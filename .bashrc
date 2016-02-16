@@ -17,7 +17,11 @@ tty -s || return
 
 umask 077                       # Strict default file permissions
 export PS1="[\u@\h:\w]\$ "      # Set prompt if interactive
+shopt -s cmdhist                # Save multi-line commands as one command
+shopt -s dotglob                # Also glob .files
 shopt -s extglob                # Extended globbing
+shopt -s globstar               # Enable ** and **/ globbing
+shopt -s histappend             # Append to history file rather than overwrite
 
 # Auto-completions
 complete -A hostname            rsh rcp telnet rlogin ftp ping disk ssh scp git rsync
@@ -39,7 +43,6 @@ export EDITOR=vim
 export HISTCONTROL=ignoreboth
 export HISTIGNORE='&:ls:ll:la:cd:exit:clear:history'
 export PATH=$HOME/.local/bin:$PATH
-export PYTHONPATH=$HOME/.local/lib/python3.4/site-packages:$PTYHONPATH
 
 # Load aliases
 test -s ~/.alias && . ~/.alias || true
