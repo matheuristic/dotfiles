@@ -1,0 +1,90 @@
+##########################
+## GNU Screen Settings  ##
+## Updated: Feb 15 2016 ##
+##########################
+
+####################
+# ESCAPE CHARACTER #
+####################
+
+## Remap the CTRL-a escape sequence to "Ctrl-`" (Ctrl-Backtick) instead.
+## To input a backtick regularly, hit "Ctrl-` `" (Ctrl-Backtick Backtick).
+# escape ^``
+
+####################
+# STARTUP PROGRAMS #
+####################
+
+## Uncomment one/some of the following lines to run the indicated
+## programs in the given window numbers when starting screen
+#screen -t bash   0 $SHELL
+#screen -t lynx   1 $BROWSER http://www.google.com
+
+#####################
+# BOOLEAN VARIABLES #
+#####################
+
+autodetach      on      ## Detach on hangup? Default: on
+nonblock        on      ## Do not block session if a window goes unresponsive? Default: off
+startup_message off     ## Show startup message? Default: on
+vbell           off     ## Use visual bell instead of audible bell? Default: off
+
+###########################
+# NUMBER VALUED VARIABLES #
+###########################
+
+defscrollback   4096    ## Define size of scrollback buffer in lines. Default: 100 lines
+
+#########################################
+# PATH AND SYSTEM FILE VALUED VARIABLES #
+#########################################
+
+hardcopydir     $HOME/.hardcopy ## Directory containing all hardcopies
+#shell           zsh  ## Default process started when screen creates a new window
+term            screen-256color ## Default TERM environment variable in each screen window.
+                                ## To allow 256 colors, set to one that supports it,
+                                ## for example 'screen-256color'
+
+####################################
+# HARDSTATUS LINE, AND SORENDITION #
+####################################
+
+## Show window list in hardstatus line, and put hardstatus on the last line
+hardstatus      on
+hardstatus      alwayslastline "%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]"
+
+## Set the colors for messages and text marking
+sorendition     GK
+
+##############
+## MESSAGES ##
+##############
+
+## Warning of activity in screens
+activity        "Activity in window %n (%t) [%w:%s]"
+
+################
+# KEY BINDINGS #
+################
+
+#bindkey -k F1 select 0  ## F11 = screen 0... avoid this screen :/
+#bindkey -k k1 select 1  ## F1 = screen 1
+#bindkey -k k2 select 2  ## F2 = screen 2
+#bindkey -k k3 select 3  ## F3 = screen 3
+#bindkey -k k4 select 4  ## F4 = screen 4
+#bindkey -k k5 select 5  ## F5 = screen 5
+#bindkey -k k6 select 6  ## F6 = screen 6
+#bindkey -k k7 select 7  ## F7 = screen 7
+#bindkey -k k8 select 8  ## F8 = screen 8
+#bindkey -k k9 select 9  ## F9 = screen 9
+#bindkey -k k0 select 10 ## F10 = screen 10
+#bindkey -k F2 command   ## F12 = do a command
+
+#################
+# MISCELLANEOUS #
+#################
+
+## Uncomment the following line if backspace is not working in screen.
+## Alternatively, starting screen with 'TERM=<your-terminal-definition> screen' works too
+#bindkey -d -k kb stuff "\010"
+#bindkey -d -k kb stuff ^H
