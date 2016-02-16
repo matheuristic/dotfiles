@@ -36,6 +36,8 @@ complete -A directory           -s default cd
 
 # Environment variables
 export EDITOR=vim
+export HISTCONTROL=ignoreboth
+export HISTIGNORE='&:ls:ll:la:cd:exit:clear:history'
 export PATH=$HOME/.local/bin:$PATH
 export PYTHONPATH=$HOME/.local/lib/python3.4/site-packages:$PTYHONPATH
 
