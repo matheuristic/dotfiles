@@ -24,7 +24,10 @@
 # BOOLEAN VARIABLES #
 #####################
 
+altscreen       on      ## Enable alternate screen support (helps with screen redraws)? Default: off
 autodetach      on      ## Detach on hangup? Default: on
+defutf8         on      ## Enable utf-8? Default: off
+defnonblock     on      ## Enable non-blocking mode (deals with flaky ssh connections)? Default: off
 nonblock        on      ## Do not block session if a window goes unresponsive? Default: off
 startup_message off     ## Show startup message? Default: on
 vbell           off     ## Use visual bell instead of audible bell? Default: off
