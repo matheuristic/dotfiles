@@ -1,4 +1,11 @@
+# Aliases
 alias rm="rm -i"                # Ask before removing a file
 alias ls='ls -h --color'        # Colorize ls by default
 alias ll='ls -lh --group-directories-first --color'
-alias rpmlast='rpm -qa --last'  # Latest installed packages
+# Debian package management
+alias deblast='grep " install " /var/log/dpkg.log | tail -n 20'
+# RPM package management
+alias rpmlast='rpm -qa --last'
+# Python package management
+alias pip3updateuserpackages='pip3 freeze --user | grep -v "^\-e" \
+        | cut -d = -f 1 | xargs -n1 pip3 install --user --upgrade'
