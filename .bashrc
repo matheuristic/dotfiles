@@ -35,8 +35,7 @@ complete -A helptopic           help
 complete -A shopt               shopt
 complete -A stopped -P '%'      bg
 complete -A job -P '%'          fg jobs disown
-complete -A directory           mkdir rmdir
-complete -A directory           -s default cd
+complete -A directory           cd rmdir mkdir
 
 # Environment variables
 export EDITOR=vim
