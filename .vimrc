@@ -48,9 +48,10 @@ if filereadable(expand('~/.vim/bundle/Vundle.vim/README.md')) " Vundle
   " 6. Install L9 and avoid a Naming conflict if you've already installed a
   "    different version somewhere else.
   "    Plugin 'ascenator/L9', {'name': 'newL9'}
-  " Define plugins to use here
+  " Plugins definitons go here
   Plugin 'jnurmine/Zenburn'     " color scheme
   Plugin 'majutsushi/tagbar'    " tag browser
+  Plugin 'scrooloose/syntastic' " syntax checker
   "Plugin 'SirVer/ultisnips'     " snippets engine
   "Plugin 'honza/vim-snippets'   " snippets files
   " Postamble
@@ -64,7 +65,12 @@ else " Pathogen
   endif
 endif
 
-" Set plugin-specific settings here
+" Plugin-specific settings go here
+" Syntastic
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
 
 
 """"""""""""""""""""""""""""""
@@ -298,7 +304,7 @@ if has('autocmd')
     " Switch to binary mode to read the encrypted file
     autocmd BufReadPre,FileReadPre      *.asc,*.gpg set bin
     autocmd BufReadPre,FileReadPre      *.asc,*.gpg let ch_save = &ch|set ch=2
-    autocmd BufReadPre,FileReadPre      *.asc,*.gpg let shsave=&sh
+    autocmd BufReadPre,FileReadPre      *.asc,*.gpg let shsave = &sh
     autocmd BufReadPre,FileReadPre      *.asc,*.gpg let &sh='sh'
     autocmd BufReadPre,FileReadPre      *.asc,*.gpg let ch_save = &ch|set ch=2
     autocmd BufReadPost,FileReadPost    *.asc,*.gpg '[,']!gpg --decrypt --default-recipient-self 2> /dev/null
@@ -309,11 +315,11 @@ if has('autocmd')
     autocmd BufReadPost,FileReadPost    *.asc,*.gpg execute ":doautocmd BufReadPost " . expand("%:r")
     " Convert all text to encrypted text before writing
     autocmd BufWritePre,FileWritePre    *.asc,*.gpg set bin
-    autocmd BufWritePre,FileWritePre    *.asc,*.gpg let shsave=&sh
-    autocmd BufWritePre,FileWritePre    *.asc,*.gpg let &sh='sh'
+    autocmd BufWritePre,FileWritePre    *.asc,*.gpg let shsave = &sh
+    autocmd BufWritePre,FileWritePre    *.asc,*.gpg let &sh = 'sh'
     autocmd BufWritePre,FileWritePre    *.gpg '[,']!gpg --encrypt --default-recipient-self 2>/dev/null
     autocmd BufWritePre,FileWritePre    *.asc '[,']!gpg --armor --encrypt --default-recipient-self 2>/dev/null
-    autocmd BufWritePre,FileWritePre    *.asc,*.gpg let &sh=shsave
+    autocmd BufWritePre,FileWritePre    *.asc,*.gpg let &sh = shsave
     " Undo the encryption so we are back in the normal text, directly after the file has been written.
     autocmd BufWritePost,FileWritePost  *.asc,*.gpg silent u
     autocmd BufWritePost,FileWritePost  *.asc,*.gpg set nobin
@@ -469,10 +475,12 @@ if has('windows')
         \ . max(map(range(1, line('$')), "virtcol([v:val, '$'])-1"))<CR>
 endif
 
-" Quickfix error window commands
+" Quickfix error and location window commands
 if has('quickfix')
-  nnoremap <silent> <Leader>qo :copen<CR>
-  nnoremap <silent> <Leader>qc :cclose<CR>
+  nnoremap <silent> <Leader>qeo :copen<CR>
+  nnoremap <silent> <Leader>qec :cclose<CR>
+  nnoremap <silent> <Leader>qlo :lopen<CR>
+  nnoremap <silent> <Leader>qlc :lclose<CR>
 endif
 
 " Unhighlight search results (from https://github.com/tpope/vim-sensible)
@@ -507,6 +515,9 @@ nnoremap <silent> <Leader>M :set modeline! modeline?<CR>
 
 " Toggle Tagbar window (requires Tagbar plugin)
 nnoremap <silent> <Leader>T :TagbarToggle<CR>
+
+" Populate location list with Syntastic errors (requires Syntastic plugin)
+nnoremap <silent> <Leader>S :SyntasticSetLoclist<CR>
 
 
 """""""""""""""""""""
