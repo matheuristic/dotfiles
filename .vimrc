@@ -4,26 +4,26 @@
 
 """""""""""""""""""""""""""""""""
 " Sections:
-" 0. Vi Compatibility Settings
-" 1. Runtime Path Settings
-" 2. User Interface Settings
+" 0. Vi Compatibility
+" 1. Plugins
+" 2. User Interface
 " 3. Text Formatting
 " 4. Search and Replace
 " 5. Filetype Specific Settings
 " 6. Settings for Vim Scripts
 " 7. Keymappings
 " 8. Other Settings
-" 9. Function Definitions
+" 9. Commands and Functions
 
 
-""""""""""""""""""""""""""""""""
-" 0. Vi Compatibility Settings
+"""""""""""""""""""""""
+" 0. Vi Compatibility
 
 " Turn off compatibility with old vi
 set nocompatible
 
 
-""""""""""""""""""""""""""""
+""""""""""""""
 " 1. Plugins
 
 " Use Vundle if available, otherwise try using Pathogen
@@ -33,7 +33,6 @@ if filereadable(expand('~/.vim/bundle/Vundle.vim/README.md')) " Vundle
   set runtimepath+=~/.vim/bundle/Vundle.vim
   call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'  " let Vundle manage Vundle, required
-  " Other plugins
   " Examples:
   " 1. plugin on GitHub repo
   "    Plugin 'tpop/vim-fugitive'
@@ -49,7 +48,7 @@ if filereadable(expand('~/.vim/bundle/Vundle.vim/README.md')) " Vundle
   " 6. Install L9 and avoid a Naming conflict if you've already installed a
   "    different version somewhere else.
   "    Plugin 'ascenator/L9', {'name': 'newL9'}
-  " Plugin definitions go here:
+  " Define plugins to use here
   Plugin 'jnurmine/Zenburn'     " color scheme
   Plugin 'majutsushi/tagbar'    " tag browser
   "Plugin 'SirVer/ultisnips'     " snippets engine
@@ -65,13 +64,14 @@ else " Pathogen
   endif
 endif
 
-" Plugin-specific settings
+" Set plugin-specific settings here
+
 
 """"""""""""""""""""""""""""""
 " 2. User Interface Settings
 
 " Unset g:colors_name to avoid loading colorscheme several times
-" when sourcing .vimrc a second time.
+" when sourcing .vimrc a second time
 silent! unset g:colors_name
 
 " Watch for file changes by other programs
@@ -109,15 +109,15 @@ if has('statusline') && (version >= 700)
   set statusline+=\ \           " spacer
   set statusline+=[%{&ff}]      " file format
   set statusline+=\ \           " spacer
-  " show '[list]' if in list mode
+  " Show '[list]' if in list mode
   set statusline+=%{!&list?'':'[list]\ \ '}
-  " show patchmode if enabled
+  " Show patchmode if enabled
   set statusline+=%{&pm==''?'':'[PM='.&pm.']\ \ '}
-  " show file encoding followed by comma and B if 'bomb' is functional and has value 1
+  " Show file encoding followed by comma and B if 'bomb' is functional and has value 1
   set statusline+=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}
   set statusline+=%k            " Value of 'b:keymap_name' of 'keymap' when :lmap mappings are being used
   set statusline+=\ \           " spacer
-  " show position (line, column and virtual column number) of cursor
+  " Show position (line, column and virtual column number) of cursor
   set statusline+=%-14.(%l,%c%V%)
   set statusline+=\             " spacer
   set statusline+=%P            " Percentage through file of displayed window
@@ -201,7 +201,9 @@ unlet! s:colorList
 set nowrap
 
 " Visually indicate wrapped lines
-set showbreak=...\  " put '... ' at start of each continued line
+if has('linebreak')
+  set showbreak=...\  " put '... ' at start of each continued line
+endif
 
 " Delete comment leader when joining comment lines
 " (from https://github.com/tpope/vim-sensible)
@@ -221,7 +223,7 @@ endif
 " used for 'cindent', >> , << , etc
 set shiftwidth=2
 
-" Set length of a real tab
+" Length of a real tab
 "set tabstop=8
 
 " Number of spaces a tab counts for while performing editing operations.
@@ -393,17 +395,17 @@ if has('autocmd')
     autocmd FileType html,xhtml set formatoptions+=tl
   augroup END
 
-  " Note: The autocommand event is defined to avoid setting this augroup when in the
-  " NERD tree buffer, which causes a conflict with its color settings.
+  " Note: The autocommand events are defined to avoid setting this augroup when
+  " in the NERD tree buffer, which causes a conflict with its color settings.
   augroup highlightextrawhitespace
     autocmd!
-    " Highlight extra white space:
+    " Highlight extra white space
     autocmd Syntax *[^{nerdtree}]* highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-    " Show trailing whitepace and spaces before a tab:
+    " Show trailing whitepace and spaces before a tab
     autocmd Syntax *[^{nerdtree}]* if has('syntax') | syntax match ExtraWhitespace /\s\+$\| \+\ze\t/ | endif
-    " Show tabs that are not at the start of a line:
+    " Show tabs that are not at the start of a line
     "autocmd Syntax *[^{nerdtree}]* syntax match ExtraWhitespace /[^\t]\zs\t\+/
-    " Show spaces used for indenting (so you use only tabs for indenting).
+    " Show spaces used for indenting (so you use only tabs for indenting)
     "autocmd Syntax * syntax match ExtraWhitespace /^\t*\zs \+/
   augroup END
 endif
@@ -423,7 +425,9 @@ set grepprg=grep\ -nH\ $*
 " Default map leader <Leader> is backslash '\'
 
 " Map <Space> to the map leader in normal mode
-nmap <Space> <Leader>
+if has('eval')
+  nmap <Space> <Leader>
+endif
 
 " Buffer manipulation and navigation
 nnoremap <silent> <Leader>bl :buffers<CR>
@@ -434,9 +438,9 @@ nnoremap <Leader>bg :buffer!<Space>
 nnoremap <Leader>bad :badd<Space>
 nnoremap <silent> <Leader>bal :ball<CR>
 
-" Tab and window commands
+" Tab and window manipulation and navigation
 if has('windows')
-  " Tab manipulation and navigation
+  " Tab commands
   nnoremap <silent> <Leader>tl :tabs<CR>
   nnoremap <silent> <Leader>te :tabedit<CR>
   nnoremap <silent> <Leader>tc :tabclose<CR>
@@ -456,25 +460,28 @@ if has('windows')
   nnoremap <Leader>tm :tabmove<Space>
   nnoremap <Leader>tg :tabnext<Space>
   nnoremap <Leader>td :tabdo<Space>
+
+  " Window commands
   " Resize window height to fit number of lines of buffer
-  nnoremap <Leader>wr :execute ":resize " . line('$')<CR>
+  nnoremap <silent> <Leader>wr :execute ":resize " . line('$')<CR>
+  " Resize window width to fit maximum line width of buffer
+  nnoremap <silent> <Leader>wR :execute ": vertical resize "
+        \ . max(map(range(1, line('$')), "virtcol([v:val, '$'])-1"))<CR>
 endif
 
 " Quickfix error window commands
-nnoremap <silent> <Leader>qo :copen<CR>
-nnoremap <silent> <Leader>qc :cclose<CR>
+if has('quickfix')
+  nnoremap <silent> <Leader>qo :copen<CR>
+  nnoremap <silent> <Leader>qc :cclose<CR>
+endif
 
 " Unhighlight search results (from https://github.com/tpope/vim-sensible)
-nnoremap <silent> <Leader>l :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR>
+if has('extra_search')
+  nnoremap <silent> <Leader>l :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR>
+endif
 
 " Change directory to that of file being edited
 nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
-
-" Write file as root/superuser using :Sudow (requires sudo be present on the
-" system and that the action is permitted the user in the /etc/sudoers file)
-if executable('sudo')
-  command! -nargs=0 -bang -bar Sudow w<bang> !sudo tee % >/dev/null
-endif
 
 " Toggle folding
 if has('folding')
@@ -506,10 +513,18 @@ nnoremap <silent> <Leader>T :TagbarToggle<CR>
 " 8. Other Settings
 
 " Sets the terminal emulator's title to path of file being edited
-set title
+if has('title')
+  set title
+endif
 
 
-"""""""""""""""""""""""""""
-" 9. Function Definitions
+"""""""""""""""""""""""""""""
+" 9. Commands and Functions
+
+" Write file as root/superuser using :Sudow (requires sudo be present on the
+" system and that the action is permitted the user in the /etc/sudoers file)
+if executable('sudo')
+  command! -nargs=0 -bang -bar Sudow w<bang> !sudo tee % >/dev/null
+endif
 
 " vim:set ft=vim et sw=2:
