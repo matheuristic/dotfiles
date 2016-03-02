@@ -5,7 +5,7 @@
 " Section: Vi Compatibility {{{1
 " ------------------------------
 
-set nocompatible " Turn off compatibility with old vi
+set nocompatible " vi non-compatible mode
 
 "}}}1
 " Section: Plugins {{{1
@@ -202,36 +202,28 @@ if has('autocmd')
     autocmd!
     " Display line numbers
     autocmd FileType c,cpp,java,javascript,haskell,make,perl,python set number
-
     " Omnifunc completions
     autocmd FileType c,cpp,java,javascript,haskell,make,perl,python
           \ if has('eval') || has('insert_expand')
           \ | set omnifunc=syntaxcomplete#Complete
           \ | endif
-
     " For languages where whitespace is not important,
     " expand tabs to 2 spaces and use 2 space indents
     autocmd FileType c,cpp,java,javascript,perl set expandtab shiftwidth=2 tabstop=2
-
     " For C (not C++) where comments have explicit end characters,
     " automatically insert comment leader characters when starting a new line
     " in the middle of a comment
     autocmd FileType c set formatoptions+=ro
-
     " For C-like languages, have automatic indentation:
     autocmd FileType c,cpp if has('cindent') | set cindent | endif
-
     " For Haskell, expand tabs to 2 spaces and set 2 space indents
     autocmd Filetype haskell set expandtab tabstop=2 shiftwidth=2
-
     " In Makefiles, do not expand tabs to spaces, since actual tab characters
     " are needed, and have indentation at 8 chars to be sure that all
     " indents are tabs (despite the mappings later):
     autocmd FileType make set noexpandtab nosmarttab shiftwidth=8 tabstop=8
-
     " For Perl, have things in braces indenting themselves:
     autocmd FileType perl if has('smartindent') | set smartindent | endif
-
     " For Python, expand tabs to 4 spaces and set 4 space indents
     autocmd Filetype python set expandtab tabstop=4 shiftwidth=4
     " For Python, use cindent with the appropriate keywords
@@ -299,7 +291,6 @@ if has('user_commands')
   nmap <Space> <Leader>
 endif
 " }}}2
-
 " Buffer manipulation and navigation {{{2
 nnoremap <silent> <Leader>bl :buffers<CR>
 nnoremap <silent> <Leader>bd :bdelete<CR>
@@ -309,7 +300,6 @@ nnoremap <Leader>bg :buffer!<Space>
 nnoremap <Leader>bad :badd<Space>
 nnoremap <silent> <Leader>bal :ball<CR>
 " }}}2
-
 " Tab and window manipulation and navigation {{{2
 if has('windows')
   " Tab commands
@@ -341,7 +331,6 @@ if has('windows')
         \ . max(map(range(1, line('$')), "virtcol([v:val, '$'])-1"))<CR>
 endif
 " }}}2
-
 " Quickfix error and location window commands {{{2
 if has('quickfix')
   nnoremap <silent> <Leader>qeo :copen<CR>
@@ -350,43 +339,42 @@ if has('quickfix')
   nnoremap <silent> <Leader>qlc :lclose<CR>
 endif
 " }}}2
-
 " Unhighlight search results (from https://github.com/tpope/vim-sensible) {{{2
 if has('extra_search')
   nnoremap <silent> <Leader>l :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR>
 endif
 " }}}2
-
 " Change directory to that of file being edited
 nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
-
 " Toggle folding {{{2
 if has('folding')
   nnoremap <silent> <Leader>f :set foldenable! foldenable?<CR>
 endif
 " }}}2
-
 " Toggle spell check {{{2
 if has('syntax')
   nnoremap <silent> <Leader>Sp :set spell! spell?<CR>
 endif
 " }}}2
-
 " Toggle wrapping of lines
 nnoremap <silent> <Leader>W :set wrap! wrap?<CR>
-
 " Toggle paste mode
 nnoremap <silent> <Leader>P :set paste! paste?<CR>
-
 " Toggle highlighting of listchars
 nnoremap <silent> <Leader>L :set list! list?<CR>
-
 " Toggle modeline (file should be reloaded using :e after that)
 nnoremap <silent> <Leader>M :set modeline! modeline?<CR>
-
 " Tagbar commands (requires Tagbar plugin)
 nnoremap <silent> <Leader>T :TagbarToggle<CR>
 
 " }}}1
+" Section: Local Vim Config {{{1
+" ------------------------------
+
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
+
+"}}}1
 " Modeline {{{1
 " vim:set ft=vim et sw=2 fen fdc=1 fdm=marker: }}}1
