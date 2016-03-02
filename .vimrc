@@ -43,7 +43,7 @@ let g:tagbar_show_visibility = 1 " show visibility symbols (public/protected/pri
 set autoindent  " use indent level from previous line
 "set autoread    " watch for file changes by other programs
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
-"set binary noeol " do not autowrite <EOL> at end of file, resets textwidth, wrapmargin, modeline and expandtab
+"set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
 "set complete=.,w,b,u,U,t,i,d " extra scanning on keyword completion
 set complete+=k " also use dictionaries on keyword completion
 set expandtab   " expand tabs into spaces; use <C-v><Tab> for a real tab
@@ -274,8 +274,8 @@ endif
 " Section: Commands and Functions {{{1
 " ------------------------------------
 
-" Write file as root/superuser using :Sudow (requires sudo be present on the
-" system and that the action is permitted the user in the /etc/sudoers file)
+" Write file as root/superuser with :Sudow
+" (uses 'sudo'; user needs to be in the /etc/sudoers file)
 if executable('sudo')
   command! -nargs=0 -bang -bar Sudow w<bang> !sudo tee % >/dev/null
 endif
