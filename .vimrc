@@ -120,7 +120,7 @@ if has('statusline') && (version >= 700)
   set statusline+=%m            " modified flag
   set statusline+=%r            " readonly flag
   set statusline+=%w            " preview window flag
-  set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''} " Git branch status (requires fugitive.vim)
+  set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''} " Git branch and commit (requires fugitive.vim plugin)
   set statusline+=%=            " center auto-spacing
   set statusline+=%y            " filetype
   set statusline+=\             " spacer
