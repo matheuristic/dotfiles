@@ -120,13 +120,14 @@ if has('statusline') && (version >= 700)
   set statusline+=%m            " modified flag
   set statusline+=%r            " readonly flag
   set statusline+=%w            " preview window flag
+  set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''} " Git branch status (requires fugitive.vim)
   set statusline+=%=            " center auto-spacing
   set statusline+=%y            " filetype
-  set statusline+=\ \           " spacer
+  set statusline+=\             " spacer
   set statusline+=[%{&ff}]      " file format
-  set statusline+=\ \           " spacer
-  set statusline+=%{!&list?'':'[list]\ \ '} " show '[list'] if in list mode
-  set statusline+=%{&pm==''?'':'[PM='.&pm.']\ \ '} " show patchmode if enabled
+  set statusline+=\             " spacer
+  set statusline+=%{!&list?'':'[list]\ '} " show '[list'] if in list mode
+  set statusline+=%{&pm==''?'':'[PM='.&pm.']\ '} " show patchmode if enabled
   set statusline+=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"} " show encoding and if 'bomb' option is set
   set statusline+=%k            " Value of 'b:keymap_name' of 'keymap' when :lmap mappings are being used
   set statusline+=\ \           " spacer
