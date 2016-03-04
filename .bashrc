@@ -1,13 +1,14 @@
 # Bash interactive shell settings
-# Updated: Feb 15 2016
+# Updated: Mar 03 2016
 
 # NOTE: There are 3 types of bash shells
-# - the login shell, which reads ~/.profile
-# - the normal shell
-# - the interactive shell, which reads ~/.bashrc
+# - the login shell (reads ~/.bash_profile, ~/.bash_login or ~/.profile on
+#   start and ~/.bash_logout on exit)
+# - the non-interactive shell (reads the file specified by $BASH_ENV on start)
+# - the interactive shell (reads ~/.bashrc on start)
 
-# NOTE: Change language settings in ~/.profile and not ~/.bashrc, since if LANG
-# is overridden in each subshell multilingual X sessions will not work right
+# NOTE: Set language in ~/.bash_profile and not ~/.bashrc, since if LANG is
+# overridden in each subshell multilingual X sessions will not work right
 
 # No core dumps
 ulimit -S -c 0
@@ -15,7 +16,6 @@ ulimit -S -c 0
 # Done if non-interactive
 tty -s || return
 
-# Interactive shell-only from here on
 umask 077                       # Strict default file permissions
 shopt -s cmdhist                # Save multi-line commands as one command
 shopt -s dotglob                # Also glob .files
