@@ -13,12 +13,15 @@ set nocompatible " vi non-compatible mode
 
 " Suggested plugins:
 " pathogen.vim - package manager
-" zenburn - color scheme
+" commentary.vim - block comment and uncomment
 " ctrlp.vim <or> fzf - fuzzy file finder (https://github.com/ctrlpvim/ctrlp.vim)
-" tagbar - tag browser
+" dispatch.vim - asynchronous builds and tests
 " fugitive.vim - Git wrapper
 " surround.vim - paranthesis/bracket/quote manipulations
-" dispatch.vim - asynchronous builds and tests
+" tagbar - tag browser
+" unimpaired.vim - handy bracket mappings
+" vinegar.vim - enhancements for netrw
+" zenburn - color scheme
 
 " Use the Pathogen package manager, see https://github.com/tpope/vim-pathogen
 runtime! autoload/pathogen.vim  " force autoload so check on next lines works
@@ -344,8 +347,9 @@ if has('extra_search')
   nnoremap <silent> <Leader>l :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR>
 endif
 " }}}2
-" Change directory to that of file being edited
+" Change directory to that of file being edited {{{2
 nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
+" }}}2
 " Toggle folding {{{2
 if has('folding')
   nnoremap <silent> <Leader>f :set foldenable! foldenable?<CR>
@@ -356,16 +360,21 @@ if has('syntax')
   nnoremap <silent> <Leader>Sp :set spell! spell?<CR>
 endif
 " }}}2
-" Toggle wrapping of lines
+" Toggle wrapping of lines {{{2
 nnoremap <silent> <Leader>W :set wrap! wrap?<CR>
-" Toggle paste mode
+" }}}2
+" Toggle paste mode {{{2
 nnoremap <silent> <Leader>P :set paste! paste?<CR>
-" Toggle highlighting of listchars
+" }}}2
+" Toggle highlighting of listchars {{{2
 nnoremap <silent> <Leader>L :set list! list?<CR>
-" Toggle modeline (file should be reloaded using :e after that)
+" }}}2
+" Toggle modeline (file should be reloaded using :e after that) {{{2
 nnoremap <silent> <Leader>M :set modeline! modeline?<CR>
-" Tagbar commands (requires Tagbar plugin)
+" }}}2
+" Tagbar commands (requires Tagbar plugin) {{{2
 nnoremap <silent> <Leader>T :TagbarToggle<CR>
+" }}}2
 
 " }}}1
 " Section: Local Vim Config {{{1
