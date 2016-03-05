@@ -1,6 +1,5 @@
-" Vim settings
+" ~/.vimrc
 " Author: matheuristic
-" Updated: Mar 02 2016
 
 " Section: Vi Compatibility {{{1
 " ------------------------------
@@ -65,7 +64,7 @@ set nowrap      " do not wrap text
 set sidescrolloff=5 " num lines from left or right of window to begin scrolling
 set shiftwidth=2 " number of spaces for each indent level
 set showmatch   " show matching brackets
-set showmode    " show which mode we're in
+set showmode    " show current mode
 set smartcase   " override 'ignorecase' if search pattern has upper case chars
 set smarttab    " tabs (spaces if expandtab is set) inserts shiftwidth space
 "set softtabstop=4 " num spaces a tab counts for while in insert mode
@@ -164,7 +163,6 @@ endif
 
 if has('autocmd')
   filetype plugin indent on " enable filetype detection for plugins and indents
-
   augroup encrypted " {{{2
     " Transparent editing of gnupg encrypted files
     " By Wouter Hanegraaff <wouter@blub.net>
@@ -283,9 +281,9 @@ endif
 " Section: Keymappings {{{1
 " -------------------------
 
-" Default map leader <Leader> is backslash '\'
+" Default map leader <Leader> is '\'
 
-" Map <Space> to the map leader in normal mode {{{2
+" Map <Space> in normal mode to map leader {{{2
 if has('user_commands')
   nmap <Space> <Leader>
 endif
@@ -321,16 +319,15 @@ if has('windows')
   nnoremap <Leader>tm :tabmove<Space>
   nnoremap <Leader>tg :tabnext<Space>
   nnoremap <Leader>td :tabdo<Space>
-
   " Window commands
   " Resize window height to fit number of lines of buffer
   nnoremap <silent> <Leader>wr :execute ":resize " . line('$')<CR>
-  " Resize window width to fit maximum line width of buffer
+  " Resize window width to fit max line width of buffer
   nnoremap <silent> <Leader>wR :execute ": vertical resize "
         \ . max(map(range(1, line('$')), "virtcol([v:val, '$'])-1"))<CR>
 endif
 " }}}2
-" Quickfix error and location window commands {{{2
+" Quickfix error and location window manipulation {{{2
 if has('quickfix')
   nnoremap <silent> <Leader>qeo :copen<CR>
   nnoremap <silent> <Leader>qec :cclose<CR>
@@ -343,7 +340,7 @@ if has('extra_search')
   nnoremap <silent> <Leader>l :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR>
 endif
 " }}}2
-" Change directory to that of file being edited {{{2
+" Change directory to current file's {{{2
 nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
 " }}}2
 " Toggle folding {{{2
@@ -365,7 +362,7 @@ nnoremap <silent> <Leader>P :set paste! paste?<CR>
 " Toggle highlighting of listchars {{{2
 nnoremap <silent> <Leader>L :set list! list?<CR>
 " }}}2
-" Toggle modeline (file should be reloaded using :e after that) {{{2
+" Toggle modeline (reload file with :e to effect change) {{{2
 nnoremap <silent> <Leader>M :set modeline! modeline?<CR>
 " }}}2
 " Tagbar commands (requires Tagbar plugin) {{{2
@@ -379,7 +376,6 @@ nnoremap <Leader>s :call MyLinter()<CR>
 " Section: Functions {{{1
 " -----------------------
 
-" Run lint for current filetype {{{2
 let g:my_linters = {
       \ 'c': 'clang -std=c++11 --analyze',
       \ 'cpp': 'clang -std=c++11 --analyze',
@@ -387,7 +383,7 @@ let g:my_linters = {
       \ 'haskell': 'ghc-mod lint',
       \ 'python': 'flake8',
       \ }
-function! MyLinter()
+function! MyLinter() " {{{2
   if !exists(':Dispatch')
     echo "Dispatch command not available. Install the dispatch.vim plugin"
     return

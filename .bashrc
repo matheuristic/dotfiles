@@ -1,5 +1,4 @@
-# Bash interactive shell settings
-# Updated: Mar 03 2016
+# ~/.bashrc
 
 # NOTE: There are 3 types of bash shells
 # - the login shell (reads ~/.bash_profile, ~/.bash_login or ~/.profile on
@@ -16,6 +15,7 @@ ulimit -S -c 0
 # Done if non-interactive
 tty -s || return
 
+# Shell options
 umask 077                       # Strict default file permissions
 shopt -s cmdhist                # Save multi-line commands as one command
 shopt -s dotglob                # Also glob .files
@@ -42,7 +42,7 @@ export EDITOR=vim
 export HISTCONTROL=ignoreboth
 export HISTIGNORE='&:ls:ll:la:cd:exit:clear:history'
 export PATH=$HOME/.local/bin:$PATH
-export PS1="[\u@\h:\w]\$ "      # Set prompt
+export PS1="[\u@\h:\w]\$ "      # Set prompt to "[user@host:/path/to/cwd]$ "
 
 # Load aliases
 test -s ~/.alias && . ~/.alias || true

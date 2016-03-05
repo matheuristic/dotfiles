@@ -1,7 +1,6 @@
 !!---------------------------------
 !! File         : $HOME/.Xresources
 !! Description  : X resources file
-!! Last Updated : 08 Dec 2011
 !!---------------------------------
 
 !!----------------
@@ -23,11 +22,9 @@
 !!---------------
 
 !!-- The 'xterm-256color' terminal definition is in the ncurses-term package on
-!!-- Debian-based distributions
-!!-- This lets programs know that this xterm supports 256 colors, which is
-!!-- compiled into xterms of most distributions
-!!-- If compiling xterm oneself, specify the '--enable-256-color' flag when
-!!-- running configure
+!!-- Debian-based distributions, and lets programs know that this xterm
+!!-- supports 256 colors, which is compiled into xterms of most distributions
+!!-- If compiling xterm, specify '--enable-256-color' when running configure
 *xterm*termName:                xterm-256color
 *xterm*pointerMode:             2
 *xterm*scrollBar:               true
@@ -70,7 +67,6 @@
 !!-- Colors
 !!-- Tango Color Scheme
 !!-- See http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines
-!!-- Foreground and background are set to different colors
 *xterm*background:              #000000
 *xterm*foreground:              #babdb6
 *xterm*cursorColor:             #729fcf

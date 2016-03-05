@@ -1,4 +1,4 @@
-# Aliases
+# ~/.alias
 alias rm="rm -i"                # Ask before removing a file
 alias ls='ls -h --color'        # Colorize ls by default
 alias ll='ls -lh --group-directories-first --color'
