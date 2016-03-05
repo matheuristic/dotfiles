@@ -14,7 +14,7 @@ set nocompatible " vi non-compatible mode
 " Suggested plugins:
 " pathogen.vim - package manager
 " commentary.vim - block comment and uncomment
-" ctrlp.vim <or> fzf - fuzzy file finder (https://github.com/ctrlpvim/ctrlp.vim)
+" ctrlp.vim - fuzzy file finder https://github.com/ctrlpvim/ctrlp.vim [or fzf]
 " dispatch.vim - asynchronous builds and tests
 " fugitive.vim - Git wrapper
 " surround.vim - paranthesis/bracket/quote manipulations
@@ -196,12 +196,22 @@ if has('autocmd')
     autocmd BufWritePost,FileWritePost  *.asc,*.gpg silent u
     autocmd BufWritePost,FileWritePost  *.asc,*.gpg set nobin
   augroup END " }}}2
-
+  augroup highlightextrawhitespace " {{{2
+    " Note: autocommands designed to work to not clobber NERD tree colors
+    autocmd!
+    " Highlight extra white space
+    autocmd Syntax *[^{nerdtree}]* highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+    " Show trailing whitepace and spaces before a tab
+    autocmd Syntax *[^{nerdtree}]* if has('syntax') | syntax match ExtraWhitespace /\s\+$\| \+\ze\t/ | endif
+    " Show tabs that are not at the start of a line
+    "autocmd Syntax *[^{nerdtree}]* syntax match ExtraWhitespace /[^\t]\zs\t\+/
+    " Show spaces used for indenting (so you use only tabs for indenting)
+    "autocmd Syntax * syntax match ExtraWhitespace /^\t*\zs \+/
+  augroup END " }}}2
   augroup mail " {{{2
     autocmd!
     autocmd Filetype mail if has('syntax') | set spell textwidth=70 wrap nonumber | endif
   augroup END " }}}2
-
   augroup programming " {{{2
     autocmd!
     " Display line numbers
@@ -236,7 +246,6 @@ if has('autocmd')
           \ | set cindent cinwords=class,def,elif,else,except,finally,for,if,try,while
           \ | endif
   augroup END " }}}2
-
   augroup web " {{{2
     autocmd!
     " For both CSS and HTML, display line numbers
@@ -259,27 +268,13 @@ if has('autocmd')
     " leave it alone when editing
     autocmd FileType html,xhtml set formatoptions+=tl
   augroup END " }}}2
-
-  augroup highlightextrawhitespace " {{{2
-    " Note: autocommands designed to work to not clobber NERD tree colors
-    autocmd!
-    " Highlight extra white space
-    autocmd Syntax *[^{nerdtree}]* highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-    " Show trailing whitepace and spaces before a tab
-    autocmd Syntax *[^{nerdtree}]* if has('syntax') | syntax match ExtraWhitespace /\s\+$\| \+\ze\t/ | endif
-    " Show tabs that are not at the start of a line
-    "autocmd Syntax *[^{nerdtree}]* syntax match ExtraWhitespace /[^\t]\zs\t\+/
-    " Show spaces used for indenting (so you use only tabs for indenting)
-    "autocmd Syntax * syntax match ExtraWhitespace /^\t*\zs \+/
-  augroup END " }}}2
 endif
 
 " }}}1
-" Section: Commands and Functions {{{1
+" Section: Commands {{{1
 " ------------------------------------
 
-" Write file as root/superuser with :Sudow
-" (uses 'sudo'; user needs to be in the /etc/sudoers file)
+" Write file as superuser with :Sudow (user should be in the /etc/sudoers file)
 if executable('sudo')
   command! -nargs=0 -bang -bar Sudow w<bang> !sudo tee % >/dev/null
 endif
@@ -375,6 +370,30 @@ nnoremap <silent> <Leader>M :set modeline! modeline?<CR>
 " }}}2
 " Tagbar commands (requires Tagbar plugin) {{{2
 nnoremap <silent> <Leader>T :TagbarToggle<CR>
+" }}}2
+" Run linter {{{2
+nnoremap <Leader>s :call MyLinter()<CR>
+" }}}2
+
+" }}}1
+" Section: Functions {{{1
+" -----------------------
+
+" Run lint for current filetype {{{2
+let g:my_linters = {
+      \ 'c': 'clang -std=c++11 --analyze',
+      \ 'cpp': 'clang -std=c++11 --analyze',
+      \ 'cabal': 'ghc-mod lint',
+      \ 'haskell': 'ghc-mod lint',
+      \ 'python': 'flake8',
+      \ }
+function! MyLinter()
+  if !exists(':Dispatch')
+    echo "Dispatch command not available. Install the dispatch.vim plugin"
+    return
+  endif
+  execute ":Dispatch " . get(g:my_linters, &filetype, 'echo Unsupported filetype "' . &filetype . '" for ') . ' %'
+endfunction
 " }}}2
 
 " }}}1
