@@ -10,19 +10,32 @@ set nocompatible " vi non-compatible mode
 " Section: Plugins {{{1
 " ---------------------
 
+" Suggested plugin manager:
+"   pathogen.vim - package manager | https://github.com/tpope/vim-pathogen
 " Suggested plugins:
-" pathogen.vim - package manager
-" commentary.vim - block comment and uncomment
-" ctrlp.vim - fuzzy file finder https://github.com/ctrlpvim/ctrlp.vim [or fzf]
-" dispatch.vim - asynchronous builds and tests
-" fugitive.vim - Git wrapper
-" surround.vim - paranthesis/bracket/quote manipulations
-" tagbar - tag browser
-" unimpaired.vim - handy bracket mappings
-" vinegar.vim - enhancements for netrw
-" zenburn - color scheme
+"   commentary.vim - block comment and uncomment | https://github.com/tpope/vim-commentary
+"   ctrlp.vim - fuzzy file finder | https://github.com/ctrlpvim/ctrlp.vim [or fzf or unite.vim]
+"   deoplete - auto-complete, requires Python3-enabled Neovim (Neovim-only) | https://github.com/Shougo/deoplete.nvim
+"   fugitive.vim - Git wrapper | https://github.com/tpope/vim-fugitive
+"   neocomplete - auto-complete, requires lua-enabled Vim (Vim-only) | https://github.com/Shougo/neocomplete.vim
+"   rails.vim - Rails tools | https://github.com/tpope/vim-rails
+"   speeddating.vim - increment and decrement dates in Vim | https://github.com/tpope/vim-speeddating
+"   surround.vim - paranthesis/bracket/quote manipulations | https://github.com/tpope/vim-surround
+"   tagbar - tag browser | https://github.com/majutsushi/tagbar
+"   unimpaired.vim - handy bracket mappings | https://github.com/tpope/vim-unimpaired
+"   vim-flake8 - wrapper around Python flake8 library | https://github.com/nvie/vim-flake8
+"   vim-orgmode - editing and organizing mode based on Emacs' eponymous mode, requires speeddating.vim | https://github.com/jceb/vim-orgmode
+"   vim-python-pep8-indent - modify indentation to fit PEP8 | https://github.com/hynek/vim-python-pep8-indent
+"   vim-virtualenv - switch between virtualenvs within Vim | https://github.com/jmcantrell/vim-virtualenv
+"   vinegar.vim - enhancements for netrw | https://github.com/tpope/vim-vinegar
+"   YankRing.vim - emulates Emacs' kill ring | https://github.com/vim-scripts/YankRing.vim
+"   YouCompleteMe - code completion | https://github.com/Valloric/YouCompleteMe [see for install instructions]
+" Suggested color themes:
+"   gruvbox | https://github.com/morhetz/gruvbox
+"   nofrils | https://github.com/robertmeta/nofrils
+"   zenburn | https://github.com/jnurmine/Zenburn
 
-" Use the Pathogen package manager, see https://github.com/tpope/vim-pathogen
+" Pathogen package manager
 runtime! autoload/pathogen.vim  " force autoload so check on next lines works
 if !exists('g:loaded_pathogen')  " if yet to load, try the bundle dir
   runtime! bundle/vim-pathogen/autoload/pathogen.vim
@@ -32,11 +45,24 @@ if exists('g:loaded_pathogen') " load plugins and update help docs
   execute pathogen#helptags()
 endif
 
-" Plugin-specific settings
+" ctrlp.vim settings {{{2
 let g:ctrlp_map = "<Leader><C-p>" " remap invocation key to <Leader><C-p>
-let g:ctrlp_show_hidden = 1     " show files beginning with dot
+let g:ctrlp_show_hidden = 1     " show dot files
+" }}}2
+
+" neocomplete settings {{{2
+let g:neocomplete#enable_at_startup = 1 " enable neocomplete
+" }}}2
+
+" Tagbar settings {{{2
 let g:tagbar_width = 30         " set width of Tagbar window to 30 cols
 let g:tagbar_show_visibility = 1 " show visibility symbols (public/protected/private)
+" }}}2
+
+" YankRing.vim settings {{{2
+" show yankring entries
+nnoremap <Leader>y :YRShow<CR>
+"}}}2
 
 " }}}1
 " Section: Options {{{1
@@ -45,6 +71,9 @@ let g:tagbar_show_visibility = 1 " show visibility symbols (public/protected/pri
 set autoindent  " use indent level from previous line
 "set autoread    " watch for file changes by other programs
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
+set backup      " keep a backup file
+set backupdir=~/.backup,.,~/tmp/,~/ " use ~/.backup to keep backups
+"set directory=~/.tmp//,.,~/tmp/,/var/tmp,/tmp " use ~/.tmp for swap files
 "set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
 "set complete=.,w,b,u,U,t,i,d " extra scanning on keyword completion
 set complete+=k " also use dictionaries on keyword completion
@@ -63,10 +92,10 @@ set nowrap      " do not wrap text
 "set scrolloff=1 " num lines from top or bottom of window to begin scrolling
 set sidescrolloff=5 " num lines from left or right of window to begin scrolling
 set shiftwidth=2 " number of spaces for each indent level
-set showmatch   " show matching brackets
+"set showmatch   " show matching brackets
 set showmode    " show current mode
 set smartcase   " override 'ignorecase' if search pattern has upper case chars
-set smarttab    " tabs (spaces if expandtab is set) inserts shiftwidth space
+set smarttab    " tabs inserts shiftwidth space
 "set softtabstop=4 " num spaces a tab counts for while in insert mode
 "set tabstop=8   " length of a real tab
 set ttyfast     " smoother output
@@ -140,11 +169,20 @@ if has('syntax') && (&t_Co > 2)
   silent! unset g:colors_name
   syntax on
   " List of (colors_name[, numcolors needed])
-  let s:colors_list = [['zenburn', 256], ['default', 8]]
+  let s:colors_list = [['zenburn', 256], ['gruvbox', 256], ['nofrils-dark', 256], ['default', 8]]
   " In list order, try setting color scheme if the terminal emulator supports
   " the number of colors necessary for the scheme (default: 256)
   for color_pair in s:colors_list
     if !exists('colors_name') && (&t_Co >= get(color_pair, 1, 256))
+      if color_pair[0] =~ '^gruvbox'
+        set background=dark
+        let g:gruvbox_contrast_dark = 'soft'
+      endif
+      if color_pair[0] =~ '^nofrils'
+        "let g:nofrils_heavycomments = 1
+        "let g:nofrils_heavylinenumbers = 1
+        let g:nofrils_strbackgrounds = 1
+      endif
       silent! execute 'colorscheme' color_pair[0]
     endif
   endfor
@@ -163,14 +201,16 @@ endif
 
 if has('autocmd')
   filetype plugin indent on " enable filetype detection for plugins and indents
+  augroup cron " {{{2
+    autocmd filetype crontab setlocal nobackup nowritebackup
+  augroup END " }}}2
   augroup encrypted " {{{2
-    " Transparent editing of gnupg encrypted files
-    " By Wouter Hanegraaff <wouter@blub.net>
+    " Transparent editing of gnupg encrypted files (Wouter Hanegraaff <wouter@blub.net>)
     autocmd!
     " First make sure nothing is written to ~/.viminfo while editing an encrypted file.
     autocmd BufReadPre,FileReadPre      *.asc,*.gpg set viminfo=
-    " We don't want a swap file, as it writes unencrypted data to disk
-    autocmd BufReadPre,FileReadPre      *.asc,*.gpg set noswapfile
+    " We don't want a backup and swap files, as they are written unencrypted to disk
+    autocmd BufReadPre,FileReadPre      *.asc,*.gpg set noswapfile nobackup
     " Switch to binary mode to read the encrypted file
     autocmd BufReadPre,FileReadPre      *.asc,*.gpg set bin
     autocmd BufReadPre,FileReadPre      *.asc,*.gpg let ch_save = &ch|set ch=2
@@ -193,18 +233,6 @@ if has('autocmd')
     " Undo the encryption so we are back in the normal text, directly after the file has been written.
     autocmd BufWritePost,FileWritePost  *.asc,*.gpg silent u
     autocmd BufWritePost,FileWritePost  *.asc,*.gpg set nobin
-  augroup END " }}}2
-  augroup highlightextrawhitespace " {{{2
-    " Note: autocommands designed to work to not clobber NERD tree colors
-    autocmd!
-    " Highlight extra white space
-    autocmd Syntax *[^{nerdtree}]* highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-    " Show trailing whitepace and spaces before a tab
-    autocmd Syntax *[^{nerdtree}]* if has('syntax') | syntax match ExtraWhitespace /\s\+$\| \+\ze\t/ | endif
-    " Show tabs that are not at the start of a line
-    "autocmd Syntax *[^{nerdtree}]* syntax match ExtraWhitespace /[^\t]\zs\t\+/
-    " Show spaces used for indenting (so you use only tabs for indenting)
-    "autocmd Syntax * syntax match ExtraWhitespace /^\t*\zs \+/
   augroup END " }}}2
   augroup mail " {{{2
     autocmd!
@@ -334,6 +362,9 @@ if has('quickfix')
   nnoremap <silent> <Leader>qlo :lopen<CR>
   nnoremap <silent> <Leader>qlc :lclose<CR>
 endif
+" }}}2
+" Toggle mouse {{{2
+nnoremap <silent> <Leader>m :if &mouse == 'a' <Bar> set mouse= <Bar> else <Bar> set mouse=a <Bar> endif <Bar> set mouse?<CR>
 " }}}2
 " Unhighlight search results (from https://github.com/tpope/vim-sensible) {{{2
 if has('extra_search')
