@@ -15,16 +15,17 @@ set nocompatible " vi non-compatible mode
 " Suggested plugins:
 "   commentary.vim - block comment and uncomment | https://github.com/tpope/vim-commentary
 "   ctrlp.vim - fuzzy file finder | https://github.com/ctrlpvim/ctrlp.vim [or fzf or unite.vim]
-"   deoplete - auto-complete, requires Python3-enabled Neovim (Neovim-only) | https://github.com/Shougo/deoplete.nvim
+"   dispatch.vim - asynchronous execution library | https://github.com/tpope/vim-dispatch
+"   deoplete - auto-complete, requires editor be built with Python3 support (Neovim-only) | https://github.com/Shougo/deoplete.nvim
 "   fugitive.vim - Git wrapper | https://github.com/tpope/vim-fugitive
-"   neocomplete - auto-complete, requires lua-enabled Vim (Vim-only) | https://github.com/Shougo/neocomplete.vim
+"   neocomplete - auto-complete, requires editor be built with lua support (Vim-only) | https://github.com/Shougo/neocomplete.vim
 "   rails.vim - Rails tools | https://github.com/tpope/vim-rails
 "   speeddating.vim - increment and decrement dates in Vim | https://github.com/tpope/vim-speeddating
-"   surround.vim - paranthesis/bracket/quote manipulations | https://github.com/tpope/vim-surround
+"   surround.vim - paranthesis, bracket and quote manipulations | https://github.com/tpope/vim-surround
 "   tagbar - tag browser | https://github.com/majutsushi/tagbar
 "   unimpaired.vim - handy bracket mappings | https://github.com/tpope/vim-unimpaired
 "   vim-flake8 - wrapper around Python flake8 library | https://github.com/nvie/vim-flake8
-"   vim-orgmode - editing and organizing mode based on Emacs' eponymous mode, requires speeddating.vim | https://github.com/jceb/vim-orgmode
+"   vim-orgmode - emulate Emacs' Org-mode, requires speeddating.vim | https://github.com/jceb/vim-orgmode
 "   vim-python-pep8-indent - modify indentation to fit PEP8 | https://github.com/hynek/vim-python-pep8-indent
 "   vim-virtualenv - switch between virtualenvs within Vim | https://github.com/jmcantrell/vim-virtualenv
 "   vinegar.vim - enhancements for netrw | https://github.com/tpope/vim-vinegar
@@ -50,8 +51,12 @@ let g:ctrlp_map = "<Leader><C-p>" " remap invocation key to <Leader><C-p>
 let g:ctrlp_show_hidden = 1     " show dot files
 " }}}2
 
-" neocomplete settings {{{2
-let g:neocomplete#enable_at_startup = 1 " enable neocomplete
+" deoplete (Neovim) and neocomplete (Vim) settings {{{2
+if has('nvim') " Neovim
+  let g:deoplete#enable_at_startup = 1
+else           " Vim
+  let g:neocomplete#enable_at_startup = 1
+endif
 " }}}2
 
 " Tagbar settings {{{2
