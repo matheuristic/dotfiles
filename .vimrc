@@ -15,7 +15,7 @@ set nocompatible " vi non-compatible mode
 " Suggested plugins:
 "   CtrlP - fuzzy file finder | https://github.com/ctrlpvim/ctrlp.vim [or fzf or unite.vim]
 "   deoplete - auto-complete, requires editor be built with Python3 support (Neovim-only) | https://github.com/Shougo/deoplete.nvim [see for installation instructions]
-"   ghcmod-vim - Haskell type check, linting, and code expansion using ghc-mod, requires vimproc | https://github.com/eagletmt/ghcmod-vim
+"   ghcmod-vim - Haskell type checking, linting, and code expansion using ghc-mod, requires vimproc | https://github.com/eagletmt/ghcmod-vim
 "   neco-ghc - more Haskell auto-completion, requires neocomplete or deoplete | https://github.com/eagletmt/neco-ghc
 "   neocomplete - auto-complete, requires editor be built with lua support (Vim-only) | https://github.com/Shougo/neocomplete.vim
 "   Neomake - asynchronous make (can be configured for linting) | https://github.com/neomake/neomake
@@ -54,7 +54,7 @@ endif
 
 " CtrlP settings {{{2
 let g:ctrlp_map = '<Leader><C-p>' " remap invocation key to <Leader><C-p>
-let g:ctrlp_show_hidden = 1     " show dot files
+let g:ctrlp_show_hidden = 1       " show dot files
 " }}}2
 
 " deoplete (Neovim) and neocomplete (Vim) settings {{{2
@@ -70,7 +70,7 @@ endif
 let g:neomake_cpp_clang_args = ['-std=c++11', '-Wextra', '-Wall']
 " runs make command on current file
 nnoremap <Leader>m :Neomake<CR>
-" runs make command with no input file (i.e. at the project-level)
+" runs make command with no input file (project-level)
 nnoremap <Leader>m! :Neomake!<CR>
 " }}}2
 
@@ -116,7 +116,7 @@ set autoindent  " use indent level from previous line
 "set autoread    " watch for file changes by other programs
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
 set backup      " keep a backup file
-set backupdir=~/.backup,.,~/tmp/,~/ " use ~/.backup to keep backups
+set backupdir=~/.backup,.,~/tmp/,~/ " use ~/.backup to keep backups, note that file names do not contain the dirname as prefixes
 "set directory=~/.tmp//,.,~/tmp/,/var/tmp,/tmp " use ~/.tmp for swap files
 "set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
 "set complete=.,w,b,u,U,t,i,d " extra scanning on keyword completion
@@ -451,18 +451,18 @@ nnoremap <silent> <Leader>T :TagbarToggle<CR>
 " -----------------------
 
 function! SexpMappings() " {{{2
-  " vim-sexp key mappings
-  if exists('g:sexp_loaded')
+  " custom vim-sexp key mappings
+  if exists('g:sexp_loaded') && empty(g:sexp_filetypes)
     if !exists('g:sexp_leader')
-      echo 'g:sexp_leader needs to be defined'
+      echo 'g:sexp_leader should be defined'
       return
     endif
     if !exists('g:sexp_motions')
-      echo 'g:sexp_motions needs to be defined'
+      echo 'g:sexp_motions should be defined'
       return
     endif
     " g:sexp_leader should be a key, e.g. '<C-L>'
-    " g:sexp_motions should be a (mode list, key, vim-sexp command) list,
+    " g:sexp_motions should be a (mode list, key, vim-sexp command) tuple list,
     "   e.g. [[['n', 'x'], 'o', '<Plug>(sexp_raise_list)'], [['n'], '@', '<Plug>(sexp_splice_list)']]
     for map_motion in g:sexp_motions
       for map_mode in map_motion[0]
