@@ -246,7 +246,7 @@ endif
 if has('autocmd')
   filetype plugin indent on " enable filetype detection for plugins and indents
   augroup cron " {{{2
-    autocmd filetype crontab setlocal nobackup nowritebackup
+    autocmd FileType crontab setlocal nobackup nowritebackup
   augroup END " }}}2
   augroup encrypted " {{{2
     " Transparent editing of gnupg encrypted files (Wouter Hanegraaff <wouter@blub.net>)
@@ -280,7 +280,7 @@ if has('autocmd')
   augroup END " }}}2
   augroup mail " {{{2
     autocmd!
-    autocmd Filetype mail if has('syntax') | set spell textwidth=70 wrap nonumber | endif
+    autocmd FileType mail if has('syntax') | set spell textwidth=70 wrap nonumber | endif
   augroup END " }}}2
   augroup programming " {{{2
     autocmd!
@@ -303,7 +303,7 @@ if has('autocmd')
     " For Clojure, Lisp, Racket, Scheme, use custom sexp mappings for vim-sexp plugin
     autocmd FileType clojure,lisp,racket,scheme call SexpMappings()
     " For Haskell, expand tabs to 2 spaces and set 2 space indents
-    autocmd Filetype haskell set expandtab tabstop=2 shiftwidth=2
+    autocmd FileType haskell set expandtab tabstop=2 shiftwidth=2
     " In Makefiles, do not expand tabs to spaces, since actual tab characters
     " are needed, and have indentation at 8 chars to be sure that all
     " indents are tabs (despite the mappings later):
@@ -311,9 +311,9 @@ if has('autocmd')
     " For Perl, have things in braces indenting themselves:
     autocmd FileType perl if has('smartindent') | set smartindent | endif
     " For Python, expand tabs to 4 spaces and set 4 space indents
-    autocmd Filetype python set expandtab tabstop=4 shiftwidth=4
+    autocmd FileType python set expandtab tabstop=4 shiftwidth=4
     " For Python, use cindent with the appropriate keywords
-    autocmd Filetype python
+    autocmd FileType python
           \ if has('cindent')
           \ | set cindent cinwords=class,def,elif,else,except,finally,for,if,try,while
           \ | endif
@@ -335,7 +335,7 @@ if has('autocmd')
     " indentation to make files a few bytes smaller:
     autocmd FileType css,html,xhtml set noexpandtab shiftwidth=2 tabstop=2
     " For CSS, also have things in braces indented:
-    autocmd Filetype css if has('smartindent') | set smartindent | endif
+    autocmd FileType css if has('smartindent') | set smartindent | endif
     " For HTML, generally format text, but if a long line has been created,
     " leave it alone when editing
     autocmd FileType html,xhtml set formatoptions+=tl
