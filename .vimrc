@@ -15,6 +15,7 @@ set nocompatible " vi non-compatible mode
 " Suggested plugins:
 "   CtrlP - fuzzy file finder | https://github.com/ctrlpvim/ctrlp.vim [or fzf or unite.vim]
 "   deoplete - auto-complete, requires editor be built with Python3 support (Neovim-only) | https://github.com/Shougo/deoplete.nvim [see for installation instructions]
+"   elm-vim - Elm plugin for vim | https://github.com/ElmCast/elm-vim
 "   ghcmod-vim - Haskell type checking, linting, and code expansion using ghc-mod, requires vimproc | https://github.com/eagletmt/ghcmod-vim
 "   neco-ghc - more Haskell auto-completion, requires neocomplete or deoplete | https://github.com/eagletmt/neco-ghc
 "   neocomplete - auto-complete, requires editor be built with lua support (Vim-only) | https://github.com/Shougo/neocomplete.vim
