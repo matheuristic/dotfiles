@@ -42,7 +42,7 @@ export EDITOR=vim
 export HISTCONTROL=ignoreboth
 export HISTFILESIZE=10000
 export HISTIGNORE='&:ls:ll:la:cd:exit:clear:history'
-export PATH=$HOME/.local/bin:$HOME/.node_modules/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.npm_packages/bin:$PATH
 export PS1="[\u@\h:\w]\$ "      # Set prompt to "[user@host:/path/to/cwd]$ "
 
 # Load aliases
