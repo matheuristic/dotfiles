@@ -70,7 +70,7 @@ endif
 "let g:neomake_cpp_enable_makers = ['clang', 'g\+\+']
 let g:neomake_cpp_clang_args = ['-std=c++11', '-Wextra', '-Wall']
 " runs make command on current file
-nnoremap <Leader>m :Neomake<CR>
+nnoremap <Leader>mm :Neomake<CR>
 " runs make command with no input file (project-level)
 nnoremap <Leader>m! :Neomake!<CR>
 " }}}2
