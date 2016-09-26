@@ -214,7 +214,7 @@ if has('syntax') && (&t_Co > 2)
   silent! unset g:colors_name
   syntax on
   " List of (colors_name[, numcolors needed])
-  let s:colors_list = [['zenburn', 256], ['gruvbox', 256], ['nofrils-dark', 256], ['default', 8]]
+  let s:colors_list = [['gruvbox', 256], ['nofrils-dark', 256], ['zenburn', 256], ['default', 8]]
   " In list order, try setting color scheme if the terminal emulator supports
   " the number of colors necessary for the scheme (default: 256)
   for color_pair in s:colors_list
@@ -366,8 +366,6 @@ endif
 " Buffer manipulation and navigation {{{2
 nnoremap <silent> <Leader>bl :buffers<CR>
 nnoremap <silent> <Leader>bd :bdelete<CR>
-nnoremap <silent> <Leader>bn :bnext<CR>
-nnoremap <silent> <Leader>bp :bprevious<CR>
 nnoremap <Leader>bg :buffer!<Space>
 nnoremap <Leader>bad :badd<Space>
 nnoremap <silent> <Leader>bal :ball<CR>
