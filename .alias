@@ -1,13 +1,8 @@
 # ~/.alias
-# Core userland tools
+# GNU Linux core userland tools
 alias rm="rm -i"                # Ask before removing a file
-if ls --color=auto &> /dev/null; then # Linux
-  alias ls='ls -h --color'
-  alias ll='ls -lh --group-directories-first --color'
-else # BSD (includes OS X)
-  alias ls='ls -h -G'
-  alias ll='ls -lh -G'
-fi
+alias ls='ls -h --color'        # Colorized ls, for BSDs use '-G' instead
+alias ll='ls -lh --group-directories-first --color'
 # Debian package management
 alias deblast='grep " install " /var/log/dpkg.log | tail -n 20'
 # RPM package management
