@@ -45,5 +45,8 @@ export HISTIGNORE='&:ls:ll:la:cd:exit:clear:history'
 export PATH=$HOME/.local/bin:$PATH
 export PS1="[\u@\h:\w]\$ "      # Set prompt to "[user@host:/path/to/cwd]$ "
 
+# Load local bashrc
+test -s ~/.bashrc.local && . ~/.bashrc.local || true
+
 # Load aliases
 test -s ~/.alias && . ~/.alias || true
