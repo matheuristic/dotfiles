@@ -11,7 +11,7 @@ set nocompatible " vi non-compatible mode
 " ---------------------
 
 " Suggested plugin manager:
-"   pathogen.vim - package manager | https://github.com/tpope/vim-pathogen
+"   pathogen.vim - package manager | https://github.com/tpope/vim-pathogen [or vim-plug]
 " Suggested plugins:
 "   CtrlP - fuzzy file finder | https://github.com/ctrlpvim/ctrlp.vim [or fzf or unite.vim]
 "   deoplete - auto-complete, requires editor be built with Python3 support (Neovim-only) | https://github.com/Shougo/deoplete.nvim [see for installation instructions]
