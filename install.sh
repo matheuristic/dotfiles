@@ -14,6 +14,7 @@ declare -a arr=( \
   ".npmrc" \
   ".tmux.conf" \
   ".vimrc" \
+  ".emacs.d/init.el" \
   )
 
 for dotfile in "${arr[@]}"
@@ -22,11 +23,17 @@ do
     echo "$dotfile already symlinked"
   else
     echo "Setting up $dotfile"
+    # Create directory for symlink if necessary
+    mkdir -p `dirname $HOME/$dotfile`
+    if [ $? -ne 0 ]; then
+        echo "unable to create base dir for symlink, skipping file"
+        continue
+    fi
     # Backup file
     if [ -f $HOME/$dotfile ]; then
       mv "$HOME/$dotfile" "$HOME/$dotfile.bak"
     fi
-    # Symlink new file
+    # Create symlink
     ln -s $GITDIR/$dotfile $HOME/$dotfile
   fi
 done
