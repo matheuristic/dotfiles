@@ -23,7 +23,7 @@ set nocompatible " vi non-compatible mode
 "   tagbar - tag browser | https://github.com/majutsushi/tagbar
 "   vim-commentary - block comment and uncomment | https://github.com/tpope/vim-commentary
 "   vim-fireplace - Clojure REPL support | https://github.com/tpope/vim-fireplace
-"   vim-fugitive - Git wrapper | https://github.com/tpope/vim-fugitive
+"   vim-gitgutter - show git diff in the sign column | https://github.com/airblade/vim-gitgutter
 "   vim-orgmode - emulate Emacs' Org-mode, requires vim-speeddating | https://github.com/jceb/vim-orgmode
 "   vim-python-pep8-indent - modify indentation to fit PEP8 | https://github.com/hynek/vim-python-pep8-indent
 "   vim-racket - Racket file auto-detect, indentation and syntax highlighting | https://github.com/wlangstroth/vim-racket
@@ -36,6 +36,7 @@ set nocompatible " vi non-compatible mode
 "   vim-unimpaired - handy bracket mappings | https://github.com/tpope/vim-unimpaired
 "   vim-vinegar - enhancements for netrw | https://github.com/tpope/vim-vinegar
 "   vim-virtualenv - virtualenv switching within Vim | https://github.com/jmcantrell/vim-virtualenv
+"   vimagit - Git wrapper, emulates Emacs' magit plugin, integrates with vim-gitgutter | https://github.com/jreybert/vimagit [or vim-fugitive]
 "   vimproc - asynchronous execution library | https://github.com/Shougo/vimproc.vim [see for installation instructions]
 "   YankRing - emulates Emacs' kill ring | https://github.com/vim-scripts/YankRing.vim
 " Suggested color themes:
@@ -54,7 +55,7 @@ if exists('g:loaded_pathogen') " load plugins and update help docs
 endif
 
 " CtrlP settings {{{2
-let g:ctrlp_map = '<Leader><C-p>' " remap invocation key to <Leader><C-p>
+let g:ctrlp_map = '<Leader><C-p>' " remap invocation key mapping
 let g:ctrlp_show_hidden = 1       " show dot files
 " }}}2
 
@@ -80,6 +81,13 @@ let g:tagbar_width = 30          " set width of Tagbar window to 30 cols
 let g:tagbar_show_visibility = 1 " show visibility symbols (public/protected/private)
 " }}}2
 
+" vim-gitgutter settings {{{2
+let g:gitgutter_enabled = 0 " don't turn on gitgutter automatically
+nnoremap <Leader>GG :GitGutterToggle<CR>
+nnoremap <Leader>GS :GitGutterSignsToggle<CR>
+nnoremap <Leader>GH :GitGutterHighlightsToggle<CR>
+" }}}2
+
 " vim-sexp settings {{{2
 let g:sexp_filetypes = '' " disable default sexp mappings
 let g:sexp_leader = '<C-m>' " special leader character for sexp, see SexpMappings function
@@ -102,6 +110,15 @@ let g:sexp_motions = [
       \ [['n', 'x'],      'H',        '<Plug>(sexp_capture_prev_element)'],
       \ [['n', 'x'],      'L',        '<Plug>(sexp_capture_next_element)'],
       \ ] " list of sexp mappings for different modes, see SexpMappings function
+if has('autocmd')
+  augroup vimsexp
+    autocmd FileType clojure,lisp,racket,scheme call SexpMappings() " custom key map
+  augroup END
+endif
+" }}}2
+
+" vimagit settings {{{2
+let g:magit_show_magit_mapping = '<Leader>M'  " remap invocation key mapping
 " }}}2
 
 " YankRing settings {{{2
@@ -193,7 +210,7 @@ if has('statusline') && (version >= 700)
   set statusline+=%m            " modified flag
   set statusline+=%r            " readonly flag
   set statusline+=%w            " preview window flag
-  set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''} " Git branch and commit (requires fugitive.vim plugin)
+  "set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''} " Git branch and commit, requires fugitive.vim plugin
   set statusline+=%=            " center auto-spacing
   set statusline+=%y            " filetype
   set statusline+=\             " spacer
@@ -301,8 +318,6 @@ if has('autocmd')
     autocmd FileType c set formatoptions+=ro
     " For C-like languages, have automatic indentation:
     autocmd FileType c,cpp if has('cindent') | set cindent | endif
-    " For Clojure, Lisp, Racket, Scheme, use custom sexp mappings for vim-sexp plugin
-    autocmd FileType clojure,lisp,racket,scheme call SexpMappings()
     " For Haskell, expand tabs to 2 spaces and set 2 space indents
     autocmd FileType haskell set expandtab tabstop=2 shiftwidth=2
     " In Makefiles, do not expand tabs to spaces, since actual tab characters
@@ -409,7 +424,7 @@ if has('quickfix')
 endif
 " }}}2
 " Toggle mouse {{{2
-nnoremap <silent> <Leader>MM :if &mouse == 'a' <Bar> set mouse= <Bar> else <Bar> set mouse=a <Bar> endif <Bar> set mouse?<CR>
+nnoremap <silent> <Leader>smm :if &mouse == 'a' <Bar> set mouse= <Bar> else <Bar> set mouse=a <Bar> endif <Bar> set mouse?<CR>
 " }}}2
 " Unhighlight search results (from https://github.com/tpope/vim-sensible) {{{2
 if has('extra_search')
@@ -426,7 +441,7 @@ endif
 " }}}2
 " Toggle spell check {{{2
 if has('syntax')
-  nnoremap <silent> <Leader>Sp :set spell! spell?<CR>
+  nnoremap <silent> <Leader>ssp :set spell! spell?<CR>
 endif
 " }}}2
 " Toggle wrapping of lines {{{2
@@ -439,7 +454,7 @@ nnoremap <silent> <Leader>P :set paste! paste?<CR>
 nnoremap <silent> <Leader>L :set list! list?<CR>
 " }}}2
 " Toggle modeline (reload file with :e to effect change) {{{2
-nnoremap <silent> <Leader>ML :set modeline! modeline?<CR>
+nnoremap <silent> <Leader>sml :set modeline! modeline?<CR>
 " }}}2
 " Tagbar commands (requires Tagbar plugin) {{{2
 nnoremap <silent> <Leader>T :TagbarToggle<CR>
