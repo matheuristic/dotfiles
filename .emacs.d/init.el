@@ -84,6 +84,7 @@
 (elpy-enable)
 
 ;; evil
+(setq evil-want-C-u-scroll t) ;; set C-u to half-page up (match Vim behavior)
 (require 'evil)
 (evil-mode t)
 
