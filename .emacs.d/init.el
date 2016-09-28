@@ -14,6 +14,10 @@
 ;; Set backup directory
 (setq backup-directory-alist '((".*" . "~/.backup")))
 
+;; Keep Customize settings in separate file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file 'noerror)
+
 ;; Soft tabs (use C-q to insert hard tabs)
 (setq-default indent-tabs-mode nil)
 
@@ -30,8 +34,8 @@
 (defvar my-font-weight 'light)
 (defvar my-font-width 'normal)
 (when (and (display-graphic-p)
-           (and (and my-font (not (string= my-font "")))
-                (x-list-fonts my-font)))
+           (and my-font (not (string= my-font "")))
+           (x-list-fonts my-font))
   (set-face-attribute 'default nil
                       :family my-font
                       :height my-font-height
@@ -48,55 +52,106 @@
   (when (file-directory-p project)
     (add-to-list 'load-path project)))
 
+;; Package management
+
+;; Regenerate outdated byte code
+(setq load-prefer-newer t)
+
 ;; MELPA packages
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
+(setq package-enable-at-startup nil)
+(setq package-archives
+      '(("GNU ELPA"     . "http://elpa.gnu.org/packages/")
+        ("MELPA"        . "https://melpa.org/packages/")
+        ("MELPA Stable" . "https://stable.melpa.org/packages/"))
+      package-archive-priorities
+      '(("MELPA Stable" . 10)
+        ("GNU ELPA"     . 5)
+        ("MELPA"        . 0)))
+
 (package-initialize)
 
 (unless package-archive-contents (package-refresh-contents))
 
-;; Packages to use
-(defvar package-list
-  '(
-    ;company
-    elpy
-    evil
-    ;evil-paredit
-    gruvbox-theme
-    helm
-    magit
-    ;paredit
-    undo-tree
-    zenburn-theme
-    )
-  "Packages to install.")
+;; Bootstrap use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-;; Install packages if necessary
-(dolist (p package-list)
-  (unless (package-installed-p p)
-    (package-install p)))
+(eval-when-compile
+  (require 'use-package))
 
-;; Color theme
-(load-theme 'gruvbox t)
+;; Packages, see https://github.com/jwiegley/use-package
 
-;; elpy
-(elpy-enable)
+(use-package elpy
+  :ensure t
+  :init (with-eval-after-load 'python (elpy-enable)))
 
-;; evil
-(setq evil-want-C-u-scroll t) ;; set C-u to half-page up (match Vim behavior)
-(require 'evil)
-(evil-mode t)
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
 
-;; helm
-(require 'helm-config)
-(helm-mode t)
+(use-package gruvbox-theme
+  :ensure t
+  :config (load-theme 'gruvbox t))
 
-;; magit
-(require 'magit)
+(use-package helm
+  :ensure t
+  :init
+  (progn
+    (require 'helm-config)
+    (helm-mode t))
+  :bind (("M-x" . helm-M-x)))
 
-;; undo-tree
-(require 'undo-tree)
-(global-undo-tree-mode t)
+(use-package magit
+  :ensure t)
+
+(use-package undo-tree
+  :ensure t
+  :init (global-undo-tree-mode))
+
+;; load evil and its addons last as keybindings may depend on earlier packages
+(use-package evil
+  :ensure t
+  :init
+  (progn
+    (setq evil-want-C-u-scroll t) ;; set C-u to half-page up (Vim behavior)
+    (use-package evil-leader
+      :ensure t
+      :init (global-evil-leader-mode)
+      :config
+      (progn
+        (evil-leader/set-leader "<SPC>") ;; set leader to spacebar
+        (unless (featurep 'helm)
+          (evil-leader/set-key
+            "e" 'find-file
+            "b" 'switch-to-buffer))
+        (eval-after-load "helm"
+          (progn
+            (evil-leader/set-key
+              "I" 'helm-info-emacs
+              "a" 'helm-apropos
+              ;"m" 'helm-man-woman
+              "b" 'helm-mini ;; buffers and recent files
+              "e" 'helm-find-files
+              "f" 'helm-for-files
+              ;"l" 'helm-locate
+              "/" 'helm-find
+              "o" 'helm-occur
+              "y" 'helm-show-kill-ring
+              ;"t" 'helm-top
+              "i" 'helm-semantic-or-imenu
+              ;"h" 'helm-projectile-find-file ;; requires helm-projectile
+              ;"H" 'helm-projectile ;; requires helm-projectile
+              )))
+        (eval-after-load "magit"
+          (evil-leader/set-key
+            "g" 'magit-status
+            ))
+        (evil-leader/set-key
+          "d" 'dired
+          ;"k" 'kill-buffer
+          )))
+    (evil-mode t)))
 
 ;; done
