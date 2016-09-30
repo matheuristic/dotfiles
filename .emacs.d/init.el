@@ -42,8 +42,8 @@
 
 ;; Set font for GUI mode
 (defvar my-font "Source Code Pro")
-(defvar my-font-height 140)
-(defvar my-font-weight 'light)
+(defvar my-font-height (if (eq system-type 'darwin) 140 110))
+(defvar my-font-weight (if (eq system-type 'darwin) 'light 'regular))
 (defvar my-font-width 'normal)
 (when (and (display-graphic-p)
            (and my-font (not (string= my-font "")))
@@ -120,6 +120,8 @@
     (helm-mode t))
   :bind (("M-x" . helm-M-x)))
 
+;(use-package hydra)
+
 (use-package magit
   :ensure t)
 
@@ -127,7 +129,7 @@
   :ensure t
   :init (global-undo-tree-mode))
 
-;; load evil and its addons last as keybindings may depend on earlier packages
+;; load evil and its addons last (keybindings depend on loaded packages)
 
 (use-package evil
   :ensure t
@@ -137,14 +139,14 @@
     (evil-mode t))
   :config
   (progn
-    (define-key evil-normal-state-map (kbd "[ e") 'move-text-up)
-    (define-key evil-normal-state-map (kbd "] e") 'move-text-down)
-    (define-key evil-visual-state-map (kbd "[ e") ":move '<--1")
-    (define-key evil-visual-state-map (kbd "] e") ":move >+1")
-    (define-key evil-normal-state-map (kbd "[ h") 'diff-hunk-prev)
-    (define-key evil-normal-state-map (kbd "] h") 'diff-hunk-next)
-    (define-key evil-normal-state-map (kbd "[ t") (lambda () (interactive)(raise-frame (previous-frame))))
-    (define-key evil-normal-state-map (kbd "] t") (lambda () (interactive)(raise-frame (next-frame))))
+    (define-key evil-normal-state-map (kbd "[ e") (lambda (n) (interactive "p")(dotimes (k n) (progn (transpose-lines 1)(forward-line -2)))))
+    (define-key evil-normal-state-map (kbd "] e") (lambda (n) (interactive "p")(dotimes (k n) (progn (forward-line 1)(transpose-lines 1)(forward-line 1)))))
+    (define-key evil-visual-state-map (kbd "[ e") (lambda (n) (interactive "p")(concat ":'<,'>move '<--" (number-to-string n))))
+    (define-key evil-visual-state-map (kbd "] e") (lambda (n) (interactive "p")(concat ":'<,'>move '>+" (number-to-string n))))
+    (define-key evil-normal-state-map (kbd "[ h") (lambda (n) (interactive "p")(dotimes (k n) 'diff-hunk-prev)))
+    (define-key evil-normal-state-map (kbd "] h") (lambda (n) (interactive "p")(dotimes (k n) 'diff-hunk-next)))
+    (define-key evil-normal-state-map (kbd "[ f") (lambda () (interactive)(raise-frame (previous-frame))))
+    (define-key evil-normal-state-map (kbd "] f") (lambda () (interactive)(raise-frame (next-frame))))
     (when (featurep 'flycheck)
       (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
       (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error))))
@@ -154,37 +156,46 @@
   :init (global-evil-leader-mode)
   :config
   (progn
-    (evil-leader/set-leader "<SPC>") ;; set leader to spacebar
+    (evil-leader/set-leader "<SPC>")
+    (evil-leader/set-key
+      "d" 'dired
+      "k b" 'kill-buffer
+      "k f" 'delete-frame
+      "k w" 'delete-window
+      "m v" 'evil-show-marks
+      "n f" 'new-frame
+      "w" 'whitespace-mode
+      "#" 'comment-or-uncomment-region)
     (unless (featurep 'helm)
       (evil-leader/set-key
+        "a" 'apropos
         "e" 'find-file
-        "b" 'switch-to-buffer))
+        "b" 'switch-to-buffer
+        "r" 'list-registers))
     (eval-after-load "helm"
       (evil-leader/set-key
-        "I" 'helm-info-emacs
         "a" 'helm-apropos
-        ;"m" 'helm-man-woman
         "b" 'helm-mini ;; buffers and recent files
         "e" 'helm-find-files
         "f" 'helm-for-files
+        "i" 'helm-semantic-or-imenu
+        "I" 'helm-info-emacs
         ;"l" 'helm-locate
-        "/" 'helm-find
+        "m a" 'helm-all-mark-rings
+        "m m" 'helm-mark-ring
+        "M" 'helm-man-woman
         "o" 'helm-occur
-        "y" 'helm-show-kill-ring
+        "r" 'helm-register
         ;"t" 'helm-top
-        "i" 'helm-semantic-or-imenu))
+        "y" 'helm-show-kill-ring
+        "/" 'helm-find))
     (eval-after-load "helm-projectile"
       (evil-leader/set-key
         "p f" 'helm-projectile-find-file
         "p p" 'helm-projectile))
     (eval-after-load "magit"
       (evil-leader/set-key
-        "g" 'magit-status))
-    (evil-leader/set-key
-      "d" 'dired
-      "k" 'kill-buffer
-      "w" 'whitespace-mode
-      "#" 'comment-or-uncomment-region)))
+        "g" 'magit-status))))
 
 (provide 'init)
 ;;; init.el ends here
