@@ -1,4 +1,4 @@
-;;; init.el --- Emacs config file, this should go in ~/.emacs.d/init.el
+;;; init.el --- Emacs config file ~/.emacs.d/init.el -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
@@ -19,7 +19,7 @@
 (setq-default show-paren-delay 0)
 (show-paren-mode t)
 
-;; Soft tabs (use C-q to insert hard tabs)
+;; Soft tabs for indentation (use C-q <TAB> to insert hard tabs)
 (setq-default indent-tabs-mode nil)
 
 ;; Menus and scroll bars visible only for GUI mode
@@ -34,7 +34,7 @@
 ;; Set backup directory
 (setq backup-directory-alist '((".*" . "~/.backup")))
 
-;; Keep Customize settings in separate file
+;; Keep Customize settings in separate file, ignore if no such file exists
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
@@ -139,17 +139,56 @@
     (evil-mode t))
   :config
   (progn
-    (define-key evil-normal-state-map (kbd "[ e") (lambda (n) (interactive "p")(dotimes (k n) (progn (transpose-lines 1)(forward-line -2)))))
-    (define-key evil-normal-state-map (kbd "] e") (lambda (n) (interactive "p")(dotimes (k n) (progn (forward-line 1)(transpose-lines 1)(forward-line 1)))))
-    (define-key evil-visual-state-map (kbd "[ e") (lambda (n) (interactive "p")(concat ":'<,'>move '<--" (number-to-string n))))
-    (define-key evil-visual-state-map (kbd "] e") (lambda (n) (interactive "p")(concat ":'<,'>move '>+" (number-to-string n))))
-    (define-key evil-normal-state-map (kbd "[ h") (lambda (n) (interactive "p")(dotimes (k n) 'diff-hunk-prev)))
-    (define-key evil-normal-state-map (kbd "] h") (lambda (n) (interactive "p")(dotimes (k n) 'diff-hunk-next)))
-    (define-key evil-normal-state-map (kbd "[ f") (lambda () (interactive)(raise-frame (previous-frame))))
-    (define-key evil-normal-state-map (kbd "] f") (lambda () (interactive)(raise-frame (next-frame))))
+    ;; set various modes to default to emacs keybindings
+    (evil-set-initial-state 'comint-mode 'emacs)
+    (evil-set-initial-state 'compilation-mode 'emacs)
+    (evil-set-initial-state 'diff-mode 'emacs)
+    (evil-set-initial-state 'dired-mode 'emacs)
+    (evil-set-initial-state 'erc-mode 'emacs)
+    (evil-set-initial-state 'eshell-mode 'emacs)
+    (evil-set-initial-state 'fundamental-mode 'emacs)
+    (evil-set-initial-state 'git-commit-mode 'emacs)
+    (evil-set-initial-state 'git-rebase-mode 'emacs)
+    (evil-set-initial-state 'grep-mode 'emacs)
+    (evil-set-initial-state 'gud-mode 'emacs)
+    (evil-set-initial-state 'help-mode 'emacs)
+    (evil-set-initial-state 'Info-mode 'emacs)
+    (evil-set-initial-state 'message-mode 'emacs)
+    (evil-set-initial-state 'nav-mode 'emacs)
+    (evil-set-initial-state 'org-mode 'emacs)
+    (evil-set-initial-state 'shell-mode 'emacs)
+    (evil-set-initial-state 'speedbar-mode 'emacs)
+    (evil-set-initial-state 'term-mode 'emacs)
+    ;; useful bracket mappings (like vim-unimpaired)
+    (define-key evil-normal-state-map (kbd "[ e")
+      (lambda (n) (interactive "p")
+        (dotimes (_ n)
+          (progn (transpose-lines 1)(forward-line -2)))))
+    (define-key evil-normal-state-map (kbd "] e")
+      (lambda (n) (interactive "p")
+        (dotimes (_ n)
+          (progn (forward-line 1)(transpose-lines 1)(forward-line 1)))))
+    (define-key evil-visual-state-map (kbd "[ e")
+      (lambda (n) (interactive "p")
+        (concat ":'<,'>move '<--" (number-to-string n))))
+    (define-key evil-visual-state-map (kbd "] e")
+      (lambda (n) (interactive "p")
+        (concat ":'<,'>move '>+" (number-to-string n))))
+    (define-key evil-normal-state-map (kbd "[ h") 'diff-hunk-prev)
+    (define-key evil-normal-state-map (kbd "] h") 'diff-hunk-next)
+    (define-key evil-normal-state-map (kbd "[ f")
+      (lambda () (interactive)(raise-frame (previous-frame))))
+    (define-key evil-normal-state-map (kbd "] f")
+      (lambda () (interactive)(raise-frame (next-frame))))
+    ;; plugin-specific keymappings
     (when (featurep 'flycheck)
       (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
-      (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error))))
+      (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error))
+    (when (featurep 'magit)
+      (evil-set-initial-state 'magit-mode 'emacs)
+      (evil-set-initial-state 'magit-popup-mode 'emacs))
+    (when (featurep 'undo-tree)
+      (setq evil-want-fine-undo t))))
 
 (use-package evil-leader
   :ensure t
@@ -166,6 +205,7 @@
       "n f" 'new-frame
       "w" 'whitespace-mode
       "#" 'comment-or-uncomment-region)
+    ;; plugin-specific keymappings
     (unless (featurep 'helm)
       (evil-leader/set-key
         "a" 'apropos
