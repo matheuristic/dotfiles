@@ -75,6 +75,7 @@
     (add-to-list 'load-path project)))
 
 ;;; Packages from ELPA-compatible package repositories
+
 (require 'package)
 (setq package-enable-at-startup nil)
 (setq package-archives
@@ -90,7 +91,7 @@
 
 (unless package-archive-contents (package-refresh-contents))
 
-;; Bootstrap use-package
+;; Bootstrap use-package, https://github.com/jwiegley/use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -98,7 +99,64 @@
 (eval-when-compile
   (require 'use-package))
 
-;; Use packages, see https://github.com/jwiegley/use-package
+;; Load evil and its addons first (so package defns can have evil keybindings)
+
+(use-package evil
+  :ensure t
+  :init
+  (setq-default evil-want-C-u-scroll t) ;; set C-u to half-page up (like Vim)
+  (evil-mode t)
+  :config
+  ;; set various modes to default to emacs keybindings
+  (dolist (mode '(apropos-mode comint-mode compilation-mode diff-mode
+                  dired-mode erc-mode eshell-mode fundamental-mode
+                  git-commit-mode git-rebase-mode grep-mode gud-mode
+                  help-mode Info-mode message-mode nav-mode org-mode
+                  shell-mode speedbar-mode term-mode))
+    (evil-set-initial-state mode 'emacs))
+  ;; useful bracket mappings (like vim-unimpaired)
+  (define-key evil-normal-state-map (kbd "[ e")
+    (lambda (n) (interactive "p")
+      (dotimes (_ n)
+        (progn (transpose-lines 1)(forward-line -2)))))
+  (define-key evil-normal-state-map (kbd "] e")
+    (lambda (n) (interactive "p")
+      (dotimes (_ n)
+        (progn (forward-line 1)(transpose-lines 1)(forward-line -1)))))
+  (define-key evil-visual-state-map (kbd "[ e")
+    (lambda (n) (interactive "p")
+      (concat ":'<,'>move '<--" (number-to-string n))))
+  (define-key evil-visual-state-map (kbd "] e")
+    (lambda (n) (interactive "p")
+      (concat ":'<,'>move '>+" (number-to-string n))))
+  (define-key evil-normal-state-map (kbd "[ h") 'diff-hunk-prev)
+  (define-key evil-normal-state-map (kbd "] h") 'diff-hunk-next)
+  (define-key evil-normal-state-map (kbd "[ f")
+    (lambda () (interactive)(raise-frame (previous-frame))))
+  (define-key evil-normal-state-map (kbd "] f")
+    (lambda () (interactive)(raise-frame (next-frame)))))
+
+(use-package evil-leader
+  :ensure t
+  :init (global-evil-leader-mode)
+  :config
+  (evil-leader/set-leader "<SPC>")
+  (evil-leader/set-key
+    "b" 'switch-to-buffer
+    "B" 'ibuffer
+    "d" 'dired
+    "e" 'find-file
+    "k b" 'kill-buffer
+    "k f" 'delete-frame
+    "k w" 'delete-window
+    "m" 'evil-show-marks
+    "n f" 'new-frame
+    "r" 'list-registers
+    "w" 'whitespace-mode
+    "y" (lambda () (interactive)(popup-menu 'yank-menu))
+    "#" 'comment-or-uncomment-region))
+
+;; Other packages
 
 (use-package elpy
   :ensure t
@@ -106,136 +164,46 @@
 
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  :init (global-flycheck-mode)
+  :config
+  (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
+  (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error))
 
 (use-package gruvbox-theme
   :ensure t
   :config (load-theme 'gruvbox t))
 
-(use-package helm
+(use-package ido
   :ensure t
   :init
-  (progn
-    (require 'helm-config)
-    (helm-mode t))
-  :bind (("M-x" . helm-M-x)))
-
-;(use-package hydra)
+  (setq ido-default-file-method 'selected-window
+        ido-default-buffer-method 'selected-window
+        ido-enable-flex-matching t
+        ido-everywhere t)
+  (ido-mode t))
 
 (use-package magit
-  :ensure t)
+  :ensure t
+  :config
+  (evil-set-initial-state 'magit-mode 'emacs)
+  (evil-set-initial-state 'magit-popup-mode 'emacs)
+  (evil-leader/set-key "g" 'magit-status))
+
+(use-package rainbow-delimiters
+  :ensure t
+  :config (evil-leader/set-key "R" 'rainbow-delimiters-mode))
+
+(use-package smex
+  :ensure t
+  :bind (("M-x" . smex)
+         ("M-X" . smex-major-mode-commands))
+  :config (smex-initialize))
 
 (use-package undo-tree
   :ensure t
-  :init (global-undo-tree-mode))
-
-;; load evil and its addons last (keybindings depend on loaded packages)
-
-(use-package evil
-  :ensure t
-  :init
-  (progn
-    (setq-default evil-want-C-u-scroll t) ;; set C-u to half-page up (like Vim)
-    (evil-mode t))
-  :config
-  (progn
-    ;; set various modes to default to emacs keybindings
-    (evil-set-initial-state 'comint-mode 'emacs)
-    (evil-set-initial-state 'compilation-mode 'emacs)
-    (evil-set-initial-state 'diff-mode 'emacs)
-    (evil-set-initial-state 'dired-mode 'emacs)
-    (evil-set-initial-state 'erc-mode 'emacs)
-    (evil-set-initial-state 'eshell-mode 'emacs)
-    (evil-set-initial-state 'fundamental-mode 'emacs)
-    (evil-set-initial-state 'git-commit-mode 'emacs)
-    (evil-set-initial-state 'git-rebase-mode 'emacs)
-    (evil-set-initial-state 'grep-mode 'emacs)
-    (evil-set-initial-state 'gud-mode 'emacs)
-    (evil-set-initial-state 'help-mode 'emacs)
-    (evil-set-initial-state 'Info-mode 'emacs)
-    (evil-set-initial-state 'message-mode 'emacs)
-    (evil-set-initial-state 'nav-mode 'emacs)
-    (evil-set-initial-state 'org-mode 'emacs)
-    (evil-set-initial-state 'shell-mode 'emacs)
-    (evil-set-initial-state 'speedbar-mode 'emacs)
-    (evil-set-initial-state 'term-mode 'emacs)
-    ;; useful bracket mappings (like vim-unimpaired)
-    (define-key evil-normal-state-map (kbd "[ e")
-      (lambda (n) (interactive "p")
-        (dotimes (_ n)
-          (progn (transpose-lines 1)(forward-line -2)))))
-    (define-key evil-normal-state-map (kbd "] e")
-      (lambda (n) (interactive "p")
-        (dotimes (_ n)
-          (progn (forward-line 1)(transpose-lines 1)(forward-line 1)))))
-    (define-key evil-visual-state-map (kbd "[ e")
-      (lambda (n) (interactive "p")
-        (concat ":'<,'>move '<--" (number-to-string n))))
-    (define-key evil-visual-state-map (kbd "] e")
-      (lambda (n) (interactive "p")
-        (concat ":'<,'>move '>+" (number-to-string n))))
-    (define-key evil-normal-state-map (kbd "[ h") 'diff-hunk-prev)
-    (define-key evil-normal-state-map (kbd "] h") 'diff-hunk-next)
-    (define-key evil-normal-state-map (kbd "[ f")
-      (lambda () (interactive)(raise-frame (previous-frame))))
-    (define-key evil-normal-state-map (kbd "] f")
-      (lambda () (interactive)(raise-frame (next-frame))))
-    ;; plugin-specific keymappings
-    (when (featurep 'flycheck)
-      (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
-      (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error))
-    (when (featurep 'magit)
-      (evil-set-initial-state 'magit-mode 'emacs)
-      (evil-set-initial-state 'magit-popup-mode 'emacs))
-    (when (featurep 'undo-tree)
-      (setq evil-want-fine-undo t))))
-
-(use-package evil-leader
-  :ensure t
-  :init (global-evil-leader-mode)
-  :config
-  (progn
-    (evil-leader/set-leader "<SPC>")
-    (evil-leader/set-key
-      "d" 'dired
-      "k b" 'kill-buffer
-      "k f" 'delete-frame
-      "k w" 'delete-window
-      "m v" 'evil-show-marks
-      "n f" 'new-frame
-      "w" 'whitespace-mode
-      "#" 'comment-or-uncomment-region)
-    ;; plugin-specific keymappings
-    (unless (featurep 'helm)
-      (evil-leader/set-key
-        "a" 'apropos
-        "e" 'find-file
-        "b" 'switch-to-buffer
-        "r" 'list-registers))
-    (eval-after-load "helm"
-      (evil-leader/set-key
-        "a" 'helm-apropos
-        "b" 'helm-mini ;; buffers and recent files
-        "e" 'helm-find-files
-        "f" 'helm-for-files
-        "i" 'helm-semantic-or-imenu
-        "I" 'helm-info-emacs
-        ;"l" 'helm-locate
-        "m a" 'helm-all-mark-rings
-        "m m" 'helm-mark-ring
-        "M" 'helm-man-woman
-        "o" 'helm-occur
-        "r" 'helm-register
-        ;"t" 'helm-top
-        "y" 'helm-show-kill-ring
-        "/" 'helm-find))
-    (eval-after-load "helm-projectile"
-      (evil-leader/set-key
-        "p f" 'helm-projectile-find-file
-        "p p" 'helm-projectile))
-    (eval-after-load "magit"
-      (evil-leader/set-key
-        "g" 'magit-status))))
+  :diminish undo-tree-mode
+  :init (global-undo-tree-mode)
+  :config (setq evil-want-fine-undo t))
 
 (provide 'init)
 ;;; init.el ends here
