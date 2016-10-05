@@ -1,0 +1,28 @@
+-- ALIASES
+
+-- set pager to off (useful in Emacs Shell)
+\set pager_off '\pset pager off'
+
+-- show disk usage per table (Redshift)
+\set disk_usage 'select trim(pgdb.datname) as Database, trim(pgn.nspname) as Schema, trim(a.name) as Table,  ((b.mbytes/part.total::decimal)*100)::decimal(5,2) as pct_of_total, b.mbytes, b.unsorted_mbytes from stv_tbl_perm a join pg_database as pgdb on pgdb.oid=a.db_id join pg_class as pgc on pgc.oid=a.id join pg_namespace as pgn on pgn.oid=pgc.relnamespace join (select tbl, sum(decode(unsorted, 1, 1, 0)) as unsorted_mbytes, count(*) as mbytes from stv_blocklist group by tbl) b on a.id=b.tbl join ( select sum(capacity) as  total from stv_partitions where part_begin=0 ) as part on 1=1 where a.slice=0'
+
+-- show disk capacity and free space (Redshift)
+\set disk_free 'select sum(capacity)/1024 as capacity_gbytes, sum(used)/1024 as used_gbytes, (sum(capacity) - sum(used))/1024 as free_gbytes from stv_partitions where part_begin=0'
+
+-- show dependencies
+\set show_dependencies 'select distinct dependee_namespace.nspname || \'.\' || dependee.relname as tablename, dependent_namespace.nspname || \'.\' || dependent.relname as depends from pg_depend join pg_rewrite on pg_depend.objid=pg_rewrite.oid join pg_class as dependee on pg_rewrite.ev_class=dependee.oid join pg_namespace as dependee_namespace on dependee.relnamespace=dependee_namespace.oid join pg_class as dependent on pg_depend.refobjid=dependent.oid join pg_namespace as dependent_namespace on dependent.relnamespace=dependent_namespace.oid join pg_attribute on pg_depend.refobjid=pg_attribute.attrelid and pg_depend.refobjsubid=pg_attribute.attnum where pg_attribute.attnum > 0'
+
+-- show namespaces
+\set show_namespaces 'select nspname, usename, nspacl from pg_namespace left join pg_user on nspowner=usesysid'
+
+-- show namespaces default acl
+\set show_namespaces_default_acl 'select nspname, defaclobjtype, defaclacl from pg_default_acl a join pg_namespace b on a.defaclnamespace=b.oid'
+
+-- show tables
+\set show_tables 'select distinct id, trim(datname) as db_name, trim(nspname) as schema_name, trim(relname) as table_name, trim(usename) as table_owner from stv_tbl_perm join pg_class on pg_class.oid=stv_tbl_perm.id join pg_namespace on pg_namespace.oid=relnamespace join pg_database on pg_database.oid=stv_tbl_perm.db_id join pg_user on pg_user.usesysid=pg_class.relowner'
+
+-- show table grants
+\set show_table_grants 'select * from ( select schemaname, objectname, obj_type, usename, has_table_privilege(usrs.usename, fullobj, \'select\') sel, has_table_privilege(usrs.usename, fullobj, \'insert\') ins, has_table_privilege(usrs.usename, fullobj, \'update\') upd, has_table_privilege(usrs.usename, fullobj, \'delete\') del, has_table_privilege(usrs.usename, fullobj, \'references\') ref from ( select schemaname, \'t\' obj_type, tablename objectname, schemaname || \'.\' || tablename fullobj from pg_tables where schemaname not in (\'pg_internal\') union select schemaname, \'v\' obj_type, viewname objectname, schemaname || \'.\' || viewname fullobj from pg_views where schemaname not in (\'pg_internal\') ) objs, ( select * from pg_user ) usrs ) where (sel = true or ins = true or upd = true or del = true or ref = true)'
+
+-- show users
+\set show_users 'select usesysid, usename, usecreatedb, usesuper, usecatupd, groname from pg_user left join pg_group on usesysid=any(grolist)'
