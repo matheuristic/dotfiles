@@ -11,6 +11,7 @@ GITDIR=$1
 declare -a arr=( \
   ".alias" \
   ".bashrc" \
+  ".gitignore_global" \
   ".npmrc" \
   ".tmux.conf" \
   ".vimrc" \

@@ -29,6 +29,15 @@
 (when (and (not (display-graphic-p)) (fboundp 'scroll-bar-mode))
   (scroll-bar-mode -1))
 
+;; Make comint-mode prompts read-only
+(setq-default comint-prompt-read-only t)
+
+;; Close term-mode and eshell-mode buffers on exit
+(defadvice term-handle-exit
+    (after term-kill-buffer-on-exit activate)
+  "Kill term buffers on term session ends."
+  (kill-buffer))
+
 ;;; Backup and config files
 
 ;; Set backup directory
@@ -97,22 +106,30 @@
   (package-install 'use-package))
 
 (eval-when-compile
-  (require 'use-package))
+  (require 'use-package)
+  (setq use-package-always-ensure t))
 
-;; Load evil and its addons first (so package defns can have evil keybindings)
+;; Load evil first (so package defns can have evil keybindings)
 
 (use-package evil
-  :ensure t
   :init
   (setq-default evil-want-C-u-scroll t) ;; set C-u to half-page up (like Vim)
   (evil-mode t)
   :config
-  ;; set various modes to default to emacs keybindings
-  (dolist (mode '(apropos-mode comint-mode compilation-mode diff-mode
-                  dired-mode erc-mode eshell-mode fundamental-mode
-                  git-commit-mode git-rebase-mode grep-mode gud-mode
-                  help-mode Info-mode message-mode nav-mode org-mode
-                  shell-mode speedbar-mode term-mode))
+  ;; emulate Vim leader key
+  (defvar evil-leader "<SPC>")
+  ;; function for easy normal-mode bindings with the leader key
+  (defun evil-leader-set-key (key fn)
+    "Defines an evil normal mode keybinding prefixed with evil-leader."
+    (define-key evil-normal-state-map(kbd (concat evil-leader key)) fn))
+  ;; set various modes emacs keybindings by default
+  (dolist (mode '(calculator-mode
+                  comint-mode
+                  eshell-mode
+                  eww-mode
+                  fundamental-mode
+                  shell-mode
+                  term-mode))
     (evil-set-initial-state mode 'emacs))
   ;; useful bracket mappings (like vim-unimpaired)
   (define-key evil-normal-state-map (kbd "[ e")
@@ -134,76 +151,98 @@
   (define-key evil-normal-state-map (kbd "[ f")
     (lambda () (interactive)(raise-frame (previous-frame))))
   (define-key evil-normal-state-map (kbd "] f")
-    (lambda () (interactive)(raise-frame (next-frame)))))
-
-(use-package evil-leader
-  :ensure t
-  :init (global-evil-leader-mode)
-  :config
-  (evil-leader/set-leader "<SPC>")
-  (evil-leader/set-key
-    "b" 'switch-to-buffer
-    "B" 'ibuffer
-    "d" 'dired
-    "e" 'find-file
-    "k b" 'kill-buffer
-    "k f" 'delete-frame
-    "k w" 'delete-window
-    "m" 'evil-show-marks
-    "n f" 'new-frame
-    "r" 'list-registers
-    "w" 'whitespace-mode
-    "y" (lambda () (interactive)(popup-menu 'yank-menu))
-    "#" 'comment-or-uncomment-region))
+    (lambda () (interactive)(raise-frame (next-frame))))
+  ;; leader key bindings
+  (evil-leader-set-key "b" 'switch-to-buffer)
+  (evil-leader-set-key "d" 'dired)
+  (evil-leader-set-key "e" 'find-file)
+  (evil-leader-set-key "k b" 'kill-buffer)
+  (evil-leader-set-key "k f" 'delete-frame)
+  (evil-leader-set-key "k w" 'delete-window)
+  (evil-leader-set-key "m" 'evil-show-marks)
+  (evil-leader-set-key "n f" 'new-frame)
+  (evil-leader-set-key "r" 'list-registers)
+  (evil-leader-set-key "w" 'whitespace-mode)
+  (evil-leader-set-key "y" (lambda () (interactive)(popup-menu 'yank-menu)))
+  (evil-leader-set-key "#" 'comment-or-uncomment-region))
 
 ;; Other packages
 
+(use-package company
+  :init (add-hook 'after-init-hook 'global-company-mode)
+  :config
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous))
+
 (use-package elpy
-  :ensure t
   :init (with-eval-after-load 'python (elpy-enable)))
 
 (use-package flycheck
-  :ensure t
   :init (global-flycheck-mode)
   :config
-  (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
-  (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error))
+  (when (featurep 'evil)
+    (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
+    (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error)))
 
 (use-package gruvbox-theme
-  :ensure t
   :config (load-theme 'gruvbox t))
 
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer))
+
 (use-package ido
-  :ensure t
   :init
   (setq ido-default-file-method 'selected-window
         ido-default-buffer-method 'selected-window
         ido-enable-flex-matching t
-        ido-everywhere t)
+        ido-everywhere t
+        ido-use-virtual-buffers t)
   (ido-mode t))
 
+(use-package ido-ubiquitous
+  :init
+  (ido-ubiquitous-mode t))
+
 (use-package magit
-  :ensure t
   :config
-  (evil-set-initial-state 'magit-mode 'emacs)
-  (evil-set-initial-state 'magit-popup-mode 'emacs)
-  (evil-leader/set-key "g" 'magit-status))
+  (when (featurep 'evil)
+    (evil-set-initial-state 'magit-mode 'emacs)
+    (evil-set-initial-state 'magit-popup-mode 'emacs)
+    (evil-leader-set-key "g" 'magit-status)))
+
+(use-package projectile
+  :init (projectile-global-mode)
+  :config
+  (setq projectile-switch-project-action #'projectile-commander)
+  (when (featurep 'evil)
+    (evil-leader-set-key "p e" 'projectile-find-file)
+    (evil-leader-set-key "p k" 'projectile-kill-buffers)
+    (evil-leader-set-key "p p" 'projectile-switch-project)))
 
 (use-package rainbow-delimiters
-  :ensure t
-  :config (evil-leader/set-key "R" 'rainbow-delimiters-mode))
+  :config
+  (when (featurep 'evil)
+    (evil-leader-set-key "R" 'rainbow-delimiters-mode)))
+
+(use-package recentf
+  :init (recentf-mode t)
+  :config
+  (setq recentf-max-menu-items 10
+        recentf-max-saved-items 50)
+  (when (featurep 'evil)
+    (evil-leader-set-key "f" 'recentf-open-files)))
 
 (use-package smex
-  :ensure t
   :bind (("M-x" . smex)
          ("M-X" . smex-major-mode-commands))
   :config (smex-initialize))
 
 (use-package undo-tree
-  :ensure t
   :diminish undo-tree-mode
   :init (global-undo-tree-mode)
-  :config (setq evil-want-fine-undo t))
+  :config
+  (when (featurep 'evil)
+    (setq evil-want-fine-undo t)))
 
 (provide 'init)
 ;;; init.el ends here
