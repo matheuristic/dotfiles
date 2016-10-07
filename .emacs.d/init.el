@@ -12,6 +12,9 @@
 ;; Turn off audible and visual bells
 (setq ring-bell-function 'ignore)
 
+;; Turn off scroll bars
+(scroll-bar-mode -1)
+
 ;; Show column numbers
 (setq column-number-mode t)
 
@@ -119,9 +122,12 @@
   ;; emulate Vim leader key
   (defvar evil-leader "<SPC>")
   ;; function for easy normal-mode bindings with the leader key
-  (defun evil-leader-set-key (key fn)
+  (defun evil-leader-set-key-normal (key fn)
     "Defines an evil normal mode keybinding prefixed with evil-leader."
-    (define-key evil-normal-state-map(kbd (concat evil-leader key)) fn))
+    (define-key evil-normal-state-map (kbd (concat evil-leader key)) fn))
+  (defun evil-leader-set-key-visual (key fn)
+    "Defines an evil visual mode keybinding prefixed with evil-leader."
+    (define-key evil-visual-state-map (kbd (concat evil-leader key)) fn))
   ;; set various modes emacs keybindings by default
   (dolist (mode '(calculator-mode
                   comint-mode
@@ -153,18 +159,20 @@
   (define-key evil-normal-state-map (kbd "] f")
     (lambda () (interactive)(raise-frame (next-frame))))
   ;; leader key bindings
-  (evil-leader-set-key "b" 'switch-to-buffer)
-  (evil-leader-set-key "d" 'dired)
-  (evil-leader-set-key "e" 'find-file)
-  (evil-leader-set-key "k b" 'kill-buffer)
-  (evil-leader-set-key "k f" 'delete-frame)
-  (evil-leader-set-key "k w" 'delete-window)
-  (evil-leader-set-key "m" 'evil-show-marks)
-  (evil-leader-set-key "n f" 'new-frame)
-  (evil-leader-set-key "r" 'list-registers)
-  (evil-leader-set-key "w" 'whitespace-mode)
-  (evil-leader-set-key "y" (lambda () (interactive)(popup-menu 'yank-menu)))
-  (evil-leader-set-key "#" 'comment-or-uncomment-region))
+  (evil-leader-set-key-normal "b" 'switch-to-buffer)
+  (evil-leader-set-key-normal "B" 'ibuffer)
+  (evil-leader-set-key-normal "d" 'dired)
+  (evil-leader-set-key-normal "e" 'find-file)
+  (evil-leader-set-key-normal "k b" 'kill-buffer)
+  (evil-leader-set-key-normal "k f" 'delete-frame)
+  (evil-leader-set-key-normal "k w" 'delete-window)
+  (evil-leader-set-key-normal "m" 'evil-show-marks)
+  (evil-leader-set-key-normal "n f" 'new-frame)
+  (evil-leader-set-key-normal "r" 'list-registers)
+  (evil-leader-set-key-normal "w" 'whitespace-mode)
+  (evil-leader-set-key-normal "y" (lambda () (interactive)
+                                    (popup-menu 'yank-menu)))
+  (evil-leader-set-key-visual "#" 'comment-or-uncomment-region))
 
 ;; Other packages
 
@@ -208,21 +216,21 @@
   (when (featurep 'evil)
     (evil-set-initial-state 'magit-mode 'emacs)
     (evil-set-initial-state 'magit-popup-mode 'emacs)
-    (evil-leader-set-key "g" 'magit-status)))
+    (evil-leader-set-key-normal "g" 'magit-status)))
 
 (use-package projectile
   :init (projectile-global-mode)
   :config
   (setq projectile-switch-project-action #'projectile-commander)
   (when (featurep 'evil)
-    (evil-leader-set-key "p e" 'projectile-find-file)
-    (evil-leader-set-key "p k" 'projectile-kill-buffers)
-    (evil-leader-set-key "p p" 'projectile-switch-project)))
+    (evil-leader-set-key-normal "p e" 'projectile-find-file)
+    (evil-leader-set-key-normal "p k" 'projectile-kill-buffers)
+    (evil-leader-set-key-normal "p p" 'projectile-switch-project)))
 
 (use-package rainbow-delimiters
   :config
   (when (featurep 'evil)
-    (evil-leader-set-key "R" 'rainbow-delimiters-mode)))
+    (evil-leader-set-key-normal "R" 'rainbow-delimiters-mode)))
 
 (use-package recentf
   :init (recentf-mode t)
@@ -230,7 +238,7 @@
   (setq recentf-max-menu-items 10
         recentf-max-saved-items 50)
   (when (featurep 'evil)
-    (evil-leader-set-key "f" 'recentf-open-files)))
+    (evil-leader-set-key-normal "f" 'recentf-open-files)))
 
 (use-package smex
   :bind (("M-x" . smex)

@@ -1,4 +1,4 @@
--- ALIASES
+-- ALIASES -*- mode: sql; -*-
 
 -- set pager to off (useful in Emacs Shell)
 \set pager_off '\pset pager off'
