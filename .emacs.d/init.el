@@ -6,36 +6,32 @@
 
 ;;; User interface
 
-;; Suppress splash screen
+;; suppress splash screen
 (setq inhibit-startup-message t)
 
-;; Turn off audible and visual bells
+;; turn off audible and visual bells
 (setq ring-bell-function 'ignore)
 
-;; Turn off scroll bars
-(scroll-bar-mode -1)
-
-;; Show column numbers
+;; show column numbers
 (setq column-number-mode t)
 
-;; Show matching parentheses without delay
+;; show matching parentheses without delay
 (setq-default show-paren-delay 0)
 (show-paren-mode t)
 
-;; Soft tabs for indentation (use C-q <TAB> to insert hard tabs)
+;; soft tabs for indentation (use C-q <TAB> to insert hard tabs)
 (setq-default indent-tabs-mode nil)
 
-;; Menus and scroll bars visible only for GUI mode
+;; menu bar visible only for GUI mode
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (and (not (display-graphic-p)) (fboundp 'menu-bar-mode))
   (menu-bar-mode -1))
-(when (and (not (display-graphic-p)) (fboundp 'scroll-bar-mode))
-  (scroll-bar-mode -1))
 
-;; Make comint-mode prompts read-only
+;; make comint-mode prompts read-only
 (setq-default comint-prompt-read-only t)
 
-;; Close term-mode and eshell-mode buffers on exit
+;; close term-mode and eshell-mode buffers on exit
 (defadvice term-handle-exit
     (after term-kill-buffer-on-exit activate)
   "Kill term buffers on term session ends."
@@ -43,16 +39,16 @@
 
 ;;; Backup and config files
 
-;; Set backup directory
+;; set backup directory
 (setq backup-directory-alist '((".*" . "~/.backup")))
 
-;; Keep Customize settings in separate file, ignore if no such file exists
+;; keep Customize settings in separate file, ignore if no such file exists
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
 ;;; Fonts
 
-;; Set font for GUI mode
+;; set font for GUI mode
 (defvar my-font "Source Code Pro")
 (defvar my-font-height (if (eq system-type 'darwin) 140 110))
 (defvar my-font-weight (if (eq system-type 'darwin) 'light 'regular))
@@ -68,16 +64,16 @@
 
 ;;; Package management
 
-;; Regenerate outdated byte code
+;; regenerate outdated byte code
 (setq load-prefer-newer t)
 
-;; User packages in ~/.emacs.d/lisp
+;; packages in ~/.emacs.d/lisp (user)
 (defvar lisp-dir (expand-file-name "lisp" user-emacs-directory))
 (unless (file-exists-p lisp-dir)
   (make-directory lisp-dir))
 (add-to-list 'load-path lisp-dir)
 
-;; Third-party packages in ~/.emacs.d/site-lisp and its subdirs
+;; packages in ~/.emacs.d/site-lisp and its subdirs (third-party)
 (defvar site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
 (unless (file-exists-p site-lisp-dir)
   (make-directory site-lisp-dir))
@@ -86,7 +82,7 @@
   (when (file-directory-p project)
     (add-to-list 'load-path project)))
 
-;;; Packages from ELPA-compatible package repositories
+;; ELPA-compatible package repositories
 
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -103,16 +99,18 @@
 
 (unless package-archive-contents (package-refresh-contents))
 
-;; Bootstrap use-package, https://github.com/jwiegley/use-package
+;; bootstrap use-package, https://github.com/jwiegley/use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
 (eval-when-compile
   (require 'use-package)
+  (require 'diminish)
+  (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; Load evil first (so package defns can have evil keybindings)
+;; load evil first (so package defns can have evil keybindings)
 
 (use-package evil
   :init
@@ -128,15 +126,19 @@
   (defun evil-leader-set-key-visual (key fn)
     "Defines an evil visual mode keybinding prefixed with evil-leader."
     (define-key evil-visual-state-map (kbd (concat evil-leader key)) fn))
-  ;; set various modes emacs keybindings by default
+  ;; set which modes to use emacs state keybindings by default
   (dolist (mode '(calculator-mode
                   comint-mode
                   eshell-mode
                   eww-mode
-                  fundamental-mode
+                  org-mode
                   shell-mode
                   term-mode))
     (evil-set-initial-state mode 'emacs))
+  ;; set which modes to use motion state keybindings by default
+  (dolist (mode '(diff-mode
+                  special-mode))
+    (evil-set-initial-state mode 'motion))
   ;; useful bracket mappings (like vim-unimpaired)
   (define-key evil-normal-state-map (kbd "[ e")
     (lambda (n) (interactive "p")
@@ -152,35 +154,81 @@
   (define-key evil-visual-state-map (kbd "] e")
     (lambda (n) (interactive "p")
       (concat ":'<,'>move '>+" (number-to-string n))))
-  (define-key evil-normal-state-map (kbd "[ h") 'diff-hunk-prev)
-  (define-key evil-normal-state-map (kbd "] h") 'diff-hunk-next)
+  (define-key evil-normal-state-map (kbd "[ h") #'diff-hunk-prev)
+  (define-key evil-normal-state-map (kbd "] h") #'diff-hunk-next)
   (define-key evil-normal-state-map (kbd "[ f")
     (lambda () (interactive)(raise-frame (previous-frame))))
   (define-key evil-normal-state-map (kbd "] f")
     (lambda () (interactive)(raise-frame (next-frame))))
   ;; leader key bindings
-  (evil-leader-set-key-normal "b" 'switch-to-buffer)
-  (evil-leader-set-key-normal "B" 'ibuffer)
-  (evil-leader-set-key-normal "d" 'dired)
-  (evil-leader-set-key-normal "e" 'find-file)
-  (evil-leader-set-key-normal "k b" 'kill-buffer)
-  (evil-leader-set-key-normal "k f" 'delete-frame)
-  (evil-leader-set-key-normal "k w" 'delete-window)
-  (evil-leader-set-key-normal "m" 'evil-show-marks)
-  (evil-leader-set-key-normal "n f" 'new-frame)
-  (evil-leader-set-key-normal "r" 'list-registers)
-  (evil-leader-set-key-normal "w" 'whitespace-mode)
+  (evil-leader-set-key-normal "b" #'switch-to-buffer)
+  (evil-leader-set-key-normal "d" #'dired)
+  (evil-leader-set-key-normal "e" #'find-file)
+  (evil-leader-set-key-normal "k b" #'kill-buffer)
+  (evil-leader-set-key-normal "k f" #'delete-frame)
+  (evil-leader-set-key-normal "k w" #'delete-window)
+  (evil-leader-set-key-normal "m" #'evil-show-marks)
+  (evil-leader-set-key-normal "n f" #'make-frame)
+  (evil-leader-set-key-normal "r" #'list-registers)
+  (evil-leader-set-key-normal "w" #'whitespace-mode)
   (evil-leader-set-key-normal "y" (lambda () (interactive)
-                                    (popup-menu 'yank-menu)))
-  (evil-leader-set-key-visual "#" 'comment-or-uncomment-region))
+                                    (popup-menu #'yank-menu)))
+  (evil-leader-set-key-visual "#" #'comment-or-uncomment-region))
 
-;; Other packages
+(use-package evil-surround
+  :init
+  (require 'evil)
+  (global-evil-surround-mode 1))
+
+;; load hydra next (so package defns can have hydra defs and keybindings)
+
+(use-package hydra
+  :config
+  (defhydra my-hydra/desktop-menu (:color blue)
+    "Desktop"
+    ("c" desktop-clear "clear")
+    ("s" desktop-save "save")
+    ("r" desktop-revert "revert")
+    ("d" desktop-change-dir "dir"))
+  (defhydra my-hydra/org-mode-menu (:color red :columns 2)
+    "Org Mode Movements"
+    ("n" outline-next-visible-heading "next heading")
+    ("p" outline-previous-visible-heading "prev heading")
+    ("N" org-forward-heading-same-level "next heading at same level")
+    ("P" org-backward-heading-same-level "prev heading at same level")
+    ("u" outline-up-heading "up heading")
+    ("<tab>" outline-toggle-children "toggle children")
+    ("g" org-goto "goto" :color teal)
+    ("q" nil "quit" :color blue))
+  (defhydra my-hydra/search-menu (:color blue :columns 2)
+    "Search"
+    ("gg" grep "grep")
+    ("gr" rgrep "rgrep")
+    ("gl" lgrep "lgrep")
+    ("gz" zgrep "zgrep")
+    ("oo" occur "occur")
+    ("om" multi-occur "multi-occur")
+    ("ob" multi-occur-in-matching-buffers "multi-occur (matching buffers)")
+    ("oO" org-occur "org-occur")
+    ("q"  nil "quit"))
+  (defhydra my-hydra/zoom-menu ()
+    "Zoom"
+    ("+" text-scale-increase "in")
+    ("-" text-scale-decrease "out")
+    ("0" (text-scale-adjust 0) "reset")
+    ("q" nil "quit" :color blue))
+  (global-set-key (kbd "C-c d") #'my-hydra/desktop-menu/body)
+  (global-set-key (kbd "C-c o") #'my-hydra/org-mode-menu/body)
+  (global-set-key (kbd "C-c s") #'my-hydra/search-menu/body)
+  (global-set-key (kbd "C-c z") #'my-hydra/zoom-menu/body))
+
+;; other packages
 
 (use-package company
-  :init (add-hook 'after-init-hook 'global-company-mode)
+  :init (add-hook 'after-init-hook #'global-company-mode)
   :config
-  (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous))
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous))
 
 (use-package elpy
   :init (with-eval-after-load 'python (elpy-enable)))
@@ -188,20 +236,36 @@
 (use-package flycheck
   :init (global-flycheck-mode)
   :config
+  (when (featurep 'hydra)
+    (defhydra my-hydra/flycheck-menu
+      (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
+       :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*")))
+      "Errors"
+      ("f" flycheck-error-list-set-filter "filter")
+      ("n" flycheck-next-error "next")
+      ("p" flycheck-previous-error "previous")
+      ("f" flycheck-first-error "first")
+      ("l" (progn (goto-char (point-max)) (flycheck-previous-error)) "last")
+      ("q" nil "quit" :color blue))
+    (global-set-key (kbd "C-c f") #'my-hydra/flycheck-menu/body))
   (when (featurep 'evil)
-    (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
-    (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error)))
+    (evil-set-initial-state 'flycheck-error-list-mode 'emacs)
+    (define-key evil-normal-state-map (kbd "[ l") #'flycheck-previous-error)
+    (define-key evil-normal-state-map (kbd "] l") #'flycheck-next-error)))
 
 (use-package gruvbox-theme
   :config (load-theme 'gruvbox t))
 
 (use-package ibuffer
-  :bind ("C-x C-b" . ibuffer))
+  :bind ("C-x C-b" . ibuffer)
+  :config
+  (when (featurep 'evil)
+    (evil-leader-set-key-normal "B" #'ibuffer)))
 
 (use-package ido
   :init
-  (setq ido-default-file-method 'selected-window
-        ido-default-buffer-method 'selected-window
+  (setq ido-default-file-method #'selected-window
+        ido-default-buffer-method #'selected-window
         ido-enable-flex-matching t
         ido-everywhere t
         ido-use-virtual-buffers t)
@@ -211,26 +275,80 @@
   :init
   (ido-ubiquitous-mode t))
 
+(use-package lispy
+  :bind ("C-S-l" . lispy-mode)
+  :config
+  (when (featurep 'evil)
+    (evil-leader-set-key-normal "L" 'lispy-mode)))
+
 (use-package magit
   :config
   (when (featurep 'evil)
     (evil-set-initial-state 'magit-mode 'emacs)
     (evil-set-initial-state 'magit-popup-mode 'emacs)
-    (evil-leader-set-key-normal "g" 'magit-status)))
+    (evil-set-initial-state 'magit-repolist-mode 'emacs)
+    (evil-leader-set-key-normal "g" #'magit-status)))
 
 (use-package projectile
   :init (projectile-global-mode)
   :config
-  (setq projectile-switch-project-action #'projectile-commander)
+    (setq projectile-switch-project-action #'projectile-commander)
+    (if (featurep 'hydra)
+        (progn
+          (defhydra my-hydra/projectile-menu (:color teal :hint nil)
+            "
+Projectile: %(projectile-project-root)
+
+Buffer  _bb_  : switch buffer              _bi_  : ibuffer
+        _bk_  : kill buffers               _bo_  : switch buffer (other window)
+      
+File    _ff_  : find file                  _fw_  : find file dwim
+        _fd_  : find file in dir           _fp_  : find file in known projects
+        _fof_ : find file (other window)   _fow_ : find file dwim (other window)
+        _fr_  : recent files
+
+Dir     _dd_  : find dir                   _do_  : find dir (other window)
+
+Search  _sa_  : ag                         _sg_  : grep
+        _so_  : multi-occur
+
+Cache   _cc_  : cache current file         _cC_  : clear cache
+        _cx_  : remove known project       _cX_  : cleanup known projects
+
+"
+            ("bb"  projectile-switch-to-buffer)
+            ("bi"  projectile-ibuffer)
+            ("bk"  projectile-kill-buffers)
+            ("bo"  projectile-switch-to-buffer-other-window)
+            ("ff"  projectile-find-file)
+            ("fw"  projectile-find-file-dwim)
+            ("fd"  projectile-find-file-in-directory)
+            ("fp"  projectile-find-file-in-known-projects)
+            ("fof" projectile-find-file-other-window)
+            ("fow" projectile-find-file-dwim-other-window)
+            ("fr"  projectile-recentf)
+            ("dd"  projectile-find-dir)
+            ("do"  projectile-find-dir-other-window)
+            ("sa"  projectile-ag)
+            ("sg"  projectile-grep)
+            ("so"  projectile-multi-occur)
+            ("cc"  projectile-cache-current-file)
+            ("cC"  projectile-invalidate-cache)
+            ("cx"  projectile-remove-known-project)
+            ("cX"  projectile-cleanup-known-projects)
+            ("C"   projectile-compile-project "compile")
+            ("p"   projectile-switch-project "switch project")
+            ("q"   nil "quit" :color blue))
+          (global-set-key (kbd "C-c C-p") #'my-hydra/projectile-menu/body))
+      (global-set-key (kbd "C-c C-p") #'my-hydra/projectile-menu/body))
   (when (featurep 'evil)
-    (evil-leader-set-key-normal "p e" 'projectile-find-file)
-    (evil-leader-set-key-normal "p k" 'projectile-kill-buffers)
-    (evil-leader-set-key-normal "p p" 'projectile-switch-project)))
+    (evil-leader-set-key-normal "p" #'projectile-commander)))
 
 (use-package rainbow-delimiters
+  :bind ("C-c r" . rainbow-delimiters-mode)
   :config
   (when (featurep 'evil)
-    (evil-leader-set-key-normal "R" 'rainbow-delimiters-mode)))
+    (evil-leader-set-key-normal "R" #'rainbow-delimiters-mode)))
 
 (use-package recentf
   :init (recentf-mode t)
@@ -238,7 +356,7 @@
   (setq recentf-max-menu-items 10
         recentf-max-saved-items 50)
   (when (featurep 'evil)
-    (evil-leader-set-key-normal "f" 'recentf-open-files)))
+    (evil-leader-set-key-normal "f" #'recentf-open-files)))
 
 (use-package smex
   :bind (("M-x" . smex)
@@ -247,10 +365,12 @@
 
 (use-package undo-tree
   :diminish undo-tree-mode
+  :bind ("C-c u" . undo-tree-visualize)
   :init (global-undo-tree-mode)
   :config
   (when (featurep 'evil)
-    (setq evil-want-fine-undo t)))
+    (setq evil-want-fine-undo t)
+    (evil-leader-set-key-normal "u" #'undo-tree-visualize)))
 
 (provide 'init)
 ;;; init.el ends here
