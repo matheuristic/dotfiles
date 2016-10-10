@@ -1,10 +1,12 @@
-;;; init.el --- Emacs config file ~/.emacs.d/init.el -*- lexical-binding: t; -*-
+;;; init.el --- Emacs config file -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
+;; This file should be copied or symlinked to ~/.emacs or ~/.emacs.d/init.el
+
 ;;; Code:
 
-;;; User interface
+;; User interface
 
 ;; suppress splash screen
 (setq inhibit-startup-message t)
@@ -37,7 +39,7 @@
   "Kill term buffers on term session ends."
   (kill-buffer))
 
-;;; Backup and config files
+;; Backup and config files
 
 ;; set backup directory
 (setq backup-directory-alist '((".*" . "~/.backup")))
@@ -46,7 +48,7 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
-;;; Fonts
+;; Fonts
 
 ;; set font for GUI mode
 (defvar my-font "Source Code Pro")
@@ -62,18 +64,18 @@
                       :weight my-font-weight
                       :width my-font-width))
 
-;;; Package management
+;; Package management
 
 ;; regenerate outdated byte code
 (setq load-prefer-newer t)
 
-;; packages in ~/.emacs.d/lisp (user)
+;; packages (user) in ~/.emacs.d/lisp (user)
 (defvar lisp-dir (expand-file-name "lisp" user-emacs-directory))
 (unless (file-exists-p lisp-dir)
   (make-directory lisp-dir))
 (add-to-list 'load-path lisp-dir)
 
-;; packages in ~/.emacs.d/site-lisp and its subdirs (third-party)
+;; packages (third-party) in ~/.emacs.d/site-lisp and its subdirs
 (defvar site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
 (unless (file-exists-p site-lisp-dir)
   (make-directory site-lisp-dir))
@@ -100,6 +102,7 @@
 (unless package-archive-contents (package-refresh-contents))
 
 ;; bootstrap use-package, https://github.com/jwiegley/use-package
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -110,7 +113,7 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; load evil first (so package defns can have evil keybindings)
+;; load evil first (so package defns can have evil bindings)
 
 (use-package evil
   :init
@@ -126,7 +129,7 @@
   (defun evil-leader-set-key-visual (key fn)
     "Defines an evil visual mode keybinding prefixed with evil-leader."
     (define-key evil-visual-state-map (kbd (concat evil-leader key)) fn))
-  ;; set which modes to use emacs state keybindings by default
+  ;; set which modes use emacs state by default
   (dolist (mode '(calculator-mode
                   comint-mode
                   eshell-mode
@@ -135,19 +138,19 @@
                   shell-mode
                   term-mode))
     (evil-set-initial-state mode 'emacs))
-  ;; set which modes to use motion state keybindings by default
+  ;; set which modes use motion state by default
   (dolist (mode '(diff-mode
                   special-mode))
     (evil-set-initial-state mode 'motion))
-  ;; useful bracket mappings (like vim-unimpaired)
+  ;; useful bracket mappings (bindings modeled after vim-unimpaired)
   (define-key evil-normal-state-map (kbd "[ e")
     (lambda (n) (interactive "p")
       (dotimes (_ n)
-        (progn (transpose-lines 1)(forward-line -2)))))
+        (progn (transpose-lines 1) (forward-line -2)))))
   (define-key evil-normal-state-map (kbd "] e")
     (lambda (n) (interactive "p")
       (dotimes (_ n)
-        (progn (forward-line 1)(transpose-lines 1)(forward-line -1)))))
+        (progn (forward-line 1) (transpose-lines 1) (forward-line -1)))))
   (define-key evil-visual-state-map (kbd "[ e")
     (lambda (n) (interactive "p")
       (concat ":'<,'>move '<--" (number-to-string n))))
@@ -180,17 +183,25 @@
   (require 'evil)
   (global-evil-surround-mode 1))
 
-;; load hydra next (so package defns can have hydra defs and keybindings)
+;; load hydra next (so package defns can have hydra defs and bindings)
 
 (use-package hydra
   :config
-  (defhydra my-hydra/desktop-menu (:color blue)
+  (defhydra my-hydra/desktop (:color blue)
     "Desktop"
     ("c" desktop-clear "clear")
     ("s" desktop-save "save")
     ("r" desktop-revert "revert")
-    ("d" desktop-change-dir "dir"))
-  (defhydra my-hydra/org-mode-menu (:color red :columns 2)
+    ("d" desktop-change-dir "dir")
+    ("q" nil "quit"))
+  (defhydra my-hydra/error ()
+    "Errors"
+    ("n" next-error "next")
+    ("p" previous-error "previous")
+    ("f" first-error "first")
+    ("l" (progn (goto-char (point-max)) (previous-error)) "last")
+    ("q" nil "quit" :color blue))
+  (defhydra my-hydra/org-mode (:color red :columns 2)
     "Org Mode Movements"
     ("n" outline-next-visible-heading "next heading")
     ("p" outline-previous-visible-heading "prev heading")
@@ -200,7 +211,7 @@
     ("<tab>" outline-toggle-children "toggle children")
     ("g" org-goto "goto" :color teal)
     ("q" nil "quit" :color blue))
-  (defhydra my-hydra/search-menu (:color blue :columns 2)
+  (defhydra my-hydra/search (:color blue :columns 2)
     "Search"
     ("gg" grep "grep")
     ("gr" rgrep "rgrep")
@@ -211,24 +222,29 @@
     ("ob" multi-occur-in-matching-buffers "multi-occur (matching buffers)")
     ("oO" org-occur "org-occur")
     ("q"  nil "quit"))
-  (defhydra my-hydra/zoom-menu ()
+  (defhydra my-hydra/zoom ()
     "Zoom"
     ("+" text-scale-increase "in")
     ("-" text-scale-decrease "out")
     ("0" (text-scale-adjust 0) "reset")
     ("q" nil "quit" :color blue))
-  (global-set-key (kbd "C-c d") #'my-hydra/desktop-menu/body)
-  (global-set-key (kbd "C-c o") #'my-hydra/org-mode-menu/body)
-  (global-set-key (kbd "C-c s") #'my-hydra/search-menu/body)
-  (global-set-key (kbd "C-c z") #'my-hydra/zoom-menu/body))
+  (global-set-key (kbd "C-c d") #'my-hydra/desktop/body)
+  (global-set-key (kbd "C-c e") #'my-hydra/error/body)
+  (global-set-key (kbd "C-c o") #'my-hydra/org-mode/body)
+  (global-set-key (kbd "C-c s") #'my-hydra/search/body)
+  (global-set-key (kbd "C-c z") #'my-hydra/zoom/body))
 
 ;; other packages
 
 (use-package company
-  :init (add-hook 'after-init-hook #'global-company-mode)
+  :init
+  (setq-default company-dabbrev-ignore-case t)
+  (add-hook 'after-init-hook #'global-company-mode)
   :config
   (define-key company-active-map (kbd "C-n") #'company-select-next)
   (define-key company-active-map (kbd "C-p") #'company-select-previous))
+
+(use-package csv-mode)
 
 (use-package elpy
   :init (with-eval-after-load 'python (elpy-enable)))
@@ -237,7 +253,7 @@
   :init (global-flycheck-mode)
   :config
   (when (featurep 'hydra)
-    (defhydra my-hydra/flycheck-menu
+    (defhydra my-hydra/flycheck
       (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
        :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*")))
       "Errors"
@@ -247,7 +263,8 @@
       ("f" flycheck-first-error "first")
       ("l" (progn (goto-char (point-max)) (flycheck-previous-error)) "last")
       ("q" nil "quit" :color blue))
-    (global-set-key (kbd "C-c f") #'my-hydra/flycheck-menu/body))
+    ;; replace my-hydra/error binding
+    (global-set-key (kbd "C-c e") #'my-hydra/flycheck/body))
   (when (featurep 'evil)
     (evil-set-initial-state 'flycheck-error-list-mode 'emacs)
     (define-key evil-normal-state-map (kbd "[ l") #'flycheck-previous-error)
@@ -295,7 +312,7 @@
     (setq projectile-switch-project-action #'projectile-commander)
     (if (featurep 'hydra)
         (progn
-          (defhydra my-hydra/projectile-menu (:color teal :hint nil)
+          (defhydra my-hydra/projectile (:color teal :hint nil)
             "
 Projectile: %(projectile-project-root)
 
@@ -339,8 +356,8 @@ Cache   _cc_  : cache current file         _cC_  : clear cache
             ("C"   projectile-compile-project "compile")
             ("p"   projectile-switch-project "switch project")
             ("q"   nil "quit" :color blue))
-          (global-set-key (kbd "C-c C-p") #'my-hydra/projectile-menu/body))
-      (global-set-key (kbd "C-c C-p") #'my-hydra/projectile-menu/body))
+          (global-set-key (kbd "C-c C-p") #'my-hydra/projectile/body))
+      (global-set-key (kbd "C-c C-p") #'my-hydra/projectile/body))
   (when (featurep 'evil)
     (evil-leader-set-key-normal "p" #'projectile-commander)))
 
