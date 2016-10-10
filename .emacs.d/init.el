@@ -37,7 +37,7 @@
   "Kill term buffers on term session ends."
   (kill-buffer))
 
-;; set backup directory
+;; backup directory
 (setq backup-directory-alist '((".*" . "~/.backup")))
 
 ;; keep Customize settings in separate file, ignore if no such file exists
@@ -57,6 +57,15 @@
                       :height my-font-height
                       :weight my-font-weight
                       :width my-font-width))
+
+(defun my-transpose-windows (selector)
+  "Transpose buffers between current window and window after calling SELECTOR."
+  (interactive)
+  (let ((from-win (selected-window))
+        (from-buf (window-buffer)))
+    (funcall selector)
+    (set-window-buffer from-win (window-buffer))
+    (set-window-buffer (selected-window) from-buf)))
 
 ;; regenerate outdated byte code
 (setq load-prefer-newer t)
@@ -111,7 +120,7 @@
   :config
   ;; emulate Vim leader key
   (defvar evil-leader "<SPC>")
-  ;; function for easy normal-mode bindings with the leader key
+  ;; functions for defining evil bindings with leader key
   (defun evil-leader-set-key-normal (key fn)
     "Defines an evil normal mode keybinding prefixed with evil-leader."
     (define-key evil-normal-state-map (kbd (concat evil-leader key)) fn))
@@ -132,7 +141,7 @@
   (dolist (mode '(diff-mode
                   special-mode))
     (evil-set-initial-state mode 'motion))
-  ;; useful bracket mappings (like vim-unimpaired)
+  ;; useful bracket mappings, like vim-unimpaired
   (define-key evil-normal-state-map (kbd "[ e")
     (lambda (n) (interactive "p")
       (dotimes (_ n)
@@ -223,6 +232,10 @@
     ("j" windmove-down "down")
     ("k" windmove-up "up")
     ("l" windmove-right "right")
+    ("H" (my-transpose-windows 'windmove-left) "transpose-left")
+    ("J" (my-transpose-windows 'windmove-down) "transpose-down")
+    ("K" (my-transpose-windows 'windmove-up) "transpose-up")
+    ("L" (my-transpose-windows 'windmove-right) "transpose-right")
     ("v" split-window-right "split-v")
     ("s" split-window-below "split-h")
     ("b" balance-windows "balance")
@@ -272,7 +285,7 @@
                (while t (flycheck-next-error))
              (user-error nil)) "last")
       ("q" nil "quit" :color blue))
-    ;; replace my-hydra/error binding
+    ;; replace my-hydra/error binding with my-hydra/flycheck
     (global-set-key (kbd "C-c e") 'my-hydra/flycheck/body))
   (when (featurep 'evil)
     (evil-set-initial-state 'flycheck-error-list-mode 'emacs)
