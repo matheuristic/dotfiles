@@ -132,8 +132,10 @@
   ;; set which modes use emacs state by default
   (dolist (mode '(calculator-mode
                   comint-mode
+                  dired-mode
                   eshell-mode
                   eww-mode
+                  ibuffer-mode
                   org-mode
                   shell-mode
                   term-mode))
