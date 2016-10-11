@@ -1,8 +1,11 @@
 ;;; init.el --- Emacs config file -*- lexical-binding: t; -*-
 
+;; Author: matheuristic
+;; URL: https://github.com/matheuristic/dotfiles
+
 ;;; Commentary:
 
-;; This file should be copied or symlinked to ~/.emacs or ~/.emacs.d/init.el
+;; Symlink or copy this file to ~/.emacs or ~/.emacs.d/init.el
 
 ;;; Code:
 
@@ -60,18 +63,28 @@
 
 (defun my-transpose-windows (selector)
   "Transpose buffers between current window and window after calling SELECTOR."
-  (interactive)
-  (let ((from-win (selected-window))
-        (from-buf (window-buffer)))
+  (let* ((from-win (selected-window))
+         (from-buf (window-buffer)))
     (funcall selector)
     (set-window-buffer from-win (window-buffer))
     (set-window-buffer (selected-window) from-buf)))
 
-(defun my-enlarge-frame (h w)
-  "Enlarge height, width of selected frame by H, W lines (shrink if negative)."
-  (interactive "p")
-  (set-frame-height (selected-frame) (+ (frame-height (selected-frame)) h))
-  (set-frame-width (selected-frame) (+ (frame-width (selected-frame)) w)))
+(defun my-enlarge-frame (w h)
+  "Enlarge width, height of selected frame by W, H lines (shrink if negative)."
+  (let* ((this-frame (selected-frame)))
+    (set-frame-width this-frame (+ (frame-width this-frame) w))
+    (set-frame-height this-frame (+ (frame-height this-frame) h))))
+
+(defun my-move-frame (x y)
+  "Move selected frame by X pixels horizontally and Y pixels vertically."
+  (let* ((this-frame (selected-frame))
+         (fpos (frame-position this-frame)))
+    (set-frame-position this-frame (+ (car fpos) x) (+ (cdr fpos) y))))
+
+(defun my-move-frame-pct (x y)
+  "Move selected frame by X% horizontally and Y% vertically of the display."
+  (my-move-frame (* x (/ (x-display-pixel-width) 100))
+                 (* y (/ (x-display-pixel-height) 100))))
 
 ;; regenerate outdated byte code
 (setq load-prefer-newer t)
@@ -118,7 +131,7 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; load evil first (so package defns can have evil bindings)
+;; load evil first (so package defs can have evil bindings)
 (use-package evil
   :init
   (setq-default evil-want-C-u-scroll t) ;; set C-u to half-page up (like Vim)
@@ -140,6 +153,7 @@
                   eshell-mode
                   eww-mode
                   ibuffer-mode
+                  inferior-emacs-lisp-mode
                   org-mode
                   shell-mode
                   term-mode))
@@ -173,8 +187,8 @@
   (evil-leader-set-key-normal "k b" 'kill-buffer)
   (evil-leader-set-key-normal "k f" 'delete-frame)
   (evil-leader-set-key-normal "k w" 'delete-window)
-  (evil-leader-set-key-normal "m" 'evil-show-marks)
-  (evil-leader-set-key-normal "n f" 'make-frame)
+  (evil-leader-set-key-normal "M" 'evil-show-marks)
+  (evil-leader-set-key-normal "m f" 'make-frame)
   (evil-leader-set-key-normal "r" 'list-registers)
   (evil-leader-set-key-normal "w" 'whitespace-mode)
   (evil-leader-set-key-normal "y" (lambda () (interactive)
@@ -187,7 +201,7 @@
   (require 'evil)
   (global-evil-surround-mode 1))
 
-;; load hydra next (so package defns can have hydra defs and bindings)
+;; load hydra next (so package defs can have hydra defs and bindings)
 (use-package hydra
   :config
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
@@ -211,7 +225,6 @@
     "Desktop"
     ("c" desktop-clear "clear")
     ("s" desktop-save "save")
-    ("v" desktop-revert "revert")
     ("r" desktop-read "read")
     ("R" desktop-revert "revert")
     ("d" desktop-change-dir "dir")
@@ -229,10 +242,14 @@
     ("p" ns-prev-frame "previous")
     ("s" select-frame-by-name "select")
     ("M" toggle-frame-maximized "maximize")
-    ("+" (lambda (n) (interactive "p") (my-enlarge-frame n 0)) "enlarge-v")
-    ("-" (lambda (n) (interactive "p") (my-enlarge-frame (- n) 0)) "shrink-v")
-    (">" (lambda (n) (interactive "p") (my-enlarge-frame 0 n)) "enlarge-h")
-    ("<" (lambda (n) (interactive "p") (my-enlarge-frame 0 (- n))) "shrink-h")
+    ("+" (lambda (n) (interactive "p") (my-enlarge-frame 0 n)) "enlarge-v")
+    ("-" (lambda (n) (interactive "p") (my-enlarge-frame 0 (- n))) "shrink-v")
+    (">" (lambda (n) (interactive "p") (my-enlarge-frame n 0)) "enlarge-h")
+    ("<" (lambda (n) (interactive "p") (my-enlarge-frame (- n) 0)) "shrink-h")
+    ("}" (lambda (n) (interactive "p") (my-move-frame-pct 0 n)) "move-d")
+    ("{" (lambda (n) (interactive "p") (my-move-frame-pct 0 (- n))) "move-u")
+    (")" (lambda (n) (interactive "p") (my-move-frame-pct n 0)) "move-r")
+    ("(" (lambda (n) (interactive "p") (my-move-frame-pct (- n) 0)) "move-l")
     ("m" make-frame "make")
     ("d" delete-frame "delete")
     ("o" delete-other-frames "only")
@@ -328,7 +345,7 @@
                (while t (flycheck-next-error))
              (user-error nil)) "last")
       ("q" nil "quit" :color blue))
-    ;; replace my-hydra/error binding with my-hydra/flycheck
+    ;; bind over my-hydra/error
     (global-set-key (kbd "C-c e") 'my-hydra/flycheck/body))
   (when (featurep 'evil)
     (evil-set-initial-state 'flycheck-error-list-mode 'emacs)
