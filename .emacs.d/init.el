@@ -67,6 +67,16 @@
     (set-window-buffer from-win (window-buffer))
     (set-window-buffer (selected-window) from-buf)))
 
+(defun my-enlarge-frame-height (num)
+  "Enlarge selected frame by NUM lines (or shrink if it is negative)."
+  (interactive "p")
+  (set-frame-height (selected-frame) (+ (frame-height (selected-frame)) num)))
+
+(defun my-enlarge-frame-width (num)
+  "Enlarge selected frame by NUM lines (or shrink if it is negative)."
+  (interactive "p")
+  (set-frame-width (selected-frame) (+ (frame-width (selected-frame)) num)))
+
 ;; regenerate outdated byte code
 (setq load-prefer-newer t)
 
@@ -221,11 +231,17 @@
     "Frame"
     ("n" ns-next-frame "next")
     ("p" ns-prev-frame "previous")
+    ("s" select-frame-by-name "select")
     ("M" toggle-frame-maximized "maximize")
+    ("+" my-enlarge-frame-height "enlarge-v")
+    ("-" (lambda (n) (interactive "p")
+           (my-enlarge-frame-height (- n))) "shrink-v")
+    (">" my-enlarge-frame-width "enlarge-h")
+    ("<" (lambda (n) (interactive "p")
+           (my-enlarge-frame-width (- n))) "shrink-h")
     ("m" make-frame "make")
     ("d" delete-frame "delete")
     ("o" delete-other-frames "only")
-    ("s" select-frame-by-name "select")
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/org-mode (:color amaranth :columns 2)
     "Org Mode Navigation"
