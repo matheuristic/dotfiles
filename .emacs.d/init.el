@@ -22,16 +22,16 @@
 (setq-default show-paren-delay 0)
 (show-paren-mode t)
 
-;; soft tabs for indentation (use C-q <TAB> to insert hard tabs)
+;; soft tabs for indentation (use C-q <TAB> to insert real tabs)
 (setq-default indent-tabs-mode nil)
 
-;; menu bar visible only for GUI mode
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+;; less GUI elements
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (and (not (display-graphic-p)) (fboundp 'menu-bar-mode))
   (menu-bar-mode -1))
 
-;; make comint-mode prompts read-only
+;; read-only comint-mode prompts
 (setq-default comint-prompt-read-only t)
 
 ;; allow narrowing commands
@@ -48,11 +48,11 @@
 ;; backup directory
 (setq backup-directory-alist '((".*" . "~/.backup")))
 
-;; keep Customize settings in separate file, ignore if no such file exists
+;; keep Customize settings in separate file, ignore if file does not exist
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
-;; set font for GUI mode
+;; set GUI mode font
 (defvar my-font "Source Code Pro")
 (defvar my-font-height (if (eq system-type 'darwin) 140 110))
 (defvar my-font-weight (if (eq system-type 'darwin) 'light 'regular))
@@ -136,7 +136,7 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; load evil first (so package defs can have evil bindings)
+;; load evil first so package defs can have evil bindings
 (use-package evil
   :init
   (setq-default evil-want-C-u-scroll t) ;; set C-u to half-page up (like Vim)
@@ -144,7 +144,7 @@
   :config
   ;; emulate Vim leader key
   (defvar evil-leader "<SPC>")
-  ;; functions for defining evil bindings with leader key
+  ;; functions for defining evil leader key bindings
   (defun evil-leader-set-key-normal (key fn)
     "Defines an evil normal mode keybinding prefixed with evil-leader."
     (define-key evil-normal-state-map (kbd (concat evil-leader key)) fn))
@@ -206,7 +206,7 @@
   (require 'evil)
   (global-evil-surround-mode 1))
 
-;; load hydra next (so package defs can have hydra defs and bindings)
+;; load hydra next so package defs can have hydra defs and bindings
 (use-package hydra
   :config
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
@@ -217,9 +217,9 @@
     ("B" bury-buffer "bury")
     ("U" unbury-buffer "unbury")
     ("s" save-buffer "save")
-    ("S" save-some-buffers "save all")
+    ("S" save-some-buffers "save-all")
     ("k" kill-this-buffer "kill")
-    ("K" kill-matching-buffers "kill-matching")
+    ("K" kill-matching-buffers "kill-match")
     ("c" clean-buffer-list "clean")
     ("L" (condition-case nil
              (quit-windows-on "*Buffer List*" t)
@@ -296,10 +296,10 @@
     ("j" windmove-down "down")
     ("k" windmove-up "up")
     ("l" windmove-right "right")
-    ("H" (my-transpose-windows 'windmove-left) "transpose-left")
-    ("J" (my-transpose-windows 'windmove-down) "transpose-down")
-    ("K" (my-transpose-windows 'windmove-up) "transpose-up")
-    ("L" (my-transpose-windows 'windmove-right) "transpose-right")
+    ("H" (my-transpose-windows 'windmove-left) "transpose-l")
+    ("J" (my-transpose-windows 'windmove-down) "transpose-d")
+    ("K" (my-transpose-windows 'windmove-up) "transpose-u")
+    ("L" (my-transpose-windows 'windmove-right) "transpose-r")
     ("+" enlarge-window "enlarge-v")
     ("-" shrink-window "shrink-v")
     (">" enlarge-window-horizontally "enlarge-h")
@@ -309,7 +309,7 @@
     ("=" balance-windows "balance")
     ("_" balance-windows-area "balance-area")
     ("d" delete-window "delete")
-    ("D" delete-windows-on "delete-matching")
+    ("D" delete-windows-on "delete-match")
     ("o" delete-other-windows "only")
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/zoom (:color amaranth)
@@ -345,10 +345,7 @@
   :init (global-flycheck-mode)
   :config
   (when (featurep 'hydra)
-    (defhydra my-hydra/flycheck
-      (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
-       :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*" t))
-       :color amaranth)
+    (defhydra my-hydra/flycheck (:color amaranth :columns 6)
       "Errors"
       ("F" flycheck-error-list-set-filter "filter")
       ("n" flycheck-next-error "next")
@@ -357,6 +354,9 @@
       ("l" (condition-case nil
                (while t (flycheck-next-error))
              (user-error nil)) "last")
+      ("L" (condition-case nil
+               (quit-windows-on "*Flycheck errors*" t)
+             (error (flycheck-list-errors))) "list")
       ("q" nil "quit" :color blue))
     ;; bind over my-hydra/error
     (global-set-key (kbd "C-c e") 'my-hydra/flycheck/body))
@@ -384,22 +384,18 @@
   (ido-mode t))
 
 (use-package ido-ubiquitous
-  :init
-  (ido-ubiquitous-mode t))
+  :init (ido-ubiquitous-mode t))
 
 (use-package lispy
-  :bind ("C-c l" . lispy-mode)
-  :config
-  (when (featurep 'evil)
-    (evil-leader-set-key-normal "L" 'lispy-mode)))
+  :bind ("C-c l" . lispy-mode))
 
 (use-package magit
+  :bind ("C-c g" . magit-status)
   :config
   (when (featurep 'evil)
-    (evil-set-initial-state 'magit-mode 'emacs)
-    (evil-set-initial-state 'magit-popup-mode 'emacs)
-    (evil-set-initial-state 'magit-repolist-mode 'emacs)
-    (evil-leader-set-key-normal "g" 'magit-status)))
+    ;; use Emacs state by default in magit modes
+    (dolist (mode '(magit-mode magit-popup-mode magit-repolist-mode))
+      (evil-set-initial-state mode 'emacs))))
 
 (use-package projectile
   :init (projectile-global-mode)
@@ -452,17 +448,13 @@ Cache   _cc_  : cache current file         _cC_  : clear cache
             ("p"   projectile-switch-project "switch project")
             ("q"   nil "quit" :color blue))
           (global-set-key (kbd "C-c C-p") 'my-hydra/projectile/body))
-      (global-set-key (kbd "C-c C-p") 'my-hydra/projectile/body))
-  (when (featurep 'evil)
-    (evil-leader-set-key-normal "p" 'projectile-commander)))
+      (global-set-key (kbd "C-c C-p") 'projectile-commander)))
 
 (use-package rainbow-delimiters
-  :bind ("C-c r" . rainbow-delimiters-mode)
-  :config
-  (when (featurep 'evil)
-    (evil-leader-set-key-normal "R" 'rainbow-delimiters-mode)))
+  :bind ("C-c r" . rainbow-delimiters-mode))
 
 (use-package recentf
+  :bind ("C-c F" . recentf-open-files)
   :init (recentf-mode t)
   :config
   (setq recentf-max-menu-items 10
