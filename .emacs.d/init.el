@@ -34,6 +34,11 @@
 ;; make comint-mode prompts read-only
 (setq-default comint-prompt-read-only t)
 
+;; allow narrowing commands
+(put 'narrow-to-defun 'disabled nil)
+(put 'narrow-to-page 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+
 ;; close term-mode and eshell-mode buffers on exit
 (defadvice term-handle-exit
     (after term-kill-buffer-on-exit activate)
@@ -254,6 +259,13 @@
     ("d" delete-frame "delete")
     ("o" delete-other-frames "only")
     ("q" nil "quit" :color blue))
+  (defhydra my-hydra/narrow (:color teal)
+    "Narrow"
+    ("n" narrow-to-region "region")
+    ("p" narrow-to-page "page")
+    ("d" narrow-to-defun "defun")
+    ("w" widen "widen")
+    ("q" quit :color blue))
   (defhydra my-hydra/org-mode (:color amaranth :columns 2)
     "Org Mode Navigation"
     ("n" outline-next-visible-heading "next heading")
@@ -310,6 +322,7 @@
   (global-set-key (kbd "C-c d") 'my-hydra/desktop/body)
   (global-set-key (kbd "C-c e") 'my-hydra/error/body)
   (global-set-key (kbd "C-c f") 'my-hydra/frame/body)
+  (global-set-key (kbd "C-c n") 'my-hydra/narrow/body)
   (global-set-key (kbd "C-c o") 'my-hydra/org-mode/body)
   (global-set-key (kbd "C-c s") 'my-hydra/search/body)
   (global-set-key (kbd "C-c w") 'my-hydra/window/body)
