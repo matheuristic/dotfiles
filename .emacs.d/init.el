@@ -67,15 +67,11 @@
     (set-window-buffer from-win (window-buffer))
     (set-window-buffer (selected-window) from-buf)))
 
-(defun my-enlarge-frame-height (num)
-  "Enlarge selected frame by NUM lines (or shrink if it is negative)."
+(defun my-enlarge-frame (h w)
+  "Enlarge height, width of selected frame by H, W lines (shrink if negative)."
   (interactive "p")
-  (set-frame-height (selected-frame) (+ (frame-height (selected-frame)) num)))
-
-(defun my-enlarge-frame-width (num)
-  "Enlarge selected frame by NUM lines (or shrink if it is negative)."
-  (interactive "p")
-  (set-frame-width (selected-frame) (+ (frame-width (selected-frame)) num)))
+  (set-frame-height (selected-frame) (+ (frame-height (selected-frame)) h))
+  (set-frame-width (selected-frame) (+ (frame-width (selected-frame)) w)))
 
 ;; regenerate outdated byte code
 (setq load-prefer-newer t)
@@ -233,12 +229,10 @@
     ("p" ns-prev-frame "previous")
     ("s" select-frame-by-name "select")
     ("M" toggle-frame-maximized "maximize")
-    ("+" my-enlarge-frame-height "enlarge-v")
-    ("-" (lambda (n) (interactive "p")
-           (my-enlarge-frame-height (- n))) "shrink-v")
-    (">" my-enlarge-frame-width "enlarge-h")
-    ("<" (lambda (n) (interactive "p")
-           (my-enlarge-frame-width (- n))) "shrink-h")
+    ("+" (lambda (n) (interactive "p") (my-enlarge-frame n 0)) "enlarge-v")
+    ("-" (lambda (n) (interactive "p") (my-enlarge-frame (- n) 0)) "shrink-v")
+    (">" (lambda (n) (interactive "p") (my-enlarge-frame 0 n)) "enlarge-h")
+    ("<" (lambda (n) (interactive "p") (my-enlarge-frame 0 (- n))) "shrink-h")
     ("m" make-frame "make")
     ("d" delete-frame "delete")
     ("o" delete-other-frames "only")
