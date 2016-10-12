@@ -34,11 +34,6 @@
 ;; read-only comint-mode prompts
 (setq-default comint-prompt-read-only t)
 
-;; allow narrowing commands
-(put 'narrow-to-defun 'disabled nil)
-(put 'narrow-to-page 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
-
 ;; close term-mode and eshell-mode buffers on exit
 (defadvice term-handle-exit
     (after term-kill-buffer-on-exit activate)
@@ -136,11 +131,14 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; load evil first so other package defs can have evil bindings
+;; load evil first so following package defs can have evil bindings
 (use-package evil
   :init
-  (setq-default evil-want-C-u-scroll t) ;; set C-u to half-page up (like Vim)
-  (evil-mode t)
+  (setq-default evil-want-C-u-scroll t ;; C-u goes half-page up like Vim
+                evil-insert-state-modes nil ;; clear Insert state modes
+                evil-motion-state-modes nil ;; clear Motion state modes
+                evil-default-state 'emacs) ;; use Emacs state as default
+  (evil-mode t) ;; C-z switches between Emacs and Evil bindings
   :config
   ;; emulate Vim leader key
   (defvar evil-leader "<SPC>")
@@ -151,22 +149,7 @@
   (defun evil-leader-set-key-visual (key fn)
     "Defines an evil visual mode keybinding prefixed with evil-leader."
     (define-key evil-visual-state-map (kbd (concat evil-leader key)) fn))
-  ;; set default states for specific modes
-  (dolist (mode '(calculator-mode
-                  comint-mode
-                  dired-mode
-                  eshell-mode
-                  eww-mode
-                  ibuffer-mode
-                  inferior-emacs-lisp-mode
-                  org-mode
-                  shell-mode
-                  term-mode))
-    (evil-set-initial-state mode 'emacs))
-  (dolist (mode '(diff-mode
-                  special-mode))
-    (evil-set-initial-state mode 'motion))
-  ;; useful bracket mappings (modeled after vim-unimpaired)
+  ;; useful bracket mappings like vim-unimpaired
   (define-key evil-normal-state-map (kbd "[ e")
     (lambda (n) (interactive "p")
       (dotimes (_ n)
@@ -200,19 +183,13 @@
                                     (popup-menu 'yank-menu)))
   (evil-leader-set-key-visual "#" 'comment-or-uncomment-region))
 
-;; load packages built on top of evil next
-(use-package evil-surround
-  :init
-  (require 'evil)
-  (global-evil-surround-mode 1))
-
-;; load hydra next so package defs can have hydra defs and bindings
+;; load hydra next so following package defs can have hydra defs and bindings
 (use-package hydra
   :config
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
     "Buffer"
-    ("n" next-buffer "next")
     ("p" previous-buffer "previous")
+    ("n" next-buffer "next")
     ("R" revert-buffer "revert")
     ("B" bury-buffer "bury")
     ("U" unbury-buffer "unbury")
@@ -236,15 +213,15 @@
     ("q" nil "quit"))
   (defhydra my-hydra/error (:color amaranth)
     "Error"
-    ("n" next-error "next")
     ("p" previous-error "previous")
+    ("n" next-error "next")
     ("f" first-error "first")
     ("l" (condition-case nil (while t (next-error)) (user-error nil)) "last")
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/frame (:color amaranth :columns 4)
     "Frame"
-    ("n" ns-next-frame "next")
     ("p" ns-prev-frame "previous")
+    ("n" ns-next-frame "next")
     ("s" select-frame-by-name "select")
     ("M" toggle-frame-maximized "maximize")
     ("+" (lambda (n) (interactive "p") (my-enlarge-frame 0 n)) "enlarge-v")
@@ -266,14 +243,45 @@
     ("d" narrow-to-defun "defun")
     ("w" widen "widen")
     ("q" quit :color blue))
+  (defhydra my-hydra/navigation (:color amaranth :columns 4)
+    "Navigation"
+    ("h" backward-char "bkwd-char")
+    ("j" next-line "next-line")
+    ("k" previous-line "prev-line")
+    ("l" forward-char "fwd-char")
+    ("b" backward-word "bkwd-word")
+    ("w" forward-word "fwd-word")
+    ("," backward-sexp "bkwd-sexp")
+    ("." forward-sexp "fwd-sexp")
+    ("(" backward-sentence "bkwd-sntc")
+    (")" forward-sentence "fwd-sntc")
+    ("[" backward-list "bkwd-list")
+    ("]" forward-list "fwd-list")
+    ("{" backward-paragraph "bkwd-par")
+    ("}" forward-paragraph "fwd-par")
+    ("S-SPC" scroll-down "page-up")
+    ("SPC" scroll-up "pg-down")
+    ("<" scroll-right "pg-left")
+    (">" scroll-left "pg-right")
+    ("a" move-beginning-of-line "beg-line")
+    ("^" beginning-of-line-text "beg-ln-txt")
+    ("$" move-end-of-line "end-line")
+    ("gg" beginning-of-buffer "beg-buf")
+    ("gG" end-of-buffer "end-buf")
+    ("G" goto-line "goto-line")
+    ("C-SPC" set-mark-command "set-mark")
+    ("x" exchange-point-and-mark "xchg-mark")
+    ("M-S-SPC" scroll-other-window-down "o-pg-up")
+    ("M-SPC" scroll-other-window "o-pg-down")
+    ("q" nil "quit" :color blue))
   (defhydra my-hydra/org-mode (:color amaranth :columns 2)
     "Org Mode Navigation"
-    ("n" outline-next-visible-heading "next heading")
     ("p" outline-previous-visible-heading "prev heading")
-    ("N" org-forward-heading-same-level "next heading at same level")
+    ("n" outline-next-visible-heading "next heading")
     ("P" org-backward-heading-same-level "prev heading at same level")
+    ("N" org-forward-heading-same-level "next heading at same level")
     ("u" outline-up-heading "up heading")
-    ("<tab>" outline-toggle-children "toggle children")
+    ("TAB" outline-toggle-children "toggle children")
     ("g" org-goto "goto" :color blue)
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/search (:color teal :columns 3)
@@ -300,10 +308,10 @@
     ("J" (my-transpose-windows 'windmove-down) "transpose-d")
     ("K" (my-transpose-windows 'windmove-up) "transpose-u")
     ("L" (my-transpose-windows 'windmove-right) "transpose-r")
-    ("+" enlarge-window "enlarge-v")
     ("-" shrink-window "shrink-v")
-    (">" enlarge-window-horizontally "enlarge-h")
+    ("+" enlarge-window "enlarge-v")
     ("<" shrink-window-horizontally "shrink-h")
+    (">" enlarge-window-horizontally "enlarge-h")
     ("v" split-window-right "split-v")
     ("s" split-window-below "split-h")
     ("=" balance-windows "balance")
@@ -314,15 +322,16 @@
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/zoom (:color amaranth)
     "Zoom"
-    ("+" text-scale-increase "in")
     ("-" text-scale-decrease "out")
+    ("+" text-scale-increase "in")
     ("0" (text-scale-adjust 0) "reset")
     ("q" nil "quit" :color blue))
   (global-set-key (kbd "C-c b") 'my-hydra/buffer/body)
   (global-set-key (kbd "C-c d") 'my-hydra/desktop/body)
   (global-set-key (kbd "C-c e") 'my-hydra/error/body)
   (global-set-key (kbd "C-c f") 'my-hydra/frame/body)
-  (global-set-key (kbd "C-c n") 'my-hydra/narrow/body)
+  (global-set-key (kbd "C-c n") 'my-hydra/navigation/body)
+  (global-set-key (kbd "C-c N") 'my-hydra/narrow/body)
   (global-set-key (kbd "C-c o") 'my-hydra/org-mode/body)
   (global-set-key (kbd "C-c s") 'my-hydra/search/body)
   (global-set-key (kbd "C-c w") 'my-hydra/window/body)
@@ -341,6 +350,13 @@
 (use-package elpy
   :init (with-eval-after-load 'python (elpy-enable)))
 
+(use-package evil-surround
+  :init
+  (require 'evil)
+  (global-evil-surround-mode 1))
+
+(use-package exec-path-from-shell)
+
 (use-package flycheck
   :init (global-flycheck-mode)
   :config
@@ -348,8 +364,8 @@
     (defhydra my-hydra/flycheck (:color amaranth :columns 6)
       "Error"
       ("F" flycheck-error-list-set-filter "filter")
-      ("n" flycheck-next-error "next")
       ("p" flycheck-previous-error "previous")
+      ("n" flycheck-next-error "next")
       ("f" flycheck-first-error "first")
       ("l" (condition-case nil
                (while t (flycheck-next-error))
@@ -361,7 +377,6 @@
     ;; bind over my-hydra/error
     (global-set-key (kbd "C-c e") 'my-hydra/flycheck/body))
   (when (featurep 'evil)
-    (evil-set-initial-state 'flycheck-error-list-mode 'emacs)
     (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
     (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error)))
 
@@ -390,12 +405,7 @@
   :bind ("C-c l" . lispy-mode))
 
 (use-package magit
-  :bind ("C-c g" . magit-status)
-  :config
-  (when (featurep 'evil)
-    ;; default to Emacs state in magit modes
-    (dolist (mode '(magit-mode magit-popup-mode magit-repolist-mode))
-      (evil-set-initial-state mode 'emacs))))
+  :bind ("C-c g" . magit-status))
 
 (use-package projectile
   :init (projectile-global-mode)
