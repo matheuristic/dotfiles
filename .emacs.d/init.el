@@ -42,17 +42,17 @@
 ;; close term-mode and eshell-mode buffers on exit
 (defadvice term-handle-exit
     (after term-kill-buffer-on-exit activate)
-  "Kill term buffers on term session ends."
+  "Kill term buffer on term session end."
   (kill-buffer))
 
-;; backup directory
+;; set backup directory
 (setq backup-directory-alist '((".*" . "~/.backup")))
 
-;; keep Customize settings in separate file, ignore if file does not exist
+;; keep Customize settings in a separate file, ignore if file does not exist
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
-;; set GUI mode font
+;; set GUI font
 (defvar my-font "Source Code Pro")
 (defvar my-font-height (if (eq system-type 'darwin) 140 110))
 (defvar my-font-weight (if (eq system-type 'darwin) 'light 'regular))
@@ -87,11 +87,11 @@
     (set-frame-position this-frame (+ (car fpos) x) (+ (cdr fpos) y))))
 
 (defun my-move-frame-pct (x y)
-  "Move selected frame by X% horizontally and Y% vertically of the display."
+  "Move selected frame by X% and Y% of the display horizontally and vertically."
   (my-move-frame (* x (/ (x-display-pixel-width) 100))
                  (* y (/ (x-display-pixel-height) 100))))
 
-;; regenerate outdated byte code
+;; regenerate outdated bytecode
 (setq load-prefer-newer t)
 
 ;; packages (user) in ~/.emacs.d/lisp
@@ -136,7 +136,7 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; load evil first so package defs can have evil bindings
+;; load evil first so other package defs can have evil bindings
 (use-package evil
   :init
   (setq-default evil-want-C-u-scroll t) ;; set C-u to half-page up (like Vim)
@@ -144,7 +144,7 @@
   :config
   ;; emulate Vim leader key
   (defvar evil-leader "<SPC>")
-  ;; functions for defining evil leader key bindings
+  ;; functions for defining evil-leader bindings
   (defun evil-leader-set-key-normal (key fn)
     "Defines an evil normal mode keybinding prefixed with evil-leader."
     (define-key evil-normal-state-map (kbd (concat evil-leader key)) fn))
@@ -185,7 +185,7 @@
   (define-key evil-normal-state-map (kbd "] h") 'diff-hunk-next)
   (define-key evil-normal-state-map (kbd "[ f") 'ns-next-frame)
   (define-key evil-normal-state-map (kbd "] f") 'ns-prev-frame)
-  ;; leader key bindings
+  ;; evil-leader bindings
   (evil-leader-set-key-normal "b" 'switch-to-buffer)
   (evil-leader-set-key-normal "d" 'dired)
   (evil-leader-set-key-normal "e" 'find-file)
@@ -200,7 +200,7 @@
                                     (popup-menu 'yank-menu)))
   (evil-leader-set-key-visual "#" 'comment-or-uncomment-region))
 
-;; load support packages for evil next
+;; load packages built on top of evil next
 (use-package evil-surround
   :init
   (require 'evil)
@@ -286,7 +286,7 @@
     ("gd" grep-find-dired "grep-find-dired")
     ("oo" occur "occur")
     ("om" multi-occur "multi-occur")
-    ("ob" multi-occur-in-matching-buffers "multi-occur (buffers)")
+    ("ob" multi-occur-in-matching-buffers "multi-occur-match-buf")
     ("oO" org-occur "org-occur")
     ("kg" kill-grep "kill-grep")
     ("q"  nil "quit"))
@@ -346,7 +346,7 @@
   :config
   (when (featurep 'hydra)
     (defhydra my-hydra/flycheck (:color amaranth :columns 6)
-      "Errors"
+      "Error"
       ("F" flycheck-error-list-set-filter "filter")
       ("n" flycheck-next-error "next")
       ("p" flycheck-previous-error "previous")
@@ -393,7 +393,7 @@
   :bind ("C-c g" . magit-status)
   :config
   (when (featurep 'evil)
-    ;; use Emacs state by default in magit modes
+    ;; default to Emacs state in magit modes
     (dolist (mode '(magit-mode magit-popup-mode magit-repolist-mode))
       (evil-set-initial-state mode 'emacs))))
 
@@ -447,8 +447,8 @@ Cache   _cc_  : cache current file         _cC_  : clear cache
             ("C"   projectile-compile-project "compile")
             ("p"   projectile-switch-project "switch project")
             ("q"   nil "quit" :color blue))
-          (global-set-key (kbd "C-c C-p") 'my-hydra/projectile/body))
-      (global-set-key (kbd "C-c C-p") 'projectile-commander)))
+          (global-set-key (kbd "C-c P") 'my-hydra/projectile/body))
+      (global-set-key (kbd "C-c P") 'projectile-commander)))
 
 (use-package rainbow-delimiters
   :bind ("C-c r" . rainbow-delimiters-mode))
