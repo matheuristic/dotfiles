@@ -117,8 +117,6 @@
 
 (package-initialize) ;; load and activate Emacs packages
 
-(unless package-archive-contents (package-refresh-contents)) ;; refresh pkg list
-
 ;; bootstrap use-package, https://github.com/jwiegley/use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -282,6 +280,7 @@
     ("rj" jump-to-register "jmp-to-reg")
     ("rm" bookmark-set "bmk-set")
     ("rb" bookmark-jump "bmk-jmp")
+    ("M-x" smex "smex")
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/org-mode (:color amaranth :columns 2)
     "Org Mode Navigation"
@@ -365,7 +364,8 @@
   (global-evil-surround-mode 1))
 
 (use-package exec-path-from-shell
-  :init (when (memq window-system '(mac ns)) (exec-path-from-shell-initialize)))
+  :init (when (memq window-system '(mac ns))
+          (exec-path-from-shell-initialize)))
 
 (use-package flycheck
   :init (global-flycheck-mode)
@@ -493,7 +493,7 @@ Cache   _cc_  : cache current file         _cC_  : clear cache
   :init (global-undo-tree-mode)
   :config
   (when (featurep 'evil)
-    (setq evil-want-fine-undo t)
+    (setq evil-want-fine-undo t) ;; per-operation undos in Evil mode
     (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
 
 (provide 'init)
