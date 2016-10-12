@@ -168,7 +168,7 @@
   (define-key evil-normal-state-map (kbd "] h") 'diff-hunk-next)
   (define-key evil-normal-state-map (kbd "[ f") 'ns-next-frame)
   (define-key evil-normal-state-map (kbd "] f") 'ns-prev-frame)
-  ;; evil-leader bindings
+  ;; set evil-leader bindings
   (evil-leader-set-key-normal "b" 'switch-to-buffer)
   (evil-leader-set-key-normal "d" 'dired)
   (evil-leader-set-key-normal "e" 'find-file)
@@ -281,6 +281,8 @@
     ("x" exchange-point-and-mark "xchg-mark")
     ("r SPC" point-to-register "pt-to-reg")
     ("rj" jump-to-register "jmp-to-reg")
+    ("rm" bookmark-set "bmk-set")
+    ("rb" bookmark-jump "bmk-jmp")
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/org-mode (:color amaranth :columns 2)
     "Org Mode Navigation"
