@@ -35,8 +35,7 @@
 (setq-default comint-prompt-read-only t)
 
 ;; close term-mode and eshell-mode buffers on exit
-(defadvice term-handle-exit
-    (after term-kill-buffer-on-exit activate)
+(defadvice term-handle-exit (after term-kill-buffer-on-exit activate)
   "Kill term buffer on term session end."
   (kill-buffer))
 
@@ -116,9 +115,9 @@
         ("GNU ELPA"     . 5)
         ("MELPA"        . 0)))
 
-(package-initialize)
+(package-initialize) ;; load and activate Emacs packages
 
-(unless package-archive-contents (package-refresh-contents))
+(unless package-archive-contents (package-refresh-contents)) ;; refresh pkg list
 
 ;; bootstrap use-package, https://github.com/jwiegley/use-package
 (unless (package-installed-p 'use-package)
@@ -168,7 +167,7 @@
   (define-key evil-normal-state-map (kbd "] h") 'diff-hunk-next)
   (define-key evil-normal-state-map (kbd "[ f") 'ns-next-frame)
   (define-key evil-normal-state-map (kbd "] f") 'ns-prev-frame)
-  ;; set evil-leader bindings
+  ;; evil-leader bindings
   (evil-leader-set-key-normal "b" 'switch-to-buffer)
   (evil-leader-set-key-normal "d" 'dired)
   (evil-leader-set-key-normal "e" 'find-file)
@@ -365,7 +364,8 @@
   (require 'evil)
   (global-evil-surround-mode 1))
 
-(use-package exec-path-from-shell)
+(use-package exec-path-from-shell
+  :init (when (memq window-system '(mac ns)) (exec-path-from-shell-initialize)))
 
 (use-package flycheck
   :init (global-flycheck-mode)
