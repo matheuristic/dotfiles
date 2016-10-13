@@ -15,7 +15,7 @@
 ;; turn off audible and visual bells
 (setq ring-bell-function 'ignore)
 
-;; show column numbers
+;; show column number of point
 (setq column-number-mode t)
 
 ;; show matching parentheses without delay
@@ -135,7 +135,7 @@
                 evil-insert-state-modes nil ;; clear Insert state modes
                 evil-motion-state-modes nil ;; clear Motion state modes
                 evil-default-state 'emacs) ;; use Emacs state as default
-  (evil-mode t) ;; C-z switches between Emacs and Evil bindings
+  (evil-mode t) ;; use C-z to switch between Emacs and Evil bindings
   :config
   ;; emulate Vim leader key
   (defvar evil-leader "<SPC>")
@@ -248,7 +248,7 @@
     ("l" forward-char "fwd-char")
     ("b" backward-word "bkwd-word")
     ("w" forward-word "fwd-word")
-    ("B" backward-whitespace "bkwd-whsp")
+    ("B" (lambda (n) (interactive "p") (forward-whitespace (- n))) "bkwd-whsp")
     ("W" forward-whitespace "fwd-whsp")
     ("," backward-sexp "bkwd-sexp")
     ("." forward-sexp "fwd-sexp")
@@ -493,7 +493,7 @@ Cache   _cc_  : cache current file         _cC_  : clear cache
   :init (global-undo-tree-mode)
   :config
   (when (featurep 'evil)
-    (setq evil-want-fine-undo t) ;; per-operation undos in Evil mode
+    (setq evil-want-fine-undo t)
     (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
 
 (provide 'init)
