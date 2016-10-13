@@ -22,7 +22,7 @@
 (setq-default show-paren-delay 0)
 (show-paren-mode t)
 
-;; soft tabs for indentation (use C-q <TAB> to insert real tabs)
+;; indent with soft tabs (use C-q <TAB> to insert real tabs)
 (setq-default indent-tabs-mode nil)
 
 ;; less GUI elements
@@ -94,7 +94,7 @@
   (make-directory lisp-dir))
 (add-to-list 'load-path lisp-dir)
 
-;; packages (third-party) in ~/.emacs.d/site-lisp and its subdirs
+;; packages (third-party) in ~/.emacs.d/site-lisp and its subdirectories
 (defvar site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
 (unless (file-exists-p site-lisp-dir)
   (make-directory site-lisp-dir))
@@ -115,7 +115,8 @@
         ("GNU ELPA"     . 5)
         ("MELPA"        . 0)))
 
-(package-initialize) ;; load and activate Emacs packages
+;; load and activate Emacs packages
+(package-initialize)
 
 ;; bootstrap use-package, https://github.com/jwiegley/use-package
 (unless (package-installed-p 'use-package)
@@ -128,14 +129,14 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; load evil first so following package defs can have evil bindings
+;; load evil first so following package definitions can have evil bindings
 (use-package evil
   :init
   (setq-default evil-want-C-u-scroll t ;; C-u goes half-page up like Vim
                 evil-insert-state-modes nil ;; clear Insert state modes
                 evil-motion-state-modes nil ;; clear Motion state modes
                 evil-default-state 'emacs) ;; use Emacs state as default
-  (evil-mode t) ;; use C-z to switch between Emacs and Evil bindings
+  (evil-mode t) ;; C-z switches between Emacs and Evil bindings
   :config
   ;; emulate Vim leader key
   (defvar evil-leader "<SPC>")
@@ -384,7 +385,7 @@
                (quit-windows-on "*Flycheck errors*" t)
              (error (flycheck-list-errors))) "list")
       ("q" nil "quit" :color blue))
-    ;; bind over my-hydra/error
+    ;; replace my-hydra/error binding
     (global-set-key (kbd "C-c e") 'my-hydra/flycheck/body))
   (when (featurep 'evil)
     (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
@@ -427,7 +428,7 @@
             "
 Projectile: %(projectile-project-root)
 
-Buffer  _bb_  : switch buffer              _bi_  : ibuffer
+Buffer  _bb_  : switch to buffer           _bi_  : ibuffer
         _bk_  : kill buffers               _bo_  : switch buffer (other window)
       
 File    _ff_  : find file                  _fw_  : find file dwim
@@ -437,8 +438,7 @@ File    _ff_  : find file                  _fw_  : find file dwim
 
 Dir     _dd_  : find dir                   _do_  : find dir (other window)
 
-Search  _sa_  : ag                         _sg_  : grep
-        _so_  : multi-occur
+Search  _sg_  : grep                       _so_  : multi-occur
 
 Cache   _cc_  : cache current file         _cC_  : clear cache
         _cx_  : remove known project       _cX_  : cleanup known projects
