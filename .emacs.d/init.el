@@ -147,7 +147,7 @@
   (defun evil-leader-set-key-visual (key fn)
     "Defines an evil visual mode keybinding prefixed with evil-leader."
     (define-key evil-visual-state-map (kbd (concat evil-leader key)) fn))
-  ;; useful bracket mappings like vim-unimpaired
+  ;; useful bracket mappings (like vim-unimpaired)
   (define-key evil-normal-state-map (kbd "[ e")
     (lambda (n) (interactive "p")
       (dotimes (_ n)
@@ -357,7 +357,15 @@
 (use-package csv-mode)
 
 (use-package elpy
-  :init (with-eval-after-load 'python (elpy-enable)))
+  :init (with-eval-after-load 'python
+          (elpy-enable)
+          ;; use IPython over CPython for REPL environment when available
+          (when (executable-find "ipython")
+            (add-hook 'elpy-mode-hook 'elpy-use-ipython))
+          ;; use FlyCheck over FlyMake for syntax checking when available
+          (when (featurep 'flycheck)
+            (remove-hook 'elpy-modules 'elpy-module-flymake)
+            (add-hook 'elpy-mode-hook 'flycheck-mode))))
 
 (use-package evil-surround
   :init
