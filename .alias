@@ -11,9 +11,5 @@ alias rpmlast='rpm -qa --last'
 alias condaupdateall='conda list | grep -v "^\s*#" | grep -v "^\(anaconda\|conda\)" | cut -d" " -f1 | xargs -n1 conda update'
 alias pip2updateuserpackages='pip2 freeze --user | grep -v "^\-e" | cut -d = -f 1 | xargs -n1 pip2 install --user --upgrade'
 alias pip3updateuserpackages='pip3 freeze --user | grep -v "^\-e" | cut -d = -f 1 | xargs -n1 pip3 install --user --upgrade'
-# Emacs
-alias emacs='emacsclient -c -n --alternate-editor=""'
-alias emacsnw='emacsclient -nw --alternate-editor=""'
-alias emacskill='emacsclient -e "(kill-emacs)"'
 # Lynx
 alias lynx='lynx -cookies'
