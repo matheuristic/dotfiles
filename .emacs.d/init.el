@@ -15,7 +15,7 @@
 ;; turn off audible and visual bells
 (setq ring-bell-function 'ignore)
 
-;; show column number of point
+;; show column number in modeline
 (setq column-number-mode t)
 
 ;; show matching parentheses without delay
@@ -42,7 +42,7 @@
 ;; set backup directory
 (setq backup-directory-alist '((".*" . "~/.backup")))
 
-;; keep Customize settings in a separate file, ignore if file does not exist
+;; keep Customize settings in a separate file. ignore if file does not exist
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
@@ -103,7 +103,7 @@
   (when (file-directory-p project)
     (add-to-list 'load-path project)))
 
-;; ELPA-compatible package repositories
+;; use package.el with given ELPA-compatible package repositories
 (require 'package)
 (setq package-enable-at-startup nil)
 (setq package-archives
@@ -115,10 +115,9 @@
         ("GNU ELPA"     . 5)
         ("MELPA"        . 0)))
 
-;; load and activate Emacs packages
 (package-initialize)
 
-;; bootstrap use-package, https://github.com/jwiegley/use-package
+;; bootstrap use-package ( https://github.com/jwiegley/use-package )
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -129,25 +128,37 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; load evil first so following package definitions can have evil bindings
+;; load evil first so following package defs support evil bindings
 (use-package evil
   :init
-  (setq-default evil-want-C-u-scroll t ;; C-u goes half-page up like Vim
+  (setq-default evil-want-C-u-scroll t ;; C-u goes half-page up like in Vim
                 evil-insert-state-modes nil ;; clear Insert state modes
                 evil-motion-state-modes nil ;; clear Motion state modes
                 evil-default-state 'emacs) ;; use Emacs state as default
   (evil-mode t) ;; C-z switches between Emacs and Evil bindings
   :config
-  ;; emulate Vim leader key
+  ;; emulate Vim leader key in evil-mode
   (defvar evil-leader "<SPC>")
-  ;; functions for defining evil-leader bindings
   (defun evil-leader-set-key-normal (key fn)
-    "Defines an evil normal mode keybinding prefixed with evil-leader."
+    "Binds \"<evil-leader> KEY\" to interactively call FN in Evil normal mode."
     (define-key evil-normal-state-map (kbd (concat evil-leader key)) fn))
   (defun evil-leader-set-key-visual (key fn)
-    "Defines an evil visual mode keybinding prefixed with evil-leader."
+    "Binds \"<evil-leader> KEY\" to interactively call FN in Evil visual mode."
     (define-key evil-visual-state-map (kbd (concat evil-leader key)) fn))
-  ;; useful bracket mappings (like vim-unimpaired)
+  (evil-leader-set-key-normal "b" 'switch-to-buffer)
+  (evil-leader-set-key-normal "d" 'dired)
+  (evil-leader-set-key-normal "e" 'find-file)
+  (evil-leader-set-key-normal "k b" 'kill-buffer)
+  (evil-leader-set-key-normal "k f" 'delete-frame)
+  (evil-leader-set-key-normal "k w" 'delete-window)
+  (evil-leader-set-key-normal "M" 'evil-show-marks)
+  (evil-leader-set-key-normal "m f" 'make-frame)
+  (evil-leader-set-key-normal "r" 'list-registers)
+  (evil-leader-set-key-normal "w" 'whitespace-mode)
+  (evil-leader-set-key-normal "y" (lambda () (interactive)
+                                    (popup-menu 'yank-menu)))
+  (evil-leader-set-key-visual "#" 'comment-or-uncomment-region)
+  ;; useful bracket mappings like in vim-unimpaired
   (define-key evil-normal-state-map (kbd "[ e")
     (lambda (n) (interactive "p")
       (dotimes (_ n)
@@ -165,23 +176,9 @@
   (define-key evil-normal-state-map (kbd "[ h") 'diff-hunk-prev)
   (define-key evil-normal-state-map (kbd "] h") 'diff-hunk-next)
   (define-key evil-normal-state-map (kbd "[ f") 'ns-next-frame)
-  (define-key evil-normal-state-map (kbd "] f") 'ns-prev-frame)
-  ;; evil-leader bindings
-  (evil-leader-set-key-normal "b" 'switch-to-buffer)
-  (evil-leader-set-key-normal "d" 'dired)
-  (evil-leader-set-key-normal "e" 'find-file)
-  (evil-leader-set-key-normal "k b" 'kill-buffer)
-  (evil-leader-set-key-normal "k f" 'delete-frame)
-  (evil-leader-set-key-normal "k w" 'delete-window)
-  (evil-leader-set-key-normal "M" 'evil-show-marks)
-  (evil-leader-set-key-normal "m f" 'make-frame)
-  (evil-leader-set-key-normal "r" 'list-registers)
-  (evil-leader-set-key-normal "w" 'whitespace-mode)
-  (evil-leader-set-key-normal "y" (lambda () (interactive)
-                                    (popup-menu 'yank-menu)))
-  (evil-leader-set-key-visual "#" 'comment-or-uncomment-region))
+  (define-key evil-normal-state-map (kbd "] f") 'ns-prev-frame))
 
-;; load hydra next so following package defs can have hydra defs and bindings
+;; load hydra next so following package defs support hydra defs and bindings
 (use-package hydra
   :config
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
@@ -309,6 +306,10 @@
     ("q"  nil "quit"))
   (defhydra my-hydra/window (:color amaranth :columns 4)
     "Window"
+    ("n" next-multiframe-window "next")
+    ("p" previous-multiframe-window "previous")
+    ("v" split-window-right "split-v")
+    ("s" split-window-below "split-h")
     ("h" windmove-left "left")
     ("j" windmove-down "down")
     ("k" windmove-up "up")
@@ -321,13 +322,13 @@
     ("+" enlarge-window "enlarge-v")
     ("<" shrink-window-horizontally "shrink-h")
     (">" enlarge-window-horizontally "enlarge-h")
-    ("v" split-window-right "split-v")
-    ("s" split-window-below "split-h")
+    ("M" minimize-window "minimize")
+    ("m" maximize-window "maximize")
     ("=" balance-windows "balance")
     ("_" balance-windows-area "balance-area")
-    ("d" delete-window "delete")
-    ("D" delete-windows-on "delete-match")
     ("o" delete-other-windows "only")
+    ("d" delete-window "delete")
+    ("D" kill-buffer-and-window "delete-buf")
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/zoom (:color amaranth)
     "Zoom"
@@ -357,15 +358,17 @@
 (use-package csv-mode)
 
 (use-package elpy
-  :init (with-eval-after-load 'python
-          (elpy-enable)
-          ;; use IPython over CPython for REPL environment when available
-          (when (executable-find "ipython")
-            (add-hook 'elpy-mode-hook 'elpy-use-ipython))
-          ;; use FlyCheck over FlyMake for syntax checking when available
-          (when (featurep 'flycheck)
-            (remove-hook 'elpy-modules 'elpy-module-flymake)
-            (add-hook 'elpy-mode-hook 'flycheck-mode))))
+  :init (elpy-enable)
+  :config
+  ;; use jedi over rope for Python auto-completion
+  (setq-default elpy-rpc-backend "jedi")
+  ;; use IPython over CPython for REPL environment
+  (when (executable-find "ipython")
+    (add-hook 'elpy-mode-hook 'elpy-use-ipython))
+  ;; use FlyCheck over FlyMake for syntax checking
+  (with-eval-after-load 'flycheck
+    (remove-hook 'elpy-modules 'elpy-module-flymake)
+    (add-hook 'elpy-mode-hook 'flycheck-mode)))
 
 (use-package evil-surround
   :init
@@ -373,13 +376,14 @@
   (global-evil-surround-mode 1))
 
 (use-package exec-path-from-shell
-  :init (when (memq window-system '(mac ns))
-          (exec-path-from-shell-initialize)))
+  :init
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)))
 
 (use-package flycheck
   :init (global-flycheck-mode)
   :config
-  (when (featurep 'hydra)
+  (with-eval-after-load 'hydra
     (defhydra my-hydra/flycheck (:color amaranth :columns 6)
       "Error"
       ("F" flycheck-error-list-set-filter "filter")
@@ -393,9 +397,9 @@
                (quit-windows-on "*Flycheck errors*" t)
              (error (flycheck-list-errors))) "list")
       ("q" nil "quit" :color blue))
-    ;; replace my-hydra/error binding
+    ;; bind over my-hydra/error with my-hydra/flycheck
     (global-set-key (kbd "C-c e") 'my-hydra/flycheck/body))
-  (when (featurep 'evil)
+  (with-eval-after-load 'evil
     (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
     (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error)))
 
@@ -405,7 +409,7 @@
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer)
   :config
-  (when (featurep 'evil)
+  (with-eval-after-load 'evil
     (evil-leader-set-key-normal "B" 'ibuffer)))
 
 (use-package ido
@@ -429,11 +433,10 @@
 (use-package projectile
   :init (projectile-global-mode)
   :config
-    (setq projectile-switch-project-action 'projectile-commander)
-    (if (featurep 'hydra)
-        (progn
-          (defhydra my-hydra/projectile (:color teal :hint nil)
-            "
+  (setq projectile-switch-project-action 'projectile-commander)
+  (with-eval-after-load 'hydra
+    (defhydra my-hydra/projectile (:color teal :hint nil)
+      "
 Projectile: %(projectile-project-root)
 
 Buffer  _bb_  : switch to buffer           _bi_  : ibuffer
@@ -452,31 +455,30 @@ Cache   _cc_  : cache current file         _cC_  : clear cache
         _cx_  : remove known project       _cX_  : cleanup known projects
 
 "
-            ("bb"  projectile-switch-to-buffer)
-            ("bi"  projectile-ibuffer)
-            ("bk"  projectile-kill-buffers)
-            ("bo"  projectile-switch-to-buffer-other-window)
-            ("ff"  projectile-find-file)
-            ("fw"  projectile-find-file-dwim)
-            ("fd"  projectile-find-file-in-directory)
-            ("fp"  projectile-find-file-in-known-projects)
-            ("fof" projectile-find-file-other-window)
-            ("fow" projectile-find-file-dwim-other-window)
-            ("fr"  projectile-recentf)
-            ("dd"  projectile-find-dir)
-            ("do"  projectile-find-dir-other-window)
-            ("sa"  projectile-ag)
-            ("sg"  projectile-grep)
-            ("so"  projectile-multi-occur)
-            ("cc"  projectile-cache-current-file)
-            ("cC"  projectile-invalidate-cache)
-            ("cx"  projectile-remove-known-project)
-            ("cX"  projectile-cleanup-known-projects)
-            ("C"   projectile-compile-project "compile")
-            ("p"   projectile-switch-project "switch project")
-            ("q"   nil "quit" :color blue))
-          (global-set-key (kbd "C-c P") 'my-hydra/projectile/body))
-      (global-set-key (kbd "C-c P") 'projectile-commander)))
+      ("bb"  projectile-switch-to-buffer)
+      ("bi"  projectile-ibuffer)
+      ("bk"  projectile-kill-buffers)
+      ("bo"  projectile-switch-to-buffer-other-window)
+      ("ff"  projectile-find-file)
+      ("fw"  projectile-find-file-dwim)
+      ("fd"  projectile-find-file-in-directory)
+      ("fp"  projectile-find-file-in-known-projects)
+      ("fof" projectile-find-file-other-window)
+      ("fow" projectile-find-file-dwim-other-window)
+      ("fr"  projectile-recentf)
+      ("dd"  projectile-find-dir)
+      ("do"  projectile-find-dir-other-window)
+      ("sa"  projectile-ag)
+      ("sg"  projectile-grep)
+      ("so"  projectile-multi-occur)
+      ("cc"  projectile-cache-current-file)
+      ("cC"  projectile-invalidate-cache)
+      ("cx"  projectile-remove-known-project)
+      ("cX"  projectile-cleanup-known-projects)
+      ("C"   projectile-compile-project "compile")
+      ("p"   projectile-switch-project "switch project")
+      ("q"   nil "quit" :color blue))
+    (global-set-key (kbd "C-c P") 'my-hydra/projectile/body)))
 
 (use-package rainbow-delimiters
   :bind ("C-c r" . rainbow-delimiters-mode))
@@ -487,7 +489,7 @@ Cache   _cc_  : cache current file         _cC_  : clear cache
   :config
   (setq recentf-max-menu-items 10
         recentf-max-saved-items 50)
-  (when (featurep 'evil)
+  (with-eval-after-load 'evil
     (evil-leader-set-key-normal "f" 'recentf-open-files)))
 
 (use-package smex
@@ -500,7 +502,7 @@ Cache   _cc_  : cache current file         _cC_  : clear cache
   :bind ("C-c u" . undo-tree-visualize)
   :init (global-undo-tree-mode)
   :config
-  (when (featurep 'evil)
+  (with-eval-after-load 'evil
     (setq evil-want-fine-undo t)
     (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
 
