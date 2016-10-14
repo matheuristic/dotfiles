@@ -12,6 +12,9 @@
 # No core dumps
 ulimit -S -c 0
 
+# Path variables
+export PATH=$HOME/.local/bin:$PATH
+
 # Done if non-interactive
 tty -s || return
 
@@ -20,7 +23,7 @@ umask 077                       # Strict default file permissions
 shopt -s cmdhist                # Save multi-line commands as one command
 shopt -s dotglob                # Also glob .files
 shopt -s extglob                # Extended globbing
-#shopt -s globstar               # Enable ** and **/ globbing
+# shopt -s globstar               # Enable ** and **/ globbing
 shopt -s histappend             # Append to history file rather than overwrite
 
 # Auto-completions
@@ -37,19 +40,18 @@ complete -A stopped -P '%'      bg
 complete -A job -P '%'          fg jobs disown
 complete -A directory           cd rmdir mkdir
 
-# Environment variables
+# Environment variables for interactive session
 export EDITOR=vim
 export HISTCONTROL=ignoreboth
 export HISTFILESIZE=10000
 export HISTIGNORE='&:ls:ll:la:cd:exit:clear:history'
-export PATH=$HOME/.local/bin:$HOME/.npm_packages/bin:$PATH
 export PS1="[\u@\h:\w]\$ "      # Set prompt to "[user@host:/path/to/cwd]$ "
 
 # Load aliases
 test -s ~/.alias && . ~/.alias || true
 
-# Load machine-specific bashrc
+# Load machine-specific bashrc for interactive sessions
 test -s ~/.bashrc.local && . ~/.bashrc.local || true
 
-# Load machine-specific aliases
+# Load machine-specific aliases for interactive sessions
 test -s ~/.alias.local && . ~/.alias.local || true
