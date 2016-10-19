@@ -22,7 +22,7 @@
 (setq-default show-paren-delay 0)
 (show-paren-mode t)
 
-;; indent with soft tabs (use C-q <TAB> to insert real tabs)
+;; indent with soft tabs. Use C-q <TAB> to insert real tabs
 (setq-default indent-tabs-mode nil)
 
 ;; less GUI elements
@@ -42,7 +42,7 @@
 ;; set backup directory
 (setq backup-directory-alist '((".*" . "~/.backup")))
 
-;; keep Customize settings in a separate file. ignore if file does not exist
+;; store Customize settings in separate file. Ignore if file does not exist
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
@@ -349,7 +349,7 @@
 
 (use-package company
   :init
-  (setq-default company-dabbrev-ignore-case t)
+  (setq-default company-selection-wrap-around t)
   (add-hook 'after-init-hook 'global-company-mode)
   :config
   (define-key company-active-map (kbd "C-n") 'company-select-next)
