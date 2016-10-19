@@ -128,7 +128,7 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; load evil first so following package defs support evil bindings
+;; load evil first to allow evil bindings in following package defs
 (use-package evil
   :init
   (setq-default evil-want-C-u-scroll t ;; C-u goes half-page up like in Vim
@@ -152,13 +152,15 @@
   (evil-leader-set-key-normal "k f" 'delete-frame)
   (evil-leader-set-key-normal "k w" 'delete-window)
   (evil-leader-set-key-normal "M" 'evil-show-marks)
-  (evil-leader-set-key-normal "m f" 'make-frame)
+  (evil-leader-set-key-normal "n f" 'make-frame)
   (evil-leader-set-key-normal "r" 'list-registers)
   (evil-leader-set-key-normal "w" 'whitespace-mode)
   (evil-leader-set-key-normal "y" (lambda () (interactive)
                                     (popup-menu 'yank-menu)))
   (evil-leader-set-key-visual "#" 'comment-or-uncomment-region)
   ;; useful bracket mappings like in vim-unimpaired
+  (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
+  (define-key evil-normal-state-map (kbd "] b") 'next-buffer)
   (define-key evil-normal-state-map (kbd "[ e")
     (lambda (n) (interactive "p")
       (dotimes (_ n)
@@ -173,12 +175,16 @@
   (define-key evil-visual-state-map (kbd "] e")
     (lambda (n) (interactive "p")
       (concat ":'<,'>move '>+" (number-to-string n))))
+  (define-key evil-normal-state-map (kbd "[ f") 'ns-prev-frame)
+  (define-key evil-normal-state-map (kbd "] f") 'ns-next-frame)
   (define-key evil-normal-state-map (kbd "[ h") 'diff-hunk-prev)
   (define-key evil-normal-state-map (kbd "] h") 'diff-hunk-next)
-  (define-key evil-normal-state-map (kbd "[ f") 'ns-next-frame)
-  (define-key evil-normal-state-map (kbd "] f") 'ns-prev-frame))
+  (define-key evil-normal-state-map (kbd "[ l") 'previous-error)
+  (define-key evil-normal-state-map (kbd "] l") 'next-error)
+  (define-key evil-normal-state-map (kbd "[ w") 'previous-multiframe-window)
+  (define-key evil-normal-state-map (kbd "] w") 'next-multiframe-window))
 
-;; load hydra next so following package defs support hydra defs and bindings
+;; load hydra next to allow hydra defs and bindings in following package defs
 (use-package hydra
   :config
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
@@ -278,7 +284,7 @@
     ("rj" jump-to-register "jmp-to-reg")
     ("rm" bookmark-set "bmk-set")
     ("rb" bookmark-jump "bmk-jmp")
-    ("M-x" smex "smex")
+    ("M-x" (condition-case nil (smex) (execute-extended-command)) "smex")
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/org-mode (:color amaranth :columns 2)
     "Org Mode Navigation"
@@ -400,6 +406,7 @@
     ;; bind over my-hydra/error with my-hydra/flycheck
     (global-set-key (kbd "C-c e") 'my-hydra/flycheck/body))
   (with-eval-after-load 'evil
+    ;; bind over bracket mappings for error navigation with flycheck version
     (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
     (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error)))
 
@@ -493,6 +500,7 @@ Cache   _cc_  : cache current file         _cC_  : clear cache
     (evil-leader-set-key-normal "f" 'recentf-open-files)))
 
 (use-package smex
+  ;; bind over M-x to run smex instead of execute-extended-command
   :bind (("M-x" . smex)
          ("M-X" . smex-major-mode-commands))
   :config (smex-initialize))
