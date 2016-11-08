@@ -128,14 +128,14 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; load evil first to allow evil bindings in following package defs
+;; load evil first so following package defs can use it
 (use-package evil
   :init
   (setq-default evil-want-C-u-scroll t ;; C-u goes half-page up like in Vim
                 evil-insert-state-modes nil ;; clear Insert state modes
                 evil-motion-state-modes nil ;; clear Motion state modes
                 evil-default-state 'emacs) ;; use Emacs state as default
-  (evil-mode t) ;; C-z switches between Emacs and Evil bindings
+  (evil-mode t) ;; C-z toggles Evil bindings; use C-x C-z to suspend instead
   :config
   ;; emulate Vim leader key in evil-mode
   (defvar evil-leader "<SPC>")
@@ -184,7 +184,7 @@
   (define-key evil-normal-state-map (kbd "[ w") 'previous-multiframe-window)
   (define-key evil-normal-state-map (kbd "] w") 'next-multiframe-window))
 
-;; load hydra next to allow hydra defs and bindings in following package defs
+;; load hydra next so following packages can use it
 (use-package hydra
   :config
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
