@@ -108,11 +108,11 @@
 (setq package-enable-at-startup nil)
 (setq package-archives
       '(("GNU ELPA"     . "http://elpa.gnu.org/packages/")
-        ("MELPA"        . "https://melpa.org/packages/")
-        ("MELPA Stable" . "https://stable.melpa.org/packages/"))
+        ("MELPA Stable" . "https://stable.melpa.org/packages/")
+        ("MELPA"        . "https://melpa.org/packages/"))
       package-archive-priorities
-      '(("MELPA Stable" . 10)
-        ("GNU ELPA"     . 5)
+      '(("GNU ELPA"     . 10)
+        ("MELPA Stable" . 5)
         ("MELPA"        . 0)))
 
 (package-initialize)
@@ -376,10 +376,18 @@
     (remove-hook 'elpy-modules 'elpy-module-flymake)
     (add-hook 'elpy-mode-hook 'flycheck-mode)))
 
+(use-package evil-smartparens
+  :diminish evil-smartparens-mode
+  :after smartparens
+  :config
+  (add-hook 'smartparens-enabled-hook
+            (lambda () (interactive) (evil-smartparens-mode t)))
+  (add-hook 'smartparens-disabled-hook
+            (lambda () (interactive) (evil-smartparens-mode -1))))
+
 (use-package evil-surround
-  :init
-  (require 'evil)
-  (global-evil-surround-mode 1))
+  :after evil
+  :init (global-evil-surround-mode 1))
 
 (use-package exec-path-from-shell
   :init
@@ -430,9 +438,6 @@
 
 (use-package ido-ubiquitous
   :init (ido-ubiquitous-mode t))
-
-(use-package lispy
-  :bind ("C-c l" . lispy-mode))
 
 (use-package magit
   :bind ("C-c g" . magit-status))
@@ -498,6 +503,9 @@ Cache   _cc_  : cache current file         _cC_  : clear cache
         recentf-max-saved-items 50)
   (with-eval-after-load 'evil
     (evil-leader-set-key-normal "f" 'recentf-open-files)))
+
+(use-package smartparens
+  :bind ("C-c S" . smartparens-mode))
 
 (use-package smex
   ;; bind over M-x to run smex instead of execute-extended-command
