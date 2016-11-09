@@ -505,7 +505,10 @@ Cache   _cc_  : cache current file         _cC_  : clear cache
     (evil-leader-set-key-normal "f" 'recentf-open-files)))
 
 (use-package smartparens
-  :bind ("C-c S" . smartparens-mode))
+  :bind ("C-c S" . smartparens-mode)
+  :config
+  (require 'smartparens-config)
+  (add-hook 'smartparens-enabled-hook 'turn-on-smartparens-strict-mode))
 
 (use-package smex
   ;; bind over M-x to run smex instead of execute-extended-command
