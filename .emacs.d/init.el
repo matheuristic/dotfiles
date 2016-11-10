@@ -533,7 +533,6 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("J"  sp-join-sexp "join")
       ("t"  sp-transpose-sexp "transpose")
       ("y"  sp-copy-sexp "copy")
-      ("p"  yank "paste")
       ("k"  sp-kill-sexp "kill" :color blue)
       ("q"  nil "quit" :color blue))
     (define-key smartparens-mode-map (kbd "C-c C-n")
