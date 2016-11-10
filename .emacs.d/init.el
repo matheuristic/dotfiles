@@ -128,7 +128,7 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; load evil first so following package defs can use it
+;; load evil first so proceeding package defs can use it
 (use-package evil
   :init
   (setq-default evil-want-C-u-scroll t ;; C-u goes half-page up like in Vim
@@ -175,16 +175,16 @@
   (define-key evil-visual-state-map (kbd "] e")
     (lambda (n) (interactive "p")
       (concat ":'<,'>move '>+" (number-to-string n))))
-  (define-key evil-normal-state-map (kbd "[ f") 'ns-prev-frame)
-  (define-key evil-normal-state-map (kbd "] f") 'ns-next-frame)
-  (define-key evil-normal-state-map (kbd "[ h") 'diff-hunk-prev)
-  (define-key evil-normal-state-map (kbd "] h") 'diff-hunk-next)
   (define-key evil-normal-state-map (kbd "[ l") 'previous-error)
   (define-key evil-normal-state-map (kbd "] l") 'next-error)
+  (define-key evil-normal-state-map (kbd "[ n") 'diff-hunk-prev)
+  (define-key evil-normal-state-map (kbd "] n") 'diff-hunk-next)
+  (define-key evil-normal-state-map (kbd "[ t") 'ns-prev-frame)
+  (define-key evil-normal-state-map (kbd "] t") 'ns-next-frame)
   (define-key evil-normal-state-map (kbd "[ w") 'previous-multiframe-window)
   (define-key evil-normal-state-map (kbd "] w") 'next-multiframe-window))
 
-;; load hydra next so following packages can use it
+;; load hydra next so proceeding packages can use it
 (use-package hydra
   :config
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
@@ -243,7 +243,7 @@
     ("p" narrow-to-page "page")
     ("d" narrow-to-defun "defun")
     ("w" widen "widen")
-    ("q" quit :color blue))
+    ("q" nil "quit" :color blue))
   (defhydra my-hydra/navigation (:color amaranth :columns 4)
     "Navigation"
     ("h" backward-char "bkwd-char")
@@ -285,16 +285,6 @@
     ("rm" bookmark-set "bmk-set")
     ("rb" bookmark-jump "bmk-jmp")
     ("M-x" (condition-case nil (smex) (execute-extended-command)) "smex")
-    ("q" nil "quit" :color blue))
-  (defhydra my-hydra/org-mode (:color amaranth :columns 2)
-    "Org Mode Navigation"
-    ("p" outline-previous-visible-heading "prev heading")
-    ("n" outline-next-visible-heading "next heading")
-    ("P" org-backward-heading-same-level "prev heading at same level")
-    ("N" org-forward-heading-same-level "next heading at same level")
-    ("u" outline-up-heading "up heading")
-    ("TAB" outline-toggle-children "toggle children")
-    ("g" org-goto "goto" :color blue)
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/search (:color teal :columns 3)
     "Search"
@@ -348,7 +338,6 @@
   (global-set-key (kbd "C-c f") 'my-hydra/frame/body)
   (global-set-key (kbd "C-c n") 'my-hydra/navigation/body)
   (global-set-key (kbd "C-c N") 'my-hydra/narrow/body)
-  (global-set-key (kbd "C-c o") 'my-hydra/org-mode/body)
   (global-set-key (kbd "C-c s") 'my-hydra/search/body)
   (global-set-key (kbd "C-c w") 'my-hydra/window/body)
   (global-set-key (kbd "C-c z") 'my-hydra/zoom/body))
@@ -412,7 +401,7 @@
              (error (flycheck-list-errors))) "list")
       ("q" nil "quit" :color blue))
     ;; bind over my-hydra/error with my-hydra/flycheck
-    (global-set-key (kbd "C-c e") 'my-hydra/flycheck/body))
+    (define-key flycheck-mode-map (kbd "C-c e") 'my-hydra/flycheck/body))
   (with-eval-after-load 'evil
     ;; bind over bracket mappings for error navigation with flycheck version
     (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
@@ -441,6 +430,21 @@
 
 (use-package magit
   :bind ("C-c g" . magit-status))
+
+(use-package org
+  :config
+  (with-eval-after-load 'hydra
+    (defhydra my-hydra/org-mode (:color amaranth :columns 2)
+      "Org Mode Navigation"
+      ("p" outline-previous-visible-heading "prev heading")
+      ("n" outline-next-visible-heading "next heading")
+      ("P" org-backward-heading-same-level "prev heading at same level")
+      ("N" org-forward-heading-same-level "next heading at same level")
+      ("u" outline-up-heading "up heading")
+      ("<tab>" outline-toggle-children "toggle children")
+      ("g" org-goto "goto" :color blue)
+      ("q" nil "quit" :color blue))
+    (define-key org-mode-map (kbd "C-c o") 'my-hydra/org-mode/body)))
 
 (use-package projectile
   :init (projectile-global-mode)
@@ -490,7 +494,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("C"   projectile-compile-project "compile")
       ("p"   projectile-switch-project "switch project")
       ("q"   nil "quit" :color blue))
-    (global-set-key (kbd "C-c P") 'my-hydra/projectile/body)))
+    (define-key projectile-mode-map (kbd "C-c P") 'my-hydra/projectile/body)))
 
 (use-package rainbow-delimiters
   :bind ("C-c r" . rainbow-delimiters-mode))
@@ -508,10 +512,23 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   :bind ("C-c S" . smartparens-mode)
   :config
   (require 'smartparens-config)
-  (add-hook 'smartparens-enabled-hook 'turn-on-smartparens-strict-mode))
+  (add-hook 'smartparens-enabled-hook 'turn-on-smartparens-strict-mode)
+  (with-eval-after-load 'hydra
+    (defhydra my-hydra/smartparens (:color amaranth :columns 4)
+      "Smartparens"
+      ("d" sp-down-sexp "dn")
+      ("e" sp-up-sexp "up")
+      ("u" sp-backward-down-sexp "bw-dn")
+      ("a" sp-backward-up-sexp "bw-up")
+      ("f" sp-forward-sexp "fw")
+      ("b" sp-backward-sexp "bw")
+      ("k" sp-kill-sexp "kill" :color blue)
+      ("q" nil "quit" :color blue))
+    (define-key smartparens-mode-map (kbd "C-c C-n")
+      'my-hydra/smartparens/body)))
 
 (use-package smex
-  ;; bind over M-x to run smex instead of execute-extended-command
+  ;; bind over executed-extended-command with smex
   :bind (("M-x" . smex)
          ("M-X" . smex-major-mode-commands))
   :config (smex-initialize))
