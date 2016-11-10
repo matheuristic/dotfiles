@@ -128,7 +128,7 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; load evil first so proceeding package defs can use it
+;; load evil first so following package defs can use it
 (use-package evil
   :init
   (setq-default evil-want-C-u-scroll t ;; C-u goes half-page up like in Vim
@@ -184,7 +184,7 @@
   (define-key evil-normal-state-map (kbd "[ w") 'previous-multiframe-window)
   (define-key evil-normal-state-map (kbd "] w") 'next-multiframe-window))
 
-;; load hydra next so proceeding packages can use it
+;; load hydra next so following packages can use it
 (use-package hydra
   :config
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
@@ -515,15 +515,27 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   (add-hook 'smartparens-enabled-hook 'turn-on-smartparens-strict-mode)
   (with-eval-after-load 'hydra
     (defhydra my-hydra/smartparens (:color amaranth :columns 4)
-      "Smartparens"
-      ("d" sp-down-sexp "dn")
-      ("e" sp-up-sexp "up")
-      ("u" sp-backward-down-sexp "bw-dn")
-      ("a" sp-backward-up-sexp "bw-up")
-      ("f" sp-forward-sexp "fw")
-      ("b" sp-backward-sexp "bw")
-      ("k" sp-kill-sexp "kill" :color blue)
-      ("q" nil "quit" :color blue))
+      "Smartparens Sexp Navigation and Manipulation"
+      ("p"  sp-previous-sexp "prev")
+      ("n"  sp-next-sexp "next")
+      ("b"  sp-backward-sexp "bw")
+      ("f"  sp-forward-sexp "fw")
+      ("d"  sp-down-sexp "dn")
+      ("e"  sp-up-sexp "up")
+      ("u"  sp-backward-down-sexp "bw-dn")
+      ("a"  sp-backward-up-sexp "bw-up")
+      ("<(" sp-backward-slurp-sexp "bw-slurp")
+      (">(" sp-backward-barf-sexp "bw-barf")
+      ("<)" sp-forward-barf-sexp "fw-barf")
+      (">)" sp-forward-slurp-sexp "fw-slurp")
+      ("s"  sp-splice-sexp "splice")
+      ("S"  sp-split-sexp "split")
+      ("J"  sp-join-sexp "join")
+      ("t"  sp-transpose-sexp "transpose")
+      ("y"  sp-copy-sexp "copy")
+      ("p"  yank "paste")
+      ("k"  sp-kill-sexp "kill" :color blue)
+      ("q"  nil "quit" :color blue))
     (define-key smartparens-mode-map (kbd "C-c C-n")
       'my-hydra/smartparens/body)))
 
