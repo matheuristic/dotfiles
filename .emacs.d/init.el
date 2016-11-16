@@ -128,7 +128,7 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; load evil first so following package defs can use it
+;; load evil first so following package defs can use it and its modes
 (use-package evil
   :init
   (setq-default evil-want-C-u-scroll t ;; C-u goes half-page up like in Vim
@@ -184,7 +184,7 @@
   (define-key evil-normal-state-map (kbd "[ w") 'previous-multiframe-window)
   (define-key evil-normal-state-map (kbd "] w") 'next-multiframe-window))
 
-;; load hydra next so following packages can use it
+;; load hydra next so following packages can use it and its mode
 (use-package hydra
   :config
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
@@ -342,6 +342,22 @@
   (global-set-key (kbd "C-c w") 'my-hydra/window/body)
   (global-set-key (kbd "C-c z") 'my-hydra/zoom/body))
 
+;; load org-mode next so following packages can use it and its mode
+(use-package org
+  :config
+  (with-eval-after-load 'hydra
+    (defhydra my-hydra/org-mode (:color amaranth :columns 2)
+      "Org Mode Navigation"
+      ("p" outline-previous-visible-heading "prev heading")
+      ("n" outline-next-visible-heading "next heading")
+      ("P" org-backward-heading-same-level "prev heading at same level")
+      ("N" org-forward-heading-same-level "next heading at same level")
+      ("u" outline-up-heading "up heading")
+      ("<tab>" outline-toggle-children "toggle children")
+      ("g" org-goto "goto" :color blue)
+      ("q" nil "quit" :color blue))
+    (define-key org-mode-map (kbd "C-c o") 'my-hydra/org-mode/body)))
+
 (use-package company
   :init
   (setq-default company-selection-wrap-around t)
@@ -431,20 +447,12 @@
 (use-package magit
   :bind ("C-c g" . magit-status))
 
-(use-package org
+(use-package ob-ipython
+  :after org
   :config
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra/org-mode (:color amaranth :columns 2)
-      "Org Mode Navigation"
-      ("p" outline-previous-visible-heading "prev heading")
-      ("n" outline-next-visible-heading "next heading")
-      ("P" org-backward-heading-same-level "prev heading at same level")
-      ("N" org-forward-heading-same-level "next heading at same level")
-      ("u" outline-up-heading "up heading")
-      ("<tab>" outline-toggle-children "toggle children")
-      ("g" org-goto "goto" :color blue)
-      ("q" nil "quit" :color blue))
-    (define-key org-mode-map (kbd "C-c o") 'my-hydra/org-mode/body)))
+  (org-babel-do-load-languages 'org-babel-load-languages '((ipython .t)))
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+  (define-key org-mode-map (kbd "C-c I") 'ob-ipython-inspect))
 
 (use-package projectile
   :init (projectile-global-mode)
