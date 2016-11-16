@@ -19,10 +19,13 @@
 \set show_namespaces_default_acl 'select nspname, defaclobjtype, defaclacl from pg_default_acl a join pg_namespace b on a.defaclnamespace=b.oid'
 
 -- show tables
-\set show_tables 'select distinct id, trim(datname) as db_name, trim(nspname) as schema_name, trim(relname) as table_name, trim(usename) as table_owner from stv_tbl_perm join pg_class on pg_class.oid=stv_tbl_perm.id join pg_namespace on pg_namespace.oid=relnamespace join pg_database on pg_database.oid=stv_tbl_perm.db_id join pg_user on pg_user.usesysid=pg_class.relowner'
+\set show_tables 'select distinct id, trim(datname) as db_name, trim(nspname) as nspname, trim(relname) as relname, trim(usename) as table_owner from stv_tbl_perm join pg_class on pg_class.oid=stv_tbl_perm.id join pg_namespace on pg_namespace.oid=relnamespace join pg_database on pg_database.oid=stv_tbl_perm.db_id join pg_user on pg_user.usesysid=pg_class.relowner'
 
 -- show table grants
 \set show_table_grants 'select * from ( select schemaname, objectname, obj_type, usename, has_table_privilege(usrs.usename, fullobj, \'select\') sel, has_table_privilege(usrs.usename, fullobj, \'insert\') ins, has_table_privilege(usrs.usename, fullobj, \'update\') upd, has_table_privilege(usrs.usename, fullobj, \'delete\') del, has_table_privilege(usrs.usename, fullobj, \'references\') ref from ( select schemaname, \'t\' obj_type, tablename objectname, schemaname || \'.\' || tablename fullobj from pg_tables where schemaname not in (\'pg_internal\') union select schemaname, \'v\' obj_type, viewname objectname, schemaname || \'.\' || viewname fullobj from pg_views where schemaname not in (\'pg_internal\') ) objs, ( select * from pg_user ) usrs ) where (sel = true or ins = true or upd = true or del = true or ref = true)'
 
 -- show users
 \set show_users 'select usesysid, usename, usecreatedb, usesuper, usecatupd, groname from pg_user left join pg_group on usesysid=any(grolist)'
+
+-- show views
+\set show_views 'select trim(n.nspname) as nspname, trim(c.relname) as relname, pg_catalog.pg_get_userbyid(c.relowner) as relowner from pg_catalog.pg_class c left join pg_catalog.pg_namespace n on (n.oid = c.relnamespace) where c.relkind  = \'v\''
