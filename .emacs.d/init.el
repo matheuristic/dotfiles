@@ -563,5 +563,10 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
     (setq evil-want-fine-undo t)
     (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
 
+;; load machine-specific init file ~/.emacs.d/init-local.el
+(let ((init-local-f (expand-file-name "init-local.el" user-emacs-directory)))
+  (if (file-exists-p init-local-f)
+      (load-file init-local-f)))
+
 (provide 'init)
 ;;; init.el ends here
