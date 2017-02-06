@@ -25,7 +25,7 @@
 ;; indent with soft tabs. Use C-q <TAB> to insert real tabs
 (setq-default indent-tabs-mode nil)
 
-;; less GUI elements
+;; simplify GUI
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (and (not (display-graphic-p)) (fboundp 'menu-bar-mode))
@@ -42,7 +42,7 @@
 ;; set backup directory
 (setq backup-directory-alist '((".*" . "~/.backup")))
 
-;; store Customize settings in separate file. Ignore if file does not exist
+;; store Customize settings in separate file if it exists
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
