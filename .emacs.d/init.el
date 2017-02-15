@@ -128,14 +128,14 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; load evil first so following package defs can use it and its modes
 (use-package evil
   :init
+  ;; C-z toggles between Evil and Emacs bindings; use C-x C-z to suspend
   (setq-default evil-want-C-u-scroll t ;; C-u goes half-page up like in Vim
                 evil-insert-state-modes nil ;; clear Insert state modes
                 evil-motion-state-modes nil ;; clear Motion state modes
                 evil-default-state 'emacs) ;; use Emacs state as default
-  (evil-mode t) ;; C-z toggles Evil bindings; use C-x C-z to suspend instead
+  (evil-mode t)
   :config
   ;; emulate Vim leader key in evil-mode
   (defvar evil-leader "<SPC>")
@@ -158,6 +158,8 @@
   (evil-leader-set-key-normal "y" (lambda () (interactive)
                                     (popup-menu 'yank-menu)))
   (evil-leader-set-key-visual "#" 'comment-or-uncomment-region)
+  ;; make tabs in insert mode work like Vim
+  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
   ;; useful bracket mappings like in vim-unimpaired
   (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
   (define-key evil-normal-state-map (kbd "] b") 'next-buffer)
@@ -184,7 +186,6 @@
   (define-key evil-normal-state-map (kbd "[ w") 'previous-multiframe-window)
   (define-key evil-normal-state-map (kbd "] w") 'next-multiframe-window))
 
-;; load hydra next so following packages can use it and its mode
 (use-package hydra
   :config
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
@@ -342,7 +343,6 @@
   (global-set-key (kbd "C-c w") 'my-hydra/window/body)
   (global-set-key (kbd "C-c z") 'my-hydra/zoom/body))
 
-;; load org-mode next so following packages can use it and its mode
 (use-package org
   :config
   (with-eval-after-load 'hydra
