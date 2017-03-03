@@ -345,6 +345,9 @@
 
 (use-package org
   :config
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+  (setq org-catch-invisible-edits 'error)
   (with-eval-after-load 'hydra
     (defhydra my-hydra/org-mode (:color amaranth :columns 2)
       "Org Mode Navigation"
