@@ -63,6 +63,7 @@
 ;; use Command key as Meta on Mac OS X
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta)
+  (setq mac-right-command-modifier 'nil)
   (setq mac-option-modifier 'nil))
 
 (defun my-transpose-windows (selector)
