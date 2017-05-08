@@ -19,11 +19,11 @@
 (setq column-number-mode t)
 
 ;; show matching parentheses without delay
-(setq-default show-paren-delay 0)
+(setq show-paren-delay 0)
 (show-paren-mode t)
 
 ;; indent with soft tabs. Use C-q <TAB> to insert real tabs
-(setq-default indent-tabs-mode nil)
+(setq indent-tabs-mode nil)
 
 ;; simplify GUI
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -32,7 +32,7 @@
   (menu-bar-mode -1))
 
 ;; read-only comint-mode prompts
-(setq-default comint-prompt-read-only t)
+(setq comint-prompt-read-only t)
 
 ;; close term-mode and eshell-mode buffers on exit
 (defadvice term-handle-exit (after term-kill-buffer-on-exit activate)
@@ -63,8 +63,8 @@
 ;; use Command key as Meta on Mac OS X
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta)
-  (setq mac-right-command-modifier 'nil)
-  (setq mac-option-modifier 'nil))
+  (setq mac-right-command-modifier 'super)
+  (setq mac-option-modifier nil))
 
 (defun my-transpose-windows (selector)
   "Transpose buffers between current window and window after calling SELECTOR."
@@ -137,10 +137,10 @@
 (use-package evil
   :init
   ;; C-z toggles between Evil and Emacs bindings; use C-x C-z to suspend
-  (setq-default evil-want-C-u-scroll t ;; C-u goes half-page up like in Vim
-                evil-insert-state-modes nil ;; clear Insert state modes
-                evil-motion-state-modes nil ;; clear Motion state modes
-                evil-default-state 'emacs) ;; use Emacs state as default
+  (setq evil-want-C-u-scroll t ;; C-u goes half-page up like in Vim
+        evil-insert-state-modes nil ;; clear Insert state modes
+        evil-motion-state-modes nil ;; clear Motion state modes
+        evil-default-state 'emacs) ;; use Emacs state as default
   (evil-mode t)
   :config
   ;; emulate Vim leader key in evil-mode
@@ -350,7 +350,10 @@
   (global-set-key (kbd "C-c z") 'my-hydra/zoom/body))
 
 (use-package org
+  :bind (("C-c a" . org-agenda)
+         ("C-c l" . org-store-link))
   :config
+  (setq org-agenda-start-on-weekday nil)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
   (setq org-catch-invisible-edits 'error)
@@ -369,7 +372,7 @@
 
 (use-package company
   :init
-  (setq-default company-selection-wrap-around t)
+  (setq company-selection-wrap-around t)
   (add-hook 'after-init-hook 'global-company-mode)
   :config
   (define-key company-active-map (kbd "C-n") 'company-select-next)
@@ -381,7 +384,7 @@
   :init (elpy-enable)
   :config
   ;; use jedi over rope for Python auto-completion
-  (setq-default elpy-rpc-backend "jedi")
+  (setq elpy-rpc-backend "jedi")
   ;; use IPython over CPython for REPL environment
   (when (executable-find "ipython")
     (add-hook 'elpy-mode-hook 'elpy-use-ipython))
@@ -579,3 +582,8 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 
 (provide 'init)
 ;;; init.el ends here
+
+;; suppress byte-compilation warnings about assignments to free variables
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars)
+;; End:
