@@ -380,6 +380,8 @@
 
 (use-package csv-mode)
 
+(use-package ein)
+
 (use-package elpy
   :init (elpy-enable)
   :config
@@ -458,13 +460,6 @@
 
 (use-package magit
   :bind ("C-c g" . magit-status))
-
-(use-package ob-ipython
-  :after org
-  :config
-  (org-babel-do-load-languages 'org-babel-load-languages '((ipython .t)))
-  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
-  (define-key org-mode-map (kbd "C-c I") 'ob-ipython-inspect))
 
 (use-package projectile
   :init (projectile-global-mode)
@@ -583,7 +578,8 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 (provide 'init)
 ;;; init.el ends here
 
-;; suppress byte-compilation warnings about assignments to free variables
+;; suppress byte-compiler warnings about assignments to free vars and
+;; calls to fns that are unknown or may not be defined at runtime
 ;; Local Variables:
-;; byte-compile-warnings: (not free-vars)
+;; byte-compile-warnings: (not free-vars unresolved noruntime)
 ;; End:
