@@ -371,12 +371,10 @@
     (define-key org-mode-map (kbd "C-c o") 'my-hydra/org-mode/body)))
 
 (use-package company
+  :diminish company-mode
   :init
   (setq company-selection-wrap-around t)
-  (add-hook 'after-init-hook 'global-company-mode)
-  :config
-  (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous))
+  (add-hook 'after-init-hook 'global-company-mode))
 
 (use-package csv-mode)
 
@@ -395,25 +393,18 @@
     (remove-hook 'elpy-modules 'elpy-module-flymake)
     (add-hook 'elpy-mode-hook 'flycheck-mode)))
 
-(use-package evil-smartparens
-  :diminish evil-smartparens-mode
-  :after smartparens
-  :config
-  (add-hook 'smartparens-enabled-hook
-            (lambda () (interactive) (evil-smartparens-mode t)))
-  (add-hook 'smartparens-disabled-hook
-            (lambda () (interactive) (evil-smartparens-mode -1))))
-
 (use-package evil-surround
   :after evil
   :init (global-evil-surround-mode 1))
 
 (use-package exec-path-from-shell
   :init
+  ;; copy GUI mode environment vars from the user's shell on Mac OS X
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
 
 (use-package flycheck
+  :diminish flycheck-mode
   :init (global-flycheck-mode)
   :config
   (with-eval-after-load 'hydra
@@ -528,6 +519,10 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   :config
   (require 'smartparens-config)
   (add-hook 'smartparens-enabled-hook 'turn-on-smartparens-strict-mode)
+  (with-eval-after-load 'evil
+    (defadvice smartparens-mode (after toggle-evil activate)
+      "Turn off/on evil-mode locally when enabling/disabling smartparens-mode"
+      (evil-local-mode (if smartparens-mode -1 1))))
   (with-eval-after-load 'hydra
     (defhydra my-hydra/smartparens (:color amaranth :columns 4)
       "Smartparens Sexp Navigation and Manipulation"
@@ -552,7 +547,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("c"  sp-copy-sexp "copy")
       ("k"  sp-kill-sexp "kill")
       ("q"  nil "quit" :color blue))
-    (define-key smartparens-mode-map (kbd "C-c C-n")
+    (define-key smartparens-mode-map (kbd "C-c n")
       'my-hydra/smartparens/body)))
 
 (use-package smex
@@ -579,7 +574,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 ;;; init.el ends here
 
 ;; suppress byte-compiler warnings about assignments to free vars and
-;; calls to fns that are unknown or may not be defined at runtime
+;; calls to funcs that are unknown or may not be defined at runtime
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved noruntime)
 ;; End:
