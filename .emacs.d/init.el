@@ -15,6 +15,9 @@
 ;; turn off audible and visual bells
 (setq ring-bell-function 'ignore)
 
+;; scroll one line at a time when cursor moves past window top/bottom
+(setq scroll-conservatively 101)
+
 ;; show column number in modeline
 (setq column-number-mode t)
 
@@ -23,7 +26,7 @@
 (show-paren-mode t)
 
 ;; indent with soft tabs. Use C-q <TAB> to insert real tabs
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 ;; simplify GUI
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -354,21 +357,15 @@
          ("C-c l" . org-store-link))
   :config
   (setq org-agenda-start-on-weekday nil)
-  (setq org-log-done 'time)
-  (setq org-log-into-drawer t)
   (setq org-catch-invisible-edits 'error)
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra/org-mode (:color amaranth :columns 2)
-      "Org Mode Navigation"
-      ("p" outline-previous-visible-heading "prev heading")
-      ("n" outline-next-visible-heading "next heading")
-      ("P" org-backward-heading-same-level "prev heading at same level")
-      ("N" org-forward-heading-same-level "next heading at same level")
-      ("u" outline-up-heading "up heading")
-      ("<tab>" outline-toggle-children "toggle children")
-      ("g" org-goto "goto" :color blue)
-      ("q" nil "quit" :color blue))
-    (define-key org-mode-map (kbd "C-c o") 'my-hydra/org-mode/body)))
+  (setq org-log-into-drawer t)
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)"
+                    "|" "DONE(d!)")
+          (sequence "WAITING(w@/!)" "HOLD(h@/!)"
+                    "|" "CANCELED(c@/!)")))
+  (setq org-use-fast-todo-selection t)
+  (setq org-use-speed-commands t))
 
 (use-package company
   :diminish company-mode
@@ -403,8 +400,8 @@
   (require 'em-term)
   (require 'em-smart)
   (setq eshell-review-quick-commands nil
-	eshell-smart-space-goes-to-end t
-	eshell-where-to-jump 'begin)
+        eshell-smart-space-goes-to-end t
+        eshell-where-to-jump 'begin)
   :config
   (add-to-list 'eshell-visual-commands "htop")
   (add-to-list 'eshell-visual-commands "lftp")
@@ -582,15 +579,16 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
     (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
 
 ;; load local init file ~/.emacs.d/init-local.el
-(let ((init-local-f (expand-file-name "init-local.el" user-emacs-directory)))
+(let ((init-local-f (expand-file-name "init-local.el"
+                                      user-emacs-directory)))
   (if (file-exists-p init-local-f)
       (load-file init-local-f)))
 
 (provide 'init)
 ;;; init.el ends here
 
-;; suppress byte-compiler warnings about assignments to free vars and
-;; calls to funcs not known or not defined at runtime
+;; suppress byte-compiler warnings about assignments to free variables
+;; and calls to functions not known or not defined at runtime
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved noruntime)
 ;; End:
