@@ -94,13 +94,13 @@
 ;; regenerate outdated bytecode
 (setq load-prefer-newer t)
 
-;; packages (user) in ~/.emacs.d/lisp
+;; user packages in ~/.emacs.d/lisp
 (defvar lisp-dir (expand-file-name "lisp" user-emacs-directory))
 (unless (file-exists-p lisp-dir)
   (make-directory lisp-dir))
 (add-to-list 'load-path lisp-dir)
 
-;; packages (third-party) in ~/.emacs.d/site-lisp and its subdirectories
+;; third-party packages in ~/.emacs.d/site-lisp and its subdirectories
 (defvar site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
 (unless (file-exists-p site-lisp-dir)
   (make-directory site-lisp-dir))
@@ -397,9 +397,25 @@
   :after evil
   :init (global-evil-surround-mode 1))
 
+(use-package eshell
+  :commands (eshell eshell-command)
+  :init
+  (require 'em-term)
+  (require 'em-smart)
+  (setq eshell-review-quick-commands nil
+	eshell-smart-space-goes-to-end t
+	eshell-where-to-jump 'begin)
+  :config
+  (add-to-list 'eshell-visual-commands "htop")
+  (add-to-list 'eshell-visual-commands "lftp")
+  (add-to-list 'eshell-visual-commands "ssh")
+  (add-to-list 'eshell-visual-commands "vim")
+  (add-to-list 'eshell-visual-subcommands '("git" "log" "diff" "show"))
+  (add-to-list 'eshell-visual-subcommands '("vagrant" "ssh")))
+
 (use-package exec-path-from-shell
   :init
-  ;; copy GUI mode environment vars from the user's shell on Mac OS X
+  ;; in Mac OS X GUI mode, copy environment vars from the shell
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
 
@@ -565,7 +581,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
     (setq evil-want-fine-undo t)
     (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
 
-;; load machine-specific init file ~/.emacs.d/init-local.el
+;; load local init file ~/.emacs.d/init-local.el
 (let ((init-local-f (expand-file-name "init-local.el" user-emacs-directory)))
   (if (file-exists-p init-local-f)
       (load-file init-local-f)))
@@ -574,7 +590,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 ;;; init.el ends here
 
 ;; suppress byte-compiler warnings about assignments to free vars and
-;; calls to funcs that are unknown or may not be defined at runtime
+;; calls to funcs not known or not defined at runtime
 ;; Local Variables:
 ;; byte-compile-warnings: (not free-vars unresolved noruntime)
 ;; End:
