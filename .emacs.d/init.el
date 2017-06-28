@@ -99,18 +99,15 @@
 
 ;; user packages in ~/.emacs.d/lisp
 (defvar lisp-dir (expand-file-name "lisp" user-emacs-directory))
-(unless (file-exists-p lisp-dir)
-  (make-directory lisp-dir))
+(unless (file-exists-p lisp-dir) (make-directory lisp-dir))
 (add-to-list 'load-path lisp-dir)
 
 ;; third-party packages in ~/.emacs.d/site-lisp and its subdirectories
 (defvar site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
-(unless (file-exists-p site-lisp-dir)
-  (make-directory site-lisp-dir))
+(unless (file-exists-p site-lisp-dir) (make-directory site-lisp-dir))
 (add-to-list 'load-path site-lisp-dir)
 (dolist (project (directory-files site-lisp-dir t "\\w+"))
-  (when (file-directory-p project)
-    (add-to-list 'load-path project)))
+  (when (file-directory-p project) (add-to-list 'load-path project)))
 
 ;; use package.el with given ELPA-compatible package repositories
 (require 'package)
@@ -146,8 +143,7 @@
         evil-default-state 'emacs) ;; use Emacs state as default
   (evil-mode t)
   :config
-  ;; emulate Vim leader key in evil-mode
-  (defvar evil-leader "<SPC>")
+  (defvar evil-leader "<SPC>") ;; emulate Vim leader key in normal mode
   (defun evil-leader-set-key-normal (key fn)
     "Binds \"<evil-leader> KEY\" to interactively call FN in Evil normal mode."
     (define-key evil-normal-state-map (kbd (concat evil-leader key)) fn))
@@ -157,11 +153,7 @@
   (evil-leader-set-key-normal "b" 'switch-to-buffer)
   (evil-leader-set-key-normal "d" 'dired)
   (evil-leader-set-key-normal "e" 'find-file)
-  (evil-leader-set-key-normal "k b" 'kill-buffer)
-  (evil-leader-set-key-normal "k f" 'delete-frame)
-  (evil-leader-set-key-normal "k w" 'delete-window)
   (evil-leader-set-key-normal "M" 'evil-show-marks)
-  (evil-leader-set-key-normal "n f" 'make-frame)
   (evil-leader-set-key-normal "r" 'list-registers)
   (evil-leader-set-key-normal "w" 'whitespace-mode)
   (evil-leader-set-key-normal "y" (lambda () (interactive)
@@ -175,23 +167,23 @@
   (define-key evil-normal-state-map (kbd "[ e")
     (lambda (n) (interactive "p")
       (dotimes (_ n)
-        (progn (transpose-lines 1) (forward-line -2)))))
+        (unless (eq (string-to-number (format-mode-line "%l")) 1)
+          (progn (transpose-lines 1)
+                 (forward-line -2))))))
   (define-key evil-normal-state-map (kbd "] e")
     (lambda (n) (interactive "p")
       (dotimes (_ n)
-        (progn (forward-line 1) (transpose-lines 1) (forward-line -1)))))
-  (define-key evil-visual-state-map (kbd "[ e")
-    (lambda (n) (interactive "p")
-      (concat ":'<,'>move '<--" (number-to-string n))))
-  (define-key evil-visual-state-map (kbd "] e")
-    (lambda (n) (interactive "p")
-      (concat ":'<,'>move '>+" (number-to-string n))))
+        (unless (eq (string-to-number (format-mode-line "%l"))
+                    (line-number-at-pos (point-max)))
+          (progn (forward-line 1)
+                 (transpose-lines 1)
+                 (forward-line -1))))))
   (define-key evil-normal-state-map (kbd "[ l") 'previous-error)
   (define-key evil-normal-state-map (kbd "] l") 'next-error)
   (define-key evil-normal-state-map (kbd "[ n") 'diff-hunk-prev)
   (define-key evil-normal-state-map (kbd "] n") 'diff-hunk-next)
-  (define-key evil-normal-state-map (kbd "[ t") 'ns-prev-frame)
-  (define-key evil-normal-state-map (kbd "] t") 'ns-next-frame)
+  (define-key evil-normal-state-map (kbd "[ f") 'ns-prev-frame)
+  (define-key evil-normal-state-map (kbd "] f") 'ns-next-frame)
   (define-key evil-normal-state-map (kbd "[ w") 'previous-multiframe-window)
   (define-key evil-normal-state-map (kbd "] w") 'next-multiframe-window))
 
@@ -209,8 +201,7 @@
     ("k" kill-this-buffer "kill")
     ("K" kill-matching-buffers "kill-match")
     ("c" clean-buffer-list "clean")
-    ("L" (condition-case nil
-             (quit-windows-on "*Buffer List*" t)
+    ("L" (condition-case nil (quit-windows-on "*Buffer List*" t)
            (error (list-buffers))) "list")
     ("b" switch-to-buffer "switch" :color blue)
     ("q" nil "quit" :color blue))
@@ -360,8 +351,7 @@
   (setq org-catch-invisible-edits 'error)
   (setq org-log-into-drawer t)
   (setq org-todo-keywords
-        '((sequence "TODO(t)" "NEXT(n)"
-                    "|" "DONE(d!)")
+        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
           (sequence "WAITING(w@/!)" "HOLD(h@/!)"
                     "|" "CANCELED(c@/!)")))
   (setq org-use-fast-todo-selection t)
@@ -385,7 +375,7 @@
   ;; use IPython over CPython for REPL environment
   (when (executable-find "ipython")
     (add-hook 'elpy-mode-hook 'elpy-use-ipython))
-  ;; use FlyCheck over FlyMake for syntax checking
+  ;; use FlyCheck over FlyMake for Python syntax checking
   (with-eval-after-load 'flycheck
     (remove-hook 'elpy-modules 'elpy-module-flymake)
     (add-hook 'elpy-mode-hook 'flycheck-mode)))
@@ -427,19 +417,23 @@
       ("p" flycheck-previous-error "previous")
       ("n" flycheck-next-error "next")
       ("f" flycheck-first-error "first")
-      ("l" (condition-case nil
-               (while t (flycheck-next-error))
+      ("l" (condition-case nil (while t (flycheck-next-error))
              (user-error nil)) "last")
-      ("L" (condition-case nil
-               (quit-windows-on "*Flycheck errors*" t)
+      ("L" (condition-case nil (quit-windows-on "*Flycheck errors*" t)
              (error (flycheck-list-errors))) "list")
       ("q" nil "quit" :color blue))
-    ;; bind over my-hydra/error with my-hydra/flycheck
+    ;; bind over my-hydra/error
     (define-key flycheck-mode-map (kbd "C-c e") 'my-hydra/flycheck/body))
   (with-eval-after-load 'evil
-    ;; bind over bracket mappings for error navigation with flycheck version
+    ;; bind over bracket mappings for error navigation
     (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
     (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error)))
+
+(use-package go-mode
+  :commands go-mode
+  :config
+  (with-eval-after-load 'flycheck
+    (add-hook 'go-mode-hook 'flycheck-mode)))
 
 (use-package gruvbox-theme
   :config (load-theme 'gruvbox t))
@@ -464,6 +458,12 @@
 
 (use-package magit
   :bind ("C-c g" . magit-status))
+
+(use-package markdown-mode
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode) ;; GitHub Flavored Markdown
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode)))
 
 (use-package projectile
   :init (projectile-global-mode)
@@ -564,7 +564,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       'my-hydra/smartparens/body)))
 
 (use-package smex
-  ;; bind over executed-extended-command with smex
+  ;; bind over executed-extended-command
   :bind (("M-x" . smex)
          ("M-X" . smex-major-mode-commands))
   :config (smex-initialize))
@@ -578,11 +578,13 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
     (setq evil-want-fine-undo t)
     (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
 
+(use-package yaml-mode
+  :mode ("\\.ya?ml\\'" . yaml-mode))
+
 ;; load local init file ~/.emacs.d/init-local.el
-(let ((init-local-f (expand-file-name "init-local.el"
-                                      user-emacs-directory)))
-  (if (file-exists-p init-local-f)
-      (load-file init-local-f)))
+(let ((init-local-f
+       (expand-file-name "init-local.el" user-emacs-directory)))
+  (if (file-exists-p init-local-f) (load-file init-local-f)))
 
 (provide 'init)
 ;;; init.el ends here
