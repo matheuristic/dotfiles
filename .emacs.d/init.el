@@ -365,16 +365,18 @@
 
 (use-package csv-mode)
 
-(use-package ein)
+(use-package ein
+  :config
+  (add-to-list 'python-shell-completion-native-disabled-interpreters
+               "jupyter")
+  ;; IPython 5+ fancy prompts don't work with Emacs shells
+  (setq ein:console-args '("--simple-prompt")))
 
 (use-package elpy
   :init (elpy-enable)
   :config
   ;; use jedi over rope for Python auto-completion
   (setq elpy-rpc-backend "jedi")
-  ;; use IPython over CPython for REPL environment
-  (when (executable-find "ipython")
-    (add-hook 'elpy-mode-hook 'elpy-use-ipython))
   ;; use FlyCheck over FlyMake for Python syntax checking
   (with-eval-after-load 'flycheck
     (remove-hook 'elpy-modules 'elpy-module-flymake)
