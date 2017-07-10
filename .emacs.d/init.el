@@ -367,10 +367,11 @@
 
 (use-package ein
   :config
-  (add-to-list 'python-shell-completion-native-disabled-interpreters
-               "jupyter")
-  ;; IPython 5+ fancy prompts don't work with Emacs shells
-  (setq ein:console-args '("--simple-prompt")))
+  ;; IPython 5 fancy prompts don't work with eshell
+  (setq ein:console-args '("--simple-prompt"))
+  (with-eval-after-load 'elpy
+    (add-to-list 'python-shell-completion-native-disabled-interpreters
+                 "jupyter")))
 
 (use-package elpy
   :init (elpy-enable)
