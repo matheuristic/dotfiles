@@ -352,8 +352,7 @@
   (setq org-log-into-drawer t)
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-          (sequence "WAITING(w@/!)" "HOLD(h@/!)"
-                    "|" "CANCELED(c@/!)")))
+          (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANCELED(c@/!)")))
   (setq org-use-fast-todo-selection t)
   (setq org-use-speed-commands t))
 
@@ -376,10 +375,8 @@
 (use-package elpy
   :init (elpy-enable)
   :config
-  ;; use jedi over rope for Python auto-completion
-  (setq elpy-rpc-backend "jedi")
-  ;; use FlyCheck over FlyMake for Python syntax checking
-  (with-eval-after-load 'flycheck
+  (setq elpy-rpc-backend "jedi") ;; use jedi for autocompletion
+  (with-eval-after-load 'flycheck ;; use FlyCheck for syntax checking
     (remove-hook 'elpy-modules 'elpy-module-flymake)
     (add-hook 'elpy-mode-hook 'flycheck-mode)))
 
@@ -408,6 +405,10 @@
   ;; in Mac OS X GUI mode, copy environment vars from the shell
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
+
+(use-package fic-mode
+  :diminish fic-mode
+  :config (add-hook 'prog-mode-hook 'fic-mode))
 
 (use-package flycheck
   :diminish flycheck-mode
@@ -464,7 +465,7 @@
 
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode) ;; GitHub Flavored Markdown
+  :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode)))
 
