@@ -136,7 +136,7 @@
 
 (use-package evil
   :init
-  ;; C-z toggles between Evil and Emacs bindings; use C-x C-z to suspend
+  ;; use C-z to toggle between Evil and Emacs bindings, C-x C-z to suspend
   (setq evil-want-C-u-scroll t ;; C-u goes half-page up like in Vim
         evil-insert-state-modes nil ;; clear Insert state modes
         evil-motion-state-modes nil ;; clear Motion state modes
@@ -375,8 +375,8 @@
 (use-package elpy
   :init (elpy-enable)
   :config
-  (setq elpy-rpc-backend "jedi") ;; use jedi for autocompletion
-  (with-eval-after-load 'flycheck ;; use FlyCheck for syntax checking
+  (setq elpy-rpc-backend "jedi") ;; use jedi for Python autocompletion
+  (with-eval-after-load 'flycheck ;; use FlyCheck for Python syntax checking
     (remove-hook 'elpy-modules 'elpy-module-flymake)
     (add-hook 'elpy-mode-hook 'flycheck-mode)))
 
@@ -461,7 +461,8 @@
   :init (ido-ubiquitous-mode t))
 
 (use-package magit
-  :bind ("C-c g" . magit-status))
+  :bind ("C-c g" . magit-status)
+  :config (setq vc-handled-backends (delq 'Git vc-handled-backends)))
 
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
@@ -586,8 +587,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   :mode ("\\.ya?ml\\'" . yaml-mode))
 
 ;; load local init file ~/.emacs.d/init-local.el
-(let ((init-local-f
-       (expand-file-name "init-local.el" user-emacs-directory)))
+(let ((init-local-f (expand-file-name "init-local.el" user-emacs-directory)))
   (if (file-exists-p init-local-f) (load-file init-local-f)))
 
 (provide 'init)
