@@ -134,6 +134,7 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
+;; extensible vi layer for Emacs
 (use-package evil
   :init
   ;; use C-z to toggle between Evil and Emacs bindings, C-x C-z to suspend
@@ -187,6 +188,7 @@
   (define-key evil-normal-state-map (kbd "[ w") 'previous-multiframe-window)
   (define-key evil-normal-state-map (kbd "] w") 'next-multiframe-window))
 
+;; framework for creating temporary or repeatable keybindings
 (use-package hydra
   :config
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
@@ -343,6 +345,7 @@
   (global-set-key (kbd "C-c w") 'my-hydra/window/body)
   (global-set-key (kbd "C-c z") 'my-hydra/zoom/body))
 
+;; Org-mode configuration
 (use-package org
   :bind (("C-c a" . org-agenda)
          ("C-c l" . org-store-link))
@@ -356,34 +359,19 @@
   (setq org-use-fast-todo-selection t)
   (setq org-use-speed-commands t))
 
+;; text completion framework
 (use-package company
   :diminish company-mode
   :init
   (setq company-selection-wrap-around t)
   (add-hook 'after-init-hook 'global-company-mode))
 
-(use-package csv-mode)
-
-(use-package ein
-  :config
-  ;; IPython 5 fancy prompts don't work with eshell
-  (setq ein:console-args '("--simple-prompt"))
-  (with-eval-after-load 'elpy
-    (add-to-list 'python-shell-completion-native-disabled-interpreters
-                 "jupyter")))
-
-(use-package elpy
-  :init (elpy-enable)
-  :config
-  (setq elpy-rpc-backend "jedi") ;; use jedi for Python autocompletion
-  (with-eval-after-load 'flycheck ;; use FlyCheck for Python syntax checking
-    (remove-hook 'elpy-modules 'elpy-module-flymake)
-    (add-hook 'elpy-mode-hook 'flycheck-mode)))
-
+;; emulates surround.vim ( https://github.com/tpope/vim-surround )
 (use-package evil-surround
   :after evil
   :init (global-evil-surround-mode 1))
 
+;; Eshell configuration
 (use-package eshell
   :commands (eshell eshell-command)
   :init
@@ -400,16 +388,19 @@
   (add-to-list 'eshell-visual-subcommands '("git" "log" "diff" "show"))
   (add-to-list 'eshell-visual-subcommands '("vagrant" "ssh")))
 
+;; copies environment variables from the shell
 (use-package exec-path-from-shell
   :init
-  ;; in Mac OS X GUI mode, copy environment vars from the shell
+  ;; use only in Mac OS X GUI mode
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
 
+;; highlight FIXME, TODO, BUG in comments
 (use-package fic-mode
   :diminish fic-mode
   :config (add-hook 'prog-mode-hook 'fic-mode))
 
+;; alternative syntax checker to Flymake
 (use-package flycheck
   :diminish flycheck-mode
   :init (global-flycheck-mode)
@@ -433,21 +424,18 @@
     (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
     (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error)))
 
-(use-package go-mode
-  :commands go-mode
-  :config
-  (with-eval-after-load 'flycheck
-    (add-hook 'go-mode-hook 'flycheck-mode)))
-
+;; color scheme
 (use-package gruvbox-theme
   :config (load-theme 'gruvbox t))
 
+;; advanced buffer menu
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer)
   :config
   (with-eval-after-load 'evil
     (evil-leader-set-key-normal "B" 'ibuffer)))
 
+;; interactively do things with buffers and files
 (use-package ido
   :init
   (setq ido-default-file-method 'selected-window
@@ -457,19 +445,11 @@
         ido-use-virtual-buffers t)
   (ido-mode t))
 
-(use-package ido-ubiquitous
+;; replaces stock completion with ido wherever possible
+(use-package ido-completing-read+
   :init (ido-ubiquitous-mode t))
 
-(use-package magit
-  :bind ("C-c g" . magit-status)
-  :config (setq vc-handled-backends (delq 'Git vc-handled-backends)))
-
-(use-package markdown-mode
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode)))
-
+;; project interaction library
 (use-package projectile
   :init (projectile-global-mode)
   :config
@@ -520,9 +500,11 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("q"   nil "quit" :color blue))
     (define-key projectile-mode-map (kbd "C-c P") 'my-hydra/projectile/body)))
 
+;; colorize parentheses, brackets and braces according to their depth
 (use-package rainbow-delimiters
   :bind ("C-c r" . rainbow-delimiters-mode))
 
+;; maintain a list of recent files
 (use-package recentf
   :bind ("C-c F" . recentf-open-files)
   :init (recentf-mode t)
@@ -532,6 +514,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   (with-eval-after-load 'evil
     (evil-leader-set-key-normal "f" 'recentf-open-files)))
 
+;; minor mode for dealing with pairs
 (use-package smartparens
   :bind ("C-c S" . smartparens-mode)
   :config
@@ -568,12 +551,14 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
     (define-key smartparens-mode-map (kbd "C-c n")
       'my-hydra/smartparens/body)))
 
+;; smart M-x enhancements
 (use-package smex
   ;; bind over executed-extended-command
   :bind (("M-x" . smex)
          ("M-X" . smex-major-mode-commands))
   :config (smex-initialize))
 
+;; traverse undo history as a tree
 (use-package undo-tree
   :diminish undo-tree-mode
   :bind ("C-c u" . undo-tree-visualize)
@@ -583,6 +568,60 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
     (setq evil-want-fine-undo t)
     (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
 
+;; CSV
+(use-package csv-mode)
+
+;; Git
+(when (executable-find "git")
+  (use-package magit
+    :bind ("C-c g" . magit-status)
+    :config (setq vc-handled-backends (delq 'Git vc-handled-backends))))
+
+;; Go
+(when (executable-find "go")
+  (use-package go-mode
+    :commands go-mode
+    :config
+    (if (executable-find "goimports")
+        (setq gofmt-command "goimports")))
+  ;; add go support to company
+  (use-package company-go
+    :config
+    (with-eval-after-load 'company
+      (add-to-list 'company-backends 'company-go)))
+  ;; Go guru, bound to commands with prefix C-c C-o
+  (if (executable-find "guru")
+      (use-package go-guru
+        :config
+        (with-eval-after-load 'go-mode
+          (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)))))
+
+;; Markdown
+(use-package markdown-mode
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode)))
+
+;; Python
+(when (executable-find "python")
+  (use-package elpy
+    :init (elpy-enable)
+    :config
+    (setq elpy-rpc-backend "jedi") ;; use jedi for Python autocompletion
+    (with-eval-after-load 'flycheck ;; use FlyCheck for Python syntax checking
+      (remove-hook 'elpy-modules 'elpy-module-flymake)
+      (add-hook 'elpy-mode-hook 'flycheck-mode)))
+  (if (executable-find "jupyter")
+      (use-package ein
+        :config
+        ;; IPython 5 fancy prompts don't work with eshell
+        (setq ein:console-args '("--simple-prompt"))
+        (with-eval-after-load 'elpy
+          (add-to-list 'python-shell-completion-native-disabled-interpreters
+                       "jupyter")))))
+
+;; YAML
 (use-package yaml-mode
   :mode ("\\.ya?ml\\'" . yaml-mode))
 
