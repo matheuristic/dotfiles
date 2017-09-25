@@ -182,11 +182,7 @@
   (define-key evil-normal-state-map (kbd "[ l") 'previous-error)
   (define-key evil-normal-state-map (kbd "] l") 'next-error)
   (define-key evil-normal-state-map (kbd "[ n") 'diff-hunk-prev)
-  (define-key evil-normal-state-map (kbd "] n") 'diff-hunk-next)
-  (define-key evil-normal-state-map (kbd "[ f") 'ns-prev-frame)
-  (define-key evil-normal-state-map (kbd "] f") 'ns-next-frame)
-  (define-key evil-normal-state-map (kbd "[ w") 'previous-multiframe-window)
-  (define-key evil-normal-state-map (kbd "] w") 'next-multiframe-window))
+  (define-key evil-normal-state-map (kbd "] n") 'diff-hunk-next))
 
 ;; framework for creating temporary or repeatable keybindings
 (use-package hydra
@@ -513,43 +509,6 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
         recentf-max-saved-items 50)
   (with-eval-after-load 'evil
     (evil-leader-set-key-normal "f" 'recentf-open-files)))
-
-;; minor mode for dealing with pairs
-(use-package smartparens
-  :bind ("C-c S" . smartparens-mode)
-  :config
-  (require 'smartparens-config)
-  (add-hook 'smartparens-enabled-hook 'turn-on-smartparens-strict-mode)
-  (with-eval-after-load 'evil
-    (defadvice smartparens-mode (after toggle-evil activate)
-      "Turn off/on evil-mode locally when enabling/disabling smartparens-mode"
-      (evil-local-mode (if smartparens-mode -1 1))))
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra/smartparens (:color amaranth :columns 4)
-      "Smartparens Sexp Navigation and Manipulation"
-      ("p"  sp-previous-sexp "prev")
-      ("n"  sp-next-sexp "next")
-      ("b"  sp-backward-sexp "bw")
-      ("f"  sp-forward-sexp "fw")
-      ("d"  sp-down-sexp "dn")
-      ("e"  sp-up-sexp "up")
-      ("u"  sp-backward-down-sexp "bw-dn")
-      ("a"  sp-backward-up-sexp "bw-up")
-      ("<(" sp-backward-slurp-sexp "bw-slurp")
-      (">(" sp-backward-barf-sexp "bw-barf")
-      ("<)" sp-forward-barf-sexp "fw-barf")
-      (">)" sp-forward-slurp-sexp "fw-slurp")
-      ("s"  sp-splice-sexp "splice")
-      ("S"  sp-split-sexp "split")
-      ("J"  sp-join-sexp "join")
-      ("t"  sp-transpose-sexp "transpose")
-      ("R"  sp-rewrap-sexp "rewrap")
-      ("U"  sp-unwrap-sexp "unwrap")
-      ("c"  sp-copy-sexp "copy")
-      ("k"  sp-kill-sexp "kill")
-      ("q"  nil "quit" :color blue))
-    (define-key smartparens-mode-map (kbd "C-c n")
-      'my-hydra/smartparens/body)))
 
 ;; smart M-x enhancements
 (use-package smex
