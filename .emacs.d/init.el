@@ -63,7 +63,7 @@
                       :weight my-font-weight
                       :width my-font-width))
 
-;; use Command key as Meta on Mac OS X
+;; use left Command key as Meta on Mac OS X
 (when (eq system-type 'darwin)
   (setq mac-command-modifier 'meta)
   (setq mac-right-command-modifier 'super)
@@ -198,9 +198,6 @@
     ("S" save-some-buffers "save-all")
     ("k" kill-this-buffer "kill")
     ("K" kill-matching-buffers "kill-match")
-    ("c" clean-buffer-list "clean")
-    ("L" (condition-case nil (quit-windows-on "*Buffer List*" t)
-           (error (list-buffers))) "list")
     ("b" switch-to-buffer "switch" :color blue)
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/desktop (:color teal)
@@ -245,14 +242,6 @@
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/navigation (:color amaranth :columns 4)
     "Navigation"
-    ("h" backward-char "bkwd-char")
-    ("j" next-line "next-line")
-    ("k" previous-line "prev-line")
-    ("l" forward-char "fwd-char")
-    ("b" backward-word "bkwd-word")
-    ("w" forward-word "fwd-word")
-    ("B" (lambda (n) (interactive "p") (forward-whitespace (- n))) "bkwd-whsp")
-    ("W" forward-whitespace "fwd-whsp")
     ("," backward-sexp "bkwd-sexp")
     ("." forward-sexp "fwd-sexp")
     ("[" backward-list "bkwd-list")
@@ -265,25 +254,19 @@
     (")" forward-sentence "fwd-sntc")
     ("{" backward-paragraph "bkwd-par")
     ("}" forward-paragraph "fwd-par")
-    ("a" move-beginning-of-line "beg-line")
-    ("$" move-end-of-line "end-line")
-    ("^" beginning-of-line-text "beg-ln-txt")
-    ("G" goto-line "goto-line")
-    ("gg" beginning-of-buffer "beg-buf")
-    ("gG" end-of-buffer "end-buf")
     ("S-SPC" scroll-down "page-up")
     ("SPC" scroll-up "pg-down")
     ("<" scroll-right "pg-left")
     (">" scroll-left "pg-right")
-    ("M-S-SPC" scroll-other-window-down "o-pg-up")
-    ("M-SPC" scroll-other-window "o-pg-down")
     ("C-SPC" set-mark-command "set-mark")
     ("x" exchange-point-and-mark "xchg-mark")
     ("r SPC" point-to-register "pt-to-reg")
     ("rj" jump-to-register "jmp-to-reg")
     ("rm" bookmark-set "bmk-set")
     ("rb" bookmark-jump "bmk-jmp")
-    ("M-x" (condition-case nil (smex) (execute-extended-command)) "smex")
+    ("gg" beginning-of-buffer "beg-buf")
+    ("gG" end-of-buffer "end-buf")
+    ("G" goto-line "goto-line")
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/search (:color teal :columns 3)
     "Search"
@@ -297,6 +280,8 @@
     ("om" multi-occur "multi-occur")
     ("ob" multi-occur-in-matching-buffers "multi-occur-match-buf")
     ("oO" org-occur "org-occur")
+    ("rs" query-replace "replace string")
+    ("rr" query-replace-regexp "replace regexp")
     ("kg" kill-grep "kill-grep")
     ("q"  nil "quit"))
   (defhydra my-hydra/window (:color amaranth :columns 4)
@@ -341,20 +326,6 @@
   (global-set-key (kbd "C-c w") 'my-hydra/window/body)
   (global-set-key (kbd "C-c z") 'my-hydra/zoom/body))
 
-;; Org-mode configuration
-(use-package org
-  :bind (("C-c a" . org-agenda)
-         ("C-c l" . org-store-link))
-  :config
-  (setq org-agenda-start-on-weekday nil)
-  (setq org-catch-invisible-edits 'error)
-  (setq org-log-into-drawer t)
-  (setq org-todo-keywords
-        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-          (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANCELED(c@/!)")))
-  (setq org-use-fast-todo-selection t)
-  (setq org-use-speed-commands t))
-
 ;; text completion framework
 (use-package company
   :diminish company-mode
@@ -366,23 +337,6 @@
 (use-package evil-surround
   :after evil
   :init (global-evil-surround-mode 1))
-
-;; Eshell configuration
-(use-package eshell
-  :commands (eshell eshell-command)
-  :init
-  (require 'em-term)
-  (require 'em-smart)
-  (setq eshell-review-quick-commands nil
-        eshell-smart-space-goes-to-end t
-        eshell-where-to-jump 'begin)
-  :config
-  (add-to-list 'eshell-visual-commands "htop")
-  (add-to-list 'eshell-visual-commands "lftp")
-  (add-to-list 'eshell-visual-commands "ssh")
-  (add-to-list 'eshell-visual-commands "vim")
-  (add-to-list 'eshell-visual-subcommands '("git" "log" "diff" "show"))
-  (add-to-list 'eshell-visual-subcommands '("vagrant" "ssh")))
 
 ;; copies environment variables from the shell
 (use-package exec-path-from-shell
@@ -396,7 +350,7 @@
   :diminish fic-mode
   :config (add-hook 'prog-mode-hook 'fic-mode))
 
-;; alternative syntax checker to Flymake
+;; syntax checker (alternative to Flymake)
 (use-package flycheck
   :diminish flycheck-mode
   :init (global-flycheck-mode)
@@ -432,6 +386,7 @@
     (evil-leader-set-key-normal "B" 'ibuffer)))
 
 ;; interactively do things with buffers and files
+;; new files should be created without ido using C-x C-f C-f
 (use-package ido
   :init
   (setq ido-default-file-method 'selected-window
@@ -466,6 +421,7 @@ File    _ff_  : find file                 _fw_  : find file dwim
 Dir     _dd_  : find dir                  _do_  : find dir (other window)
 
 Search  _sg_  : grep                      _so_  : multi-occur
+        _rs_  : replace string            _rr_  : replace regexp
 
 Cache   _cc_  : cache current file        _cC_  : clear cache
         _cx_  : remove known project      _cX_  : cleanup known projects
@@ -484,9 +440,10 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("fr"  projectile-recentf)
       ("dd"  projectile-find-dir)
       ("do"  projectile-find-dir-other-window)
-      ("sa"  projectile-ag)
       ("sg"  projectile-grep)
       ("so"  projectile-multi-occur)
+      ("rs"  projectile-replace)
+      ("rr"  projectile-replace-regexp)
       ("cc"  projectile-cache-current-file)
       ("cC"  projectile-invalidate-cache)
       ("cx"  projectile-remove-known-project)
@@ -496,11 +453,11 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("q"   nil "quit" :color blue))
     (define-key projectile-mode-map (kbd "C-c P") 'my-hydra/projectile/body)))
 
-;; colorize parentheses, brackets and braces according to their depth
+;; colorize parentheses, brackets and braces according to depth
 (use-package rainbow-delimiters
   :bind ("C-c r" . rainbow-delimiters-mode))
 
-;; maintain a list of recent files
+;; list recently opened files
 (use-package recentf
   :bind ("C-c F" . recentf-open-files)
   :init (recentf-mode t)
@@ -508,7 +465,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   (setq recentf-max-menu-items 10
         recentf-max-saved-items 50)
   (with-eval-after-load 'evil
-    (evil-leader-set-key-normal "f" 'recentf-open-files)))
+    (evil-leader-set-key-normal "F" 'recentf-open-files)))
 
 ;; smart M-x enhancements
 (use-package smex
@@ -530,6 +487,23 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 ;; CSV
 (use-package csv-mode)
 
+;; Eshell
+(use-package eshell
+  :commands (eshell eshell-command)
+  :init
+  (require 'em-term)
+  (require 'em-smart)
+  (setq eshell-review-quick-commands nil
+        eshell-smart-space-goes-to-end t
+        eshell-where-to-jump 'begin)
+  :config
+  (add-to-list 'eshell-visual-commands "htop")
+  (add-to-list 'eshell-visual-commands "lftp")
+  (add-to-list 'eshell-visual-commands "ssh")
+  (add-to-list 'eshell-visual-commands "vim")
+  (add-to-list 'eshell-visual-subcommands '("git" "log" "diff" "show"))
+  (add-to-list 'eshell-visual-subcommands '("vagrant" "ssh")))
+
 ;; Git
 (when (executable-find "git")
   (use-package magit
@@ -541,14 +515,15 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   (use-package go-mode
     :commands go-mode
     :config
+    (add-hook 'go-mode-hook (lambda () (setq tab-width 4)))
     (if (executable-find "goimports")
         (setq gofmt-command "goimports")))
-  ;; add go support to company
+  ;; Go support for company
   (use-package company-go
     :config
     (with-eval-after-load 'company
       (add-to-list 'company-backends 'company-go)))
-  ;; Go guru, bound to commands with prefix C-c C-o
+  ;; Go guru, commands have prefix C-c C-o
   (if (executable-find "guru")
       (use-package go-guru
         :config
@@ -558,9 +533,23 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 ;; Markdown
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
+  :mode (("README\\.md\\'" . gfm-mode) ;; Github-flavored markdown
+         ("\\.md\\'" . markdown-mode) ;; regular markdown
          ("\\.markdown\\'" . markdown-mode)))
+
+;; Org-mode
+(use-package org
+  :bind (("C-c a" . org-agenda)
+         ("C-c l" . org-store-link))
+  :config
+  (setq org-agenda-start-on-weekday nil)
+  (setq org-catch-invisible-edits 'error)
+  (setq org-log-into-drawer t)
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+          (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANCELED(c@/!)")))
+  (setq org-use-fast-todo-selection t)
+  (setq org-use-speed-commands t))
 
 ;; Python
 (when (executable-find "python")
@@ -572,9 +561,10 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       (remove-hook 'elpy-modules 'elpy-module-flymake)
       (add-hook 'elpy-mode-hook 'flycheck-mode)))
   (if (executable-find "jupyter")
+      ;; IPython notebook client
       (use-package ein
         :config
-        ;; IPython 5 fancy prompts don't work with eshell
+        ;; fancy prompts in IPython 5 or later don't work with Eshell
         (setq ein:console-args '("--simple-prompt"))
         (with-eval-after-load 'elpy
           (add-to-list 'python-shell-completion-native-disabled-interpreters
