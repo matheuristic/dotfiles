@@ -63,11 +63,10 @@
                       :weight my-font-weight
                       :width my-font-width))
 
-;; use left Command key as Meta on Mac OS X
+;; use left Option key as Meta on Mac OS X
 (when (eq system-type 'darwin)
-  (setq mac-command-modifier 'meta)
-  (setq mac-right-command-modifier 'super)
-  (setq mac-option-modifier nil))
+  (setq mac-option-modifier 'meta)
+  (setq mac-right-option-modifier nil))
 
 (defun my-transpose-windows (selector)
   "Transpose buffers between current window and window after calling SELECTOR."
