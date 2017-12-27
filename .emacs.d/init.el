@@ -28,11 +28,15 @@
 ;; indent with soft tabs. Use C-q <TAB> to insert real tabs
 (setq-default indent-tabs-mode nil)
 
-;; simplify GUI
+;; remove unused GUI elements
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(when (and (not (display-graphic-p)) (fboundp 'menu-bar-mode))
+(if (and (not (display-graphic-p)) (fboundp 'menu-bar-mode))
   (menu-bar-mode -1))
+
+;; smooth scrolling in GUI (hold shift for 5 lines, control for full screen)
+(if (display-graphic-p)
+    (setq mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control)))))
 
 ;; read-only comint-mode prompts
 (setq comint-prompt-read-only t)
@@ -54,7 +58,7 @@
 (defvar my-font-height (if (eq system-type 'darwin) 140 110))
 (defvar my-font-weight (if (eq system-type 'darwin) 'light 'regular))
 (defvar my-font-width 'normal)
-(when (and (display-graphic-p)
+(if (and (display-graphic-p)
            (and my-font (not (string= my-font "")))
            (x-list-fonts my-font))
   (set-face-attribute 'default nil
@@ -129,7 +133,6 @@
 
 (eval-when-compile
   (require 'use-package)
-  (require 'diminish)
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
@@ -241,18 +244,6 @@
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/navigation (:color amaranth :columns 4)
     "Navigation"
-    ("," backward-sexp "bkwd-sexp")
-    ("." forward-sexp "fwd-sexp")
-    ("[" backward-list "bkwd-list")
-    ("]" forward-list "fwd-list")
-    ("u" up-list "up-list")
-    ("d" down-list "down-list")
-    ("U" beginning-of-defun "beg-defun")
-    ("D" end-of-defun "end-defun")
-    ("(" backward-sentence "bkwd-sntc")
-    (")" forward-sentence "fwd-sntc")
-    ("{" backward-paragraph "bkwd-par")
-    ("}" forward-paragraph "fwd-par")
     ("S-SPC" scroll-down "page-up")
     ("SPC" scroll-up "pg-down")
     ("<" scroll-right "pg-left")
