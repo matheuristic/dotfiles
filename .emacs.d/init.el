@@ -112,6 +112,10 @@
 (dolist (project (directory-files site-lisp-dir t "\\w+"))
   (when (file-directory-p project) (add-to-list 'load-path project)))
 
+;; load local pre-init file ~/.emacs.d/init-local-pre.el
+(let ((local-f (expand-file-name "init-local-pre.el" user-emacs-directory)))
+  (if (file-exists-p local-f) (load-file local-f)))
+
 ;; use package.el with given ELPA-compatible package repositories
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -520,6 +524,12 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
         (with-eval-after-load 'go-mode
           (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)))))
 
+;; Vim Tagbar-like extension for imenu
+(use-package imenu-list
+  :bind ("C-c i" . imenu-list-smart-toggle)
+  :init (setq imenu-list-focus-after-activation t
+              imenu-list-auto-resize t))
+
 ;; Markdown
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
@@ -543,13 +553,16 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 
 ;; Python
 (when (executable-find "python")
-  (use-package elpy
-    :init (elpy-enable)
+  (use-package anaconda-mode
+    :commands anaconda-mode
+    :diminish anaconda-mode
+    :init
+    (add-hook 'python-mode-hook 'anaconda-mode)
+    (add-hook 'python-mode-hook 'eldoc-mode))
+  (use-package company-anaconda
     :config
-    (setq elpy-rpc-backend "jedi") ;; use jedi for Python autocompletion
-    (with-eval-after-load 'flycheck ;; use FlyCheck for Python syntax checking
-      (remove-hook 'elpy-modules 'elpy-module-flymake)
-      (add-hook 'elpy-mode-hook 'flycheck-mode)))
+    (with-eval-after-load 'company
+      (add-to-list 'company-backends 'company-anaconda)))
   (if (executable-find "jupyter")
       ;; IPython notebook client
       (use-package ein
@@ -564,9 +577,9 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 (use-package yaml-mode
   :mode ("\\.ya?ml\\'" . yaml-mode))
 
-;; load local init file ~/.emacs.d/init-local.el
-(let ((init-local-f (expand-file-name "init-local.el" user-emacs-directory)))
-  (if (file-exists-p init-local-f) (load-file init-local-f)))
+;; load local post-init file ~/.emacs.d/init-local-post.el
+(let ((local-f (expand-file-name "init-local-post.el" user-emacs-directory)))
+  (if (file-exists-p local-f) (load-file local-f)))
 
 (provide 'init)
 ;;; init.el ends here
