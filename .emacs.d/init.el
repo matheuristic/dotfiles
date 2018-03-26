@@ -116,7 +116,7 @@
 (let ((local-f (expand-file-name "init-local-pre.el" user-emacs-directory)))
   (if (file-exists-p local-f) (load-file local-f)))
 
-;; use package.el with ELPA-compatible package repositories
+;; use package.el with given ELPA-compatible package repositories
 (require 'package)
 (setq package-enable-at-startup nil)
 (setq package-archives
@@ -342,7 +342,7 @@
 ;; highlight FIXME, TODO, BUG in comments
 (use-package fic-mode
   :diminish fic-mode
-  :config (add-hook 'prog-mode-hook 'fic-mode))
+  :init (add-hook 'prog-mode-hook 'fic-mode))
 
 ;; syntax checker (Flymake alternative)
 (use-package flycheck
@@ -463,7 +463,6 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 
 ;; smart M-x enhancements
 (use-package smex
-  ;; bind over executed-extended-command
   :bind (("M-x" . smex)
          ("M-X" . smex-major-mode-commands))
   :config (smex-initialize))
@@ -508,11 +507,10 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 (when (executable-find "go")
   (use-package go-mode
     :commands go-mode
-    :config
+    :init
     (add-hook 'go-mode-hook (lambda () (setq tab-width 4)))
     (if (executable-find "goimports")
         (setq gofmt-command "goimports")))
-  ;; Go support for company
   (use-package company-go
     :config
     (with-eval-after-load 'company
@@ -520,7 +518,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   ;; Go guru, commands have prefix C-c C-o
   (if (executable-find "guru")
       (use-package go-guru
-        :config
+        :init
         (with-eval-after-load 'go-mode
           (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)))))
 
@@ -567,7 +565,9 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   (if (executable-find "pipenv")
       ;; pipenv porcelain
       (use-package pipenv
-        :init (add-hook 'python-mode-hook 'pipenv-mode)))
+        :init (add-hook 'python-mode-hook 'pipenv-mode)
+        :config
+        (define-key pipenv-mode-map (kbd "C-c C-p r") 'run-python)))
   (if (executable-find "jupyter")
       ;; Jupyter notebook client
       (use-package ein
