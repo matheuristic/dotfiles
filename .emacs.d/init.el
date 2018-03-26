@@ -332,7 +332,7 @@
   (setq company-selection-wrap-around t)
   (add-hook 'after-init-hook 'global-company-mode))
 
-;; copies environment variables from the shell
+;; copies environment variables from shell
 (use-package exec-path-from-shell
   :init
   ;; use only in Mac OS X GUI mode
@@ -565,9 +565,9 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   (if (executable-find "pipenv")
       ;; pipenv porcelain
       (use-package pipenv
+        :diminish pipenv-mode
         :init (add-hook 'python-mode-hook 'pipenv-mode)
-        :config
-        (define-key pipenv-mode-map (kbd "C-c C-p r") 'run-python)))
+        :config (define-key pipenv-mode-map (kbd "C-c C-p r") 'run-python)))
   (if (executable-find "jupyter")
       ;; Jupyter notebook client
       (use-package ein
