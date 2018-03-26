@@ -116,7 +116,7 @@
 (let ((local-f (expand-file-name "init-local-pre.el" user-emacs-directory)))
   (if (file-exists-p local-f) (load-file local-f)))
 
-;; use package.el with given ELPA-compatible package repositories
+;; use package.el with ELPA-compatible package repositories
 (require 'package)
 (setq package-enable-at-startup nil)
 (setq package-archives
@@ -189,6 +189,11 @@
   (define-key evil-normal-state-map (kbd "] l") 'next-error)
   (define-key evil-normal-state-map (kbd "[ n") 'diff-hunk-prev)
   (define-key evil-normal-state-map (kbd "] n") 'diff-hunk-next))
+
+;; emulates surround.vim ( https://github.com/tpope/vim-surround )
+(use-package evil-surround
+  :after evil
+  :init (global-evil-surround-mode 1))
 
 ;; framework for creating temporary or repeatable keybindings
 (use-package hydra
@@ -327,11 +332,6 @@
   (setq company-selection-wrap-around t)
   (add-hook 'after-init-hook 'global-company-mode))
 
-;; emulates surround.vim ( https://github.com/tpope/vim-surround )
-(use-package evil-surround
-  :after evil
-  :init (global-evil-surround-mode 1))
-
 ;; copies environment variables from the shell
 (use-package exec-path-from-shell
   :init
@@ -344,7 +344,7 @@
   :diminish fic-mode
   :config (add-hook 'prog-mode-hook 'fic-mode))
 
-;; syntax checker (alternative to Flymake)
+;; syntax checker (Flymake alternative)
 (use-package flycheck
   :diminish flycheck-mode
   :init (global-flycheck-mode)
@@ -451,7 +451,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 (use-package rainbow-delimiters
   :bind ("C-c r" . rainbow-delimiters-mode))
 
-;; list recently opened files
+;; recently opened files
 (use-package recentf
   :bind ("C-c F" . recentf-open-files)
   :init (recentf-mode t)
@@ -524,7 +524,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
         (with-eval-after-load 'go-mode
           (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)))))
 
-;; Vim Tagbar-like extension for imenu
+;; Vim Tagbar-like imenu extension
 (use-package imenu-list
   :bind ("C-c i" . imenu-list-smart-toggle)
   :init (setq imenu-list-focus-after-activation t
@@ -554,22 +554,27 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 ;; Python
 (when (executable-find "python")
   (use-package anaconda-mode
+    ;; requires python jedi package be installed
     :commands anaconda-mode
     :diminish anaconda-mode
     :init
     (add-hook 'python-mode-hook 'anaconda-mode)
-    (add-hook 'python-mode-hook 'eldoc-mode))
+    (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
   (use-package company-anaconda
     :config
     (with-eval-after-load 'company
       (add-to-list 'company-backends 'company-anaconda)))
+  (if (executable-find "pipenv")
+      ;; pipenv porcelain
+      (use-package pipenv
+        :init (add-hook 'python-mode-hook 'pipenv-mode)))
   (if (executable-find "jupyter")
-      ;; IPython notebook client
+      ;; Jupyter notebook client
       (use-package ein
         :config
-        ;; fancy prompts in IPython 5 or later don't work with Eshell
+        ;; fancy prompts in IPython don't work with Eshell
         (setq ein:console-args '("--simple-prompt"))
-        (with-eval-after-load 'elpy
+        (with-eval-after-load 'anaconda-mode
           (add-to-list 'python-shell-completion-native-disabled-interpreters
                        "jupyter")))))
 
