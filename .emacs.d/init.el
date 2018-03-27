@@ -576,12 +576,14 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   (if (executable-find "jupyter")
       ;; Jupyter notebook client
       (use-package ein
+        :commands ein:notebooklist-open
         :config
         ;; IPython fancy prompts don't work in Eshell
         (setq ein:console-args '("--simple-prompt"))
         (with-eval-after-load 'anaconda-mode
           (add-to-list 'python-shell-completion-native-disabled-interpreters
                        "jupyter"))
+        ;; hydra keybindings
         (with-eval-after-load 'hydra
           (defhydra my-hydra/ein (:color teal :hint nil)
             "
@@ -599,7 +601,7 @@ Worksheet  _h_/_l_     : prev/next        _H_/_L_     : move prev/next
 Notebook   _C-s_/_C-w_ : save/rename      _C-#_       : close
 
 Other      _t_         : toggle output    _C-l_/_C-L_ : clear cell/all output
-           _C-x_       : show traceback   _C-r/C-z_   : restart/stop kernel
+           _C-x_       : show traceback   _C-r_/_C-z_ : restart/stop kernel
            _C-/_       : open scratch     _C-o_       : open console
 
 "
