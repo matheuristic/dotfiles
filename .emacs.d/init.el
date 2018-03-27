@@ -25,7 +25,7 @@
 (setq show-paren-delay 0)
 (show-paren-mode t)
 
-;; indent with soft tabs. Use C-q <TAB> to insert real tabs
+;; indent with soft tabs. Use C-q <TAB> for real tabs
 (setq-default indent-tabs-mode nil)
 
 ;; remove unused GUI elements
@@ -59,8 +59,8 @@
 (defvar my-font-weight (if (eq system-type 'darwin) 'light 'regular))
 (defvar my-font-width 'normal)
 (if (and (display-graphic-p)
-           (and my-font (not (string= my-font "")))
-           (x-list-fonts my-font))
+         (and my-font (not (string= my-font "")))
+         (x-list-fonts my-font))
   (set-face-attribute 'default nil
                       :family my-font
                       :height my-font-height
@@ -69,8 +69,8 @@
 
 ;; use left Option key as Meta on Mac OS X
 (when (eq system-type 'darwin)
-  (setq mac-option-modifier 'meta)
-  (setq mac-right-option-modifier nil))
+  (setq mac-option-modifier 'meta
+        mac-right-option-modifier nil))
 
 (defun my-transpose-windows (selector)
   "Transpose buffers between current window and window after calling SELECTOR."
@@ -315,15 +315,15 @@
     ("+" text-scale-increase "in")
     ("0" (text-scale-adjust 0) "reset")
     ("q" nil "quit" :color blue))
+  (global-set-key (kbd "C-c D") 'my-hydra/desktop/body)
+  (global-set-key (kbd "C-c N") 'my-hydra/narrow/body)
+  (global-set-key (kbd "C-c S") 'my-hydra/search/body)
+  (global-set-key (kbd "C-c Z") 'my-hydra/zoom/body)
   (global-set-key (kbd "C-c b") 'my-hydra/buffer/body)
-  (global-set-key (kbd "C-c d") 'my-hydra/desktop/body)
   (global-set-key (kbd "C-c e") 'my-hydra/error/body)
   (global-set-key (kbd "C-c f") 'my-hydra/frame/body)
   (global-set-key (kbd "C-c n") 'my-hydra/navigation/body)
-  (global-set-key (kbd "C-c N") 'my-hydra/narrow/body)
-  (global-set-key (kbd "C-c s") 'my-hydra/search/body)
-  (global-set-key (kbd "C-c w") 'my-hydra/window/body)
-  (global-set-key (kbd "C-c z") 'my-hydra/zoom/body))
+  (global-set-key (kbd "C-c w") 'my-hydra/window/body))
 
 ;; text completion framework
 (use-package company
@@ -480,6 +480,11 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 ;; CSV
 (use-package csv-mode)
 
+;; Eldoc
+(use-package eldoc
+  :diminish eldoc-mode
+  :init (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
+
 ;; Eshell
 (use-package eshell
   :commands (eshell eshell-command)
@@ -540,19 +545,19 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   :bind (("C-c a" . org-agenda)
          ("C-c l" . org-store-link))
   :config
-  (setq org-agenda-start-on-weekday nil)
-  (setq org-catch-invisible-edits 'error)
-  (setq org-log-into-drawer t)
-  (setq org-todo-keywords
+  (setq org-agenda-start-on-weekday nil
+        org-catch-invisible-edits 'error
+        org-log-into-drawer t
+        org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-          (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANCELED(c@/!)")))
-  (setq org-use-fast-todo-selection t)
-  (setq org-use-speed-commands t))
+          (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANCELED(c@/!)"))
+        org-use-fast-todo-selection t
+        org-use-speed-commands t))
 
 ;; Python
 (when (executable-find "python")
   (use-package anaconda-mode
-    ;; requires python jedi package be installed
+    ;; requires python jedi be installed
     :commands anaconda-mode
     :diminish anaconda-mode
     :init
@@ -572,11 +577,77 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ;; Jupyter notebook client
       (use-package ein
         :config
-        ;; fancy prompts in IPython don't work with Eshell
+        ;; IPython fancy prompts don't work in Eshell
         (setq ein:console-args '("--simple-prompt"))
         (with-eval-after-load 'anaconda-mode
           (add-to-list 'python-shell-completion-native-disabled-interpreters
-                       "jupyter")))))
+                       "jupyter"))
+        (with-eval-after-load 'hydra
+          (defhydra my-hydra/ein (:color teal :hint nil)
+            "
+Emacs IPython Notebook
+
+Cell       _j_/_k_     : next/prev        _J_/_K_     : move down/up
+           _m_         : merge with prev  _o_/_O_     : insert below/above
+           _y_/_p_/_d_ : copy/paste/del   _s_         : split at point
+           _u_         : change type      _'_         : edit contents
+           _S-RET_     : run              _C-RET_     : run in-place
+
+Worksheet  _h_/_l_     : prev/next        _H_/_L_     : move prev/next
+           _1_.._9_    : first..last      _+_/_-_     : new/delete
+
+Notebook   _C-s_/_C-w_ : save/rename      _C-#_       : close
+
+Other      _t_         : toggle output    _C-l_/_C-L_ : clear cell/all output
+           _C-x_       : show traceback   _C-r/C-z_   : restart/stop kernel
+           _C-/_       : open scratch     _C-o_       : open console
+
+"
+            ("j"     ein:worksheet-goto-next-input)
+            ("k"     ein:worksheet-goto-prev-input)
+            ("J"     ein:worksheet-move-cell-down)
+            ("K"     ein:worksheet-move-cell-up)
+            ("m"     ein:worksheet-merge-cell)
+            ("o"     ein:worksheet-insert-cell-below)
+            ("O"     ein:worksheet-insert-cell-above)
+            ("y"     ein:worksheet-copy-cell)
+            ("p"     ein:worksheet-yank-cell)
+            ("d"     ein:worksheet-kill-cell)
+            ("s"     ein:worksheet-split-cell-at-point)
+            ("u"     ein:worksheet-change-cell-type)
+            ("'"     ein:edit-cell-contents)
+            ("S-RET" ein:worksheet-execute-cell-and-goto-next)
+            ("C-RET" ein:worksheet-execute-cell)
+            ("h"     ein:notebook-worksheet-open-prev-or-last)
+            ("l"     ein:notebook-worksheet-open-next-or-first)
+            ("H"     ein:notebook-worksheet-move-prev)
+            ("L"     ein:notebook-worksheet-move-next)
+            ("1"     ein:notebook-worksheet-open-1th)
+            ("2"     ein:notebook-worksheet-open-2th)
+            ("3"     ein:notebook-worksheet-open-3th)
+            ("4"     ein:notebook-worksheet-open-4th)
+            ("5"     ein:notebook-worksheet-open-5th)
+            ("6"     ein:notebook-worksheet-open-6th)
+            ("7"     ein:notebook-worksheet-open-7th)
+            ("8"     ein:notebook-worksheet-open-8th)
+            ("9"     ein:notebook-worksheet-open-last)
+            ("+"     ein:notebook-worksheet-insert-next)
+            ("-"     ein:notebook-worksheet-delete)
+            ("C-s"   ein:notebook-save-notebook-command)
+            ("C-w"   ein:notebook-rename-command)
+            ("C-#"   ein:notebook-close)
+            ("t"     ein:worksheet-toggle-output)
+            ("C-l"   ein:worksheet-clear-output)
+            ("C-L"   ein:worksheet-clear-all-output)
+            ("C-x"   ein:tb-show)
+            ("C-r"   ein:notebook-restart-kernel-command)
+            ("C-z"   ein:notebook-kernel-interrupt-command)
+            ("C-/"   ein:notebook-scratchsheet-open)
+            ("C-o"   ein:console-open)
+            ("q"     nil "quit" :color blue))
+          (define-key ein:notebook-multilang-mode-map (kbd "C-c H")
+            'my-hydra/ein/body)
+          ))))
 
 ;; YAML
 (use-package yaml-mode
