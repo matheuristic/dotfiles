@@ -364,7 +364,7 @@
     ;; bind over my-hydra/error
     (define-key flycheck-mode-map (kbd "C-c e") 'my-hydra/flycheck/body))
   (with-eval-after-load 'evil
-    ;; bind over bracket mappings for error navigation
+    ;; bind over error navigation bracket mappings
     (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
     (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error)))
 
@@ -447,10 +447,6 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("q"   nil "quit" :color blue))
     (define-key projectile-mode-map (kbd "C-c P") 'my-hydra/projectile/body)))
 
-;; colorize parentheses, brackets and braces according to depth
-(use-package rainbow-delimiters
-  :bind ("C-c r" . rainbow-delimiters-mode))
-
 ;; recently opened files
 (use-package recentf
   :bind ("C-c F" . recentf-open-files)
@@ -478,7 +474,19 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
     (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
 
 ;; CSV
-(use-package csv-mode)
+(use-package csv-mode
+  :config
+  (defhydra my-hydra/csv-mode (:color amaranth :columns 4)
+    "CSV mode"
+    ("s" csv-sort-fields "sort")
+    ("r" csv-sort-numeric-fields "numsort")
+    ("k" csv-kill-fields "cut")
+    ("y" csv-yank-fields "copy")
+    ("a" csv-align-fields "align")
+    ("u" csv-unalign-fields "unalign")
+    ("t" csv-transpose "transpose")
+    ("q" nil "quit" :color blue))
+  (define-key csv-mode-map (kbd "C-c M") 'my-hydra/csv-mode/body))
 
 ;; Eldoc
 (use-package eldoc
@@ -506,7 +514,8 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 (when (executable-find "git")
   (use-package magit
     :bind ("C-c g" . magit-status)
-    :config (setq vc-handled-backends (delq 'Git vc-handled-backends))))
+    :config
+    (setq vc-handled-backends (delq 'Git vc-handled-backends))))
 
 ;; Go
 (when (executable-find "go")
@@ -536,9 +545,51 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 ;; Markdown
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode) ;; Github-flavored markdown
-         ("\\.md\\'" . markdown-mode) ;; regular markdown
-         ("\\.markdown\\'" . markdown-mode)))
+  :mode (("README\\.md\\'" . gfm-mode) ;; Github-flavored
+         ("\\.md\\'" . markdown-mode)  ;; regular-flavored
+         ("\\.markdown\\'" . markdown-mode))
+  :init (use-package markdown-toc)  ;; table of contents builder
+  :config
+  (defhydra my-hydra/markdown-mode (:color teal :hint nil)
+    "
+Markdown mode
+
+Formatting  _b_ : bold      _i_ : italic    _c_ : code      _p_ : pre-formatted
+            _B_ : blockquote
+
+Headings    _h_ : automatic _1_.._4_ : h1..h4
+
+Move        _H_ : promote   _L_ : demote    _J_ : move down _K_ : move up
+
+Lists       _m_ : insert item
+
+Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
+            _T_ : table of contents
+
+"
+    ("b" markdown-insert-bold)
+    ("i" markdown-insert-italic)
+    ("c" markdown-insert-code)
+    ("p" markdown-insert-pre :color blue)
+    ("B" markdown-insert-blockquote :color blue)
+    ("h" markdown-insert-header-dwim)
+    ("1" markdown-insert-header-atx-1)
+    ("2" markdown-insert-header-atx-2)
+    ("3" markdown-insert-header-atx-3)
+    ("4" markdown-insert-header-atx-4)
+    ("m" markdown-insert-list-item)
+    ("H" markdown-promote)
+    ("L" markdown-demote)
+    ("J" markdown-move-down)
+    ("K" markdown-move-up)
+    ("l" markdown-insert-link :color blue)
+    ("u" markdown-insert-uri :color blue)
+    ("f" markdown-insert-footnote :color blue)
+    ("w" markdown-insert-wiki-link :color blue)
+    ("T" markdown-toc-generate-toc)
+    ("q" nil "quit" :color blue))
+  (define-key markdown-mode-map (kbd "C-c M") 'my-hydra/markdown-mode/body)
+  (define-key gfm-mode-map (kbd "C-c M") 'my-hydra/markdown-mode/body))
 
 ;; Org-mode
 (use-package org
@@ -552,7 +603,67 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
           (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANCELED(c@/!)"))
         org-use-fast-todo-selection t
-        org-use-speed-commands t))
+        org-use-speed-commands t)
+  (defhydra my-hydra/org-agenda (:color teal :hint nil)
+    "
+Org agenda
+
+Headline    _ht_  : set status   _hk_  : kill         _hr_  : refile
+            _hA_  : archive      _h:_  : set tags     _hp_  : set priority
+
+Visit Entry _SPC_ : other window _TAB_ : & go to loc  _RET_ : & del other wins
+            _o_   : link
+
+Date        _ds_  : schedule     _dd_  : set deadline _dt_  : timestanp
+            _+_   : do later     _-_   : do earlier
+
+View        _vd_  : day          _vw_  : week         _vm_  : month
+            _vn_  : next span    _vp_  : prev span    _vr_  : reset
+
+Filter      _ft_  : by tag       _fc_  : by category  _fh_  : by top headline
+            _fx_  : by regex     _fd_  : reset
+
+Clock       _ci_  : in           _co_  : out          _cq_  : cancel
+            _cg_  : goto
+
+Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
+
+"
+    ("ht" org-agenda-todo)
+    ("hk" org-agenda-kill)
+    ("hr" org-agenda-refile)
+    ("hA" org-agenda-archive-default)
+    ("h:" org-agenda-set-tags)
+    ("hp" org-agenda-priority)
+    ("SPC" org-agenda-show-and-scroll-up)
+    ("TAB" org-agenda-goto :exit t)
+    ("RET" org-agenda-switch-to :exit t)
+    ("o"   link-hint-open-link :exit t)
+    ("ds" org-agenda-schedule)
+    ("dd" org-agenda-deadline)
+    ("dt" org-agenda-date-prompt)
+    ("+" org-agenda-do-date-later)
+    ("-" org-agenda-do-date-earlier)
+    ("vd" org-agenda-day-view)
+    ("vw" org-agenda-week-view)
+    ("vm" org-agenda-month-view)
+    ("vn" org-agenda-later)
+    ("vp" org-agenda-earlier)
+    ("vr" org-agenda-reset-view)
+    ("ft" org-agenda-filter-by-tag)
+    ("fc" org-agenda-filter-by-category)
+    ("fh" org-agenda-filter-by-top-headline)
+    ("fx" org-agenda-filter-by-regexp)
+    ("fd" org-agenda-filter-remove-all)
+    ("ci" org-agenda-clock-in :exit t)
+    ("co" org-agenda-clock-out)
+    ("cq" org-agenda-clock-cancel)
+    ("cg" org-agenda-clock-goto :exit t)
+    ("gr" org-agenda-redo)
+    ("gd" org-agenda-goto-date)
+    ("." org-agenda-goto-today)
+    ("q" nil "quit" :color blue))
+  (define-key org-agenda-mode-map (kbd "C-c M") 'my-hydra/org-agenda/body))
 
 ;; Python
 (when (executable-find "python")
@@ -583,11 +694,10 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
         (with-eval-after-load 'anaconda-mode
           (add-to-list 'python-shell-completion-native-disabled-interpreters
                        "jupyter"))
-        ;; hydra keybindings
         (with-eval-after-load 'hydra
           (defhydra my-hydra/ein (:color teal :hint nil)
             "
-Emacs IPython Notebook
+Emacs IPython Notebook mode
 
 Cell       _j_/_k_     : next/prev        _J_/_K_     : move down/up
            _m_         : merge with prev  _o_/_O_     : insert below/above
@@ -647,9 +757,8 @@ Other      _t_         : toggle output    _C-l_/_C-L_ : clear cell/all output
             ("C-/"   ein:notebook-scratchsheet-open)
             ("C-o"   ein:console-open)
             ("q"     nil "quit" :color blue))
-          (define-key ein:notebook-multilang-mode-map (kbd "C-c H")
-            'my-hydra/ein/body)
-          ))))
+          (define-key ein:notebook-multilang-mode-map (kbd "C-c M")
+            'my-hydra/ein/body)))))
 
 ;; YAML
 (use-package yaml-mode
