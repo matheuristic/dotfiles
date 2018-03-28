@@ -34,7 +34,7 @@
 (if (and (not (display-graphic-p)) (fboundp 'menu-bar-mode))
   (menu-bar-mode -1))
 
-;; smooth scrolling in GUI (hold shift for 5 lines, control for full screen)
+;; smooth scrolling in GUI (hold shift/control for 5 lines/full screen)
 (if (display-graphic-p)
     (setq mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control)))))
 
@@ -169,8 +169,6 @@
   ;; make tabs in insert mode work like Vim
   (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
   ;; useful bracket mappings like in vim-unimpaired
-  (define-key evil-normal-state-map (kbd "[ b") 'previous-buffer)
-  (define-key evil-normal-state-map (kbd "] b") 'next-buffer)
   (define-key evil-normal-state-map (kbd "[ e")
     (lambda (n) (interactive "p")
       (dotimes (_ n)
@@ -282,7 +280,7 @@
     ("rs" query-replace "replace string")
     ("rr" query-replace-regexp "replace regexp")
     ("kg" kill-grep "kill-grep")
-    ("q"  nil "quit"))
+    ("q" nil "quit"))
   (defhydra my-hydra/window (:color amaranth :columns 4)
     "Window"
     ("n" next-multiframe-window "next")
@@ -344,7 +342,7 @@
   :diminish fic-mode
   :init (add-hook 'prog-mode-hook 'fic-mode))
 
-;; syntax checker (Flymake alternative)
+;; syntax checker (replaces Flymake)
 (use-package flycheck
   :diminish flycheck-mode
   :init (global-flycheck-mode)
@@ -421,30 +419,30 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
         _cx_  : remove known project      _cX_  : cleanup known projects
 
 "
-      ("bb"  projectile-switch-to-buffer)
-      ("bi"  projectile-ibuffer)
-      ("bk"  projectile-kill-buffers)
-      ("bo"  projectile-switch-to-buffer-other-window)
-      ("ff"  projectile-find-file)
-      ("fw"  projectile-find-file-dwim)
-      ("fd"  projectile-find-file-in-directory)
-      ("fp"  projectile-find-file-in-known-projects)
+      ("bb" projectile-switch-to-buffer)
+      ("bi" projectile-ibuffer)
+      ("bk" projectile-kill-buffers)
+      ("bo" projectile-switch-to-buffer-other-window)
+      ("ff" projectile-find-file)
+      ("fw" projectile-find-file-dwim)
+      ("fd" projectile-find-file-in-directory)
+      ("fp" projectile-find-file-in-known-projects)
       ("fof" projectile-find-file-other-window)
       ("fow" projectile-find-file-dwim-other-window)
-      ("fr"  projectile-recentf)
-      ("dd"  projectile-find-dir)
-      ("do"  projectile-find-dir-other-window)
-      ("sg"  projectile-grep)
-      ("so"  projectile-multi-occur)
-      ("rs"  projectile-replace)
-      ("rr"  projectile-replace-regexp)
-      ("cc"  projectile-cache-current-file)
-      ("cC"  projectile-invalidate-cache)
-      ("cx"  projectile-remove-known-project)
-      ("cX"  projectile-cleanup-known-projects)
-      ("C"   projectile-compile-project "compile")
-      ("p"   projectile-switch-project "switch project")
-      ("q"   nil "quit" :color blue))
+      ("fr" projectile-recentf)
+      ("dd" projectile-find-dir)
+      ("do" projectile-find-dir-other-window)
+      ("sg" projectile-grep)
+      ("so" projectile-multi-occur)
+      ("rs" projectile-replace)
+      ("rr" projectile-replace-regexp)
+      ("cc" projectile-cache-current-file)
+      ("cC" projectile-invalidate-cache)
+      ("cx" projectile-remove-known-project)
+      ("cX" projectile-cleanup-known-projects)
+      ("C" projectile-compile-project "compile")
+      ("p" projectile-switch-project "switch project")
+      ("q" nil "quit" :color blue))
     (define-key projectile-mode-map (kbd "C-c P") 'my-hydra/projectile/body)))
 
 ;; recently opened files
@@ -475,6 +473,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 
 ;; CSV
 (use-package csv-mode
+  :commands csv-mode
   :config
   (defhydra my-hydra/csv-mode (:color amaranth :columns 4)
     "CSV mode"
@@ -526,12 +525,14 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
     (if (executable-find "goimports")
         (setq gofmt-command "goimports")))
   (use-package company-go
+    :after go-mode
     :config
     (with-eval-after-load 'company
       (add-to-list 'company-backends 'company-go)))
   ;; Go guru, commands have prefix C-c C-o
   (if (executable-find "guru")
       (use-package go-guru
+        :after go-mode
         :init
         (with-eval-after-load 'go-mode
           (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)))))
@@ -545,10 +546,10 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 ;; Markdown
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode) ;; Github-flavored
-         ("\\.md\\'" . markdown-mode)  ;; regular-flavored
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init (use-package markdown-toc)  ;; table of contents builder
+  :init (use-package markdown-toc)  ;; Markdown table of contents
   :config
   (defhydra my-hydra/markdown-mode (:color teal :hint nil)
     "
@@ -596,6 +597,7 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
   :bind (("C-c a" . org-agenda)
          ("C-c l" . org-store-link))
   :config
+  (require 'org-agenda)
   (setq org-agenda-start-on-weekday nil
         org-catch-invisible-edits 'error
         org-log-into-drawer t
@@ -615,7 +617,6 @@ Visit Entry _SPC_ : other window _TAB_ : & go to loc  _RET_ : & del other wins
             _o_   : link
 
 Date        _ds_  : schedule     _dd_  : set deadline _dt_  : timestanp
-            _+_   : do later     _-_   : do earlier
 
 View        _vd_  : day          _vw_  : week         _vm_  : month
             _vn_  : next span    _vp_  : prev span    _vr_  : reset
@@ -638,12 +639,10 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("SPC" org-agenda-show-and-scroll-up)
     ("TAB" org-agenda-goto :exit t)
     ("RET" org-agenda-switch-to :exit t)
-    ("o"   link-hint-open-link :exit t)
+    ("o" link-hint-open-link :exit t)
     ("ds" org-agenda-schedule)
     ("dd" org-agenda-deadline)
     ("dt" org-agenda-date-prompt)
-    ("+" org-agenda-do-date-later)
-    ("-" org-agenda-do-date-earlier)
     ("vd" org-agenda-day-view)
     ("vw" org-agenda-week-view)
     ("vm" org-agenda-month-view)
@@ -675,12 +674,14 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     (add-hook 'python-mode-hook 'anaconda-mode)
     (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
   (use-package company-anaconda
+    :after anaconda-mode
     :config
     (with-eval-after-load 'company
       (add-to-list 'company-backends 'company-anaconda)))
   (if (executable-find "pipenv")
       ;; pipenv porcelain
       (use-package pipenv
+        :after anaconda-mode
         :diminish pipenv-mode
         :init (add-hook 'python-mode-hook 'pipenv-mode)
         :config (define-key pipenv-mode-map (kbd "C-c C-p r") 'run-python)))
@@ -715,53 +716,54 @@ Other      _t_         : toggle output    _C-l_/_C-L_ : clear cell/all output
            _C-/_       : open scratch     _C-o_       : open console
 
 "
-            ("j"     ein:worksheet-goto-next-input)
-            ("k"     ein:worksheet-goto-prev-input)
-            ("J"     ein:worksheet-move-cell-down)
-            ("K"     ein:worksheet-move-cell-up)
-            ("m"     ein:worksheet-merge-cell)
-            ("o"     ein:worksheet-insert-cell-below)
-            ("O"     ein:worksheet-insert-cell-above)
-            ("y"     ein:worksheet-copy-cell)
-            ("p"     ein:worksheet-yank-cell)
-            ("d"     ein:worksheet-kill-cell)
-            ("s"     ein:worksheet-split-cell-at-point)
-            ("u"     ein:worksheet-change-cell-type)
-            ("'"     ein:edit-cell-contents)
+            ("j" ein:worksheet-goto-next-input)
+            ("k" ein:worksheet-goto-prev-input)
+            ("J" ein:worksheet-move-cell-down)
+            ("K" ein:worksheet-move-cell-up)
+            ("m" ein:worksheet-merge-cell)
+            ("o" ein:worksheet-insert-cell-below)
+            ("O" ein:worksheet-insert-cell-above)
+            ("y" ein:worksheet-copy-cell)
+            ("p" ein:worksheet-yank-cell)
+            ("d" ein:worksheet-kill-cell)
+            ("s" ein:worksheet-split-cell-at-point)
+            ("u" ein:worksheet-change-cell-type)
+            ("'" ein:edit-cell-contents)
             ("S-RET" ein:worksheet-execute-cell-and-goto-next)
             ("C-RET" ein:worksheet-execute-cell)
-            ("h"     ein:notebook-worksheet-open-prev-or-last)
-            ("l"     ein:notebook-worksheet-open-next-or-first)
-            ("H"     ein:notebook-worksheet-move-prev)
-            ("L"     ein:notebook-worksheet-move-next)
-            ("1"     ein:notebook-worksheet-open-1th)
-            ("2"     ein:notebook-worksheet-open-2th)
-            ("3"     ein:notebook-worksheet-open-3th)
-            ("4"     ein:notebook-worksheet-open-4th)
-            ("5"     ein:notebook-worksheet-open-5th)
-            ("6"     ein:notebook-worksheet-open-6th)
-            ("7"     ein:notebook-worksheet-open-7th)
-            ("8"     ein:notebook-worksheet-open-8th)
-            ("9"     ein:notebook-worksheet-open-last)
-            ("+"     ein:notebook-worksheet-insert-next)
-            ("-"     ein:notebook-worksheet-delete)
-            ("C-s"   ein:notebook-save-notebook-command)
-            ("C-w"   ein:notebook-rename-command)
-            ("C-#"   ein:notebook-close)
-            ("t"     ein:worksheet-toggle-output)
-            ("C-l"   ein:worksheet-clear-output)
-            ("C-L"   ein:worksheet-clear-all-output)
-            ("C-x"   ein:tb-show)
-            ("C-r"   ein:notebook-restart-kernel-command)
-            ("C-z"   ein:notebook-kernel-interrupt-command)
-            ("C-/"   ein:notebook-scratchsheet-open)
-            ("C-o"   ein:console-open)
-            ("q"     nil "quit" :color blue))
+            ("h" ein:notebook-worksheet-open-prev-or-last)
+            ("l" ein:notebook-worksheet-open-next-or-first)
+            ("H" ein:notebook-worksheet-move-prev)
+            ("L" ein:notebook-worksheet-move-next)
+            ("1" ein:notebook-worksheet-open-1th)
+            ("2" ein:notebook-worksheet-open-2th)
+            ("3" ein:notebook-worksheet-open-3th)
+            ("4" ein:notebook-worksheet-open-4th)
+            ("5" ein:notebook-worksheet-open-5th)
+            ("6" ein:notebook-worksheet-open-6th)
+            ("7" ein:notebook-worksheet-open-7th)
+            ("8" ein:notebook-worksheet-open-8th)
+            ("9" ein:notebook-worksheet-open-last)
+            ("+" ein:notebook-worksheet-insert-next)
+            ("-" ein:notebook-worksheet-delete)
+            ("C-s" ein:notebook-save-notebook-command)
+            ("C-w" ein:notebook-rename-command)
+            ("C-#" ein:notebook-close)
+            ("t" ein:worksheet-toggle-output)
+            ("C-l" ein:worksheet-clear-output)
+            ("C-L" ein:worksheet-clear-all-output)
+            ("C-x" ein:tb-show)
+            ("C-r" ein:notebook-restart-kernel-command)
+            ("C-z" ein:notebook-kernel-interrupt-command)
+            ("C-/" ein:notebook-scratchsheet-open)
+            ("C-o" ein:console-open)
+            ("q" nil "quit" :color blue))
           (define-key ein:notebook-multilang-mode-map (kbd "C-c M")
             'my-hydra/ein/body)))))
 
 ;; YAML
 (use-package yaml-mode
+  :commands yaml-mode
   :mode ("\\.ya?ml\\'" . yaml-mode))
 
 ;; load local post-init file ~/.emacs.d/init-local-post.el
