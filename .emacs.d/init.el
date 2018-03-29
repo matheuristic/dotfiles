@@ -475,7 +475,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 (use-package csv-mode
   :commands csv-mode
   :config
-  (defhydra my-hydra/csv-mode (:color amaranth :columns 4)
+  (defhydra my-hydra/csv-mode (:color teal :columns 4)
     "CSV mode"
     ("s" csv-sort-fields "sort")
     ("r" csv-sort-numeric-fields "numsort")
@@ -562,8 +562,6 @@ Headings    _h_ : automatic _1_.._4_ : h1..h4
 
 Move        _H_ : promote   _L_ : demote    _J_ : move down _K_ : move up
 
-Lists       _m_ : insert item
-
 Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
             _T_ : table of contents
 
@@ -571,22 +569,21 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
     ("b" markdown-insert-bold)
     ("i" markdown-insert-italic)
     ("c" markdown-insert-code)
-    ("p" markdown-insert-pre :color blue)
-    ("B" markdown-insert-blockquote :color blue)
+    ("p" markdown-insert-pre)
+    ("B" markdown-insert-blockquote)
     ("h" markdown-insert-header-dwim)
     ("1" markdown-insert-header-atx-1)
     ("2" markdown-insert-header-atx-2)
     ("3" markdown-insert-header-atx-3)
     ("4" markdown-insert-header-atx-4)
-    ("m" markdown-insert-list-item)
-    ("H" markdown-promote)
-    ("L" markdown-demote)
-    ("J" markdown-move-down)
-    ("K" markdown-move-up)
-    ("l" markdown-insert-link :color blue)
-    ("u" markdown-insert-uri :color blue)
-    ("f" markdown-insert-footnote :color blue)
-    ("w" markdown-insert-wiki-link :color blue)
+    ("H" markdown-promote :color red)
+    ("L" markdown-demote :color red)
+    ("J" markdown-move-down :color red)
+    ("K" markdown-move-up :color red)
+    ("l" markdown-insert-link)
+    ("u" markdown-insert-uri)
+    ("f" markdown-insert-footnote)
+    ("w" markdown-insert-wiki-link)
     ("T" markdown-toc-generate-toc)
     ("q" nil "quit" :color blue))
   (define-key markdown-mode-map (kbd "C-c M") 'my-hydra/markdown-mode/body)
@@ -606,7 +603,7 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
           (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANCELED(c@/!)"))
         org-use-fast-todo-selection t
         org-use-speed-commands t)
-  (defhydra my-hydra/org-agenda (:color teal :hint nil)
+  (defhydra my-hydra/org-agenda (:color amaranth :hint nil)
     "
 Org agenda
 
@@ -637,9 +634,9 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("h:" org-agenda-set-tags)
     ("hp" org-agenda-priority)
     ("SPC" org-agenda-show-and-scroll-up)
-    ("TAB" org-agenda-goto :exit t)
-    ("RET" org-agenda-switch-to :exit t)
-    ("o" link-hint-open-link :exit t)
+    ("TAB" org-agenda-goto :color blue)
+    ("RET" org-agenda-switch-to :color blue)
+    ("o" link-hint-open-link :color blue)
     ("ds" org-agenda-schedule)
     ("dd" org-agenda-deadline)
     ("dt" org-agenda-date-prompt)
@@ -654,10 +651,10 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("fh" org-agenda-filter-by-top-headline)
     ("fx" org-agenda-filter-by-regexp)
     ("fd" org-agenda-filter-remove-all)
-    ("ci" org-agenda-clock-in :exit t)
+    ("ci" org-agenda-clock-in :color blue)
     ("co" org-agenda-clock-out)
     ("cq" org-agenda-clock-cancel)
-    ("cg" org-agenda-clock-goto :exit t)
+    ("cg" org-agenda-clock-goto :color blue)
     ("gr" org-agenda-redo)
     ("gd" org-agenda-goto-date)
     ("." org-agenda-goto-today)
@@ -696,23 +693,23 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
           (add-to-list 'python-shell-completion-native-disabled-interpreters
                        "jupyter"))
         (with-eval-after-load 'hydra
-          (defhydra my-hydra/ein (:color teal :hint nil)
+          (defhydra my-hydra/ein (:color amaranth :hint nil)
             "
 Emacs IPython Notebook mode
 
-Cell       _j_/_k_     : next/prev        _J_/_K_     : move down/up
-           _m_         : merge with prev  _o_/_O_     : insert below/above
-           _y_/_p_/_d_ : copy/paste/del   _s_         : split at point
+Cell       _j_/_k_       : next/prev        _J_/_K_       : move down/up
+           _m_         : merge with prev  _o_/_O_       : insert below/above
+           _y_/_p_/_d_     : copy/paste/del   _s_         : split at point
            _u_         : change type      _'_         : edit contents
-           _S-RET_     : run              _C-RET_     : run in-place
+           _RET_       : run              _M-RET_     : run in-place
 
-Worksheet  _h_/_l_     : prev/next        _H_/_L_     : move prev/next
-           _1_.._9_    : first..last      _+_/_-_     : new/delete
+Worksheet  _h_/_l_       : prev/next        _H_/_L_       : move prev/next
+           _1_.._9_      : first..last      _+_/_-_       : new/delete
 
-Notebook   _C-s_/_C-w_ : save/rename      _C-#_       : close
+Notebook   _C-s_/_C-w_   : save/rename      _C-#_       : close
 
-Other      _t_         : toggle output    _C-l_/_C-L_ : clear cell/all output
-           _C-x_       : show traceback   _C-r_/_C-z_ : restart/stop kernel
+Other      _t_         : toggle output    _C-l_/_C-L_   : clear cell/all output
+           _C-x_       : show traceback   _C-r_/_C-z_   : restart/stop kernel
            _C-/_       : open scratch     _C-o_       : open console
 
 "
@@ -728,9 +725,9 @@ Other      _t_         : toggle output    _C-l_/_C-L_ : clear cell/all output
             ("d" ein:worksheet-kill-cell)
             ("s" ein:worksheet-split-cell-at-point)
             ("u" ein:worksheet-change-cell-type)
-            ("'" ein:edit-cell-contents)
-            ("S-RET" ein:worksheet-execute-cell-and-goto-next)
-            ("C-RET" ein:worksheet-execute-cell)
+            ("'" ein:edit-cell-contents :color blue)
+            ("RET" ein:worksheet-execute-cell-and-goto-next)
+            ("M-RET" ein:worksheet-execute-cell)
             ("h" ein:notebook-worksheet-open-prev-or-last)
             ("l" ein:notebook-worksheet-open-next-or-first)
             ("H" ein:notebook-worksheet-move-prev)
@@ -746,20 +743,21 @@ Other      _t_         : toggle output    _C-l_/_C-L_ : clear cell/all output
             ("9" ein:notebook-worksheet-open-last)
             ("+" ein:notebook-worksheet-insert-next)
             ("-" ein:notebook-worksheet-delete)
-            ("C-s" ein:notebook-save-notebook-command)
-            ("C-w" ein:notebook-rename-command)
-            ("C-#" ein:notebook-close)
+            ("C-s" ein:notebook-save-notebook-command :color blue)
+            ("C-w" ein:notebook-rename-command :color blue)
+            ("C-#" ein:notebook-close :color blue)
             ("t" ein:worksheet-toggle-output)
             ("C-l" ein:worksheet-clear-output)
             ("C-L" ein:worksheet-clear-all-output)
             ("C-x" ein:tb-show)
             ("C-r" ein:notebook-restart-kernel-command)
             ("C-z" ein:notebook-kernel-interrupt-command)
-            ("C-/" ein:notebook-scratchsheet-open)
-            ("C-o" ein:console-open)
+            ("C-/" ein:notebook-scratchsheet-open :color blue)
+            ("C-o" ein:console-open :color blue)
             ("q" nil "quit" :color blue))
-          (define-key ein:notebook-multilang-mode-map (kbd "C-c M")
-            'my-hydra/ein/body)))))
+          (with-eval-after-load 'ein-notebooklist
+            (define-key ein:notebook-mode-map (kbd "C-c M")
+              'my-hydra/ein/body))))))
 
 ;; YAML
 (use-package yaml-mode
