@@ -327,7 +327,8 @@
 (use-package company
   :diminish company-mode
   :init
-  (setq company-selection-wrap-around t)
+  (setq company-selection-wrap-around t
+        company-dabbrev-downcase nil)
   (add-hook 'after-init-hook 'global-company-mode))
 
 ;; copies environment variables from shell
