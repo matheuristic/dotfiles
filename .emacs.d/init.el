@@ -338,11 +338,6 @@
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
 
-;; highlight FIXME, TODO, BUG in comments
-(use-package fic-mode
-  :diminish fic-mode
-  :init (add-hook 'prog-mode-hook 'fic-mode))
-
 ;; syntax checker (replaces Flymake)
 (use-package flycheck
   :diminish flycheck-mode
@@ -759,6 +754,10 @@ Other      _t_         : toggle output    _C-l_/_C-L_   : clear cell/all output
           (with-eval-after-load 'ein-notebooklist
             (define-key ein:notebook-mode-map (kbd "C-c M")
               'my-hydra/ein/body))))))
+
+;; Visit large files without loading it entirely
+(use-package vlf
+  :config (require 'vlf-setup))
 
 ;; YAML
 (use-package yaml-mode
