@@ -509,7 +509,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 (when (executable-find "git")
   (use-package magit
     :bind ("C-c g" . magit-status)
-    :config
+    :init
     (setq vc-handled-backends (delq 'Git vc-handled-backends))))
 
 ;; Go
