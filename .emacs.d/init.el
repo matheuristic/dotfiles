@@ -598,7 +598,9 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
           (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANCELED(c@/!)"))
         org-use-fast-todo-selection t
-        org-use-speed-commands t)
+        org-use-speed-commands t
+        org-startup-indented t)
+  (add-hook 'org-mode-hook #'visual-line-mode)
   (defhydra my-hydra/org-agenda (:color amaranth :hint nil)
     "
 Org agenda
