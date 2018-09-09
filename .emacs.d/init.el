@@ -98,7 +98,7 @@
                  (* y (/ (x-display-pixel-height) 100))))
 
 ;; regenerate outdated bytecode
-(setq load-prefer-newer t)
+;(setq load-prefer-newer t)
 
 ;; user packages in ~/.emacs.d/lisp
 (defvar lisp-dir (expand-file-name "lisp" user-emacs-directory))
@@ -673,13 +673,6 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     :config
     (with-eval-after-load 'company
       (add-to-list 'company-backends 'company-anaconda)))
-  (if (executable-find "pipenv")
-      ;; pipenv porcelain
-      (use-package pipenv
-        :after anaconda-mode
-        :diminish pipenv-mode
-        :init (add-hook 'python-mode-hook 'pipenv-mode)
-        :config (define-key pipenv-mode-map (kbd "C-c C-p r") 'run-python)))
   (if (executable-find "jupyter")
       ;; Jupyter notebook client
       (use-package ein
