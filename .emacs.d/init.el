@@ -331,12 +331,12 @@
         company-dabbrev-downcase nil)
   (add-hook 'after-init-hook 'global-company-mode))
 
-;; copies environment variables from shell
-(use-package exec-path-from-shell
-  :init
-  ;; use only in Mac OS X GUI mode
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-initialize)))
+;; copies environment variables from shell (Mac OS X GUI mode only)
+(when (eq system-type 'darwin)
+  (use-package exec-path-from-shell
+    :init
+    (when (memq window-system '(mac ns))
+      (exec-path-from-shell-initialize))))
 
 ;; syntax checker (replaces Flymake)
 (use-package flycheck
