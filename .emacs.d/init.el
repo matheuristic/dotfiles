@@ -226,8 +226,8 @@
     ("q" nil "quit" :color blue))
   (defhydra my-hydra/frame (:color amaranth :columns 4)
     "Frame"
-    ("p" ns-prev-frame "previous")
-    ("n" ns-next-frame "next")
+    ("p" (other-frame -1) "previous")
+    ("n" other-frame "next")
     ("s" select-frame-by-name "select")
     ("M" toggle-frame-maximized "maximize")
     ("+" (lambda (n) (interactive "p") (my-enlarge-frame 0 n)) "enlarge-v")
