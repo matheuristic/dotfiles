@@ -122,11 +122,13 @@
 (setq package-archives
       '(("GNU ELPA"     . "http://elpa.gnu.org/packages/")
         ("MELPA Stable" . "https://stable.melpa.org/packages/")
-        ("MELPA"        . "https://melpa.org/packages/"))
+        ;;("MELPA"        . "https://melpa.org/packages/")
+       )
       package-archive-priorities
       '(("GNU ELPA"     . 10)
         ("MELPA Stable" . 5)
-        ("MELPA"        . 0)))
+        ;;("MELPA"        . 0)
+       ))
 
 (package-initialize)
 
@@ -140,7 +142,7 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
-;; extensible vi layer for Emacs
+;; extensible vi layer for Emacs - MELPA Stable
 (use-package evil
   :init
   ;; use C-z to toggle between Evil and Emacs bindings, C-x C-z to suspend
@@ -188,12 +190,13 @@
   (define-key evil-normal-state-map (kbd "[ n") 'diff-hunk-prev)
   (define-key evil-normal-state-map (kbd "] n") 'diff-hunk-next))
 
-;; emulates surround.vim ( https://github.com/tpope/vim-surround )
+;; emulates surround.vim - MELPA Stable
+;; ( https://github.com/tpope/vim-surround )
 (use-package evil-surround
   :after evil
   :init (global-evil-surround-mode 1))
 
-;; framework for creating temporary or repeatable keybindings
+;; framework for temporary or repeatable keybindings - MELPA Stable
 (use-package hydra
   :config
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
@@ -323,7 +326,7 @@
   (global-set-key (kbd "C-c n") 'my-hydra/navigation/body)
   (global-set-key (kbd "C-c w") 'my-hydra/window/body))
 
-;; text completion framework
+;; text completion framework - MELPA Stable
 (use-package company
   :diminish company-mode
   :init
@@ -331,14 +334,14 @@
         company-dabbrev-downcase nil)
   (add-hook 'after-init-hook 'global-company-mode))
 
-;; copies environment variables from shell (Mac OS X GUI mode only)
-(when (eq system-type 'darwin)
+;; copies env vars from shell - MELPA Stable
+(when (eq system-type 'darwin)  ;; only for Mac OS X GUI mode
   (use-package exec-path-from-shell
     :init
     (when (memq window-system '(mac ns))
       (exec-path-from-shell-initialize))))
 
-;; syntax checker (replaces Flymake)
+;; syntax checker (replaces Flymake) - MELPA Stable
 (use-package flycheck
   :diminish flycheck-mode
   :init (global-flycheck-mode)
@@ -362,18 +365,18 @@
     (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
     (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error)))
 
-;; color scheme
+;; color scheme - MELPA Stable
 (use-package gruvbox-theme
   :config (load-theme 'gruvbox t))
 
-;; advanced buffer menu
+;; advanced buffer menu - built-in
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer)
   :config
   (with-eval-after-load 'evil
     (evil-leader-set-key-normal "B" 'ibuffer)))
 
-;; interactively do things with buffers and files
+;; interactively do things with buffers and files - built-in
 ;; new files should be created without ido using C-x C-f C-f
 (use-package ido
   :init
@@ -384,11 +387,11 @@
         ido-use-virtual-buffers t)
   (ido-mode t))
 
-;; replaces stock completion with ido wherever possible
+;; replaces stock completion with ido wherever possible - MELPA Stable
 (use-package ido-completing-read+
   :init (ido-ubiquitous-mode t))
 
-;; project interaction library
+;; project interaction library - MELPA Stable
 (use-package projectile
   :init (projectile-global-mode)
   :config
@@ -441,7 +444,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("q" nil "quit" :color blue))
     (define-key projectile-mode-map (kbd "C-c P") 'my-hydra/projectile/body)))
 
-;; recently opened files
+;; recently opened files - built-in
 (use-package recentf
   :bind ("C-c F" . recentf-open-files)
   :init (recentf-mode t)
@@ -451,13 +454,13 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   (with-eval-after-load 'evil
     (evil-leader-set-key-normal "F" 'recentf-open-files)))
 
-;; smart M-x enhancements
+;; smart M-x enhancements - MELPA Stable
 (use-package smex
   :bind (("M-x" . smex)
          ("M-X" . smex-major-mode-commands))
   :config (smex-initialize))
 
-;; traverse undo history as a tree
+;; traverse undo history as a tree - GNU ELPA
 (use-package undo-tree
   :diminish undo-tree-mode
   :bind ("C-c u" . undo-tree-visualize)
@@ -467,7 +470,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
     (setq evil-want-fine-undo t)
     (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
 
-;; CSV
+;; CSV - GNU ELPA
 (use-package csv-mode
   :commands csv-mode
   :config
@@ -483,12 +486,12 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
     ("q" nil "quit" :color blue))
   (define-key csv-mode-map (kbd "C-c M") 'my-hydra/csv-mode/body))
 
-;; Eldoc
+;; Eldoc - built-in
 (use-package eldoc
   :diminish eldoc-mode
   :init (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
 
-;; Eshell
+;; Eshell - built-in
 (use-package eshell
   :commands (eshell eshell-command)
   :init
@@ -505,14 +508,14 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   (add-to-list 'eshell-visual-subcommands '("git" "log" "diff" "show"))
   (add-to-list 'eshell-visual-subcommands '("vagrant" "ssh")))
 
-;; Git
+;; Git - MELPA Stable
 (when (executable-find "git")
   (use-package magit
     :bind ("C-c g" . magit-status)
     :init
     (setq vc-handled-backends (delq 'Git vc-handled-backends))))
 
-;; Go
+;; Go - MELPA Stable (all packages)
 (when (executable-find "go")
   (use-package go-mode
     :commands go-mode
@@ -533,13 +536,13 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
         (with-eval-after-load 'go-mode
           (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)))))
 
-;; Vim Tagbar-like imenu extension
+;; Vim Tagbar-like imenu extension - MELPA Stable
 (use-package imenu-list
   :bind ("C-c i" . imenu-list-smart-toggle)
   :init (setq imenu-list-focus-after-activation t
               imenu-list-auto-resize t))
 
-;; Markdown
+;; Markdown - MELPA Stable
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
@@ -585,7 +588,7 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
   (define-key markdown-mode-map (kbd "C-c M") 'my-hydra/markdown-mode/body)
   (define-key gfm-mode-map (kbd "C-c M") 'my-hydra/markdown-mode/body))
 
-;; Org-mode
+;; Org-mode - built-in
 (use-package org
   :bind (("C-c a" . org-agenda)
          ("C-c l" . org-store-link))
@@ -659,7 +662,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("q" nil "quit" :color blue))
   (define-key org-agenda-mode-map (kbd "C-c M") 'my-hydra/org-agenda/body))
 
-;; Python
+;; Python - MELPA Stable (all packages)
 (when (executable-find "python")
   (use-package anaconda-mode
     ;; requires python jedi be installed
@@ -673,8 +676,10 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     :config
     (with-eval-after-load 'company
       (add-to-list 'company-backends 'company-anaconda)))
-  (if (executable-find "jupyter")
+  (if (and (bound-and-true-p 'my-load-ein)
+           (executable-find "jupyter"))
       ;; Jupyter notebook client
+      ;; Add (setq my-load-ein t) to init-local-pre.el to enable
       (use-package ein
         :commands ein:notebooklist-open
         :config
@@ -750,11 +755,11 @@ Other      _t_         : toggle output    _C-l_/_C-L_   : clear cell/all output
             (define-key ein:notebook-mode-map (kbd "C-c M")
               'my-hydra/ein/body))))))
 
-;; Visit large files without loading it entirely
+;; Visit large files without loading it entirely - MELPA Stable
 (use-package vlf
   :config (require 'vlf-setup))
 
-;; YAML
+;; YAML - MELPA Stable
 (use-package yaml-mode
   :commands yaml-mode
   :mode ("\\.ya?ml\\'" . yaml-mode))
