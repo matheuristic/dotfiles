@@ -676,7 +676,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     :config
     (with-eval-after-load 'company
       (add-to-list 'company-backends 'company-anaconda)))
-  (if (and (bound-and-true-p 'my-load-ein)
+  (if (and (bound-and-true-p my-load-ein)
            (executable-find "jupyter"))
       ;; Jupyter notebook client
       ;; Add (setq my-load-ein t) to init-local-pre.el to enable
