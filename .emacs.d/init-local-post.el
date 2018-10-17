@@ -10,11 +10,11 @@
 ;;; Code:
 
 ;; virtualenv activation in Emacs - MELPA Stable
-;;(use-package pyvenv
-;;  :init
-;;  (setenv "WORKON_HOME" "~/miniconda3/envs")
-;;  (pyvenv-mode 1)
-;;  (pyvenv-tracking-mode 1))
+(use-package pyvenv
+  :init
+  (setenv "WORKON_HOME" "~/miniconda3/envs")
+  (pyvenv-mode 1)
+  (pyvenv-tracking-mode 1))
 
 ;; return to normal mode in evil with custom key seq - MELPA Stable
 (use-package evil-escape
