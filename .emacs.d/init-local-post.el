@@ -10,11 +10,11 @@
 ;;; Code:
 
 ;; virtualenv activation in Emacs - MELPA Stable
-(use-package pyvenv
-  :init
-  (setenv "WORKON_HOME" "~/miniconda3/envs")
-  (pyvenv-mode 1)
-  (pyvenv-tracking-mode 1))
+;;(use-package pyvenv
+;;  :init
+;;  (setenv "WORKON_HOME" "~/miniconda3/envs")
+;;  (pyvenv-mode 1)
+;;  (pyvenv-tracking-mode 1))
 
 ;; return to normal mode in evil with custom key seq - MELPA Stable
 (use-package evil-escape
@@ -24,7 +24,7 @@
   (evil-escape-mode 1)
   (setq-default evil-escape-key-sequence "jk"))
 
-;; Docker file support - MELPA Stable
+;; Dockerfile - MELPA Stable
 (use-package dockerfile-mode
   :config
   (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
