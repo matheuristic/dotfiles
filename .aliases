@@ -24,5 +24,3 @@ command -v sha1sum > /dev/null || alias sha1sum="shasum"  # alias `shasum` to `s
 # Intuitive map function.  E.g. list directories containing some file:
 # $ find . -name .gitattributes | map dirname
 alias map="xargs -n1"
-# URL-encode strings
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
