@@ -1,0 +1,8 @@
+# ~/.alias -*- conf-unix -*-
+# Sample file for crostini on Chromebook running anaconda or miniconda
+# Start jupyterlab in crostini VM and connect to it
+alias jupyterlab_start="jupyter lab --ip=$(/sbin/ifconfig eth0 | grep 'inet ' | cut -d: -f2 | awk '{print $2}')"
+# Aliases for activating and deactivating conda environments
+alias pyactivate='source activate'
+alias pydeactivate='source deactivate'
+alias pyenvs='conda info -e'

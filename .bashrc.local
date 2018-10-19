@@ -1,0 +1,5 @@
+# ~/.bash_local: local bash path and environment settings
+
+# Sample file for crostini on Chromebook running miniconda
+
+export PATH=$HOME/miniconda3/bin:$PATH

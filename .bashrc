@@ -48,10 +48,10 @@ export HISTIGNORE='&:ls:ll:la:cd:exit:clear:history'
 export PS1="[\u@\h:\w]\$ "      # Set prompt to "[user@host:/path/to/cwd]$ "
 
 # Load aliases
-test -s ~/.alias && . ~/.alias || true
+test -s ~/.aliases && . ~/.aliases || true
 
 # Load machine-specific bashrc for interactive sessions
 test -s ~/.bashrc.local && . ~/.bashrc.local || true
 
 # Load machine-specific aliases for interactive sessions
-test -s ~/.alias.local && . ~/.alias.local || true
+test -s ~/.aliases.local && . ~/.aliases.local || true
