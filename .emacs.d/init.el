@@ -54,9 +54,9 @@
 (load custom-file 'noerror)
 
 ;; set GUI font
-(defvar my-font "Source Code Pro")
+(defvar my-font (if (eq system-type 'darwin) "Menlo" "DejaVu Sans Mono"))
 (defvar my-font-height (if (eq system-type 'darwin) 140 110))
-(defvar my-font-weight (if (eq system-type 'darwin) 'light 'regular))
+(defvar my-font-weight (if (eq system-type 'darwin) 'light 'normal))
 (defvar my-font-width 'normal)
 (if (and (display-graphic-p)
          (and my-font (not (string= my-font "")))
@@ -67,7 +67,7 @@
                       :weight my-font-weight
                       :width my-font-width))
 
-;; use left Option key as Meta on Mac OS X
+;; use left Option key as Meta and preserve right Option key on Mac OS X
 (when (eq system-type 'darwin)
   (setq mac-option-modifier 'meta
         mac-right-option-modifier nil))
@@ -316,22 +316,25 @@
     ("+" text-scale-increase "in")
     ("0" (text-scale-adjust 0) "reset")
     ("q" nil "quit" :color blue))
-  (global-set-key (kbd "C-c D") 'my-hydra/desktop/body)
-  (global-set-key (kbd "C-c N") 'my-hydra/narrow/body)
-  (global-set-key (kbd "C-c S") 'my-hydra/search/body)
-  (global-set-key (kbd "C-c Z") 'my-hydra/zoom/body)
-  (global-set-key (kbd "C-c b") 'my-hydra/buffer/body)
-  (global-set-key (kbd "C-c e") 'my-hydra/error/body)
-  (global-set-key (kbd "C-c f") 'my-hydra/frame/body)
-  (global-set-key (kbd "C-c n") 'my-hydra/navigation/body)
-  (global-set-key (kbd "C-c w") 'my-hydra/window/body))
+  (global-set-key (kbd "C-c h d") 'my-hydra/desktop/body)
+  (global-set-key (kbd "C-c h N") 'my-hydra/narrow/body)
+  (global-set-key (kbd "C-c h s") 'my-hydra/search/body)
+  (global-set-key (kbd "C-c h Z") 'my-hydra/zoom/body)
+  (global-set-key (kbd "C-c h b") 'my-hydra/buffer/body)
+  (global-set-key (kbd "C-c h e") 'my-hydra/error/body)
+  (global-set-key (kbd "C-c h f") 'my-hydra/frame/body)
+  (global-set-key (kbd "C-c h n") 'my-hydra/navigation/body)
+  (global-set-key (kbd "C-c h w") 'my-hydra/window/body))
 
 ;; text completion framework - MELPA Stable
 (use-package company
   :diminish company-mode
   :init
   (setq company-selection-wrap-around t
-        company-dabbrev-downcase nil)
+        company-dabbrev-downcase nil
+        company-idle-delay 0.25
+        company-minimum-prefix-length 2)
+  (company-tng-configure-default) ;; Tab and Go behavior
   (add-hook 'after-init-hook 'global-company-mode))
 
 ;; copies env vars from shell - MELPA Stable
@@ -359,7 +362,7 @@
              (error (flycheck-list-errors))) "list")
       ("q" nil "quit" :color blue))
     ;; bind over my-hydra/error
-    (define-key flycheck-mode-map (kbd "C-c e") 'my-hydra/flycheck/body))
+    (define-key flycheck-mode-map (kbd "C-c h e") 'my-hydra/flycheck/body))
   (with-eval-after-load 'evil
     ;; bind over error navigation bracket mappings
     (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
@@ -393,7 +396,7 @@
 
 ;; project interaction library - MELPA Stable
 (use-package projectile
-  :init (projectile-global-mode)
+  :init (projectile-mode)
   :config
   (setq projectile-switch-project-action 'projectile-commander)
   (with-eval-after-load 'hydra
@@ -442,7 +445,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("C" projectile-compile-project "compile")
       ("p" projectile-switch-project "switch project")
       ("q" nil "quit" :color blue))
-    (define-key projectile-mode-map (kbd "C-c P") 'my-hydra/projectile/body)))
+    (define-key projectile-mode-map (kbd "C-c h P") 'my-hydra/projectile/body)))
 
 ;; recently opened files - built-in
 (use-package recentf
@@ -484,7 +487,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
     ("u" csv-unalign-fields "unalign")
     ("t" csv-transpose "transpose")
     ("q" nil "quit" :color blue))
-  (define-key csv-mode-map (kbd "C-c M") 'my-hydra/csv-mode/body))
+  (define-key csv-mode-map (kbd "C-c h M") 'my-hydra/csv-mode/body))
 
 ;; Eldoc - built-in
 (use-package eldoc
@@ -585,8 +588,8 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
     ("w" markdown-insert-wiki-link)
     ("T" markdown-toc-generate-toc)
     ("q" nil "quit" :color blue))
-  (define-key markdown-mode-map (kbd "C-c M") 'my-hydra/markdown-mode/body)
-  (define-key gfm-mode-map (kbd "C-c M") 'my-hydra/markdown-mode/body))
+  (define-key markdown-mode-map (kbd "C-c h M") 'my-hydra/markdown-mode/body)
+  (define-key gfm-mode-map (kbd "C-c h M") 'my-hydra/markdown-mode/body))
 
 ;; Org-mode - built-in
 (use-package org
@@ -660,7 +663,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("gd" org-agenda-goto-date)
     ("." org-agenda-goto-today)
     ("q" nil "quit" :color blue))
-  (define-key org-agenda-mode-map (kbd "C-c M") 'my-hydra/org-agenda/body))
+  (define-key org-agenda-mode-map (kbd "C-c h M") 'my-hydra/org-agenda/body))
 
 ;; Python - MELPA Stable (all packages)
 (when (executable-find "python")
@@ -676,10 +679,10 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     :config
     (with-eval-after-load 'company
       (add-to-list 'company-backends 'company-anaconda)))
+  ;; Jupyter notebook client
+  ;; Add (setq my-load-ein t) to init-local-pre.el to enable
   (if (and (bound-and-true-p my-load-ein)
            (executable-find "jupyter"))
-      ;; Jupyter notebook client
-      ;; Add (setq my-load-ein t) to init-local-pre.el to enable
       (use-package ein
         :commands ein:notebooklist-open
         :config
@@ -752,7 +755,7 @@ Other      _t_         : toggle output    _C-l_/_C-L_   : clear cell/all output
             ("C-o" ein:console-open :color blue)
             ("q" nil "quit" :color blue))
           (with-eval-after-load 'ein-notebooklist
-            (define-key ein:notebook-mode-map (kbd "C-c M")
+            (define-key ein:notebook-mode-map (kbd "C-c h M")
               'my-hydra/ein/body))))))
 
 ;; Visit large files without loading it entirely - MELPA Stable
@@ -763,6 +766,22 @@ Other      _t_         : toggle output    _C-l_/_C-L_   : clear cell/all output
 (use-package yaml-mode
   :commands yaml-mode
   :mode ("\\.ya?ml\\'" . yaml-mode))
+
+;; template systems, i.e. expandable snippets
+(use-package yasnippet
+  :diminish yas-minor-mode
+  :init (yas-global-mode 1)
+  :config
+  ;; disable tab for snippet expansion to avoid conflicts with company-mode
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  ;; use Ctrl-Shift-Space for snippet expansion
+  (define-key yas-minor-mode-map (kbd "<C-S-spc>") #'yas-expand)
+  (define-key yas-minor-mode-map (kbd "C-S-SPC") #'yas-expand))
+
+;; official snippets for yasnippet, load after yasnippet
+(use-package yasnippet-snippets
+  :after yasnippet)
 
 ;; load local post-init file ~/.emacs.d/init-local-post.el
 (let ((local-f (expand-file-name "init-local-post.el" user-emacs-directory)))
