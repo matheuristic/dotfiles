@@ -28,6 +28,9 @@
 ;; indent with soft tabs. Use C-q <TAB> for real tabs
 (setq-default indent-tabs-mode nil)
 
+;; guess default target dir for dired file ops using dired buffers in next window
+(setq dired-dwim-target t)
+
 ;; remove unused GUI elements
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -332,7 +335,8 @@
   :config
   (setq which-key-compute-remaps t
         which-key-allow-multiple-replacements t)
-  (which-key-mode 1))
+  (which-key-mode 1)
+  (global-set-key (kbd "C-c h W") 'which-key-show-top-level))
 
 ;; text completion framework - MELPA Stable
 (use-package company
@@ -587,7 +591,7 @@ Headline    _ht_  : set status   _hk_  : kill         _hr_  : refile
 Visit Entry _SPC_ : other window _TAB_ : & go to loc  _RET_ : & del other wins
             _o_   : link
 
-Date        _ds_  : schedule     _dd_  : set deadline _dt_  : timestanp
+Date        _ds_  : schedule     _dd_  : set deadline _dt_  : timestamp
 
 View        _vd_  : day          _vw_  : week         _vm_  : month
             _vn_  : next span    _vp_  : prev span    _vr_  : reset
@@ -644,28 +648,24 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
   :diminish yas-minor-mode
   :init (yas-global-mode 1)
   :config
+  (use-package yasnippet-snippets) ;; official snippets - MELPA Stable
+  (use-package auto-yasnippet) ;; create temporary snippets - MELPA Stable
   ;; disable tab for snippet expansion to avoid conflicts with company-mode
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   ;; use Ctrl-Shift-Space for snippet expansion
   (define-key yas-minor-mode-map (kbd "<C-S-spc>") #'yas-expand)
-  (define-key yas-minor-mode-map (kbd "C-S-SPC") #'yas-expand))
-
-;; official snippets for yasnippet, load after yasnippet - MELPA Stable
-(use-package yasnippet-snippets
-  :after yasnippet)
-
-;; quickly create disposable yasnippets - MELPA Stable
-(use-package auto-yasnippet
-  :after yasnippet
-  :config
   (with-eval-after-load 'hydra
-    (defhydra my-hydra/auto-yasnippet (:color teal)
-      "auto-yasnippet"
-      ("w" aya-create "create") ;; stores temporary yasnippet
-      ("y" aya-expand "expand") ;; paste stored temporary yasnippet
+    (defhydra my-hydra/yasnippet (:color teal :columns 3)
+      "yasnippet"
+      ("SPC" yas-expand "expand") ;; expand snippet
+      ("d" yas-describe-tables "describe") ;; describe snippets for current mode
+      ("w" aya-create "create-auto") ;; store temp yasnippet
+      ("y" aya-expand "expand-auto") ;; paste stored temp yasnippet
+      ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; print stored temp yasnippet
       ("q" nil "quit"))
-    (global-set-key (kbd "C-c h y") 'my-hydra/auto-yasnippet/body)))
+    (global-set-key (kbd "C-c h y") 'my-hydra/yasnippet/body))
+  (define-key yas-minor-mode-map (kbd "C-S-SPC") #'yas-expand))
 
 ;; load local post-init file ~/.emacs.d/init-local-post.el
 (let ((local-f (expand-file-name "init-local-post.el" user-emacs-directory)))

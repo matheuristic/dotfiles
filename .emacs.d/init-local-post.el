@@ -26,7 +26,7 @@
 ;; powerline - MELPA Stable
 (use-package powerline
   :config
-  (setq powerline-default-separator 'utf-8)
+  (setq powerline-default-separator nil)
   (powerline-center-evil-theme))
 
 ;; virtualenv activation in Emacs - MELPA Stable
@@ -81,6 +81,9 @@
         :init
         (with-eval-after-load 'go-mode
           (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)))))
+
+;; JSON - GNU ELPA
+(use-package json-mode)
 
 ;; Python - MELPA Stable (all packages)
 (when (executable-find "python")
