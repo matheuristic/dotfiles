@@ -11,12 +11,9 @@
 
 ;;; Code:
 
-;; virtualenv activation in Emacs - MELPA Stable
-(use-package pyvenv
-  :init
-  (setenv "WORKON_HOME" "~/miniconda3/envs")
-  (pyvenv-mode 1)
-  (pyvenv-tracking-mode 1))
+;;;;
+;; USER INTERFACE
+;;;;
 
 ;; return to normal mode in evil with custom key seq - MELPA Stable
 (use-package evil-escape
@@ -25,6 +22,23 @@
   :config
   (evil-escape-mode 1)
   (setq-default evil-escape-key-sequence "jk"))
+
+;; powerline - MELPA Stable
+(use-package powerline
+  :config
+  (setq powerline-default-separator 'utf-8)
+  (powerline-center-evil-theme))
+
+;; virtualenv activation in Emacs - MELPA Stable
+(use-package pyvenv
+  :init
+  (setenv "WORKON_HOME" "~/miniconda3/envs")
+  (pyvenv-mode 1)
+  (pyvenv-tracking-mode 1))
+
+;;;;
+;; LANGUAGE-SPECIFIC
+;;;;
 
 ;; CSV - GNU ELPA
 (use-package csv-mode
