@@ -193,8 +193,9 @@
   (define-key evil-normal-state-map (kbd "[ n") 'diff-hunk-prev)
   (define-key evil-normal-state-map (kbd "] n") 'diff-hunk-next))
 
-;; emulates surround.vim - MELPA Stable
-;; ( https://github.com/tpope/vim-surround )
+;; mappings to easily delete, change and add surrounding quotes and
+;; parentheses in Vim (emulates surround.vim by tpope)
+;; - MELPA Stable
 (use-package evil-surround
   :after evil
   :init (global-evil-surround-mode 1))
@@ -319,7 +320,7 @@
     ("+" text-scale-increase "in")
     ("0" (text-scale-adjust 0) "reset")
     ("q" nil "quit" :color blue))
-  (global-set-key (kbd "C-c h d") 'my-hydra/desktop/body)
+  (global-set-key (kbd "C-c h D") 'my-hydra/desktop/body)
   (global-set-key (kbd "C-c h N") 'my-hydra/narrow/body)
   (global-set-key (kbd "C-c h s") 'my-hydra/search/body)
   (global-set-key (kbd "C-c h Z") 'my-hydra/zoom/body)
@@ -356,6 +357,34 @@
     (when (memq window-system '(mac ns))
       (exec-path-from-shell-initialize))))
 
+;; Ediff - built-in
+(use-package ediff
+  :config
+  (with-eval-after-load 'hydra
+     (defhydra my-hydra/ediff (:color teal :hint nil)
+       "
+Ediff
+
+Buffer   _b_ : 2-way       _B_ : 3-way
+
+Files    _f_ : 2-way       _F_ : 3-way       _c_ : current
+
+Region   _l_ : line-wise   _w_ : word-wise
+
+Windows  _L_ : line-wise   _W_ : word-wise
+"
+      ("b" ediff-buffers)
+      ("B" ediff-buffers3)
+      ("f" ediff-files)
+      ("F" ediff-files3)
+      ("c" ediff-current-file)
+      ("l" ediff-regions-linewise)
+      ("w" ediff-regions-wordwise)
+      ("L" ediff-windows-linewise)
+      ("W" ediff-windows-wordwise)
+      ("q" nil "quit" :color blue))
+    (global-set-key (kbd "C-c h d") 'my-hydra/ediff/body)))
+
 ;; syntax checker (replaces Flymake) - MELPA Stable
 (use-package flycheck
   :diminish flycheck-mode
@@ -379,10 +408,6 @@
     ;; bind over error navigation bracket mappings
     (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
     (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error)))
-
-;; color scheme - MELPA Stable
-(use-package gruvbox-theme
-  :config (load-theme 'gruvbox t))
 
 ;; advanced buffer menu - built-in
 (use-package ibuffer
@@ -509,9 +534,11 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 ;; Git - MELPA Stable
 (when (executable-find "git")
   (use-package magit
-    :bind ("C-c g" . magit-status)
-    :init
-    (setq vc-handled-backends (delq 'Git vc-handled-backends))))
+    :init (setq vc-handled-backends (delq 'Git vc-handled-backends))
+    :config (global-set-key (kbd "C-c g g") 'magit-status))
+  (use-package git-timemachine
+    :after magit
+    :config (global-set-key (kbd "C-c g t") 'git-timemachine)))
 
 ;; Vim Tagbar-like imenu extension - MELPA Stable
 (use-package imenu-list
@@ -657,7 +684,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
   (define-key yas-minor-mode-map (kbd "<C-S-spc>") #'yas-expand)
   (with-eval-after-load 'hydra
     (defhydra my-hydra/yasnippet (:color teal :columns 3)
-      "yasnippet"
+      "YASnippet"
       ("SPC" yas-expand "expand") ;; expand snippet
       ("d" yas-describe-tables "describe") ;; describe snippets for current mode
       ("w" aya-create "create-auto") ;; store temp yasnippet

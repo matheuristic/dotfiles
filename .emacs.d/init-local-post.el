@@ -23,18 +23,20 @@
   (evil-escape-mode 1)
   (setq-default evil-escape-key-sequence "jk"))
 
+;; gruvbox color scheme - MELPA Stable
+(use-package gruvbox-theme
+  :config (load-theme 'gruvbox t))
+
 ;; powerline - MELPA Stable
 (use-package powerline
   :config
   (setq powerline-default-separator nil)
+  ;; workaround for sRGB colorspace issues in Mac OS X Emacs
+  (if (and (eq system-type 'darwin)
+           (display-graphic-p)
+           (not powerline-default-separator))
+     (setq ns-use-srgb-colorspace nil))
   (powerline-center-evil-theme))
-
-;; virtualenv activation in Emacs - MELPA Stable
-(use-package pyvenv
-  :init
-  (setenv "WORKON_HOME" "~/miniconda3/envs")
-  (pyvenv-mode 1)
-  (pyvenv-tracking-mode 1))
 
 ;;;;
 ;; LANGUAGE-SPECIFIC
@@ -87,18 +89,48 @@
 
 ;; Python - MELPA Stable (all packages)
 (when (executable-find "python")
+  ;; Code navigation, documentation lookup and completion
+  ;; requires python jedi be installed
   (use-package anaconda-mode
-    ;; requires python jedi be installed
     :commands anaconda-mode
     :diminish anaconda-mode
     :init
     (add-hook 'python-mode-hook 'anaconda-mode)
     (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
+  ;; anaconda backend for company-mode
   (use-package company-anaconda
     :after anaconda-mode
     :config
     (with-eval-after-load 'company
       (add-to-list 'company-backends 'company-anaconda)))
+  ;; virtualenv activation
+  (use-package pyvenv
+    :init
+    (setenv "WORKON_HOME" "~/miniconda3/envs")
+    (pyvenv-mode 1)
+    (pyvenv-tracking-mode 1))
+  ;; client for traad Python refactoring tool
+  ;; requires python virtualenv be installed
+  (use-package traad
+    :config
+    (with-eval-after-load 'hydra
+      (defhydra my-hydra/traad (:color teal :columns 4)
+        "traad"
+        ("o" traad-open "open")
+        ("k" traad-close "close")
+        ("U" traad-undo "undo")
+        ("R" traad-redo "redo")
+        ("r" traad-rename "rename")
+        ("n" traad-normalize-arguments "norm-args")
+        ("x" traad-remove-argument "remove-arg")
+        ("M" traad-extract-method "extract-method")
+        ("V" traad-extract-method "extract-variable")
+        ("f" traad-findit "find")
+        ("c" traad-display-occurances "occur")
+        ("i" traad-display-implementations "implementations")
+        ("." traad-goto-definition "goto-def")
+        ("I" traad-install-server "install")
+        ("q" nil "quit"))))
   ;; Jupyter notebook client
   ;; Add (setq my-load-ein t) to init-local-pre.el to enable
   (if (and (bound-and-true-p my-load-ein)
