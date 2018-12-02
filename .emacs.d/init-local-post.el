@@ -36,6 +36,9 @@
      (setq ns-use-srgb-colorspace nil))
   (powerline-center-evil-theme))
 
+;; front-end for interacting with external debuggers - MELPA Stable
+(use-package realgud)
+
 ;; LANGUAGE-SPECIFIC
 
 ;; CSV - GNU ELPA
@@ -102,7 +105,7 @@
   (use-package virtualenvwrapper
     ;; enable the MELPA repository and uncomment below if the version of
     ;; virtualenvwrapper.el in MELPA Stable is too old for emacs-traad
-    ;; :pin "MELPA"
+    ;; :pin "MELPA" ;; name should match that assigned to MELPA repository
     :after anaconda-mode
     :config
     (venv-initialize-interactive-shells)
@@ -120,8 +123,6 @@
         ("g" venv-cdvirtualenv "cd")
         ("c" venv-cpvirtualenv "cp")
         ("q" nil "quit"))
-      (define-key shell-mode-map (kbd "C-c h v") 'my-hydra/virtualenv/body)
-      (define-key eshell-mode-map (kbd "C-c h v") 'my-hydra/virtualenv/body)
       (define-key python-mode-map (kbd "C-c h v") 'my-hydra/virtualenv/body)))
   ;; client for traad refactoring tool; requires python virtualenv
   (use-package traad
