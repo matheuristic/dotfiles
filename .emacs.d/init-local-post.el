@@ -55,7 +55,7 @@
     ("u" csv-unalign-fields "unalign")
     ("t" csv-transpose "transpose")
     ("q" nil "quit" :color blue))
-  (define-key csv-mode-map (kbd "C-c h M") 'my-hydra/csv-mode/body))
+  (define-key csv-mode-map (kbd "C-c h m") 'my-hydra/csv-mode/body))
 
 ;; Dockerfile - MELPA Stable
 (use-package dockerfile-mode
@@ -85,6 +85,52 @@
 
 ;; JSON - GNU ELPA
 (use-package json-mode)
+
+;; Markdown - MELPA Stable
+(use-package markdown-mode
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (use-package markdown-toc)  ;; Markdown table of contents
+  :config
+  (defhydra my-hydra/markdown-mode (:color teal :hint nil)
+    "
+Markdown mode
+
+Formatting  _b_ : bold      _i_ : italic    _c_ : code      _p_ : pre-formatted
+            _B_ : blockquote
+
+Headings    _h_ : automatic _1_.._4_ : h1..h4
+
+Move        _H_ : promote   _L_ : demote    _J_ : move down _K_ : move up
+
+Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
+            _T_ : table of contents
+
+"
+    ("b" markdown-insert-bold)
+    ("i" markdown-insert-italic)
+    ("c" markdown-insert-code)
+    ("p" markdown-insert-pre)
+    ("B" markdown-insert-blockquote)
+    ("h" markdown-insert-header-dwim)
+    ("1" markdown-insert-header-atx-1)
+    ("2" markdown-insert-header-atx-2)
+    ("3" markdown-insert-header-atx-3)
+    ("4" markdown-insert-header-atx-4)
+    ("H" markdown-promote :color red)
+    ("L" markdown-demote :color red)
+    ("J" markdown-move-down :color red)
+    ("K" markdown-move-up :color red)
+    ("l" markdown-insert-link)
+    ("u" markdown-insert-uri)
+    ("f" markdown-insert-footnote)
+    ("w" markdown-insert-wiki-link)
+    ("T" markdown-toc-generate-toc)
+    ("q" nil "quit" :color blue))
+  (define-key markdown-mode-map (kbd "C-c h m") 'my-hydra/markdown-mode/body)
+  (define-key gfm-mode-map (kbd "C-c h m") 'my-hydra/markdown-mode/body))
 
 ;; Python - MELPA Stable (all packages)
 (when (executable-find "python")
@@ -228,7 +274,7 @@ Other      _t_         : toggle output    _C-l_/_C-L_   : clear cell/all output
             ("C-o" ein:console-open :color blue)
             ("q" nil "quit" :color blue))
           (with-eval-after-load 'ein-notebooklist
-            (define-key ein:notebook-mode-map (kbd "C-c h M")
+            (define-key ein:notebook-mode-map (kbd "C-c h m")
               'my-hydra/ein/body))))))
 
 ;; YAML - MELPA Stable

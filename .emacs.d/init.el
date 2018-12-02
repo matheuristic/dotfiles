@@ -145,6 +145,13 @@
   (require 'bind-key)
   (setq use-package-always-ensure t))
 
+;; copies env vars from shell - MELPA Stable
+(when (eq system-type 'darwin)  ;; only for Mac OS X GUI mode
+  (use-package exec-path-from-shell
+    :init
+    (when (memq window-system '(mac ns))
+      (exec-path-from-shell-initialize))))
+
 ;; extensible vi layer for Emacs - MELPA Stable
 (use-package evil
   :init
@@ -170,6 +177,7 @@
   (evil-leader-set-key-normal "w" 'whitespace-mode)
   (evil-leader-set-key-normal "y" (lambda () (interactive)
                                     (popup-menu 'yank-menu)))
+  (evil-leader-set-key-normal "#" 'comment-line)
   (evil-leader-set-key-visual "#" 'comment-or-uncomment-region)
   ;; make tabs in insert mode work like Vim
   (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
@@ -329,6 +337,10 @@
   (global-set-key (kbd "C-c h n") 'my-hydra/navigation/body)
   (global-set-key (kbd "C-c h w") 'my-hydra/window/body))
 
+;; frontend for The Silver Searcher, requires system ag - MELPA Stable
+(when (executable-find "ag")
+      (use-package ag))
+
 ;; display available keybindings in popup - GNU ELPA
 (use-package which-key
   :diminish which-key-mode
@@ -349,13 +361,6 @@
   (company-tng-configure-default) ;; Tab and Go behavior
   (add-hook 'after-init-hook 'global-company-mode))
 
-;; copies env vars from shell - MELPA Stable
-(when (eq system-type 'darwin)  ;; only for Mac OS X GUI mode
-  (use-package exec-path-from-shell
-    :init
-    (when (memq window-system '(mac ns))
-      (exec-path-from-shell-initialize))))
-
 ;; Ediff - built-in
 (use-package ediff
   :config
@@ -371,6 +376,7 @@ Files    _f_ : 2-way       _F_ : 3-way       _c_ : current
 Region   _l_ : line-wise   _w_ : word-wise
 
 Windows  _L_ : line-wise   _W_ : word-wise
+
 "
       ("b" ediff-buffers)
       ("B" ediff-buffers3)
@@ -384,7 +390,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
       ("q" nil "quit" :color blue))
     (global-set-key (kbd "C-c h d") 'my-hydra/ediff/body)))
 
-;; syntax checker (replaces Flymake) - MELPA Stable
+;; syntax checker, replaces Flymake - MELPA Stable
 (use-package flycheck
   :diminish flycheck-mode
   :init (global-flycheck-mode)
@@ -429,7 +435,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package ido-completing-read+
   :init (ido-ubiquitous-mode t))
 
-;; project interaction - MELPA Stable
+;; project interaction library - MELPA Stable
 (use-package projectile
   :init (projectile-mode)
   :config
@@ -453,7 +459,7 @@ File    _ff_  : find file                 _fw_  : find file dwim
 
 Dir     _dd_  : find dir                  _do_  : find dir (other window)
 
-Search  _sg_  : grep                      _so_  : multi-occur
+Search  _sg_  : grep / ag                 _so_  : multi-occur
         _rs_  : replace string            _rr_  : replace regexp
 
 Cache   _cc_  : cache current file        _cC_  : clear cache
@@ -473,7 +479,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("fr" projectile-recentf)
       ("dd" projectile-find-dir)
       ("do" projectile-find-dir-other-window)
-      ("sg" projectile-grep)
+      ("sg" (call-interactively (if (and (fboundp 'ag) (executable-find "ag")) 'projectile-ag 'projectile-grep)))
       ("so" projectile-multi-occur)
       ("rs" projectile-replace)
       ("rr" projectile-replace-regexp)
@@ -484,7 +490,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("C" projectile-compile-project "compile")
       ("p" projectile-switch-project "switch project")
       ("q" nil "quit" :color blue))
-    (define-key projectile-mode-map (kbd "C-c h P") 'my-hydra/projectile/body)))
+    (define-key projectile-mode-map (kbd "C-c h p") 'my-hydra/projectile/body)))
 
 ;; recently opened files - built-in
 (use-package recentf
@@ -548,52 +554,6 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   :bind ("C-c i" . imenu-list-smart-toggle)
   :init (setq imenu-list-focus-after-activation t
               imenu-list-auto-resize t))
-
-;; Markdown - MELPA Stable
-(use-package markdown-mode
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (use-package markdown-toc)  ;; Markdown table of contents
-  :config
-  (defhydra my-hydra/markdown-mode (:color teal :hint nil)
-    "
-Markdown mode
-
-Formatting  _b_ : bold      _i_ : italic    _c_ : code      _p_ : pre-formatted
-            _B_ : blockquote
-
-Headings    _h_ : automatic _1_.._4_ : h1..h4
-
-Move        _H_ : promote   _L_ : demote    _J_ : move down _K_ : move up
-
-Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
-            _T_ : table of contents
-
-"
-    ("b" markdown-insert-bold)
-    ("i" markdown-insert-italic)
-    ("c" markdown-insert-code)
-    ("p" markdown-insert-pre)
-    ("B" markdown-insert-blockquote)
-    ("h" markdown-insert-header-dwim)
-    ("1" markdown-insert-header-atx-1)
-    ("2" markdown-insert-header-atx-2)
-    ("3" markdown-insert-header-atx-3)
-    ("4" markdown-insert-header-atx-4)
-    ("H" markdown-promote :color red)
-    ("L" markdown-demote :color red)
-    ("J" markdown-move-down :color red)
-    ("K" markdown-move-up :color red)
-    ("l" markdown-insert-link)
-    ("u" markdown-insert-uri)
-    ("f" markdown-insert-footnote)
-    ("w" markdown-insert-wiki-link)
-    ("T" markdown-toc-generate-toc)
-    ("q" nil "quit" :color blue))
-  (define-key markdown-mode-map (kbd "C-c h M") 'my-hydra/markdown-mode/body)
-  (define-key gfm-mode-map (kbd "C-c h M") 'my-hydra/markdown-mode/body))
 
 ;; Org-mode - built-in
 (use-package org
@@ -667,7 +627,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("gd" org-agenda-goto-date)
     ("." org-agenda-goto-today)
     ("q" nil "quit" :color blue))
-  (define-key org-agenda-mode-map (kbd "C-c h M") 'my-hydra/org-agenda/body))
+  (define-key org-agenda-mode-map (kbd "C-c h m") 'my-hydra/org-agenda/body))
 
 ;; Visit large files without loading it entirely - MELPA Stable
 (use-package vlf
@@ -678,8 +638,10 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
   :diminish yas-minor-mode
   :init (yas-global-mode 1)
   :config
-  (use-package yasnippet-snippets) ;; official snippets - MELPA Stable
-  (use-package auto-yasnippet) ;; create temporary snippets - MELPA Stable
+  ;; official snippets - MELPA Stable
+  (use-package yasnippet-snippets)
+  ;; create temporary snippets - MELPA Stable
+  (use-package auto-yasnippet)
   ;; disable tab for snippet expansion to avoid conflicts with company-mode
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
