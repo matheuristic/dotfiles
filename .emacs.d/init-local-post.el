@@ -112,6 +112,13 @@
     (venv-initialize-eshell)
     ;; set virtualenv storage dir if it differs from default ~/.virtualenvs
     ;; (setq venv-location "~/miniconda3/envs")  ;; miniconda3
+    ;; display currently active virtualenv on the mode line
+    (setq-default mode-line-format
+                  (cons
+                   '(:eval (if venv-current-name
+                               (format "venv:%s" venv-current-name)
+                             ""))
+                   mode-line-format))
     (with-eval-after-load 'hydra
       (defhydra my-hydra/virtualenv (:color teal :columns 4)
         "virtualenv"
