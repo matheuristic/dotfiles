@@ -101,7 +101,7 @@
                  (* y (/ (x-display-pixel-height) 100))))
 
 ;; regenerate outdated bytecode
-;(setq load-prefer-newer t)
+;; (setq load-prefer-newer t)
 
 ;; user packages in ~/.emacs.d/lisp
 (defvar lisp-dir (expand-file-name "lisp" user-emacs-directory))
@@ -125,12 +125,12 @@
 (setq package-archives
       '(("GNU ELPA"     . "http://elpa.gnu.org/packages/")
         ("MELPA Stable" . "https://stable.melpa.org/packages/")
-        ;;("MELPA"        . "https://melpa.org/packages/")
+        ;; ("MELPA"        . "https://melpa.org/packages/")
        )
       package-archive-priorities
       '(("GNU ELPA"     . 10)
         ("MELPA Stable" . 5)
-        ;;("MELPA"        . 0)
+        ;; ("MELPA"        . 0)
        ))
 
 (package-initialize)
@@ -193,9 +193,8 @@
   (define-key evil-normal-state-map (kbd "[ n") 'diff-hunk-prev)
   (define-key evil-normal-state-map (kbd "] n") 'diff-hunk-next))
 
-;; mappings to easily delete, change and add surrounding quotes and
-;; parentheses in Vim (emulates surround.vim by tpope)
-;; - MELPA Stable
+;; mappings for adding, changing and deleting of surrounding brackets
+;; in evil-mode (emulates surround.vim by tpope) - MELPA Stable
 (use-package evil-surround
   :after evil
   :init (global-evil-surround-mode 1))
@@ -430,10 +429,14 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package ido-completing-read+
   :init (ido-ubiquitous-mode t))
 
-;; project interaction library - MELPA Stable
+;; project interaction - MELPA Stable
 (use-package projectile
   :init (projectile-mode)
   :config
+  (setq-default projectile-mode-line
+                '(:eval (if (file-remote-p default-directory)
+                            " Proj"
+                          (format " Proj[%s]" (projectile-project-name)))))
   (setq projectile-switch-project-action 'projectile-commander)
   (with-eval-after-load 'hydra
     (defhydra my-hydra/projectile (:color teal :hint nil)
