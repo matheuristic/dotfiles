@@ -11,9 +11,7 @@
 
 ;;; Code:
 
-;;;;
 ;; USER INTERFACE
-;;;;
 
 ;; return to normal mode in evil with custom key seq - MELPA Stable
 (use-package evil-escape
@@ -38,9 +36,7 @@
      (setq ns-use-srgb-colorspace nil))
   (powerline-center-evil-theme))
 
-;;;;
 ;; LANGUAGE-SPECIFIC
-;;;;
 
 ;; CSV - GNU ELPA
 (use-package csv-mode
@@ -89,8 +85,7 @@
 
 ;; Python - MELPA Stable (all packages)
 (when (executable-find "python")
-  ;; Code navigation, documentation lookup and completion
-  ;; requires python jedi be installed
+  ;; Code navigation, documentation lookup and completion; requires python jedi
   (use-package anaconda-mode
     :commands anaconda-mode
     :diminish anaconda-mode
@@ -103,34 +98,52 @@
     :config
     (with-eval-after-load 'company
       (add-to-list 'company-backends 'company-anaconda)))
-  ;; virtualenv activation
-  (use-package pyvenv
-    :init
-    (setenv "WORKON_HOME" "~/miniconda3/envs")
-    (pyvenv-mode 1)
-    (pyvenv-tracking-mode 1))
-  ;; client for traad Python refactoring tool
-  ;; requires python virtualenv be installed
+  ;; virtualenv tool
+  (use-package virtualenvwrapper
+    ;; enable the MELPA repository and uncomment below if the version of
+    ;; virtualenvwrapper.el in MELPA Stable is too old for emacs-traad
+    ;; :pin "MELPA"
+    :after anaconda-mode
+    :config
+    (venv-initialize-interactive-shells)
+    (venv-initialize-eshell)
+    ;; set virtualenv storage dir if it differs from default ~/.virtualenvs
+    ;; (setq venv-location "~/miniconda3/envs")  ;; miniconda3
+    (with-eval-after-load 'hydra
+      (defhydra my-hydra/virtualenv (:color teal :columns 4)
+        "virtualenv"
+        ("w" venv-workon "workon")
+        ("d" venv-deactivate "deactivate")
+        ("m" venv-mkvirtualenv-using "make")
+        ("r" venv-rmvirtualenv "remove")
+        ("l" venv-lsvirtualenv "list")
+        ("g" venv-cdvirtualenv "cd")
+        ("c" venv-cpvirtualenv "cp")
+        ("q" nil "quit"))
+      (define-key shell-mode-map (kbd "C-c h v") 'my-hydra/virtualenv/body)
+      (define-key eshell-mode-map (kbd "C-c h v") 'my-hydra/virtualenv/body)
+      (define-key python-mode-map (kbd "C-c h v") 'my-hydra/virtualenv/body)))
+  ;; client for traad refactoring tool; requires python virtualenv
   (use-package traad
+    :after anaconda-mode
     :config
     (with-eval-after-load 'hydra
       (defhydra my-hydra/traad (:color teal :columns 4)
         "traad"
-        ("o" traad-open "open")
-        ("k" traad-close "close")
+        ("r" traad-rename "rename")
+        ("m" traad-move "move")
         ("U" traad-undo "undo")
         ("R" traad-redo "redo")
-        ("r" traad-rename "rename")
         ("n" traad-normalize-arguments "norm-args")
         ("x" traad-remove-argument "remove-arg")
         ("M" traad-extract-method "extract-method")
-        ("V" traad-extract-method "extract-variable")
-        ("f" traad-findit "find")
-        ("c" traad-display-occurances "occur")
-        ("i" traad-display-implementations "implementations")
-        ("." traad-goto-definition "goto-def")
+        ("V" traad-extract-variable "extract-variable")
+        ("E" traad-encapsulate-field "encapsulate")
+        ("H" traad-display-history "history")
+        ("K" traad-kill-all "kill")
         ("I" traad-install-server "install")
-        ("q" nil "quit"))))
+        ("q" nil "quit"))
+      (define-key python-mode-map (kbd "C-c h t") 'my-hydra/traad/body)))
   ;; Jupyter notebook client
   ;; Add (setq my-load-ein t) to init-local-pre.el to enable
   (if (and (bound-and-true-p my-load-ein)
