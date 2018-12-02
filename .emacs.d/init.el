@@ -193,7 +193,7 @@
   (define-key evil-normal-state-map (kbd "[ n") 'diff-hunk-prev)
   (define-key evil-normal-state-map (kbd "] n") 'diff-hunk-next))
 
-;; mappings for adding, changing and deleting of surrounding brackets
+;; mappings for adding, changing and deleting surrounding brackets
 ;; in evil-mode (emulates surround.vim by tpope) - MELPA Stable
 (use-package evil-surround
   :after evil
