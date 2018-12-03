@@ -1,5 +1,15 @@
 # ~/.bash_local: local bash path and environment settings
 
-# Sample file for crostini on Chromebook running miniconda
-
 export PATH=$HOME/miniconda3/bin:$PATH
+
+# Prevent Mac from sleeping for given time: $ keepawake <hrs>
+if [[ "x`uname`" == "xDarwin" ]]; then
+  function keepawake {
+    KEEPAWAKEHRS=${1:-8}  # default 8 hours
+    KEEPAWAKESECS=$(( 60 * 60 * KEEPAWAKEHRS ))
+    echo "keeping machine awake for $KEEPAWAKEHRS hours"
+    echo "start : `date`"
+    echo "end   : `date -v +${KEEPAWAKEHRS}H`"
+    caffeinate -i -t $KEEPAWAKESECS
+  }
+fi
