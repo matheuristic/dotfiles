@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Script for symlinking basic config files into the user home directory
+
 if [ "$#" -ne 1 ]; then
   echo "Usage: $0 path/to/dotfiles/git/dir"
   exit 1
@@ -9,12 +11,8 @@ GITDIR=$1
 
 # List of files and directories to symlink
 declare -a arr=( \
-  ".alias" \
-  ".bashrc" \
   ".gitignore_global" \
-  ".npmrc" \
   ".tmux.conf" \
-  ".vimrc" \
   ".emacs.d/init.el" \
   )
 
@@ -23,7 +21,11 @@ do
   if [[ -L $HOME/$dotfile ]]; then
     echo "$dotfile already symlinked"
   else
-    echo "Setting up $dotfile"
+    read -p "Do you wish to symlink $dotfile? [yn] " YN
+    case $YN in
+    	[Yy]) echo "Setting up $dotfile";;
+        *) echo "Skipping $dotfile"; continue;;
+    esac
     # Create directory for symlink if necessary
     mkdir -p `dirname $HOME/$dotfile`
     if [ $? -ne 0 ]; then
