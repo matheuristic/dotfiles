@@ -19,7 +19,7 @@ To set up basic gitignore, NPM, tmux and Emacs config files for a new account:
 ```Shell
 $ ./install.sh $PWD
 ```
-from the root directory of the repository. The files will set up as symlinks to the repository files.
+from the root directory of the repository. The files will be set up as symlinks to corresponding files in the repository.
 
 Optional Emacs UI elements and support for specific file formats and programming languages can be set up by copying the [post-init](.emacs.d/init-local-post.el) and modifying it as needed.
 
