@@ -337,10 +337,6 @@
   (global-set-key (kbd "C-c h n") 'my-hydra/navigation/body)
   (global-set-key (kbd "C-c h w") 'my-hydra/window/body))
 
-;; frontend for The Silver Searcher, requires system ag - MELPA Stable
-(when (executable-find "ag")
-      (use-package ag))
-
 ;; display available keybindings in popup - GNU ELPA
 (use-package which-key
   :diminish which-key-mode
@@ -444,6 +440,12 @@ Windows  _L_ : line-wise   _W_ : word-wise
                             " Proj"
                           (format " Proj[%s]" (projectile-project-name)))))
   (setq projectile-switch-project-action 'projectile-commander)
+  ;; define function to use for grepping in projectile, prefer ripgrep to grep
+  (if (executable-find "rg")
+      (progn
+        (use-package projectile-ripgrep) ;; load ripgrep support
+        (defalias 'my-projectile-search-fun 'projectile-ripgrep))
+    (defalias 'my-projectile-search-fun 'projectile-grep))
   (with-eval-after-load 'hydra
     (defhydra my-hydra/projectile (:color teal :hint nil)
       "
@@ -479,7 +481,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("fr" projectile-recentf)
       ("dd" projectile-find-dir)
       ("do" projectile-find-dir-other-window)
-      ("sg" (call-interactively (if (and (fboundp 'ag) (executable-find "ag")) 'projectile-ag 'projectile-grep)))
+      ("sg" my-projectile-search-fun)
       ("so" projectile-multi-occur)
       ("rs" projectile-replace)
       ("rr" projectile-replace-regexp)

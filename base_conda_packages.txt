@@ -2,5 +2,5 @@
 # $ conda create --name <env> --file <this file>
 # platform: osx-64
 pylint
-the_silver_searcher
+ripgrep
 virtualenv
