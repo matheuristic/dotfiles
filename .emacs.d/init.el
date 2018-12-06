@@ -461,7 +461,7 @@ File    _ff_  : find file                 _fw_  : find file dwim
 
 Dir     _dd_  : find dir                  _do_  : find dir (other window)
 
-Search  _sg_  : grep / ag                 _so_  : multi-occur
+Search  _sg_  : grep / ripgrep            _so_  : multi-occur
         _rs_  : replace string            _rr_  : replace regexp
 
 Cache   _cc_  : cache current file        _cC_  : clear cache
