@@ -23,6 +23,9 @@ max-module-lines=2000
 
 [DESIGN]
 
+# Maximum number of attributes for a class (see R0902).
+max-attributes=15
+
 # Maximum number of arguments for function / method.
 max-args=10
 

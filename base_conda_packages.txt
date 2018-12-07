@@ -1,6 +1,8 @@
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
 # platform: osx-64
+jedi
 pylint
 ripgrep
+rope
 virtualenv
