@@ -25,6 +25,13 @@
 (use-package gruvbox-theme
   :config (load-theme 'gruvbox t))
 
+;; syntax-block code folding (alt: origami.el) - built-in
+;; evil has vim-like default bindings for this (za, zc, zo, zM, zR)
+;; NOTE: if using this, comment out usage of vimish-fold below (conflicts)
+(use-package hideshow
+  :diminish hs-minor-mode
+  :config (add-hook 'prog-mode-hook 'hs-minor-mode)) 
+
 ;; powerline - MELPA Stable
 (use-package powerline
   :config
@@ -38,6 +45,19 @@
 
 ;; front-end for interacting with external debuggers - MELPA Stable
 (use-package realgud)
+
+;; manual code folding with fold persistence - MELPA Stable
+;; NOTE: if using this, comment out usage of hideshow (conflicts)
+;; (use-package vimish-fold
+;;   :after evil
+;;   :config
+;;   ;; integration with evil-mode - MELPA
+;;   ;; in evil normal mode, vim-like bindings are available
+;;   ;; (zf, zd, za, zc, zo, zm, zr)
+;;   (use-package evil-vimish-fold
+;;    :diminish evil-vimish-fold-mode
+;;    ;; enable only for programming modes
+;;    :config (add-hook 'prog-mode-hook 'evil-vimish-fold-mode)))
 
 ;; LANGUAGE-SPECIFIC
 
