@@ -439,9 +439,13 @@ Windows  _L_ : line-wise   _W_ : word-wise
   (setq ido-default-file-method 'selected-window
         ido-default-buffer-method 'selected-window
         ido-enable-flex-matching t
+        ido-enable-tramp-completion nil
         ido-everywhere t
         ido-use-virtual-buffers t)
   (ido-mode t)
+  ;; stop ido from suggesting when naming new file
+  (when (boundp 'ido-minor-mode-map-entry)
+    (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
   ;; replaces stock completion with ido wherever possible - MELPA Stable
   (use-package ido-completing-read+
     :init (ido-ubiquitous-mode t)))
