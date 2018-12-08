@@ -346,6 +346,11 @@
   (which-key-mode 1)
   (global-set-key (kbd "C-c h W") 'which-key-show-top-level))
 
+;; alternative interface for M-x - MELPA Stable
+(use-package amx
+  :bind (("M-X" . amx-major-mode-commands))
+  :init (amx-mode))
+
 ;; text completion framework - MELPA Stable
 (use-package company
   :diminish company-mode
@@ -436,11 +441,10 @@ Windows  _L_ : line-wise   _W_ : word-wise
         ido-enable-flex-matching t
         ido-everywhere t
         ido-use-virtual-buffers t)
-  (ido-mode t))
-
-;; replaces stock completion with ido wherever possible - MELPA Stable
-(use-package ido-completing-read+
-  :init (ido-ubiquitous-mode t))
+  (ido-mode t)
+  ;; replaces stock completion with ido wherever possible - MELPA Stable
+  (use-package ido-completing-read+
+    :init (ido-ubiquitous-mode t)))
 
 ;; project interaction library - MELPA Stable
 (use-package projectile
@@ -507,19 +511,13 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 
 ;; recently opened files - built-in
 (use-package recentf
-  :bind ("C-c F" . recentf-open-files)
+  :bind ("C-c r" . recentf-open-files)
   :init (recentf-mode t)
   :config
   (setq recentf-max-menu-items 10
         recentf-max-saved-items 50)
   (with-eval-after-load 'evil
     (evil-leader-set-key-normal "F" 'recentf-open-files)))
-
-;; smart M-x enhancements - MELPA Stable
-(use-package smex
-  :bind (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands))
-  :config (smex-initialize))
 
 ;; traverse undo history as a tree - GNU ELPA
 (use-package undo-tree
