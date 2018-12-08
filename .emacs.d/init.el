@@ -153,15 +153,14 @@
       (exec-path-from-shell-initialize))))
 
 ;; extensible vi layer for Emacs - MELPA Stable
+;; use C-z to toggle between Evil and Emacs bindings, C-x C-z to suspend
 (use-package evil
-  :init
-  ;; use C-z to toggle between Evil and Emacs bindings, C-x C-z to suspend
+  :init (evil-mode t)
+  :config
   (setq evil-want-C-u-scroll t ;; C-u goes half-page up like in Vim
         evil-insert-state-modes nil ;; clear Insert state modes
         evil-motion-state-modes nil ;; clear Motion state modes
         evil-default-state 'emacs) ;; use Emacs state as default
-  (evil-mode t)
-  :config
   (defvar evil-leader "<SPC>") ;; emulate Vim leader key in normal mode
   (defun evil-leader-set-key-normal (key fn)
     "Binds \"<evil-leader> KEY\" to interactively call FN in Evil normal mode."
@@ -199,13 +198,12 @@
   (define-key evil-normal-state-map (kbd "[ l") 'previous-error)
   (define-key evil-normal-state-map (kbd "] l") 'next-error)
   (define-key evil-normal-state-map (kbd "[ n") 'diff-hunk-prev)
-  (define-key evil-normal-state-map (kbd "] n") 'diff-hunk-next))
+  (define-key evil-normal-state-map (kbd "] n") 'diff-hunk-next)
+  ;; mappings for adding, changing and deleting surrounding brackets
+  ;; in evil-mode (emulates surround.vim by tpope) - MELPA Stable
+  (use-package evil-surround
+    :init (global-evil-surround-mode 1)))
 
-;; mappings for adding, changing and deleting surrounding brackets
-;; in evil-mode (emulates surround.vim by tpope) - MELPA Stable
-(use-package evil-surround
-  :after evil
-  :init (global-evil-surround-mode 1))
 
 ;; framework for temporary or repeatable keybindings - MELPA Stable
 (use-package hydra
@@ -340,21 +338,20 @@
 ;; display available keybindings in popup - GNU ELPA
 (use-package which-key
   :diminish which-key-mode
-  :config
-  (setq which-key-compute-remaps t
-        which-key-allow-multiple-replacements t)
-  (which-key-mode 1)
-  (global-set-key (kbd "C-c h W") 'which-key-show-top-level))
+  :bind ("C-c h W" . which-key-show-top-level)
+  :init (which-key-mode 1)
+  :config (setq which-key-compute-remaps t
+                which-key-allow-multiple-replacements t))
 
 ;; alternative interface for M-x - MELPA Stable
 (use-package amx
-  :bind (("M-X" . amx-major-mode-commands))
+  :bind ("M-X" . amx-major-mode-commands)
   :init (amx-mode))
 
 ;; text completion framework - MELPA Stable
 (use-package company
   :diminish company-mode
-  :init
+  :config
   (setq company-selection-wrap-around t
         company-dabbrev-downcase nil
         company-idle-delay 0.25
@@ -429,21 +426,22 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; advanced buffer menu - built-in
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer)
-  :config
-  (with-eval-after-load 'evil
-    (evil-leader-set-key-normal "B" 'ibuffer)))
+  :config (with-eval-after-load 'evil
+            (evil-leader-set-key-normal "B" 'ibuffer)))
 
 ;; interactively do things with buffers and files, use C-f to escape - built-in
 (use-package ido
-  :init
-  (setq ido-default-file-method 'selected-window
+  :init (ido-mode t)
+  :config
+  (setq ido-create-new-buffer 'always
+        ido-default-file-method 'selected-window
         ido-default-buffer-method 'selected-window
         ido-enable-flex-matching t
         ido-enable-tramp-completion nil
         ido-everywhere t
+        ido-use-filename-at-point 'guess
         ido-use-virtual-buffers t)
-  (ido-mode t)
-  ;; stop ido from suggesting when naming new file
+  ;; stop ido suggestions when naming new file
   (when (boundp 'ido-minor-mode-map-entry)
     (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
   ;; replaces stock completion with ido wherever possible - MELPA Stable
@@ -528,10 +526,9 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   :diminish undo-tree-mode
   :bind ("C-c u" . undo-tree-visualize)
   :init (global-undo-tree-mode)
-  :config
-  (with-eval-after-load 'evil
-    (setq evil-want-fine-undo t)
-    (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
+  :config (with-eval-after-load 'evil
+            (setq evil-want-fine-undo t)
+            (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
 
 ;; Eldoc - built-in
 (use-package eldoc
@@ -544,10 +541,10 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   :init
   (require 'em-term)
   (require 'em-smart)
+  :config
   (setq eshell-review-quick-commands nil
         eshell-smart-space-goes-to-end t
         eshell-where-to-jump 'begin)
-  :config
   (add-to-list 'eshell-visual-commands "htop")
   (add-to-list 'eshell-visual-commands "lftp")
   (add-to-list 'eshell-visual-commands "ssh")
@@ -558,17 +555,17 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 ;; Git - MELPA Stable
 (when (executable-find "git")
   (use-package magit
-    :init (setq vc-handled-backends (delq 'Git vc-handled-backends))
-    :config (global-set-key (kbd "C-c g g") 'magit-status))
+    :bind ("C-c g g" . magit-status)
+    :config (setq vc-handled-backends (delq 'Git vc-handled-backends)))
   (use-package git-timemachine
     :after magit
-    :config (global-set-key (kbd "C-c g t") 'git-timemachine)))
+    :bind ("C-c g t" . git-timemachine)))
 
 ;; Vim Tagbar-like imenu extension - MELPA Stable
 (use-package imenu-list
   :bind ("C-c i" . imenu-list-smart-toggle)
-  :init (setq imenu-list-focus-after-activation t
-              imenu-list-auto-resize t))
+  :config (setq imenu-list-focus-after-activation t
+                imenu-list-auto-resize t))
 
 ;; Org-mode - built-in
 (use-package org
@@ -657,7 +654,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
   (use-package yasnippet-snippets)
   ;; create temporary snippets - MELPA Stable
   (use-package auto-yasnippet)
-  ;; disable tab for snippet expansion to avoid conflicts with company-mode
+  ;; disable tab binding to avoid conflicts with company-mode
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   ;; use Ctrl-Shift-Space for snippet expansion
@@ -668,8 +665,8 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
       ("SPC" yas-expand "expand") ;; expand snippet
       ("d" yas-describe-tables "describe") ;; describe snippets for current mode
       ("w" aya-create "create-auto") ;; store temp yasnippet
-      ("y" aya-expand "expand-auto") ;; paste stored temp yasnippet
-      ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; print stored temp yasnippet
+      ("y" aya-expand "expand-auto") ;; paste temp yasnippet
+      ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; show temp yasnippet
       ("q" nil "quit"))
     (global-set-key (kbd "C-c h y") 'my-hydra/yasnippet/body))
   (define-key yas-minor-mode-map (kbd "C-S-SPC") #'yas-expand))
