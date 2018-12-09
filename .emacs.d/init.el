@@ -35,7 +35,7 @@
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (and (not (display-graphic-p)) (fboundp 'menu-bar-mode))
-  (menu-bar-mode -1))
+    (menu-bar-mode -1))
 
 ;; smooth scrolling in GUI (hold shift/control for 5 lines/full screen)
 (if (display-graphic-p)
@@ -64,16 +64,28 @@
 (if (and (display-graphic-p)
          (and my-font (not (string= my-font "")))
          (x-list-fonts my-font))
-  (set-face-attribute 'default nil
-                      :family my-font
-                      :height my-font-height
-                      :weight my-font-weight
-                      :width my-font-width))
+    (set-face-attribute 'default nil
+                        :family my-font
+                        :height my-font-height
+                        :weight my-font-weight
+                        :width my-font-width))
 
 ;; use left Option key as Meta and preserve right Option key on Mac OS X
 (when (eq system-type 'darwin)
   (setq mac-option-modifier 'meta
         mac-right-option-modifier nil))
+
+(defun my-yank-from-kill-ring ()
+  "Yank from the kill ring into buffer at point or region.
+Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
+  (interactive)
+  (let ((to_insert (completing-read
+                    "Yank : " (delete-duplicates kill-ring :test #'equal))))
+    ;; delete selected buffer region, if applicable
+    (when (and to_insert (region-active-p))
+      (delete-region (region-beginning) (region-end)))
+    ;; insert the selected entry from the kill ring
+    (insert to_insert)))
 
 (defun my-transpose-windows (selector)
   "Transpose buffers between current window and window after calling SELECTOR."
@@ -174,8 +186,8 @@
   (evil-leader-set-key-normal "M" 'evil-show-marks)
   (evil-leader-set-key-normal "r" 'list-registers)
   (evil-leader-set-key-normal "w" 'whitespace-mode)
-  (evil-leader-set-key-normal "y" (lambda () (interactive)
-                                    (popup-menu 'yank-menu)))
+  (evil-leader-set-key-normal "y" 'my-yank-from-kill-ring)
+  (evil-leader-set-key-visual "y" 'my-yank-from-kill-ring)
   (evil-leader-set-key-normal "#" 'comment-line)
   (evil-leader-set-key-visual "#" 'comment-or-uncomment-region)
   ;; make tabs in insert mode work like Vim
@@ -391,6 +403,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; typing any left bracket auto-inserts matching right bracket - built-in
 (use-package elec-pair
   :config
+  ;; don't automatically insert closing double quotes
   ;; see https://www.topbug.net/blog/2016/09/29/emacs-disable-certain-pairs-for-electric-pair-mode/
   (setq electric-pair-inhibit-predicate
       (lambda (c)
@@ -515,11 +528,8 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 (use-package recentf
   :bind ("C-c r" . recentf-open-files)
   :init (recentf-mode t)
-  :config
-  (setq recentf-max-menu-items 10
-        recentf-max-saved-items 50)
-  (with-eval-after-load 'evil
-    (evil-leader-set-key-normal "F" 'recentf-open-files)))
+  :config (setq recentf-max-menu-items 10
+                recentf-max-saved-items 50))
 
 ;; traverse undo history as a tree - GNU ELPA
 (use-package undo-tree
