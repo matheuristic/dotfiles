@@ -82,6 +82,17 @@
   :config
   (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
 
+;; Emacs Speaks Statistics (languages: R, S, SAS, Stata, Julia) - MELPA Stable
+(use-package ess
+  :mode (("\\.R$" . R-mode)
+         ("\\.jl$" . julia-mode))
+  :commands (R-mode
+             julia-mode
+             ess-eval-function
+             ess-eval-line
+             ess-eval-buffer
+             ess-switch-to-ESS))
+
 ;; Go - MELPA Stable (all packages)
 (when (executable-find "go")
   (use-package go-mode
@@ -295,7 +306,13 @@ Other      _t_         : toggle output    _C-l_/_C-L_   : clear cell/all output
             ("q" nil "quit" :color blue))
           (with-eval-after-load 'ein-notebooklist
             (define-key ein:notebook-mode-map (kbd "C-c h m")
-              'my-hydra/ein/body))))))
+              'my-hydra/ein/body)))))
+  ;; indentation and tab settings
+  (add-hook 'python-mode-hook
+      (lambda ()
+        (setq indent-tabs-mode nil)
+        (setq tab-width 4)
+        (setq python-indent-offset 4))))
 
 ;; YAML - MELPA Stable
 (use-package yaml-mode
