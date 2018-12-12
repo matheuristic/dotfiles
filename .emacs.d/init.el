@@ -401,11 +401,11 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; typing any left bracket auto-inserts matching right bracket - built-in
 (use-package elec-pair
   :config
-  ;; don't automatically insert closing double quotes
+  ;; don't automatically insert closing single or double quotes
   ;; see https://www.topbug.net/blog/2016/09/29/emacs-disable-certain-pairs-for-electric-pair-mode/
   (setq electric-pair-inhibit-predicate
       (lambda (c)
-        (if (char-equal c ?\") t (electric-pair-default-inhibit c))))
+        (if (memq c '(?\" ?\')) t (electric-pair-default-inhibit c))))
   (add-hook 'prog-mode-hook 'electric-pair-mode)
   (add-hook 'org-mode-hook 'electric-pair-mode)
   (add-hook 'markdown-mode-hook 'electric-pair-mode))
