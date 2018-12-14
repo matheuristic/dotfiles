@@ -46,6 +46,17 @@
 ;; front-end for interacting with external debuggers - MELPA Stable
 (use-package realgud)
 
+;; sidebar file explorer using a tree layout - MELPA Stable (all packages)
+(use-package treemacs
+  :bind ("C-c h T" . treemacs)
+  :defer 0.5
+  :config
+  ;; (setq treemacs-no-png-images t)
+  ;; (use-package treemacs-evil
+  ;;   :after evil)
+  (use-package treemacs-projectile
+    :after projectile))
+
 ;; manual code folding with fold persistence - MELPA Stable
 ;; NOTE: if using this, comment out usage of hideshow (conflicts)
 ;; (use-package vimish-fold
