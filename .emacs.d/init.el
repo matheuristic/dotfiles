@@ -345,14 +345,6 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (global-set-key (kbd "C-c h n") 'my-hydra/navigation/body)
   (global-set-key (kbd "C-c h w") 'my-hydra/window/body))
 
-;; display available keybindings in popup - GNU ELPA
-(use-package which-key
-  :diminish which-key-mode
-  :bind ("C-c h W" . which-key-show-top-level)
-  :init (which-key-mode 1)
-  :config (setq which-key-compute-remaps t
-                which-key-allow-multiple-replacements t))
-
 ;; alternative interface for M-x - MELPA Stable
 (use-package amx
   :bind ("M-X" . amx-major-mode-commands)
@@ -401,7 +393,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; typing any left bracket auto-inserts matching right bracket - built-in
 (use-package elec-pair
   :config
-  ;; don't automatically insert closing single or double quotes
+  ;; have elec-pair not automatically insert closing single or double quotes
   ;; see https://www.topbug.net/blog/2016/09/29/emacs-disable-certain-pairs-for-electric-pair-mode/
   (setq electric-pair-inhibit-predicate
       (lambda (c)
@@ -452,7 +444,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
         ido-everywhere t
         ido-use-filename-at-point 'guess
         ido-use-virtual-buffers t)
-  ;; stop ido suggestions when naming new file
+  ;; have ido not make suggestions when naming new file
   (when (boundp 'ido-minor-mode-map-entry)
     (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
   ;; replaces stock completion with ido wherever possible - MELPA Stable
@@ -524,15 +516,14 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 
 ;; recently opened files - built-in
 (use-package recentf
-  :bind ("C-c r" . recentf-open-files)
+  :bind ("C-c R" . recentf-open-files)
   :init (recentf-mode t)
   :config (setq recentf-max-menu-items 10
                 recentf-max-saved-items 50))
 
-;; traverse undo history as a tree - GNU ELPA
+;; traverse undo history as a tree, default keybinding is C-x u - GNU ELPA
 (use-package undo-tree
   :diminish undo-tree-mode
-  :bind ("C-c u" . undo-tree-visualize)
   :init (global-undo-tree-mode)
   :config (with-eval-after-load 'evil
             (setq evil-want-fine-undo t)
@@ -560,7 +551,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   (add-to-list 'eshell-visual-subcommands '("git" "log" "diff" "show"))
   (add-to-list 'eshell-visual-subcommands '("vagrant" "ssh")))
 
-;; Git - MELPA Stable
+;; Git - MELPA Stable (all packages)
 (when (executable-find "git")
   (use-package magit
     :bind ("C-c g g" . magit-status)
@@ -574,6 +565,14 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   :bind ("C-c i" . imenu-list-smart-toggle)
   :config (setq imenu-list-focus-after-activation t
                 imenu-list-auto-resize t))
+
+;; Multiple cursors - MELPA Stable
+(use-package multiple-cursors
+  :bind (("C-S-c C-S-c" . mc/edit-lines)
+         ("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("C-c C-<" . mc/mark-all-like-this)
+         ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 
 ;; Org-mode - built-in
 (use-package org
@@ -652,6 +651,14 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
 ;; Visit large files without loading it entirely - MELPA Stable
 (use-package vlf
   :config (require 'vlf-setup))
+
+;; display available keybindings in popup - GNU ELPA
+(use-package which-key
+  :diminish which-key-mode
+  :bind ("C-c h W" . which-key-show-top-level)
+  :init (which-key-mode 1)
+  :config (setq which-key-compute-remaps t
+                which-key-allow-multiple-replacements t))
 
 ;; template systems, i.e. expandable snippets - GNU ELPA
 (use-package yasnippet
