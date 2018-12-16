@@ -28,9 +28,6 @@
 ;; indent with soft tabs. Use C-q <TAB> for real tabs
 (setq-default indent-tabs-mode nil)
 
-;; guess default target dir for dired file ops using dired buffers in next window
-(setq dired-dwim-target t)
-
 ;; remove unused GUI elements
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -158,19 +155,19 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 ;; copies env vars from shell - MELPA Stable
 (when (eq system-type 'darwin)  ;; only for Mac OS X GUI mode
   (use-package exec-path-from-shell
-    :init
-    (when (memq window-system '(mac ns))
-      (exec-path-from-shell-initialize))))
+    :init (when (memq window-system '(mac ns))
+            (exec-path-from-shell-initialize))))
 
 ;; extensible vi layer for Emacs - MELPA Stable
 ;; use C-z to toggle between Evil and Emacs bindings, C-x C-z to suspend
 (use-package evil
-  :init (evil-mode t)
-  :config
+  :init
   (setq evil-want-C-u-scroll t ;; C-u goes half-page up like in Vim
         evil-insert-state-modes nil ;; clear Insert state modes
         evil-motion-state-modes nil ;; clear Motion state modes
         evil-default-state 'emacs) ;; use Emacs state as default
+  (evil-mode t)
+  :config
   (defvar evil-leader "<SPC>") ;; emulate Vim leader key in normal mode
   (defun evil-leader-set-key-normal (key fn)
     "Binds \"<evil-leader> KEY\" to interactively call FN in Evil normal mode."
@@ -178,9 +175,6 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (defun evil-leader-set-key-visual (key fn)
     "Binds \"<evil-leader> KEY\" to interactively call FN in Evil visual mode."
     (define-key evil-visual-state-map (kbd (concat evil-leader key)) fn))
-  (evil-leader-set-key-normal "b" 'switch-to-buffer)
-  (evil-leader-set-key-normal "d" 'dired)
-  (evil-leader-set-key-normal "e" 'find-file)
   (evil-leader-set-key-normal "M" 'evil-show-marks)
   (evil-leader-set-key-normal "r" 'list-registers)
   (evil-leader-set-key-normal "w" 'whitespace-mode)
@@ -354,12 +348,22 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 (use-package company
   :diminish company-mode
   :config
-  (setq company-selection-wrap-around t
-        company-dabbrev-downcase nil
+  (setq company-dabbrev-downcase nil
         company-idle-delay 0.25
-        company-minimum-prefix-length 2)
+        company-minimum-prefix-length 2
+        company-selection-wrap-around t
+        company-show-numbers t  ;; use M-<number> to directly choose completion
+        company-tooltip-align-annotations t)
   (company-tng-configure-default) ;; Tab and Go behavior
   (add-hook 'after-init-hook 'global-company-mode))
+
+;; Dired - built-in
+(use-package dired
+  :ensure nil ;; dired does not have updated packages in ELPA/MELPA
+  :config (setq dired-dwim-target t ;; use neighboring dired buffer as default target dir
+                dired-listing-switches "-alhvF" ;; more readable file listings
+                dired-recursive-copies 'always ;; always copy recursively
+                dired-recursive-deletes 'always)) ;; always delete recursively
 
 ;; Ediff - built-in
 (use-package ediff
@@ -390,10 +394,29 @@ Windows  _L_ : line-wise   _W_ : word-wise
       ("q" nil "quit" :color blue))
     (global-set-key (kbd "C-c h d") 'my-hydra/ediff/body)))
 
+;; Eldoc - built-in
+(use-package eldoc
+  :diminish eldoc-mode
+  :init (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
+
+;; Eshell - built-in
+(use-package eshell
+  :commands (eshell eshell-command)
+  :init
+  (require 'em-term)
+  (require 'em-smart)
+  :config
+  (setq eshell-review-quick-commands nil
+        eshell-smart-space-goes-to-end t
+        eshell-where-to-jump 'begin)
+  (add-to-list 'eshell-visual-commands '("htop" "lftp" "ssh" "vim"))
+  (add-to-list 'eshell-visual-subcommands '("git" "log" "diff" "show"))
+  (add-to-list 'eshell-visual-subcommands '("vagrant" "ssh")))
+
 ;; typing any left bracket auto-inserts matching right bracket - built-in
 (use-package elec-pair
   :config
-  ;; have elec-pair not automatically insert closing single or double quotes
+  ;; do not automatically insert closing single or double quotes
   ;; see https://www.topbug.net/blog/2016/09/29/emacs-disable-certain-pairs-for-electric-pair-mode/
   (setq electric-pair-inhibit-predicate
       (lambda (c)
@@ -444,12 +467,108 @@ Windows  _L_ : line-wise   _W_ : word-wise
         ido-everywhere t
         ido-use-filename-at-point 'guess
         ido-use-virtual-buffers t)
-  ;; have ido not make suggestions when naming new file
+  ;; do not make suggestions when naming new file
   (when (boundp 'ido-minor-mode-map-entry)
     (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
   ;; replaces stock completion with ido wherever possible - MELPA Stable
   (use-package ido-completing-read+
     :init (ido-ubiquitous-mode t)))
+
+;; Vim Tagbar-like imenu extension - MELPA Stable
+(use-package imenu-list
+  :bind ("C-c i" . imenu-list-smart-toggle)
+  :config (setq imenu-list-focus-after-activation t
+                imenu-list-auto-resize t))
+
+;; Git - MELPA Stable (all packages)
+(when (executable-find "git")
+  (use-package magit
+    :bind ("C-c g g" . magit-status)
+    :config (setq vc-handled-backends (delq 'Git vc-handled-backends)))
+  (use-package git-timemachine
+    :after magit
+    :bind ("C-c g t" . git-timemachine)))
+
+;; Multiple cursors - MELPA Stable
+(use-package multiple-cursors
+  :bind (("C-S-c C-S-c" . mc/edit-lines)
+         ("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("C-c C-<" . mc/mark-all-like-this)
+         ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
+
+;; Org-mode - built-in
+(use-package org
+  :bind (("C-c a" . org-agenda)
+         ("C-c l" . org-store-link))
+  :config
+  (require 'org-agenda)
+  (setq org-agenda-start-on-weekday nil
+        org-catch-invisible-edits 'error
+        org-log-into-drawer t
+        org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+                            (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANCELED(c@/!)"))
+        org-use-fast-todo-selection t
+        org-use-speed-commands t
+        org-startup-indented t)
+  (add-hook 'org-mode-hook #'visual-line-mode)
+  (defhydra my-hydra/org-agenda (:color amaranth :hint nil)
+    "
+Org agenda
+
+Headline    _ht_  : set status   _hk_  : kill         _hr_  : refile
+            _hA_  : archive      _h:_  : set tags     _hp_  : set priority
+
+Visit Entry _SPC_ : other window _TAB_ : & go to loc  _RET_ : & del other wins
+            _o_   : link
+
+Date        _ds_  : schedule     _dd_  : set deadline _dt_  : timestamp
+
+View        _vd_  : day          _vw_  : week         _vm_  : month
+            _vn_  : next span    _vp_  : prev span    _vr_  : reset
+
+Filter      _ft_  : by tag       _fc_  : by category  _fh_  : by top headline
+            _fx_  : by regex     _fd_  : reset
+
+Clock       _ci_  : in           _co_  : out          _cq_  : cancel
+            _cg_  : goto
+
+Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
+
+"
+    ("ht" org-agenda-todo)
+    ("hk" org-agenda-kill)
+    ("hr" org-agenda-refile)
+    ("hA" org-agenda-archive-default)
+    ("h:" org-agenda-set-tags)
+    ("hp" org-agenda-priority)
+    ("SPC" org-agenda-show-and-scroll-up)
+    ("TAB" org-agenda-goto :color blue)
+    ("RET" org-agenda-switch-to :color blue)
+    ("o" link-hint-open-link :color blue)
+    ("ds" org-agenda-schedule)
+    ("dd" org-agenda-deadline)
+    ("dt" org-agenda-date-prompt)
+    ("vd" org-agenda-day-view)
+    ("vw" org-agenda-week-view)
+    ("vm" org-agenda-month-view)
+    ("vn" org-agenda-later)
+    ("vp" org-agenda-earlier)
+    ("vr" org-agenda-reset-view)
+    ("ft" org-agenda-filter-by-tag)
+    ("fc" org-agenda-filter-by-category)
+    ("fh" org-agenda-filter-by-top-headline)
+    ("fx" org-agenda-filter-by-regexp)
+    ("fd" org-agenda-filter-remove-all)
+    ("ci" org-agenda-clock-in :color blue)
+    ("co" org-agenda-clock-out)
+    ("cq" org-agenda-clock-cancel)
+    ("cg" org-agenda-clock-goto :color blue)
+    ("gr" org-agenda-redo)
+    ("gd" org-agenda-goto-date)
+    ("." org-agenda-goto-today)
+    ("q" nil "quit" :color blue))
+  (define-key org-agenda-mode-map (kbd "C-c h m") 'my-hydra/org-agenda/body))
 
 ;; project interaction library - MELPA Stable
 (use-package projectile
@@ -460,7 +579,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
                             " Proj"
                           (format " Proj[%s]" (projectile-project-name)))))
   (setq projectile-switch-project-action 'projectile-commander)
-  ;; define function to use for grepping in projectile, prefer ripgrep to grep
+  ;; define projectile grepping function, prefer ripgrep to grep
   (if (executable-find "rg")
       (progn
         (use-package projectile-ripgrep) ;; load ripgrep support
@@ -528,125 +647,6 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   :config (with-eval-after-load 'evil
             (setq evil-want-fine-undo t)
             (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
-
-;; Eldoc - built-in
-(use-package eldoc
-  :diminish eldoc-mode
-  :init (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
-
-;; Eshell - built-in
-(use-package eshell
-  :commands (eshell eshell-command)
-  :init
-  (require 'em-term)
-  (require 'em-smart)
-  :config
-  (setq eshell-review-quick-commands nil
-        eshell-smart-space-goes-to-end t
-        eshell-where-to-jump 'begin)
-  (add-to-list 'eshell-visual-commands "htop")
-  (add-to-list 'eshell-visual-commands "lftp")
-  (add-to-list 'eshell-visual-commands "ssh")
-  (add-to-list 'eshell-visual-commands "vim")
-  (add-to-list 'eshell-visual-subcommands '("git" "log" "diff" "show"))
-  (add-to-list 'eshell-visual-subcommands '("vagrant" "ssh")))
-
-;; Git - MELPA Stable (all packages)
-(when (executable-find "git")
-  (use-package magit
-    :bind ("C-c g g" . magit-status)
-    :config (setq vc-handled-backends (delq 'Git vc-handled-backends)))
-  (use-package git-timemachine
-    :after magit
-    :bind ("C-c g t" . git-timemachine)))
-
-;; Vim Tagbar-like imenu extension - MELPA Stable
-(use-package imenu-list
-  :bind ("C-c i" . imenu-list-smart-toggle)
-  :config (setq imenu-list-focus-after-activation t
-                imenu-list-auto-resize t))
-
-;; Multiple cursors - MELPA Stable
-(use-package multiple-cursors
-  :bind (("C-S-c C-S-c" . mc/edit-lines)
-         ("C->" . mc/mark-next-like-this)
-         ("C-<" . mc/mark-previous-like-this)
-         ("C-c C-<" . mc/mark-all-like-this)
-         ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
-
-;; Org-mode - built-in
-(use-package org
-  :bind (("C-c a" . org-agenda)
-         ("C-c l" . org-store-link))
-  :config
-  (require 'org-agenda)
-  (setq org-agenda-start-on-weekday nil
-        org-catch-invisible-edits 'error
-        org-log-into-drawer t
-        org-todo-keywords
-        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-          (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANCELED(c@/!)"))
-        org-use-fast-todo-selection t
-        org-use-speed-commands t
-        org-startup-indented t)
-  (add-hook 'org-mode-hook #'visual-line-mode)
-  (defhydra my-hydra/org-agenda (:color amaranth :hint nil)
-    "
-Org agenda
-
-Headline    _ht_  : set status   _hk_  : kill         _hr_  : refile
-            _hA_  : archive      _h:_  : set tags     _hp_  : set priority
-
-Visit Entry _SPC_ : other window _TAB_ : & go to loc  _RET_ : & del other wins
-            _o_   : link
-
-Date        _ds_  : schedule     _dd_  : set deadline _dt_  : timestamp
-
-View        _vd_  : day          _vw_  : week         _vm_  : month
-            _vn_  : next span    _vp_  : prev span    _vr_  : reset
-
-Filter      _ft_  : by tag       _fc_  : by category  _fh_  : by top headline
-            _fx_  : by regex     _fd_  : reset
-
-Clock       _ci_  : in           _co_  : out          _cq_  : cancel
-            _cg_  : goto
-
-Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
-
-"
-    ("ht" org-agenda-todo)
-    ("hk" org-agenda-kill)
-    ("hr" org-agenda-refile)
-    ("hA" org-agenda-archive-default)
-    ("h:" org-agenda-set-tags)
-    ("hp" org-agenda-priority)
-    ("SPC" org-agenda-show-and-scroll-up)
-    ("TAB" org-agenda-goto :color blue)
-    ("RET" org-agenda-switch-to :color blue)
-    ("o" link-hint-open-link :color blue)
-    ("ds" org-agenda-schedule)
-    ("dd" org-agenda-deadline)
-    ("dt" org-agenda-date-prompt)
-    ("vd" org-agenda-day-view)
-    ("vw" org-agenda-week-view)
-    ("vm" org-agenda-month-view)
-    ("vn" org-agenda-later)
-    ("vp" org-agenda-earlier)
-    ("vr" org-agenda-reset-view)
-    ("ft" org-agenda-filter-by-tag)
-    ("fc" org-agenda-filter-by-category)
-    ("fh" org-agenda-filter-by-top-headline)
-    ("fx" org-agenda-filter-by-regexp)
-    ("fd" org-agenda-filter-remove-all)
-    ("ci" org-agenda-clock-in :color blue)
-    ("co" org-agenda-clock-out)
-    ("cq" org-agenda-clock-cancel)
-    ("cg" org-agenda-clock-goto :color blue)
-    ("gr" org-agenda-redo)
-    ("gd" org-agenda-goto-date)
-    ("." org-agenda-goto-today)
-    ("q" nil "quit" :color blue))
-  (define-key org-agenda-mode-map (kbd "C-c h m") 'my-hydra/org-agenda/body))
 
 ;; Visit large files without loading it entirely - MELPA Stable
 (use-package vlf

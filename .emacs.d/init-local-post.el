@@ -218,7 +218,7 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
         ("g" venv-cdvirtualenv "cd")
         ("c" venv-cpvirtualenv "cp")
         ("q" nil "quit"))
-      (define-key python-mode-map (kbd "C-c h v") 'my-hydra/virtualenv/body)))
+      (global-set-key (kbd "C-c h v") 'my-hydra/virtualenv/body)))
   ;; client for traad refactoring tool; requires python virtualenv
   (use-package traad
     :after anaconda-mode
