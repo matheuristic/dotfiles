@@ -189,7 +189,7 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
     :config
     (with-eval-after-load 'company
       (add-to-list 'company-backends 'company-anaconda)))
-  ;; virtualenv tool
+  ;; virtualenv tool, requires python virtualenv
   (use-package virtualenvwrapper
     ;; enable the MELPA repository and uncomment below if the version of
     ;; virtualenvwrapper.el in MELPA Stable is too old for emacs-traad
@@ -219,9 +219,12 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
         ("c" venv-cpvirtualenv "cp")
         ("q" nil "quit"))
       (global-set-key (kbd "C-c h v") 'my-hydra/virtualenv/body)))
-  ;; client for traad refactoring tool; requires python virtualenv
+  ;; client for traad tool for refactoring Python code using rope,
+  ;; requires Python rope
+  ;; Call traad-install-server before first usage to install the
+  ;; Python server into a virtualenv specified by traad-environment-name
   (use-package traad
-    :after anaconda-mode
+    :after (anaconda-mode virtualenvwrapper)
     :config
     (with-eval-after-load 'hydra
       (defhydra my-hydra/traad (:color teal :columns 4)
