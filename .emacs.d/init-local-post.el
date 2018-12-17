@@ -70,6 +70,32 @@
 ;;    ;; enable only for programming modes
 ;;    :config (add-hook 'prog-mode-hook 'evil-vimish-fold-mode)))
 
+
+;; NON-LANGUAGE-SPECIFIC
+
+;; conda - MELPA Stable
+(use-package conda
+  :init (setq conda-anaconda-home "~/miniconda3") ;; conda root directory
+  :config
+  (conda-env-initialize-interactive-shells) ;; interactive shell support
+  (conda-env-initialize-eshell) ;; eshell support
+  (conda-env-autoactivate-mode t) ;; auto-activation using proj environment.yml
+  (setq-default mode-line-format
+                (cons
+                 '(:eval (if conda-env-current-name
+                             (format "conda:%s" conda-env-current-name)
+                           ""))
+                 mode-line-format))
+  (with-eval-after-load 'hydra
+    (defhydra my-hydra/conda (:color teal :columns 4)
+      "conda"
+      ("a" conda-env-activate "activate")
+      ("d" conda-env-deactivate "deactivate")
+      ("l" conda-env-list "list")
+      ("q" nil "quit"))
+    (global-set-key (kbd "C-c h C") 'my-hydra/conda/body)))
+
+
 ;; LANGUAGE-SPECIFIC
 
 ;; CSV - GNU ELPA
@@ -189,43 +215,22 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
     :config
     (with-eval-after-load 'company
       (add-to-list 'company-backends 'company-anaconda)))
-  ;; virtualenv tool, requires python virtualenv
-  (use-package virtualenvwrapper
-    ;; enable the MELPA repository and uncomment below if the version of
-    ;; virtualenvwrapper.el in MELPA Stable is too old for emacs-traad
-    ;; :pin "MELPA" ;; name should match that assigned to MELPA repository
+  ;; client for traad refactoring tool using the rope package,
+  ;; which gets auto-installed using either method below
+  ;; if using virtualenv: call traad-install-server before first usage
+  ;;   to install the Python server into a virtualenv specified by
+  ;;   traad-environment-name
+  ;; if using conda: set up a new environment for each desired Python
+  ;;   version with its own version of traad installed, which requires
+  ;;   $ conda activate <environment_name>
+  ;;   $ conda install pip
+  ;;   $ pip install traad
+  (use-package traad
     :after anaconda-mode
     :config
-    (venv-initialize-interactive-shells)
-    (venv-initialize-eshell)
-    ;; set virtualenv storage dir if it differs from default ~/.virtualenvs
-    ;; (setq venv-location "~/miniconda3/envs")  ;; miniconda3
-    ;; display currently active virtualenv on the mode line
-    (setq-default mode-line-format
-                  (cons
-                   '(:eval (if venv-current-name
-                               (format "venv:%s" venv-current-name)
-                             ""))
-                   mode-line-format))
-    (with-eval-after-load 'hydra
-      (defhydra my-hydra/virtualenv (:color teal :columns 4)
-        "virtualenv"
-        ("w" venv-workon "workon")
-        ("d" venv-deactivate "deactivate")
-        ("m" venv-mkvirtualenv-using "make")
-        ("r" venv-rmvirtualenv "remove")
-        ("l" venv-lsvirtualenv "list")
-        ("g" venv-cdvirtualenv "cd")
-        ("c" venv-cpvirtualenv "cp")
-        ("q" nil "quit"))
-      (global-set-key (kbd "C-c h v") 'my-hydra/virtualenv/body)))
-  ;; client for traad tool for refactoring Python code using rope,
-  ;; requires Python rope
-  ;; Call traad-install-server before first usage to install the
-  ;; Python server into a virtualenv specified by traad-environment-name
-  (use-package traad
-    :after (anaconda-mode virtualenvwrapper)
-    :config
+    ;; if using conda, set path to traad binary here
+    (with-eval-after-load 'conda
+      (setq traad-server-program "~/miniconda3/envs/traad/bin/traad"))
     (with-eval-after-load 'hydra
       (defhydra my-hydra/traad (:color teal :columns 4)
         "traad"

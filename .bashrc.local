@@ -1,9 +1,7 @@
 # ~/.bash_local: local bash path and environment settings
 
-# Conda activate and deactivate commands
-MINICONDAPATH=$HOME/miniconda3
-export PATH=$MINICONDAPATH/bin:$PATH
-. $MINICONDAPATH/etc/profile.d/conda.sh
+# conda
+. $HOME/miniconda3/etc/profile.d/conda.sh
 
 # Prevent Mac from sleeping for given time: $ keepawake <hrs>
 if [[ "x`uname`" == "xDarwin" ]]; then

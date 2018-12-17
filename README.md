@@ -23,9 +23,9 @@ from the root directory of the repository. The files will be set up as symlinks 
 
 Optional Emacs UI elements and support for specific file formats and programming languages can be set up by copying the [post-init](.emacs.d/init-local-post.el) and modifying it as needed.
 
-## Setting up base environment
+## Setting up conda environment
 
-If using [Anaconda](https://www.anaconda.com/download/) or [Miniconda](https://conda.io/miniconda.html), basic packages for Python and other development can be installed via:
+If using [Anaconda](https://www.anaconda.com/download/) or [Miniconda](https://conda.io/miniconda.html), basic packages for Python development used for each project can be installed via:
 ```Shell
 $ conda install --file base_conda_packages.txt
 ```
@@ -33,7 +33,7 @@ for a currently activated environment, or
 ```Shell
 $ conda create --name <env> --file base_conda_packages.txt
 ```
-if creating a new environment for Python development.
+if creating a new environment.
 
 ## Getting specific files
 

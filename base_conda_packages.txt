@@ -4,5 +4,3 @@
 jedi
 pylint
 ripgrep
-rope
-virtualenv
