@@ -30,7 +30,7 @@
 ;; NOTE: if using this, comment out usage of vimish-fold below (conflicts)
 (use-package hideshow
   :diminish hs-minor-mode
-  :config (add-hook 'prog-mode-hook 'hs-minor-mode)) 
+  :config (add-hook 'prog-mode-hook 'hs-minor-mode))
 
 ;; powerline - MELPA Stable
 (use-package powerline

@@ -25,17 +25,26 @@ Optional Emacs UI elements and support for specific file formats and programming
 
 ## Setting up conda environment
 
-If using [Anaconda](https://www.anaconda.com/download/) or [Miniconda](https://conda.io/miniconda.html), basic packages for Python development used for each project can be installed via:
+If using [Anaconda](https://www.anaconda.com/download/) or [Miniconda](https://conda.io/miniconda.html), basic packages for Python development can be set up via:
 ```Shell
 $ conda install --file base_conda_packages.txt
 ```
-for a currently activated environment, or
+to install the packages into a currently activated environment, or
 ```Shell
 $ conda create --name <env> --file base_conda_packages.txt
 ```
-if creating a new environment.
+to create a new environment and install the packages into it.
 
-## Getting specific files
+## Project-specific pylint configuration
+
+To specify a project-specific pylintrc file, create a pylintrc file at the Python project root directory and add the appropriate `init-hook` to the master section:
+```
+[MASTER]
+
+init-hook="from pylint.config import find_pylintrc; import os, sys; sys.path.append(os.path.dirname(find_pylintrc()))"
+```
+
+## Getting specific config files directly from Github
 
 For \*nix machines:
 ```Shell
