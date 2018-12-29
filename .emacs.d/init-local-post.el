@@ -13,21 +13,12 @@
 
 ;; USER INTERFACE
 
-;; return to normal mode in evil with custom key seq - MELPA Stable
-(use-package evil-escape
-  :after evil
-  :diminish evil-escape-mode
-  :config
-  (evil-escape-mode 1)
-  (setq-default evil-escape-key-sequence "jk"))
-
 ;; gruvbox color scheme - MELPA Stable
 (use-package gruvbox-theme
   :config (load-theme 'gruvbox t))
 
 ;; syntax-block code folding (alt: origami.el) - built-in
 ;; evil has vim-like default bindings for this (za, zc, zo, zM, zR)
-;; NOTE: if using this, comment out usage of vimish-fold below (conflicts)
 (use-package hideshow
   :diminish hs-minor-mode
   :config (add-hook 'prog-mode-hook 'hs-minor-mode))
@@ -56,30 +47,18 @@
   :defer 0.5
   :config
   ;; (setq treemacs-no-png-images t)
+  ;; ;; evil bindings for treemacs
   ;; (use-package treemacs-evil
   ;;   :after evil)
   (use-package treemacs-projectile
     :after projectile))
-
-;; manual code folding with fold persistence - MELPA Stable
-;; NOTE: if using this, comment out usage of hideshow (conflicts)
-;; (use-package vimish-fold
-;;   :after evil
-;;   :config
-;;   ;; integration with evil-mode - MELPA
-;;   ;; in evil normal mode, vim-like bindings are available
-;;   ;; (zf, zd, za, zc, zo, zm, zr)
-;;   (use-package evil-vimish-fold
-;;    :diminish evil-vimish-fold-mode
-;;    ;; enable only for programming modes
-;;    :config (add-hook 'prog-mode-hook 'evil-vimish-fold-mode)))
 
 
 ;; NON-LANGUAGE-SPECIFIC
 
 ;; conda - MELPA Stable
 (use-package conda
-  :init (setq conda-anaconda-home "~/miniconda3") ;; conda root directory
+  :init (setq conda-anaconda-home "~/miniconda3") ;; conda envs root directory
   :config
   (conda-env-initialize-interactive-shells) ;; interactive shell support
   (conda-env-initialize-eshell) ;; eshell support
@@ -87,12 +66,15 @@
   (setq-default mode-line-format
                 (cons
                  '(:eval (if conda-env-current-name
-                             (format "conda:%s" conda-env-current-name)
+                             (format "conda:%s"
+                                     (truncate-string-to-width
+                                      conda-env-current-name 9 nil nil "…"))
                            ""))
                  mode-line-format))
   (with-eval-after-load 'hydra
     (defhydra my-hydra/conda (:color teal :columns 4)
-      "conda"
+      "
+conda %s(if conda-env-current-name (concat \"[\" conda-env-current-name \"]\") \"\")"
       ("a" conda-env-activate "activate")
       ("d" conda-env-deactivate "deactivate")
       ("l" conda-env-list "list")
@@ -206,7 +188,7 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
 
 ;; Python - MELPA Stable (all packages)
 (when (executable-find "python")
-  ;; Code navigation, documentation lookup and completion; requires python jedi
+  ;; Code navigation, documentation lookup and completion, requires python jedi
   (use-package anaconda-mode
     :commands anaconda-mode
     :diminish anaconda-mode
@@ -219,16 +201,17 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
     :config
     (with-eval-after-load 'company
       (add-to-list 'company-backends 'company-anaconda)))
-  ;; client for traad refactoring tool using the rope package,
-  ;; which gets auto-installed using either method below
-  ;; if using virtualenv: call traad-install-server before first usage
-  ;;   to install the Python server into a virtualenv specified by
-  ;;   traad-environment-name
-  ;; if using conda: set up a new environment for each desired Python
-  ;;   version with its own version of traad installed, which requires
+  ;; client for traad refactoring tool using the rope package
+  ;; before usage, set up the Python traad server with either method below
+  ;; - using virtualenv: call `M-x traad-install-server' to install the
+  ;;   server for the default Python version into virtualenv specified by
+  ;;   `traad-environment-name'
+  ;; - using conda: set up a new environment for each desired Python
+  ;;   version, install the server for that environment using pip
   ;;   $ conda activate <environment_name>
   ;;   $ conda install pip
   ;;   $ pip install traad
+  ;;   and set `traad-server-program' to the environment's traad binary path
   (use-package traad
     :after anaconda-mode
     :config
@@ -249,7 +232,6 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
         ("E" traad-encapsulate-field "encapsulate")
         ("H" traad-display-history "history")
         ("K" traad-kill-all "kill")
-        ("I" traad-install-server "install")
         ("q" nil "quit"))
       (define-key python-mode-map (kbd "C-c h t") 'my-hydra/traad/body)))
   ;; Jupyter notebook client
