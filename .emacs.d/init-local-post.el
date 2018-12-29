@@ -32,16 +32,20 @@
   :diminish hs-minor-mode
   :config (add-hook 'prog-mode-hook 'hs-minor-mode))
 
-;; powerline - MELPA Stable
-(use-package powerline
-  :config
-  (setq powerline-default-separator nil)
-  ;; workaround for sRGB colorspace issues in Mac OS X Emacs
-  (if (and (eq system-type 'darwin)
-           (display-graphic-p)
-           (not powerline-default-separator))
-     (setq ns-use-srgb-colorspace nil))
-  (powerline-center-evil-theme))
+;; customize GUI mode line - MELPA Stable (all packages)
+(when (display-graphic-p)
+  ;; clickable minor-mode menu in the mode line
+  ;; menu can also be opened with `M-x minions-minor-mode-menu'
+  (use-package minions
+    :init (minions-mode 1))
+  ;; display mode line elements in tabs and ribbons
+  (use-package moody
+    :config
+    (setq x-underline-at-descent-line t)
+    (moody-replace-mode-line-buffer-identification)
+    (moody-replace-vc-mode)
+    (if (eq system-type 'darwin)
+        (setq moody-slant-function 'moody-slant-apple-rgb))))
 
 ;; front-end for interacting with external debuggers - MELPA Stable
 (use-package realgud)
