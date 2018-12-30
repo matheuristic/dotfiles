@@ -575,14 +575,14 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
 
 ;; project interaction library - MELPA Stable
 (use-package projectile
-  :delight '(:eval (concat " [" (projectile-project-name) "]"))
+  :delight projectile-mode '(:eval (concat " [" (projectile-project-name) "]"))
   :init (projectile-mode)
   :config
   (setq projectile-switch-project-action 'projectile-commander)
-  ;; define projectile grepping function, prefer ripgrep to grep
+  ;; use ripgrep for grepping in projectile if it is available
   (if (executable-find "rg")
       (progn
-        (use-package projectile-ripgrep) ;; load ripgrep support
+        (use-package projectile-ripgrep)
         (defalias 'my-projectile-search-fun 'projectile-ripgrep))
     (defalias 'my-projectile-search-fun 'projectile-grep))
   (with-eval-after-load 'hydra
