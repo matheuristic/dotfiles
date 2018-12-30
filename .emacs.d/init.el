@@ -158,8 +158,11 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
     :init (when (memq window-system '(mac ns))
             (exec-path-from-shell-initialize))))
 
+;; customize how mode names appear in the mode line - ELPA
+(use-package delight)
+
 ;; extensible vi layer for Emacs - MELPA Stable
-;; use C-z to toggle between Evil and Emacs bindings, C-x C-z to suspend
+;; use C-z to toggle between Evil and Emacs bindings, and C-x C-z to suspend
 (use-package evil
   :init
   (setq evil-want-C-u-scroll t ;; C-u goes half-page up like in Vim
@@ -346,7 +349,7 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 
 ;; text completion framework - MELPA Stable
 (use-package company
-  :diminish company-mode
+  :delight company-mode
   :config
   (setq company-dabbrev-downcase nil
         company-idle-delay 0.25
@@ -396,7 +399,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
 
 ;; Eldoc - built-in
 (use-package eldoc
-  :diminish eldoc-mode
+  :delight eldoc-mode
   :init (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
 
 ;; Eshell - built-in
@@ -427,7 +430,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
 
 ;; syntax checker, replaces Flymake - MELPA Stable
 (use-package flycheck
-  :diminish flycheck-mode
+  :delight flycheck-mode
   :init (global-flycheck-mode)
   :config
   (with-eval-after-load 'hydra
@@ -572,12 +575,9 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
 
 ;; project interaction library - MELPA Stable
 (use-package projectile
+  :delight '(:eval (concat " [" (projectile-project-name) "]"))
   :init (projectile-mode)
   :config
-  (setq-default projectile-mode-line
-                '(:eval (if (file-remote-p default-directory)
-                            " Proj"
-                          (format " Proj[%s]" (projectile-project-name)))))
   (setq projectile-switch-project-action 'projectile-commander)
   ;; define projectile grepping function, prefer ripgrep to grep
   (if (executable-find "rg")
@@ -642,7 +642,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 
 ;; traverse undo history as a tree, default keybinding is C-x u - GNU ELPA
 (use-package undo-tree
-  :diminish undo-tree-mode
+  :delight undo-tree-mode
   :init (global-undo-tree-mode)
   :config (with-eval-after-load 'evil
             (setq evil-want-fine-undo t)
@@ -654,7 +654,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 
 ;; display available keybindings in popup - GNU ELPA
 (use-package which-key
-  :diminish which-key-mode
+  :delight which-key-mode
   :bind ("C-c h W" . which-key-show-top-level)
   :init (which-key-mode 1)
   :config (setq which-key-compute-remaps t
@@ -662,7 +662,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 
 ;; template systems, i.e. expandable snippets - GNU ELPA
 (use-package yasnippet
-  :diminish yas-minor-mode
+  :delight yas-minor-mode
   :init (yas-global-mode 1)
   :config
   ;; official snippets - MELPA Stable
@@ -672,7 +672,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   ;; disable tab binding to avoid conflicts with company-mode
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
-  ;; use Ctrl-Shift-Space for snippet expansion
+  ;; use Ctrl-Shift-Space to expand snippets
   (define-key yas-minor-mode-map (kbd "<C-S-spc>") #'yas-expand)
   (with-eval-after-load 'hydra
     (defhydra my-hydra/yasnippet (:color teal :columns 3)

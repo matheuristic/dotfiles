@@ -20,15 +20,16 @@
 ;; syntax-block code folding (alt: origami.el) - built-in
 ;; evil has vim-like default bindings for this (za, zc, zo, zM, zR)
 (use-package hideshow
-  :diminish hs-minor-mode
+  :delight hs-minor-mode
   :config (add-hook 'prog-mode-hook 'hs-minor-mode))
 
 ;; customize GUI mode line - MELPA Stable (all packages)
 (when (display-graphic-p)
-  ;; clickable minor-mode menu in the mode line
+  ;; mouse-clickable interactive minor-mode menu in the mode line
   ;; menu can also be opened with `M-x minions-minor-mode-menu'
   (use-package minions
-    :init (minions-mode 1))
+    :init (minions-mode 1)
+    :config (setq minions-direct '(projectile-mode)))
   ;; display mode line elements in tabs and ribbons
   (use-package moody
     :config
@@ -100,10 +101,9 @@ conda %s(if conda-env-current-name (concat \"[\" conda-env-current-name \"]\") \
     ("q" nil "quit" :color blue))
   (define-key csv-mode-map (kbd "C-c h m") 'my-hydra/csv-mode/body))
 
-;; Dockerfile - MELPA Stable
+;; Dockerfile support, C-c C-b to an build image - MELPA Stable
 (use-package dockerfile-mode
-  :config
-  (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
+  :config (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
 
 ;; Emacs Speaks Statistics (languages: R, S, SAS, Stata, Julia) - MELPA Stable
 (use-package ess
@@ -191,7 +191,7 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
   ;; Code navigation, documentation lookup and completion, requires python jedi
   (use-package anaconda-mode
     :commands anaconda-mode
-    :diminish anaconda-mode
+    :delight anaconda-mode
     :init
     (add-hook 'python-mode-hook 'anaconda-mode)
     (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
