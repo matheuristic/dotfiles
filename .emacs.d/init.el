@@ -53,10 +53,11 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
-;; set GUI font
-(defvar my-font (if (eq system-type 'darwin) "Menlo" "DejaVu Sans Mono"))
+;; set GUI font, Input font downloadable from http://input.fontbureau.com/
+;; recommended customizations: Pragmata Pro style, 1.1x line spacing
+(defvar my-font "Input Mono Narrow")
 (defvar my-font-height (if (eq system-type 'darwin) 140 110))
-(defvar my-font-weight (if (eq system-type 'darwin) 'light 'normal))
+(defvar my-font-weight 'normal)
 (defvar my-font-width 'normal)
 (if (and (display-graphic-p)
          (and my-font (not (string= my-font "")))
@@ -124,15 +125,11 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 (dolist (project (directory-files site-lisp-dir t "\\w+"))
   (when (file-directory-p project) (add-to-list 'load-path project)))
 
-;; load local pre-init file ~/.emacs.d/init-local-pre.el
-(let ((local-f (expand-file-name "init-local-pre.el" user-emacs-directory)))
-  (if (file-exists-p local-f) (load-file local-f)))
-
 ;; use package.el with given ELPA-compatible package repositories
 (require 'package)
 (setq package-enable-at-startup nil)
 (setq package-archives
-      '(("GNU ELPA"     . "http://elpa.gnu.org/packages/")
+      '(("GNU ELPA"     . "https://elpa.gnu.org/packages/")
         ("MELPA Stable" . "https://stable.melpa.org/packages/")
         ("MELPA"        . "https://melpa.org/packages/"))
       package-archive-priorities
@@ -147,6 +144,7 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (package-refresh-contents)
   (package-install 'use-package))
 
+;; preload use-package and bind-key to reduce load time
 (eval-when-compile
   (require 'use-package)
   (require 'bind-key)
@@ -579,7 +577,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
   :init (projectile-mode)
   :config
   (setq projectile-switch-project-action 'projectile-commander)
-  ;; use ripgrep for grepping in projectile if it is available
+  ;; use ripgrep for grepping in projectile if available
   (if (executable-find "rg")
       (progn
         (use-package projectile-ripgrep)
@@ -673,7 +671,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   ;; use Ctrl-Shift-Space to expand snippets
-  (define-key yas-minor-mode-map (kbd "<C-S-spc>") #'yas-expand)
+  (define-key yas-minor-mode-map (kbd "<C-S-SPC>") #'yas-expand)
   (with-eval-after-load 'hydra
     (defhydra my-hydra/yasnippet (:color teal :columns 3)
       "YASnippet"
@@ -686,8 +684,8 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
     (global-set-key (kbd "C-c h y") 'my-hydra/yasnippet/body))
   (define-key yas-minor-mode-map (kbd "C-S-SPC") #'yas-expand))
 
-;; load local post-init file ~/.emacs.d/init-local-post.el
-(let ((local-f (expand-file-name "init-local-post.el" user-emacs-directory)))
+;; load local post-init file ~/.emacs.d/init-local.el
+(let ((local-f (expand-file-name "init-local.el" user-emacs-directory)))
   (if (file-exists-p local-f) (load-file local-f)))
 
 (provide 'init)

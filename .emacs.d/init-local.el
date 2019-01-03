@@ -1,4 +1,4 @@
-;;; init-local-post.el --- Sample Emacs local post-initialization config file -*- lexical-binding: t; -*-
+;;; init-local.el --- Sample Emacs local post-initialization config file -*- lexical-binding: t; -*-
 
 ;; Author: matheuristic
 ;; URL: https://github.com/matheuristic/dotfiles
@@ -7,7 +7,7 @@
 
 ;; This file contains optional packages that are language-specific or UI
 ;; elements for specific machines (e.g. Macs with no physical ESC key)
-;; Symlink or copy this file to ~/.emacs.d/init-local-post.el
+;; Symlink or copy this file to ~/.emacs.d/init-local.el
 
 ;;; Code:
 
@@ -324,8 +324,8 @@ Other      _t_         : toggle output    _C-l_/_C-L_   : clear cell/all output
   :commands yaml-mode
   :mode ("\\.ya?ml\\'" . yaml-mode))
 
-(provide 'init-local-post)
-;;; init-local-post.el ends here
+(provide 'init-local)
+;;; init-local.el ends here
 
 ;; suppress byte-compiler warnings about assignments to free variables
 ;; and calls to functions not known or not defined at runtime
