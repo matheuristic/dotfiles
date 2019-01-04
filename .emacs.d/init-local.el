@@ -23,43 +23,47 @@
   :delight hs-minor-mode
   :config (add-hook 'prog-mode-hook 'hs-minor-mode))
 
-;; customize GUI mode line - MELPA Stable (all packages)
+;; front-end for interacting with external debuggers - MELPA Stable
+(use-package realgud)
+
+;; sidebar file explorer using a tree layout - MELPA Stable
+(use-package treemacs
+  :bind ("C-c h T" . treemacs)
+  :defer 0.5
+  :config
+  ;; projectile integration for treemacs - MELPA Stable
+  (use-package treemacs-projectile
+    :after projectile))
+
+
+;; GRAPHICAL USER INTERFACE
+
 (when (display-graphic-p)
-  ;; mouse-clickable interactive minor-mode menu in the mode line
-  ;; menu can also be opened with `M-x minions-minor-mode-menu'
+  ;; enable ligatures, only works on Emacs Mac Port by Mitsuharu
+  (if (fboundp 'mac-auto-operator-composition-mode)
+      (mac-auto-operator-composition-mode))
+  ;; mouse-interactive minor-mode menu in the mode line - MELPA Stable
+  ;; note that menu can also be opened with `M-x minions-minor-mode-menu'
   (use-package minions
     :init (minions-mode 1)
     :config (setq minions-direct '(projectile-mode)))
-  ;; display mode line elements in tabs and ribbons
+  ;; display mode line elements in tabs and ribbons - MELPA Stable
   (use-package moody
     :config
     (setq x-underline-at-descent-line t)
     (moody-replace-mode-line-buffer-identification)
     (moody-replace-vc-mode)
-    (if (eq system-type 'darwin)
+    ;; modify slant fn if using official Emacs for Mac OS X build to fix colors
+    (if (and (eq system-type 'darwin)
+             (eq window-system 'ns))
         (setq moody-slant-function 'moody-slant-apple-rgb))))
-
-;; front-end for interacting with external debuggers - MELPA Stable
-(use-package realgud)
-
-;; sidebar file explorer using a tree layout - MELPA Stable (all packages)
-(use-package treemacs
-  :bind ("C-c h T" . treemacs)
-  :defer 0.5
-  :config
-  ;; (setq treemacs-no-png-images t)
-  ;; ;; evil bindings for treemacs
-  ;; (use-package treemacs-evil
-  ;;   :after evil)
-  (use-package treemacs-projectile
-    :after projectile))
 
 
 ;; NON-LANGUAGE-SPECIFIC
 
-;; conda - MELPA Stable
+;; conda support - MELPA Stable
 (use-package conda
-  :init (setq conda-anaconda-home "~/miniconda3") ;; conda envs root directory
+  :init (setq conda-anaconda-home "~/miniconda3") ;; conda directory
   :config
   (conda-env-initialize-interactive-shells) ;; interactive shell support
   (conda-env-initialize-eshell) ;; eshell support
@@ -85,7 +89,7 @@ conda %s(if conda-env-current-name (concat \"[\" conda-env-current-name \"]\") \
 
 ;; LANGUAGE-SPECIFIC
 
-;; CSV - GNU ELPA
+;; CSV support - GNU ELPA
 (use-package csv-mode
   :commands csv-mode
   :config
@@ -116,7 +120,7 @@ conda %s(if conda-env-current-name (concat \"[\" conda-env-current-name \"]\") \
              ess-eval-buffer
              ess-switch-to-ESS))
 
-;; Go - MELPA Stable (all packages)
+;; Go support - MELPA Stable (all packages)
 (when (executable-find "go")
   (use-package go-mode
     :commands go-mode
@@ -126,21 +130,19 @@ conda %s(if conda-env-current-name (concat \"[\" conda-env-current-name \"]\") \
         (setq gofmt-command "goimports")))
   (use-package company-go
     :after go-mode
-    :config
-    (with-eval-after-load 'company
-      (add-to-list 'company-backends 'company-go)))
+    :config (with-eval-after-load 'company
+              (add-to-list 'company-backends 'company-go)))
   ;; Go guru, commands have prefix C-c C-o
   (if (executable-find "guru")
       (use-package go-guru
         :after go-mode
-        :init
-        (with-eval-after-load 'go-mode
-          (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)))))
+        :init (with-eval-after-load 'go-mode
+                (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)))))
 
-;; JSON - GNU ELPA
+;; JSON support - GNU ELPA
 (use-package json-mode)
 
-;; Markdown - MELPA Stable
+;; Markdown support - MELPA Stable
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
@@ -186,7 +188,7 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
   (define-key markdown-mode-map (kbd "C-c h m") 'my-hydra/markdown-mode/body)
   (define-key gfm-mode-map (kbd "C-c h m") 'my-hydra/markdown-mode/body))
 
-;; Python - MELPA Stable (all packages)
+;; Python support - MELPA Stable (all packages)
 (when (executable-find "python")
   ;; Code navigation, documentation lookup and completion, requires python jedi
   (use-package anaconda-mode
@@ -197,10 +199,8 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
     (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
   ;; anaconda backend for company-mode
   (use-package company-anaconda
-    :after anaconda-mode
-    :config
-    (with-eval-after-load 'company
-      (add-to-list 'company-backends 'company-anaconda)))
+    :after (anaconda-mode company)
+    :config (add-to-list 'company-backends 'company-anaconda))
   ;; client for traad refactoring tool using the rope package
   ;; before usage, set up the Python traad server with either method below
   ;; - using virtualenv: call `M-x traad-install-server' to install the
@@ -234,8 +234,8 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
         ("K" traad-kill-all "kill")
         ("q" nil "quit"))
       (define-key python-mode-map (kbd "C-c h t") 'my-hydra/traad/body)))
-  ;; Jupyter notebook client
-  ;; Add (setq my-load-ein t) to init-local-pre.el to enable
+  ;; Jupyter notebook client, uncomment `setq' statement below to enable
+  ;; (setq my-load-ein t)
   (if (and (bound-and-true-p my-load-ein)
            (executable-find "jupyter"))
       (use-package ein
@@ -319,7 +319,7 @@ Other      _t_         : toggle output    _C-l_/_C-L_   : clear cell/all output
         (setq tab-width 4)
         (setq python-indent-offset 4))))
 
-;; YAML - MELPA Stable
+;; YAML support - MELPA Stable
 (use-package yaml-mode
   :commands yaml-mode
   :mode ("\\.ya?ml\\'" . yaml-mode))
