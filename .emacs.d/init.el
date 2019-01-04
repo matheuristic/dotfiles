@@ -54,7 +54,7 @@
 (load custom-file 'noerror)
 
 ;; set GUI font, Input font downloadable from http://input.fontbureau.com
-;; recommended customizations: Deja Vu / Menlo style, 1.1x line spacing
+;; recommended customizations: Deja Vu/Menlo style, 1.1x line spacing
 (defvar my-font "Input Mono Narrow")
 (defvar my-font-height (if (eq system-type 'darwin) 140 110))
 (defvar my-font-weight 'normal)
