@@ -1,4 +1,4 @@
-" ~/.vimrc
+" ~/.vimrc - Config file for Vim
 " Author: matheuristic
 
 " Section: Vi Compatibility {{{1
@@ -111,7 +111,7 @@ if has('syntax') && (&t_Co > 2)
   silent! unset g:colors_name
   syntax on
   " List of (colors_name[, numcolors needed])
-  let s:colors_list = [['gruvbox', 256], ['nofrils-dark', 256], ['zenburn', 256], ['default', 8]]
+  let s:colors_list = [['gruvbox', 256], ['zenburn', 256], ['desert', 8], ['default', 8]]
   " In list order, try setting color scheme if the terminal emulator supports
   " the number of colors necessary for the scheme (default: 256)
   for color_pair in s:colors_list
@@ -119,11 +119,6 @@ if has('syntax') && (&t_Co > 2)
       if color_pair[0] =~ '^gruvbox'
         set background=dark
         let g:gruvbox_contrast_dark = 'soft'
-      endif
-      if color_pair[0] =~ '^nofrils'
-        "let g:nofrils_heavycomments = 1
-        "let g:nofrils_heavylinenumbers = 1
-        let g:nofrils_strbackgrounds = 1
       endif
       silent! execute 'colorscheme' color_pair[0]
     endif
