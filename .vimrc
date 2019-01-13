@@ -1,4 +1,4 @@
-" ~/.vimrc - Config file for Vim
+" ~/.vimrc - Vim configuration file
 " Author: matheuristic
 
 " Section: Vi Compatibility {{{1
@@ -13,7 +13,7 @@ set nocompatible " vi non-compatible mode
 set autoindent  " use indent level from previous line
 "set autoread    " watch for file changes by other programs
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
-set backup      " keep a backup file
+"set backup      " keep a backup file
 set backupdir=~/.backup,.,~/tmp/,~/ " use ~/.backup to keep backups, note that file names do not contain the dirname as prefixes
 "set directory=~/.tmp//,.,~/tmp/,/var/tmp,/tmp " use ~/.tmp for swap files
 "set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
@@ -21,7 +21,7 @@ set backupdir=~/.backup,.,~/tmp/,~/ " use ~/.backup to keep backups, note that f
 set complete+=k " also use dictionaries on keyword completion
 set expandtab   " expand tabs into spaces; use <C-v><Tab> for a real tab
 set formatoptions+=j " delete comment leader when joining comment lines
-set gdefault    " substitute all matches in a string by default
+"set gdefault    " substitute all matches in a string by default
 set grepprg=grep\ -nH\ $* " set grep to always show filename
 set ignorecase  " make searches case-insensitive
 set laststatus=2 " always show status line, even when editing just one file
@@ -29,11 +29,11 @@ set list        " highlight tabs and trailing whitespace
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,nbsp:. " chars for displaying whitespace when 'list' is set
 "set hidden      " hide abandoned buffers instead of unloading them
 set nojoinspaces " do not insert two spaces after '.', '?' and '!' on line joins
-"set nomodeline  " do not have files overwrite settings from this vimrc
+"set nomodeline  " do not have files overwrite vimrc settings
 set nowrap      " do not wrap text
 "set scrolloff=1 " num lines from top or bottom of window to begin scrolling
 set sidescrolloff=5 " num lines from left or right of window to begin scrolling
-set shiftwidth=2 " number of spaces for each indent level
+set shiftwidth=2 " number of spaces for each indentation level
 "set showmatch   " show matching brackets
 set showmode    " show current mode
 set smartcase   " override 'ignorecase' if search pattern has upper case chars
