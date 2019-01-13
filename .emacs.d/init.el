@@ -9,30 +9,21 @@
 
 ;;; Code:
 
-;; suppress splash screen
-(setq inhibit-startup-message t)
-
-;; turn off audible and visual bells
-(setq ring-bell-function 'ignore)
-
-;; scroll one line at a time when cursor moves past window top/bottom
-(setq scroll-conservatively 101)
-
-;; show column number in modeline
-(setq column-number-mode t)
-
-;; show matching parentheses without delay
-(setq show-paren-delay 0)
-(show-paren-mode t)
+;; basic interface settings
+(setq inhibit-startup-message t ;; suppress splash screen
+      ring-bell-function 'ignore ;; turn off audible and visual bells
+      scroll-conservatively 101 ;; scroll a line at a time at window edge
+      column-number-mode t ;; show column number in modeline
+      show-paren-delay 0) ;; no delay in show-paren-mode
+(show-paren-mode t) ;; show matching parentheses
 
 ;; indent with soft tabs. Use C-q <TAB> for real tabs
 (setq-default indent-tabs-mode nil)
 
-;; remove unused GUI elements
+;; remove unused interface elements
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (and (not (display-graphic-p)) (fboundp 'menu-bar-mode))
-    (menu-bar-mode -1))
+(if (and (not (display-graphic-p)) (fboundp 'menu-bar-mode)) (menu-bar-mode -1))
 
 ;; smooth scrolling in GUI (hold shift/control for 5 lines/full screen)
 (if (display-graphic-p)
@@ -53,25 +44,10 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
-;; set GUI font, Input font downloadable from http://input.fontbureau.com
-;; recommended customizations: Deja Vu/Menlo style, 1.1x line spacing
-(defvar my-font "Input Mono Narrow")
-(defvar my-font-height (if (eq system-type 'darwin) 140 110))
-(defvar my-font-weight 'normal)
-(defvar my-font-width 'normal)
-(if (and (display-graphic-p)
-         (and my-font (not (string= my-font "")))
-         (x-list-fonts my-font))
-    (set-face-attribute 'default nil
-                        :family my-font
-                        :height my-font-height
-                        :weight my-font-weight
-                        :width my-font-width))
-
 ;; use left Option key as Meta and preserve right Option key on Mac OS X
-(when (eq system-type 'darwin)
-  (setq mac-option-modifier 'meta
-        mac-right-option-modifier nil))
+(if (eq system-type 'darwin)
+    (setq mac-option-modifier 'meta
+          mac-right-option-modifier nil))
 
 (defun my-yank-from-kill-ring ()
   "Yank from the kill ring into buffer at point or region.
@@ -80,22 +56,22 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (let ((to_insert (completing-read
                     "Yank : " (delete-duplicates kill-ring :test #'equal))))
     ;; delete selected buffer region, if applicable
-    (when (and to_insert (region-active-p))
+    (if (and to_insert (region-active-p))
       (delete-region (region-beginning) (region-end)))
     ;; insert the selected entry from the kill ring
     (insert to_insert)))
 
 (defun my-transpose-windows (selector)
   "Transpose buffers between current window and window after calling SELECTOR."
-  (let* ((from-win (selected-window))
-         (from-buf (window-buffer)))
+  (let ((from-win (selected-window))
+        (from-buf (window-buffer)))
     (funcall selector)
     (set-window-buffer from-win (window-buffer))
     (set-window-buffer (selected-window) from-buf)))
 
 (defun my-enlarge-frame (w h)
   "Enlarge width, height of selected frame by W, H lines (shrink if negative)."
-  (let* ((this-frame (selected-frame)))
+  (let ((this-frame (selected-frame)))
     (set-frame-width this-frame (+ (frame-width this-frame) w))
     (set-frame-height this-frame (+ (frame-height this-frame) h))))
 
@@ -123,12 +99,12 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 (unless (file-exists-p site-lisp-dir) (make-directory site-lisp-dir))
 (add-to-list 'load-path site-lisp-dir)
 (dolist (project (directory-files site-lisp-dir t "\\w+"))
-  (when (file-directory-p project) (add-to-list 'load-path project)))
+  (if (file-directory-p project) (add-to-list 'load-path project)))
 
 ;; use package.el with given ELPA-compatible package repositories
 (require 'package)
-(setq package-enable-at-startup nil)
-(setq package-archives
+(setq package-enable-at-startup nil
+      package-archives
       '(("GNU ELPA"     . "https://elpa.gnu.org/packages/")
         ("MELPA Stable" . "https://stable.melpa.org/packages/")
         ("MELPA"        . "https://melpa.org/packages/"))
@@ -139,7 +115,7 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 
 (package-initialize)
 
-;; bootstrap use-package ( https://github.com/jwiegley/use-package )
+;; bootstrap use-package, provides configuration macros - MELPA Stable
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -151,10 +127,10 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (setq use-package-always-ensure t))
 
 ;; copies env vars from shell - MELPA Stable
-(when (eq system-type 'darwin)  ;; only for Mac OS X GUI mode
-  (use-package exec-path-from-shell
-    :init (when (memq window-system '(mac ns))
-            (exec-path-from-shell-initialize))))
+(if (eq system-type 'darwin)  ;; only for Mac OS X GUI mode
+    (use-package exec-path-from-shell
+      :init (if (memq window-system '(mac ns))
+                (exec-path-from-shell-initialize))))
 
 ;; customize how mode names appear in the mode line - ELPA
 (use-package delight)
@@ -205,10 +181,9 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (define-key evil-normal-state-map (kbd "[ n") 'diff-hunk-prev)
   (define-key evil-normal-state-map (kbd "] n") 'diff-hunk-next)
   ;; mappings for adding, changing and deleting surrounding brackets
-  ;; in evil-mode (emulates surround.vim by tpope) - MELPA Stable
+  ;; in evil-mode, emulates surround.vim by tpope - MELPA Stable
   (use-package evil-surround
     :init (global-evil-surround-mode 1)))
-
 
 ;; framework for temporary or repeatable keybindings - MELPA Stable
 (use-package hydra
@@ -411,8 +386,8 @@ Windows  _L_ : line-wise   _W_ : word-wise
         eshell-smart-space-goes-to-end t
         eshell-where-to-jump 'begin)
   (add-to-list 'eshell-visual-commands '("htop" "lftp" "ssh" "vim"))
-  (add-to-list 'eshell-visual-subcommands '("git" "log" "diff" "show"))
-  (add-to-list 'eshell-visual-subcommands '("vagrant" "ssh")))
+  (add-to-list 'eshell-visual-subcommands '("git" "log" "diff" "show"
+                                            "vagrant" "ssh")))
 
 ;; typing any left bracket auto-inserts matching right bracket - built-in
 (use-package elec-pair
@@ -422,11 +397,20 @@ Windows  _L_ : line-wise   _W_ : word-wise
   (setq electric-pair-inhibit-predicate
       (lambda (c)
         (if (memq c '(?\" ?\')) t (electric-pair-default-inhibit c))))
-  (add-hook 'prog-mode-hook 'electric-pair-mode)
-  (add-hook 'org-mode-hook 'electric-pair-mode)
-  (add-hook 'markdown-mode-hook 'electric-pair-mode))
+  (dolist (mode-hook '(prog-mode-hook org-mode-hook markdown-mode-hook))
+      (add-hook mode-hook 'electric-pair-mode)))
 
-;; syntax checker, replaces Flymake - MELPA Stable
+;; increase selected region by semantic units - MELPA Stable
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
+
+;; manage window configs - MELPA Stable
+(use-package eyebrowse
+  :delight eyebrowse-mode
+  :init (eyebrowse-mode t)
+  :config (setq eyebrowse-new-workspace t))
+
+;; syntax checker, alternative to Flymake - MELPA Stable
 (use-package flycheck
   :delight flycheck-mode
   :init (global-flycheck-mode)
@@ -450,11 +434,25 @@ Windows  _L_ : line-wise   _W_ : word-wise
     (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
     (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error)))
 
+;; code folding package -- built-in
+;; evil has vim-like default bindings for this mode (za, zc, zo, zM, zR)
+(use-package hideshow
+  :delight hs-minor-mode
+  :config (add-hook 'prog-mode-hook 'hs-minor-mode))
+
 ;; advanced buffer menu - built-in
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer)
-  :config (with-eval-after-load 'evil
-            (evil-leader-set-key-normal "B" 'ibuffer)))
+  :config
+  (with-eval-after-load 'evil
+     (evil-leader-set-key-normal "B" 'ibuffer))
+  (use-package ibuffer-vc ;; group buffers by VC project in ibuffer
+    :after ibuffer
+    :config (add-hook 'ibuffer-hook
+                      (lambda ()
+                        (ibuffer-vc-set-filter-groups-by-vc-root)
+                        (unless (eq ibuffer-sorting-mode 'alphabetic)
+                          (ibuffer-do-sort-by-alphabetic))))))
 
 ;; interactively do things with buffers and files, use C-f to escape - built-in
 (use-package ido
@@ -471,7 +469,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
   ;; do not make suggestions when naming new file
   (when (boundp 'ido-minor-mode-map-entry)
     (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
-  ;; replaces stock completion with ido wherever possible - MELPA Stable
+  ;; replace stock completion with ido wherever possible - MELPA Stable
   (use-package ido-completing-read+
     :init (ido-ubiquitous-mode t)))
 
@@ -485,12 +483,13 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (when (executable-find "git")
   (use-package magit
     :bind ("C-c g g" . magit-status)
-    :config (setq vc-handled-backends (delq 'Git vc-handled-backends)))
+    ;; :config (setq vc-handled-backends (delq 'Git vc-handled-backends)))
+    :config (setq auto-revert-check-vc-info t))
   (use-package git-timemachine
     :after magit
     :bind ("C-c g t" . git-timemachine)))
 
-;; Multiple cursors - MELPA Stable
+;; multiple cursors - MELPA Stable
 (use-package multiple-cursors
   :bind (("C-S-c C-S-c" . mc/edit-lines)
          ("C->" . mc/mark-next-like-this)
@@ -638,7 +637,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   :config (setq recentf-max-menu-items 10
                 recentf-max-saved-items 50))
 
-;; traverse undo history as a tree, default keybinding is C-x u - GNU ELPA
+;; traverse undo history as a tree, default binding is C-x u - GNU ELPA
 (use-package undo-tree
   :delight undo-tree-mode
   :init (global-undo-tree-mode)
@@ -646,14 +645,14 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
             (setq evil-want-fine-undo t)
             (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
 
-;; Visit large files without loading it entirely - MELPA Stable
+;; visit large files without loading it entirely - MELPA Stable
 (use-package vlf
   :config (require 'vlf-setup))
 
 ;; display available keybindings in popup - GNU ELPA
 (use-package which-key
   :delight which-key-mode
-  :bind ("C-c h W" . which-key-show-top-level)
+  :bind ("C-c M-W" . which-key-show-top-level)
   :init (which-key-mode 1)
   :config (setq which-key-compute-remaps t
                 which-key-allow-multiple-replacements t))
@@ -663,15 +662,14 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   :delight yas-minor-mode
   :init (yas-global-mode 1)
   :config
-  ;; official snippets - MELPA Stable
+  ;; pre-defined official snippets - MELPA Stable
   (use-package yasnippet-snippets)
-  ;; create temporary snippets - MELPA Stable
+  ;; allow creation of temporary snippets - MELPA Stable
   (use-package auto-yasnippet)
   ;; disable tab binding to avoid conflicts with company-mode
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
-  ;; use Ctrl-Shift-Space to expand snippets
-  (define-key yas-minor-mode-map (kbd "<C-S-SPC>") #'yas-expand)
+  (define-key yas-minor-mode-map (kbd "<C-S-SPC>") #'yas-expand) ;; Ctrl-Shift-Space expands snippets
   (with-eval-after-load 'hydra
     (defhydra my-hydra/yasnippet (:color teal :columns 3)
       "YASnippet"

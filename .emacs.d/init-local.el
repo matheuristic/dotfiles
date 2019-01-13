@@ -17,15 +17,6 @@
 (use-package gruvbox-theme
   :config (load-theme 'gruvbox t))
 
-;; syntax-block code folding (alt: origami.el) - built-in
-;; evil has vim-like default bindings for this (za, zc, zo, zM, zR)
-(use-package hideshow
-  :delight hs-minor-mode
-  :config (add-hook 'prog-mode-hook 'hs-minor-mode))
-
-;; front-end for interacting with external debuggers - MELPA Stable
-(use-package realgud)
-
 ;; sidebar file explorer using a tree layout - MELPA Stable
 (use-package treemacs
   :bind ("C-c h T" . treemacs)
@@ -36,46 +27,24 @@
     :after projectile))
 
 
-;; GRAPHICAL USER INTERFACE
-
-(when (display-graphic-p)
-  ;; enable ligatures, only works on Emacs Mac Port by Mitsuharu
-  (if (fboundp 'mac-auto-operator-composition-mode)
-      (mac-auto-operator-composition-mode))
-  ;; mouse-interactive minor-mode menu in the mode line - MELPA Stable
-  ;; note that menu can also be opened with `M-x minions-minor-mode-menu'
-  (use-package minions
-    :init (minions-mode 1)
-    :config (setq minions-direct '(projectile-mode)))
-  ;; display mode line elements in tabs and ribbons - MELPA Stable
-  (use-package moody
-    :config
-    (setq x-underline-at-descent-line t)
-    (moody-replace-mode-line-buffer-identification)
-    (moody-replace-vc-mode)
-    ;; modify slant fn if using official Emacs for Mac OS X build to fix colors
-    (if (and (eq system-type 'darwin)
-             (eq window-system 'ns))
-        (setq moody-slant-function 'moody-slant-apple-rgb))))
-
-
 ;; NON-LANGUAGE-SPECIFIC
 
-;; conda support - MELPA Stable
+;; porcelain for conda - MELPA Stable
 (use-package conda
-  :init (setq conda-anaconda-home "~/miniconda3") ;; conda directory
+  :init (setq conda-anaconda-home "~/miniconda3") ;; conda root directory
   :config
   (conda-env-initialize-interactive-shells) ;; interactive shell support
   (conda-env-initialize-eshell) ;; eshell support
   (conda-env-autoactivate-mode t) ;; auto-activation using proj environment.yml
   (setq-default mode-line-format
-                (cons
-                 '(:eval (if conda-env-current-name
-                             (format "conda:%s"
-                                     (truncate-string-to-width
-                                      conda-env-current-name 9 nil nil "…"))
-                           ""))
-                 mode-line-format))
+                (add-to-list 'mode-line-format
+                             '(:eval (if conda-env-current-name
+                                         (format " {%s}"
+                                                 (truncate-string-to-width
+                                                  conda-env-current-name
+                                                  15 nil nil "…"))
+                                       ""))
+                             t)) ;; add current conda env to mode-line, if any
   (with-eval-after-load 'hydra
     (defhydra my-hydra/conda (:color teal :columns 4)
       "
@@ -85,6 +54,9 @@ conda %s(if conda-env-current-name (concat \"[\" conda-env-current-name \"]\") \
       ("l" conda-env-list "list")
       ("q" nil "quit"))
     (global-set-key (kbd "C-c h C") 'my-hydra/conda/body)))
+
+;; front-end for interacting with external debuggers - MELPA Stable
+(use-package realgud)
 
 
 ;; LANGUAGE-SPECIFIC
@@ -323,6 +295,54 @@ Other      _t_         : toggle output    _C-l_/_C-L_   : clear cell/all output
 (use-package yaml-mode
   :commands yaml-mode
   :mode ("\\.ya?ml\\'" . yaml-mode))
+
+
+;; GRAPHICAL USER INTERFACE
+
+(when (display-graphic-p)
+  ;; customize typography
+  ;; helper functions
+  (require 'cl-extra)
+  (defun my-font-exists (font-name)
+    "Returns FONT-NAME if that font exists on the system and `nil` otherwise"
+    (if (x-list-fonts font-name) font-name))
+  (defun my-set-font (face family &optional height weight width)
+    "Sets font for FACE to FAMILY at the given HEIGHT, WEIGHT and WIDTH"
+    (set-face-attribute face nil
+                        :family family
+                        :height (or height 110)
+                        :weight (or weight 'normal)
+                        :width (or width 'normal)))
+  ;; set fonts
+  (let* ((my-font-priority-list '("Consolas"
+                                  "Menlo"
+                                  "DejaVu Sans Mono"))
+         (my-font (cl-some #'my-font-exists my-font-priority-list))
+         (is-darwin (eq system-type 'darwin)))
+    (when my-font
+      (my-set-font 'default my-font (if is-darwin 140 110) nil nil)
+      (my-set-font 'mode-line my-font (if is-darwin 120 90) nil nil)
+      (my-set-font 'mode-line-inactive my-font (if is-darwin 120 90) nil nil)))
+  ;; enable ligatures, only works on Emacs Mac Port by Mitsuharu
+  (if (fboundp 'mac-auto-operator-composition-mode)
+      (mac-auto-operator-composition-mode))
+
+  ;; customize mode-line
+  ;; mouse-interactive minor-mode menu in the mode line - MELPA Stable
+  ;; note that menu can also be opened with `M-x minions-minor-mode-menu'
+  (use-package minions
+    :init (minions-mode 1)
+    :config (setq minions-direct '(projectile-mode)))
+  ;; display mode line elements in tabs and ribbons - MELPA Stable
+  (use-package moody
+    :config
+    (setq x-underline-at-descent-line t)
+    (moody-replace-mode-line-buffer-identification)
+    (moody-replace-vc-mode)
+    ;; modify slant fn if using official Emacs for Mac OS X build to fix colors
+    (if (and (eq system-type 'darwin)
+             (eq window-system 'ns))
+        (setq moody-slant-function 'moody-slant-apple-rgb))))
 
 (provide 'init-local)
 ;;; init-local.el ends here
