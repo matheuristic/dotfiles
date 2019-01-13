@@ -345,7 +345,7 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 (use-package ediff
   :config
   (with-eval-after-load 'hydra
-     (defhydra my-hydra/ediff (:color teal :hint nil)
+    (defhydra my-hydra/ediff (:color teal :hint nil)
        "
 Ediff
 
@@ -445,7 +445,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
   :bind ("C-x C-b" . ibuffer)
   :config
   (with-eval-after-load 'evil
-     (evil-leader-set-key-normal "B" 'ibuffer))
+    (evil-leader-set-key-normal "B" 'ibuffer))
   (use-package ibuffer-vc ;; group buffers by VC project in ibuffer
     :after ibuffer
     :config (add-hook 'ibuffer-hook
@@ -471,7 +471,10 @@ Windows  _L_ : line-wise   _W_ : word-wise
     (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
   ;; replace stock completion with ido wherever possible - MELPA Stable
   (use-package ido-completing-read+
-    :init (ido-ubiquitous-mode t)))
+    :init (ido-ubiquitous-mode t))
+  ;; use ido for commands using `completing-read-multiple' - MELPA Stable
+  (use-package crm-custom
+    :init (crm-custom-mode 1)))
 
 ;; Vim Tagbar-like imenu extension - MELPA Stable
 (use-package imenu-list
@@ -483,8 +486,10 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (when (executable-find "git")
   (use-package magit
     :bind ("C-c g g" . magit-status)
-    ;; :config (setq vc-handled-backends (delq 'Git vc-handled-backends)))
-    :config (setq auto-revert-check-vc-info t))
+    :config
+    (setq auto-revert-check-vc-info t)
+    (if ido-mode
+        (setq magit-completing-read-function 'magit-ido-completing-read)))
   (use-package git-timemachine
     :after magit
     :bind ("C-c g t" . git-timemachine)))
@@ -660,27 +665,26 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 ;; template systems, i.e. expandable snippets - GNU ELPA
 (use-package yasnippet
   :delight yas-minor-mode
+  :bind (:map yas-minor-mode-map
+              ("<tab>" . nil) ;; disable yasnippet tab binding to ...
+              ("TAB" . nil) ;; ... avoid conflict with company-mode tng behavior
+              ("C-S-SPC" . #'yas-expand))
   :init (yas-global-mode 1)
   :config
   ;; official snippets - MELPA Stable
   (use-package yasnippet-snippets)
   ;; allow creation of temporary snippets - MELPA Stable
   (use-package auto-yasnippet)
-  ;; disable tab binding to avoid conflicts with company-mode
-  (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  (define-key yas-minor-mode-map (kbd "TAB") nil)
-  (define-key yas-minor-mode-map (kbd "<C-S-SPC>") #'yas-expand)
   (with-eval-after-load 'hydra
     (defhydra my-hydra/yasnippet (:color teal :columns 3)
       "YASnippet"
       ("SPC" yas-expand "expand") ;; expand snippet
       ("d" yas-describe-tables "describe") ;; describe snippets for current mode
       ("w" aya-create "create-auto") ;; store temp yasnippet
-      ("y" aya-expand "expand-auto") ;; paste temp yasnippet
+      ("y" aya-expand "expand-auto") ;; expand temp yasnippet
       ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; show temp yasnippet
       ("q" nil "quit"))
-    (global-set-key (kbd "C-c h y") 'my-hydra/yasnippet/body))
-  (define-key yas-minor-mode-map (kbd "C-S-SPC") #'yas-expand))
+    (global-set-key (kbd "C-c h y") 'my-hydra/yasnippet/body)))
 
 ;; load local post-init file ~/.emacs.d/init-local.el
 (let ((local-f (expand-file-name "init-local.el" user-emacs-directory)))
