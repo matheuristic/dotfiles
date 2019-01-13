@@ -185,7 +185,7 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (use-package evil-surround
     :init (global-evil-surround-mode 1)))
 
-;; framework for temporary or repeatable keybindings - MELPA Stable
+;; framework for temporary or repeatable bindings - MELPA Stable
 (use-package hydra
   :config
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
@@ -576,7 +576,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
   :init (projectile-mode)
   :config
   (setq projectile-switch-project-action 'projectile-commander)
-  ;; use ripgrep for grepping in projectile if available
+  ;; use ripgrep for grepping in projectile, if available
   (if (executable-find "rg")
       (progn
         (use-package projectile-ripgrep)
@@ -649,7 +649,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 (use-package vlf
   :config (require 'vlf-setup))
 
-;; display available keybindings in popup - GNU ELPA
+;; display available bindings in popup - GNU ELPA
 (use-package which-key
   :delight which-key-mode
   :bind ("C-c M-W" . which-key-show-top-level)
@@ -662,14 +662,14 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
   :delight yas-minor-mode
   :init (yas-global-mode 1)
   :config
-  ;; pre-defined official snippets - MELPA Stable
+  ;; official snippets - MELPA Stable
   (use-package yasnippet-snippets)
   ;; allow creation of temporary snippets - MELPA Stable
   (use-package auto-yasnippet)
   ;; disable tab binding to avoid conflicts with company-mode
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
-  (define-key yas-minor-mode-map (kbd "<C-S-SPC>") #'yas-expand) ;; Ctrl-Shift-Space expands snippets
+  (define-key yas-minor-mode-map (kbd "<C-S-SPC>") #'yas-expand)
   (with-eval-after-load 'hydra
     (defhydra my-hydra/yasnippet (:color teal :columns 3)
       "YASnippet"
