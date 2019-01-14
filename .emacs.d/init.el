@@ -488,8 +488,8 @@ Windows  _L_ : line-wise   _W_ : word-wise
     :bind ("C-c g g" . magit-status)
     :config
     (setq auto-revert-check-vc-info t)
-    (if ido-mode
-        (setq magit-completing-read-function 'magit-ido-completing-read)))
+    (with-eval-after-load 'ido-completing-read+
+       (setq magit-completing-read-function 'magit-ido-completing-read)))
   (use-package git-timemachine
     :after magit
     :bind ("C-c g t" . git-timemachine)))
@@ -666,8 +666,8 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 (use-package yasnippet
   :delight yas-minor-mode
   :bind (:map yas-minor-mode-map
-              ("<tab>" . nil) ;; disable yasnippet tab binding to ...
-              ("TAB" . nil) ;; ... avoid conflict with company-mode tng behavior
+              ("<tab>" . nil) ;; disable default tab binding to ...
+              ("TAB" . nil) ;; ... avoid conflict with company-mode tng
               ("C-S-SPC" . #'yas-expand))
   :init (yas-global-mode 1)
   :config
@@ -681,7 +681,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("SPC" yas-expand "expand") ;; expand snippet
       ("d" yas-describe-tables "describe") ;; describe snippets for current mode
       ("w" aya-create "create-auto") ;; store temp yasnippet
-      ("y" aya-expand "expand-auto") ;; expand temp yasnippet
+      ("y" aya-expand "expand-auto") ;; paste temp yasnippet
       ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; show temp yasnippet
       ("q" nil "quit"))
     (global-set-key (kbd "C-c h y") 'my-hydra/yasnippet/body)))

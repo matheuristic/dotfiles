@@ -90,8 +90,7 @@ conda %s(if conda-env-current-name (concat \"[\" conda-env-current-name \"]\") \
              ess-eval-function
              ess-eval-line
              ess-eval-buffer
-             ess-switch-to-ESS)
-  :config (if ido-mode (setq ess-use-ido t)))
+             ess-switch-to-ESS))
 
 ;; Go support - MELPA Stable (all packages)
 (when (executable-find "go")
