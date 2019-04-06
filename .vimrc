@@ -1,4 +1,4 @@
-" ~/.vimrc - Vim configuration file
+" ~/.vimrc - Config file for Vim
 " Author: matheuristic
 
 " Section: Vi Compatibility {{{1
@@ -13,7 +13,7 @@ set nocompatible " vi non-compatible mode
 set autoindent  " use indent level from previous line
 "set autoread    " watch for file changes by other programs
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
-"set backup      " keep a backup file
+set backup      " keep a backup file
 set backupdir=~/.backup,.,~/tmp/,~/ " use ~/.backup to keep backups, note that file names do not contain the dirname as prefixes
 "set directory=~/.tmp//,.,~/tmp/,/var/tmp,/tmp " use ~/.tmp for swap files
 "set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
@@ -29,11 +29,11 @@ set list        " highlight tabs and trailing whitespace
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,nbsp:. " chars for displaying whitespace when 'list' is set
 "set hidden      " hide abandoned buffers instead of unloading them
 set nojoinspaces " do not insert two spaces after '.', '?' and '!' on line joins
-"set nomodeline  " do not have files overwrite vimrc settings
+"set nomodeline  " do not have files overwrite settings from this vimrc
 set nowrap      " do not wrap text
 "set scrolloff=1 " num lines from top or bottom of window to begin scrolling
 set sidescrolloff=5 " num lines from left or right of window to begin scrolling
-set shiftwidth=2 " number of spaces for each indentation level
+set shiftwidth=2 " number of spaces for each indent level
 "set showmatch   " show matching brackets
 set showmode    " show current mode
 set smartcase   " override 'ignorecase' if search pattern has upper case chars
@@ -61,6 +61,7 @@ endif
 " }}}2
 " Show matches as while inputting search strings {{{2
 if has('extra_search')
+  "set hlsearch
   set incsearch
 endif
 " }}}2
@@ -96,7 +97,7 @@ if has('statusline') && (version >= 700)
   set statusline+=\             " spacer
   set statusline+=[%{&ff}]      " file format
   set statusline+=\             " spacer
-  set statusline+=%{!&list?'':'[list]\ '} " show '[list'] if in list mode
+  set statusline+=%{!&list?'':'[list]\ '} " show '[list]' if in list mode
   set statusline+=%{&pm==''?'':'[PM='.&pm.']\ '} " show patchmode if enabled
   set statusline+=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"} " show encoding and if 'bomb' option is set
   set statusline+=%k            " Value of 'b:keymap_name' of 'keymap' when :lmap mappings are being used
@@ -243,8 +244,54 @@ if executable('sudo')
 endif
 
 " }}}1
+" Section: Functions {{{1
+" -----------------------
+
+" Toggle commenting {{{2
+" Adapted from https://gist.github.com/PeterRincker/13bde011c01b7fc188c5
+
+" Uses b:commentstring or 'commentstring' as comment pattern, e.g.
+"    let &commentstring = '/*%s*/'
+
+if has('eval')
+  function! s:commentOp(...)
+    '[,']call s:toggleComment()
+  endfunction
+
+  function! s:toggleComment() range
+    let comment = substitute(get(b:, 'commentstring', &commentstring), '\s*\(%s\)\s*', '%s', '')
+    let pattern = '\V\^\(\s\*\)' . printf(escape(comment, '\'), '\s\{,1\}\(\s\*\.\*\)\s\=')
+    let replace = '\1\2'
+    " Get min indent in range
+    for lnum in range(a:firstline, a:lastline)
+      let nextindent = matchstr(getline(lnum), '^\s*')
+      if !exists('indent') || (strlen(nextindent) <= strlen(indent))
+        let indent = nextindent
+      endif
+    endfor
+    echo getline('.')
+    if getline('.') !~ pattern
+      let pattern = '^' . indent . '\zs\(\s*\)\(\S.*\)'
+      let replace = printf(comment, '\1 \2' . (comment =~ '%s$' ? '' : ' '))
+    endif
+    for lnum in range(a:firstline, a:lastline)
+      call setline(lnum, substitute(getline(lnum), pattern, replace, ''))
+    endfor
+  endfunction
+endif
+" }}}2
+
+" }}}1
 " Section: Keymappings {{{1
 " -------------------------
+
+" Toggle commenting using gc[c|motion] like in vim-commentary {{{2
+if has('eval')
+  nnoremap gcc :<c-u>.,.+<c-r>=v:count<cr>call <SID>toggleComment()<cr>
+  nnoremap gc :<c-u>set opfunc=<SID>commentOp<cr>g@
+  xnoremap gc :call <SID>toggleComment()<cr>
+endif
+" }}}2
 
 " Default map leader <Leader> is '\'
 
@@ -307,7 +354,7 @@ if has('extra_search')
 endif
 " }}}2
 " Change directory to current file's {{{2
-nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
+nnoremap <silent> <Leader>C :cd %:p:h<CR>:pwd<CR>
 " }}}2
 " Toggle folding {{{2
 if has('folding')
