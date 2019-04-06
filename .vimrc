@@ -11,10 +11,10 @@ set nocompatible " vi non-compatible mode
 " ---------------------
 
 set autoindent  " use indent level from previous line
-"set autoread    " watch for file changes by other programs
+"set autoread    " watch for file changes by external programs
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
-set backup      " keep a backup file
-set backupdir=~/.backup,.,~/tmp/,~/ " use ~/.backup to keep backups, note that file names do not contain the dirname as prefixes
+set backup      " keep backups
+set backupdir=~/.backup,.,~/tmp/,~/ " use ~/.backup for backups, note that file names do not contain the dirname as prefixes
 "set directory=~/.tmp//,.,~/tmp/,/var/tmp,/tmp " use ~/.tmp for swap files
 "set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
 "set complete=.,w,b,u,U,t,i,d " extra scanning on keyword completion
@@ -25,7 +25,7 @@ set formatoptions+=j " delete comment leader when joining comment lines
 set grepprg=grep\ -nH\ $* " set grep to always show filename
 set ignorecase  " make searches case-insensitive
 set laststatus=2 " always show status line, even when editing just one file
-set list        " highlight tabs and trailing whitespace
+"set list        " highlight tabs and trailing whitespace
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,nbsp:. " chars for displaying whitespace when 'list' is set
 "set hidden      " hide abandoned buffers instead of unloading them
 set nojoinspaces " do not insert two spaces after '.', '?' and '!' on line joins
@@ -36,7 +36,7 @@ set sidescrolloff=5 " num lines from left or right of window to begin scrolling
 set shiftwidth=2 " number of spaces for each indent level
 "set showmatch   " show matching brackets
 set showmode    " show current mode
-set smartcase   " override 'ignorecase' if search pattern has upper case chars
+set smartcase   " override 'ignorecase' if search pattern has upper case chars, only used when 'ignorecase' is set
 set smarttab    " tabs inserts shiftwidth space
 "set softtabstop=4 " num spaces a tab counts for while in insert mode
 "set tabstop=8   " length of a real tab
@@ -83,9 +83,9 @@ endif
 " }}}2
 " Status line {{{2
 if has('statusline') && (version >= 700)
-  set statusline=               " clear the statusline
+  set statusline=               " clear statusline
   set statusline+=%<            " truncate if too long
-  set statusline+=%F            " filename
+  set statusline+=%f            " file path relative to current directory
   set statusline+=\             " spacer
   set statusline+=%h            " help buffer flag
   set statusline+=%m            " modified flag
@@ -93,28 +93,30 @@ if has('statusline') && (version >= 700)
   set statusline+=%w            " preview window flag
   "set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''} " Git branch and commit, requires fugitive.vim plugin
   set statusline+=%=            " center auto-spacing
+  set statusline+=%{&pm==''?'':'[PM='.&pm.']'} " show patchmode if enabled
+  set statusline+=%{!&list?'':'[list]'} " show '[list]' if in list mode
   set statusline+=%y            " filetype
+  set statusline+=[             " left bracket
+  set statusline+=%{&ff}        " file format
+  set statusline+=%{\",\".(&fenc==\"\"?&enc:&fenc)} " file encoding
+  set statusline+=%{(exists(\"+bomb\")\ &&\ &bomb)?\",BOM\":\"\"} " whether 'bomb' option is set
+  set statusline+=]             " left bracket
   set statusline+=\             " spacer
-  set statusline+=[%{&ff}]      " file format
-  set statusline+=\             " spacer
-  set statusline+=%{!&list?'':'[list]\ '} " show '[list]' if in list mode
-  set statusline+=%{&pm==''?'':'[PM='.&pm.']\ '} " show patchmode if enabled
-  set statusline+=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"} " show encoding and if 'bomb' option is set
-  set statusline+=%k            " Value of 'b:keymap_name' of 'keymap' when :lmap mappings are being used
+  set statusline+=%k            " value of 'b:keymap_name' of 'keymap' when :lmap mappings are being used
   set statusline+=\ \           " spacer
   set statusline+=%-14.(%l,%c%V%) " position (line, column and virtual column) of cursor
   set statusline+=\             " spacer
-  set statusline+=%P            " Percentage through file of displayed window
+  set statusline+=%P            " position in file as percentage
 endif
 " }}}2
 " Set syntax highlighting colorscheme {{{2
 if has('syntax') && (&t_Co > 2)
   silent! unset g:colors_name
   syntax on
-  " List of (colors_name[, numcolors needed])
+  " List of (colors_name[, num_colors_needed])
   let s:colors_list = [['gruvbox', 256], ['zenburn', 256], ['desert', 8], ['default', 8]]
-  " In list order, try setting color scheme if the terminal emulator supports
-  " the number of colors necessary for the scheme (default: 256)
+  " In the list order, try setting color scheme if the terminal emulator
+  " supports the number of colors necessary for the scheme (default: 256)
   for color_pair in s:colors_list
     if !exists('colors_name') && (&t_Co >= get(color_pair, 1, 256))
       if color_pair[0] =~ '^gruvbox'
@@ -249,9 +251,8 @@ endif
 
 " Toggle commenting {{{2
 " Adapted from https://gist.github.com/PeterRincker/13bde011c01b7fc188c5
-
 " Uses b:commentstring or 'commentstring' as comment pattern, e.g.
-"    let &commentstring = '/*%s*/'
+"   let &commentstring = '/*%s*/'
 
 if has('eval')
   function! s:commentOp(...)
