@@ -13,8 +13,8 @@ set nocompatible " vi non-compatible mode
 set autoindent  " use indent level from previous line
 "set autoread    " watch for file changes by external programs
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
-set backup      " keep backups
-set backupdir=~/.backup,.,~/tmp/,~/ " use ~/.backup for backups, note that file names do not contain the dirname as prefixes
+"set backup      " keep backups
+"set backupdir=~/.backup,.,~/tmp/,~/ " use ~/.backup for backups, note that file names do not contain the dirname as prefixes
 "set directory=~/.tmp//,.,~/tmp/,/var/tmp,/tmp " use ~/.tmp for swap files
 "set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
 "set complete=.,w,b,u,U,t,i,d " extra scanning on keyword completion
