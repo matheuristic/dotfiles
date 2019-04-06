@@ -269,7 +269,6 @@ if has('eval')
         let indent = nextindent
       endif
     endfor
-    echo getline('.')
     if getline('.') !~ pattern
       let pattern = '^' . indent . '\zs\(\s*\)\(\S.*\)'
       let replace = printf(comment, '\1 \2' . (comment =~ '%s$' ? '' : ' '))

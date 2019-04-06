@@ -176,8 +176,6 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
           (progn (forward-line 1)
                  (transpose-lines 1)
                  (forward-line -1))))))
-  (define-key evil-normal-state-map (kbd "[ l") 'previous-error)
-  (define-key evil-normal-state-map (kbd "] l") 'next-error)
   (define-key evil-normal-state-map (kbd "[ n") 'diff-hunk-prev)
   (define-key evil-normal-state-map (kbd "] n") 'diff-hunk-next)
   ;; mappings for adding, changing and deleting surrounding brackets
@@ -209,13 +207,6 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
     ("R" desktop-revert "revert")
     ("d" desktop-change-dir "dir")
     ("q" nil "quit"))
-  (defhydra my-hydra/error (:color amaranth)
-    "Error"
-    ("p" previous-error "previous")
-    ("n" next-error "next")
-    ("f" first-error "first")
-    ("l" (condition-case nil (while t (next-error)) (user-error nil)) "last")
-    ("q" nil "quit" :color blue))
   (defhydra my-hydra/frame (:color amaranth :columns 4)
     "Frame"
     ("p" (other-frame -1) "previous")
@@ -310,7 +301,6 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (global-set-key (kbd "C-c h s") 'my-hydra/search/body)
   (global-set-key (kbd "C-c h Z") 'my-hydra/zoom/body)
   (global-set-key (kbd "C-c h b") 'my-hydra/buffer/body)
-  (global-set-key (kbd "C-c h e") 'my-hydra/error/body)
   (global-set-key (kbd "C-c h f") 'my-hydra/frame/body)
   (global-set-key (kbd "C-c h n") 'my-hydra/navigation/body)
   (global-set-key (kbd "C-c h w") 'my-hydra/window/body))
@@ -336,10 +326,12 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 ;; Dired - built-in
 (use-package dired
   :ensure nil ;; dired does not have updated packages in ELPA/MELPA
-  :config (setq dired-dwim-target t ;; use neighboring dired buffer as default target dir
+  :config
+  (setq dired-dwim-target t ;; use neighboring dired buffer as default target dir
                 dired-listing-switches "-alhvF" ;; more readable file listings
                 dired-recursive-copies 'always ;; always copy recursively
-                dired-recursive-deletes 'always)) ;; always delete recursively
+                dired-recursive-deletes 'always) ;; always delete recursively
+  (add-hook 'dired-mode-hook 'auto-revert-mode)) ;; auto-refresh on file change
 
 ;; Ediff - built-in
 (use-package ediff
@@ -391,20 +383,14 @@ Windows  _L_ : line-wise   _W_ : word-wise
 
 ;; typing any left bracket auto-inserts matching right bracket - built-in
 (use-package elec-pair
-  :config
-  ;; do not automatically insert closing single or double quotes
-  ;; see https://www.topbug.net/blog/2016/09/29/emacs-disable-certain-pairs-for-electric-pair-mode/
-  (setq electric-pair-inhibit-predicate
-      (lambda (c)
-        (if (memq c '(?\" ?\')) t (electric-pair-default-inhibit c))))
-  (dolist (mode-hook '(prog-mode-hook org-mode-hook markdown-mode-hook))
-      (add-hook mode-hook 'electric-pair-mode)))
+  :config (dolist (mode-hook '(prog-mode-hook org-mode-hook markdown-mode-hook))
+            (add-hook mode-hook 'electric-pair-mode)))
 
 ;; increase selected region by semantic units - MELPA Stable
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
-;; manage window configs - MELPA Stable
+;; manage window configs, bindings prefixed by C-c C-w  - MELPA Stable
 (use-package eyebrowse
   :delight eyebrowse-mode
   :init (eyebrowse-mode t)
@@ -430,9 +416,40 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ;; bind over my-hydra/error
     (define-key flycheck-mode-map (kbd "C-c h e") 'my-hydra/flycheck/body))
   (with-eval-after-load 'evil
-    ;; bind over error navigation bracket mappings
+    ;; bracket mappings for error navigation
     (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
     (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error)))
+
+;; syntax checker, use C-h . to show error on current line - built-in
+; (use-package flymake
+;   :config
+;   (add-hook 'emacs-lisp-mode-hook '(lambda () (flymake-mode)))
+;   (defun my-toggle-flymake-diagnostics ()
+;     "Toggles flymake diagnostics window for current buffer."
+;     (interactive)
+;     (if flymake-mode
+;         (let* ((buf-name (buffer-name (current-buffer)))
+;                (flymake-winds (condition-case nil
+;                                   (get-buffer-window-list
+;                                    (concat "*Flymake diagnostics for "
+;                                            buf-name
+;                                            "*"))
+;                                 (error nil))))
+;           (if flymake-winds
+;               (dolist (wind flymake-winds) (quit-window nil wind))
+;             (flymake-show-diagnostics-buffer)))))
+;   (with-eval-after-load 'hydra
+;     (defhydra my-hydra/flymake (:color amaranth)
+;       "Error"
+;       ("p" flymake-goto-prev-error "previous")
+;       ("n" flymake-goto-next-error "next")
+;       ("L" my-toggle-flymake-diagnostics "list")
+;       ("q" nil "quit" :color blue))
+;     (define-key flymake-mode-map (kbd "C-c h e") 'my-hydra/flymake/body))
+;   (with-eval-after-load 'evil
+;     ;; bracket mappings for error navigation
+;     (define-key evil-normal-state-map (kbd "[ l") 'flymake-goto-prev-error)
+;     (define-key evil-normal-state-map (kbd "] l") 'flymake-goto-next-error)))
 
 ;; code folding package -- built-in
 ;; evil has vim-like default bindings for this mode (za, zc, zo, zM, zR)
@@ -477,10 +494,10 @@ Windows  _L_ : line-wise   _W_ : word-wise
     :init (crm-custom-mode 1)))
 
 ;; Vim Tagbar-like imenu extension - MELPA Stable
-(use-package imenu-list
-  :bind ("C-c i" . imenu-list-smart-toggle)
-  :config (setq imenu-list-focus-after-activation t
-                imenu-list-auto-resize t))
+; (use-package imenu-list
+;   :bind ("C-c i" . imenu-list-smart-toggle)
+;   :config (setq imenu-list-focus-after-activation t
+;                 imenu-list-auto-resize t))
 
 ;; Git - MELPA Stable (all packages)
 (when (executable-find "git")
