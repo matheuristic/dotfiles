@@ -2,8 +2,23 @@
 
 # conda environments
 CONDAPATH=$HOME/miniconda3
-export PATH=$CONDAPATH/bin:$PATH
-. $CONDAPATH/etc/profile.d/conda.sh
+if [[ -d "$CONDAPATH" ]]; then
+  #export PATH=$CONDAPATH/bin:$PATH
+  . $CONDAPATH/etc/profile.d/conda.sh
+fi
+
+# dotnet support
+DOTNETSDKPATH=$HOME/dotnet-sdk
+if [[ -d "$DOTNETSDKPATH" ]]; then
+  export PATH=$HOME/dotnet-sdk:$PATH
+  export DOTNET_CLI_TELEMETRY_OPTOUT=1
+fi
+
+# locally installed packages
+LOCALPKGPATH=$HOME/.local
+if [[ -d "$LOCALPKGPATH/bin" ]]; then
+  export PATH=$HOME/.local/bin:$PATH
+fi
 
 # Prevent Mac from sleeping for given time: $ keepawake <hrs>
 if [[ "x`uname`" == "xDarwin" ]]; then
