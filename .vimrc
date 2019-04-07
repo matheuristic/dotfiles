@@ -6,7 +6,7 @@
 
 set nocompatible " vi non-compatible mode
 
-"}}}1
+" }}}1
 " Section: Options {{{1
 " ---------------------
 
@@ -14,7 +14,7 @@ set autoindent  " use indent level from previous line
 "set autoread    " watch for file changes by external programs
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
 "set backup      " keep backups
-"set backupdir=~/.backup,.,~/tmp/,~/ " use ~/.backup for backups, note that file names do not contain the dirname as prefixes
+"set backupdir=~/.backup,.,~/tmp/,~/ " backup folders, note that file names do not contain the dirname as prefixes
 "set directory=~/.tmp//,.,~/tmp/,/var/tmp,/tmp " use ~/.tmp for swap files
 "set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
 "set complete=.,w,b,u,U,t,i,d " extra scanning on keyword completion
@@ -142,6 +142,7 @@ endif
 if has('autocmd')
   filetype plugin indent on " enable filetype detection for plugins and indents
   augroup cron " {{{2
+    autocmd!
     autocmd FileType crontab setlocal nobackup nowritebackup
   augroup END " }}}2
   augroup encrypted " {{{2
@@ -387,6 +388,6 @@ if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
 
-"}}}1
+" }}}1
 " Modeline {{{1
 " vim:set ft=vim et sw=2 fen fdc=1 fdm=marker: }}}1
