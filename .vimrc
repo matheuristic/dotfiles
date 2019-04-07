@@ -93,28 +93,26 @@ endif
 if has('statusline') && (version >= 700)
   set statusline=               " clear statusline
   set statusline+=%<            " truncate if too long
-  set statusline+=%f            " file path relative to current directory
+  set statusline+=%f            " filepath relative to current directory
   set statusline+=\             " spacer
   set statusline+=%h            " help buffer flag
   set statusline+=%m            " modified flag
   set statusline+=%r            " readonly flag
   set statusline+=%w            " preview window flag
-  "set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''} " Git branch and commit, requires fugitive.vim plugin
   set statusline+=%=            " center auto-spacing
-  set statusline+=%{&pm==''?'':'[PM='.&pm.']'} " show patchmode if enabled
-  set statusline+=%{!&list?'':'[list]'} " show '[list]' if in list mode
+  set statusline+=%{&pm==''?'':'[PM='.&pm.']\ '} " show patchmode if enabled
+  set statusline+=%{!&list?'':'[list]\ '} " show '[list]' if in list mode
   set statusline+=%y            " filetype
-  set statusline+=[             " left bracket
-  set statusline+=%{&ff}        " file format
-  set statusline+=%{\",\".(&fenc==\"\"?&enc:&fenc)} " file encoding
-  set statusline+=%{(exists(\"+bomb\")\ &&\ &bomb)?\",BOM\":\"\"} " whether 'bomb' option is set
-  set statusline+=]             " left bracket
+  set statusline+=\             " spacer
+  set statusline+=%{(&fenc==\"\"?&enc:&fenc)} " file encoding
+  set statusline+=%{(exists(\"+bomb\")\ &&\ &bomb)?\"[BOM]\":\"\"} " show '[BOM]' if 'bomb' option is set
+  set statusline+=%{\"[\".(&ff).\"]\"} " file format
   set statusline+=\             " spacer
   set statusline+=%k            " value of 'b:keymap_name' of 'keymap' when :lmap mappings are being used
   set statusline+=\ \           " spacer
   set statusline+=%-14.(%l,%c%V%) " position (line, column and virtual column) of cursor
   set statusline+=\             " spacer
-  set statusline+=%P            " position in file as percentage
+  set statusline+=%P            " percentage through file of displayed window
 endif
 " }}}2
 " Set syntax highlighting colorscheme {{{2
