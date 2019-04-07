@@ -41,8 +41,8 @@ endif
 " ---------------------
 
 "set backup      " keep backups, usually better to use version control
-"set backupdir=~/.vimfiles/backup//,.,~/tmp/,~/ " backup file folders, appending // uses the full path in the name
-set directory=~/.vimfiles/swap//,.,~/tmp,/var/tmp,/tmp " swapfile folders, appending // uses the full path in the name
+"set backupdir=~/.nvimfiles/backup//,.,~/tmp/,~/ " backup file folders, appending // uses the full path in the name
+set directory=~/.nvimfiles/swap//,.,~/tmp,/var/tmp,/tmp " swapfile folders, appending // uses the full path in the name
 set expandtab   " expand tabs into spaces; use <C-v><Tab> for a real tab
 set hidden      " hide abandoned buffers instead of unloading them
 set inccommand=nosplit " show effects of commands incrementally
@@ -70,7 +70,7 @@ endif
 " Persistent undo {{{2
 if has("persistent_undo")
   set undofile
-  set undodir=~/.vimfiles/undo//,. " undo file folders, appending // uses the full path in the name
+  set undodir=~/.nvimfiles/undo//,. " undo file folders, appending // uses the full path in the name
 endif
 " }}}2
 " Set syntax highlighting colorscheme {{{2
