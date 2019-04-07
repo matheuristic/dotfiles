@@ -13,9 +13,6 @@ set nocompatible " vi non-compatible mode
 set autoindent  " use indent level from previous line
 "set autoread    " watch for file changes by external programs
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
-"set backup      " keep backups
-"set backupdir=~/.backup,.,~/tmp/,~/ " backup folders, note that file names do not contain the dirname as prefixes
-"set directory=~/.tmp//,.,~/tmp/,/var/tmp,/tmp " use ~/.tmp for swap files
 "set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
 "set complete=.,w,b,u,U,t,i,d " extra scanning on keyword completion
 set complete+=k " also use dictionaries on keyword completion
@@ -81,6 +78,29 @@ if has('linebreak')
   set showbreak=...\  " put '... ' at start of each continued line
 endif
 " }}}2
+" Backup, swap and undo {{{2
+if has("persistent_undo")
+  let s:my_var_vimtmp=expand("$HOME" . "/.vimtmp")
+  for my_dir in ['swap', 'backup', 'undo']
+    if !isdirectory(s:my_var_vimtmp . "/" . my_dir) && exists("*mkdir")
+      :call mkdir(s:my_var_vimtmp . "/" . my_dir, "p", 0700)
+    endif
+  endfor
+  if isdirectory(s:my_var_vimtmp . "/swap")
+    set swapfile
+    execute "set directory=" . expand(s:my_var_vimtmp . "/swap//")
+  endif
+  if isdirectory(s:my_var_vimtmp . "/backup")
+    let s:my_var_backup=1  " see workaround for backup filename expansion below
+    set nobackup
+    execute "set backupdir=" . expand(s:my_var_vimtmp . "/backup//")
+  endif
+  if isdirectory(s:my_var_vimtmp . "/undo")
+    set undofile
+    execute "set undodir=" . expand(s:my_var_vimtmp . "/undo//")
+  endif
+endif
+" }}}2
 " Status line {{{2
 if has('statusline') && (version >= 700)
   set statusline=               " clear statusline
@@ -141,6 +161,21 @@ endif
 
 if has('autocmd')
   filetype plugin indent on " enable filetype detection for plugins and indents
+
+  " Workaround for backup filename expansion problem " {{{2
+  " From http://stackoverflow.com/a/38479550/2085526
+  if has('persistent_undo')
+    augroup backup
+      autocmd BufWritePre * 
+            \ if (exists("s:my_var_backup") && 
+            \     s:my_var_backup &&
+            \     (expand("%:t") !~ '\m.*\.\(asc\|gpg\)') &&
+            \     (&ft != "crontab"))
+            \ | :call SaveBackups()
+            \ | endif
+    augroup END
+  endif
+  " }}}2
   augroup cron " {{{2
     autocmd!
     autocmd FileType crontab setlocal nobackup nowritebackup
@@ -254,7 +289,6 @@ endif
 " Adapted from https://gist.github.com/PeterRincker/13bde011c01b7fc188c5
 " Uses b:commentstring or 'commentstring' as comment pattern, e.g.
 "   let &commentstring = '/*%s*/'
-
 if has('eval')
   function! s:commentOp(...)
     '[,']call s:toggleComment()
@@ -278,6 +312,34 @@ if has('eval')
     for lnum in range(a:firstline, a:lastline)
       call setline(lnum, substitute(getline(lnum), pattern, replace, ''))
     endfor
+  endfunction
+endif
+" }}}2
+
+" Workaround for backup filename expansion problem {{{2
+" From http://stackoverflow.com/a/38479550/2085526
+if has("persistent_undo")
+  function! SaveBackups()
+    if expand('%:p') =~ &backupskip | return | endif
+
+    " If this is a newly created file, don't try to create a backup
+    if !filereadable(@%) | return | endif
+
+    for l:backupdir in split(&backupdir, ',')
+      :call SaveBackup(l:backupdir)
+    endfor
+  endfunction
+
+  function! SaveBackup(backupdir)
+    let l:filename = expand('%:p')
+    if a:backupdir =~ '//$'
+        let l:backup = escape(substitute(l:filename, '/', '%', 'g')  . &backupext, '%')
+    else
+        let l:backup = escape(expand('%') . &backupext, '%')
+    endif
+
+    let l:backup_path = a:backupdir . l:backup
+    :silent! execute '!cp ' . resolve(l:filename) . ' ' . l:backup_path
   endfunction
 endif
 " }}}2
