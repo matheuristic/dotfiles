@@ -14,7 +14,7 @@ if &compatible | finish | endif " don't source script if vi compatible-mode is s
 set autoindent  " use indent level from previous line
 "set autoread    " watch for file changes by external programs
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
-"set backup      " keep backups, usually better to use version control
+"set backup      " keep backups (it is usually better to use version control)
 "set backupdir=~/.vimfiles/backup//,.,~/tmp/,~/ " backup file folders, appending // uses the full path in the name
 set directory=~/.vimfiles/swap//,.,~/tmp,/var/tmp,/tmp " swapfile folders, appending // uses the full path in the name
 "set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
@@ -360,11 +360,11 @@ if has('extra_search')
 endif
 " }}}2
 " Change directory to current file's {{{2
-nnoremap <silent> <Leader>C :cd %:p:h<CR>:pwd<CR>
+nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
 " }}}2
 " Toggle folding {{{2
 if has('folding')
-  nnoremap <silent> <Leader>f :set foldenable! foldenable?<CR>
+  nnoremap <silent> <Leader>F :set foldenable! foldenable?<CR>
 endif
 " }}}2
 " Toggle spell check {{{2
@@ -372,7 +372,7 @@ if has('syntax')
   nnoremap <silent> <Leader>ssp :set spell! spell?<CR>
 endif
 " }}}2
-" Toggle wrapping of lines {{{2
+" Toggle line wrap {{{2
 nnoremap <silent> <Leader>W :set wrap! wrap?<CR>
 " }}}2
 " Toggle paste mode {{{2
