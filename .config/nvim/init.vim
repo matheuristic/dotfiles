@@ -13,7 +13,7 @@ set inccommand=nosplit " show effects of commands incrementally
 "set list        " highlight tabs and trailing whitespace
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,nbsp:. " chars for displaying whitespace when 'list' is set
 set nojoinspaces " do not insert two spaces after '.', '?' and '!' on line joins
-set swapfile    " use swapfiles, swapfile location is determined by 'directory'
+set swapfile    " use swapfiles, which are stored in 'directory'
 
 " Use ripgrep if available {{{2
 if executable('rg')
@@ -37,25 +37,6 @@ endif " }}}2
 if has("persistent_undo")
   set undofile
   set undodir=~/.nvimfiles/undo//,. " undo file folders, appending // uses the full path in the name
-endif " }}}2
-" Set syntax highlighting colorscheme {{{2
-if has('syntax') && (&t_Co > 2)
-  silent! unset g:colors_name
-  syntax on
-  " List of (colors_name[, numcolors needed])
-  let s:colors_list = [['gruvbox', 256], ['desert', 8], ['default', 8]]
-  " In list order, try setting color scheme if the terminal emulator supports
-  " the number of colors necessary for the scheme (default: 256)
-  for color_pair in s:colors_list
-    if !exists('colors_name') && (&t_Co >= get(color_pair, 1, 256))
-      if color_pair[0] =~ '^gruvbox'
-        set background=dark
-        let g:gruvbox_contrast_dark = 'soft'
-      endif
-      silent! execute 'colorscheme' color_pair[0]
-    endif
-  endfor
-  unlet! s:colors_list
 endif " }}}2
 " Set the terminal emulator title to path of file being edited {{{2
 if has('title')
@@ -173,13 +154,16 @@ if exists('*minpac#init')
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
   " 1. Interface {{{2
+  call minpac#add('chriskempson/base16-vim', {'type': 'opt'}) " color scheme {{{3
+  colorscheme base16-grayscale-dark " }}}3
   call minpac#add('vim-airline/vim-airline') " status line
-  call minpac#add('morhetz/gruvbox', {'type': 'opt'}) " color scheme
+  call minpac#add('vim-airline/vim-airline-themes') " status line themes {{{3
+  let g:airline_theme='base16_grayscale' " }}}3
   call minpac#add('mhinz/vim-startify') " fancy start screen {{{3
   if has('autocmd')
     augroup startify " run startify on new tabs
       autocmd!
-      autocmd TabNewEntered * Startify
+      autocmd TabNewEntered * if bufname('%') == '' | Startify | endif
     augroup END
   endif " }}}3
   call minpac#add('liuchengxu/vim-which-key') " display available keybindings in a popup {{{3
