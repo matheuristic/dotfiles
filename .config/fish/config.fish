@@ -32,3 +32,13 @@ end
 if test -d $HOME/cdbookmarks
     set -x CDPATH . $HOME/cdbookmarks
 end
+
+# Source local aliases
+if test -f ~/.config/fish/alias.fish
+    source ~/.config/fish/alias.fish
+end
+
+# Source local fish config file
+if test -f ~/.config/fish/config.fish.local
+    source ~/.config/fish/config.fish.local
+end
