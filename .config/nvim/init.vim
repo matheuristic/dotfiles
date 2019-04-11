@@ -1,42 +1,6 @@
 " ~/.config/nvim/init.vim - Config file for Nvim
 " Author: matheuristic
 
-" Section: Packages {{{1
-" ----------------------
-
-" Using minpac - https://github.com/k-takata/minpac
-" To install the minpac package manager, run in the shell:
-"   $ git clone https://github.com/k-takata/minpac.git ~/.config/nvim/pack/minpac/opt/minpac
-" To install or update registered packages, run:
-"   :call minpac#update()
-" To delete packages that are no longer registered, run:
-"   :call minpac#clean()
-
-packadd minpac
-
-if exists('*minpac#init')
-  call minpac#init()
-
-  " minpac must have {'type': 'opt'} so that it can be loaded with `packadd`
-  call minpac#add('k-takata/minpac', {'type': 'opt'})
-
-  " General enhancements
-  call minpac#add('junegunn/fzf', {'do': '!./install --bin'})
-  call minpac#add('junegunn/fzf.vim')
-  call minpac#add('mbbill/undotree')
-  call minpac#add('tpope/vim-abolish')
-  call minpac#add('tpope/vim-commentary')
-  call minpac#add('tpope/vim-fugitive')
-  call minpac#add('tpope/vim-projectionist')
-  call minpac#add('tpope/vim-surround')
-  call minpac#add('tpope/vim-unimpaired')
-
-  " User interface
-  call minpac#add('vim-airline/vim-airline') " status line
-  call minpac#add('morhetz/gruvbox', {'type': 'opt'}) " color scheme
-endif
-
-" }}}1
 " Section: Options {{{1
 " ---------------------
 
@@ -52,33 +16,34 @@ set nojoinspaces " do not insert two spaces after '.', '?' and '!' on line joins
 set swapfile    " use swapfiles, swapfile location is determined by 'directory'
 
 " Use ripgrep if available {{{2
-if executable('/opt/local/bin/rg')
-  set grepprg=/opt/local/bin/rg\ --vimgrep
-endif
-" }}}2
+if executable('rg')
+  set grepprg=rg\ --vimgrep
+endif " }}}2
+
+" Enable filetype detection for plugins and indents {{{2
+if has('autocmd')
+  filetype plugin indent on
+endif " }}}2
 " Enable folding {{{2
 if has('folding')
   set foldenable
   set foldmethod=marker
-endif
-" }}}2
+endif " }}}2
 " Visually indicate wrapped lines {{{2
 if has('linebreak')
   set showbreak=…\  " put '… ' at start of each continued line
-endif
-" }}}2
+endif " }}}2
 " Persistent undo {{{2
 if has("persistent_undo")
   set undofile
   set undodir=~/.nvimfiles/undo//,. " undo file folders, appending // uses the full path in the name
-endif
-" }}}2
+endif " }}}2
 " Set syntax highlighting colorscheme {{{2
 if has('syntax') && (&t_Co > 2)
   silent! unset g:colors_name
   syntax on
   " List of (colors_name[, numcolors needed])
-  let s:colors_list = [['gruvbox', 256], ['zenburn', 256], ['desert', 8], ['default', 8]]
+  let s:colors_list = [['gruvbox', 256], ['desert', 8], ['default', 8]]
   " In list order, try setting color scheme if the terminal emulator supports
   " the number of colors necessary for the scheme (default: 256)
   for color_pair in s:colors_list
@@ -91,16 +56,14 @@ if has('syntax') && (&t_Co > 2)
     endif
   endfor
   unlet! s:colors_list
-endif
-" }}}2
+endif " }}}2
 " Set the terminal emulator title to path of file being edited {{{2
 if has('title')
   set title
-endif
-" }}}2
+endif " }}}2
 
 " }}}1
-" Section: Keymappings {{{1
+" Section: Basic Keymappings {{{1
 " -------------------------
 
 " Default map leader <Leader> is '\'
@@ -163,11 +126,11 @@ if has('extra_search')
 endif
 " }}}2
 " Change directory to current file's {{{2
-nnoremap <silent> <Leader>C :cd %:p:h<CR>:pwd<CR>
+nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
 " }}}2
 " Toggle folding {{{2
 if has('folding')
-  nnoremap <silent> <Leader>f :set foldenable! foldenable?<CR>
+  nnoremap <silent> <Leader>F :set foldenable! foldenable?<CR>
 endif
 " }}}2
 " Toggle spell check {{{2
@@ -187,9 +150,119 @@ nnoremap <silent> <Leader>L :set list! list?<CR>
 " Toggle modeline (reload file with :e to effect change) {{{2
 nnoremap <silent> <Leader>sml :set modeline! modeline?<CR>
 " }}}2
-" Toggle undotree {{{2
-if exists('g:loaded_undotree') | nnoremap <silent> <Leader>u :UndotreeToggle | endif
-" }}}2
+
+" }}}1
+" Section: Packages {{{1
+" ----------------------
+
+" Using minpac - https://github.com/k-takata/minpac
+" To install the minpac package manager, run in the shell:
+"   $ git clone https://github.com/k-takata/minpac.git ~/.config/nvim/pack/minpac/opt/minpac
+" To install or update registered packages, run:
+"   :call minpac#update()
+" To delete packages that are no longer registered, run:
+"   :call minpac#clean()
+
+packadd minpac
+
+if exists('*minpac#init')
+  " Initialize minpac
+  call minpac#init()
+
+  " minpac must have {'type': 'opt'} so that it can be loaded with `packadd`
+  call minpac#add('k-takata/minpac', {'type': 'opt'})
+
+  " 1. Interface {{{2
+  call minpac#add('vim-airline/vim-airline') " status line
+  call minpac#add('morhetz/gruvbox', {'type': 'opt'}) " color scheme
+  call minpac#add('mhinz/vim-startify') " fancy start screen {{{3
+  if has('autocmd')
+    augroup startify " run startify on new tabs
+      autocmd!
+      autocmd TabNewEntered * Startify
+    augroup END
+  endif " }}}3
+  call minpac#add('liuchengxu/vim-which-key') " display available keybindings in a popup {{{3
+  nnoremap <silent> <Leader> :<c-u>WhichKey '<Leader>'<CR>
+  " }}}2
+  " 2. Editing {{{2
+  call minpac#add('mbbill/undotree') " undo history visualizer {{{3
+  nnoremap <silent> <Leader>u :UndotreeToggle<CR>
+  " }}}3
+  call minpac#add('terryma/vim-multiple-cursors') " multiple selection like Sublime Text
+  call minpac#add('tpope/vim-abolish') " search, substitute and abbreviate word variants
+  call minpac#add('tpope/vim-commentary') " toggle commenting of lines
+  call minpac#add('tpope/vim-surround') " mappings to manipulate parentheses, brackets and quotes
+  call minpac#add('tpope/vim-unimpaired') " handy bracket mappings
+  " }}}2
+  " 3. Search {{{2
+  call minpac#add('junegunn/fzf', {'do': '!./install --bin'}) " fuzzy file search {{{3
+  call minpac#add('junegunn/fzf.vim')
+  " Some fzf commands have dependencies on vim packages or system utilities
+  "   :Commits  - vim-fugitive
+  "   :Rg       - rg (ripgrep) needs to be installed on the system
+  "   :Snippets - UltiSnips
+  nnoremap <silent> <Leader>fb :Buffers<CR>
+  nnoremap <silent> <Leader>fc :Commits<CR>
+  nnoremap <silent> <Leader>ff :Files<CR>
+  nnoremap <silent> <Leader>fh :History<CR>
+  nnoremap <silent> <Leader>fg :Rg<CR>
+  nnoremap <silent> <Leader>fl :Lines<CR>
+  nnoremap <silent> <Leader>fm :Marks<CR>
+  nnoremap <silent> <Leader>fw :Windows<CR>
+  nnoremap <silent> <Leader>fH :Helptags<CR>
+  nnoremap <silent> <Leader>fM :Maps<CR>
+  nnoremap <silent> <Leader>fS :Snippets<CR>
+  nnoremap <silent> <Leader>f: :Commands<CR>
+  " }}}3
+  " }}}2
+  " 4. Snippets {{{2
+  call minpac#add('SirVer/ultisnips') " snippet manager, requires Python pynvim package be installed
+  call minpac#add('honza/vim-snippets') " default snippets
+  let g:UltiSnipsExpandTrigger="<NUL>" " disable expand trigger
+  let g:UltiSnipsListTriggers="<c-tab>" " choose expansion from completing snippet list
+  let g:UltiSnipsJumpForwardTrigger="<tab>" " jump to next placeholder in snippet
+  let g:UltiSnipsJumpBackwardTrigger="<s-tab>" " jump to prev placeholder in snippet
+  " }}}2
+  " 5. Version control {{{2
+  call minpac#add('tpope/vim-fugitive') " Git wrapper {{{3
+  nnoremap <silent> <Leader>gd :Gdiff<CR>
+  nnoremap <silent> <Leader>gs :Gstatus<CR>
+  nnoremap <silent> <Leader>gb :Gblame<CR>
+  nnoremap <silent> <Leader>gB :Gbrowse<CR>
+  nnoremap <silent> <Leader>gl :0Glog<CR>:bot copen<CR>
+  nnoremap <silent> <Leader>gL :Glog<CR>:bot copen<CR>
+  nnoremap <silent> <Leader>gf :Gfetch<CR>
+  nnoremap <silent> <Leader>gF :Gpull<CR>
+  nnoremap <silent> <Leader>gm :Gmerge<CR>
+  nnoremap <Leader>gg :Ggrep<Space>
+  nnoremap <Leader>gp :Gpush<Space>
+  nnoremap <Leader>gM :Gmove<Space>
+  nnoremap <Leader>gD :Gdelete<Space>
+  " }}}3
+  call minpac#add('tpope/vim-rhubarb') " Github extension for vim-fugitive
+  call minpac#add('junegunn/gv.vim') " Git commit browser, requires vim-fugitive {{{3
+  nnoremap <silent> <Leader>gv :GV<CR>
+  " }}}3
+  " }}}2
+  " 6. Other {{{2
+  call minpac#add('tpope/vim-obsession') " continuously updated session files {{{3
+  nnoremap <Leader>of :Obsession<Space>
+  nnoremap <silent> <Leader>oo :Obsession<CR>
+  nnoremap <silent> <Leader>o! :Obsession!<CR>
+  " }}}3
+  call minpac#add('tpope/vim-projectionist') " project-specific configuration
+  call minpac#add('tpope/vim-sleuth') " auto-adjust 'shiftwidth' and 'expandtab'
+  " }}}2
+endif
+
+" }}}1
+" Section: Local Vim Config {{{1
+" ------------------------------
+
+if filereadable(expand("~/.config/nvim/init.vim.local"))
+  source ~/.config/nvim/init.vim.local
+endif
 
 " }}}1
 " Modeline {{{1
