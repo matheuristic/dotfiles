@@ -5,33 +5,32 @@
 " ------------------------------
 
 if &compatible | finish | endif " don't source script if vi compatible-mode is set
-"set nocompatible " vi non-compatible mode, usually set automatically by system
+"set nocompatible " vi non-compatible mode, usually set automatically
 
 " }}}1
 " Section: Options {{{1
 " ---------------------
 
-set autoindent  " use indent level from previous line
-"set autoread    " watch for file changes by external programs
+set autoindent  " use indent level from the previous line
+"set autoread    " watch for file changes made by external programs
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
 "set backup      " keep backups (it is usually better to use version control)
-"set backupdir=~/.vimfiles/backup//,.,~/tmp/,~/ " backup file folders, appending // uses the full path in the name
-set directory=~/.vimfiles/swap//,.,~/tmp,/var/tmp,/tmp " swapfile folders, appending // uses the full path in the name
+"set backupdir=~/.vimfiles/backup//,.,~/tmp/,~/ " backup file folders, appending '//' uses the full path in the filename
+set directory=~/.vimfiles/swap//,.,~/tmp,/var/tmp,/tmp " swapfile folders, appending '//' uses the full path in the filename
 "set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
 "set complete=.,w,b,u,U,t,i,d " extra scanning on keyword completion
 set complete+=k " also use dictionaries on keyword completion
-set expandtab   " expand tabs into spaces; use <C-v><Tab> for a real tab
+set expandtab   " expand tabs into spaces (use <C-v><Tab> in insert mode for a real tab)
 set formatoptions+=j " delete comment leader when joining comment lines
 "set gdefault    " substitute all matches in a string by default
-set grepprg=grep\ -nH\ $* " set grep to always show filename
-set ignorecase  " make searches case-insensitive
+"set ignorecase  " make searches case-insensitive
 set laststatus=2 " always show status line, even when editing just one file
 "set list        " highlight tabs and trailing whitespace
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,nbsp:. " chars for displaying whitespace when 'list' is set
 "set hidden      " hide abandoned buffers instead of unloading them
 set nojoinspaces " do not insert two spaces after '.', '?' and '!' on line joins
 "set nomodeline  " do not have files overwrite settings from this vimrc
-set nowrap      " do not wrap text
+"set nowrap      " do not wrap text
 "set scrolloff=1 " num lines from top or bottom of window to begin scrolling
 set sidescrolloff=5 " num lines from left or right of window to begin scrolling
 set shiftwidth=2 " number of spaces for each indent level
@@ -45,8 +44,15 @@ set swapfile    " use swapfiles, swapfile location is determined by 'directory'
 set ttyfast     " smoother output
 set wildmode=list:longest,full " command-line tab completion options
 
+" Prefer rg (ripgrep) to grep for grepping {{{2
+if executable('rg')
+  set grepprg=rg\ --vimgrep
+else
+  set grepprg=grep\ -nH\ $* " set grep to always show filename
+endif " }}}2
+
 " Automatically switch working directory to current file's {{{2
-"if has('autochdir')
+"if exists('+autochdir')
 "  set autochdir
 "endif
 " }}}2
@@ -70,7 +76,7 @@ endif
 " Enable folding {{{2
 if has('folding')
   set foldenable
-  set foldmethod=marker
+  set foldmethod=marker " Use markers to specify folds
 endif
 " }}}2
 " Insert mode completion options (<C-n> and <C-p> in Insert mode) {{{2
@@ -116,23 +122,9 @@ if has('statusline') && (version >= 700)
 endif
 " }}}2
 " Set syntax highlighting colorscheme {{{2
-if has('syntax') && (&t_Co > 2)
-  silent! unset g:colors_name
+if has('syntax') && !exists('colors_name') && (&t_Co >= 8)
   syntax on
-  " List of (colors_name[, num_colors_needed])
-  let s:colors_list = [['gruvbox', 256], ['zenburn', 256], ['desert', 8], ['default', 8]]
-  " In the list order, try setting color scheme if the terminal emulator
-  " supports the number of colors necessary for the scheme (default: 256)
-  for color_pair in s:colors_list
-    if !exists('colors_name') && (&t_Co >= get(color_pair, 1, 256))
-      if color_pair[0] =~ '^gruvbox'
-        set background=dark
-        let g:gruvbox_contrast_dark = 'soft'
-      endif
-      silent! execute 'colorscheme' color_pair[0]
-    endif
-  endfor
-  unlet! s:colors_list
+  colorscheme desert
 endif
 " }}}2
 " Set the terminal emulator title to path of file being edited {{{2
