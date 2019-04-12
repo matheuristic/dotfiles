@@ -38,6 +38,10 @@ if has("persistent_undo")
   set undofile
   set undodir=~/.nvimfiles/undo//,. " undo file folders, appending // uses the full path in the name
 endif " }}}2
+" Use GUI colors in the terminal (requires 24-bit color support) {{{2
+if has("termguicolors")
+  set termguicolors
+endif " }}}2
 " Set the terminal emulator title to path of file being edited {{{2
 if has('title')
   set title
