@@ -25,7 +25,7 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (and (not (display-graphic-p)) (fboundp 'menu-bar-mode)) (menu-bar-mode -1))
 
-;; smooth scrolling in GUI (hold shift/control for 5 lines/full screen)
+;; smooth scrolling in GUI (hold shift for 5 lines or control for full screen)
 (if (display-graphic-p)
     (setq mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control)))))
 
@@ -44,18 +44,21 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
-;; use left Option key as Meta and preserve right Option key on Mac OS X
+;; use left Option key as Meta, preserve right Option key on Mac OS X
+;; use right Command key as Hyper
 (if (eq system-type 'darwin)
     (setq mac-option-modifier 'meta
-          mac-right-option-modifier nil))
+          mac-right-option-modifier nil
+          mac-right-command-modifier 'hyper))
 
+(require 'cl-seq)
 (defun my-yank-from-kill-ring ()
   "Yank from the kill ring into buffer at point or region.
 Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (interactive)
   (let ((to_insert (completing-read
-                    "Yank : " (delete-duplicates kill-ring :test #'equal))))
-    ;; delete selected buffer region, if applicable
+                    "Yank : " (cl-delete-duplicates kill-ring :test #'equal))))
+    ;; delete selected buffer region (if applicable)
     (if (and to_insert (region-active-p))
       (delete-region (region-beginning) (region-end)))
     ;; insert the selected entry from the kill ring
@@ -93,6 +96,8 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 (defvar lisp-dir (expand-file-name "lisp" user-emacs-directory))
 (unless (file-exists-p lisp-dir) (make-directory lisp-dir))
 (add-to-list 'load-path lisp-dir)
+(dolist (project (directory-files lisp-dir t "\\w+"))
+  (if (file-directory-p project) (add-to-list 'load-path project)))
 
 ;; third-party packages in ~/.emacs.d/site-lisp and its subdirectories
 (defvar site-lisp-dir (expand-file-name "site-lisp" user-emacs-directory))
@@ -135,54 +140,6 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 ;; customize how mode names appear in the mode line - ELPA
 (use-package delight)
 
-;; extensible vi layer for Emacs - MELPA Stable
-;; use C-z to toggle between Evil and Emacs bindings, and C-x C-z to suspend
-(use-package evil
-  :init
-  (setq evil-want-C-u-scroll t ;; C-u goes half-page up like in Vim
-        evil-insert-state-modes nil ;; clear Insert state modes
-        evil-motion-state-modes nil ;; clear Motion state modes
-        evil-default-state 'emacs) ;; use Emacs state as default
-  (evil-mode t)
-  :config
-  (defvar evil-leader "<SPC>") ;; emulate Vim leader key in normal mode
-  (defun evil-leader-set-key-normal (key fn)
-    "Binds \"<evil-leader> KEY\" to interactively call FN in Evil normal mode."
-    (define-key evil-normal-state-map (kbd (concat evil-leader key)) fn))
-  (defun evil-leader-set-key-visual (key fn)
-    "Binds \"<evil-leader> KEY\" to interactively call FN in Evil visual mode."
-    (define-key evil-visual-state-map (kbd (concat evil-leader key)) fn))
-  (evil-leader-set-key-normal "M" 'evil-show-marks)
-  (evil-leader-set-key-normal "r" 'list-registers)
-  (evil-leader-set-key-normal "w" 'whitespace-mode)
-  (evil-leader-set-key-normal "y" 'my-yank-from-kill-ring)
-  (evil-leader-set-key-visual "y" 'my-yank-from-kill-ring)
-  (evil-leader-set-key-normal "#" 'comment-line)
-  (evil-leader-set-key-visual "#" 'comment-or-uncomment-region)
-  ;; make tabs in insert mode work like Vim
-  (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
-  ;; useful bracket mappings like in vim-unimpaired
-  (define-key evil-normal-state-map (kbd "[ e")
-    (lambda (n) (interactive "p")
-      (dotimes (_ n)
-        (unless (eq (string-to-number (format-mode-line "%l")) 1)
-          (progn (transpose-lines 1)
-                 (forward-line -2))))))
-  (define-key evil-normal-state-map (kbd "] e")
-    (lambda (n) (interactive "p")
-      (dotimes (_ n)
-        (unless (eq (string-to-number (format-mode-line "%l"))
-                    (line-number-at-pos (point-max)))
-          (progn (forward-line 1)
-                 (transpose-lines 1)
-                 (forward-line -1))))))
-  (define-key evil-normal-state-map (kbd "[ n") 'diff-hunk-prev)
-  (define-key evil-normal-state-map (kbd "] n") 'diff-hunk-next)
-  ;; mappings for adding, changing and deleting surrounding brackets
-  ;; in evil-mode, emulates surround.vim by tpope - MELPA Stable
-  (use-package evil-surround
-    :init (global-evil-surround-mode 1)))
-
 ;; framework for temporary or repeatable bindings - MELPA Stable
 (use-package hydra
   :config
@@ -197,8 +154,8 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
     ("S" save-some-buffers "save-all")
     ("k" kill-this-buffer "kill")
     ("K" kill-matching-buffers "kill-match")
-    ("b" switch-to-buffer "switch" :color blue)
-    ("q" nil "quit" :color blue))
+    ("b" switch-to-buffer "switch" :exit t)
+    ("q" nil "quit" :exit t))
   (defhydra my-hydra/desktop (:color teal)
     "Desktop"
     ("c" desktop-clear "clear")
@@ -224,17 +181,33 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
     ("m" make-frame "make")
     ("d" delete-frame "delete")
     ("o" delete-other-frames "only")
-    ("q" nil "quit" :color blue))
+    ("q" nil "quit" :exit t))
   (defhydra my-hydra/narrow (:color teal)
     "Narrow"
     ("n" narrow-to-region "region")
     ("p" narrow-to-page "page")
     ("d" narrow-to-defun "defun")
     ("w" widen "widen")
-    ("q" nil "quit" :color blue))
+    ("q" nil "quit" :exit t))
   (defhydra my-hydra/navigation (:color amaranth :columns 4)
     "Navigation"
-    ("S-SPC" scroll-down "page-up")
+    ("h" backward-char "left")
+    ("j" next-line "down")
+    ("k" previous-line "up")
+    ("l" forward-char "right")
+    ("b" backward-word "wd-left")
+    ("w" forward-word "wd-right")
+    ("0" move-beginning-of-line "ln-begin")
+    ("$" move-end-of-line "ln-end")
+    ("(" backward-sentence "sent-left")
+    (")" forward-sentence "sent-right")
+    ("{" backward-paragraph "par-left")
+    ("}" forward-paragraph "par-right")
+    ("," backward-sexp "sexp-left")
+    ("." forward-sexp "sexp-right")
+    ("[" backward-list "list-left")
+    ("]" forward-list "list-right")
+    ("S-SPC" scroll-down "pg-up")
     ("SPC" scroll-up "pg-down")
     ("<" scroll-right "pg-left")
     (">" scroll-left "pg-right")
@@ -245,9 +218,9 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
     ("rm" bookmark-set "bmk-set")
     ("rb" bookmark-jump "bmk-jmp")
     ("gg" beginning-of-buffer "beg-buf")
-    ("gG" end-of-buffer "end-buf")
-    ("G" goto-line "goto-line")
-    ("q" nil "quit" :color blue))
+    ("G" end-of-buffer "end-buf")
+    ("gG" goto-line "goto-line")
+    ("q" nil "quit" :exit t))
   (defhydra my-hydra/search (:color teal :columns 3)
     "Search"
     ("gg" grep "grep")
@@ -263,7 +236,7 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
     ("rs" query-replace "replace string")
     ("rr" query-replace-regexp "replace regexp")
     ("kg" kill-grep "kill-grep")
-    ("q" nil "quit"))
+    ("q" nil "quit" :exit t))
   (defhydra my-hydra/window (:color amaranth :columns 4)
     "Window"
     ("n" next-multiframe-window "next")
@@ -289,21 +262,21 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
     ("o" delete-other-windows "only")
     ("d" delete-window "delete")
     ("D" kill-buffer-and-window "delete-buf")
-    ("q" nil "quit" :color blue))
+    ("q" nil "quit" :exit t))
   (defhydra my-hydra/zoom (:color amaranth)
     "Zoom"
     ("-" text-scale-decrease "out")
     ("+" text-scale-increase "in")
     ("0" (text-scale-adjust 0) "reset")
-    ("q" nil "quit" :color blue))
-  (global-set-key (kbd "C-c h D") 'my-hydra/desktop/body)
-  (global-set-key (kbd "C-c h N") 'my-hydra/narrow/body)
-  (global-set-key (kbd "C-c h s") 'my-hydra/search/body)
-  (global-set-key (kbd "C-c h Z") 'my-hydra/zoom/body)
-  (global-set-key (kbd "C-c h b") 'my-hydra/buffer/body)
-  (global-set-key (kbd "C-c h f") 'my-hydra/frame/body)
-  (global-set-key (kbd "C-c h n") 'my-hydra/navigation/body)
-  (global-set-key (kbd "C-c h w") 'my-hydra/window/body))
+    ("q" nil "quit" :exit t))
+  (global-set-key (kbd "H-D") 'my-hydra/desktop/body)
+  (global-set-key (kbd "H-N") 'my-hydra/narrow/body)
+  (global-set-key (kbd "H-s") 'my-hydra/search/body)
+  (global-set-key (kbd "H-Z") 'my-hydra/zoom/body)
+  (global-set-key (kbd "H-b") 'my-hydra/buffer/body)
+  (global-set-key (kbd "H-f") 'my-hydra/frame/body)
+  (global-set-key (kbd "H-n") 'my-hydra/navigation/body)
+  (global-set-key (kbd "H-w") 'my-hydra/window/body))
 
 ;; alternative interface for M-x - MELPA Stable
 (use-package amx
@@ -359,8 +332,8 @@ Windows  _L_ : line-wise   _W_ : word-wise
       ("w" ediff-regions-wordwise)
       ("L" ediff-windows-linewise)
       ("W" ediff-windows-wordwise)
-      ("q" nil "quit" :color blue))
-    (global-set-key (kbd "C-c h d") 'my-hydra/ediff/body)))
+      ("q" nil "quit" :exit t))
+    (global-set-key (kbd "H-d") 'my-hydra/ediff/body)))
 
 ;; Eldoc - built-in
 (use-package eldoc
@@ -382,9 +355,9 @@ Windows  _L_ : line-wise   _W_ : word-wise
                                             "vagrant" "ssh")))
 
 ;; typing any left bracket auto-inserts matching right bracket - built-in
-(use-package elec-pair
-  :config (dolist (mode-hook '(prog-mode-hook org-mode-hook markdown-mode-hook))
-            (add-hook mode-hook 'electric-pair-mode)))
+;; (use-package elec-pair
+;;   :config (dolist (mode-hook '(prog-mode-hook org-mode-hook markdown-mode-hook))
+;;             (add-hook mode-hook 'electric-pair-mode)))
 
 ;; increase selected region by semantic units - MELPA Stable
 (use-package expand-region
@@ -397,62 +370,57 @@ Windows  _L_ : line-wise   _W_ : word-wise
   :config (setq eyebrowse-new-workspace t))
 
 ;; syntax checker, alternative to Flymake - MELPA Stable
-(use-package flycheck
-  :delight flycheck-mode
-  :init (global-flycheck-mode)
-  :config
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra/flycheck (:color amaranth :columns 6)
-      "Error"
-      ("F" flycheck-error-list-set-filter "filter")
-      ("p" flycheck-previous-error "previous")
-      ("n" flycheck-next-error "next")
-      ("f" flycheck-first-error "first")
-      ("l" (condition-case nil (while t (flycheck-next-error))
-             (user-error nil)) "last")
-      ("L" (condition-case nil (quit-windows-on "*Flycheck errors*" t)
-             (error (flycheck-list-errors))) "list")
-      ("q" nil "quit" :color blue))
-    ;; bind over my-hydra/error
-    (define-key flycheck-mode-map (kbd "C-c h e") 'my-hydra/flycheck/body))
-  (with-eval-after-load 'evil
-    ;; bracket mappings for error navigation
-    (define-key evil-normal-state-map (kbd "[ l") 'flycheck-previous-error)
-    (define-key evil-normal-state-map (kbd "] l") 'flycheck-next-error)))
+;; (use-package flycheck
+;;   :delight flycheck-mode
+;;   :init (global-flycheck-mode)
+;;   :config
+;;   (with-eval-after-load 'hydra
+;;     (defhydra my-hydra/flycheck (:color amaranth :columns 6)
+;;       "Error"
+;;       ("F" flycheck-error-list-set-filter "filter")
+;;       ("p" flycheck-previous-error "previous")
+;;       ("n" flycheck-next-error "next")
+;;       ("f" flycheck-first-error "first")
+;;       ("l" (condition-case nil (while t (flycheck-next-error))
+;;              (user-error nil)) "last")
+;;       ("L" (condition-case nil (quit-windows-on "*Flycheck errors*" t)
+;;              (error (flycheck-list-errors))) "list")
+;;       ("q" nil "quit" :exit t))
+;;     ;; bind over my-hydra/error
+;;     (define-key flycheck-mode-map (kbd "H-e") 'my-hydra/flycheck/body)))
 
 ;; syntax checker, use C-h . to show error on current line - built-in
-; (use-package flymake
-;   :config
-;   (add-hook 'emacs-lisp-mode-hook '(lambda () (flymake-mode)))
-;   (defun my-toggle-flymake-diagnostics ()
-;     "Toggles flymake diagnostics window for current buffer."
-;     (interactive)
-;     (if flymake-mode
-;         (let* ((buf-name (buffer-name (current-buffer)))
-;                (flymake-winds (condition-case nil
-;                                   (get-buffer-window-list
-;                                    (concat "*Flymake diagnostics for "
-;                                            buf-name
-;                                            "*"))
-;                                 (error nil))))
-;           (if flymake-winds
-;               (dolist (wind flymake-winds) (quit-window nil wind))
-;             (flymake-show-diagnostics-buffer)))))
-;   (with-eval-after-load 'hydra
-;     (defhydra my-hydra/flymake (:color amaranth)
-;       "Error"
-;       ("p" flymake-goto-prev-error "previous")
-;       ("n" flymake-goto-next-error "next")
-;       ("L" my-toggle-flymake-diagnostics "list")
-;       ("q" nil "quit" :color blue))
-;     (define-key flymake-mode-map (kbd "C-c h e") 'my-hydra/flymake/body))
-;   (with-eval-after-load 'evil
-;     ;; bracket mappings for error navigation
-;     (define-key evil-normal-state-map (kbd "[ l") 'flymake-goto-prev-error)
-;     (define-key evil-normal-state-map (kbd "] l") 'flymake-goto-next-error)))
+(use-package flymake
+  :config
+  (use-package flymake-diagnostic-at-point
+    :config
+    (setq flymake-diagnostic-at-point-error-prefix "» ")
+    (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode))
+  (add-hook 'emacs-lisp-mode-hook '(lambda () (flymake-mode)))
+  (defun my-toggle-flymake-diagnostics ()
+    "Toggles flymake diagnostics window for current buffer."
+    (interactive)
+    (if flymake-mode
+        (let* ((buf-name (buffer-name (current-buffer)))
+               (flymake-winds (condition-case nil
+                                  (get-buffer-window-list
+                                   (concat "*Flymake diagnostics for "
+                                           buf-name
+                                           "*"))
+                                (error nil))))
+          (if flymake-winds
+              (dolist (wind flymake-winds) (quit-window nil wind))
+            (flymake-show-diagnostics-buffer)))))
+  (with-eval-after-load 'hydra
+    (defhydra my-hydra/flymake (:color amaranth)
+      "Error"
+      ("p" flymake-goto-prev-error "previous")
+      ("n" flymake-goto-next-error "next")
+      ("L" my-toggle-flymake-diagnostics "list")
+      ("q" nil "quit" :exit t))
+    (define-key flymake-mode-map (kbd "H-e") 'my-hydra/flymake/body)))
 
 ;; code folding package -- built-in
-;; evil has vim-like default bindings for this mode (za, zc, zo, zM, zR)
 (use-package hideshow
   :delight hs-minor-mode
   :config (add-hook 'prog-mode-hook 'hs-minor-mode))
@@ -461,19 +429,18 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package ibuffer
   :bind ("C-x C-b" . ibuffer)
   :config
-  (with-eval-after-load 'evil
-    (evil-leader-set-key-normal "B" 'ibuffer))
   (use-package ibuffer-vc ;; group buffers by VC project in ibuffer
-    :after ibuffer
-    :config (add-hook 'ibuffer-hook
-                      (lambda ()
-                        (ibuffer-vc-set-filter-groups-by-vc-root)
-                        (unless (eq ibuffer-sorting-mode 'alphabetic)
-                          (ibuffer-do-sort-by-alphabetic))))))
+    :after ibuffer))
+    ;; :config (add-hook 'ibuffer-hook
+    ;;                   (lambda ()
+    ;;                     (ibuffer-vc-set-filter-groups-by-vc-root)
+    ;;                     (unless (eq ibuffer-sorting-mode 'alphabetic)
+    ;;                       (ibuffer-do-sort-by-alphabetic))))))
 
 ;; interactively do things with buffers and files, use C-f to escape - built-in
 (use-package ido
   :init (ido-mode t)
+  :bind ("H-y" . my-yank-from-kill-ring)
   :config
   (setq ido-create-new-buffer 'always
         ido-default-file-method 'selected-window
@@ -494,39 +461,55 @@ Windows  _L_ : line-wise   _W_ : word-wise
     :init (crm-custom-mode 1)))
 
 ;; Vim Tagbar-like imenu extension - MELPA Stable
-; (use-package imenu-list
-;   :bind ("C-c i" . imenu-list-smart-toggle)
-;   :config (setq imenu-list-focus-after-activation t
-;                 imenu-list-auto-resize t))
+;; (use-package imenu-list
+;;   :bind ("H-i" . imenu-list-smart-toggle)
+;;   :config (setq imenu-list-focus-after-activation t
+;;                 imenu-list-auto-resize t))
 
 ;; Git - MELPA Stable (all packages)
 (when (executable-find "git")
   (use-package magit
-    :bind ("C-c g g" . magit-status)
+    :bind ("H-g g" . magit-status)
     :config
     (setq auto-revert-check-vc-info t)
     (with-eval-after-load 'ido-completing-read+
        (setq magit-completing-read-function 'magit-ido-completing-read)))
   (use-package git-timemachine
     :after magit
-    :bind ("C-c g t" . git-timemachine)))
+    :bind ("H-g t" . git-timemachine)))
 
 ;; multiple cursors - MELPA Stable
 (use-package multiple-cursors
-  :bind (("C-S-c C-S-c" . mc/edit-lines)
-         ("C->" . mc/mark-next-like-this)
-         ("C-<" . mc/mark-previous-like-this)
-         ("C-c C-<" . mc/mark-all-like-this)
-         ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
+  :config
+  (setq mc/always-run-for-all nil
+        mc/always-repeat-command nil
+        mc/insert-numbers-default 1)
+  (with-eval-after-load 'hydra
+    (defhydra my-hydra/multiple-cursors (:color amaranth :columns 3)
+      "Multiple-cursors"
+      ("l" mc/edit-lines "edit-lines")
+      ("a" mc/mark-all-like-this "mark-all-like")
+      ("<mouse-1>" mc/add-cursor-on-click "mark-click")
+      ("p" mc/mark-previous-like-this "mark-prev")
+      ("P" mc/skip-to-previous-like-this "skip-prev")
+      ("M-p" mc/unmark-previous-like-this "unmark-prev")
+      ("n" mc/mark-next-like-this "mark-next")
+      ("N" mc/skip-to-next-like-this "skip-next")
+      ("M-n" mc/unmark-next-like-this "unmark-next")
+      ("0" mc/insert-numbers "insert-numbers" :exit t)
+      ("A" mc/insert-letters "insert-letters" :exit t)
+      ("q" nil "quit" :exit t))
+    (global-set-key (kbd "H-M") 'my-hydra/multiple-cursors/body)))
 
 ;; Org-mode - built-in
 (use-package org
-  :bind (("C-c a" . org-agenda)
-         ("C-c l" . org-store-link))
+  :bind (("H-a" . org-agenda)
+         ("H-l" . org-store-link))
   :config
   (require 'org-agenda)
   (setq org-agenda-start-on-weekday nil
         org-catch-invisible-edits 'error
+        org-hide-emphasis-markers t
         org-log-into-drawer t
         org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
                             (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANCELED(c@/!)"))
@@ -534,6 +517,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
         org-use-speed-commands t
         org-startup-indented t)
   (add-hook 'org-mode-hook #'visual-line-mode)
+  (add-hook 'org-mode-hook #'variable-pitch-mode)
   (defhydra my-hydra/org-agenda (:color amaranth :hint nil)
     "
 Org agenda
@@ -565,9 +549,9 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("h:" org-agenda-set-tags)
     ("hp" org-agenda-priority)
     ("SPC" org-agenda-show-and-scroll-up)
-    ("TAB" org-agenda-goto :color blue)
+    ("TAB" org-agenda-goto :exit t)
     ("RET" org-agenda-switch-to :color blue)
-    ("o" link-hint-open-link :color blue)
+    ("o" link-hint-open-link :exit t)
     ("ds" org-agenda-schedule)
     ("dd" org-agenda-deadline)
     ("dt" org-agenda-date-prompt)
@@ -582,15 +566,15 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("fh" org-agenda-filter-by-top-headline)
     ("fx" org-agenda-filter-by-regexp)
     ("fd" org-agenda-filter-remove-all)
-    ("ci" org-agenda-clock-in :color blue)
+    ("ci" org-agenda-clock-in :exit t)
     ("co" org-agenda-clock-out)
     ("cq" org-agenda-clock-cancel)
-    ("cg" org-agenda-clock-goto :color blue)
+    ("cg" org-agenda-clock-goto :exit t)
     ("gr" org-agenda-redo)
     ("gd" org-agenda-goto-date)
     ("." org-agenda-goto-today)
-    ("q" nil "quit" :color blue))
-  (define-key org-agenda-mode-map (kbd "C-c h m") 'my-hydra/org-agenda/body))
+    ("q" nil "quit" :exit t))
+  (define-key org-agenda-mode-map (kbd "H-m") 'my-hydra/org-agenda/body))
 
 ;; project interaction library - MELPA Stable
 (use-package projectile
@@ -649,12 +633,12 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("cX" projectile-cleanup-known-projects)
       ("C" projectile-compile-project "compile")
       ("p" projectile-switch-project "switch project")
-      ("q" nil "quit" :color blue))
-    (define-key projectile-mode-map (kbd "C-c h p") 'my-hydra/projectile/body)))
+      ("q" nil "quit" :exit t))
+    (define-key projectile-mode-map (kbd "H-p") 'my-hydra/projectile/body)))
 
 ;; recently opened files - built-in
 (use-package recentf
-  :bind ("C-c R" . recentf-open-files)
+  :bind ("H-R" . recentf-open-files)
   :init (recentf-mode t)
   :config (setq recentf-max-menu-items 10
                 recentf-max-saved-items 50))
@@ -663,9 +647,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 (use-package undo-tree
   :delight undo-tree-mode
   :init (global-undo-tree-mode)
-  :config (with-eval-after-load 'evil
-            (setq evil-want-fine-undo t)
-            (evil-leader-set-key-normal "u" 'undo-tree-visualize)))
+  :config (setq undo-tree-visualizer-relative-timestamps nil))
 
 ;; visit large files without loading it entirely - MELPA Stable
 (use-package vlf
@@ -674,7 +656,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
 ;; display available bindings in popup - GNU ELPA
 (use-package which-key
   :delight which-key-mode
-  :bind ("C-c M-W" . which-key-show-top-level)
+  :bind ("H-W" . which-key-show-top-level)
   :init (which-key-mode 1)
   :config (setq which-key-compute-remaps t
                 which-key-allow-multiple-replacements t))
@@ -701,7 +683,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
       ("y" aya-expand "expand-auto") ;; paste temp yasnippet
       ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; show temp yasnippet
       ("q" nil "quit"))
-    (global-set-key (kbd "C-c h y") 'my-hydra/yasnippet/body)))
+    (global-set-key (kbd "H-Y") 'my-hydra/yasnippet/body)))
 
 ;; load local post-init file ~/.emacs.d/init-local.el
 (let ((local-f (expand-file-name "init-local.el" user-emacs-directory)))
