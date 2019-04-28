@@ -1,4 +1,4 @@
-function keepawake --description "keepawake <hrs>"
+function keepawake --description "keepawake <hrs> (default: 8)"
     switch (uname)
         case Darwin
             # default caffeinate time of 8 hours
@@ -8,6 +8,6 @@ function keepawake --description "keepawake <hrs>"
             end
             caffeinate -i -t (math "$keepawakehours * 60 * 60")
         case '*'
-            echo keepawake is only supported on Mac OS X
+            echo "keepawake is Mac OS X only. It wraps the caffeinate cmd"
     end
 end
