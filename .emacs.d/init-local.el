@@ -337,20 +337,12 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
         ("c" venv-cpvirtualenv "cp")
         ("q" nil "quit"))
       (global-set-key (kbd "H-v") 'my-hydra/virtualenv/body)))
-  ;; START
   ;; install lsp-mode support for MS Python Language Server
-  ;; option 1 ;; deprecated
-  ;; (use-package ms-python
-  ;;   :pin "MELPA"
-  ;;   :config (add-hook 'python-mode-hook #'lsp))
-  ;; option 2 ;; current
   (use-package lsp-python-ms
-    :load-path "lisp"
+    :pin "MELPA"
     :config
     (setq lsp-python-ms-executable "~/Packages/Microsoft/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
-    (add-hook 'python-mode-hook #'lsp))
-  ;; END
-  )
+    (add-hook 'python-mode-hook #'lsp)))
 
 ;; YAML support - MELPA Stable
 (use-package yaml-mode
