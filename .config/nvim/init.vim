@@ -9,11 +9,10 @@
 set directory=~/.nvimfiles/swap//,.,~/tmp,/var/tmp,/tmp " swapfile folders, appending // uses the full path in the name
 set expandtab   " expand tabs into spaces; use <C-v><Tab> for a real tab
 set hidden      " hide abandoned buffers instead of unloading them
-set inccommand=nosplit " show effects of commands incrementally
 "set list        " highlight tabs and trailing whitespace
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,nbsp:. " chars for displaying whitespace when 'list' is set
 set nojoinspaces " do not insert two spaces after '.', '?' and '!' on line joins
-set swapfile    " use swapfiles, which are stored in 'directory'
+set swapfile    " use swapfiles
 
 " Use ripgrep if available {{{2
 if executable('rg')
@@ -31,8 +30,12 @@ if has('folding')
 endif " }}}2
 " Visually indicate wrapped lines {{{2
 if has('linebreak')
-  set showbreak=…\  " put '… ' at start of each continued line
+  set showbreak=…\  " show '… ' at start of each continued line
 endif " }}}2
+" Show effects of commands incrementally while typing
+if has('nvim')
+  set inccommand=nosplit " only show effects within the current window
+endif
 " Persistent undo {{{2
 if has("persistent_undo")
   set undofile
@@ -51,13 +54,9 @@ endif " }}}2
 " Section: Basic Keymappings {{{1
 " -------------------------
 
-" Default map leader <Leader> is '\'
+" Remap <Leader> from '\' to <Space> {{{2
+let mapleader=' ' " }}}2
 
-" Map <Space> in normal mode to map leader {{{2
-if has('user_commands')
-  nmap <Space> <Leader>
-endif
-" }}}2
 " Buffer manipulation and navigation {{{2
 nnoremap <silent> <Leader>bl :buffers<CR>
 nnoremap <silent> <Leader>bd :bdelete<CR>
@@ -93,7 +92,7 @@ if has('windows')
   " Resize window height to fit number of lines of buffer
   nnoremap <silent> <Leader>wr :execute ":resize " . line('$')<CR>
   " Resize window width to fit max line width of buffer
-  nnoremap <silent> <Leader>wR :execute ": vertical resize "
+  nnoremap <silent> <Leader>wR :execute ":vertical resize "
         \ . max(map(range(1, line('$')), "virtcol([v:val, '$'])-1"))<CR>
 endif
 " }}}2
@@ -120,7 +119,7 @@ endif
 " }}}2
 " Toggle spell check {{{2
 if has('syntax')
-  nnoremap <silent> <Leader>ssp :set spell! spell?<CR>
+  nnoremap <silent> <Leader>Sp :set spell! spell?<CR>
 endif
 " }}}2
 " Toggle wrapping of lines {{{2
@@ -129,11 +128,17 @@ nnoremap <silent> <Leader>W :set wrap! wrap?<CR>
 " Toggle paste mode {{{2
 nnoremap <silent> <Leader>P :set paste! paste?<CR>
 " }}}2
+" Toggle syntax highlighting {{{2
+if has('syntax')
+  nnoremap <silent> <Leader>Ss :if exists('g:syntax_on') <Bar> syntax off <Bar>
+        \ else <Bar> syntax enable <Bar> endif <CR>
+endif
+" }}}2
 " Toggle highlighting of listchars {{{2
 nnoremap <silent> <Leader>L :set list! list?<CR>
 " }}}2
 " Toggle modeline (reload file with :e to effect change) {{{2
-nnoremap <silent> <Leader>sml :set modeline! modeline?<CR>
+nnoremap <silent> <Leader>Sm :set modeline! modeline?<CR>
 " }}}2
 
 " }}}1
@@ -143,9 +148,9 @@ nnoremap <silent> <Leader>sml :set modeline! modeline?<CR>
 " Using minpac - https://github.com/k-takata/minpac
 " To install the minpac package manager, run in the shell:
 "   $ git clone https://github.com/k-takata/minpac.git ~/.config/nvim/pack/minpac/opt/minpac
-" To install or update registered packages, run:
+" To install or update registered packages, run in Neovim:
 "   :call minpac#update()
-" To delete packages that are no longer registered, run:
+" To delete unneeded packages, run in Neovim:
 "   :call minpac#clean()
 
 packadd minpac
@@ -160,8 +165,8 @@ if exists('*minpac#init')
   " 1. Interface {{{2
   call minpac#add('chriskempson/base16-vim', {'type': 'opt'}) " color scheme {{{3
   colorscheme base16-grayscale-dark " }}}3
-  call minpac#add('vim-airline/vim-airline') " status line
-  call minpac#add('vim-airline/vim-airline-themes') " status line themes {{{3
+  call minpac#add('vim-airline/vim-airline') " status line {{{3
+  call minpac#add('vim-airline/vim-airline-themes') " status line themes
   let g:airline_theme='base16_grayscale' " }}}3
   call minpac#add('mhinz/vim-startify') " fancy start screen {{{3
   if has('autocmd')
@@ -170,6 +175,10 @@ if exists('*minpac#init')
       autocmd TabNewEntered * if bufname('%') == '' | Startify | endif
     augroup END
   endif " }}}3
+  call minpac#add('Yggdroot/indentLine') " visually display indent levels {{{3
+  let g:indentLine_char='▏' " modify indent char
+  nnoremap <silent> <Leader>il :IndentLinesToggle<CR>
+  " }}}3
   call minpac#add('liuchengxu/vim-which-key') " display available keybindings in a popup {{{3
   nnoremap <silent> <Leader> :<c-u>WhichKey '<Leader>'<CR>
   " }}}2
