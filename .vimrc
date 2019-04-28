@@ -51,11 +51,6 @@ else
   set grepprg=grep\ -nH\ $* " set grep to always show filename
 endif " }}}2
 
-" Automatically switch working directory to current file's {{{2
-"if exists('+autochdir')
-"  set autochdir
-"endif
-" }}}2
 " Set 'cindent' indentation to shiftwidth {{{2
 if has('cindent')
   set cinoptions=>1s
@@ -67,7 +62,7 @@ if has('cmdline_info')
   set ruler     " Show line and column numbers, superceded by 'statusline'
 endif
 " }}}2
-" Show matches as while inputting search strings {{{2
+" Show matches while inputting search string {{{2
 if has('extra_search')
   "set hlsearch
   set incsearch
@@ -79,7 +74,7 @@ if has('folding')
   set foldmethod=marker " Use markers to specify folds
 endif
 " }}}2
-" Insert mode completion options (<C-n> and <C-p> in Insert mode) {{{2
+" Insert mode completion options (<C-n> and <C-p>) {{{2
 if has('insert_expand')
   set completeopt=longest,menuone,preview
 endif
@@ -123,7 +118,7 @@ endif
 " }}}2
 " Set syntax highlighting colorscheme {{{2
 if has('syntax') && !exists('colors_name') && (&t_Co >= 8)
-  syntax on
+  syntax enable
   colorscheme desert
 endif
 " }}}2
@@ -248,7 +243,7 @@ endif
 " Section: Functions {{{1
 " -----------------------
 
-" Toggle commenting {{{2
+" Toggle commenting of lines {{{2
 " Adapted from https://gist.github.com/PeterRincker/13bde011c01b7fc188c5
 " Uses b:commentstring or 'commentstring' as comment pattern, e.g.
 "   let &commentstring = '/*%s*/'
@@ -283,21 +278,9 @@ endif
 " Section: Keymappings {{{1
 " -------------------------
 
-" Toggle commenting using gc[c|motion] like in vim-commentary {{{2
-if has('eval')
-  nnoremap gcc :<c-u>.,.+<c-r>=v:count<cr>call <SID>toggleComment()<cr>
-  nnoremap gc :<c-u>set opfunc=<SID>commentOp<cr>g@
-  xnoremap gc :call <SID>toggleComment()<cr>
-endif
-" }}}2
+" Remap <Leader> from '\' to <Space> {{{2
+let mapleader=' ' " }}}2
 
-" Default map leader <Leader> is '\'
-
-" Map <Space> in normal mode to map leader {{{2
-if has('user_commands')
-  nmap <Space> <Leader>
-endif
-" }}}2
 " Buffer manipulation and navigation {{{2
 nnoremap <silent> <Leader>bl :buffers<CR>
 nnoremap <silent> <Leader>bd :bdelete<CR>
@@ -331,8 +314,7 @@ if has('windows')
   " Resize window height to fit number of lines of buffer
   nnoremap <silent> <Leader>wr :execute ":resize " . line('$')<CR>
   " Resize window width to fit max line width of buffer
-  nnoremap <silent> <Leader>wR :execute ": vertical resize "
-        \ . max(map(range(1, line('$')), "virtcol([v:val, '$'])-1"))<CR>
+  nnoremap <silent> <Leader>wR :execute ":vertical resize " . max(map(range(1, line('$')), "virtcol([v:val, '$'])-1"))<CR>
 endif
 " }}}2
 " Quickfix error and location window manipulation {{{2
@@ -343,8 +325,8 @@ if has('quickfix')
   nnoremap <silent> <Leader>qlc :lclose<CR>
 endif
 " }}}2
-" Toggle mouse {{{2
-nnoremap <silent> <Leader>smm :if &mouse == 'a' <Bar> set mouse= <Bar> else <Bar> set mouse=a <Bar> endif <Bar> set mouse?<CR>
+" Toggle whether mouse is enabled {{{2
+nnoremap <silent> <Leader>M :if &mouse == 'a' <Bar> set mouse= <Bar> else <Bar> set mouse=a <Bar> endif <Bar> set mouse?<CR>
 " }}}2
 " Unhighlight search results (from https://github.com/tpope/vim-sensible) {{{2
 if has('extra_search')
@@ -361,7 +343,7 @@ endif
 " }}}2
 " Toggle spell check {{{2
 if has('syntax')
-  nnoremap <silent> <Leader>ssp :set spell! spell?<CR>
+  nnoremap <silent> <Leader>Sp :set spell! spell?<CR>
 endif
 " }}}2
 " Toggle line wrap {{{2
@@ -370,11 +352,24 @@ nnoremap <silent> <Leader>W :set wrap! wrap?<CR>
 " Toggle paste mode {{{2
 nnoremap <silent> <Leader>P :set paste! paste?<CR>
 " }}}2
+" Toggle syntax highlighting {{{2
+if has('syntax')
+  nnoremap <silent> <Leader>Sy :if exists('g:syntax_on') <Bar> syntax off <Bar>
+        \ else <Bar> syntax enable <Bar> endif <CR>
+endif
+" }}}2
 " Toggle highlighting of listchars {{{2
 nnoremap <silent> <Leader>L :set list! list?<CR>
 " }}}2
 " Toggle modeline (reload file with :e to effect change) {{{2
-nnoremap <silent> <Leader>sml :set modeline! modeline?<CR>
+nnoremap <silent> <Leader>Sm :set modeline! modeline?<CR>
+" }}}2
+" Toggle commenting using gc[c|motion] like in vim-commentary {{{2
+if has('eval')
+  nnoremap gcc :<c-u>.,.+<c-r>=v:count<cr>call <SID>toggleComment()<cr>
+  nnoremap gc :<c-u>set opfunc=<SID>commentOp<cr>g@
+  xnoremap gc :call <SID>toggleComment()<cr>
+endif
 " }}}2
 
 " }}}1
