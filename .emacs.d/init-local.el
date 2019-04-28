@@ -9,59 +9,181 @@
 ;; elements for specific machines (e.g. Macs with no physical ESC key)
 ;; Symlink or copy this file to ~/.emacs.d/init-local.el
 
+;; TODO test org-mind-map package
+;; TODO test org-brain package
+
 ;;; Code:
 
 ;; USER INTERFACE
 
-;; gruvbox color scheme - MELPA Stable
-(use-package gruvbox-theme
-  :config (load-theme 'gruvbox t))
+;; color scheme - MELPA Stable
+(use-package eink-theme
+  :config
+  (load-theme 'eink t)
+  ;; make fringe bitmaps visible (default is to make them invisible)
+  (set-face-attribute 'fringe nil
+                      :foreground (face-foreground 'default))
+  ;; make comment delimiters match comment
+  (set-face-attribute 'font-lock-comment-delimiter-face nil
+                      :foreground (face-foreground 'font-lock-comment-face)
+                      :background (face-background 'font-lock-comment-face)
+                      :inherit 'font-lock-comment-face)
+  ;; make strings distinct
+  (set-face-attribute 'font-lock-string-face nil
+                      :foreground "#606060"))
+;; (use-package gruvbox-theme :config (load-theme 'gruvbox t))
+;; (use-package poet-theme :config (load-theme 'poet t))
 
 ;; sidebar file explorer using a tree layout - MELPA Stable
-(use-package treemacs
-  :bind ("C-c h T" . treemacs)
-  :defer 0.5
-  :config
-  ;; projectile integration for treemacs - MELPA Stable
-  (use-package treemacs-projectile
-    :after projectile))
+;; (use-package treemacs
+;;   :bind ("H-T" . treemacs)
+;;   :defer 0.5
+;;   :config
+;;   ;; projectile integration for treemacs - MELPA Stable
+;;   (use-package treemacs-projectile
+;;     :after projectile))
 
 
 ;; NON-LANGUAGE-SPECIFIC
 
-;; porcelain for conda - MELPA Stable
-(use-package conda
-  :init (setq conda-anaconda-home "~/miniconda3") ;; conda root directory
+;; porcelain for conda, use this or virtualenvwrapper - MELPA Stable
+;; (use-package conda
+;;   :init (setq conda-anaconda-home "~/miniconda3") ;; conda root directory
+;;   :config
+;;   (conda-env-initialize-eshell) ;; eshell support
+;;   ;; (conda-env-initialize-interactive-shells) ;; interactive shell support
+;;   ;; (conda-env-autoactivate-mode t) ;; auto-activation using proj environment.yml
+;;   (setq-default mode-line-format
+;;                 (add-to-list 'mode-line-format
+;;                              '(:eval (if conda-env-current-name
+;;                                          (format " {%s}"
+;;                                                  (truncate-string-to-width
+;;                                                   conda-env-current-name
+;;                                                   15 nil nil "…"))
+;;                                        ""))
+;;                              t)) ;; add current conda env to mode-line, if any
+;;   (with-eval-after-load 'hydra
+;;     (defhydra my-hydra/conda (:color teal :columns 4)
+;;       "
+;; conda %s(if conda-env-current-name (concat \"[\" conda-env-current-name \"]\") \"\")"
+;;       ("a" conda-env-activate "activate")
+;;       ("d" conda-env-deactivate "deactivate")
+;;       ("l" conda-env-list "list")
+;;       ("q" nil "quit"))
+;;     (global-set-key (kbd "H-C") 'my-hydra/conda/body)))
+
+;; front-end for interacting with debug servers, use this or realgud - MELPA Stable
+;; (use-package dap-mode
+;;   :pin "MELPA"
+;;   :after lsp-mode
+;;   :config
+;;   (dap-mode 1)
+;;   (dap-ui-mode 1))
+
+;; Language Server Protocol - MELPA
+(use-package lsp-mode
+  :pin "MELPA"
   :config
-  (conda-env-initialize-interactive-shells) ;; interactive shell support
-  (conda-env-initialize-eshell) ;; eshell support
-  (conda-env-autoactivate-mode t) ;; auto-activation using proj environment.yml
+  ;; change nil to 't to enable logging of packets between emacs and the LS
+  ;; this is valuable for debugging communication with the MS Python Language
+  ;; Server and comparing this with what vs.code is doing
+  ;; (setq lsp-print-io nil)
+  (setq lsp-eldoc-enable-hover nil ;; don't have eldoc display hover info
+        lsp-eldoc-enable-signature-help nil ;; don't have eldoc display signature help
+        lsp-prefer-flymake t) ;; set to nil to prefer flycheck to flymake
+  ;; lsp-ui enables pop-up documentation boxes and sidebar info
+  (use-package lsp-ui
+    :pin "MELPA"
+    :commands lsp-ui-mode
+    :config
+    (setq lsp-ui-doc-enable t
+          lsp-ui-doc-header t
+          lsp-ui-doc-include-signature t
+          lsp-ui-doc-max-height 20
+          lsp-ui-doc-max-width 50
+          lsp-ui-imenu-enable nil
+          lsp-ui-peek-always-show t
+          lsp-ui-sideline-enable t
+          lsp-ui-sideline-ignore-duplicate t
+          lsp-ui-sideline-show-hover nil)
+    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+    (define-key lsp-ui-mode-map (kbd "C-c i") 'lsp-ui-imenu))
+  ;; install LSP company backend for LSP-driven completion
+  (use-package company-lsp
+    :pin "MELPA"
+    :commands company-lsp
+    :config (setq company-lsp-cache-candidates t))
+  (with-eval-after-load 'hydra
+    (defhydra my-hydra/lsp (:color teal :hint nil)
+      "
+Language Server Protocol
+
+Buffer  _f_   : format          _m_   : imenu           _x_   : execute action
+
+Server  _M-r_ : restart         _S_   : shutdown        _M-s_ : describe session
+
+Symbol  _d_   : declaration     _D_   : definition      _R_   : references
+        _i_   : implementation  _t_   : type            _o_   : documentation
+        _r_   : rename
+
+"
+      ("f" lsp-format-buffer)
+      ("m" lsp-ui-imenu)
+      ("x" lsp-execute-code-action)
+      ("M-r" lsp-restart-workspace)
+      ("S" lsp-shutdown-workspace)
+      ("M-s" lsp-describe-session)
+      ("d" lsp-find-declaration)
+      ("D" lsp-ui-peek-find-definitions)
+      ("R" lsp-ui-peek-find-references)
+      ("i" lsp-ui-peek-find-implementation)
+      ("t" lsp-find-type-definition)
+      ("o" lsp-describe-thing-at-point)
+      ("r" lsp-rename)
+      ("q" nil "quit" :color blue))
+    (define-key lsp-mode-map (kbd "H-L") 'my-hydra/lsp/body)))
+
+;; front-end for interacting with external debuggers, use this or dap-mode - MELPA Stable
+;; (use-package realgud)
+
+;; virtualenv tool, use this or conda - MELPA
+(use-package virtualenvwrapper
+  ;; enable the MELPA repository and uncomment below if the version of
+  ;; virtualenvwrapper.el in MELPA Stable is too old for emacs-traad
+  :pin "MELPA"
+  :config
+  (venv-initialize-interactive-shells)
+  (venv-initialize-eshell)
+  ;; set virtualenv storage dir if it differs from default ~/.virtualenvs
+  (setq venv-location "~/miniconda3/envs")  ;; miniconda3
+  ;; display currently active virtualenv on the mode line
   (setq-default mode-line-format
                 (add-to-list 'mode-line-format
-                             '(:eval (if conda-env-current-name
-                                         (format " {%s}"
+                             '(:eval (if venv-current-name
+                                         (format " «%s»"
                                                  (truncate-string-to-width
-                                                  conda-env-current-name
+                                                  venv-current-name
                                                   15 nil nil "…"))
                                        ""))
                              t)) ;; add current conda env to mode-line, if any
   (with-eval-after-load 'hydra
-    (defhydra my-hydra/conda (:color teal :columns 4)
-      "
-conda %s(if conda-env-current-name (concat \"[\" conda-env-current-name \"]\") \"\")"
-      ("a" conda-env-activate "activate")
-      ("d" conda-env-deactivate "deactivate")
-      ("l" conda-env-list "list")
+    (defhydra my-hydra/virtualenv (:color teal :columns 4)
+      "virtualenv"
+      ("w" venv-workon "workon")
+      ("d" venv-deactivate "deactivate")
+      ("m" venv-mkvirtualenv-using "make")
+      ("r" venv-rmvirtualenv "remove")
+      ("l" venv-lsvirtualenv "list")
+      ("g" venv-cdvirtualenv "cd")
+      ("c" venv-cpvirtualenv "cp")
       ("q" nil "quit"))
-    (global-set-key (kbd "C-c h C") 'my-hydra/conda/body)))
-
-;; front-end for interacting with external debuggers - MELPA Stable
-(use-package realgud)
+    (global-set-key (kbd "H-v") 'my-hydra/virtualenv/body)))
 
 
 ;; LANGUAGE-SPECIFIC
 
-;; CSV support - GNU ELPA
+;; CSV - GNU ELPA
 (use-package csv-mode
   :commands csv-mode
   :config
@@ -75,11 +197,13 @@ conda %s(if conda-env-current-name (concat \"[\" conda-env-current-name \"]\") \
     ("u" csv-unalign-fields "unalign")
     ("t" csv-transpose "transpose")
     ("q" nil "quit" :color blue))
-  (define-key csv-mode-map (kbd "C-c h m") 'my-hydra/csv-mode/body))
+  (define-key csv-mode-map (kbd "H-m") 'my-hydra/csv-mode/body))
 
-;; Dockerfile support, C-c C-b to an build image - MELPA Stable
+;; Dockerfile - MELPA Stable
 (use-package dockerfile-mode
-  :config (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
+  :commands dockerfile-mode
+  :config
+  (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
 
 ;; Emacs Speaks Statistics (languages: R, S, SAS, Stata, Julia) - MELPA Stable
 (use-package ess
@@ -111,10 +235,11 @@ conda %s(if conda-env-current-name (concat \"[\" conda-env-current-name \"]\") \
         :init (with-eval-after-load 'go-mode
                 (add-hook 'go-mode-hook 'go-guru-hl-identifier-mode)))))
 
-;; JSON support - GNU ELPA
-(use-package json-mode)
+;; JSON - GNU ELPA
+(use-package json-mode
+  :commands json-mode)
 
-;; Markdown support - MELPA Stable
+;; Markdown - MELPA Stable
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
@@ -157,139 +282,75 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
     ("w" markdown-insert-wiki-link)
     ("T" markdown-toc-generate-toc)
     ("q" nil "quit" :color blue))
-  (define-key markdown-mode-map (kbd "C-c h m") 'my-hydra/markdown-mode/body)
-  (define-key gfm-mode-map (kbd "C-c h m") 'my-hydra/markdown-mode/body))
+  (define-key markdown-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body)
+  (define-key gfm-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body))
 
-;; Python support - MELPA Stable (all packages)
+;; Python - MELPA Stable (all packages)
 (when (executable-find "python")
-  ;; Code navigation, documentation lookup and completion, requires python jedi
-  (use-package anaconda-mode
-    :commands anaconda-mode
-    :delight anaconda-mode
-    :init
-    (add-hook 'python-mode-hook 'anaconda-mode)
-    (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
-  ;; anaconda backend for company-mode
-  (use-package company-anaconda
-    :after (anaconda-mode company)
-    :config (add-to-list 'company-backends 'company-anaconda))
-  ;; client for traad refactoring tool using the rope package
-  ;; before usage, set up the Python traad server with either method below
-  ;; - using virtualenv: call `M-x traad-install-server' to install the
-  ;;   server for the default Python version into virtualenv specified by
-  ;;   `traad-environment-name'
-  ;; - using conda: set up a new environment for each desired Python
-  ;;   version, install the server for that environment using pip
-  ;;   $ conda activate <environment_name>
-  ;;   $ conda install pip
-  ;;   $ pip install traad
-  ;;   and set `traad-server-program' to the environment's traad binary path
-  (use-package traad
-    :after anaconda-mode
+  ;; use IPython for shell when available
+  (when (executable-find "ipython")
+    (setq python-shell-interpreter "ipython"
+          python-shell-interpreter-args "--simple-prompt -i")) ;; fancy prompts don't work in Eshell
+  ;; configure flymake for Python
+  (if (not (featurep 'flycheck))
+      (when (load "flymake" t)
+        (defun flymake-pylint-init ()
+          (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                              'flymake-create-temp-inplace))
+                 (local-file (file-relative-name
+                               temp-file
+                               (file-name-directory buffer-file-name))))
+            (list "epylint" (list local-file))))
+        (add-to-list 'flymake-allowed-file-name-masks
+                     '("\\.py\\'" flymake-pylint-init)))
+      ;; Set as a minor mode for Python
+      (add-hook 'python-mode-hook '(lambda () (flymake-mode))))
+  ;; virtualenv tool
+  (use-package virtualenvwrapper
+    ;; enable the MELPA repository and uncomment below if the version of
+    ;; virtualenvwrapper.el in MELPA Stable is too old for emacs-traad
+    :pin "MELPA"
     :config
-    ;; if using conda, set path to traad binary here
-    (with-eval-after-load 'conda
-      (setq traad-server-program "~/miniconda3/envs/traad/bin/traad"))
+    (venv-initialize-interactive-shells)
+    (venv-initialize-eshell)
+    ;; set virtualenv storage dir if it differs from default ~/.virtualenvs
+    (setq venv-location "~/miniconda3/envs")  ;; miniconda3
+    ;; display currently active virtualenv on the mode line
+    (setq-default mode-line-format
+                  (add-to-list 'mode-line-format
+                               '(:eval (if venv-current-name
+                                           (format " «%s»"
+                                                   (truncate-string-to-width
+                                                    venv-current-name
+                                                    15 nil nil "…"))
+                                         ""))
+                               t)) ;; add current conda env to mode-line, if any
     (with-eval-after-load 'hydra
-      (defhydra my-hydra/traad (:color teal :columns 4)
-        "traad"
-        ("r" traad-rename "rename")
-        ("m" traad-move "move")
-        ("U" traad-undo "undo")
-        ("R" traad-redo "redo")
-        ("n" traad-normalize-arguments "norm-args")
-        ("x" traad-remove-argument "remove-arg")
-        ("M" traad-extract-method "extract-method")
-        ("V" traad-extract-variable "extract-variable")
-        ("E" traad-encapsulate-field "encapsulate")
-        ("H" traad-display-history "history")
-        ("K" traad-kill-all "kill")
+      (defhydra my-hydra/virtualenv (:color teal :columns 4)
+        "virtualenv"
+        ("w" venv-workon "workon")
+        ("d" venv-deactivate "deactivate")
+        ("m" venv-mkvirtualenv-using "make")
+        ("r" venv-rmvirtualenv "remove")
+        ("l" venv-lsvirtualenv "list")
+        ("g" venv-cdvirtualenv "cd")
+        ("c" venv-cpvirtualenv "cp")
         ("q" nil "quit"))
-      (define-key python-mode-map (kbd "C-c h t") 'my-hydra/traad/body)))
-  ;; Jupyter notebook client, uncomment `setq' statement below to enable
-  ;; (setq my-load-ein t)
-  (if (and (bound-and-true-p my-load-ein)
-           (executable-find "jupyter"))
-      (use-package ein
-        :commands ein:notebooklist-open
-        :config
-        ;; IPython fancy prompts don't work in Eshell
-        (setq ein:console-args '("--simple-prompt"))
-        (with-eval-after-load 'anaconda-mode
-          (add-to-list 'python-shell-completion-native-disabled-interpreters
-                       "jupyter"))
-        (with-eval-after-load 'hydra
-          (defhydra my-hydra/ein (:color amaranth :hint nil)
-            "
-Emacs IPython Notebook mode
-
-Cell       _j_/_k_       : next/prev        _J_/_K_       : move down/up
-           _m_         : merge with prev  _o_/_O_       : insert below/above
-           _y_/_p_/_d_     : copy/paste/del   _s_         : split at point
-           _u_         : change type      _'_         : edit contents
-           _RET_       : run              _M-RET_     : run in-place
-
-Worksheet  _h_/_l_       : prev/next        _H_/_L_       : move prev/next
-           _1_.._9_      : first..last      _+_/_-_       : new/delete
-
-Notebook   _C-s_/_C-w_   : save/rename      _C-#_       : close
-
-Other      _t_         : toggle output    _C-l_/_C-L_   : clear cell/all output
-           _C-x_       : show traceback   _C-r_/_C-z_   : restart/stop kernel
-           _C-/_       : open scratch     _C-o_       : open console
-
-"
-            ("j" ein:worksheet-goto-next-input)
-            ("k" ein:worksheet-goto-prev-input)
-            ("J" ein:worksheet-move-cell-down)
-            ("K" ein:worksheet-move-cell-up)
-            ("m" ein:worksheet-merge-cell)
-            ("o" ein:worksheet-insert-cell-below)
-            ("O" ein:worksheet-insert-cell-above)
-            ("y" ein:worksheet-copy-cell)
-            ("p" ein:worksheet-yank-cell)
-            ("d" ein:worksheet-kill-cell)
-            ("s" ein:worksheet-split-cell-at-point)
-            ("u" ein:worksheet-change-cell-type)
-            ("'" ein:edit-cell-contents :color blue)
-            ("RET" ein:worksheet-execute-cell-and-goto-next)
-            ("M-RET" ein:worksheet-execute-cell)
-            ("h" ein:notebook-worksheet-open-prev-or-last)
-            ("l" ein:notebook-worksheet-open-next-or-first)
-            ("H" ein:notebook-worksheet-move-prev)
-            ("L" ein:notebook-worksheet-move-next)
-            ("1" ein:notebook-worksheet-open-1th)
-            ("2" ein:notebook-worksheet-open-2th)
-            ("3" ein:notebook-worksheet-open-3th)
-            ("4" ein:notebook-worksheet-open-4th)
-            ("5" ein:notebook-worksheet-open-5th)
-            ("6" ein:notebook-worksheet-open-6th)
-            ("7" ein:notebook-worksheet-open-7th)
-            ("8" ein:notebook-worksheet-open-8th)
-            ("9" ein:notebook-worksheet-open-last)
-            ("+" ein:notebook-worksheet-insert-next)
-            ("-" ein:notebook-worksheet-delete)
-            ("C-s" ein:notebook-save-notebook-command :color blue)
-            ("C-w" ein:notebook-rename-command :color blue)
-            ("C-#" ein:notebook-close :color blue)
-            ("t" ein:worksheet-toggle-output)
-            ("C-l" ein:worksheet-clear-output)
-            ("C-L" ein:worksheet-clear-all-output)
-            ("C-x" ein:tb-show)
-            ("C-r" ein:notebook-restart-kernel-command)
-            ("C-z" ein:notebook-kernel-interrupt-command)
-            ("C-/" ein:notebook-scratchsheet-open :color blue)
-            ("C-o" ein:console-open :color blue)
-            ("q" nil "quit" :color blue))
-          (with-eval-after-load 'ein-notebooklist
-            (define-key ein:notebook-mode-map (kbd "C-c h m")
-              'my-hydra/ein/body)))))
-  ;; indentation and tab settings
-  (add-hook 'python-mode-hook
-      (lambda ()
-        (setq indent-tabs-mode nil)
-        (setq tab-width 4)
-        (setq python-indent-offset 4))))
+      (global-set-key (kbd "H-v") 'my-hydra/virtualenv/body)))
+  ;; START
+  ;; install lsp-mode support for MS Python Language Server
+  ;; option 1 ;; deprecated
+  ;; (use-package ms-python
+  ;;   :pin "MELPA"
+  ;;   :config (add-hook 'python-mode-hook #'lsp))
+  ;; option 2 ;; current
+  (use-package lsp-python-ms
+    :load-path "lisp"
+    :config
+    (setq lsp-python-ms-executable "~/Packages/Microsoft/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
+    (add-hook 'python-mode-hook #'lsp))
+  ;; END
+  )
 
 ;; YAML support - MELPA Stable
 (use-package yaml-mode
@@ -300,7 +361,8 @@ Other      _t_         : toggle output    _C-l_/_C-L_   : clear cell/all output
 ;; GRAPHICAL USER INTERFACE
 
 (when (display-graphic-p)
-  ;; customize typography
+  ;; A. customize typography
+
   ;; helper functions
   (require 'cl-extra)
   (defun my-font-exists (font-name)
@@ -313,29 +375,43 @@ Other      _t_         : toggle output    _C-l_/_C-L_   : clear cell/all output
                         :height (or height 110)
                         :weight (or weight 'normal)
                         :width (or width 'normal)))
-  ;; set fonts
-  (let* ((my-font-priority-list '("Consolas"
+  ;; set default font priority
+  (let* ((my-font-priority-list '("IBM Plex Mono"
+                                  "Iosevka Slab"
+                                  "Consolas"
                                   "Menlo"
                                   "DejaVu Sans Mono"))
          (my-font (cl-some #'my-font-exists my-font-priority-list))
          (is-darwin (eq system-type 'darwin)))
     (when my-font
-      (my-set-font 'default my-font (if is-darwin 140 110) nil nil)
+      (my-set-font 'default my-font (if is-darwin 150 110) nil nil)
       (my-set-font 'mode-line my-font (if is-darwin 120 90) nil nil)
       (my-set-font 'mode-line-inactive my-font (if is-darwin 120 90) nil nil)))
+  ;; set variable pitch font
+  (let* ((my-font-priority-list '("IBM Plex Sans"
+                                  "Helvetica"
+                                  "DejaVu Sans"))
+         (my-font (cl-some #'my-font-exists my-font-priority-list))
+         (is-darwin (eq system-type 'darwin)))
+    (when my-font
+      (my-set-font 'variable-pitch my-font (if is-darwin 150 110) nil nil)))
   ;; enable ligatures, only works on Emacs Mac Port by Mitsuharu
   (if (fboundp 'mac-auto-operator-composition-mode)
       (mac-auto-operator-composition-mode))
 
-  ;; customize mode-line
-  ;; mouse-interactive minor-mode menu in the mode line - MELPA Stable
-  ;; note that menu can also be opened with `M-x minions-minor-mode-menu'
+  ;; B. customize mode-line
+
+  ;; mode line customizations - MELPA Stable (all packages)
+  ;; minor-mode menu for mode line (right-click or call minions-minor-mode-menu)
   (use-package minions
     :init (minions-mode 1)
-    :config (setq minions-direct '(projectile-mode)))
-  ;; display mode line elements in tabs and ribbons - MELPA Stable
+    :config (setq minions-direct '(projectile-mode
+                                   flymake-mode
+                                   overwrite-mode)))
+  ;; display elements of the mode line in tabs and ribbons
   (use-package moody
     :config
+    ;; uncomment below if using official Emacs for OSX
     (setq x-underline-at-descent-line t)
     (moody-replace-mode-line-buffer-identification)
     (moody-replace-vc-mode)
