@@ -33,6 +33,11 @@
                                          "Hoefler Text"
                                          "DejaVu Serif"))
 
+(setq init-lang-python-ms-executable (concat "~/Projects/random/Microsoft"
+                                             "/python-language-server/output"
+                                             "/bin/Release/osx-x64/publish"
+                                             "/Microsoft.Python.LanguageServer"))
+
 (require 'init-master)
 
 (provide 'init)

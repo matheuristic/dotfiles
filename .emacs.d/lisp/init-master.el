@@ -127,8 +127,9 @@
 ;; Project management layer
 (require 'init-proj)
 
-;; Org-mode layer
+;; Filetypes layers
 (require 'init-org)
+(require 'init-lang)
 
 (provide 'init-master)
 

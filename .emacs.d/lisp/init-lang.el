@@ -16,14 +16,16 @@
   "Language-specific settings."
   :group 'convenience)
 
-(defcustom init-lang-python-ms-executable nil
-  "Path to Microsoft Python Language Server executable."
-  :type 'string
-  :group 'init-lang-el)
-
-(defcustom init-lang-venv-dir "~/miniconda3/envs"
-  "Path to conda or virtualenv environments directory."
-  :type 'string
+(defcustom init-lang-enable-list '("csv"
+                                   "docker"
+                                   "json"
+                                   "julia"
+                                   "markdown"
+                                   "python"
+                                   "r"
+                                   "yaml")
+  "List of languages to enable."
+  :type '(repeat string)
   :group 'init-lang-el)
 
 ;;;;
@@ -102,95 +104,66 @@ Symbol  _d_   : declaration     _D_   : definition      _R_   : references
 ;;   (dap-mode 1)
 ;;   (dap-ui-mode 1))
 
-
-;; TODO - replace with conda after it gets fixed
-;; virtualenv tool
-(use-package virtualenvwrapper
-  ;; enable the MELPA repository and uncomment below if the version of
-  ;; virtualenvwrapper.el in MELPA Stable is too old for emacs-traad
-  :pin "MELPA"
-  :config
-  (venv-initialize-interactive-shells)
-  (venv-initialize-eshell)
-  ;; set virtualenv storage dir if it differs from default ~/.virtualenvs
-  (setq venv-location init-lang-venv-dir)
-  ;; display currently active virtualenv on the mode line
-  (setq-default mode-line-format
-                (add-to-list 'mode-line-format
-                             '(:eval (if venv-current-name
-                                         (format " «%s»"
-                                                 (truncate-string-to-width
-                                                  venv-current-name
-                                                  15 nil nil "…"))
-                                       ""))
-                             t)) ;; add current conda env to mode-line, if any
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra/virtualenv (:color teal :columns 4)
-      "virtualenv"
-      ("w" venv-workon "workon")
-      ("d" venv-deactivate "deactivate")
-      ("m" venv-mkvirtualenv-using "make")
-      ("r" venv-rmvirtualenv "remove")
-      ("l" venv-lsvirtualenv "list")
-      ("g" venv-cdvirtualenv "cd")
-      ("c" venv-cpvirtualenv "cp")
-      ("q" nil "quit"))
-    (global-set-key (kbd "H-v") 'my-hydra/virtualenv/body)))
-
 ;;;;
 ;; Specific languages
 ;;;;
 
 ;; CSV
-(use-package csv-mode
-  :commands csv-mode
-  :config
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra/csv-mode (:color teal :columns 4)
-      "CSV mode"
-      ("s" csv-sort-fields "sort")
-      ("r" csv-sort-numeric-fields "numsort")
-      ("k" csv-kill-fields "cut")
-      ("y" csv-yank-fields "copy")
-      ("a" csv-align-fields "align")
-      ("u" csv-unalign-fields "unalign")
-      ("t" csv-transpose "transpose")
-      ("q" nil "quit" :color blue))
-    (define-key csv-mode-map (kbd "H-m") 'my-hydra/csv-mode/body)))
+(when (member "csv" init-lang-enable-list)
+  (use-package csv-mode
+    :commands csv-mode
+    :config
+    (with-eval-after-load 'hydra
+      (defhydra my-hydra/csv-mode (:color teal :columns 4)
+        "CSV mode"
+        ("s" csv-sort-fields "sort")
+        ("r" csv-sort-numeric-fields "numsort")
+        ("k" csv-kill-fields "cut")
+        ("y" csv-yank-fields "copy")
+        ("a" csv-align-fields "align")
+        ("u" csv-unalign-fields "unalign")
+        ("t" csv-transpose "transpose")
+        ("q" nil "quit" :color blue))
+      (define-key csv-mode-map (kbd "H-m") 'my-hydra/csv-mode/body))))
 
 ;; Dockerfile
-(use-package dockerfile-mode
-  :commands dockerfile-mode
-  :config
-  (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
+(when (member "docker" init-lang-enable-list)
+  (use-package dockerfile-mode
+    :commands dockerfile-mode
+    :config
+    (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))))
 
 ;; Emacs Speaks Statistics
 ;; has built-in flymake support (requires the R lintr pkg be installed)
-(use-package ess
-  :mode (("\\.R$" . R-mode)
-         ("\\.jl$" . julia-mode))
-  :commands (R-mode
-             julia-mode
-             ess-eval-function
-             ess-eval-line
-             ess-eval-buffer
-             ess-switch-to-ESS))
+(when (or (member "julia" init-lang-enable-list)
+          (member "r" init-lang-enable-list))
+  (use-package ess
+    :mode (("\\.R$" . R-mode)
+           ("\\.jl$" . julia-mode))
+    :commands (R-mode
+               julia-mode
+               ess-eval-function
+               ess-eval-line
+               ess-eval-buffer
+               ess-switch-to-ESS)))
 
 ;; JSON - GNU ELPA
-(use-package json-mode
-  :commands json-mode)
+(when (member "json" init-lang-enable-list)
+  (use-package json-mode
+    :commands json-mode))
 
 ;; Markdown - MELPA Stable
-(use-package markdown-mode
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (use-package markdown-toc)  ;; Markdown table of contents
-  :config
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra/markdown-mode (:color teal :hint nil)
-      "
+(when (member "markdown" init-lang-enable-list)
+  (use-package markdown-mode
+    :commands (markdown-mode gfm-mode)
+    :mode (("README\\.md\\'" . gfm-mode)
+           ("\\.md\\'" . markdown-mode)
+           ("\\.markdown\\'" . markdown-mode))
+    :init (use-package markdown-toc)  ;; Markdown table of contents
+    :config
+    (with-eval-after-load 'hydra
+      (defhydra my-hydra/markdown-mode (:color teal :hint nil)
+        "
 Markdown mode
 
 Formatting  _b_ : bold      _i_ : italic    _c_ : code      _p_ : pre-formatted
@@ -204,58 +177,38 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
             _T_ : table of contents
 
 "
-      ("b" markdown-insert-bold)
-      ("i" markdown-insert-italic)
-      ("c" markdown-insert-code)
-      ("p" markdown-insert-pre)
-      ("B" markdown-insert-blockquote)
-      ("h" markdown-insert-header-dwim)
-      ("1" markdown-insert-header-atx-1)
-      ("2" markdown-insert-header-atx-2)
-      ("3" markdown-insert-header-atx-3)
-      ("4" markdown-insert-header-atx-4)
-      ("H" markdown-promote :color red)
-      ("L" markdown-demote :color red)
-      ("J" markdown-move-down :color red)
-      ("K" markdown-move-up :color red)
-      ("l" markdown-insert-link)
-      ("u" markdown-insert-uri)
-      ("f" markdown-insert-footnote)
-      ("w" markdown-insert-wiki-link)
-      ("T" markdown-toc-generate-toc)
-      ("q" nil "quit" :color blue))
-    (define-key markdown-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body)
-    (define-key gfm-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body)))
+        ("b" markdown-insert-bold)
+        ("i" markdown-insert-italic)
+        ("c" markdown-insert-code)
+        ("p" markdown-insert-pre)
+        ("B" markdown-insert-blockquote)
+        ("h" markdown-insert-header-dwim)
+        ("1" markdown-insert-header-atx-1)
+        ("2" markdown-insert-header-atx-2)
+        ("3" markdown-insert-header-atx-3)
+        ("4" markdown-insert-header-atx-4)
+        ("H" markdown-promote :color red)
+        ("L" markdown-demote :color red)
+        ("J" markdown-move-down :color red)
+        ("K" markdown-move-up :color red)
+        ("l" markdown-insert-link)
+        ("u" markdown-insert-uri)
+        ("f" markdown-insert-footnote)
+        ("w" markdown-insert-wiki-link)
+        ("T" markdown-toc-generate-toc)
+        ("q" nil "quit" :color blue))
+      (define-key markdown-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body)
+      (define-key gfm-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body))))
 
 ;; Python
-(when (executable-find "ipython")
-  (setq python-shell-interpreter "ipython" ;; use IPython for REPL
-        python-shell-interpreter-args "--simple-prompt -i")) ;; fancy prompts don't work in Eshell
-(if (not (featurep 'flycheck)) ;; configure flymake for Python if not using flycheck
-    (when (load "flymake" t)
-      (defun flymake-pylint-init ()
-        (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                           'flymake-create-temp-inplace))
-               (local-file (file-relative-name
-                            temp-file
-                            (file-name-directory buffer-file-name))))
-          (list "epylint" (list local-file))))
-      (add-to-list 'flymake-allowed-file-name-masks
-                   '("\\.py\\'" flymake-pylint-init)))
-  (add-hook 'python-mode-hook '(lambda () (flymake-mode))))
-(when init-lang-python-ms-executable
-  (use-package lsp-python-ms ;; use Microsoft Python Language Server
-    ;; :load-path "site-lisp"
-    :pin "MELPA"
-    :after lsp-mode
-    :config
-    (setq lsp-python-ms-executable init-lang-python-ms-executable)
-    (add-hook 'python-mode-hook #'lsp)))
+(when (member "python" init-lang-enable-list)
+  (require 'init-lang-python))
 
 ;; YAML - MELPA Stable
-(use-package yaml-mode
-  :commands yaml-mode
-  :mode ("\\.ya?ml\\'" . yaml-mode))
+(when (member "yaml" init-lang-enable-list)
+  (use-package yaml-mode
+    :commands yaml-mode
+    :mode ("\\.ya?ml\\'" . yaml-mode)))
 
 (provide 'init-lang)
 
