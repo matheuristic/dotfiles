@@ -19,6 +19,7 @@
     ("l" org-store-link "store link")
     ("q" nil "quit"))
   (global-set-key (kbd "H-o") 'my-hydra/org-global/body)
+  :hook (org-mode . visual-line-mode)
   :config
   (require 'org-agenda)
   (setq org-agenda-start-on-weekday nil
@@ -39,7 +40,6 @@
         org-use-fast-todo-selection t
         org-use-speed-commands t
         org-startup-indented t)
-  (add-hook 'org-mode-hook #'visual-line-mode)
   (defhydra my-hydra/org-agenda (:color amaranth :hint nil)
     "
 Org agenda
@@ -96,36 +96,33 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("gd" org-agenda-goto-date)
     ("." org-agenda-goto-today)
     ("q" nil "quit" :exit t))
-  (define-key org-agenda-mode-map (kbd "H-m") 'my-hydra/org-agenda/body))
+  (define-key org-agenda-mode-map (kbd "H-m") 'my-hydra/org-agenda/body)
+  ;; use variable pitch font in Org-mode for graphical Emacs
+  (when (display-graphic-p)
+    (with-eval-after-load 'init-ui-font
+      (add-hook 'org-mode-hook #'variable-pitch-mode)
+      (set-face-attribute 'org-document-title nil
+                          :height 1.5)
+      (set-face-attribute 'org-document-info nil
+                          :height 1.2
+                          :slant 'italic)
+      (set-face-attribute 'org-document-info-keyword nil
+                          :height 0.8)
+      (mapc (lambda (face)
+              (set-face-attribute face nil :inherit 'fixed-pitch))
+            (list 'org-block
+                  'org-block-begin-line
+                  'org-block-end-line
+                  'org-code
+                  'org-link
+                  'org-table
+                  'org-verbatim
+                  'org-meta-line)))))
 
 (use-package org-bullets
   :pin "MELPA"
   :after org
-  :config
-  ;; (setq org-bullets-bullet-list '("◉" "○" "✸" "✿" "◆" "◇"))
-  (add-hook 'org-mode-hook 'org-bullets-mode))
-
-;; use variable pitch font in Org-mode for graphical Emacs
-(when (display-graphic-p)
-  (with-eval-after-load 'init-ui-font
-    (add-hook 'org-mode-hook #'variable-pitch-mode)
-    (set-face-attribute 'org-document-title nil
-                        :height 1.5)
-    (set-face-attribute 'org-document-info nil
-                        :height 1.2
-                        :slant 'italic)
-    (set-face-attribute 'org-document-info-keyword nil
-                        :height 0.8)
-    (mapc (lambda (face)
-            (set-face-attribute face nil :inherit 'fixed-pitch))
-          (list 'org-block
-                'org-block-begin-line
-                'org-block-end-line
-                'org-code
-                'org-link
-                'org-table
-                'org-verbatim
-                'org-meta-line))))
+  :hook (org-mode . org-bullets-mode))
 
 (provide 'init-org)
 

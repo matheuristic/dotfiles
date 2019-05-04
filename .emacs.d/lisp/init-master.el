@@ -39,15 +39,16 @@
   :type 'string
   :group 'init-master-el)
 
-(defcustom init-master-customize-file (expand-file-name "custom.el" user-emacs-directory)
-  "Path to separate file storing Customize settings."
-  :type 'string
-  :group 'init-master-el)
-
 (defcustom init-master-regenerate-outdated-bytecode nil
   "Whether to automatically regenerate outdated bytecode."
   :type 'boolean
   :group 'init-master-el)
+
+;; always store Customize settings in a separate file
+;; default to ~/.emacs/custom.el if none is specified
+(when (or (not (boundp 'custom-file))
+          (not custom-file))
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory)))
 
 ;; set backup directory
 (when init-master-backup-dir
@@ -59,11 +60,6 @@
         kept-old-versions 0 ;; number of oldest versions to keep
         delete-old-versions t ;; don't ask before deleting old backups
         backup-by-copying t)) ;; backup by copying instead of renaming
-
-;; store Customize settings in separate file if it exists
-(when init-master-customize-file
-  (setq custom-file init-master-customize-file)
-  (load custom-file 'noerror))
 
 ;; regenerate outdated bytecode
 (when init-master-regenerate-outdated-bytecode
@@ -130,6 +126,12 @@
 ;; Filetypes layers
 (require 'init-org)
 (require 'init-lang)
+
+;; Deft layer (for viewing, recording and searching notes quickly)
+(require 'init-deft)
+
+;; load Customize settings
+(load custom-file 'noerror)
 
 (provide 'init-master)
 

@@ -93,7 +93,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
       ("L" ediff-windows-linewise)
       ("W" ediff-windows-wordwise)
       ("q" nil "quit" :exit t))
-    (global-set-key (kbd "H-d") 'my-hydra/ediff/body)))
+    (global-set-key (kbd "H-D") 'my-hydra/ediff/body)))
 
 ;; Eldoc - built-in
 (use-package eldoc

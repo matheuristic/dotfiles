@@ -24,7 +24,7 @@
                                    "python"
                                    "r"
                                    "yaml")
-  "List of languages to enable."
+  "List of languages for which to enable support."
   :type '(repeat string)
   :group 'init-lang-el)
 

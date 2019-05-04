@@ -22,7 +22,7 @@
   :group 'init-lang-el)
 
 (defcustom init-lang-python-venv-dir "~/miniconda3/envs"
-  "Path to conda or virtualenv environments directory."
+  "Path to virtualenv (or conda) environments directory."
   :type 'string
   :group 'init-lang-el)
 

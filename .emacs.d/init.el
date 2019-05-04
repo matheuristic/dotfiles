@@ -27,8 +27,7 @@
                                   "Consolas"
                                   "Menlo"
                                   "DejaVu Sans Mono")
-      init-ui-font-variable-pitch-list '("ETBembo"
-                                         "IBM Plex Sans"
+      init-ui-font-variable-pitch-list '("IBM Plex Serif"
                                          "Constantia"
                                          "Hoefler Text"
                                          "DejaVu Serif"))
