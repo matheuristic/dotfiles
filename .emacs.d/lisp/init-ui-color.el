@@ -30,7 +30,10 @@
   ;; make line numbers less prominent
   (set-face-attribute 'line-number nil
                       :foreground "#cacaca"
-                      :weight 'light))
+                      :weight 'light)
+  ;; hl-line-mode background color
+  (require 'hl-line)
+  (set-face-attribute 'hl-line nil :background "#fedcba"))
 
 ;; (use-package gruvbox-theme
 ;;   :config (load-theme 'gruvbox t))

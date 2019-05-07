@@ -54,7 +54,7 @@
         company-show-numbers t  ;; use M-<number> to directly choose completion
         company-tooltip-align-annotations t)
   (company-tng-configure-default) ;; Tab and Go behavior
-  (add-hook 'after-init-hook 'global-company-mode))
+  (add-hook 'prog-mode-hook 'company-mode))
 
 ;; Dired - built-in
 (use-package dired
@@ -133,6 +133,10 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package hideshow
   :delight hs-minor-mode
   :config (add-hook 'prog-mode-hook 'hs-minor-mode))
+
+;; highlight line -- built-in
+(use-package hl-line
+  :ensure nil)
 
 ;; advanced buffer menu - built-in
 (use-package ibuffer

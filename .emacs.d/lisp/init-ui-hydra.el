@@ -153,10 +153,11 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
     ("rr" query-replace-regexp "replace regexp")
     ("kg" kill-grep "kill-grep")
     ("q" nil "quit" :exit t))
-  (defhydra my-hydra/visual (:color amaranth :columns 3)
+  (defhydra my-hydra/visual (:color amaranth :columns 4)
     "Visual"
     ("b" blink-cursor-mode "blink-cursor")
     ("f" font-lock-mode "font-lock")
+    ("h" hl-line-mode "hl-line")
     ("l" display-line-numbers-mode "line-numbers")
     ("p" show-paren-mode "show-paren")
     ("T" transient-mark-mode "transient-mark")

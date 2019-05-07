@@ -94,7 +94,7 @@ Symbol  _d_   : declaration     _D_   : definition      _R_   : references
       ("o" lsp-describe-thing-at-point)
       ("r" lsp-rename)
       ("q" nil "quit" :color blue))
-    (define-key lsp-mode-map (kbd "H-L") 'my-hydra/lsp/body)))
+    (define-key lsp-mode-map (kbd "H-l") 'my-hydra/lsp/body)))
 
 ;; front-end for interacting with debug servers
 ;; (use-package dap-mode

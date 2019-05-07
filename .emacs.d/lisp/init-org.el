@@ -100,24 +100,25 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
   ;; use variable pitch font in Org-mode for graphical Emacs
   (when (display-graphic-p)
     (with-eval-after-load 'init-ui-font
-      (add-hook 'org-mode-hook #'variable-pitch-mode)
-      (set-face-attribute 'org-document-title nil
-                          :height 1.5)
-      (set-face-attribute 'org-document-info nil
-                          :height 1.2
-                          :slant 'italic)
-      (set-face-attribute 'org-document-info-keyword nil
-                          :height 0.8)
-      (mapc (lambda (face)
-              (set-face-attribute face nil :inherit 'fixed-pitch))
-            (list 'org-block
-                  'org-block-begin-line
-                  'org-block-end-line
-                  'org-code
-                  'org-link
-                  'org-table
-                  'org-verbatim
-                  'org-meta-line)))))
+      (add-hook 'org-mode-hook #'variable-pitch-mode) ;; variable-pitch font
+      (add-hook 'org-mode-hook (lambda () (setq cursor-type 'bar))) ;; bar cursor works better with variable pitch fonts
+      (set-face-attribute 'org-block nil :inherit 'fixed-pitch))
+      (set-face-attribute 'org-block-begin-line nil :inherit 'fixed-pitch)
+      (set-face-attribute 'org-block-end-line nil :inherit 'fixed-pitch)
+      (set-face-attribute 'org-document-info nil :height 1.2 :slant 'italic)
+      (set-face-attribute 'org-code nil :inherit 'fixed-pitch)
+      (set-face-attribute 'org-document-info-keyword nil :inherit '(shadow fixed-pitch))
+      (set-face-attribute 'org-document-title nil :height 1.5)
+      (set-face-attribute 'org-link nil :foreground "royal blue" :underline t)
+      (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+      (set-face-attribute 'org-property-value nil :inherit 'fixed-pitch)
+      (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+      (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+      (set-face-attribute 'org-tag nil :inherit '(shadow fixed-pitch) :weight 'bold :height 0.8)
+      (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+      ;; ensure proper indentation by using fixed-pitch font with it
+      (require 'org-indent) ;; make sure org-indent face is defined
+      (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))))
 
 (use-package org-bullets
   :pin "MELPA"
