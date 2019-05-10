@@ -8,6 +8,24 @@
 
 ;;; Code:
 
+;; Helper functions
+
+(require 'cl-seq)
+
+(defun my-yank-from-kill-ring ()
+  "Yank from the kill ring into buffer at point or region.
+Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
+  (interactive)
+  (let ((to_insert (completing-read
+                    "Yank : " (cl-delete-duplicates kill-ring :test #'equal))))
+    ;; delete selected buffer region (if applicable)
+    (if (and to_insert (region-active-p))
+      (delete-region (region-beginning) (region-end)))
+    ;; insert the selected entry from the kill ring
+    (insert to_insert)))
+
+;; Configure user interface
+
 ;; basic interface settings
 (setq inhibit-startup-message t ;; suppress splash screen
       ring-bell-function 'ignore ;; turn off audible and visual bells
@@ -20,30 +38,37 @@
 (setq-default indent-tabs-mode nil)
 
 ;; remove unused interface elements
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (and (not (display-graphic-p)) (fboundp 'menu-bar-mode)) (menu-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (and (not (display-graphic-p)) (fboundp 'menu-bar-mode)) (menu-bar-mode -1))
 
 ;; smooth scrolling in GUI (hold shift for 5 lines or control for full screen)
-(if (display-graphic-p)
-    (setq mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control)))))
+(when (display-graphic-p)
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control)))))
+
+;; left-right scrolling
+(if (eq system-type 'darwin)
+    (progn (global-set-key [wheel-right] (lambda () (interactive) (scroll-left 1)))
+           (global-set-key [wheel-left] (lambda () (interactive) (scroll-right 1))))
+  (progn (global-set-key [wheel-right] 'scroll-right)
+         (global-set-key [wheel-left] 'scroll-left)))
 
 ;; use left Option key as Meta, preserve right Option key on Mac OS X
 ;; use right Command key as Hyper
-(if (eq system-type 'darwin)
-    (setq mac-option-modifier 'meta
-          mac-right-option-modifier nil
-          mac-right-command-modifier 'hyper))
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier 'meta
+        mac-right-option-modifier nil
+        mac-right-command-modifier 'hyper))
 
 ;; framework for temporary or repeatable bindings
 (require 'init-ui-hydra)
 
-;; alternative interface for M-x - MELPA Stable
+;; alternative interface for M-x
 (use-package amx
   :bind ("M-X" . amx-major-mode-commands)
   :init (amx-mode))
 
-;; text completion framework - MELPA Stable
+;; text completion framework
 (use-package company
   :delight company-mode
   :config
@@ -69,9 +94,8 @@
 ;; Ediff - built-in
 (use-package ediff
   :config
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra/ediff (:color teal :hint nil)
-       "
+  (defhydra my-hydra/ediff (:color teal :hint nil)
+     "
 Ediff
 
 Buffer   _b_ : 2-way       _B_ : 3-way
@@ -83,17 +107,17 @@ Region   _l_ : line-wise   _w_ : word-wise
 Windows  _L_ : line-wise   _W_ : word-wise
 
 "
-      ("b" ediff-buffers)
-      ("B" ediff-buffers3)
-      ("f" ediff-files)
-      ("F" ediff-files3)
-      ("c" ediff-current-file)
-      ("l" ediff-regions-linewise)
-      ("w" ediff-regions-wordwise)
-      ("L" ediff-windows-linewise)
-      ("W" ediff-windows-wordwise)
-      ("q" nil "quit" :exit t))
-    (global-set-key (kbd "H-D") 'my-hydra/ediff/body)))
+    ("b" ediff-buffers)
+    ("B" ediff-buffers3)
+    ("f" ediff-files)
+    ("F" ediff-files3)
+    ("c" ediff-current-file)
+    ("l" ediff-regions-linewise)
+    ("w" ediff-regions-wordwise)
+    ("L" ediff-windows-linewise)
+    ("W" ediff-windows-wordwise)
+    ("q" nil "quit" :exit t))
+  (global-set-key (kbd "H-D") 'my-hydra/ediff/body))
 
 ;; Eldoc - built-in
 (use-package eldoc
@@ -119,11 +143,11 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;;   :config (dolist (mode-hook '(prog-mode-hook org-mode-hook markdown-mode-hook))
 ;;             (add-hook mode-hook 'electric-pair-mode)))
 
-;; increase selected region by semantic units - MELPA Stable
+;; increase selected region by semantic units
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
-;; manage window configs, bindings prefixed by C-c C-w  - MELPA Stable
+;; manage window configs, bindings prefixed by C-c C-w
 (use-package eyebrowse
   :delight eyebrowse-mode
   :init (eyebrowse-mode t)
@@ -166,41 +190,40 @@ Windows  _L_ : line-wise   _W_ : word-wise
   ;; do not make suggestions when naming new file
   (when (boundp 'ido-minor-mode-map-entry)
     (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
-  ;; replace stock completion with ido wherever possible - MELPA Stable
+  ;; replace stock completion with ido wherever possible
   (use-package ido-completing-read+
     :init (ido-ubiquitous-mode t))
-  ;; use ido for commands using `completing-read-multiple' - MELPA Stable
+  ;; use ido for commands using `completing-read-multiple'
   (use-package crm-custom
     :init (crm-custom-mode 1)))
 
-;; Vim Tagbar-like imenu extension - MELPA Stable
+;; Vim Tagbar-like imenu extension
 ;; (use-package imenu-list
 ;;   :bind ("H-i" . imenu-list-smart-toggle)
 ;;   :config (setq imenu-list-focus-after-activation t
 ;;                 imenu-list-auto-resize t))
 
-;; multiple cursors - MELPA Stable
+;; multiple cursors
 (use-package multiple-cursors
   :config
   (setq mc/always-run-for-all nil
         mc/always-repeat-command nil
         mc/insert-numbers-default 1)
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra/multiple-cursors (:color amaranth :columns 3)
-      "Multiple-cursors"
-      ("l" mc/edit-lines "edit-lines")
-      ("a" mc/mark-all-like-this "mark-all-like")
-      ("<mouse-1>" mc/add-cursor-on-click "mark-click")
-      ("p" mc/mark-previous-like-this "mark-prev")
-      ("P" mc/skip-to-previous-like-this "skip-prev")
-      ("M-p" mc/unmark-previous-like-this "unmark-prev")
-      ("n" mc/mark-next-like-this "mark-next")
-      ("N" mc/skip-to-next-like-this "skip-next")
-      ("M-n" mc/unmark-next-like-this "unmark-next")
-      ("0" mc/insert-numbers "insert-numbers" :exit t)
-      ("A" mc/insert-letters "insert-letters" :exit t)
-      ("q" nil "quit" :exit t))
-    (global-set-key (kbd "H-M") 'my-hydra/multiple-cursors/body)))
+  (defhydra my-hydra/multiple-cursors (:color amaranth :columns 3)
+    "Multiple-cursors"
+    ("l" mc/edit-lines "edit-lines")
+    ("a" mc/mark-all-like-this "mark-all-like")
+    ("<mouse-1>" mc/add-cursor-on-click "mark-click")
+    ("p" mc/mark-previous-like-this "mark-prev")
+    ("P" mc/skip-to-previous-like-this "skip-prev")
+    ("M-p" mc/unmark-previous-like-this "unmark-prev")
+    ("n" mc/mark-next-like-this "mark-next")
+    ("N" mc/skip-to-next-like-this "skip-next")
+    ("M-n" mc/unmark-next-like-this "unmark-next")
+    ("0" mc/insert-numbers "insert-numbers" :exit t)
+    ("A" mc/insert-letters "insert-letters" :exit t)
+    ("q" nil "quit" :exit t))
+  (global-set-key (kbd "H-M") 'my-hydra/multiple-cursors/body))
 
 ;; recently opened files - built-in
 (use-package recentf
@@ -209,13 +232,13 @@ Windows  _L_ : line-wise   _W_ : word-wise
   :config (setq recentf-max-menu-items 10
                 recentf-max-saved-items 50))
 
-;; traverse undo history as a tree, default binding is C-x u - GNU ELPA
+;; traverse undo history as a tree, default binding is C-x u
 (use-package undo-tree
   :delight undo-tree-mode
   :init (global-undo-tree-mode)
   :config (setq undo-tree-visualizer-relative-timestamps nil))
 
-;; display available bindings in popup - GNU ELPA
+;; display available bindings in popup
 (use-package which-key
   :delight which-key-mode
   :bind ("H-W" . which-key-show-top-level)
@@ -223,7 +246,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
   :config (setq which-key-compute-remaps t
                 which-key-allow-multiple-replacements t))
 
-;; template systems, i.e. expandable snippets - GNU ELPA
+;; expandable snippet template system
 (use-package yasnippet
   :delight yas-minor-mode
   :bind (:map yas-minor-mode-map
@@ -232,20 +255,19 @@ Windows  _L_ : line-wise   _W_ : word-wise
               ("C-S-SPC" . #'yas-expand))
   :init (yas-global-mode 1)
   :config
-  ;; official snippets - MELPA Stable
+  ;; official snippets
   (use-package yasnippet-snippets)
-  ;; allow creation of temporary snippets - MELPA Stable
+  ;; allow creation of temporary snippets
   (use-package auto-yasnippet)
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra/yasnippet (:color teal :columns 3)
-      "YASnippet"
-      ("SPC" yas-expand "expand") ;; expand snippet
-      ("d" yas-describe-tables "describe") ;; describe snippets for current mode
-      ("w" aya-create "create-auto") ;; store temp yasnippet
-      ("y" aya-expand "expand-auto") ;; paste temp yasnippet
-      ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; show temp yasnippet
-      ("q" nil "quit"))
-    (global-set-key (kbd "H-Y") 'my-hydra/yasnippet/body)))
+  (defhydra my-hydra/yasnippet (:color teal :columns 3)
+    "YASnippet"
+    ("SPC" yas-expand "expand") ;; expand snippet
+    ("d" yas-describe-tables "describe") ;; snippets for current mode
+    ("w" aya-create "create-auto") ;; store temp yasnippet
+    ("y" aya-expand "expand-auto") ;; paste temp yasnippet
+    ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; show temp yasnippet
+    ("q" nil "quit"))
+  (global-set-key (kbd "H-Y") 'my-hydra/yasnippet/body))
 
 (require 'init-ui-color)
 

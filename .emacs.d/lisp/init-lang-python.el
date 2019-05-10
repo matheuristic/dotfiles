@@ -8,9 +8,7 @@
 
 ;;; Code:
 
-;;;;
-;; Custom variables
-;;;;
+(require 'init-ui-hydra)
 
 (defgroup init-lang-python-el nil
   "Language-specific settings."
@@ -26,12 +24,8 @@
   :type 'string
   :group 'init-lang-el)
 
-;;;;
-;; Load packages and configure
-;;;;
-
 ;; use IPython for REPL
-;; use simple prompts since eshell does not support fancy prompts
+;; fall back to simple prompts since eshell does not support fancy prompts
 (when (executable-find "ipython")
   (setq python-shell-interpreter "ipython"
         python-shell-interpreter-args "--simple-prompt -i"))
@@ -81,18 +75,17 @@
                                                   15 nil nil "…"))
                                        ""))
                              t)) ;; add current conda env to mode-line, if any
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra/virtualenv (:color teal :columns 4)
-      "virtualenv"
-      ("w" venv-workon "workon")
-      ("d" venv-deactivate "deactivate")
-      ("m" venv-mkvirtualenv-using "make")
-      ("r" venv-rmvirtualenv "remove")
-      ("l" venv-lsvirtualenv "list")
-      ("g" venv-cdvirtualenv "cd")
-      ("c" venv-cpvirtualenv "cp")
-      ("q" nil "quit"))
-    (global-set-key (kbd "H-v") 'my-hydra/virtualenv/body)))
+  (defhydra my-hydra/virtualenv (:color teal :columns 4)
+    "virtualenv"
+    ("w" venv-workon "workon")
+    ("d" venv-deactivate "deactivate")
+    ("m" venv-mkvirtualenv-using "make")
+    ("r" venv-rmvirtualenv "remove")
+    ("l" venv-lsvirtualenv "list")
+    ("g" venv-cdvirtualenv "cd")
+    ("c" venv-cpvirtualenv "cp")
+    ("q" nil "quit"))
+  (global-set-key (kbd "H-v") 'my-hydra/virtualenv/body))
 
 (provide 'init-lang-python)
 

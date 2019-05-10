@@ -8,6 +8,8 @@
 
 ;;; Code:
 
+(require 'init-ui-hydra)
+
 (defgroup init-syntax-el nil
   "Syntax checker."
   :group 'convenience)
@@ -23,20 +25,19 @@
       :delight flycheck-mode
       :init (global-flycheck-mode)
       :config
-      (with-eval-after-load 'hydra
-        (defhydra my-hydra/flycheck (:color amaranth :columns 6)
-          "Error"
-          ("F" flycheck-error-list-set-filter "filter")
-          ("p" flycheck-previous-error "previous")
-          ("n" flycheck-next-error "next")
-          ("f" flycheck-first-error "first")
-          ("l" (condition-case nil (while t (flycheck-next-error))
-                 (user-error nil)) "last")
-          ("L" (condition-case nil (quit-windows-on "*Flycheck errors*" t)
-                 (error (flycheck-list-errors))) "list")
-          ("q" nil "quit" :exit t))
-        ;; bind over my-hydra/error
-        (define-key flycheck-mode-map (kbd "H-e") 'my-hydra/flycheck/body)))
+      (defhydra my-hydra/flycheck (:color amaranth :columns 6)
+        "Error"
+        ("F" flycheck-error-list-set-filter "filter")
+        ("p" flycheck-previous-error "previous")
+        ("n" flycheck-next-error "next")
+        ("f" flycheck-first-error "first")
+        ("l" (condition-case nil (while t (flycheck-next-error))
+               (user-error nil)) "last")
+        ("L" (condition-case nil (quit-windows-on "*Flycheck errors*" t)
+               (error (flycheck-list-errors))) "list")
+        ("q" nil "quit" :exit t))
+      ;; bind over my-hydra/error
+      (define-key flycheck-mode-map (kbd "H-e") 'my-hydra/flycheck/body))
   ;; ... otherwise use built-in flymake
   (use-package flymake  ;; NOTE use C-h . to show error on current line
     :config
@@ -59,14 +60,13 @@
             (if flymake-winds
                 (dolist (wind flymake-winds) (quit-window nil wind))
               (flymake-show-diagnostics-buffer)))))
-    (with-eval-after-load 'hydra
-      (defhydra my-hydra/flymake (:color amaranth)
-        "Error"
-        ("p" flymake-goto-prev-error "previous")
-        ("n" flymake-goto-next-error "next")
-        ("L" my-toggle-flymake-diagnostics "list")
-        ("q" nil "quit" :exit t))
-      (define-key flymake-mode-map (kbd "H-e") 'my-hydra/flymake/body))
+    (defhydra my-hydra/flymake (:color amaranth)
+      "Error"
+      ("p" flymake-goto-prev-error "previous")
+      ("n" flymake-goto-next-error "next")
+      ("L" my-toggle-flymake-diagnostics "list")
+      ("q" nil "quit" :exit t))
+    (define-key flymake-mode-map (kbd "H-e") 'my-hydra/flymake/body)
     (with-eval-after-load 'minions
       (add-to-list 'minions-direct 'flymake-mode))))
 

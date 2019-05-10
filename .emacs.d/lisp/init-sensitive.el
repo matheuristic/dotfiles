@@ -5,7 +5,7 @@
 ;;; Commentary:
 
 ;; Set up minor mode for sensitive files that disables backups and auto-saves
-;; for the current buffer, and default filetypes where this mode is enabled.
+;; for the current buffer.
 ;; Copied from http://anirudhsasikumar.net/blog/2005.01.21.html
 
 ;;; Code:

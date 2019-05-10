@@ -8,37 +8,23 @@
 
 ;;; Code:
 
-;;;;
-;; Custom variables
-;;;;
+(require 'init-ui-hydra)
 
 (defgroup init-lang-el nil
   "Language-specific settings."
   :group 'convenience)
 
-(defcustom init-lang-enable-list '("csv"
-                                   "docker"
-                                   "json"
-                                   "julia"
-                                   "markdown"
-                                   "python"
-                                   "r"
-                                   "yaml")
+(defcustom init-lang-enable-list '("csv" "docker" "json" "julia" "markdown"
+                                   "python" "r" "yaml")
   "List of languages for which to enable support."
   :type '(repeat string)
   :group 'init-lang-el)
-
-;;;;
-;; Multi-language tools
-;;;;
 
 ;; Language Server Protocol
 (use-package lsp-mode
   :pin "MELPA"
   :config
   ;; change nil to 't to enable logging of packets between emacs and the LS
-  ;; this is valuable for debugging communication with the MS Python Language
-  ;; Server and comparing this with what vs.code is doing
   ;; (setq lsp-print-io nil)
   (setq lsp-eldoc-enable-hover nil ;; don't have eldoc display hover info
         lsp-eldoc-enable-signature-help nil ;; don't have eldoc display signature help
@@ -66,9 +52,8 @@
     :pin "MELPA"
     :commands company-lsp
     :config (setq company-lsp-cache-candidates t))
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra/lsp (:color teal :hint nil)
-      "
+  (defhydra my-hydra/lsp (:color teal :hint nil)
+    "
 Language Server Protocol
 
 Buffer  _f_   : format          _m_   : imenu           _x_   : execute action
@@ -80,21 +65,21 @@ Symbol  _d_   : declaration     _D_   : definition      _R_   : references
         _r_   : rename
 
 "
-      ("f" lsp-format-buffer)
-      ("m" lsp-ui-imenu)
-      ("x" lsp-execute-code-action)
-      ("M-r" lsp-restart-workspace)
-      ("S" lsp-shutdown-workspace)
-      ("M-s" lsp-describe-session)
-      ("d" lsp-find-declaration)
-      ("D" lsp-ui-peek-find-definitions)
-      ("R" lsp-ui-peek-find-references)
-      ("i" lsp-ui-peek-find-implementation)
-      ("t" lsp-find-type-definition)
-      ("o" lsp-describe-thing-at-point)
-      ("r" lsp-rename)
-      ("q" nil "quit" :color blue))
-    (define-key lsp-mode-map (kbd "H-l") 'my-hydra/lsp/body)))
+    ("f" lsp-format-buffer)
+    ("m" lsp-ui-imenu)
+    ("x" lsp-execute-code-action)
+    ("M-r" lsp-restart-workspace)
+    ("S" lsp-shutdown-workspace)
+    ("M-s" lsp-describe-session)
+    ("d" lsp-find-declaration)
+    ("D" lsp-ui-peek-find-definitions)
+    ("R" lsp-ui-peek-find-references)
+    ("i" lsp-ui-peek-find-implementation)
+    ("t" lsp-find-type-definition)
+    ("o" lsp-describe-thing-at-point)
+    ("r" lsp-rename)
+    ("q" nil "quit" :color blue))
+  (define-key lsp-mode-map (kbd "H-l") 'my-hydra/lsp/body))
 
 ;; front-end for interacting with debug servers
 ;; (use-package dap-mode
@@ -104,27 +89,22 @@ Symbol  _d_   : declaration     _D_   : definition      _R_   : references
 ;;   (dap-mode 1)
 ;;   (dap-ui-mode 1))
 
-;;;;
-;; Specific languages
-;;;;
-
 ;; CSV
 (when (member "csv" init-lang-enable-list)
   (use-package csv-mode
     :commands csv-mode
     :config
-    (with-eval-after-load 'hydra
-      (defhydra my-hydra/csv-mode (:color teal :columns 4)
-        "CSV mode"
-        ("s" csv-sort-fields "sort")
-        ("r" csv-sort-numeric-fields "numsort")
-        ("k" csv-kill-fields "cut")
-        ("y" csv-yank-fields "copy")
-        ("a" csv-align-fields "align")
-        ("u" csv-unalign-fields "unalign")
-        ("t" csv-transpose "transpose")
-        ("q" nil "quit" :color blue))
-      (define-key csv-mode-map (kbd "H-m") 'my-hydra/csv-mode/body))))
+    (defhydra my-hydra/csv-mode (:color teal :columns 4)
+      "CSV mode"
+      ("s" csv-sort-fields "sort")
+      ("r" csv-sort-numeric-fields "numsort")
+      ("k" csv-kill-fields "cut")
+      ("y" csv-yank-fields "copy")
+      ("a" csv-align-fields "align")
+      ("u" csv-unalign-fields "unalign")
+      ("t" csv-transpose "transpose")
+      ("q" nil "quit" :color blue))
+    (define-key csv-mode-map (kbd "H-m") 'my-hydra/csv-mode/body)))
 
 ;; Dockerfile
 (when (member "docker" init-lang-enable-list)
@@ -147,12 +127,12 @@ Symbol  _d_   : declaration     _D_   : definition      _R_   : references
                ess-eval-buffer
                ess-switch-to-ESS)))
 
-;; JSON - GNU ELPA
+;; JSON
 (when (member "json" init-lang-enable-list)
   (use-package json-mode
     :commands json-mode))
 
-;; Markdown - MELPA Stable
+;; Markdown
 (when (member "markdown" init-lang-enable-list)
   (use-package markdown-mode
     :commands (markdown-mode gfm-mode)
@@ -161,9 +141,8 @@ Symbol  _d_   : declaration     _D_   : definition      _R_   : references
            ("\\.markdown\\'" . markdown-mode))
     :init (use-package markdown-toc)  ;; Markdown table of contents
     :config
-    (with-eval-after-load 'hydra
-      (defhydra my-hydra/markdown-mode (:color teal :hint nil)
-        "
+    (defhydra my-hydra/markdown-mode (:color teal :hint nil)
+      "
 Markdown mode
 
 Formatting  _b_ : bold      _i_ : italic    _c_ : code      _p_ : pre-formatted
@@ -177,34 +156,34 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
             _T_ : table of contents
 
 "
-        ("b" markdown-insert-bold)
-        ("i" markdown-insert-italic)
-        ("c" markdown-insert-code)
-        ("p" markdown-insert-pre)
-        ("B" markdown-insert-blockquote)
-        ("h" markdown-insert-header-dwim)
-        ("1" markdown-insert-header-atx-1)
-        ("2" markdown-insert-header-atx-2)
-        ("3" markdown-insert-header-atx-3)
-        ("4" markdown-insert-header-atx-4)
-        ("H" markdown-promote :color red)
-        ("L" markdown-demote :color red)
-        ("J" markdown-move-down :color red)
-        ("K" markdown-move-up :color red)
-        ("l" markdown-insert-link)
-        ("u" markdown-insert-uri)
-        ("f" markdown-insert-footnote)
-        ("w" markdown-insert-wiki-link)
-        ("T" markdown-toc-generate-toc)
-        ("q" nil "quit" :color blue))
-      (define-key markdown-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body)
-      (define-key gfm-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body))))
+      ("b" markdown-insert-bold)
+      ("i" markdown-insert-italic)
+      ("c" markdown-insert-code)
+      ("p" markdown-insert-pre)
+      ("B" markdown-insert-blockquote)
+      ("h" markdown-insert-header-dwim)
+      ("1" markdown-insert-header-atx-1)
+      ("2" markdown-insert-header-atx-2)
+      ("3" markdown-insert-header-atx-3)
+      ("4" markdown-insert-header-atx-4)
+      ("H" markdown-promote :color red)
+      ("L" markdown-demote :color red)
+      ("J" markdown-move-down :color red)
+      ("K" markdown-move-up :color red)
+      ("l" markdown-insert-link)
+      ("u" markdown-insert-uri)
+      ("f" markdown-insert-footnote)
+      ("w" markdown-insert-wiki-link)
+      ("T" markdown-toc-generate-toc)
+      ("q" nil "quit" :color blue)
+    (define-key markdown-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body)
+    (define-key gfm-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body))))
 
 ;; Python
 (when (member "python" init-lang-enable-list)
   (require 'init-lang-python))
 
-;; YAML - MELPA Stable
+;; YAML
 (when (member "yaml" init-lang-enable-list)
   (use-package yaml-mode
     :commands yaml-mode

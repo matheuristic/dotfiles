@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Set up tooling for version control
+;; Set up version control tooling
 
 ;; Only set up for Git currently
 

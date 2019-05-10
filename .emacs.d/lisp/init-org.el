@@ -8,6 +8,8 @@
 
 ;;; Code:
 
+(require 'init-ui-hydra)
+
 ;; Org-mode - built-in
 (use-package org
   :init
@@ -30,6 +32,7 @@
         org-fontify-quote-and-verse-blocks t
         org-fontify-whole-heading-line t
         org-hide-emphasis-markers t
+        org-hide-leading-stars t
         org-log-into-drawer t
         org-pretty-entities t
         org-return-follows-link t
@@ -39,7 +42,7 @@
                             (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANX(c@/!)"))
         org-use-fast-todo-selection t
         org-use-speed-commands t
-        org-startup-indented t)
+        org-startup-indented nil)
   (defhydra my-hydra/org-agenda (:color amaranth :hint nil)
     "
 Org agenda
@@ -96,15 +99,32 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("gd" org-agenda-goto-date)
     ("." org-agenda-goto-today)
     ("q" nil "quit" :exit t))
+  (defhydra my-hydra/org-mode (:color amaranth :columns 3)
+    "Org-mode"
+    ("ns" org-narrow-to-subtree "narrow-subtree")
+    ("nb" org-narrow-to-block "narrow-block")
+    ("nw" widen "widen")
+    ("<tab>" org-global-cycle "cycle-visibility")
+    ("i" org-toggle-inline-images "toggle-imgs")
+    ("I" org-indent-mode "org-indent-mode")
+    ("o" org-occur "org-occur" :exit t)
+    ("R" org-refile "org-refile" :exit t)
+    ("S" org-sort "sort" :exit t)
+    ("q" nil "quit" :exit t))
   (define-key org-agenda-mode-map (kbd "H-m") 'my-hydra/org-agenda/body)
-  ;; use variable pitch font in Org-mode for graphical Emacs
+  (define-key org-mode-map (kbd "H-m") 'my-hydra/org-mode/body)
+  ;; use variable pitch font in Org-mode for graphical Emacs (looks better)
   (when (display-graphic-p)
     (with-eval-after-load 'init-ui-font
+      (require 'org-mouse) ;; Org-mode mouse support
       (add-hook 'org-mode-hook #'variable-pitch-mode) ;; variable-pitch font
-      (add-hook 'org-mode-hook (lambda () (setq cursor-type 'bar))) ;; bar cursor works better with variable pitch fonts
-      (set-face-attribute 'org-block nil :inherit 'fixed-pitch))
-      (set-face-attribute 'org-block-begin-line nil :inherit 'fixed-pitch)
-      (set-face-attribute 'org-block-end-line nil :inherit 'fixed-pitch)
+      (add-hook 'org-mode-hook (lambda ()
+        (setq cursor-type 'bar ;; bar cursor looks better with variable pitch fonts
+              line-spacing 0.1)))
+      (set-face-attribute 'org-block nil :inherit 'fixed-pitch :background "#FFFFE0")
+      (set-face-attribute 'org-block-begin-line nil :inherit 'fixed-pitch :foreground "#555555" :background "#E2E1D5")
+      (set-face-attribute 'org-block-end-line nil :inherit 'fixed-pitch :foreground "#555555" :background "#E2E1D5")
+      (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
       (set-face-attribute 'org-document-info nil :height 1.2 :slant 'italic)
       (set-face-attribute 'org-code nil :inherit 'fixed-pitch)
       (set-face-attribute 'org-document-info-keyword nil :inherit '(shadow fixed-pitch))
@@ -116,10 +136,11 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
       (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
       (set-face-attribute 'org-tag nil :inherit '(shadow fixed-pitch) :weight 'bold :height 0.8)
       (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-      ;; ensure proper indentation by using fixed-pitch font with it
+      ;; properly indent by using fixed-pitch font
       (require 'org-indent) ;; make sure org-indent face is defined
-      (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))))
+      (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch)))))
 
+;; UTF-8 bullets for org-mode
 (use-package org-bullets
   :pin "MELPA"
   :after org

@@ -26,10 +26,6 @@
 
 ;;; Code:
 
-;;;;
-;; Custom variables
-;;;;
-
 (defgroup init-master-el nil
   "Basic settings."
   :group 'convenience)
@@ -127,7 +123,7 @@
 (require 'init-org)
 (require 'init-lang)
 
-;; Deft layer (for viewing, recording and searching notes quickly)
+;; Deft layer
 (require 'init-deft)
 
 ;; load Customize settings

@@ -4,27 +4,11 @@
 
 ;;; Commentary:
 
-;; Load Emacs hydra package and set up basic hydras
+;; Load Emacs hydra package
 
 ;;; Code:
 
-;;;;
 ;; Helper functions
-;;;;
-
-(require 'cl-seq)
-
-(defun my-yank-from-kill-ring ()
-  "Yank from the kill ring into buffer at point or region.
-Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
-  (interactive)
-  (let ((to_insert (completing-read
-                    "Yank : " (cl-delete-duplicates kill-ring :test #'equal))))
-    ;; delete selected buffer region (if applicable)
-    (if (and to_insert (region-active-p))
-      (delete-region (region-beginning) (region-end)))
-    ;; insert the selected entry from the kill ring
-    (insert to_insert)))
 
 (defun my-transpose-windows (selector)
   "Transpose buffers between current window and window after calling SELECTOR."
@@ -51,11 +35,9 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (my-move-frame (* x (/ (x-display-pixel-width) 100))
                  (* y (/ (x-display-pixel-height) 100))))
 
-;;;;
 ;; Load packages
-;;;;
 
-;; framework for temporary or repeatable bindings - MELPA Stable
+;; framework for temporary and repeatable bindings
 (use-package hydra
   :config
   ;; basic hydras
@@ -197,7 +179,7 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
     ("+" text-scale-increase "in")
     ("0" (text-scale-adjust 0) "reset")
     ("q" nil "quit" :exit t))
-  (global-set-key (kbd "H-D") 'my-hydra/desktop/body)
+  (global-set-key (kbd "H-S") 'my-hydra/desktop/body)
   (global-set-key (kbd "H-N") 'my-hydra/narrow/body)
   (global-set-key (kbd "H-s") 'my-hydra/search/body)
   (global-set-key (kbd "H-Z") 'my-hydra/zoom/body)

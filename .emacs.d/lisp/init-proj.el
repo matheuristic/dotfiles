@@ -4,9 +4,11 @@
 
 ;;; Commentary:
 
-;; Set up project interaction tooling
+;; Set up tooling for project interaction
 
 ;;; Code:
+
+(require 'init-ui-hydra)
 
 ;; project interaction library
 (use-package projectile
@@ -20,9 +22,8 @@
         (use-package projectile-ripgrep)
         (defalias 'my-projectile-search-fun 'projectile-ripgrep))
     (defalias 'my-projectile-search-fun 'projectile-grep))
-  (with-eval-after-load 'hydra
-    (defhydra my-hydra/projectile (:color teal :hint nil)
-      "
+  (defhydra my-hydra/projectile (:color teal :hint nil)
+    "
 Projectile: %(projectile-project-root)
 
 Buffer  _bb_  : switch to buffer          _bi_  : ibuffer
@@ -42,34 +43,31 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
         _cx_  : remove known project      _cX_  : cleanup known projects
 
 "
-      ("bb" projectile-switch-to-buffer)
-      ("bi" projectile-ibuffer)
-      ("bk" projectile-kill-buffers)
-      ("bo" projectile-switch-to-buffer-other-window)
-      ("ff" projectile-find-file)
-      ("fw" projectile-find-file-dwim)
-      ("fd" projectile-find-file-in-directory)
-      ("fp" projectile-find-file-in-known-projects)
-      ("fof" projectile-find-file-other-window)
-      ("fow" projectile-find-file-dwim-other-window)
-      ("fr" projectile-recentf)
-      ("dd" projectile-find-dir)
-      ("do" projectile-find-dir-other-window)
-      ("sg" my-projectile-search-fun)
-      ("so" projectile-multi-occur)
-      ("rs" projectile-replace)
-      ("rr" projectile-replace-regexp)
-      ("cc" projectile-cache-current-file)
-      ("cC" projectile-invalidate-cache)
-      ("cx" projectile-remove-known-project)
-      ("cX" projectile-cleanup-known-projects)
-      ("C" projectile-compile-project "compile")
-      ("p" projectile-switch-project "switch project")
-      ("q" nil "quit" :exit t))
-    (define-key projectile-mode-map (kbd "H-p") 'my-hydra/projectile/body))
-  (with-eval-after-load 'minions
-    (add-to-list 'minions-direct 'projectile-mode))
-  )
+    ("bb" projectile-switch-to-buffer)
+    ("bi" projectile-ibuffer)
+    ("bk" projectile-kill-buffers)
+    ("bo" projectile-switch-to-buffer-other-window)
+    ("ff" projectile-find-file)
+    ("fw" projectile-find-file-dwim)
+    ("fd" projectile-find-file-in-directory)
+    ("fp" projectile-find-file-in-known-projects)
+    ("fof" projectile-find-file-other-window)
+    ("fow" projectile-find-file-dwim-other-window)
+    ("fr" projectile-recentf)
+    ("dd" projectile-find-dir)
+    ("do" projectile-find-dir-other-window)
+    ("sg" my-projectile-search-fun)
+    ("so" projectile-multi-occur)
+    ("rs" projectile-replace)
+    ("rr" projectile-replace-regexp)
+    ("cc" projectile-cache-current-file)
+    ("cC" projectile-invalidate-cache)
+    ("cx" projectile-remove-known-project)
+    ("cX" projectile-cleanup-known-projects)
+    ("C" projectile-compile-project "compile")
+    ("p" projectile-switch-project "switch project")
+    ("q" nil "quit" :exit t))
+  (define-key projectile-mode-map (kbd "H-p") 'my-hydra/projectile/body))
 
 (provide 'init-proj)
 
