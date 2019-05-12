@@ -4,11 +4,9 @@
 
 ;;; Commentary:
 
-;; Load Emacs hydra package
+;; Load Emacs hydra package and set up basic hydras
 
 ;;; Code:
-
-;; Helper functions
 
 (defun my-transpose-windows (selector)
   "Transpose buffers between current window and window after calling SELECTOR."
@@ -35,12 +33,9 @@
   (my-move-frame (* x (/ (x-display-pixel-width) 100))
                  (* y (/ (x-display-pixel-height) 100))))
 
-;; Load packages
-
 ;; framework for temporary and repeatable bindings
 (use-package hydra
   :config
-  ;; basic hydras
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
     "Buffer"
     ("p" previous-buffer "previous")
@@ -80,12 +75,23 @@
     ("d" delete-frame "delete")
     ("o" delete-other-frames "only")
     ("q" nil "quit" :exit t))
-  (defhydra my-hydra/narrow (:color teal)
-    "Narrow"
-    ("n" narrow-to-region "region")
-    ("p" narrow-to-page "page")
-    ("d" narrow-to-defun "defun")
-    ("w" widen "widen")
+  (defhydra my-hydra/help (:color teal :columns 4)
+    "Help"
+    ("a" apropos-command "apropos-cmd")
+    ("d" apropos-documentation "apropos-doc")
+    ("f" describe-function "desc-fun")
+    ("v" describe-variable "desc-var")
+    ("c" describe-key-briefly "desc-key-brief")
+    ("k" describe-key "desc-key")
+    ("b" describe-bindings "desc-bind")
+    ("m" describe-mode "desc-mode")
+    ("p" describe-package "desc-pkg")
+    ("y" describe-syntax "desc-syntax")
+    ("e" view-echo-area-messages "messages")
+    ("l" view-lossage "lossage")
+    ("i" info "info")
+    ("s" info-lookup-symbol "info-symbol")
+    ("w" where-is "where-is")
     ("q" nil "quit" :exit t))
   (defhydra my-hydra/navigation (:color amaranth :columns 4)
     "Navigation"
@@ -125,8 +131,7 @@
     ("gr" rgrep "rgrep")
     ("gl" lgrep "lgrep")
     ("gf" grep-find "grep-find")
-    ("gz" rzgrep "zrgrep")
-    ("gd" grep-find-dired "grep-find-dired")
+    ("gz" rzgrep "rzgrep")
     ("oo" occur "occur")
     ("om" multi-occur "multi-occur")
     ("ob" multi-occur-in-matching-buffers "multi-occur-match-buf")
@@ -138,14 +143,24 @@
   (defhydra my-hydra/visual (:color amaranth :columns 4)
     "Visual"
     ("b" blink-cursor-mode "blink-cursor")
+    ("F" follow-mode "follow-mode")
     ("f" font-lock-mode "font-lock")
+    ("H" highlight-changes-mode "hl-changes")
     ("h" hl-line-mode "hl-line")
     ("l" display-line-numbers-mode "line-numbers")
     ("p" show-paren-mode "show-paren")
+    ("S" toggle-scroll-bar "scroll-bar")
     ("T" transient-mark-mode "transient-mark")
     ("t" toggle-truncate-lines "truncate-lines")
     ("v" visual-line-mode "visual-line")
     ("w" whitespace-mode "whitespace")
+    ("N" narrow-to-region "narrow-region" :exit t)
+    ("P" narrow-to-page "narrow-page" :exit t)
+    ("D" narrow-to-defun "narrow-defun" :exit t)
+    ("W" widen "narrow-widen" :exit t)
+    ("=" text-scale-increase "zoom-in")
+    ("-" text-scale-decrease "zoom-out")
+    ("0" (text-scale-adjust 0) "zoom-reset")
     ("q" nil "quit" :exit t))
   (defhydra my-hydra/window (:color amaranth :columns 4)
     "Window"
@@ -173,18 +188,11 @@
     ("d" delete-window "delete")
     ("D" kill-buffer-and-window "delete-buf")
     ("q" nil "quit" :exit t))
-  (defhydra my-hydra/zoom (:color amaranth)
-    "Zoom"
-    ("-" text-scale-decrease "out")
-    ("+" text-scale-increase "in")
-    ("0" (text-scale-adjust 0) "reset")
-    ("q" nil "quit" :exit t))
-  (global-set-key (kbd "H-S") 'my-hydra/desktop/body)
-  (global-set-key (kbd "H-N") 'my-hydra/narrow/body)
-  (global-set-key (kbd "H-s") 'my-hydra/search/body)
-  (global-set-key (kbd "H-Z") 'my-hydra/zoom/body)
   (global-set-key (kbd "H-b") 'my-hydra/buffer/body)
   (global-set-key (kbd "H-f") 'my-hydra/frame/body)
+  (global-set-key (kbd "H-h") 'my-hydra/help/body)
+  (global-set-key (kbd "H-S") 'my-hydra/desktop/body)
+  (global-set-key (kbd "H-s") 'my-hydra/search/body)
   (global-set-key (kbd "H-n") 'my-hydra/navigation/body)
   (global-set-key (kbd "H-V") 'my-hydra/visual/body)
   (global-set-key (kbd "H-w") 'my-hydra/window/body))

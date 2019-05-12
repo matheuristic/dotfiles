@@ -39,7 +39,8 @@
   ;; hide minor-modes behind a menu, accessible via a right-click or `minions-minor-mode-menu'
   (use-package minions
     :init (minions-mode 1)
-    :config (setq minions-direct '(overwrite-mode))))
+    :config (setq minions-direct '(overwrite-mode) ;; modes in minions-direct are always shown
+                  minions-mode-line-lighter "☰")))
 
 (provide 'init-ui-modeline)
 
