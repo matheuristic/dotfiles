@@ -110,6 +110,9 @@
 ;; Syntax checking layer
 (require 'init-syntax)
 
+;; Dired layer
+(require 'init-dired)
+
 ;; Terminal emulation layer
 (require 'init-term)
 

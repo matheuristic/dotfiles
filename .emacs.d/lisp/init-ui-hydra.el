@@ -1,10 +1,10 @@
-;;; init-ui-hydra.el --- Emacs config UI layer helper functions -*- lexical-binding: t -*-
+;;; init-ui-hydra.el --- Emacs config Hydra layer -*- lexical-binding: t -*-
 
 ;; Author: matheuristic
 
 ;;; Commentary:
 
-;; Load Emacs hydra package and set up basic hydras
+;; Set up hydra package
 
 ;;; Code:
 
@@ -35,6 +35,7 @@
 
 ;; framework for temporary and repeatable bindings
 (use-package hydra
+  :pin "MELPA"
   :config
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
     "Buffer"
@@ -117,10 +118,12 @@
     (">" scroll-left "pg-right")
     ("C-SPC" set-mark-command "set-mark")
     ("x" exchange-point-and-mark "xchg-mark")
+    ("rv" view-register "view-reg")
     ("r SPC" point-to-register "pt-to-reg")
     ("rj" jump-to-register "jmp-to-reg")
+    ("rl" list-bookmarks "bmk-list")
     ("rm" bookmark-set "bmk-set")
-    ("rb" bookmark-jump "bmk-jmp")
+    ("rb" bookmark-jump "bmk-jump")
     ("gg" beginning-of-buffer "beg-buf")
     ("G" end-of-buffer "end-buf")
     ("gl" goto-line "goto-line")

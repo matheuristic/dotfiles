@@ -81,47 +81,6 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (company-tng-configure-default) ;; Tab and Go behavior
   (add-hook 'prog-mode-hook 'company-mode))
 
-;; Dired - built-in
-(use-package dired
-  :ensure nil ;; dired does not have updated packages in ELPA/MELPA
-  :config
-  (setq dired-dwim-target t ;; use neighboring dired buffer as default target dir
-                dired-listing-switches "-alhvF" ;; more readable file listings
-                dired-recursive-copies 'always ;; always copy recursively
-                dired-recursive-deletes 'always) ;; always delete recursively
-  (add-hook 'dired-mode-hook 'auto-revert-mode) ;; auto-refresh on file change
-  (defhydra my-hydra/dired (:color teal :columns 4)
-    "Dired"
-    ("(" dired-hide-details-mode "toggle-details" :exit nil)
-    ("+" dired-create-directory "mkdir")
-    ("=" dired-diff "diff")
-    ("?" dired-summary "help")
-    ("A" dired-do-find-regexp "find-regexp")
-    ("C" dired-do-copy "copy")
-    ("D" dired-do-delete "delete")
-    ("G" dired-do-chgrp "chgrp")
-    ("g" revert-buffer "refresh")
-    ("i" dired-maybe-insert-subdir "insert-subdir")
-    ("l" dired-do-redisplay "redisplay")
-    ("M" dired-do-chmod "chmod")
-    ("m" dired-mark "mark")
-    ("O" dired-display-file "display")
-    ("o" dired-find-file-other-window "find-file-other")
-    ("Q" dired-do-find-regexp-and-replace "find-regexp-sub")
-    ("R" dired-do-rename "rename")
-    ("S" dired-do-symlink "symlink")
-    ("s" dired-sort-toggle-or-edit "sort-by-date")
-    ("t" dired-toggle-marks "toggle-marks")
-    ("U" dired-unmark-all-marks "unmark-all")
-    ("u" dired-unmark "unmark")
-    ("v" dired-view-file "view-file") ;; q -> exit, s -> search, = -> get linum
-    ("w" dired-kill-subdir "kill-subdir")
-    ("Y" dired-do-relsymlink "symlink-to-dir")
-    ("z" dired-do-compress-to "compress-to")
-    ("Z" dired-do-compress "compress")
-    ("q" nil "quit"))
-  (define-key dired-mode-map (kbd "H-m") 'my-hydra/dired/body))
-
 ;; Ediff - built-in
 (use-package ediff
   :config
