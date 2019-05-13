@@ -150,7 +150,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
 
 ;; highlight line -- built-in
 (use-package hl-line
-  :ensure nil)
+  :ensure nil) ;; hl-line has no updated packages in ELPA/MELPA
 
 ;; advanced buffer menu - built-in
 (use-package ibuffer
@@ -235,6 +235,19 @@ Windows  _L_ : line-wise   _W_ : word-wise
   :init (which-key-mode 1)
   :config (setq which-key-compute-remaps t
                 which-key-allow-multiple-replacements t))
+
+;; visualize and cleanup whitespace
+(use-package whitespace
+  :ensure nil ;; whitespace has no updated packages in ELPA/MELPA
+  :config
+  (defhydra my-hydra/whitespace (:color teal :columns 3)
+    "Whitespace"
+    ("w" whitespace-mode "show-whitespace" :exit nil)
+    ("n" whitespace-newline-mode "show-newline" :exit nil)
+    ("c" whitespace-cleanup "cleanup")
+    ("r" whitespace-report "report")
+    ("q" nil "quit"))
+  (global-set-key (kbd "M-H-w") 'my-hydra/whitespace/body))
 
 ;; expandable snippet template system
 (use-package yasnippet

@@ -156,7 +156,6 @@
     ("T" transient-mark-mode "transient-mark")
     ("t" toggle-truncate-lines "truncate-lines")
     ("v" visual-line-mode "visual-line")
-    ("w" whitespace-mode "whitespace")
     ("N" narrow-to-region "narrow-region" :exit t)
     ("P" narrow-to-page "narrow-page" :exit t)
     ("D" narrow-to-defun "narrow-defun" :exit t)
