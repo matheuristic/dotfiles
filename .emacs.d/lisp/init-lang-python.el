@@ -52,7 +52,9 @@
     :after lsp-mode
     :config
     (setq lsp-python-ms-executable init-lang-python-ms-executable)
-    (add-hook 'python-mode-hook #'lsp)))
+    (add-hook 'python-mode-hook #'lsp)
+    (with-eval-after-load 'dap-mode
+      (require 'dap-python))))
 
 ;; TODO - replace with conda after it gets fixed
 ;; virtualenv tool

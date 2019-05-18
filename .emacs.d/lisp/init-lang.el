@@ -46,7 +46,14 @@
           lsp-ui-sideline-show-hover nil)
     (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
     (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-    (define-key lsp-ui-mode-map (kbd "C-c i") 'lsp-ui-imenu))
+    (defun my-lsp-ui-doc-mode-toggle ()
+      "Toggles `lsp-ui-doc-mode'."
+      (interactive)
+      (if lsp-ui-doc-mode
+          (progn
+            (lsp-ui-doc-mode -1)
+            (lsp-ui-doc--hide-frame))
+        (lsp-ui-doc-mode 1))))
   ;; install LSP company backend for LSP-driven completion
   (use-package company-lsp
     :pin "MELPA"
@@ -64,6 +71,8 @@ Symbol  _d_   : declaration     _D_   : definition      _R_   : references
         _i_   : implementation  _t_   : type            _o_   : documentation
         _r_   : rename
 
+Other   _C-d_ : toggle docs
+
 "
     ("f" lsp-format-buffer)
     ("m" lsp-ui-imenu)
@@ -78,16 +87,37 @@ Symbol  _d_   : declaration     _D_   : definition      _R_   : references
     ("t" lsp-find-type-definition)
     ("o" lsp-describe-thing-at-point)
     ("r" lsp-rename)
+    ("C-d" my-lsp-ui-doc-mode-toggle)
     ("q" nil "quit" :color blue))
   (define-key lsp-mode-map (kbd "H-l") 'my-hydra/lsp/body))
 
 ;; front-end for interacting with debug servers
-;; (use-package dap-mode
-;;   :pin "MELPA"
-;;   :after lsp-mode
-;;   :config
-;;   (dap-mode 1)
-;;   (dap-ui-mode 1))
+(use-package dap-mode
+  :pin "MELPA"
+  :after lsp-mode
+  :config
+  (require 'dap-hydra)
+  (require 'dap-ui)
+  (dap-mode 1)
+  (dap-ui-mode 1)
+  (defhydra my-hydra/dap (:color teal :columns 4)
+    "Debug Adapter Protocol"
+    ;; session management
+    ("dd" dap-debug "debug")
+    ("dl" dap-debug-last "debug-last")
+    ("dr" dap-debug-recent "debug-recent")
+    ("A" dap-delete-all-sessions "del-all-sessions")
+    ;; windows
+    ("wo" dap-go-to-output-buffer "output-buf")
+    ("wb" dap-ui-breakpoints "breakpoints")
+    ("wl" dap-ui-locals "locals")
+    ("ws" dap-ui-sessions "sessions")
+    ;; repl
+    ("'" dap-ui-repl "repl")
+    ;; dap-mode operations
+    ("." dap-hydra "dap-hydra")
+    ("q" nil "quit"))
+  (define-key dap-mode-map (kbd "H-D") 'my-hydra/dap/body))
 
 ;; CSV
 (when (member "csv" init-lang-enable-list)

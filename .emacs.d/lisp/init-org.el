@@ -10,7 +10,17 @@
 
 (require 'init-ui-hydra)
 
-;; Org-mode - built-in
+(defvar org-agenda-files '("~/org/inbox.org"
+                           "~/org/gtd.org"
+                           "~/org/tickler.org"))
+(defvar org-refile-targets '((nil . (:maxlevel . 9)) ;; current buffer
+                             (org-agenda-files . (:maxlevel . 3)))) ;; files for agenda display
+(defvar org-refile-use-outline-path 'file) ;; allows refile to top level
+(defvar org-capture-templates '(("t" "Todo [inbox]" entry (file "~/org/inbox.org") "* TODO %i%?")
+                                ("T" "Tickler" entry (file "~/org/tickler.org") "* %i%? \n %U")))
+
+;; Org-mode
+;; http://doc.norang.ca/org-mode.html
 (use-package org
   :init
   (defhydra my-hydra/org-global (:color teal)
@@ -34,12 +44,29 @@
         org-hide-emphasis-markers t
         org-hide-leading-stars t
         org-log-into-drawer t
+        org-outline-path-complete-in-steps nil
         org-pretty-entities t
+        org-refile-allow-creating-parent-nodes 'confirm
         org-return-follows-link t
         org-src-fontify-natively t
         org-src-tab-acts-natively t
+        ;; Diagram of possible state transitions for a given task
+        ;;     -------------------------
+        ;;     |                       |
+        ;;     |                       v
+        ;; -> TODO....... -> NEXT -> DONE ----->
+        ;;    | ^  |  | ^    | ^      ^     |
+        ;;    v |  |  v |    v |      |     |
+        ;;   HOLD  |  WAIT...... ------     |
+        ;;     |   |  | (note records what  |
+        ;;     |   |  |  it is waiting for) |
+        ;;     v   v  v                     |
+        ;;     CANX.... ---------------------
+        ;;     (note records why
+        ;;      it was cancelled)
         org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
                             (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANX(c@/!)"))
+        org-treat-S-cursor-todo-selection-as-state-change nil
         org-use-fast-todo-selection t
         org-use-speed-commands t
         org-startup-indented nil)
@@ -107,9 +134,11 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("<tab>" org-global-cycle "cycle-visibility")
     ("i" org-toggle-inline-images "toggle-imgs")
     ("I" org-indent-mode "org-indent-mode")
+    ("s" org-sort "sort" :exit t)
     ("o" org-occur "org-occur" :exit t)
-    ("R" org-refile "org-refile" :exit t)
-    ("S" org-sort "sort" :exit t)
+    ("r" org-refile "org-refile" :exit t)
+    ("t" org-todo "org-todo" :exit t)
+    ("a" org-archive-subtree-default :exit t)
     ("q" nil "quit" :exit t))
   (define-key org-agenda-mode-map (kbd "H-m") 'my-hydra/org-agenda/body)
   (define-key org-mode-map (kbd "H-m") 'my-hydra/org-mode/body)
@@ -126,6 +155,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
       (set-face-attribute 'org-block-end-line nil :inherit 'fixed-pitch :foreground "#555555" :background "#E2E1D5")
       (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
       (set-face-attribute 'org-document-info nil :height 1.2 :slant 'italic)
+      (set-face-attribute 'org-done nil :inherit 'fixed-pitch)
       (set-face-attribute 'org-code nil :inherit 'fixed-pitch)
       (set-face-attribute 'org-document-info-keyword nil :inherit '(shadow fixed-pitch))
       (set-face-attribute 'org-document-title nil :height 1.5)
@@ -135,6 +165,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
       (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
       (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
       (set-face-attribute 'org-tag nil :inherit '(shadow fixed-pitch) :weight 'bold :height 0.8)
+      (set-face-attribute 'org-todo nil :inherit 'fixed-pitch)
       (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
       ;; properly indent by using fixed-pitch font
       (require 'org-indent) ;; make sure org-indent face is defined

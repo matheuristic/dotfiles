@@ -4,9 +4,9 @@
 
 ;;; Commentary:
 
-;; Master file for coordinating the Emacs configuration
+;; Master file for coordinating Emacs configuration
 
-;; ~/.emacs.d/init.el should source this file, for example:
+;; ~/.emacs.d/init.el should source this file, e.g.
 
 ;; ;; user packages in ~/.emacs.d/lisp
 ;; (defvar lisp-dir (expand-file-name "lisp" user-emacs-directory))
@@ -66,12 +66,12 @@
 (setq package-enable-at-startup nil
       package-archives
       '(("GNU"          . "https://elpa.gnu.org/packages/")
-        ("Org"          . "https://orgmode.org/elpa/")
+        ;; ("Org"          . "https://orgmode.org/elpa/")
         ("MELPA Stable" . "https://stable.melpa.org/packages/")
         ("MELPA"        . "https://melpa.org/packages/"))
       package-archive-priorities
       '(("GNU"          . 10)
-        ("Org"          . 9)
+        ;; ("Org"          . 9)
         ("MELPA Stable" . 5)
         ("MELPA"        . 0)))
 
@@ -82,7 +82,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-;; preload use-package and bind-key to reduce load time
+;; preload use-package and bind-key
 (eval-when-compile
   (require 'use-package)
   (require 'bind-key)

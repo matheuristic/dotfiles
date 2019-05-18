@@ -107,7 +107,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("L" ediff-windows-linewise)
     ("W" ediff-windows-wordwise)
     ("q" nil "quit" :exit t))
-  (global-set-key (kbd "H-D") 'my-hydra/ediff/body))
+  (global-set-key (kbd "H-E") 'my-hydra/ediff/body))
 
 ;; Eldoc - built-in
 (use-package eldoc
@@ -137,11 +137,13 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
-;; manage window configs, bindings prefixed by C-c C-w
+;; manage window configs, bindings prefixed by C-c C-w (default)
 (use-package eyebrowse
   :delight eyebrowse-mode
-  :init (eyebrowse-mode t)
-  :config (setq eyebrowse-new-workspace t))
+  :init
+  (setq eyebrowse-keymap-prefix (kbd "H-W") ;; change prefix binding
+        eyebrowse-new-workspace t)
+  (eyebrowse-mode t))
 
 ;; code folding package -- built-in
 (use-package hideshow
@@ -201,8 +203,9 @@ Windows  _L_ : line-wise   _W_ : word-wise
         mc/insert-numbers-default 1)
   (defhydra my-hydra/multiple-cursors (:color amaranth :columns 3)
     "Multiple-cursors"
-    ("l" mc/edit-lines "edit-lines")
-    ("a" mc/mark-all-like-this "mark-all-like")
+    ("l" mc/edit-lines "edit-lines" :exit t)
+    ("a" mc/mark-all-like-this "mark-all-like" :exit t)
+    ("s" mc/mark-all-in-region-regexp "mark-regex-rgn" :exit t)
     ("<mouse-1>" mc/add-cursor-on-click "mark-click")
     ("p" mc/mark-previous-like-this "mark-prev")
     ("P" mc/skip-to-previous-like-this "skip-prev")
@@ -231,7 +234,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; display available bindings in popup
 (use-package which-key
   :delight which-key-mode
-  :bind ("H-W" . which-key-show-top-level)
+  :bind ("C-H-w" . which-key-show-top-level)
   :init (which-key-mode 1)
   :config (setq which-key-compute-remaps t
                 which-key-allow-multiple-replacements t))
@@ -247,7 +250,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("c" whitespace-cleanup "cleanup")
     ("r" whitespace-report "report")
     ("q" nil "quit"))
-  (global-set-key (kbd "M-H-w") 'my-hydra/whitespace/body))
+  (global-set-key (kbd "H-M-w") 'my-hydra/whitespace/body))
 
 ;; expandable snippet template system
 (use-package yasnippet
