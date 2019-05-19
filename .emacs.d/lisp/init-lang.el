@@ -219,6 +219,68 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
     :commands yaml-mode
     :mode ("\\.ya?ml\\'" . yaml-mode)))
 
+;; support for interfacing with Jupyter kernels
+;; when using virtualenvs, make sure the activated virtualenv has jupyter
+;; installed before running `jupyter-run-repl'
+;; load this package last, since org-mode babel support requires core language
+;; support be loaded first
+;; after `ob-jupyter' is loaded, in org-mode use "C-c h" to call the
+;; `jupyter-org-hydra' hydra
+;; to execute a source block in org-mode asynchronously, set the `:async'
+;; parameter to `yes'
+;; #+BEGIN_SRC jupyter-python :session py :async yes
+;;   x = 'foo'
+;;   y = 'bar'
+;;   x + ' ' + y
+;; #+END_SRC
+(use-package jupyter
+  :defer t
+  :init
+  (defun my-jupyter-status-string ()
+    "Returns string showing jupyter cmd availability, if ob-jupyter is initialized, and if a REPL is associated with the current buffer."
+    (let ((cmd-available (executable-find "jupyter"))
+          (pkg-initialized (featurep 'ob-jupyter))
+          (repl-associated (bound-and-true-p jupyter-repl-interaction-mode)))
+      (mapconcat 'identity
+                 (list (concat "cmd=" (if cmd-available "✔" "✖"))
+                       (concat "org=" (if pkg-initialized "✔" "✖"))
+                       (concat "repl=" (if repl-associated "✔" "✖")))
+                 " ")))
+  (defhydra my-hydra/jupyter (:color teal :hint nil)
+    "
+Jupyter (%s(my-jupyter-status-string))
+
+REPL   _R_   : run         _C_   : connect     _A_   : assoc-buf   _C-s_ : scratch-buf
+
+Kernel _C-r_ : restart     _C-i_ : interrupt
+
+Eval   _C-c_ : line/region _C-b_ : buffer      _M-x_ : defun       _M-:_ : string
+
+Other  _O_   : org-init    _o_   : org-menu    _M-i_ : inspect
+
+"
+    ("R" jupyter-run-repl)
+    ("C" jupyter-connect-repl)
+    ("A" jupyter-repl-associate-buffer)
+    ("C-s" jupyter-repl-scratch-buffer)
+    ("C-r" jupyter-repl-restart-kernel)
+    ("C-i" jupyter-repl-interrupt-kernel)
+    ("C-c" jupyter-eval-line-or-region)
+    ("C-b" jupyter-eval-buffer)
+    ("M-x" jupyter-eval-defun)
+    ("M-:" jupyter-eval-string)
+    ("O" (progn (require 'ob-jupyter) (message "Org support initialized.")))
+    ("o" (if (featurep 'ob-jupyter) (jupyter-org-hydra/body) (message "Org support not yet initialized. Initialize with \"(require 'ob-jupyter)\".")))
+    ("M-i" jupyter-inspect-at-point)
+    ("q" nil "quit"))
+  (defhydra my-hydra/jupyter-repl (:color teal)
+    "Jupyter REPL"
+    ("C-s" jupyter-repl-scratch-buffer "scratch-buffer")
+    ("C-r" jupyter-repl-restart-kernel "restart-kernel")
+    ("C-i" jupyter-repl-interrupt-kernel "interrupt-kernel")
+    ("q" nil "quit"))
+  (global-set-key (kbd "H-j") 'my-hydra/jupyter/body))
+
 (provide 'init-lang)
 
 ;;; init-lang.el ends here

@@ -36,13 +36,14 @@
   (require 'org-agenda)
   (setq org-agenda-start-on-weekday nil
         org-catch-invisible-edits 'error
-        org-confirm-babel-evaluate t
+        org-confirm-babel-evaluate nil ;; don't confirm before evaluating code blocks in Org documents
         org-edit-src-content-indentation 2
         org-fontify-done-headline t
         org-fontify-quote-and-verse-blocks t
         org-fontify-whole-heading-line t
         org-hide-emphasis-markers t
         org-hide-leading-stars t
+        org-highlight-latex-and-related '(latex script entities) ;; highlight LaTeX fragments with the `org-highlight-latex-and-related' face
         org-log-into-drawer t
         org-outline-path-complete-in-steps nil
         org-pretty-entities t
@@ -159,6 +160,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
       (set-face-attribute 'org-code nil :inherit 'fixed-pitch)
       (set-face-attribute 'org-document-info-keyword nil :inherit '(shadow fixed-pitch))
       (set-face-attribute 'org-document-title nil :height 1.5)
+      (set-face-attribute 'org-latex-and-related nil :inherit 'fixed-pitch)
       (set-face-attribute 'org-link nil :foreground "royal blue" :underline t)
       (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
       (set-face-attribute 'org-property-value nil :inherit 'fixed-pitch)

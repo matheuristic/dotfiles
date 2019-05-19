@@ -24,6 +24,10 @@
   :type 'string
   :group 'init-lang-el)
 
+;; enable evaluation of Python in Org-mode code blocks
+(use-package ob-python
+  :ensure nil)
+
 ;; use IPython for REPL
 ;; fall back to simple prompts since eshell does not support fancy prompts
 (when (executable-find "ipython")
@@ -56,7 +60,6 @@
     (with-eval-after-load 'dap-mode
       (require 'dap-python))))
 
-;; TODO - replace with conda after it gets fixed
 ;; virtualenv tool
 (use-package virtualenvwrapper
   ;; enable the MELPA repository and uncomment below if the version of
