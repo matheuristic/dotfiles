@@ -32,8 +32,8 @@
                       :foreground "#cacaca"
                       :weight 'light)
   ;; hl-line-mode background color
-  (require 'hl-line)
-  (set-face-attribute 'hl-line nil :background "#fedcba"))
+  (with-eval-after-load 'hl-line
+    (set-face-attribute 'hl-line nil :background "#fedcba")))
 
 ;; (use-package gruvbox-theme
 ;;   :config (load-theme 'gruvbox t))

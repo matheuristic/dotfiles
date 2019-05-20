@@ -26,17 +26,12 @@
 
 ;; enable evaluation of Python in Org-mode code blocks
 (use-package ob-python
-  :ensure nil)
-
-;; use IPython for REPL
-;; fall back to simple prompts since eshell does not support fancy prompts
-(when (executable-find "ipython")
-  (setq python-shell-interpreter "ipython"
-        python-shell-interpreter-args "--simple-prompt -i"))
+  :ensure nil ;; built-in
+  :defer t)
 
 ;; configure flymake for Python if not using flycheck
 (if (not (featurep 'flycheck))
-    (when (load "flymake" t)
+    (with-eval-after-load 'flymake
       (defun flymake-pylint-init ()
         (let* ((temp-file (flymake-init-create-temp-buffer-copy
                            'flymake-create-temp-inplace))

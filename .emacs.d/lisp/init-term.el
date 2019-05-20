@@ -16,6 +16,21 @@
   "Kill term buffer on term session end."
   (kill-buffer))
 
+;; Eshell
+(use-package eshell
+  :ensure nil ;; built-in
+  :commands (eshell eshell-command)
+  :init
+  (require 'em-term)
+  (require 'em-smart)
+  :config
+  (setq eshell-review-quick-commands nil
+        eshell-smart-space-goes-to-end t
+        eshell-where-to-jump 'begin)
+  (add-to-list 'eshell-visual-commands '("htop" "lftp" "ssh" "vim"))
+  (add-to-list 'eshell-visual-subcommands '("git" "log" "diff" "show"
+                                            "vagrant" "ssh")))
+
 (provide 'init-term)
 
 ;;; init-term.el ends here

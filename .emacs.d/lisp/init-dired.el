@@ -10,15 +10,15 @@
 
 (require 'init-ui-hydra)
 
-;; ls-lisp - built-in
+;; ls-lisp
 (use-package ls-lisp
-  :ensure nil ;; ls-lisp does not have updated packages in ELPA/MELPA
+  :ensure nil ;; built-in
   :config (setq ls-lisp-use-insert-directory-program nil ;; don't use system ls
                 ls-lisp-dirs-first t)) ;; list directories first
 
-;; Dired - built-in
+;; Dired
 (use-package dired
-  :ensure nil ;; dired does not have updated packages in ELPA/MELPA
+  :ensure nil ;; built-in
   :config
   (require 'dired-x)
   (require 'dired-aux)
@@ -72,7 +72,7 @@
     ("U" dired-unmark-all-marks "unmark-all")
     ("u" dired-unmark "unmark")
     ("v" dired-view-file "view-file" :exit t) ;; q -> exit, s -> search, = -> get linum
-    ("Y" dired-do-relsymlink "symlink-to-dir") ;; from dired-x
+    ("Y" dired-do-relsymlink "symlink-to-dir")
     ("Z" dired-do-compress "compress")
     ("q" nil "quit" :exit t))
   (define-key dired-mode-map (kbd "H-m") 'my-hydra/dired/body))

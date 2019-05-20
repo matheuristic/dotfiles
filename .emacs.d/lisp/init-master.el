@@ -6,6 +6,18 @@
 
 ;; Master file for coordinating Emacs configuration
 
+;; Best possible startup times can be measured using in Linux using
+;; $ emacs -q --eval='(message "%s" (emacs-init-time))'
+;; or in Mac OS X using
+;; $ open -n /Applications/Emacs.app --args -q --eval='(message "%s" (emacs-init-time))'
+
+;; Startup time can be optimized using the following steps:
+;; 1. profile using the `esup' package ("M-x esup")
+;; 2. defer loading of packages when possible (e.g. use-package's `:defer')
+;;    example times are 1 sec for more important packages and 2 secs for
+;;    less important ones
+;; 3. avoid helper functions that cause eager loads
+
 ;; ~/.emacs.d/init.el should source this file, e.g.
 
 ;; ;; user packages in ~/.emacs.d/lisp

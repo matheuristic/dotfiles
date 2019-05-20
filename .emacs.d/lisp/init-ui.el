@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Set up user interface
+;; Configure user interface
 
 ;;; Code:
 
@@ -70,6 +70,7 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 
 ;; text completion framework
 (use-package company
+  :defer 1
   :delight company-mode
   :config
   (setq company-dabbrev-downcase nil
@@ -81,8 +82,9 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (company-tng-configure-default) ;; Tab and Go behavior
   (add-hook 'prog-mode-hook 'company-mode))
 
-;; Ediff - built-in
+;; Ediff
 (use-package ediff
+  :ensure nil ;; built-in
   :config
   (defhydra my-hydra/ediff (:color teal :hint nil)
      "
@@ -109,29 +111,11 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("q" nil "quit" :exit t))
   (global-set-key (kbd "H-E") 'my-hydra/ediff/body))
 
-;; Eldoc - built-in
+;; Eldoc
 (use-package eldoc
+  :ensure nil ;; built-in
   :delight eldoc-mode
   :init (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
-
-;; Eshell - built-in
-(use-package eshell
-  :commands (eshell eshell-command)
-  :init
-  (require 'em-term)
-  (require 'em-smart)
-  :config
-  (setq eshell-review-quick-commands nil
-        eshell-smart-space-goes-to-end t
-        eshell-where-to-jump 'begin)
-  (add-to-list 'eshell-visual-commands '("htop" "lftp" "ssh" "vim"))
-  (add-to-list 'eshell-visual-subcommands '("git" "log" "diff" "show"
-                                            "vagrant" "ssh")))
-
-;; typing any left bracket auto-inserts matching right bracket - built-in
-;; (use-package elec-pair
-;;   :config (dolist (mode-hook '(prog-mode-hook org-mode-hook markdown-mode-hook))
-;;             (add-hook mode-hook 'electric-pair-mode)))
 
 ;; increase selected region by semantic units
 (use-package expand-region
@@ -139,35 +123,37 @@ Windows  _L_ : line-wise   _W_ : word-wise
 
 ;; manage window configs, bindings prefixed by C-c C-w (default)
 (use-package eyebrowse
+  :defer 2
   :delight eyebrowse-mode
   :init
   (setq eyebrowse-keymap-prefix (kbd "H-W") ;; change prefix binding
         eyebrowse-new-workspace t)
   (eyebrowse-mode t))
 
-;; code folding package -- built-in
+;; code folding package
 (use-package hideshow
+  :ensure nil ;; built-in
   :delight hs-minor-mode
   :config (add-hook 'prog-mode-hook 'hs-minor-mode))
 
-;; highlight line -- built-in
+;; highlight line
 (use-package hl-line
-  :ensure nil) ;; hl-line has no updated packages in ELPA/MELPA
+  :ensure nil ;; built-in
+  :commands hl-line-mode
+  :defer t)
 
-;; advanced buffer menu - built-in
+;; advanced buffer menu
 (use-package ibuffer
+  :ensure nil ;; built-in
+  :commands ibuffer
   :bind ("C-x C-b" . ibuffer)
   :config
   (use-package ibuffer-vc ;; group buffers by VC project in ibuffer
     :after ibuffer))
-    ;; :config (add-hook 'ibuffer-hook
-    ;;                   (lambda ()
-    ;;                     (ibuffer-vc-set-filter-groups-by-vc-root)
-    ;;                     (unless (eq ibuffer-sorting-mode 'alphabetic)
-    ;;                       (ibuffer-do-sort-by-alphabetic))))))
 
-;; interactively do things with buffers and files, use C-f to escape - built-in
+;; interactively do things with buffers and files, use C-f to escape
 (use-package ido
+  :ensure nil ;; built-in
   :init (ido-mode t)
   :bind ("H-y" . my-yank-from-kill-ring)
   :config
@@ -197,6 +183,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
 
 ;; multiple cursors
 (use-package multiple-cursors
+  :defer 2
   :config
   (setq mc/always-run-for-all nil
         mc/always-repeat-command nil
@@ -218,18 +205,23 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("q" nil "quit" :exit t))
   (global-set-key (kbd "H-M") 'my-hydra/multiple-cursors/body))
 
-;; recently opened files - built-in
+;; recently opened files
 (use-package recentf
+  :ensure nil ;; built-in
+  :commands recentf-open-files
   :bind ("H-r" . recentf-open-files)
-  :init (recentf-mode t)
-  :config (setq recentf-max-menu-items 10
-                recentf-max-saved-items 50))
+  :config
+  (setq recentf-max-menu-items 10
+        recentf-max-saved-items 50)
+  (recentf-mode t))
 
 ;; traverse undo history as a tree, default binding is C-x u
 (use-package undo-tree
+  :defer 1
   :delight undo-tree-mode
-  :init (global-undo-tree-mode)
-  :config (setq undo-tree-visualizer-relative-timestamps nil))
+  :config
+  (setq undo-tree-visualizer-relative-timestamps nil)
+  (global-undo-tree-mode))
 
 ;; display available bindings in popup
 (use-package which-key
@@ -241,7 +233,8 @@ Windows  _L_ : line-wise   _W_ : word-wise
 
 ;; visualize and cleanup whitespace
 (use-package whitespace
-  :ensure nil ;; whitespace has no updated packages in ELPA/MELPA
+  :ensure nil ;; built-in
+  :defer 1
   :config
   (defhydra my-hydra/whitespace (:color teal :columns 3)
     "Whitespace"
@@ -255,11 +248,11 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; expandable snippet template system
 (use-package yasnippet
   :delight yas-minor-mode
+  :defer 2
   :bind (:map yas-minor-mode-map
               ("<tab>" . nil) ;; disable default tab binding to ...
               ("TAB" . nil) ;; ... avoid conflict with company-mode tng
               ("C-S-SPC" . #'yas-expand))
-  :init (yas-global-mode 1)
   :config
   ;; official snippets
   (use-package yasnippet-snippets)
@@ -273,7 +266,8 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("y" aya-expand "expand-auto") ;; paste temp yasnippet
     ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; show temp yasnippet
     ("q" nil "quit"))
-  (global-set-key (kbd "H-Y") 'my-hydra/yasnippet/body))
+  (global-set-key (kbd "H-Y") 'my-hydra/yasnippet/body)
+  (yas-global-mode 1))
 
 (require 'init-ui-color)
 
