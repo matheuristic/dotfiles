@@ -38,6 +38,10 @@
 
 ;;; Code:
 
+;; reduce garbage collection to reduce startup time, by increasing garbage
+;; collection threshold (threshold is in bytes, default is 800 kilobytes)
+(setq gc-cons-threshold (* 50 1000 1000))
+
 (defgroup init-master-el nil
   "Basic settings."
   :group 'convenience)
@@ -113,33 +117,37 @@
 (use-package vlf
   :config (require 'vlf-setup))
 
-;; Sensitive files layer
+;; sensitive files layer
 (require 'init-sensitive)
 
 ;; UI layer
 (require 'init-ui)
 
-;; Syntax checking layer
+;; syntax checking layer
 (require 'init-syntax)
 
 ;; Dired layer
 (require 'init-dired)
 
-;; Terminal emulation layer
+;; terminal emulation layer
 (require 'init-term)
 
-;; Version control layer
+;; version control layer
 (require 'init-vc)
 
-;; Project management layer
+;; project management layer
 (require 'init-proj)
 
-;; Filetypes layers
+;; filetypes layers
 (require 'init-org)
 (require 'init-lang)
 
 ;; Deft layer
 (require 'init-deft)
+
+;; lower back the garbage collection threshold so that garbage collection
+;; pauses are quicker
+(setq gc-cons-threshold (* 2 1000 1000))
 
 ;; load Customize settings
 (load custom-file 'noerror)

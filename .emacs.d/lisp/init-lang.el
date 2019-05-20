@@ -23,7 +23,8 @@
 ;; Language Server Protocol
 (use-package lsp-mode
   :pin "MELPA"
-  :defer 1
+  :defer t
+  :hook (prog-mode . (lambda () (require 'lsp-mode)))
   :config
   ;; change nil to 't to enable logging of packets between emacs and the LS
   ;; (setq lsp-print-io nil)

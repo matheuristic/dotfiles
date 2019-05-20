@@ -41,7 +41,7 @@
           (list "epylint" (list local-file))))
       (add-to-list 'flymake-allowed-file-name-masks
                    '("\\.py\\'" flymake-pylint-init)))
-  (add-hook 'python-mode-hook '(lambda () (flymake-mode))))
+  (add-hook 'python-mode-hook '(lambda () (flycheck-mode))))
 
 ;; lsp-mode support for Microsoft Python Language Server
 (when init-lang-python-ms-executable
