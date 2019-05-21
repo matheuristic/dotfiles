@@ -171,8 +171,8 @@ Other   _C-d_ : toggle docs
     :mode (("README\\.md\\'" . gfm-mode)
            ("\\.md\\'" . markdown-mode)
            ("\\.markdown\\'" . markdown-mode))
-    :init (use-package markdown-toc)  ;; Markdown table of contents
     :config
+    (use-package markdown-toc) ;; Markdown table of contents
     (defhydra my-hydra/markdown-mode (:color teal :hint nil)
       "
 Markdown mode
@@ -207,9 +207,10 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
       ("f" markdown-insert-footnote)
       ("w" markdown-insert-wiki-link)
       ("T" markdown-toc-generate-toc)
-      ("q" nil "quit" :color blue)
-    (define-key markdown-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body)
-    (define-key gfm-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body))))
+      ("q" nil "quit" :color blue))
+    (with-eval-after-load 'markdown-mode
+      (define-key markdown-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body)
+      (define-key gfm-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body))))
 
 ;; Python
 (when (member "python" init-lang-enable-list)

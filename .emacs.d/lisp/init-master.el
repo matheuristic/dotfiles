@@ -38,9 +38,14 @@
 
 ;;; Code:
 
-;; reduce garbage collection to reduce startup time, by increasing garbage
-;; collection threshold (threshold is in bytes, default is 800 kilobytes)
-(setq gc-cons-threshold (* 50 1000 1000))
+;; optimizations for reducing startup time (reverted at the end of file)
+;; * reduce garbage collection by relaxing garbage collection thresholds
+;;   (threshold is in bytes, default is 800 kilobytes)
+;; * set file-name-handler-alist to nil as it is scanned when files are loaded
+(defvar tmp-file-name-handler-alist file-name-handler-alist) ;; save to tmp var
+(setq gc-cons-threshold (* 50 1000 1000)
+      gc-cons-percentage 0.6
+      file-name-handler-alist nil)
 
 (defgroup init-master-el nil
   "Basic settings."
@@ -80,16 +85,14 @@
 ;; use package.el with given ELPA-compatible package repositories
 (require 'package)
 (setq package-enable-at-startup nil
-      package-archives
-      '(("GNU"          . "https://elpa.gnu.org/packages/")
-        ;; ("Org"          . "https://orgmode.org/elpa/")
-        ("MELPA Stable" . "https://stable.melpa.org/packages/")
-        ("MELPA"        . "https://melpa.org/packages/"))
-      package-archive-priorities
-      '(("GNU"          . 10)
-        ;; ("Org"          . 9)
-        ("MELPA Stable" . 5)
-        ("MELPA"        . 0)))
+      package-archives '(("GNU"          . "https://elpa.gnu.org/packages/")
+                         ;; ("Org"          . "https://orgmode.org/elpa/")
+                         ("MELPA Stable" . "https://stable.melpa.org/packages/")
+                         ("MELPA"        . "https://melpa.org/packages/"))
+      package-archive-priorities '(("GNU"          . 10)
+                                   ;; ("Org"          . 9)
+                                   ("MELPA Stable" . 5)
+                                   ("MELPA"        . 0)))
 
 (package-initialize)
 
@@ -145,9 +148,11 @@
 ;; Deft layer
 (require 'init-deft)
 
-;; lower back the garbage collection threshold so that garbage collection
-;; pauses are quicker
-(setq gc-cons-threshold (* 2 1000 1000))
+;; revert earlier optimizations for reducing startup time
+(setq gc-cons-threshold (* 2 1000 1000)
+      gc-cons-percentage 0.1
+      file-name-handler-alist tmp-file-name-handler-alist)
+(makunbound 'tmp-file-name-handler-alist) ;; unbind tmp var
 
 ;; load Customize settings
 (load custom-file 'noerror)

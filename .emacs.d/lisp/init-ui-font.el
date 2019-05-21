@@ -62,7 +62,10 @@
   ;; enable ligatures, only works on Emacs Mac Port by Mitsuharu
   (if (fboundp 'mac-auto-operator-composition-mode)
       (mac-auto-operator-composition-mode))
-)
+
+  ;; unbind helper functions
+  (fmakunbound 'my-font-exists)
+  (fmakunbound 'my-set-font))
 
 (provide 'init-ui-font)
 

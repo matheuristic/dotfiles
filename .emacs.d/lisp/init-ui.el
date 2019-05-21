@@ -12,6 +12,16 @@
 
 (require 'cl-seq)
 
+(with-eval-after-load 'ibuffer
+  (defvar ibuffer-saved-filter-groups
+          '(("default"
+             ("Org" (or (mode . org-mode) (mode . org-agenda-mode)))
+             ("Dired" (mode . dired-mode))
+             ("Elisp" (mode . emacs-lisp-mode))
+             ("Python" (mode . python-mode))
+             ("Magit" (name . "\*magit"))
+             ("Emacs" (name . "^\\*"))))))
+
 (defun my-yank-from-kill-ring ()
   "Yank from the kill ring into buffer at point or region.
 Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
@@ -146,6 +156,10 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package ibuffer
   :ensure nil ;; built-in
   :commands ibuffer
+  :hook (ibuffer-mode . (lambda () (progn
+                                      (ibuffer-auto-mode 1)
+                                      (when ibuffer-saved-filter-groups
+                                        (ibuffer-switch-to-saved-filter-groups (car (car ibuffer-saved-filter-groups)))))))
   :bind ("C-x C-b" . ibuffer)
   :config
   (use-package ibuffer-vc ;; group buffers by VC project in ibuffer
