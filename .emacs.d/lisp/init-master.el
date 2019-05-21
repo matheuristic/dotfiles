@@ -83,7 +83,6 @@
   (setq load-prefer-newer t))
 
 ;; use package.el with given ELPA-compatible package repositories
-(require 'package)
 (setq package-enable-at-startup nil
       package-archives '(("GNU"          . "https://elpa.gnu.org/packages/")
                          ;; ("Org"          . "https://orgmode.org/elpa/")
@@ -94,6 +93,7 @@
                                    ("MELPA Stable" . 5)
                                    ("MELPA"        . 0)))
 
+(require 'package)
 (package-initialize)
 
 ;; bootstrap use-package, provides configuration macros

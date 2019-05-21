@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Configure user interface
+;; Set up user interface
 
 ;;; Code:
 
@@ -28,7 +28,7 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (interactive)
   (let ((to_insert (completing-read
                     "Yank : " (cl-delete-duplicates kill-ring :test #'equal))))
-    ;; delete selected buffer region (if applicable)
+    ;; delete selected buffer region, if applicable
     (if (and to_insert (region-active-p))
       (delete-region (region-beginning) (region-end)))
     ;; insert the selected entry from the kill ring
@@ -63,12 +63,10 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (progn (global-set-key [wheel-right] 'scroll-right)
          (global-set-key [wheel-left] 'scroll-left)))
 
-;; use left Option key as Meta, preserve right Option key on Mac OS X
-;; use right Command key as Hyper
-(when (eq system-type 'darwin)
-  (setq mac-option-modifier 'meta
-        mac-right-option-modifier nil
-        mac-right-command-modifier 'hyper))
+(when (eq system-type 'darwin) ;; on Mac OS X,
+  (setq mac-option-modifier 'meta ;; use left Option as Meta,
+        mac-right-option-modifier nil ;; preserve right Option,
+        mac-right-command-modifier 'hyper)) ;; and use right Command as Hyper
 
 ;; framework for temporary or repeatable bindings
 (require 'init-ui-hydra)
@@ -95,7 +93,8 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 ;; Ediff
 (use-package ediff
   :ensure nil ;; built-in
-  :config
+  :commands ediff-setup-keymap
+  :init
   (defhydra my-hydra/ediff (:color teal :hint nil)
      "
 Ediff
@@ -125,15 +124,16 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package eldoc
   :ensure nil ;; built-in
   :delight eldoc-mode
-  :init (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
+  :hook (emacs-lisp-mode . eldoc-mode))
 
 ;; increase selected region by semantic units
 (use-package expand-region
+  :commands er/expand-region
   :bind ("C-=" . er/expand-region))
 
 ;; manage window configs, bindings prefixed by C-c C-w (default)
 (use-package eyebrowse
-  :defer 2
+  :defer 1
   :delight eyebrowse-mode
   :init
   (setq eyebrowse-keymap-prefix (kbd "H-W") ;; change prefix binding
@@ -149,26 +149,27 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; highlight line
 (use-package hl-line
   :ensure nil ;; built-in
-  :commands hl-line-mode
-  :defer t)
+  :commands hl-line-mode)
 
 ;; advanced buffer menu
 (use-package ibuffer
   :ensure nil ;; built-in
   :commands ibuffer
   :hook (ibuffer-mode . (lambda () (progn
-                                      (ibuffer-auto-mode 1)
-                                      (when ibuffer-saved-filter-groups
-                                        (ibuffer-switch-to-saved-filter-groups (car (car ibuffer-saved-filter-groups)))))))
+                                     (ibuffer-auto-mode 1)
+                                     (when ibuffer-saved-filter-groups
+                                       (ibuffer-switch-to-saved-filter-groups
+                                         (car (car ibuffer-saved-filter-groups)))))))
   :bind ("C-x C-b" . ibuffer)
   :config
+  (setq ibuffer-expert t
+        ibuffer-show-empty-filter-groups nil)
   (use-package ibuffer-vc ;; group buffers by VC project in ibuffer
     :after ibuffer))
 
 ;; interactively do things with buffers and files, use C-f to escape
 (use-package ido
   :ensure nil ;; built-in
-  :init (ido-mode t)
   :bind ("H-y" . my-yank-from-kill-ring)
   :config
   (setq ido-create-new-buffer 'always
@@ -179,25 +180,22 @@ Windows  _L_ : line-wise   _W_ : word-wise
         ido-everywhere t
         ido-use-filename-at-point 'guess
         ido-use-virtual-buffers t)
+  (ido-mode t) ;; enable ido-mode globally
   ;; do not make suggestions when naming new file
   (when (boundp 'ido-minor-mode-map-entry)
     (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
   ;; replace stock completion with ido wherever possible
   (use-package ido-completing-read+
-    :init (ido-ubiquitous-mode t))
+    :after ido
+    :config (ido-ubiquitous-mode t))
   ;; use ido for commands using `completing-read-multiple'
   (use-package crm-custom
-    :init (crm-custom-mode 1)))
-
-;; Vim Tagbar-like imenu extension
-;; (use-package imenu-list
-;;   :bind ("H-i" . imenu-list-smart-toggle)
-;;   :config (setq imenu-list-focus-after-activation t
-;;                 imenu-list-auto-resize t))
+    :after ido
+    :config (crm-custom-mode 1)))
 
 ;; multiple cursors
 (use-package multiple-cursors
-  :defer 2
+  :defer 1
   :config
   (setq mc/always-run-for-all nil
         mc/always-repeat-command nil
@@ -217,7 +215,8 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("0" mc/insert-numbers "insert-numbers" :exit t)
     ("A" mc/insert-letters "insert-letters" :exit t)
     ("q" nil "quit" :exit t))
-  (global-set-key (kbd "H-M") 'my-hydra/multiple-cursors/body))
+  (with-eval-after-load 'multiple-cursors
+    (global-set-key (kbd "H-M") 'my-hydra/multiple-cursors/body)))
 
 ;; recently opened files
 (use-package recentf
@@ -241,9 +240,10 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package which-key
   :delight which-key-mode
   :bind ("C-H-w" . which-key-show-top-level)
-  :init (which-key-mode 1)
-  :config (setq which-key-compute-remaps t
-                which-key-allow-multiple-replacements t))
+  :init
+  (setq which-key-compute-remaps t
+        which-key-allow-multiple-replacements t)
+  (which-key-mode 1))
 
 ;; visualize and cleanup whitespace
 (use-package whitespace
@@ -262,7 +262,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; expandable snippet template system
 (use-package yasnippet
   :delight yas-minor-mode
-  :defer 2
+  :defer 1
   :bind (:map yas-minor-mode-map
               ("<tab>" . nil) ;; disable default tab binding to ...
               ("TAB" . nil) ;; ... avoid conflict with company-mode tng

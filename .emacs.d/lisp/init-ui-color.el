@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Set up color themes
+;; Configure color themes
 
 ;;; Code:
 
@@ -35,9 +35,11 @@
   (with-eval-after-load 'hl-line
     (set-face-attribute 'hl-line nil :background "#fedcba")))
 
+;; retro color scheme
 ;; (use-package gruvbox-theme
 ;;   :config (load-theme 'gruvbox t))
 
+;; color scheme that complements `variable-pitch' mode
 ;; (use-package poet-theme
 ;;   :config (load-theme 'poet t))
 

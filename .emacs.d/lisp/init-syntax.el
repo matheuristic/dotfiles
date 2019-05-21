@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Set up syntax checker
+;; Set up syntax checker (flycheck or built-in flymake)
 
 ;;; Code:
 
@@ -40,12 +40,12 @@
       (define-key flycheck-mode-map (kbd "H-e") 'my-hydra/flycheck/body))
   ;; ... otherwise use built-in flymake
   (use-package flymake  ;; NOTE use C-h . to show error on current line
+    :ensure nil ;; built-in
     :config
     (use-package flymake-diagnostic-at-point
-      :config
-      (setq flymake-diagnostic-at-point-error-prefix "» ")
-      (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode))
-    (add-hook 'emacs-lisp-mode-hook 'flymake-mode)
+      :hook ((emacs-lisp-mode . flymake-mode)
+             (flymake-mode . flymake-diagnostic-at-point-mode))
+      :config (setq flymake-diagnostic-at-point-error-prefix "» "))
     (defun my-toggle-flymake-diagnostics ()
       "Toggles flymake diagnostics window for current buffer."
       (interactive)

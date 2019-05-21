@@ -4,11 +4,11 @@
 
 ;;; Commentary:
 
-;; Set up eshell and term
+;; Configure eshell and term
 
 ;;; Code:
 
-;; read-only comint-mode prompts
+;; make comint-mode prompts read-only
 (setq comint-prompt-read-only t)
 
 ;; close term-mode and eshell-mode buffers on exit
@@ -20,10 +20,9 @@
 (use-package eshell
   :ensure nil ;; built-in
   :commands (eshell eshell-command)
-  :init
+  :config
   (require 'em-term)
   (require 'em-smart)
-  :config
   (setq eshell-review-quick-commands nil
         eshell-smart-space-goes-to-end t
         eshell-where-to-jump 'begin)
