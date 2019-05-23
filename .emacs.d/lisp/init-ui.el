@@ -78,17 +78,18 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 
 ;; text completion framework
 (use-package company
-  :defer 1
+  :defer t
   :delight company-mode
+  :init (with-eval-after-load 'prog-mode
+          (add-hook 'prog-mode-hook 'company-mode))
   :config
   (setq company-dabbrev-downcase nil
         company-idle-delay 0.25
         company-minimum-prefix-length 2
         company-selection-wrap-around t
-        company-show-numbers t  ;; use M-<number> to directly choose completion
+        company-show-numbers t  ;; use M-<num> to directly choose completion
         company-tooltip-align-annotations t)
-  (company-tng-configure-default) ;; Tab and Go behavior
-  (add-hook 'prog-mode-hook 'company-mode))
+  (company-tng-configure-default)) ;; Tab and Go behavior
 
 ;; Ediff
 (use-package ediff
@@ -155,17 +156,106 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package ibuffer
   :ensure nil ;; built-in
   :commands ibuffer
-  :hook (ibuffer-mode . (lambda () (progn
+  :hook (ibuffer-mode . (lambda () (progn ;; default to first saved group
                                      (ibuffer-auto-mode 1)
                                      (when ibuffer-saved-filter-groups
                                        (ibuffer-switch-to-saved-filter-groups
                                          (car (car ibuffer-saved-filter-groups)))))))
   :bind ("C-x C-b" . ibuffer)
   :config
-  (setq ibuffer-expert t
+  (setq ibuffer-expert t ;; skip extraneous confirm messages
         ibuffer-show-empty-filter-groups nil)
-  (use-package ibuffer-vc ;; group buffers by VC project in ibuffer
-    :after ibuffer))
+  ;; build VC project ibuffer filter groups
+  (use-package ibuffer-vc
+    :after ibuffer
+    :config (define-key ibuffer-mode-map (kbd "/ V") 'ibuffer-vc-set-filter-groups-by-vc-root))
+  ;; adapted hydra definitions from https://github.com/abo-abo/hydra/wiki/Ibuffer
+  (defhydra my-hydra/ibuffer (:color amaranth :columns 3)
+    "ibuffer"
+    ;; navigation
+    ("n" ibuffer-forward-line "next")
+    ("p" ibuffer-backward-line "prev")
+    ("RET" (condition-case nil
+               (progn (ibuffer-toggle-filter-group) (my-hydra/ibuffer/body))
+             (error (ibuffer-visit-buffer))) "open" :exit t)
+    ;; mark
+    ("m" ibuffer-mark-forward "mark")
+    ("u" ibuffer-unmark-forward "unmark")
+    ("*" my-hydra/ibuffer-mark/body "→ mark" :exit t)
+    ;; actions
+    ("S" ibuffer-do-save "save")
+    ("D" ibuffer-do-delete "delete")
+    ("a" my-hydra/ibuffer-action/body "→ action" :exit t)
+    ;; view
+    ("g" ibuffer-update "refresh")
+    ("s" my-hydra/ibuffer-sort/body "→ sort" :exit t)
+    ("/" my-hydra/ibuffer-filter/body "→ filter" :exit t)
+    ;; other
+    ("o" ibuffer-visit-buffer-other-window "open-other" :exit t)
+    ("q" nil "quit" :exit t))
+  (defhydra my-hydra/ibuffer-mark (:color teal
+                                   :columns 5
+                                   :after-exit (my-hydra/ibuffer/body))
+    "ibuffer → mark"
+    ("*" ibuffer-unmark-all "unmark all")
+    ("M" ibuffer-mark-by-mode "mode")
+    ("m" ibuffer-mark-modified-buffers "modified")
+    ("u" ibuffer-mark-unsaved-buffers "unsaved")
+    ("s" ibuffer-mark-special-buffers "special")
+    ("r" ibuffer-mark-read-only-buffers "read-only")
+    ("/" ibuffer-mark-dired-buffers "dired")
+    ("e" ibuffer-mark-dissociated-buffers "dissociated")
+    ("h" ibuffer-mark-help-buffers "help")
+    ("z" ibuffer-mark-compressed-file-buffers "compressed")
+    ("q" nil "←"))
+  (defhydra my-hydra/ibuffer-action (:color teal
+                                     :columns 3
+                                     :after-exit (if (eq major-mode 'ibuffer-mode)
+                                                   (my-hydra/ibuffer/body)))
+    "ibuffer → action"
+    ("A" ibuffer-do-view "view")
+    ("E" ibuffer-do-eval "eval")
+    ("F" ibuffer-do-shell-command-file "shell-command-file")
+    ("I" ibuffer-do-query-replace-regexp "query-replace-regexp")
+    ("H" ibuffer-do-view-other-frame "view-other-frame")
+    ("N" ibuffer-do-shell-command-pipe-replace "shell-cmd-pipe-replace")
+    ("M" ibuffer-do-toggle-modified "toggle-modified")
+    ("O" ibuffer-do-occur "occur")
+    ("P" ibuffer-do-print "print")
+    ("Q" ibuffer-do-query-replace "query-replace")
+    ("R" ibuffer-do-rename-uniquely "rename-uniquely")
+    ("T" ibuffer-do-toggle-read-only "toggle-read-only")
+    ("U" ibuffer-do-replace-regexp "replace-regexp")
+    ("V" ibuffer-do-revert "revert")
+    ("W" ibuffer-do-view-and-eval "view-and-eval")
+    ("X" ibuffer-do-shell-command-pipe "shell-command-pipe")
+    ("q" nil "←"))
+  (defhydra my-hydra/ibuffer-sort (:color amaranth :columns 5)
+    "ibuffer → sort"
+    ("a" ibuffer-do-sort-by-alphabetic "alphabetic")
+    ("f" ibuffer-do-sort-by-filename/process "filename")
+    ("m" ibuffer-do-sort-by-major-mode "mode")
+    ("s" ibuffer-do-sort-by-size "size")
+    ("v" ibuffer-do-sort-by-recency "recency")
+    ("i" ibuffer-invert-sorting "invert")
+    ("q" my-hydra/ibuffer/body "←" :exit t))
+  (defhydra my-hydra/ibuffer-filter (:color amaranth :columns 5)
+    "ibuffer → filter"
+    ("c" ibuffer-filter-by-content "content")
+    ("e" ibuffer-filter-by-predicate "predicate")
+    ("f" ibuffer-filter-by-filename "filename")
+    ("m" ibuffer-filter-by-used-mode "mode")
+    ("M" ibuffer-filter-by-derived-mode "derived mode")
+    ("n" ibuffer-filter-by-name "name")
+    (">" ibuffer-filter-by-size-gt "size-gt")
+    ("<" ibuffer-filter-by-size-lt "size-lt")
+    ("&" ibuffer-and-filter "and")
+    ("|" ibuffer-or-filter "or")
+    ("V" ibuffer-vc-set-filter-groups-by-vc-root "vc-groups")
+    ("R" ibuffer-switch-to-saved-filter-groups "saved-groups")
+    ("/" ibuffer-filter-disable "disable")
+    ("q" my-hydra/ibuffer/body "←" :exit t))
+  (define-key ibuffer-mode-map (kbd "H-m") 'my-hydra/ibuffer/body))
 
 ;; interactively do things with buffers and files, use C-f to escape
 (use-package ido
@@ -181,7 +271,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
         ido-use-filename-at-point 'guess
         ido-use-virtual-buffers t)
   (ido-mode t) ;; enable ido-mode globally
-  ;; do not make suggestions when naming new file
+  ;; don't make suggestions when naming new file
   (when (boundp 'ido-minor-mode-map-entry)
     (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
   ;; replace stock completion with ido wherever possible
@@ -263,24 +353,30 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package yasnippet
   :delight yas-minor-mode
   :defer 1
-  :bind (:map yas-minor-mode-map
-              ("<tab>" . nil) ;; disable default tab binding to ...
-              ("TAB" . nil) ;; ... avoid conflict with company-mode tng
-              ("C-S-SPC" . #'yas-expand))
   :config
   ;; official snippets
   (use-package yasnippet-snippets)
   ;; allow creation of temporary snippets
   (use-package auto-yasnippet)
-  (defhydra my-hydra/yasnippet (:color teal :columns 3)
+  (defhydra my-hydra/yasnippet (:color teal :columns 4)
     "YASnippet"
     ("SPC" yas-expand "expand") ;; expand snippet
     ("d" yas-describe-tables "describe") ;; snippets for current mode
+    ("s" yas-insert-snippet "insert") ;; insert snippet
+    ("n" yas-new-snippet "new") ;; create new snippet
+    ("v" yas-visit-snippet-file "visit-snippet") ;; visit snippet file
     ("w" aya-create "create-auto") ;; store temp yasnippet
     ("y" aya-expand "expand-auto") ;; paste temp yasnippet
     ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; show temp yasnippet
     ("q" nil "quit"))
-  (global-set-key (kbd "H-Y") 'my-hydra/yasnippet/body)
+  (define-key yas-minor-mode-map (kbd "H-Y") 'my-hydra/yasnippet/body)
+  ;; remove default yas-minor-map bindings, add new one for snippet expansion
+  (require 'bind-key)
+  (unbind-key "\C-c&" yas-minor-mode-map) ;; removing prefix bindings also ...
+  (unbind-key "\C-c" yas-minor-mode-map) ;; ... removes the bindings using them
+  (unbind-key "<tab>" yas-minor-mode-map) ;; remove tab bindings to avoid ...
+  (unbind-key "TAB" yas-minor-mode-map) ;; ... conflict with company-mode tng
+  (bind-key "C-S-SPC" #'yas-expand yas-minor-mode-map)
   (yas-global-mode 1))
 
 (require 'init-ui-color)

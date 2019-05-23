@@ -13,14 +13,20 @@
 (defvar org-agenda-files '("~/org/inbox.org"
                            "~/org/gtd.org"
                            "~/org/tickler.org"))
+(defvar org-capture-templates '(("t" "Todo [inbox]" entry (file "~/org/inbox.org") "* TODO %i%?")
+                                ("T" "Tickler" entry (file "~/org/tickler.org") "* %i%? \n %U")))
 (defvar org-refile-targets '((nil . (:maxlevel . 9)) ;; current buffer
                              (org-agenda-files . (:maxlevel . 3)))) ;; files for agenda display
 (defvar org-refile-use-outline-path 'file) ;; allows refile to top level
-(defvar org-capture-templates '(("t" "Todo [inbox]" entry (file "~/org/inbox.org") "* TODO %i%?")
-                                ("T" "Tickler" entry (file "~/org/tickler.org") "* %i%? \n %U")))
+(defvar org-tag-alist '((:startgroup) ;; tags within the same group are mutually exclusive
+                        ("@home" . ?H) ("@work" . ?W)
+                        (:endgroup)
+                        (:startgroup)
+                        ("easy" . ?e) ("medium" . ?m) ("hard" . ?h)
+                        (:endgroup)
+                        ("urgent" . ?u)))
 
-;; Org-mode
-;; http://doc.norang.ca/org-mode.html
+;; Org-mode ( good setup example - http://doc.norang.ca/org-mode.html )
 (use-package org
   :init
   (defhydra my-hydra/org-global (:color teal)
@@ -63,8 +69,7 @@
         ;;     |   |  |  it is waiting for) |
         ;;     v   v  v                     |
         ;;     CANX.... ---------------------
-        ;;     (note records why
-        ;;      it was cancelled)
+        ;;     (note records why it was cancelled)
         org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
                             (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANX(c@/!)"))
         org-treat-S-cursor-todo-selection-as-state-change nil
@@ -93,6 +98,7 @@ Clock       _ci_  : in           _co_  : out          _cq_  : cancel
             _cg_  : goto
 
 Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
+            _sd_  : hide done
 
 "
     ("ht" org-agenda-todo)
@@ -126,6 +132,10 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("gr" org-agenda-redo)
     ("gd" org-agenda-goto-date)
     ("." org-agenda-goto-today)
+    ("sd" (lambda () (interactive)
+            (progn (setq org-agenda-skip-scheduled-if-done
+                         (if org-agenda-skip-scheduled-if-done nil t))
+                   (org-agenda-redo-all t))))
     ("q" nil "quit" :exit t))
   (defhydra my-hydra/org-mode (:color amaranth :columns 3)
     "Org-mode"
