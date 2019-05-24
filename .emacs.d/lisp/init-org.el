@@ -26,18 +26,21 @@
                         (:endgroup)
                         ("urgent" . ?u)))
 
-;; Org-mode ( good setup example - http://doc.norang.ca/org-mode.html )
+;; Org-mode, see http://doc.norang.ca/org-mode.html for a good example config
 (use-package org
-  :init
-  (defhydra my-hydra/org-global (:color teal)
-    "Org"
-    ("a" org-agenda "agenda")
-    ("c" org-capture "capture")
-    ("b" org-switchb "switch buffer")
-    ("l" org-store-link "store link")
-    ("q" nil "quit"))
-  (global-set-key (kbd "H-o") 'my-hydra/org-global/body)
   :hook (org-mode . visual-line-mode)
+  :bind (("H-o" . my-hydra/org-global/body)
+         :map org-agenda-mode-map
+         ("H-m" . my-hydra/org-agenda/body)
+         :map org-mode-map
+         ("H-m" . my-hydra/org-mode/body))
+  :init (defhydra my-hydra/org-global (:color teal)
+          "Org"
+          ("a" org-agenda "agenda")
+          ("c" org-capture "capture")
+          ("b" org-switchb "switch buffer")
+          ("l" org-store-link "store link")
+          ("q" nil "quit"))
   :config
   (require 'org-agenda)
   (setq org-agenda-start-on-weekday nil
@@ -66,8 +69,7 @@
         ;;    v |  |  v |    v |      |     |
         ;;   HOLD  |  WAIT...... ------     |
         ;;     |   |  | (note records what  |
-        ;;     |   |  |  it is waiting for) |
-        ;;     v   v  v                     |
+        ;;     v   v  v  it is waiting for) |
         ;;     CANX.... ---------------------
         ;;     (note records why it was cancelled)
         org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
@@ -151,9 +153,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("t" org-todo "org-todo" :exit t)
     ("a" org-archive-subtree-default :exit t)
     ("q" nil "quit" :exit t))
-  (define-key org-agenda-mode-map (kbd "H-m") 'my-hydra/org-agenda/body)
-  (define-key org-mode-map (kbd "H-m") 'my-hydra/org-mode/body)
-  ;; use variable pitch font in Org-mode for graphical Emacs (looks better)
+  ;; use variable pitch font in Org-mode for graphical Emacs, which looks better
   (when (display-graphic-p)
     (with-eval-after-load 'init-ui-font
       (require 'org-mouse) ;; Org-mode mouse support

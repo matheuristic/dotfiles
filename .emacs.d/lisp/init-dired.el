@@ -19,6 +19,9 @@
 ;; Dired
 (use-package dired
   :ensure nil ;; built-in
+  :commands dired
+  :bind (:map dired-mode-map
+         ("H-m" . my-hydra/dired/body))
   :config
   (require 'dired-x)
   (require 'dired-aux)
@@ -42,6 +45,7 @@
       (search-forward search-term)))
   (defhydra my-hydra/dired (:color pink :columns 4)
     "Dired"
+    ("RET" (progn (dired-find-file) (when (eq major-mode 'dired-mode) (my-hydra/dired/body))) "open" :exit t)
     ("(" dired-hide-details-mode "toggle-details")
     (")" dired-omit-mode "toggle-omit")
     ("+" dired-create-directory "mkdir")
@@ -71,11 +75,10 @@
     ("t" dired-toggle-marks "toggle-marks")
     ("U" dired-unmark-all-marks "unmark-all")
     ("u" dired-unmark "unmark")
-    ("v" dired-view-file "view-file" :exit t) ;; q -> exit, s -> search, = -> get linum
+    ("v" dired-view-file "view-file" :exit t) ;; open file in view-mode
     ("Y" dired-do-relsymlink "symlink-to-dir")
     ("Z" dired-do-compress "compress")
-    ("q" nil "quit" :exit t))
-  (define-key dired-mode-map (kbd "H-m") 'my-hydra/dired/body))
+    ("q" nil "quit" :exit t)))
 
 (provide 'init-dired)
 

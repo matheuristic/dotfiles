@@ -11,6 +11,7 @@
 
 (require 'init-ui-hydra)
 
+;; lightweight alternative to emerge/ediff
 (use-package smerge-mode
   :ensure nil
   :hook (find-file . (lambda ()
@@ -18,9 +19,10 @@
                          (goto-char (point-min))
                          (when (re-search-forward "^<<<<<<< " nil t)
                            (smerge-mode 1)))))
-  :config
-  (defhydra my-hydra/smerge (:color pink :hint nil :post (smerge-auto-leave))
-    "
+  :bind (:map smerge-mode-map
+         ("H-m" . my-hydra/smerge/body))
+  :config (defhydra my-hydra/smerge (:color pink :hint nil :post (smerge-auto-leave))
+            "
 Smerge
 
 Move   _n_   : next          _p_ : prev
@@ -34,39 +36,37 @@ Diff   _<_   : upper/base    _=_   : upper/lower   _>_   : base/lower
 Other  _C_   : combine       _r_   : resolve       _k_   : kill current
 
 "
-    ("n" smerge-next)
-    ("p" smerge-prev)
-    ("b" smerge-keep-base)
-    ("u" smerge-keep-upper)
-    ("l" smerge-keep-lower)
-    ("a" smerge-keep-all)
-    ("RET" smerge-keep-current)
-    ("<" smerge-diff-base-upper)
-    ("=" smerge-diff-upper-lower)
-    (">" smerge-diff-base-lower)
-    ("R" smerge-refine)
-    ("E" smerge-ediff)
-    ("C" smerge-combine-with-next)
-    ("r" smerge-resolve)
-    ("k" smerge-kill-current)
-    ("q" nil "quit" :color blue))
-  (define-key smerge-mode-map (kbd "H-m") 'my-hydra/smerge/body))
+            ("n" smerge-next)
+            ("p" smerge-prev)
+            ("b" smerge-keep-base)
+            ("u" smerge-keep-upper)
+            ("l" smerge-keep-lower)
+            ("a" smerge-keep-all)
+            ("RET" smerge-keep-current)
+            ("<" smerge-diff-base-upper)
+            ("=" smerge-diff-upper-lower)
+            (">" smerge-diff-base-lower)
+            ("R" smerge-refine)
+            ("E" smerge-ediff)
+            ("C" smerge-combine-with-next)
+            ("r" smerge-resolve)
+            ("k" smerge-kill-current)
+            ("q" nil "quit" :color blue)))
 
 (when (executable-find "git")
   ;; Git porcelain
   (use-package magit
     :after smerge-mode
+    :commands magit-status
     :bind ("H-g s" . magit-status)
-    :hook (magit-diff-visit-file . (lambda ()
-                                     (when smerge-mode (my-hydra/smerge/body))))
     :config
     (setq auto-revert-check-vc-info t)
     (with-eval-after-load 'ido-completing-read+
       (setq magit-completing-read-function 'magit-ido-completing-read)))
-  
+
   ;; Browse historic versions of Git-controlled files
   (use-package git-timemachine
-    ;; :after magit
+    :commands git-timemachine
     :bind ("H-g t" . git-timemachine)))
 
 (provide 'init-vc)

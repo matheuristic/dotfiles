@@ -9,14 +9,13 @@
 ;;; Code:
 
 (when (display-graphic-p)
-  ;; ;; display mode-line elements using tabs and ribbons
+  ;; ;; fancy mode-line display elements using tabs and ribbons
   ;; (use-package moody
   ;;   :config
-  ;;   ;; uncomment below if using official Emacs for OSX
-  ;;   (setq x-underline-at-descent-line t)
+  ;;   (setq x-underline-at-descent-line t) ;; needed for proper drawing when using official Emacs for OSX
   ;;   (moody-replace-mode-line-buffer-identification)
   ;;   (moody-replace-vc-mode)
-  ;;   ;; modify slant fn if using official Emacs for Mac OS X build to fix colors
+  ;;   ;; modify slant fun to fix colors when using official Emacs for Mac OS X
   ;;   (if (and (eq system-type 'darwin)
   ;;            (eq window-system 'ns))
   ;;       (setq moody-slant-function 'moody-slant-apple-rgb)))
@@ -39,7 +38,7 @@
   ;; hide minor-modes behind a menu, accessible via a right-click or `minions-minor-mode-menu'
   (use-package minions
     :init (minions-mode 1)
-    :config (setq minions-direct '(overwrite-mode) ;; modes in minions-direct are always shown
+    :config (setq minions-direct '(overwrite-mode view-mode) ;; modes in minions-direct are always shown
                   minions-mode-line-lighter "☰")))
 
 (provide 'init-ui-modeline)

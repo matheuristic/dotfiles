@@ -25,16 +25,20 @@
   :pin "MELPA"
   :defer t
   :hook (prog-mode . (lambda () (require 'lsp-mode)))
+  :bind (:map lsp-mode-map
+         ("H-l" . my-hydra/lsp/body))
   :config
-  ;; change nil to 't to enable logging of packets between emacs and the LS
-  ;; (setq lsp-print-io nil)
-  (setq lsp-eldoc-enable-hover nil ;; don't have eldoc display hover info
+  (setq lsp-print-io nil ;; change nil to t to enable logging of packets between emacs and the LS
+        lsp-eldoc-enable-hover nil ;; don't have eldoc display hover info
         lsp-eldoc-enable-signature-help nil ;; don't have eldoc display signature help
         lsp-prefer-flymake t) ;; set to nil to prefer flycheck to flymake
   ;; lsp-ui enables pop-up documentation boxes and sidebar info
   (use-package lsp-ui
     :pin "MELPA"
     :commands lsp-ui-mode
+    :bind (:map lsp-ui-mode-map
+           ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+           ([remap xref-find-references] . lsp-ui-peek-find-references))
     :config
     (setq lsp-ui-doc-enable t
           lsp-ui-doc-header t
@@ -46,8 +50,6 @@
           lsp-ui-sideline-enable t
           lsp-ui-sideline-ignore-duplicate t
           lsp-ui-sideline-show-hover nil)
-    (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-    (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
     (defun my-lsp-ui-doc-mode-toggle ()
       "Toggles `lsp-ui-doc-mode'."
       (interactive)
@@ -60,7 +62,7 @@
   (use-package company-lsp
     :pin "MELPA"
     :commands company-lsp
-    :config (setq company-lsp-cache-candidates t))
+    :init (setq company-lsp-cache-candidates t))
   (defhydra my-hydra/lsp (:color teal :hint nil)
     "
 Language Server Protocol
@@ -90,16 +92,18 @@ Other   _C-d_ : toggle docs
     ("o" lsp-describe-thing-at-point)
     ("r" lsp-rename)
     ("C-d" my-lsp-ui-doc-mode-toggle)
-    ("q" nil "quit" :color blue))
-  (define-key lsp-mode-map (kbd "H-l") 'my-hydra/lsp/body))
+    ("q" nil "quit" :color blue)))
 
 ;; front-end for interacting with debug servers
 (use-package dap-mode
   :pin "MELPA"
   :after lsp-mode
-  :config
+  :bind (:map dap-mode-map
+         ("H-D" . my-hydra/dap/body))
+  :init
   (require 'dap-hydra)
   (require 'dap-ui)
+  :config
   (dap-mode 1)
   (dap-ui-mode 1)
   (defhydra my-hydra/dap (:color teal :columns 4)
@@ -118,32 +122,30 @@ Other   _C-d_ : toggle docs
     ("'" dap-ui-repl "repl")
     ;; dap-mode operations
     ("." dap-hydra "dap-hydra")
-    ("q" nil "quit"))
-  (define-key dap-mode-map (kbd "H-D") 'my-hydra/dap/body))
+    ("q" nil "quit")))
 
 ;; CSV
 (when (member "csv" init-lang-enable-list)
   (use-package csv-mode
     :commands csv-mode
-    :config
-    (defhydra my-hydra/csv-mode (:color teal :columns 4)
-      "CSV mode"
-      ("s" csv-sort-fields "sort")
-      ("r" csv-sort-numeric-fields "numsort")
-      ("k" csv-kill-fields "cut")
-      ("y" csv-yank-fields "copy")
-      ("a" csv-align-fields "align")
-      ("u" csv-unalign-fields "unalign")
-      ("t" csv-transpose "transpose")
-      ("q" nil "quit" :color blue))
-    (define-key csv-mode-map (kbd "H-m") 'my-hydra/csv-mode/body)))
+    :bind (:map csv-mode-map
+           ("H-m" . my-hydra/csv-mode/body))
+    :config (defhydra my-hydra/csv-mode (:color teal :columns 4)
+              "CSV mode"
+              ("s" csv-sort-fields "sort")
+              ("r" csv-sort-numeric-fields "numsort")
+              ("k" csv-kill-fields "cut")
+              ("y" csv-yank-fields "copy")
+              ("a" csv-align-fields "align")
+              ("u" csv-unalign-fields "unalign")
+              ("t" csv-transpose "transpose")
+              ("q" nil "quit" :color blue))))
 
 ;; Dockerfile
 (when (member "docker" init-lang-enable-list)
   (use-package dockerfile-mode
     :commands dockerfile-mode
-    :config
-    (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))))
+    :config (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))))
 
 ;; Emacs Speaks Statistics
 ;; has built-in flymake support (requires the R lintr pkg be installed)
@@ -171,6 +173,10 @@ Other   _C-d_ : toggle docs
     :mode (("README\\.md\\'" . gfm-mode)
            ("\\.md\\'" . markdown-mode)
            ("\\.markdown\\'" . markdown-mode))
+    :bind (:map markdown-mode-map
+           ("H-m" . my-hydra/markdown-mode/body)
+           :map gfm-mode-map
+           ("H-m" . my-hydra/markdown-mode/body))
     :config
     (use-package markdown-toc) ;; Markdown table of contents
     (defhydra my-hydra/markdown-mode (:color teal :hint nil)
@@ -207,10 +213,7 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
       ("f" markdown-insert-footnote)
       ("w" markdown-insert-wiki-link)
       ("T" markdown-toc-generate-toc)
-      ("q" nil "quit" :color blue))
-    (with-eval-after-load 'markdown-mode
-      (define-key markdown-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body)
-      (define-key gfm-mode-map (kbd "H-m") 'my-hydra/markdown-mode/body))))
+      ("q" nil "quit" :color blue))))
 
 ;; Python
 (when (member "python" init-lang-enable-list)
@@ -225,10 +228,9 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
 ;; support for interfacing with Jupyter kernels
 ;; when using virtualenvs, make sure the activated virtualenv has jupyter
 ;; installed before running `jupyter-run-repl'
-;; load this package last, since org-mode babel support requires core language
+;; load `ob-jupyter' last, since org-mode babel support requires core language
 ;; support be loaded first
-;; after `ob-jupyter' is loaded, in org-mode use "C-c h" to call the
-;; `jupyter-org-hydra' hydra
+;; after `ob-jupyter' is loaded, "C-c h" in org-mode calls `jupyter-org-hydra'
 ;; to execute a source block in org-mode asynchronously, set the `:async'
 ;; parameter to `yes'
 ;; #+BEGIN_SRC jupyter-python :session py :async yes
@@ -238,9 +240,10 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
 ;; #+END_SRC
 (use-package jupyter
   :defer t
+  :bind ("H-j" . my-hydra/jupyter/body)
   :init
   (defun my-jupyter-status-string ()
-    "Returns string showing jupyter cmd availability, if ob-jupyter is initialized, and if a REPL is associated with the current buffer."
+    "Returns string showing availability of jupyter cmd, if `ob-jupyter' is initialized, and if a REPL is associated with the current buffer."
     (let ((cmd-available (executable-find "jupyter"))
           (pkg-initialized (featurep 'ob-jupyter))
           (repl-associated (bound-and-true-p jupyter-repl-interaction-mode)))
@@ -272,17 +275,14 @@ Other  _O_   : org-init    _o_   : org-menu    _M-i_ : inspect
     ("C-b" jupyter-eval-buffer)
     ("M-x" jupyter-eval-defun)
     ("M-:" jupyter-eval-string)
-    ("O" (progn (require 'ob-jupyter) (message "Org support initialized.")))
-    ("o" (if (featurep 'ob-jupyter) (jupyter-org-hydra/body) (message "Org support not yet initialized. Initialize with \"(require 'ob-jupyter)\".")))
+    ("O" (progn
+           (require 'ob-jupyter)
+           (message "Org support initialized.")))
+    ("o" (if (featurep 'ob-jupyter)
+             (jupyter-org-hydra/body)
+           (message "Org support not yet initialized. Initialize with \"(require 'ob-jupyter)\".")))
     ("M-i" jupyter-inspect-at-point)
-    ("q" nil "quit"))
-  (defhydra my-hydra/jupyter-repl (:color teal)
-    "Jupyter REPL"
-    ("C-s" jupyter-repl-scratch-buffer "scratch-buffer")
-    ("C-r" jupyter-repl-restart-kernel "restart-kernel")
-    ("C-i" jupyter-repl-interrupt-kernel "interrupt-kernel")
-    ("q" nil "quit"))
-  (global-set-key (kbd "H-j") 'my-hydra/jupyter/body))
+    ("q" nil "quit")))
 
 (provide 'init-lang)
 

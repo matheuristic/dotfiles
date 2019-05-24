@@ -11,6 +11,7 @@
 ;; Helper functions
 
 (require 'cl-seq)
+(require 'bind-key)
 
 (with-eval-after-load 'ibuffer
   (defvar ibuffer-saved-filter-groups
@@ -28,11 +29,20 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (interactive)
   (let ((to_insert (completing-read
                     "Yank : " (cl-delete-duplicates kill-ring :test #'equal))))
-    ;; delete selected buffer region, if applicable
+    ;; delete selected buffer region if applicable
     (if (and to_insert (region-active-p))
       (delete-region (region-beginning) (region-end)))
     ;; insert the selected entry from the kill ring
     (insert to_insert)))
+
+(defmacro my-lazy-key-seq (mode-map key-seq &rest fun)
+  "When the KEY-SEQ is pressed when MODE-MAP is active, run FUN, unbind KEY-SEQ and simulate KEY-SEQ again."
+  (declare (indent 1))
+  `(define-key ,mode-map ,key-seq (lambda ()
+                                    (interactive)
+                                    (progn (define-key ,mode-map ,key-seq nil)
+                                           ,fun
+                                           (setq unread-command-events (listify-key-sequence ,key-seq))))))
 
 ;; Configure user interface
 
@@ -52,11 +62,11 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (and (not (display-graphic-p)) (fboundp 'menu-bar-mode)) (menu-bar-mode -1))
 
-;; smooth scrolling in GUI (hold shift for 5 lines or control for full screen)
+;; smooth scrolling in GUI (hold SHIFT/CTRL for 5 line/full screen increments)
 (when (display-graphic-p)
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control)))))
 
-;; left-right scrolling
+;; left and right scrolling
 (if (eq system-type 'darwin)
     (progn (global-set-key [wheel-right] (lambda () (interactive) (scroll-left 1)))
            (global-set-key [wheel-left] (lambda () (interactive) (scroll-right 1))))
@@ -87,7 +97,7 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
         company-idle-delay 0.25
         company-minimum-prefix-length 2
         company-selection-wrap-around t
-        company-show-numbers t  ;; use M-<num> to directly choose completion
+        company-show-numbers t ;; use M-<num> to directly choose completion
         company-tooltip-align-annotations t)
   (company-tng-configure-default)) ;; Tab and Go behavior
 
@@ -130,16 +140,18 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; increase selected region by semantic units
 (use-package expand-region
   :commands er/expand-region
-  :bind ("C-=" . er/expand-region))
+  :bind ("C-=" . er/expand/region))
 
-;; manage window configs, bindings prefixed by C-c C-w (default)
+;; manage window configs, default prefix binding is "C-c C-w"
 (use-package eyebrowse
-  :defer 1
+  :defer t
   :delight eyebrowse-mode
+  :commands eyebrowse-mode
   :init
-  (setq eyebrowse-keymap-prefix (kbd "H-W") ;; change prefix binding
+  (setq eyebrowse-keymap-prefix (kbd "H-W") ;; change prefix binding to "H-W"
         eyebrowse-new-workspace t)
-  (eyebrowse-mode t))
+  (my-lazy-key-seq global-map (kbd "H-W") (lambda () (require 'eyebrowse)))
+  :config (eyebrowse-mode t))
 
 ;; code folding package
 (use-package hideshow
@@ -156,27 +168,31 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package ibuffer
   :ensure nil ;; built-in
   :commands ibuffer
-  :hook (ibuffer-mode . (lambda () (progn ;; default to first saved group
-                                     (ibuffer-auto-mode 1)
-                                     (when ibuffer-saved-filter-groups
-                                       (ibuffer-switch-to-saved-filter-groups
-                                         (car (car ibuffer-saved-filter-groups)))))))
-  :bind ("C-x C-b" . ibuffer)
+  :hook (ibuffer-mode . (lambda ()
+                          (progn (ibuffer-auto-mode 1) ;; refresh buffer after interactive commands
+                                 (when ibuffer-saved-filter-groups ;; default to first saved group
+                                   (ibuffer-switch-to-saved-filter-groups
+                                     (car (car ibuffer-saved-filter-groups)))))))
+  :bind (("C-x C-b" . ibuffer)
+         :map ibuffer-mode-map
+         ("H-m" . my-hydra/ibuffer/body))
   :config
   (setq ibuffer-expert t ;; skip extraneous confirm messages
         ibuffer-show-empty-filter-groups nil)
   ;; build VC project ibuffer filter groups
   (use-package ibuffer-vc
     :after ibuffer
-    :config (define-key ibuffer-mode-map (kbd "/ V") 'ibuffer-vc-set-filter-groups-by-vc-root))
-  ;; adapted hydra definitions from https://github.com/abo-abo/hydra/wiki/Ibuffer
+    :bind (:map ibuffer-mode-map
+           ("/ V" . ibuffer-vc-set-filter-groups-by-vc-root)))
+  ;; adapted from https://github.com/abo-abo/hydra/wiki/Ibuffer
   (defhydra my-hydra/ibuffer (:color amaranth :columns 3)
     "ibuffer"
     ;; navigation
     ("n" ibuffer-forward-line "next")
     ("p" ibuffer-backward-line "prev")
     ("RET" (condition-case nil
-               (progn (ibuffer-toggle-filter-group) (my-hydra/ibuffer/body))
+               (progn (ibuffer-toggle-filter-group)
+                      (my-hydra/ibuffer/body))
              (error (ibuffer-visit-buffer))) "open" :exit t)
     ;; mark
     ("m" ibuffer-mark-forward "mark")
@@ -193,8 +209,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ;; other
     ("o" ibuffer-visit-buffer-other-window "open-other" :exit t)
     ("q" nil "quit" :exit t))
-  (defhydra my-hydra/ibuffer-mark (:color teal
-                                   :columns 5
+  (defhydra my-hydra/ibuffer-mark (:color teal :columns 5
                                    :after-exit (my-hydra/ibuffer/body))
     "ibuffer → mark"
     ("*" ibuffer-unmark-all "unmark all")
@@ -208,8 +223,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("h" ibuffer-mark-help-buffers "help")
     ("z" ibuffer-mark-compressed-file-buffers "compressed")
     ("q" nil "←"))
-  (defhydra my-hydra/ibuffer-action (:color teal
-                                     :columns 3
+  (defhydra my-hydra/ibuffer-action (:color teal :columns 3
                                      :after-exit (if (eq major-mode 'ibuffer-mode)
                                                    (my-hydra/ibuffer/body)))
     "ibuffer → action"
@@ -254,8 +268,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("V" ibuffer-vc-set-filter-groups-by-vc-root "vc-groups")
     ("R" ibuffer-switch-to-saved-filter-groups "saved-groups")
     ("/" ibuffer-filter-disable "disable")
-    ("q" my-hydra/ibuffer/body "←" :exit t))
-  (define-key ibuffer-mode-map (kbd "H-m") 'my-hydra/ibuffer/body))
+    ("q" my-hydra/ibuffer/body "←" :exit t)))
 
 ;; interactively do things with buffers and files, use C-f to escape
 (use-package ido
@@ -271,9 +284,6 @@ Windows  _L_ : line-wise   _W_ : word-wise
         ido-use-filename-at-point 'guess
         ido-use-virtual-buffers t)
   (ido-mode t) ;; enable ido-mode globally
-  ;; don't make suggestions when naming new file
-  (when (boundp 'ido-minor-mode-map-entry)
-    (define-key (cdr ido-minor-mode-map-entry) [remap write-file] nil))
   ;; replace stock completion with ido wherever possible
   (use-package ido-completing-read+
     :after ido
@@ -285,46 +295,41 @@ Windows  _L_ : line-wise   _W_ : word-wise
 
 ;; multiple cursors
 (use-package multiple-cursors
-  :defer 1
-  :config
-  (setq mc/always-run-for-all nil
-        mc/always-repeat-command nil
-        mc/insert-numbers-default 1)
-  (defhydra my-hydra/multiple-cursors (:color amaranth :columns 3)
-    "Multiple-cursors"
-    ("l" mc/edit-lines "edit-lines" :exit t)
-    ("a" mc/mark-all-like-this "mark-all-like" :exit t)
-    ("s" mc/mark-all-in-region-regexp "mark-regex-rgn" :exit t)
-    ("<mouse-1>" mc/add-cursor-on-click "mark-click")
-    ("p" mc/mark-previous-like-this "mark-prev")
-    ("P" mc/skip-to-previous-like-this "skip-prev")
-    ("M-p" mc/unmark-previous-like-this "unmark-prev")
-    ("n" mc/mark-next-like-this "mark-next")
-    ("N" mc/skip-to-next-like-this "skip-next")
-    ("M-n" mc/unmark-next-like-this "unmark-next")
-    ("0" mc/insert-numbers "insert-numbers" :exit t)
-    ("A" mc/insert-letters "insert-letters" :exit t)
-    ("q" nil "quit" :exit t))
-  (with-eval-after-load 'multiple-cursors
-    (global-set-key (kbd "H-M") 'my-hydra/multiple-cursors/body)))
+  :commands my-hydra/multiple-cursors/body
+  :bind ("H-M" . my-hydra/multiple-cursors/body)
+  :init (setq mc/always-run-for-all nil
+              mc/always-repeat-command nil
+              mc/insert-numbers-default 1)
+  :config (defhydra my-hydra/multiple-cursors (:color amaranth :columns 3)
+            "Multiple-cursors"
+            ("l" mc/edit-lines "edit-lines" :exit t)
+            ("a" mc/mark-all-like-this "mark-all-like" :exit t)
+            ("s" mc/mark-all-in-region-regexp "mark-regex-rgn" :exit t)
+            ("<mouse-1>" mc/add-cursor-on-click "mark-click")
+            ("p" mc/mark-previous-like-this "mark-prev")
+            ("P" mc/skip-to-previous-like-this "skip-prev")
+            ("M-p" mc/unmark-previous-like-this "unmark-prev")
+            ("n" mc/mark-next-like-this "mark-next")
+            ("N" mc/skip-to-next-like-this "skip-next")
+            ("M-n" mc/unmark-next-like-this "unmark-next")
+            ("0" mc/insert-numbers "insert-numbers" :exit t)
+            ("A" mc/insert-letters "insert-letters" :exit t)
+            ("q" nil "quit" :exit t)))
 
 ;; recently opened files
 (use-package recentf
   :ensure nil ;; built-in
   :commands recentf-open-files
   :bind ("H-r" . recentf-open-files)
-  :config
-  (setq recentf-max-menu-items 10
-        recentf-max-saved-items 50)
-  (recentf-mode t))
+  :init (setq recentf-max-menu-items 10
+              recentf-max-saved-items 50)
+  :config (recentf-mode t))
 
 ;; traverse undo history as a tree, default binding is C-x u
 (use-package undo-tree
-  :defer 1
   :delight undo-tree-mode
-  :config
-  (setq undo-tree-visualizer-relative-timestamps nil)
-  (global-undo-tree-mode))
+  :init (setq undo-tree-visualizer-relative-timestamps nil)
+  :config (global-undo-tree-mode))
 
 ;; display available bindings in popup
 (use-package which-key
@@ -338,26 +343,26 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; visualize and cleanup whitespace
 (use-package whitespace
   :ensure nil ;; built-in
-  :defer 1
-  :config
-  (defhydra my-hydra/whitespace (:color teal :columns 3)
-    "Whitespace"
-    ("w" whitespace-mode "show-whitespace" :exit nil)
-    ("n" whitespace-newline-mode "show-newline" :exit nil)
-    ("c" whitespace-cleanup "cleanup")
-    ("r" whitespace-report "report")
-    ("q" nil "quit"))
-  (global-set-key (kbd "H-M-w") 'my-hydra/whitespace/body))
+  :commands my-hydra/whitespace/body
+  :bind ("H-M-w" . my-hydra/whitespace/body)
+  :config (defhydra my-hydra/whitespace (:color teal :columns 3)
+            "Whitespace"
+            ("w" whitespace-mode "show-whitespace" :exit nil)
+            ("n" whitespace-newline-mode "show-newline" :exit nil)
+            ("c" whitespace-cleanup "cleanup")
+            ("r" whitespace-report "report")
+            ("q" nil "quit")))
 
 ;; expandable snippet template system
 (use-package yasnippet
-  :delight yas-minor-mode
   :defer 1
+  :delight yas-minor-mode
+  :bind (:map yas-minor-mode-map
+         ("C-S-SPC" . yas-expand)
+         ("H-Y" . my-hydra/yasnippet/body))
   :config
-  ;; official snippets
-  (use-package yasnippet-snippets)
-  ;; allow creation of temporary snippets
-  (use-package auto-yasnippet)
+  (use-package yasnippet-snippets) ;; official snippets
+  (use-package auto-yasnippet) ;; allow creation of temporary snippets
   (defhydra my-hydra/yasnippet (:color teal :columns 4)
     "YASnippet"
     ("SPC" yas-expand "expand") ;; expand snippet
@@ -369,14 +374,11 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("y" aya-expand "expand-auto") ;; paste temp yasnippet
     ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; show temp yasnippet
     ("q" nil "quit"))
-  (define-key yas-minor-mode-map (kbd "H-Y") 'my-hydra/yasnippet/body)
-  ;; remove default yas-minor-map bindings, add new one for snippet expansion
-  (require 'bind-key)
+  ;; remove default bindings to avoid conflicts with other packages
   (unbind-key "\C-c&" yas-minor-mode-map) ;; removing prefix bindings also ...
-  (unbind-key "\C-c" yas-minor-mode-map) ;; ... removes the bindings using them
-  (unbind-key "<tab>" yas-minor-mode-map) ;; remove tab bindings to avoid ...
-  (unbind-key "TAB" yas-minor-mode-map) ;; ... conflict with company-mode tng
-  (bind-key "C-S-SPC" #'yas-expand yas-minor-mode-map)
+  (unbind-key "\C-c" yas-minor-mode-map) ;; ... removes bindings using them
+  (unbind-key "<tab>" yas-minor-mode-map)
+  (unbind-key "TAB" yas-minor-mode-map)
   (yas-global-mode 1))
 
 (require 'init-ui-color)

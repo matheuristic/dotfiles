@@ -30,11 +30,11 @@
 (when (display-graphic-p)
   ;; helper functions
   (require 'cl-extra)
-  
+
   (defun my-font-exists (font-name)
     "Returns FONT-NAME if that font exists on the system and `nil` otherwise"
     (if (x-list-fonts font-name) font-name))
-  
+
   (defun my-set-font (face family &optional height weight width)
     "Sets font for FACE to FAMILY at the given HEIGHT, WEIGHT and WIDTH"
     (set-face-attribute face nil

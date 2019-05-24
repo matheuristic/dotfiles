@@ -8,10 +8,10 @@
 
 ;;; Code:
 
-;; make comint-mode prompts read-only
+;; make shell prompts read-only
 (setq comint-prompt-read-only t)
 
-;; close term-mode and eshell-mode buffers on exit
+;; close term buffers on exit
 (defadvice term-handle-exit (after term-kill-buffer-on-exit activate)
   "Kill term buffer on term session end."
   (kill-buffer))
@@ -20,15 +20,14 @@
 (use-package eshell
   :ensure nil ;; built-in
   :commands (eshell eshell-command)
+  :init (setq eshell-review-quick-commands nil
+              eshell-smart-space-goes-to-end t
+              eshell-where-to-jump 'begin)
   :config
   (require 'em-term)
   (require 'em-smart)
-  (setq eshell-review-quick-commands nil
-        eshell-smart-space-goes-to-end t
-        eshell-where-to-jump 'begin)
   (add-to-list 'eshell-visual-commands '("htop" "lftp" "ssh" "vim"))
-  (add-to-list 'eshell-visual-subcommands '("git" "log" "diff" "show"
-                                            "vagrant" "ssh")))
+  (add-to-list 'eshell-visual-subcommands '("diff" "git" "log" "show" "ssh" "vagrant")))
 
 (provide 'init-term)
 

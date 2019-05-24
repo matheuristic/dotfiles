@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Set up syntax checker (flycheck or built-in flymake)
+;; Configure syntax checker (flycheck/flymake)
 
 ;;; Code:
 
@@ -20,27 +20,26 @@
   :group 'init-syntax-el)
 
 (if init-syntax-use-flycheck
-    ;; use flycheck if specified ...
     (use-package flycheck
       :delight flycheck-mode
+      :bind (:map flycheck-mode-map
+             ("H-e" . my-hydra/flycheck/body))
       :init (global-flycheck-mode)
-      :config
-      (defhydra my-hydra/flycheck (:color amaranth :columns 6)
-        "Error"
-        ("F" flycheck-error-list-set-filter "filter")
-        ("p" flycheck-previous-error "previous")
-        ("n" flycheck-next-error "next")
-        ("f" flycheck-first-error "first")
-        ("l" (condition-case nil (while t (flycheck-next-error))
-               (user-error nil)) "last")
-        ("L" (condition-case nil (quit-windows-on "*Flycheck errors*" t)
-               (error (flycheck-list-errors))) "list")
-        ("q" nil "quit" :exit t))
-      ;; bind over my-hydra/error
-      (define-key flycheck-mode-map (kbd "H-e") 'my-hydra/flycheck/body))
-  ;; ... otherwise use built-in flymake
-  (use-package flymake  ;; NOTE use C-h . to show error on current line
+      :config (defhydra my-hydra/flycheck (:color amaranth :columns 6)
+                "Error"
+                ("F" flycheck-error-list-set-filter "filter")
+                ("p" flycheck-previous-error "previous")
+                ("n" flycheck-next-error "next")
+                ("f" flycheck-first-error "first")
+                ("l" (condition-case nil (while t (flycheck-next-error))
+                       (user-error nil)) "last")
+                ("L" (condition-case nil (quit-windows-on "*Flycheck errors*" t)
+                       (error (flycheck-list-errors))) "list")
+                ("q" nil "quit" :exit t)))
+  (use-package flymake ;; use "C-h ." to show error at point in minibuffer
     :ensure nil ;; built-in
+    :bind (:map flymake-mode-map
+           ("H-e" . my-hydra/flymake/body))
     :config
     (use-package flymake-diagnostic-at-point
       :hook ((emacs-lisp-mode . flymake-mode)
@@ -53,9 +52,7 @@
           (let* ((buf-name (buffer-name (current-buffer)))
                  (flymake-winds (condition-case nil
                                     (get-buffer-window-list
-                                     (concat "*Flymake diagnostics for "
-                                             buf-name
-                                             "*"))
+                                     (concat "*Flymake diagnostics for " buf-name "*"))
                                   (error nil))))
             (if flymake-winds
                 (dolist (wind flymake-winds) (quit-window nil wind))
@@ -66,7 +63,6 @@
       ("n" flymake-goto-next-error "next")
       ("L" my-toggle-flymake-diagnostics "list")
       ("q" nil "quit" :exit t))
-    (define-key flymake-mode-map (kbd "H-e") 'my-hydra/flymake/body)
     (with-eval-after-load 'minions
       (add-to-list 'minions-direct 'flymake-mode))))
 

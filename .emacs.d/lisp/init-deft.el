@@ -22,6 +22,7 @@
 (defvar deft-use-filter-string-for-filename t)
 
 (use-package deft
+  :commands deft
   :bind ("H-d" . deft))
 
 (provide 'init-deft)

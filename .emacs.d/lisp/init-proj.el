@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Set up tooling for project interaction
+;; Configure tooling for project interaction
 
 ;;; Code:
 
@@ -13,10 +13,16 @@
 ;; project interaction library
 (use-package projectile
   :delight projectile-mode '(:eval (concat " [" (projectile-project-name) "]"))
-  :init (projectile-mode)
+  :bind (:map projectile-mode-map
+         ("H-p" . projectile-command-map) ;; prefix binding for projectile cmds
+         ("H-P" . my-hydra/projectile/body))
+  :init
+  (setq projectile-create-missing-test-files t ;; create test files if none is found when toggling btw implementation and test
+        projectile-switch-project-action 'projectile-commander
+        projectile-use-git-grep t) ;; use git grep when in a Git project to skip backup, object and other files that are not tracked
+  (projectile-mode)
   :config
-  (setq projectile-switch-project-action 'projectile-commander)
-  ;; use ripgrep for grepping in projectile, if available
+  ;; use ripgrep to grep in projectile, if available
   (if (executable-find "rg")
       (progn
         (use-package projectile-ripgrep)
@@ -66,8 +72,7 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
     ("cX" projectile-cleanup-known-projects)
     ("C" projectile-compile-project "compile")
     ("p" projectile-switch-project "switch project")
-    ("q" nil "quit" :exit t))
-  (define-key projectile-mode-map (kbd "H-p") 'my-hydra/projectile/body))
+    ("q" nil "quit" :exit t)))
 
 (provide 'init-proj)
 
