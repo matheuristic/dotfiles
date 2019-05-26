@@ -14,8 +14,8 @@
   "Language-specific settings."
   :group 'convenience)
 
-(defcustom init-lang-enable-list '("csv" "docker" "json" "julia" "markdown"
-                                   "python" "r" "yaml")
+(defcustom init-lang-enable-list '("bibtex" "csv" "docker" "json" "julia"
+                                   "markdown" "python" "r" "yaml")
   "List of languages for which to enable support."
   :type '(repeat string)
   :group 'init-lang-el)
@@ -147,6 +147,78 @@ Other   _C-d_ : toggle docs
     :commands dockerfile-mode
     :config (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))))
 
+;; BibTeX
+;;
+;; this setup supports exporting Org to PDF with BibTeX bibliographies via
+;; xelatex and biber, so they will need to be installed on the system
+;;
+;; Org documents should include the LaTeX headers for bibliographies via
+;; "#+LATEX_HEADER:" structural markup elements and "\printbibliography"
+;; should be added at the desired location for the bibliography (typically
+;; at the end of an article or book chapter or before the index)
+;;
+;; Org references to bibliography entries can be inserted by calling
+;; `ebib-insert-citation' while in org-mode or by pressing `i' when on an entry
+;; in ebib
+;;
+;; to export references from Org to LaTeX, ebib needs to be opened with the
+;; bibliographies for the references that appear in the document
+;;
+;; use "::" in the Org-link description to separate the pre-reference text,
+;; pre-note and post-note elements (all optional) for the LaTeX export,
+;; i.e. "[[ebib:key][Pre-reference text::Pre-note::Post-note]]"
+;; will export to "Pre-reference text\cite[Pre-note][Post-note]{key}"
+;;
+;; example:
+;; ---
+;; ...
+;; #+LATEX_HEADER: \usepackage[backend=biber]{biblatex}
+;; #+LATEX_HEADER: \addbibresource{path/to/bibtex_file.bib}
+;; ...
+;; [[ebib:some_ebib_entry_key]]
+;; [[ebib:some_ebib_entry_key][Preamble]
+;; [[ebib:some_ebib_entry_key][Preamble::::Post-note]
+;; [[ebib:some_ebib_entry_key][Preamble::Pre-note::Post-note]]
+;; [[ebib:incognito_1970][::see::pg. 99]]
+;; ...
+;; \printbibliography
+;; ...
+;; ---
+(when (member "bibtex" init-lang-enable-list)
+  ;; BibTeX reference manager
+  (use-package ebib
+    :commands ebib
+    :bind ("H-B" . ebib)
+    :config
+    (with-eval-after-load 'org
+      (require 'org-ebib)
+      ;; compile LaTeX to PDF using xelatex and biber (for bibliographies)
+      (setq org-latex-pdf-process '("xelatex -interaction nonstopmode -output-directory %o %f"
+                                    "biber %b"
+                                    "xelatex -interaction nonstopmode -output-directory %o %f"
+                                    "xelatex -interaction nonstopmode -output-directory %o %f"))
+      (defun my-org-ebib-export (path desc format)
+        "Export an ebib link. See `org-link-parameters' for details about PATH, DESC and FORMAT."
+        (let* ((my-desc (or desc ""))
+               (desc-parts (split-string my-desc "::"))
+               (desc-name (car desc-parts))
+               (desc-pre-note (or (nth 1 desc-parts) ""))
+               (desc-post-note (mapconcat 'identity (nthcdr 2 desc-parts) "::")))
+          (cond
+            ((eq format 'html)
+             (if desc
+                 (format "(%s<cite>%s</cite>%s)"
+                         (if (string= "" desc-pre-note) "" (concat desc-pre-note " "))
+                         (if (string= "" desc-name) path desc-name)
+                         (if (string= "" desc-post-note) "" (concat ", " desc-post-note)))
+               (format "(<cite>%s</cite>)" path)))
+            ((eq format 'latex)
+             (if desc
+                 (format "%s\\cite[%s][%s]{%s}" desc-name desc-pre-note desc-post-note path)
+               (format "\\cite{%s}" path))))))
+      (org-link-set-parameters "ebib" :export 'my-org-ebib-export)
+      (bind-key "H-i" 'ebib-insert-citation org-mode-map))))
+
 ;; Emacs Speaks Statistics
 ;; has built-in flymake support (requires the R lintr pkg be installed)
 (when (or (member "julia" init-lang-enable-list)
@@ -178,7 +250,8 @@ Other   _C-d_ : toggle docs
            :map gfm-mode-map
            ("H-m" . my-hydra/markdown-mode/body))
     :config
-    (use-package markdown-toc) ;; Markdown table of contents
+    ;; Markdown table of contents
+    (use-package markdown-toc)
     (defhydra my-hydra/markdown-mode (:color teal :hint nil)
       "
 Markdown mode
@@ -226,18 +299,25 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
     :mode ("\\.ya?ml\\'" . yaml-mode)))
 
 ;; support for interfacing with Jupyter kernels
+;;
 ;; when using virtualenvs, make sure the activated virtualenv has jupyter
 ;; installed before running `jupyter-run-repl'
+;;
 ;; load `ob-jupyter' last, since org-mode babel support requires core language
 ;; support be loaded first
+;;
 ;; after `ob-jupyter' is loaded, "C-c h" in org-mode calls `jupyter-org-hydra'
 ;; to execute a source block in org-mode asynchronously, set the `:async'
 ;; parameter to `yes'
+;;
+;; example:
+;; ---
 ;; #+BEGIN_SRC jupyter-python :session py :async yes
 ;;   x = 'foo'
 ;;   y = 'bar'
 ;;   x + ' ' + y
 ;; #+END_SRC
+;; ---
 (use-package jupyter
   :defer t
   :bind ("H-j" . my-hydra/jupyter/body)
