@@ -1,0 +1,93 @@
+#+TITLE: Title of article
+#+SUBTITLE: Sub-title of article, if applicable
+#+AUTHOR: Name of author
+#+EMAIL: name@server.com
+#+DATE: Jan 1, 1970
+#+OPTIONS: author:t broken-links:mark date:t email:t title:t toc:nil
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [11pt,twocolumn]
+#+LATEX_HEADER: \usepackage{amsthm}
+#+LATEX_HEADER: \usepackage[backend=biber]{biblatex}
+#+LATEX_HEADER: \addbibresource{ebib-example.bib}
+#+LATEX_HEADER: \newtheorem{theorem}{Theorem}[section]
+#+LATEX_HEADER: \newtheorem{corollary}{Corollary}[theorem]
+#+LATEX_HEADER: \newtheorem{lemma}[theorem]{Lemma}
+#+LATEX_HEADER: \newtheorem{definition}{Definition}
+
+#+begin_abstract
+Abstract goes here.
+#+end_abstract
+
+* Introduction
+
+LaTeX equations like [[eqn:a]] are supported without additional markup:
+
+#+NAME: eqn:a
+\begin{equation}
+\mathbb{P}(X) = 1.0
+\end{equation}
+
+This article can be exported to PDF via LaTeX using "~C-c C-e l p~".
+
+* Section Name
+
+The LaTeX export backend automatically converts blocks to an environment of the same type, i.e. ~#+begin_env \n ... \n #+end_env~ gets converted to ~\begin{env} ... \end{env}~.
+
+Section [[Subsection Name]] showcases examples of this, specifically the ~theorem~ and ~proof~ environments.
+
+** Subsection Name
+
+This subsection has a theorem, its proof, and a bibliographic reference.
+
+#+NAME: thm:1
+#+begin_theorem
+Theorem goes here.
+#+end_theorem
+
+The proof for Theorem [[thm:1]] follows.
+
+#+ATTR_LATEX: :options [Proof of the Theorem]
+#+begin_proof
+Proof goes here.
+#+end_proof
+
+References like [[ebib:ebib_example_1970]] can be cited, perhaps with pre-notes and post-notes, and preambles like [[ebib:ebib_example_1970][this::see::pg. 123]].
+
+* Discussion
+
+There's more LaTeX functionality beyond what is shown in Section [[Section Name]].
+
+#+CAPTION: An example table
+#+NAME: tbl:1
+#+ATTR_LATEX: :align |l|c|r|
+|-------+-------+-------|
+| Col A | Col B | Col C |
+|-------+-------+-------|
+|     1 |     2 |     3 |
+|     4 |     5 |     6 |
+|-------+-------+-------|
+
+#+NAME: tbl:2
+#+ATTR_LATEX: :options [hb]
+#+begin_table
+\caption{Another table}
++---+-----+-----------+
+|   | A   | B         |
++---+-----+-----+-----+
+| 1 | A1  | B1  | C1  |
+|   |     +-----+-----+
+|   |     | B1b | C1b |
++---+-----+-----+-----+
+| 2 | A2  | BC2       |
+|   +-----+           |
+|   | A2b | BC2b      |
++---+-----+-----------+
+#+end_table
+
+We can create simple tables like Table [[tbl:1]] or even multicolumn tables like Table [[tbl:2]]. See the official [[https://orgmode.org/manual/Tables-in-LaTeX-export.html][documentation]] for more table formatting options. Note:
+- Tables with merged cells like Table [[tbl:2]] are most easily created in a separate environment and added to the Org document, since table auto-formatting makes directly creating them within the Org document difficult.
+- Tables are in ~table.el~ format like Table [[tbl:2]] which are not auto-exported to a table environment so the environment needs to be specified manually, with captions in LaTeX markup within the table environment to properly place them above or below the table.
+
+At the appropriate location, the bibliography can be inserted using the standard LaTeX command.
+
+\printbibliography
