@@ -15,14 +15,14 @@
 (defcustom init-ui-font-default-list '("Consolas"
                                        "Menlo"
                                        "DejaVu Sans Mono")
-  "List of fonts to use for the default face."
+  "List of fonts, by priority, to use for the default face."
   :type '(repeat string)
   :group 'init-ui-font-el)
 
 (defcustom init-ui-font-variable-pitch-list '("Constantia"
                                               "Hoefler Text"
                                               "DejaVu Serif")
-  "List of fonts to use for the default face."
+  "List of fonts, by priority, to use for the variable pitch face."
   :type '(repeat string)
   :group 'init-ui-font-el)
 
@@ -36,14 +36,14 @@
     (if (x-list-fonts font-name) font-name))
 
   (defun my-set-font (face family &optional height weight width)
-    "Sets font for FACE to FAMILY at the given HEIGHT, WEIGHT and WIDTH"
+    "Set font for FACE to FAMILY at the given HEIGHT, WEIGHT and WIDTH"
     (set-face-attribute face nil
                         :family family
                         :height (or height 110)
                         :weight (or weight 'normal)
                         :width (or width 'normal)))
 
-  ;; set default font priority
+  ;; set default font
   (let* ((my-font-priority-list init-ui-font-default-list)
          (my-font (cl-some #'my-font-exists my-font-priority-list))
          (is-darwin (eq system-type 'darwin)))

@@ -5,8 +5,7 @@
 ;;; Commentary:
 
 ;; Set up minor mode for sensitive files that disables backups and auto-saves
-;; for the current buffer.
-;; Copied from http://anirudhsasikumar.net/blog/2005.01.21.html
+;; for the buffer. Copied from http://anirudhsasikumar.net/blog/2005.01.21.html
 
 ;;; Code:
 
@@ -15,7 +14,7 @@
   :group 'convenience)
 
 (defcustom init-sensitive-file-patterns '("\\.gpg$")
-  "List of file patterns for which to turn on sensitive-mode automatically."
+  "List of file patterns for which sensitive-mode is enabled by default."
   :type '(repeat string)
   :group 'init-sensitive-el)
 

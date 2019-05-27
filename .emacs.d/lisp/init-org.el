@@ -158,9 +158,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     (with-eval-after-load 'init-ui-font
       (require 'org-mouse) ;; Org-mode mouse support
       (add-hook 'org-mode-hook #'variable-pitch-mode) ;; variable-pitch font
-      (add-hook 'org-mode-hook (lambda ()
-        (setq cursor-type 'bar ;; bar cursor looks better with variable pitch fonts
-              line-spacing 0.1)))
+      (add-hook 'org-mode-hook (lambda () (setq line-spacing 0.1)))
       (set-face-attribute 'org-block nil :inherit 'fixed-pitch :background "#FFFFE0")
       (set-face-attribute 'org-block-begin-line nil :inherit 'fixed-pitch :foreground "#555555" :background "#E2E1D5")
       (set-face-attribute 'org-block-end-line nil :inherit 'fixed-pitch :foreground "#555555" :background "#E2E1D5")
@@ -188,6 +186,19 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
   :pin "MELPA"
   :after org
   :hook (org-mode . org-bullets-mode))
+
+;; export Org documents to Markdown
+(use-package ox-md
+  :ensure nil
+  :after org) ;; built-in to Org
+
+;; export Org documents to reveal.js presentations
+;; https://gitlab.com/oer/org-re-reveal
+(use-package org-re-reveal
+  :pin "MELPA"
+  :after org
+  :init (setq org-re-reveal-note-key-char nil
+              org-re-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0/"))
 
 (provide 'init-org)
 

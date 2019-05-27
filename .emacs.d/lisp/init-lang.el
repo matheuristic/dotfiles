@@ -164,10 +164,10 @@ Other   _C-d_ : toggle docs
 ;; to export references from Org to LaTeX, ebib needs to be opened with the
 ;; bibliographies for the references that appear in the document
 ;;
-;; use "::" in the Org-link description to separate the pre-reference text,
-;; pre-note and post-note elements (all optional) for the LaTeX export,
-;; i.e. "[[ebib:key][Pre-reference text::Pre-note::Post-note]]"
-;; will export to "Pre-reference text\cite[Pre-note][Post-note]{key}"
+;; use "::" in the Org link description to separate the preamble text,
+;; pre-note and post-note elements (all optional) for export to LaTeX,
+;; i.e. "[[ebib:key][Preamble text::Pre-note::Post-note]]"
+;; will export to "Preamble text\cite[Pre-note][Post-note]{key}"
 ;;
 ;; example:
 ;; ---
@@ -214,7 +214,7 @@ Other   _C-d_ : toggle docs
                (format "(<cite>%s</cite>)" path)))
             ((eq format 'latex)
              (if desc
-                 (format "%s\\cite[%s][%s]{%s}" desc-name desc-pre-note desc-post-note path)
+                 (format "%s\\cite[%s][%s]{%s}" (concat desc-name " ") desc-pre-note desc-post-note path)
                (format "\\cite{%s}" path))))))
       (org-link-set-parameters "ebib" :export 'my-org-ebib-export)
       (bind-key "H-i" 'ebib-insert-citation org-mode-map))))

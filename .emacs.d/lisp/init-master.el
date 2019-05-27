@@ -6,20 +6,20 @@
 
 ;; Master file for coordinating Emacs configuration
 
-;; Best possible startup times can be measured using in Linux using
+;; Best possible startup times can be measured using in Linux
 ;; $ emacs -q --eval='(message "%s" (emacs-init-time))'
-;; or in Mac OS X using
+;; or in Mac OS X
 ;; $ open -n /Applications/Emacs.app --args -q --eval='(message "%s" (emacs-init-time))'
 
 ;; Startup time can be optimized using the following steps:
 ;; 1. profile using the `esup' package ("M-x esup")
-;; 2. defer loading of packages when possible (e.g. use-package's `:defer')
-;;    example times are 1 sec for more important packages and 2 secs for
-;;    less important ones
+;; 2. defer loading of packages when possible, e.g. use-package's `:defer N'
+;;    with N=1 sec for important packages and N=2 for less important ones
 ;; 3. avoid helper functions that cause eager loads
 
 ;; ~/.emacs.d/init.el should source this file, e.g.
 
+;; ---
 ;; ;; user packages in ~/.emacs.d/lisp
 ;; (defvar lisp-dir (expand-file-name "lisp" user-emacs-directory))
 ;; (unless (file-exists-p lisp-dir) (make-directory lisp-dir))
@@ -35,15 +35,15 @@
 ;;   (if (file-directory-p project) (add-to-list 'load-path project)))
 ;;
 ;; (require 'init-master)
+;; ---
 
 ;;; Code:
 
 ;; optimizations for reducing startup time (reverted at the end of file)
-;; * reduce garbage collection by relaxing garbage collection thresholds
-;;   (threshold is in bytes, default is 800 kilobytes)
+;; * increase garbage collection thresholds
 ;; * set file-name-handler-alist to nil as it is scanned when files are loaded
 (defvar tmp-file-name-handler-alist file-name-handler-alist) ;; save to tmp var
-(setq gc-cons-threshold (* 50 1000 1000)
+(setq gc-cons-threshold (* 50 1000 1000) ;; in bytes, default is 800k
       gc-cons-percentage 0.6
       file-name-handler-alist nil)
 
@@ -85,11 +85,9 @@
 ;; use package.el with given ELPA-compatible package repositories
 (setq package-enable-at-startup nil
       package-archives '(("GNU"          . "https://elpa.gnu.org/packages/")
-                         ;; ("Org"          . "https://orgmode.org/elpa/")
                          ("MELPA Stable" . "https://stable.melpa.org/packages/")
                          ("MELPA"        . "https://melpa.org/packages/"))
       package-archive-priorities '(("GNU"          . 10)
-                                   ;; ("Org"          . 9)
                                    ("MELPA Stable" . 5)
                                    ("MELPA"        . 0)))
 
