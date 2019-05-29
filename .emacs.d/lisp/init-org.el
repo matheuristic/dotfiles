@@ -59,7 +59,10 @@
         org-refile-allow-creating-parent-nodes 'confirm
         org-return-follows-link t
         org-src-fontify-natively t
+        org-src-preserve-indentation t ;; preserve src code block indentation on export and when switching btw org buffer and edit buffer
+        org-src-strip-leading-and-trailing-blank-lines t
         org-src-tab-acts-natively t
+        org-src-window-setup 'current-window ;; reuse Org file window for editing source blocks when using "C-c '"
         ;; Diagram of possible state transitions for a given task
         ;;     -------------------------
         ;;     |                       |
