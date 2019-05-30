@@ -8,6 +8,8 @@
 
 ;;; Code:
 
+(require 'init-ui-hydra)
+
 ;; make shell prompts read-only
 (setq comint-prompt-read-only t)
 
@@ -28,6 +30,22 @@
   (require 'em-smart)
   (add-to-list 'eshell-visual-commands '("htop" "lftp" "ssh" "vim"))
   (add-to-list 'eshell-visual-subcommands '("diff" "git" "log" "show" "ssh" "vagrant")))
+
+;; term
+(use-package term
+  :ensure nil
+  :commands (ansi-term term)
+  :bind (:map term-mode-map
+         ("H-m" . my-hydra/term/body)
+         :map term-raw-map
+         ("H-m" . my-hydra/term/body))
+  :config (defhydra my-hydra/term (:color teal :columns 4)
+            "Term"
+            ("m" (lambda () (interactive)
+                   (if (term-in-line-mode)
+                       (progn (term-char-mode) (message "line → char"))
+                     (progn (term-line-mode) (message "char → line")))) "toggle-mode")
+            ("q" nil "quit" :exit t)))
 
 (provide 'init-term)
 

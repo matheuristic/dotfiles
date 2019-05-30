@@ -16,12 +16,19 @@
 (with-eval-after-load 'ibuffer
   (defvar ibuffer-saved-filter-groups
           '(("default"
-             ("Org" (or (mode . org-mode) (mode . org-agenda-mode)))
+             ("Shell" (or (mode . eshell-mode)
+                          (mode . shell-mode)
+                          (mode . term-mode)))
              ("Dired" (mode . dired-mode))
-             ("Elisp" (mode . emacs-lisp-mode))
-             ("Python" (mode . python-mode))
-             ("Magit" (name . "\*magit"))
-             ("Emacs" (name . "^\\*"))))))
+             ("Org" (or (mode . org-mode)
+                        (mode . org-agenda-mode)))
+             ("Magit" (or (name . "\*magit.*\\*")
+                          (mode . magit-mode)))
+             ("Emacs" (or (name . "^\\*scratch\\*$")
+                          (name . "^\\*Messages\\*$")))
+             ("Help" (or (name . "\*Help\*")
+                         (name . "\*Apropos\*")
+                         (name . "\*info\*")))))))
 
 (defun my-yank-from-kill-ring ()
   "Yank from the kill ring into buffer at point or region.
@@ -134,8 +141,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; Eldoc
 (use-package eldoc
   :ensure nil ;; built-in
-  :delight eldoc-mode
-  :hook (emacs-lisp-mode . eldoc-mode))
+  :delight eldoc-mode)
 
 ;; increase selected region by semantic units
 (use-package expand-region
@@ -152,12 +158,6 @@ Windows  _L_ : line-wise   _W_ : word-wise
         eyebrowse-new-workspace t)
   (my-lazy-key-seq global-map (kbd "H-W") (lambda () (require 'eyebrowse)))
   :config (eyebrowse-mode t))
-
-;; code folding package
-(use-package hideshow
-  :ensure nil ;; built-in
-  :delight hs-minor-mode
-  :config (add-hook 'prog-mode-hook 'hs-minor-mode))
 
 ;; highlight line
 (use-package hl-line
@@ -255,12 +255,14 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("q" my-hydra/ibuffer/body "←" :exit t))
   (defhydra my-hydra/ibuffer-filter (:color amaranth :columns 5)
     "ibuffer → filter"
+    ("a" ibuffer-add-saved-filters "add-saved")
     ("c" ibuffer-filter-by-content "content")
     ("e" ibuffer-filter-by-predicate "predicate")
     ("f" ibuffer-filter-by-filename "filename")
     ("m" ibuffer-filter-by-used-mode "mode")
     ("M" ibuffer-filter-by-derived-mode "derived mode")
     ("n" ibuffer-filter-by-name "name")
+    ("p" ibuffer-pop-filter "pop")
     (">" ibuffer-filter-by-size-gt "size-gt")
     ("<" ibuffer-filter-by-size-lt "size-lt")
     ("&" ibuffer-and-filter "and")
@@ -286,12 +288,16 @@ Windows  _L_ : line-wise   _W_ : word-wise
   (ido-mode t) ;; enable ido-mode globally
   ;; replace stock completion with ido wherever possible
   (use-package ido-completing-read+
-    :after ido
     :config (ido-ubiquitous-mode t))
   ;; use ido for commands using `completing-read-multiple'
   (use-package crm-custom
-    :after ido
     :config (crm-custom-mode 1)))
+
+;; get a menu list across several buffers
+(use-package imenu-anywhere
+  :pin "MELPA"
+  :defer t
+  :bind ("H-I" . imenu-anywhere))
 
 ;; multiple cursors
 (use-package multiple-cursors
@@ -362,7 +368,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
          ("H-Y" . my-hydra/yasnippet/body))
   :config
   (use-package yasnippet-snippets) ;; official snippets
-  (use-package auto-yasnippet) ;; allow creation of temporary snippets
+  (use-package auto-yasnippet) ;; enable creation of temporary snippets
   (defhydra my-hydra/yasnippet (:color teal :columns 4)
     "YASnippet"
     ("SPC" yas-expand "expand") ;; expand snippet
@@ -370,9 +376,9 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("s" yas-insert-snippet "insert") ;; insert snippet
     ("n" yas-new-snippet "new") ;; create new snippet
     ("v" yas-visit-snippet-file "visit-snippet") ;; visit snippet file
-    ("w" aya-create "create-auto") ;; store temp yasnippet
-    ("y" aya-expand "expand-auto") ;; paste temp yasnippet
-    ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; show temp yasnippet
+    ("w" aya-create "create-auto") ;; store temp snippet
+    ("y" aya-expand "expand-auto") ;; paste temp snippet
+    ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; show temp snippet
     ("q" nil "quit"))
   ;; remove default bindings to avoid conflicts with other packages
   (unbind-key "\C-c&" yas-minor-mode-map) ;; removing prefix bindings also ...
@@ -382,9 +388,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
   (yas-global-mode 1))
 
 (require 'init-ui-color)
-
 (require 'init-ui-font)
-
 (require 'init-ui-modeline)
 
 (provide 'init-ui)

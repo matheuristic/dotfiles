@@ -28,36 +28,12 @@
   :bind (:map lsp-mode-map
          ("H-l" . my-hydra/lsp/body))
   :config
-  (setq lsp-print-io nil ;; change nil to t to enable logging of packets between emacs and the LS
+  (setq lsp-print-io nil ;; set to t (nil) to enable (disable) logging of packets between emacs and the LS
         lsp-eldoc-enable-hover nil ;; don't have eldoc display hover info
-        lsp-eldoc-enable-signature-help nil ;; don't have eldoc display signature help
+        lsp-eldoc-enable-signature-help t ;; display signature help in minibuffer
+        lsp-eldoc-prefer-signature-help t ;; prefer displaying signature help over hover
+        lsp-eldoc-render-all nil ;; don't show all returned from document/onHover, only symbol info
         lsp-prefer-flymake t) ;; set to nil to prefer flycheck to flymake
-  ;; lsp-ui enables pop-up documentation boxes and sidebar info
-  (use-package lsp-ui
-    :pin "MELPA"
-    :commands lsp-ui-mode
-    :bind (:map lsp-ui-mode-map
-           ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
-           ([remap xref-find-references] . lsp-ui-peek-find-references))
-    :config
-    (setq lsp-ui-doc-enable t
-          lsp-ui-doc-header t
-          lsp-ui-doc-include-signature t
-          lsp-ui-doc-max-height 20
-          lsp-ui-doc-max-width 50
-          lsp-ui-imenu-enable nil
-          lsp-ui-peek-always-show t
-          lsp-ui-sideline-enable t
-          lsp-ui-sideline-ignore-duplicate t
-          lsp-ui-sideline-show-hover nil)
-    (defun my-lsp-ui-doc-mode-toggle ()
-      "Toggles `lsp-ui-doc-mode'."
-      (interactive)
-      (if lsp-ui-doc-mode
-          (progn
-            (lsp-ui-doc-mode -1)
-            (lsp-ui-doc--hide-frame))
-        (lsp-ui-doc-mode 1))))
   ;; install LSP company backend for LSP-driven completion
   (use-package company-lsp
     :pin "MELPA"
@@ -65,33 +41,43 @@
     :init (setq company-lsp-cache-candidates t))
   (defhydra my-hydra/lsp (:color teal :hint nil)
     "
-Language Server Protocol
+Language Server
 
-Buffer  _f_   : format          _m_   : imenu           _x_   : execute action
+Server  _R_ : restart            _S_   : shutdown         _M-l_ : IO log
 
-Server  _M-r_ : restart         _S_   : shutdown        _M-s_ : describe session
+Symbol  _o_   : describe         _fd_  : find declaration _fD_  : find defn
+        _fi_  : find implementn  _fr_  : find references  _ft_  : find type defn
+        _h_   : highlight        _M-r_   : rename
 
-Symbol  _d_   : declaration     _D_   : definition      _R_   : references
-        _i_   : implementation  _t_   : type            _o_   : documentation
-        _r_   : rename
+Lens    _lm_  : lsp-lens-mode    _ls_  : show lenses      _lh_  : hide lenses
 
-Other   _C-d_ : toggle docs
+Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
+        _O_   : organize imports _M-s_ : describe session
 
 "
-    ("f" lsp-format-buffer)
-    ("m" lsp-ui-imenu)
-    ("x" lsp-execute-code-action)
-    ("M-r" lsp-restart-workspace)
+    ;; Server
+    ("R" lsp-restart-workspace)
     ("S" lsp-shutdown-workspace)
-    ("M-s" lsp-describe-session)
-    ("d" lsp-find-declaration)
-    ("D" lsp-ui-peek-find-definitions)
-    ("R" lsp-ui-peek-find-references)
-    ("i" lsp-ui-peek-find-implementation)
-    ("t" lsp-find-type-definition)
+    ("M-l" lsp-switch-to-io-log-buffer)
+    ;; Symbol at point
     ("o" lsp-describe-thing-at-point)
-    ("r" lsp-rename)
-    ("C-d" my-lsp-ui-doc-mode-toggle)
+    ("fd" lsp-find-declaration)
+    ("fD" lsp-find-definition)
+    ("fi" lsp-find-implementation)
+    ("fr" lsp-find-references)
+    ("ft" lsp-find-type-definition)
+    ("h" lsp-document-highlight)
+    ("M-r" lsp-rename)
+    ;; CodeLens (Microsoft Language Servers)
+    ("lm" lsp-lens-mode)
+    ("ls" lsp-lens-show)
+    ("lh" lsp-lens-hide)
+    ;; Other
+    ("FB" lsp-format-buffer)
+    ("FR" lsp-format-region)
+    ("X" lsp-execute-code-action)
+    ("O" lsp-organize-imports)
+    ("M-s" lsp-describe-session)
     ("q" nil "quit" :color blue)))
 
 ;; front-end for interacting with debug servers
@@ -157,9 +143,8 @@ Other   _C-d_ : toggle docs
 ;; should be added at the desired location for the bibliography (typically
 ;; at the end of an article or book chapter or before the index)
 ;;
-;; Org references to bibliography entries can be inserted by calling
-;; `ebib-insert-citation' while in org-mode or by pressing `i' when on an entry
-;; in ebib
+;; Org references to bibliography entries can be inserted by pressing `i' when
+;; on an entry in ebib or by calling `ebib-insert-citation' in org-mode
 ;;
 ;; to export references from Org to LaTeX, ebib needs to be opened with the
 ;; bibliographies for the references that appear in the document
