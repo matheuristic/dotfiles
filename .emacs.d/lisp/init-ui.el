@@ -54,10 +54,11 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 ;; Configure user interface
 
 ;; basic interface settings
-(setq inhibit-startup-message t ;; suppress splash screen
+(setq auto-revert-verbose nil ;; suppress auto-revert minibuffer messages
+      column-number-mode t ;; show column number in modeline
+      inhibit-startup-message t ;; suppress splash screen
       ring-bell-function 'ignore ;; turn off audible and visual bells
       scroll-conservatively 101 ;; scroll a line at a time at window edge
-      column-number-mode t ;; show column number in modeline
       show-paren-delay 0) ;; no delay in show-paren-mode
 (show-paren-mode t) ;; show matching parentheses
 

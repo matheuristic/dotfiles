@@ -26,7 +26,12 @@
                         (:endgroup)
                         ("urgent" . ?u)))
 
-;; Org-mode, see http://doc.norang.ca/org-mode.html for a good example config
+;; Org-mode
+;;
+;; see http://doc.norang.ca/org-mode.html for a good example config
+;;
+;; escaping Org examples: using "C-c '" to edit Org source blocks in a separate
+;; buffer will automatically escape the Org markup on return
 (use-package org
   :hook (org-mode . visual-line-mode)
   :bind (("H-o" . my-hydra/org-global/body)
@@ -190,10 +195,86 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
   :after org
   :hook (org-mode . org-bullets-mode))
 
-;; export Org documents to Markdown
-(use-package ox-md
+;; Gantt charts via LaTeX
+;;
+;; assumes org-gantt package is present on the system; to install the package,
+;; clone the repo https://github.com/swillner/org-gantt in ~/.emacs.d/site-lisp
+;;
+;; to use, in a Org document create an org-gantt-chart dynamic block, which
+;; can be limited to a given Org subtree using the :ID: property, populate it
+;; using "C-c C-x C-u" and export the Org document to LaTeX as a PDF file
+;;
+;; the subtree tasks should have either
+;; 1. scheduled ("C-c C-s") and deadline ("C-c C-d") dates, or
+;; 2. an :Effort: property
+;;
+;; task downstream dependencies are specified by a :LINKED-TO: <id_list>
+;; property to link to tasks with the given :ID: property, or by using the
+;; order of the child tasks if a task has an :ORDERED: property with value t
+;;
+;; to hide the subtree generating the Gantt chart in the LaTeX output, give the
+;; subtree a COMMENT state and make sure the dynamic block appears outside the
+;; commented subtree (in fact, outside any commented subtree)
+;;
+;; Example:
+;; ---
+;; ...
+;; #+LATEX_HEADER: \usepackage{pgfgantt}
+;; #+LATEX_HEADER: \usepackage{pdflscape}
+;; ...
+;; * Task Specification
+;; Description of Project.
+;; Since the subtree below has the ~COMMENT~ state, it is not exported.
+;; To also export it, remove the ~COMMENT~ state before exporting.
+;; ** COMMENT Project
+;;    :PROPERTIES:
+;;    :ID:       project
+;;    :END:
+;; *** Task 1
+;;     SCHEDULED: <2015-05-25 Mon> DEADLINE: <2015-05-28 Thu>
+;;     :PROPERTIES:
+;;     :LINKED-TO: task2,task4
+;;     :END:
+;; *** Task 2
+;;     :PROPERTIES:
+;;     :ID:       task2
+;;     :Effort:   2d
+;;     :END:
+;; *** Task 3
+;;     :PROPERTIES:
+;;     :ID:       task3
+;;     :ORDERED:  t
+;;     :Effort:   7d
+;;     :END:
+;; **** Task 3.1
+;;      :PROPERTIES:
+;;      :Effort:   3d
+;;      :END:
+;; **** Task 3.2
+;;      :PROPERTIES:
+;;      :Effort:   4d
+;;      :END:
+;; *** Task 4
+;;     :PROPERTIES:
+;;     :ID:       task4
+;;     :Effort:   5d
+;;     :LINKED-TO: task3
+;;     :END:
+;;
+;; * Gantt chart
+;; Press "~C-c C-x C-u~" to populate the dynamic block below before exporting
+;; to LaTeX. The Gantt chart below is wrapped in the ~landscape~ environment
+;; to make it appear on its own landscape page.
+;; #+LATEX: \begin{landscape}
+;; #+BEGIN: org-gantt-chart :id "project-deadlines-schedules"
+;; #+END
+;; #+LATEX: \end{landscape}
+;; ...
+;; ---
+(use-package org-gantt
+  :load-path "site-lisp/org-gantt"
   :ensure nil
-  :after org) ;; built-in to Org
+  :after org)
 
 ;; export Org documents to reveal.js presentations
 ;; https://gitlab.com/oer/org-re-reveal
@@ -202,6 +283,11 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
   :after org
   :init (setq org-re-reveal-note-key-char nil
               org-re-reveal-root "https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.8.0/"))
+
+;; export Org documents to Markdown
+(use-package ox-md
+  :ensure nil
+  :after org) ;; built-in to Org
 
 (provide 'init-org)
 
