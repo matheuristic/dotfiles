@@ -15,7 +15,7 @@
   :group 'convenience)
 
 (defcustom init-lang-enable-list '("bibtex" "csv" "docker" "json" "julia"
-                                   "markdown" "python" "r" "yaml")
+                                   "markdown" "plantuml" "python" "r" "yaml")
   "List of languages for which to enable support."
   :type '(repeat string)
   :group 'init-lang-el)
@@ -272,6 +272,39 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
       ("w" markdown-insert-wiki-link)
       ("T" markdown-toc-generate-toc)
       ("q" nil "quit" :color blue))))
+
+;; PlantUML
+;;
+;; graphviz and java needs to be installed on the system
+;;
+;; the plantuml.jar file needs to be downloaded to `plantuml-jar-path',
+;; e.g. using "M-x plantuml-download-jar"
+;;
+;; there is also Org source block support (edit a block with "C-c '" and
+;; evaluate with "C-c C-c"), for example:
+;; ---
+;; ...
+;; #+BEGIN_SRC plantuml :file diagram.png
+;;   @startuml
+;;   [*] --> State1
+;;   State1 --> [*]
+;;   State1 : a line description
+;;   State1 : another line description
+;;   State1 --> State2
+;;   State2 --> [*]
+;;   @enduml
+;; #+END_SRC
+;; ...
+;; ---
+(when (member "plantuml" init-lang-enable-list)
+  (use-package plantuml-mode
+    :defer t
+    :mode ("\\.p\\(lant\\)?uml" . plantuml-mode)
+    :init (setq plantuml-jar-path (expand-file-name "~/plantuml.jar"))
+    :config (with-eval-after-load 'org
+              (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
+              (setq org-plantuml-jar-path plantuml-jar-path)
+              (add-to-list 'org-src-lang-modes '("plantuml" . plantuml)))))
 
 ;; Python
 (when (member "python" init-lang-enable-list)

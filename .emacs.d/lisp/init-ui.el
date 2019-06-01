@@ -94,6 +94,15 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   :bind ("M-X" . amx-major-mode-commands)
   :init (amx-mode))
 
+;; draw diagrams with the mouse; use `picture-mode' to draw with the keyboard
+(use-package artist
+  :ensure nil ;; built-in
+  :defer t
+  :bind (("H-A" . artist-mode)
+         :map artist-mode-map
+         ;; trackpad workaround - "super-click" for the drawing menu
+         (([s-mouse-1] . artist-mouse-choose-operation))))
+
 ;; text completion framework
 (use-package company
   :defer t
