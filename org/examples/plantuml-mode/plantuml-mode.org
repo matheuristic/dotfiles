@@ -1,0 +1,156 @@
+#+TITLE: PlantUML example
+
+This Org document describes emacs support for [[http://plantuml.com/index][PlantUML]] via [[https://github.com/skuro/plantuml-mode][plantuml-mode]].
+
+* Usage
+
+Make sure graphviz and Java is installed.
+
+Download ~plantuml.jar~ and set its path:
+
+#+begin_src emacs-lisp
+(setq plantuml-jar-path "/path/to/plantuml.jar")
+#+end_src
+
+Previewing the PlantUML diagram in ~plantuml-mode~ can be done via the ~`plantuml-view'~ command, which has the following shortcut keys.
+
+"C-c C-c" - renders a diagram from the current buffer
+"C-u C-c C-c" - renders in other window
+"C-u C-u C-c C-c" - renders in other frame
+
+* Org support
+
+For Org-mode support:
+
+#+begin_src emacs-lisp
+(setq org-plantuml-jar-path "/path/to/plantuml.jar")
+(org-babel-do-load-languages 'org-babel-load-languages '((plantuml...  . t)))
+(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+#+end_src
+
+PlantUML code is supported within source blocks.
+
+Use "C-c '" to edit the source block. Use "C-c C-c" to evaluate the source block.
+
+Here is an example of a [[http://plantuml.com/sequence-diagram][sequence diagram]].
+
+#+begin_src plantuml :file sequence-diagram.png
+@startuml
+
+MachineA -> MachineB: request
+MachineB --> MachineA: response
+
+MachineA -> MachineB: another request
+MachineA <-- MachineB: another response
+
+@enduml
+#+end_src
+
+** Activity diagrams
+
+[[http://plantuml.com/activity-diagram-beta][Activity diagrams]] are useful for workflows.
+
+#+begin_src plantuml :file activity-diagram.png
+@startuml
+
+start
+:foo;
+-> arrow text;
+if (test1) then (true)
+  -[#blue]->
+  if (test2) then
+    -[#green,dashed]-> more text;
+    stop
+  else (false)
+    :bar1;
+  endif
+else (false)
+  -[dotted]->
+  :bar2;
+endif
+:go;
+stop
+
+@enduml
+#+end_src
+
+** Class diagrams
+
+[[http://plantuml.com/class-diagram][Class diagrams]] are useful for documenting code.
+
+#+begin_src plantuml :file class-diagram.png
+@startuml
+abstract class AbstractClass {
+        - private_method
+        ==
+        # protected_method
+        __
+        ~ package_private_method
+        + public_method
+        --
+        Some text
+}
+note left: Left-sided note
+
+AbstractClass <|-- ConcreteClass
+
+class ConcreteClass {
+        + getProp()
+        + setProp()
+        __ private data __
+        int variable
+        -- encrypted --
+        String secret
+}
+
+note bottom of ConcreteClass
+        <size:18>This</size> is
+        <b>another</b> <i>note</i>
+        with some <s>strikethrough</s> text.
+end note
+
+note as N1
+        <u>This</u> is a
+        <b><color:royalBlue>free-standing</color></b>
+        note.
+end note
+
+@enduml
+#+end_src
+
+** ditaa support
+
+[[http://ditaa.sourceforge.net/][ditaa]] code is also [[http://plantuml.com/ditaa][supported]] by PlantUML.
+
+The Emacs modes  ~artist-mode~ or ~picture-mode~ are useful for drawing ditaa diagrams.
+
+#+begin_src plantuml :file ditaa-diagram.png
+@startditaa
++--------+    +-------+    +-------+    /-------\
+|        |    |       |    |       |    |       |
+|   A    +----+   B   +--->|   C   +--->|   D   |
+|        |    |       |<---+       |    +-------+
+|     {d}|    |   {io}|    |    {s}|    : D.sub |
++---+----+    +-------+    +-------+    \-------/
+	:                         ^
+	|    Alternate path       |
+	+-------------------------+
+@endditaa
+#+end_src
+
+** Mind-maps
+
+Mindmaps are [[http://plantuml.com/mindmap-diagram][supported]] too.
+
+#+begin_src plantuml :file mindmap-diagram.png
+@startmindmap
+,* Topic
+,** Subtopic 1
+,*** Heading 1.1
+,*** Heading 1.2
+,*** Heading 1.3
+,** Subtopic 2
+,*** Heading 2.1
+,*** Heading 2.2
+@endmindmap
+#+end_src
