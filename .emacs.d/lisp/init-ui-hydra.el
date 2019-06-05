@@ -8,6 +8,18 @@
 
 ;;; Code:
 
+(require 'cl-extra)
+
+(defun my-open-finder (&optional path)
+  "Opens a new Finder window to PATH, or the current buffer file or directory in that order if PATH is nil. Mac OS X-only."
+  (interactive)
+  (let* ((my-path (cl-some 'identity (list path (buffer-file-name) default-directory)))
+         (my-full-path (expand-file-name my-path))
+         (my-process-args (list "my-open-finder" nil "open" "-R" my-full-path)))
+    (if (eq system-type 'darwin)
+        (apply 'start-process my-process-args)
+      (message "my-open-in-finder is Mac OS X-only"))))
+
 (defun my-transpose-windows (selector)
   "Transpose buffers between current window and window after calling SELECTOR."
   (let ((from-win (selected-window))
@@ -49,6 +61,7 @@
     ("k" kill-this-buffer "kill")
     ("K" kill-matching-buffers "kill-match")
     ("b" switch-to-buffer "switch" :exit t)
+    ("e" my-open-finder "open-finder" :exit t)
     ("q" nil "quit" :exit t))
   (defhydra my-hydra/desktop (:color teal)
     "Desktop"

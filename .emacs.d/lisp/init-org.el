@@ -200,77 +200,27 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
 ;; assumes org-gantt package is present on the system; to install the package,
 ;; clone the repo https://github.com/swillner/org-gantt in ~/.emacs.d/site-lisp
 ;;
-;; to use, in a Org document create an org-gantt-chart dynamic block, which
-;; can be limited to a given Org subtree using the :ID: property, populate it
-;; using "C-c C-x C-u" and export the Org document to LaTeX as a PDF file
+;; create an org-gantt-chart dynamic block in a Org document, select a given
+;; Org subtree using the :ID: property, populate it using "C-c C-x C-u" and
+;; export the document to LaTeX
 ;;
-;; the subtree tasks should have either
-;; 1. scheduled ("C-c C-s") and deadline ("C-c C-d") dates, or
-;; 2. an :Effort: property
+;; the subtree tasks should have either: A. scheduled ("C-c C-s") and deadline
+;; ("C-c C-d") dates; or B. scheduled date for the first child task,
+;; :ORDERED: t for parents, and :Effort: <time-string> for task length
+;; and :LINKED-TO: <id_list> to indicate downstream tasks for children
 ;;
-;; task downstream dependencies are specified by a :LINKED-TO: <id_list>
-;; property to link to tasks with the given :ID: property, or by using the
-;; order of the child tasks if a task has an :ORDERED: property with value t
+;; to hide the subtree for Gantt chart in the LaTeX output, give it a COMMENT
+;; state and make sure the dynamic block appears outside any commented subtree
 ;;
-;; to hide the subtree generating the Gantt chart in the LaTeX output, give the
-;; subtree a COMMENT state and make sure the dynamic block appears outside the
-;; commented subtree (in fact, outside any commented subtree)
-;;
-;; Example:
-;; ---
-;; ...
-;; #+LATEX_HEADER: \usepackage{pgfgantt}
-;; #+LATEX_HEADER: \usepackage{pdflscape}
-;; ...
-;; * Task Specification
-;; Description of Project.
-;; Since the subtree below has the ~COMMENT~ state, it is not exported.
-;; To also export it, remove the ~COMMENT~ state before exporting.
-;; ** COMMENT Project
-;;    :PROPERTIES:
-;;    :ID:       project
-;;    :END:
-;; *** Task 1
-;;     SCHEDULED: <2015-05-25 Mon> DEADLINE: <2015-05-28 Thu>
-;;     :PROPERTIES:
-;;     :LINKED-TO: task2,task4
-;;     :END:
-;; *** Task 2
-;;     :PROPERTIES:
-;;     :ID:       task2
-;;     :Effort:   2d
-;;     :END:
-;; *** Task 3
-;;     :PROPERTIES:
-;;     :ID:       task3
-;;     :ORDERED:  t
-;;     :Effort:   7d
-;;     :END:
-;; **** Task 3.1
-;;      :PROPERTIES:
-;;      :Effort:   3d
-;;      :END:
-;; **** Task 3.2
-;;      :PROPERTIES:
-;;      :Effort:   4d
-;;      :END:
-;; *** Task 4
-;;     :PROPERTIES:
-;;     :ID:       task4
-;;     :Effort:   5d
-;;     :LINKED-TO: task3
-;;     :END:
-;;
-;; * Gantt chart
-;; Press "~C-c C-x C-u~" to populate the dynamic block below before exporting
-;; to LaTeX. The Gantt chart below is wrapped in the ~landscape~ environment
-;; to make it appear on its own landscape page.
-;; #+LATEX: \begin{landscape}
-;; #+BEGIN: org-gantt-chart :id "project-deadlines-schedules"
-;; #+END
-;; #+LATEX: \end{landscape}
-;; ...
-;; ---
+;; note there is a bug in the package converting :Effort: to length of time,
+;; fixable by changing a line in `org-gantt-strings-to-time' in org-gantt.el:
+;; --
+;;              (* 3600 (or hours-per-day (org-gantt-hours-per-day)) (- 7 (length work-free-days)))
+;; --
+;; to:
+;; --
+;;              (* 3600 (or hours-per-day (org-gantt-hours-per-day)) (- 7 (length work-free-days)) (org-gantt-string-to-number weeks-string))
+;; --
 (use-package org-gantt
   :load-path "site-lisp/org-gantt"
   :ensure nil
