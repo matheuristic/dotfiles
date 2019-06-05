@@ -14,54 +14,77 @@ Since the subtree below has the ~COMMENT~ state, it is not exported. To also exp
    :ID:       project
    :END:
 *** Task 1
-    SCHEDULED: <2015-05-25 Mon> DEADLINE: <2015-05-28 Thu>
     :PROPERTIES:
-    :LINKED-TO: task2,task4
+    :ID:       task1
     :END:
+**** Task 1.1
+     DEADLINE: <2016-05-26 Thu> SCHEDULED: <2016-05-23 Mon>
+     :PROPERTIES:
+     :ID:       task11
+     :LINKED-TO: task21,task31
+     :END:
 *** Task 2
     :PROPERTIES:
     :ID:       task2
-    :Effort:   2d
+    :ORDERED:  t
     :END:
+**** Task 2.1
+     :PROPERTIES:
+     :ID:       task21
+     :Effort:   2d
+     :END:
+**** Task 2.2
+     :PROPERTIES:
+     :ID:       task22
+     :Effort:   4d
+     :END:
 *** Task 3
     :PROPERTIES:
     :ID:       task3
     :ORDERED:  t
-    :Effort:   7d
     :END:
 **** Task 3.1
      :PROPERTIES:
+     :ID:       task31
      :Effort:   3d
+     :LINKED-TO: task41
      :END:
 **** Task 3.2
      :PROPERTIES:
-     :Effort:   4d
+     :ID:       task32
+     :Effort:   2d
      :END:
 *** Task 4
     :PROPERTIES:
     :ID:       task4
-    :Effort:   5d
-    :LINKED-TO: task3
     :END:
+**** Task 4.1
+     :PROPERTIES:
+     :ID:       task41
+     :Effort:   3d
+     :END:
 
 * Gantt chart
 
 Press "~C-c C-x C-u~" to populate the dynamic block below before exporting to LaTeX.
 
  #+LATEX: \begin{landscape}
- #+BEGIN: org-gantt-chart :id "project"
- \begin{ganttchart}[time slot format=isodate, vgrid={*4{dashed},*3{black}}]{2015-05-25}{2015-06-29}
- \gantttitlecalendar{year, month=name, day}\\
- \ganttgroup[group left shift=0.0, group right shift=-0.0, name=project]{Project}{2015-05-25}{2015-05-28}\\
-   \ganttbar[bar left shift=0.0, bar right shift=-0.0, name=uniqueid1]{Task 1}{2015-05-25}{2015-05-28}\\
-   \ganttbar[bar left shift=0.0, bar right shift=-0.0, name=task2]{Task 2}{2015-05-29}{2015-06-08}\\
-   \ganttgroup[group left shift=0.0, group right shift=-0.0, name=task3]{Task 3}{2015-06-12}{2015-06-29}\\
-     \ganttbar[bar left shift=0.0, bar right shift=-0.0, name=uniqueid2]{Task 3.1}{2015-06-12}{2015-06-23}\\
-     \ganttlinkedbar[bar left shift=0.0, bar right shift=-0.0, name=uniqueid3]{Task 3.2}{2015-06-17}{2015-06-29}\\
-   \ganttbar[bar left shift=0.0, bar right shift=-0.0, name=task4]{Task 4}{2015-05-29}{2015-06-11}
- \ganttlink{uniqueid1}{task2}
- \ganttlink{uniqueid1}{task4}
- \ganttlink{task4}{task3}
+ #+BEGIN: org-gantt-chart :id "project" :use-id-subheadlines t :title-calendar "year,month=name,day,week" :weekend-style "{draw=blue!30, line width=1pt}" :workday-style "{draw=blue!50, dashed, line width=.75pt}"
+ \begin{ganttchart}[time slot format=isodate, vgrid={*4{draw=blue!50, dashed, line width=.75pt},*3{draw=blue!30, line width=1pt}}]{2016-05-23}{2016-06-03}
+ \gantttitlecalendar{year,month=name,day,week}\\
+ \ganttgroup[group left shift=0.0, group right shift=-0.0, name=task1]{Task 1}{2016-05-23}{2016-05-26}\\
+   \ganttbar[bar left shift=0.0, bar right shift=-0.0, name=task11]{Task 1.1}{2016-05-23}{2016-05-26}\\
+ \ganttgroup[group left shift=0.0, group right shift=-0.0, name=task2]{Task 2}{2016-05-27}{2016-06-03}\\
+   \ganttbar[bar left shift=0.0, bar right shift=-0.0, name=task21]{Task 2.1}{2016-05-27}{2016-05-30}\\
+   \ganttlinkedbar[bar left shift=0.0, bar right shift=-0.0, name=task22]{Task 2.2}{2016-05-31}{2016-06-03}\\
+ \ganttgroup[group left shift=0.0, group right shift=-0.0, name=task3]{Task 3}{2016-05-27}{2016-06-02}\\
+   \ganttbar[bar left shift=0.0, bar right shift=-0.0, name=task31]{Task 3.1}{2016-05-27}{2016-05-31}\\
+   \ganttlinkedbar[bar left shift=0.0, bar right shift=-0.0, name=task32]{Task 3.2}{2016-06-01}{2016-06-02}\\
+ \ganttgroup[group left shift=0.0, group right shift=-0.0, name=task4]{Task 4}{2016-06-01}{2016-06-03}\\
+   \ganttbar[bar left shift=0.0, bar right shift=-0.0, name=task41]{Task 4.1}{2016-06-01}{2016-06-03}
+ \ganttlink{task11}{task21}
+ \ganttlink{task11}{task31}
+ \ganttlink{task31}{task41}
  \end{ganttchart}
  #+END:
  #+LATEX: \end{landscape}
