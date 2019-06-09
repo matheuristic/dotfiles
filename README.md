@@ -4,36 +4,17 @@ User configuration files for:
 
 * Bash
 * Emacs
+* fish
 * Flake8
 * Git global gitignore files
+* Neovim
+* NPM
 * PostgreSQL aliases
 * Pylint
 * GNU Screen
 * tmux
 * Vim
 * X11 (urxvt and xterm)
-
-## Automated installation
-
-To set up basic gitignore, NPM, tmux and Emacs config files for a new account:
-```Shell
-$ ./install.sh $PWD
-```
-from the root directory of the repository. The files will be set up as symlinks to corresponding files in the repository.
-
-Optional Emacs UI elements and support for specific file formats and programming languages can be set up by copying the [post-init](.emacs.d/init-local-post.el) and modifying it as needed.
-
-## Setting up conda environment
-
-If using [Anaconda](https://www.anaconda.com/download/) or [Miniconda](https://conda.io/miniconda.html), basic packages for Python development can be set up via:
-```Shell
-$ conda install --file base_conda_packages.txt
-```
-to install the packages into a currently activated environment, or
-```Shell
-$ conda create --name <env> --file base_conda_packages.txt
-```
-to create a new environment and install the packages into it.
 
 ## Project-specific pylint configuration
 
