@@ -70,21 +70,23 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (and (not (display-graphic-p)) (fboundp 'menu-bar-mode)) (menu-bar-mode -1))
 
-;; smooth scrolling in GUI (hold SHIFT/CTRL for 5 line/full screen increments)
+;; mouse scrolling
 (when (display-graphic-p)
-  (setq mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control)))))
+  ;; smooth scrolling in GUI (hold SHIFT/CTRL for 5 line/full window increments)
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control))))
+  ;; horizontal scrolling (hold SHIFT/CTRL for 5 column/full window increments)
+  (global-set-key [wheel-right] (lambda () (interactive) (scroll-left 1)))
+  (global-set-key [wheel-left] (lambda () (interactive) (scroll-right 1)))
+  (global-set-key [S-wheel-right] (lambda () (interactive) (scroll-left 5)))
+  (global-set-key [S-wheel-left] (lambda () (interactive) (scroll-right 5)))
+  (global-set-key [C-wheel-right] (lambda () (interactive) (scroll-left (window-total-width))))
+  (global-set-key [C-wheel-left] (lambda () (interactive) (scroll-right (window-total-width)))))
 
-;; left and right scrolling
-(if (eq system-type 'darwin)
-    (progn (global-set-key [wheel-right] (lambda () (interactive) (scroll-left 1)))
-           (global-set-key [wheel-left] (lambda () (interactive) (scroll-right 1))))
-  (progn (global-set-key [wheel-right] 'scroll-right)
-         (global-set-key [wheel-left] 'scroll-left)))
-
-(when (eq system-type 'darwin) ;; on Mac OS X,
-  (setq mac-option-modifier 'meta ;; use left Option as Meta,
-        mac-right-option-modifier nil ;; preserve right Option,
-        mac-right-command-modifier 'hyper)) ;; and use right Command as Hyper
+;; on Mac OS X, use left Option as Meta and right Command as Hyper
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier 'meta
+        mac-right-option-modifier nil
+        mac-right-command-modifier 'hyper))
 
 ;; framework for temporary or repeatable bindings
 (require 'init-ui-hydra)
@@ -173,6 +175,12 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package hl-line
   :ensure nil ;; built-in
   :commands hl-line-mode)
+
+;; hypertextual information manager, https://www.gnu.org/software/hyperbole/
+(use-package hyperbole
+  :defer 1
+  :bind (("H-H" . hyperbole-toggle-bindings)) ;; to access global bindings that were written by hyperbole when it was loaded
+  :init (setq hkey-init-override-local-keys nil)) ;; don't automatically unbind mode-specific keys that conflict with hyperbole
 
 ;; advanced buffer menu
 (use-package ibuffer
@@ -391,8 +399,9 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; show temp snippet
     ("q" nil "quit"))
   ;; remove default bindings to avoid conflicts with other packages
-  (unbind-key "\C-c&" yas-minor-mode-map) ;; removing prefix bindings also ...
-  (unbind-key "\C-c" yas-minor-mode-map) ;; ... removes bindings using them
+  ;; note that removing prefix bindings also removes bindings using them
+  (unbind-key "\C-c&" yas-minor-mode-map)
+  (unbind-key "\C-c" yas-minor-mode-map)
   (unbind-key "<tab>" yas-minor-mode-map)
   (unbind-key "TAB" yas-minor-mode-map)
   (yas-global-mode 1))
