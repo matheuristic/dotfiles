@@ -1,9 +1,0 @@
-# Base set of conda packages for new environments
-# This file may be used to create an environment using:
-# $ conda create --name <env> --file <this_file>
-# or to install specified packages into an activated environment using:
-# $ conda install --file <this_file>
-# platform: osx-64
-jedi
-pip
-pylint

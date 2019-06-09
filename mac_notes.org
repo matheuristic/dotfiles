@@ -1,0 +1,53 @@
+#+TITLE: Mac OS X Notes
+* Applications
+- [[https://www.google.com/chrome/][Chrome]]
+- [[https://cyberduck.io/][Cyberduck]]
+- [[https://www.devontechnologies.com/apps/devonthink][DevonThink Pro]] /(license needed)/
+- [[https://docs.docker.com/docker-for-mac/install/][Docker]]
+- [[https://emacsformacosx.com/][Emacs for OS X]]
+- [[https://www.mozilla.org/en-US/firefox/new/][Firefox]]
+- [[http://tentouchapps.com/grafio/][Grafio]] /(license needed)/ *(coming soon)*
+- [[https://www.toketaware.com/ithoughts-osx][iThoughts]] /(license needed or via App Store)/
+- [[https://www.macports.org/][MacPorts]]
+- [[https://www.office.com/][Microsoft Office]] /(license needed)/
+- [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]]
+- [[https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-macos/][OpenVPN]] /(as needed)/
+- [[https://pdfexpert.com/][PDF Expert]] /(license needed)/ or [[https://smilesoftware.com/store][PDFPenPro]] /(license needed)/
+- [[https://www.getpostman.com/][Postman]]
+- [[https://eggerapps.at/postico/][Postico]]
+- [[https://www.royalapplications.com/ts/mac/features][Royal TSX]]
+- [[https://www.talend.com/products/talend-open-studio/][Talend Open Studio]] /(Data Integration; Data Quality; Big Data, if needed; requires OpenJDK which can be installed via MacPorts)/
+- [[https://github.com/yihui/tinytex][TinyTeX]]
+- [[https://www.zotero.org/][Zotero]]
+* Application-specific configuration
+** MacPorts
+***  Recommended packages
+#+begin_src
+autoconf
+automake
+bat
+fish
+fzf
+go
+htop
+lftp
+openjdk8 / openjdk11
+ripgrep
+tmux
+xsv
+#+end_src
+*** Migration process after upgrading to a new version of OS X
+See instructions [[https://trac.macports.org/wiki/Migration][here]].
+** friendly interactive shell (fish)
+*** Setup
+- [[https://github.com/fish-shell/fish-shell][fish]] can be installed via MacPorts.
+- Set up a profile in [[https://support.apple.com/guide/terminal/welcome/mac][Terminal]] (or [[https://www.iterm2.com/][iterm2]]) with "Shell > Startup > Run Command" enabled and set to the installed fish binary. Set it as the default profile.
+- [[https://github.com/jorgebucaran/fisher][fisher]] can be used to manage fish packages.
+*** Recommended packages
+#+begin_src
+fzf
+pure
+z
+#+end_src
+* Usage tips
+- ~Control-Command-Q~ locks the screen

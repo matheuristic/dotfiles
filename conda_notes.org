@@ -1,0 +1,16 @@
+#+TITLE: Conda Notes
+* Anaconda vs Miniconda
+Generally, use [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]] over [[https://www.anaconda.com/distribution/][Anaconda]] since the latter installs a lot of extraneous packages.
+* Recommended workflow
+- A new environment for Python package development or where package Python packages will be directly installed from [[https://pypi.org/][PyPI]] should first have ~pip~ installed via ~conda~.
+- Within an environment, don't mix packages from the ~conda-forge~ and standard ~conda~ channels, use one of them and stick with it as far as possible for all conda installed packages in that environment.
+* Duplicating environments
+A conda environment can be saved via
+#+begin_src sh
+$ conda env export > environment.yaml
+#+end_src
+(change ~environment.yaml~ to another output file name as needed) and recreated via
+#+begin_src sh
+$ conda env create -f environment.yaml
+#+end_src
+*Note*: a saved environment lists the environment's name, its prefix path, conda channels and installed conda packages and their versions, but /not/ any packages installed via ~pip~ (those should be tracked in a separate file, typically ~requirements.txt~).
