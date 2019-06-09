@@ -179,7 +179,9 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; hypertextual information manager, https://www.gnu.org/software/hyperbole/
 (use-package hyperbole
   :defer 1
-  :bind (("H-H" . hyperbole-toggle-bindings)) ;; to access global bindings that were written by hyperbole when it was loaded
+  :bind (("H-\\" . hycontrol-enable-windows-mode) ;; Hycontrol
+         ("<H-return>" . hkey-either) ;; action/assist
+         ("H-H" . hyperbole-toggle-bindings)) ;; to access global bindings overwritten by hyperbole default bindings
   :init (setq hkey-init-override-local-keys nil)) ;; don't automatically unbind mode-specific keys that conflict with hyperbole
 
 ;; advanced buffer menu
