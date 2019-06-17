@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Set up support for various programming languages and their tooling
+;; Set up support for programming languages and their tooling
 
 ;;; Code:
 
@@ -173,7 +173,7 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
   ;; BibTeX reference manager
   (use-package ebib
     :commands ebib
-    :bind ("H-B" . ebib)
+    :bind ("C-H-B" . ebib)
     :config
     (with-eval-after-load 'org
       (require 'org-ebib)
@@ -205,18 +205,56 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
       (bind-key "H-i" 'ebib-insert-citation org-mode-map))))
 
 ;; Emacs Speaks Statistics
-;; has built-in flymake support (requires the R lintr pkg be installed)
+;; has built-in flymake support (requires R lintr be installed)
 (when (or (member "julia" init-lang-enable-list)
           (member "r" init-lang-enable-list))
   (use-package ess
+    :pin "MELPA"
     :mode (("\\.R$" . R-mode)
            ("\\.jl$" . julia-mode))
-    :commands (R-mode
-               julia-mode
-               ess-eval-function
-               ess-eval-line
-               ess-eval-buffer
-               ess-switch-to-ESS)))
+    :commands (R-mode julia-mode ess-switch-to-ESS)
+    :bind (:map ess-mode-map
+           ("H-m" . my-hydra/ess/body))
+    :init (setq ess-eval-visibly 'nowait
+                ess-default-style 'RStudio)
+    :config
+    (defhydra my-hydra/ess (:color teal :hint nil)
+      "
+Emacs Speaks Statistics
+
+Session     _N_   : new     _R_   : request _s_   : switch  _C-q_ : quit
+
+Eval        _l_   : line    _f_   : func    _r_   : region  _b_   : buffer
+
+Workspace   _D_   : chdir   _d_   : R dired
+
+Help        _h_   : object  _H_   : browser _A_   : apropos
+
+"
+      ;; session
+      ("N" (lambda () (interactive)
+             (cond ((string= ess-dialect "R") (R))
+                   ((string= ess-dialect "julia") (julia))
+                   (t (message "Unsupported dialect")))))
+      ("R" ess-request-a-process)
+      ("s" ess-switch-to-ESS)
+      ("C-q" ess-quit)
+      ;; eval
+      ("l" ess-eval-line)
+      ("f" ess-eval-function)
+      ("r" ess-eval-region)
+      ("b" ess-eval-buffer)
+      ;; workspace
+      ("D" ess-change-directory)
+      ("d" ess-rdired)
+      ;; help
+      ("h" ess-display-help-on-object)
+      ("H" ess-display-help-in-browser)
+      ("A" ess-display-help-apropos)
+      ("q" nil "quit"))
+    ;; polymodes for hybrid R formats (Rnw, Rmd, Rhtml, Rbrew, Rcpp, cppR, etc)
+    (when (member "r" init-lang-enable-list)
+      (use-package poly-R))))
 
 ;; JSON
 (when (member "json" init-lang-enable-list)

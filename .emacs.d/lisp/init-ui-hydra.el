@@ -34,6 +34,17 @@ Note that `hyperbole' provides `hycontrol' which has similar functionality."
 (use-package hydra
   :pin "MELPA"
   :config
+  (defhydra my-hydra/bookmarks (:color teal :columns 3)
+    "Bookmarks"
+    ("s" bookmark-set "set")
+    ("d" bookmark-delete "delete")
+    ("l" list-bookmarks "list")
+    ("j" bookmark-jump "jump")
+    ("i" bookmark-insert "insert")
+    ("I" bookmark-insert-location "insert-loc")
+    ("L" bookmark-load "load")
+    ("W" bookmark-write "write")
+    ("q" nil "quit"))
   (defhydra my-hydra/buffer (:color amaranth :columns 5)
     "Buffer"
     ("p" previous-buffer "previous")
@@ -98,16 +109,24 @@ Note that `hyperbole' provides `hycontrol' which has similar functionality."
     (">" scroll-left "pg-right")
     ("C-SPC" set-mark-command "set-mark")
     ("x" exchange-point-and-mark "xchg-mark")
-    ("rv" view-register "view-reg")
-    ("r SPC" point-to-register "pt-to-reg")
-    ("rj" jump-to-register "jmp-to-reg")
-    ("rl" list-bookmarks "bmk-list")
-    ("rm" bookmark-set "bmk-set")
-    ("rb" bookmark-jump "bmk-jump")
     ("gg" beginning-of-buffer "beg-buf")
     ("G" end-of-buffer "end-buf")
     ("gl" goto-line "goto-line")
     ("q" nil "quit" :exit t))
+  (defhydra my-hydra/registers (:color teal :columns 4)
+    "Registers"
+    ("SPC" point-to-register "save-point")
+    ("w" window-configuration-to-register "save-windows")
+    ("f" frameset-to-register "save-frames")
+    ("j" jump-to-register "jump")
+    ("s" copy-to-register "copy-region")
+    ("a" append-to-register "append-region")
+    ("p" prepend-to-register "prepend-region")
+    ("r" copy-rectangle-to-register "copy-rect")
+    ("i" insert-register "insert")
+    ("l" list-registers "list")
+    ("v" view-register "view")
+    ("q" nil "quit"))
   (defhydra my-hydra/search (:color teal :columns 3)
     "Search"
     ("gg" grep "grep")
@@ -144,11 +163,13 @@ Note that `hyperbole' provides `hycontrol' which has similar functionality."
     ("-" text-scale-decrease "zoom-out")
     ("0" (text-scale-adjust 0) "zoom-reset")
     ("q" nil "quit" :exit t))
+  (global-set-key (kbd "H-B") 'my-hydra/bookmarks/body)
   (global-set-key (kbd "H-b") 'my-hydra/buffer/body)
   (global-set-key (kbd "H-h") 'my-hydra/help/body)
   (global-set-key (kbd "H-S") 'my-hydra/desktop/body)
   (global-set-key (kbd "H-s") 'my-hydra/search/body)
   (global-set-key (kbd "H-n") 'my-hydra/navigation/body)
+  (global-set-key (kbd "H-R") 'my-hydra/registers/body)
   (global-set-key (kbd "H-V") 'my-hydra/visual/body))
 
 ;; load frames and windows hydras
