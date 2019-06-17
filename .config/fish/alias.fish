@@ -9,3 +9,6 @@ alias mv='mv -i'
 if not type -q md5sum
     alias md5sum='md5'
 end
+
+# Alias to run R lintr from the command line
+alias lintr="Rscript -e 'lintr::lint(commandArgs(trailingOnly = TRUE))'"
