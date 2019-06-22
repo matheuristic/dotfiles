@@ -26,13 +26,14 @@
   :defer t
   :hook (prog-mode . (lambda () (require 'lsp-mode)))
   :bind (:map lsp-mode-map
-         ("H-l" . my-hydra/lsp/body))
+         ("C-c s-l" . my-hydra/lsp/body))
   :config
   (setq lsp-print-io nil ;; set to t (nil) to enable (disable) logging of packets between emacs and the LS
         lsp-eldoc-enable-hover nil ;; don't have eldoc display hover info
         lsp-eldoc-enable-signature-help t ;; display signature help in minibuffer
         lsp-eldoc-prefer-signature-help t ;; prefer displaying signature help over hover
         lsp-eldoc-render-all nil ;; don't show all returned from document/onHover, only symbol info
+        lsp-enable-on-type-formatting nil ;; don't have the LS auto format the document when typing
         lsp-prefer-flymake t) ;; set to nil to prefer flycheck to flymake
   ;; install LSP company backend for LSP-driven completion
   (use-package company-lsp
@@ -85,7 +86,7 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
   :pin "MELPA"
   :after lsp-mode
   :bind (:map dap-mode-map
-         ("H-D" . my-hydra/dap/body))
+         ("C-c s-d b" . my-hydra/dap/body))
   :init
   (require 'dap-hydra)
   (require 'dap-ui)
@@ -115,7 +116,7 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
   (use-package csv-mode
     :commands csv-mode
     :bind (:map csv-mode-map
-           ("H-m" . my-hydra/csv-mode/body))
+           ("C-c s-m" . my-hydra/csv-mode/body))
     :config (defhydra my-hydra/csv-mode (:color teal :columns 4)
               "CSV mode"
               ("s" csv-sort-fields "sort")
@@ -173,7 +174,7 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
   ;; BibTeX reference manager
   (use-package ebib
     :commands ebib
-    :bind ("C-H-B" . ebib)
+    :bind ("C-c s-b e" . ebib)
     :config
     (with-eval-after-load 'org
       (require 'org-ebib)
@@ -202,7 +203,7 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
                  (format "%s\\cite[%s][%s]{%s}" (concat desc-name " ") desc-pre-note desc-post-note path)
                (format "\\cite{%s}" path))))))
       (org-link-set-parameters "ebib" :export 'my-org-ebib-export)
-      (bind-key "H-i" 'ebib-insert-citation org-mode-map))))
+      (bind-key "C-c s-b i" 'ebib-insert-citation org-mode-map))))
 
 ;; Emacs Speaks Statistics
 ;; has built-in flymake support (requires R lintr be installed)
@@ -214,7 +215,7 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
            ("\\.jl$" . julia-mode))
     :commands (R-mode julia-mode ess-switch-to-ESS)
     :bind (:map ess-mode-map
-           ("H-m" . my-hydra/ess/body))
+           ("C-c s-m" . my-hydra/ess/body))
     :init (setq ess-eval-visibly 'nowait
                 ess-default-style 'RStudio)
     :config
@@ -269,9 +270,9 @@ Help        _h_   : object  _H_   : browser _A_   : apropos
            ("\\.md\\'" . markdown-mode)
            ("\\.markdown\\'" . markdown-mode))
     :bind (:map markdown-mode-map
-           ("H-m" . my-hydra/markdown-mode/body)
+           ("C-c s-m" . my-hydra/markdown-mode/body)
            :map gfm-mode-map
-           ("H-m" . my-hydra/markdown-mode/body))
+           ("C-c s-m" . my-hydra/markdown-mode/body))
     :config
     ;; Markdown table of contents
     (use-package markdown-toc)
@@ -376,7 +377,7 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
 ;; ---
 (use-package jupyter
   :defer t
-  :bind ("H-j" . my-hydra/jupyter/body)
+  :bind ("C-c s-j" . my-hydra/jupyter/body)
   :init
   (defun my-jupyter-status-string ()
     "Returns string showing availability of jupyter cmd, if `ob-jupyter' is initialized, and if a REPL is associated with the current buffer."

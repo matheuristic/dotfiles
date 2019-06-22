@@ -163,14 +163,14 @@ Note that `hyperbole' provides `hycontrol' which has similar functionality."
     ("-" text-scale-decrease "zoom-out")
     ("0" (text-scale-adjust 0) "zoom-reset")
     ("q" nil "quit" :exit t))
-  (global-set-key (kbd "H-B") 'my-hydra/bookmarks/body)
-  (global-set-key (kbd "H-b") 'my-hydra/buffer/body)
-  (global-set-key (kbd "H-h") 'my-hydra/help/body)
-  (global-set-key (kbd "H-S") 'my-hydra/desktop/body)
-  (global-set-key (kbd "H-s") 'my-hydra/search/body)
-  (global-set-key (kbd "H-n") 'my-hydra/navigation/body)
-  (global-set-key (kbd "H-R") 'my-hydra/registers/body)
-  (global-set-key (kbd "H-V") 'my-hydra/visual/body))
+  (global-set-key (kbd "C-c s-b m") 'my-hydra/bookmarks/body)
+  (global-set-key (kbd "C-c s-b f") 'my-hydra/buffer/body)
+  (global-set-key (kbd "C-c s-h h") 'my-hydra/help/body)
+  (global-set-key (kbd "C-c s-d k") 'my-hydra/desktop/body)
+  (global-set-key (kbd "C-c s-s") 'my-hydra/search/body)
+  (global-set-key (kbd "C-c s-n") 'my-hydra/navigation/body)
+  (global-set-key (kbd "C-c s-r r") 'my-hydra/registers/body)
+  (global-set-key (kbd "C-c s-v i") 'my-hydra/visual/body))
 
 ;; load frames and windows hydras
 (when init-ui-hydra-load-frames-windows-hydra
@@ -239,8 +239,8 @@ Note that `hyperbole' provides `hycontrol' which has similar functionality."
     ("d" delete-window "delete")
     ("D" kill-buffer-and-window "delete-buf")
     ("q" nil "quit" :exit t))
-  (global-set-key (kbd "H-f") 'my-hydra/frame/body)
-  (global-set-key (kbd "H-w") 'my-hydra/window/body))
+  (global-set-key (kbd "C-c s-f") 'my-hydra/frame/body)
+  (global-set-key (kbd "C-c s-w w") 'my-hydra/window/body))
 
 (provide 'init-ui-hydra)
 

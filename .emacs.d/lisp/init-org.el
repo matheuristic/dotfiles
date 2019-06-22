@@ -30,15 +30,15 @@
 ;;
 ;; see http://doc.norang.ca/org-mode.html for a good example config
 ;;
-;; escaping Org examples: using "C-c '" to edit Org source blocks in a separate
-;; buffer will automatically escape the Org markup on return
+;; using "C-c '" to edit Org source blocks in a separate buffer will
+;; automatically escape the Org markup on return
 (use-package org
   :hook (org-mode . visual-line-mode)
-  :bind (("H-o" . my-hydra/org-global/body)
+  :bind (("C-c s-o" . my-hydra/org-global/body)
          :map org-agenda-mode-map
-         ("H-m" . my-hydra/org-agenda/body)
+         ("C-c s-m" . my-hydra/org-agenda/body)
          :map org-mode-map
-         ("H-m" . my-hydra/org-mode/body))
+         ("C-c s-m" . my-hydra/org-mode/body))
   :init (defhydra my-hydra/org-global (:color teal)
           "Org"
           ("a" org-agenda "agenda")

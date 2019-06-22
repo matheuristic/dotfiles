@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Configure tooling for project interaction
+;; Configure tools for project interaction
 
 ;;; Code:
 
@@ -14,12 +14,12 @@
 (use-package projectile
   :delight projectile-mode '(:eval (concat " [" (projectile-project-name) "]"))
   :bind (:map projectile-mode-map
-         ("H-p" . projectile-command-map) ;; prefix binding for projectile cmds
-         ("H-P" . my-hydra/projectile/body))
+         ("C-c s-p" . projectile-command-map) ;; prefix binding for projectile cmds
+         ("C-c s-P" . my-hydra/projectile/body))
   :init
   (setq projectile-create-missing-test-files t ;; create test files if none is found when toggling btw implementation and test
         projectile-switch-project-action 'projectile-commander
-        projectile-use-git-grep t) ;; use git grep when in a Git project to skip backup, object and other files that are not tracked
+        projectile-use-git-grep t) ;; use git grep when in a Git project to skip backup, object and other non-tracked files
   (projectile-mode)
   :config
   ;; use ripgrep to grep in projectile, if available

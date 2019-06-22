@@ -82,11 +82,10 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (global-set-key [C-wheel-right] (lambda () (interactive) (scroll-left (window-total-width))))
   (global-set-key [C-wheel-left] (lambda () (interactive) (scroll-right (window-total-width)))))
 
-;; on Mac OS X, use left Option as Meta and right Command as Hyper
+;; on Mac OS X, use left Option as Meta
 (when (eq system-type 'darwin)
   (setq mac-option-modifier 'meta
-        mac-right-option-modifier nil
-        mac-right-command-modifier 'hyper))
+        mac-right-option-modifier nil))
 
 ;; framework for temporary or repeatable bindings
 (require 'init-ui-hydra)
@@ -100,9 +99,9 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
 (use-package artist
   :ensure nil ;; built-in
   :defer t
-  :bind (("H-A" . artist-mode)
+  :bind (("C-c s-a" . artist-mode)
          :map artist-mode-map
-         ;; trackpad workaround - "super-click" for the drawing menu
+         ;; "super-click" for the drawing menu (trackpad workaround)
          (([s-mouse-1] . artist-mouse-choose-operation))))
 
 ;; text completion framework
@@ -148,7 +147,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("L" ediff-windows-linewise)
     ("W" ediff-windows-wordwise)
     ("q" nil "quit" :exit t))
-  (global-set-key (kbd "H-E") 'my-hydra/ediff/body))
+  (global-set-key (kbd "C-c s-e d") 'my-hydra/ediff/body))
 
 ;; Eldoc
 (use-package eldoc
@@ -166,9 +165,9 @@ Windows  _L_ : line-wise   _W_ : word-wise
   :delight eyebrowse-mode
   :commands eyebrowse-mode
   :init
-  (setq eyebrowse-keymap-prefix (kbd "H-W") ;; change prefix binding to "H-W"
+  (setq eyebrowse-keymap-prefix (kbd "C-c s-w e") ;; change prefix binding to "C-c s-w e"
         eyebrowse-new-workspace t)
-  (my-lazy-key-seq global-map (kbd "H-W") (lambda () (require 'eyebrowse)))
+  (my-lazy-key-seq global-map (kbd "C-c s-w e") (lambda () (require 'eyebrowse)))
   :config (eyebrowse-mode t))
 
 ;; highlight line
@@ -179,9 +178,9 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; hypertextual information manager, https://www.gnu.org/software/hyperbole/
 (use-package hyperbole
   :defer 1
-  :bind (("H-\\" . hycontrol-enable-windows-mode) ;; HyControl
-         ("<H-return>" . hkey-either) ;; action/assist
-         ("H-H" . hyperbole-toggle-bindings)) ;; to access global bindings overwritten by hyperbole default bindings
+  :bind (("C-c s-\\" . hycontrol-enable-windows-mode) ;; HyControl
+         ("<s-return>" . hkey-either) ;; action/assist
+         ("C-c s-h b" . hyperbole-toggle-bindings)) ;; to access global bindings overwritten by hyperbole default bindings
   :init (setq hkey-init-override-local-keys nil)) ;; don't unbind mode-specific keys that conflict with hyperbole's defaults
 
 ;; advanced buffer menu
@@ -195,7 +194,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
                                      (car (car ibuffer-saved-filter-groups)))))))
   :bind (("C-x C-b" . ibuffer)
          :map ibuffer-mode-map
-         ("H-m" . my-hydra/ibuffer/body))
+         ("C-c s-m" . my-hydra/ibuffer/body))
   :config
   (setq ibuffer-expert t ;; skip extraneous confirm messages
         ibuffer-show-empty-filter-groups nil)
@@ -295,7 +294,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; interactively do things with buffers and files, use C-f to escape
 (use-package ido
   :ensure nil ;; built-in
-  :bind ("H-y" . my-yank-from-kill-ring)
+  :bind ("C-c s-y y" . my-yank-from-kill-ring)
   :config
   (setq ido-create-new-buffer 'always
         ido-default-file-method 'selected-window
@@ -317,12 +316,12 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package imenu-anywhere
   :pin "MELPA"
   :defer t
-  :bind ("H-I" . imenu-anywhere))
+  :bind ("C-c s-i m" . imenu-anywhere))
 
 ;; multiple cursors
 (use-package multiple-cursors
   :commands my-hydra/multiple-cursors/body
-  :bind ("H-M" . my-hydra/multiple-cursors/body)
+  :bind ("C-c s-c" . my-hydra/multiple-cursors/body)
   :init (setq mc/always-run-for-all nil
               mc/always-repeat-command nil
               mc/insert-numbers-default 1)
@@ -346,7 +345,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package recentf
   :ensure nil ;; built-in
   :commands recentf-open-files
-  :bind ("H-r" . recentf-open-files)
+  :bind ("C-c s-r f" . recentf-open-files)
   :init (setq recentf-max-menu-items 10
               recentf-max-saved-items 50)
   :config (recentf-mode t))
@@ -360,7 +359,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
 ;; display available bindings in popup
 (use-package which-key
   :delight which-key-mode
-  :bind ("C-H-w" . which-key-show-top-level)
+  :bind ("C-c s-w k" . which-key-show-top-level)
   :init
   (setq which-key-compute-remaps t
         which-key-allow-multiple-replacements t)
@@ -370,7 +369,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
 (use-package whitespace
   :ensure nil ;; built-in
   :commands my-hydra/whitespace/body
-  :bind ("H-M-w" . my-hydra/whitespace/body)
+  :bind ("C-c s-w s" . my-hydra/whitespace/body)
   :config (defhydra my-hydra/whitespace (:color teal :columns 3)
             "Whitespace"
             ("w" whitespace-mode "show-whitespace" :exit nil)
@@ -385,7 +384,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
   :delight yas-minor-mode
   :bind (:map yas-minor-mode-map
          ("C-S-SPC" . yas-expand)
-         ("H-Y" . my-hydra/yasnippet/body))
+         ("C-c s-y s" . my-hydra/yasnippet/body))
   :config
   (use-package yasnippet-snippets) ;; official snippets
   (use-package auto-yasnippet) ;; enable creation of temporary snippets
@@ -401,7 +400,7 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("?" (message "Current auto-yasnippet:\n%s" aya-current) "current-auto") ;; show temp snippet
     ("q" nil "quit"))
   ;; remove default bindings to avoid conflicts with other packages
-  ;; note that removing prefix bindings also removes bindings using them
+  ;; removing prefix bindings also removes bindings using them
   (unbind-key "\C-c&" yas-minor-mode-map)
   (unbind-key "\C-c" yas-minor-mode-map)
   (unbind-key "<tab>" yas-minor-mode-map)

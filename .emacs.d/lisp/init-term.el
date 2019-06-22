@@ -36,9 +36,9 @@
   :ensure nil
   :commands (ansi-term term)
   :bind (:map term-mode-map
-         ("H-m" . my-hydra/term/body)
+         ("C-c s-m" . my-hydra/term/body)
          :map term-raw-map
-         ("H-m" . my-hydra/term/body))
+         ("C-c s-m" . my-hydra/term/body))
   :config (defhydra my-hydra/term (:color teal :columns 4)
             "Term"
             ("m" (lambda () (interactive)

@@ -21,7 +21,7 @@
   :ensure nil ;; built-in
   :commands dired
   :bind (:map dired-mode-map
-         ("H-m" . my-hydra/dired/body))
+         ("C-c s-m" . my-hydra/dired/body))
   :config
   (require 'dired-x)
   (require 'dired-aux)

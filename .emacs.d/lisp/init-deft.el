@@ -23,7 +23,7 @@
 
 (use-package deft
   :commands deft
-  :bind ("H-d" . deft))
+  :bind ("C-c s-d d" . deft))
 
 (provide 'init-deft)
 

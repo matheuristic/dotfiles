@@ -85,7 +85,7 @@
     ("g" venv-cdvirtualenv "cd")
     ("c" venv-cpvirtualenv "cp")
     ("q" nil "quit"))
-  (global-set-key (kbd "H-v") 'my-hydra/virtualenv/body))
+  (global-set-key (kbd "C-c s-v e") 'my-hydra/virtualenv/body))
 
 (provide 'init-lang-python)
 

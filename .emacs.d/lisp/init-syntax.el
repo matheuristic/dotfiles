@@ -23,23 +23,23 @@
     (use-package flycheck
       :delight flycheck-mode
       :bind (:map flycheck-mode-map
-             ("H-e" . my-hydra/flycheck/body))
+             ("C-c s-e e" . my-hydra/flycheck/body))
       :init (global-flycheck-mode)
       :config (defhydra my-hydra/flycheck (:color amaranth :columns 6)
                 "Error"
                 ("F" flycheck-error-list-set-filter "filter")
                 ("p" flycheck-previous-error "previous")
                 ("n" flycheck-next-error "next")
-                ("f" flycheck-first-error "first")
-                ("l" (condition-case nil (while t (flycheck-next-error))
+                ("<" flycheck-first-error "first")
+                (">" (condition-case nil (while t (flycheck-next-error))
                        (user-error nil)) "last")
-                ("L" (condition-case nil (quit-windows-on "*Flycheck errors*" t)
+                ("l" (condition-case nil (quit-windows-on "*Flycheck errors*" t)
                        (error (flycheck-list-errors))) "list")
                 ("q" nil "quit" :exit t)))
   (use-package flymake ;; use "C-h ." to show error at point in minibuffer
     :ensure nil ;; built-in
     :bind (:map flymake-mode-map
-           ("H-e" . my-hydra/flymake/body))
+           ("C-c s-e e" . my-hydra/flymake/body))
     :config
     (use-package flymake-diagnostic-at-point
       :hook ((emacs-lisp-mode . flymake-mode)
@@ -61,7 +61,7 @@
       "Error"
       ("p" flymake-goto-prev-error "previous")
       ("n" flymake-goto-next-error "next")
-      ("L" my-toggle-flymake-diagnostics "list")
+      ("l" my-toggle-flymake-diagnostics "list")
       ("q" nil "quit" :exit t))
     (with-eval-after-load 'minions
       (add-to-list 'minions-direct 'flymake-mode))))
