@@ -312,8 +312,8 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
       ("T" markdown-toc-generate-toc)
       ("q" nil "quit" :color blue))))
 
-;; Pandoc for converting between document formats
-;; Use C-c / to bring up a menu for accessing pandoc options and settings
+;; Pandoc wrapper for converting between document formats
+;; Use C-c / to access pandoc options and settings
 (use-package pandoc-mode
   :commands (pandoc-mode pandoc-load-default-settings)
   :hook ((pandoc-mode . pandoc-load-default-settings)
