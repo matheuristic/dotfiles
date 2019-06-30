@@ -361,8 +361,8 @@ Windows  _L_ : line-wise   _W_ : word-wise
   :delight which-key-mode
   :bind ("C-c s-w k" . which-key-show-top-level)
   :init
-  (setq which-key-compute-remaps t
-        which-key-allow-multiple-replacements t)
+  (setq which-key-allow-multiple-replacements t
+        which-key-compute-remaps t)
   (which-key-mode 1))
 
 ;; visualize and cleanup whitespace

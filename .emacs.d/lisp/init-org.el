@@ -68,7 +68,7 @@
         org-src-strip-leading-and-trailing-blank-lines t
         org-src-tab-acts-natively t
         org-src-window-setup 'current-window ;; reuse Org file window for editing source blocks when using "C-c '"
-        ;; Diagram of possible state transitions for a given task
+        ;; Diagram of possible task state transitions
         ;;     -------------------------
         ;;     |                       |
         ;;     |                       v
@@ -119,7 +119,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("hp" org-agenda-priority)
     ("SPC" org-agenda-show-and-scroll-up)
     ("TAB" org-agenda-goto :exit t)
-    ("RET" org-agenda-switch-to :color blue)
+    ("RET" org-agenda-switch-to :exit t)
     ("o" link-hint-open-link :exit t)
     ("ds" org-agenda-schedule)
     ("dd" org-agenda-deadline)
@@ -161,11 +161,11 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("t" org-todo "org-todo" :exit t)
     ("a" org-archive-subtree-default :exit t)
     ("q" nil "quit" :exit t))
-  ;; use variable pitch font in Org-mode for graphical Emacs, which looks better
+  ;; use variable pitch font in Org-mode for graphical Emacs, as it looks better
   (when (display-graphic-p)
     (with-eval-after-load 'init-ui-font
       (require 'org-mouse) ;; Org-mode mouse support
-      (add-hook 'org-mode-hook #'variable-pitch-mode) ;; variable-pitch font
+      (add-hook 'org-mode-hook #'variable-pitch-mode) ;; enable var-pitch font
       (add-hook 'org-mode-hook (lambda () (setq line-spacing 0.1)))
       (set-face-attribute 'org-block nil :inherit 'fixed-pitch :background "#FFFFE0")
       (set-face-attribute 'org-block-begin-line nil :inherit 'fixed-pitch :foreground "#555555" :background "#E2E1D5")
@@ -202,7 +202,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
 ;;
 ;; create an org-gantt-chart dynamic block in a Org document, select a given
 ;; Org subtree using the :ID: property, populate it using "C-c C-x C-u" and
-;; export the document to LaTeX
+;; export the document to LaTeX via the export menu ("C-c C-e")
 ;;
 ;; the subtree tasks should have either: A. scheduled ("C-c C-s") and deadline
 ;; ("C-c C-d") dates; or B. scheduled date for the first child task,

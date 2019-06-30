@@ -79,7 +79,7 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
     ("X" lsp-execute-code-action)
     ("O" lsp-organize-imports)
     ("M-s" lsp-describe-session)
-    ("q" nil "quit" :color blue)))
+    ("q" nil "quit")))
 
 ;; front-end for interacting with debug servers
 (use-package dap-mode
@@ -126,7 +126,7 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
               ("a" csv-align-fields "align")
               ("u" csv-unalign-fields "unalign")
               ("t" csv-transpose "transpose")
-              ("q" nil "quit" :color blue))))
+              ("q" nil "quit"))))
 
 ;; Dockerfile
 (when (member "docker" init-lang-enable-list)
@@ -265,6 +265,7 @@ Help        _h_   : object  _H_   : browser _A_   : apropos
 ;; Markdown
 (when (member "markdown" init-lang-enable-list)
   (use-package markdown-mode
+    :pin "MELPA"
     :commands (markdown-mode gfm-mode)
     :mode (("README\\.md\\'" . gfm-mode)
            ("\\.md\\'" . markdown-mode)
@@ -275,7 +276,8 @@ Help        _h_   : object  _H_   : browser _A_   : apropos
            ("C-c s-m" . my-hydra/markdown-mode/body))
     :config
     ;; Markdown table of contents
-    (use-package markdown-toc)
+    (use-package markdown-toc
+      :pin "MELPA")
     (defhydra my-hydra/markdown-mode (:color teal :hint nil)
       "
 Markdown mode
@@ -283,12 +285,12 @@ Markdown mode
 Formatting  _b_ : bold      _i_ : italic    _c_ : code      _p_ : pre-formatted
             _B_ : blockquote
 
-Headings    _h_ : automatic _1_.._4_ : h1..h4
+Headings    _h_ : automatic _1_.._6_ : h1..h6
 
 Move        _H_ : promote   _L_ : demote    _J_ : move down _K_ : move up
 
 Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
-            _T_ : table of contents
+            _t_ : table     _T_/_C-T_: insert/remove table of contents
 
 "
       ("b" markdown-insert-bold)
@@ -301,6 +303,8 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
       ("2" markdown-insert-header-atx-2)
       ("3" markdown-insert-header-atx-3)
       ("4" markdown-insert-header-atx-4)
+      ("5" markdown-insert-header-atx-5)
+      ("6" markdown-insert-header-atx-6)
       ("H" markdown-promote :color red)
       ("L" markdown-demote :color red)
       ("J" markdown-move-down :color red)
@@ -309,8 +313,10 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
       ("u" markdown-insert-uri)
       ("f" markdown-insert-footnote)
       ("w" markdown-insert-wiki-link)
-      ("T" markdown-toc-generate-toc)
-      ("q" nil "quit" :color blue))))
+      ("t" markdown-insert-table)
+      ("T" markdown-toc-generate-or-refresh-toc)
+      ("C-T" markdown-toc-delete-toc)
+      ("q" nil "quit"))))
 
 ;; Pandoc wrapper for converting between document formats
 ;; Use C-c / to access pandoc options and settings

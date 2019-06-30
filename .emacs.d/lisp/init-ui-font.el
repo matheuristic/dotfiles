@@ -15,7 +15,7 @@
 (defcustom init-ui-font-default-list '("Consolas"
                                        "Menlo"
                                        "DejaVu Sans Mono")
-  "List of fonts, by priority, to use for the default face."
+  "List of fonts, by priority, to use for the default and fixed pitch face."
   :type '(repeat string)
   :group 'init-ui-font-el)
 
@@ -26,13 +26,13 @@
   :type '(repeat string)
   :group 'init-ui-font-el)
 
-;; Typography, GUI-only
+;; GUI fonts
 (when (display-graphic-p)
   ;; helper functions
   (require 'cl-extra)
 
   (defun my-font-exists (font-name)
-    "Returns FONT-NAME if that font exists on the system and `nil` otherwise"
+    "Returns FONT-NAME if given font exists on the system and `nil` otherwise"
     (if (x-list-fonts font-name) font-name))
 
   (defun my-set-font (face family &optional height weight width)
@@ -43,16 +43,17 @@
                         :weight (or weight 'normal)
                         :width (or width 'normal)))
 
-  ;; set default font
+  ;; default and fixed pitch font
   (let* ((my-font-priority-list init-ui-font-default-list)
          (my-font (cl-some #'my-font-exists my-font-priority-list))
          (is-darwin (eq system-type 'darwin)))
     (when my-font
       (my-set-font 'default my-font (if is-darwin 150 110) nil nil)
+      (my-set-font 'fixed-pitch my-font (if is-darwin 150 110) nil nil)
       (my-set-font 'mode-line my-font (if is-darwin 120 90) nil nil)
       (my-set-font 'mode-line-inactive my-font (if is-darwin 120 90) nil nil)))
 
-  ;; set variable pitch font
+  ;; variable pitch font
   (let* ((my-font-priority-list init-ui-font-variable-pitch-list)
          (my-font (cl-some #'my-font-exists my-font-priority-list))
          (is-darwin (eq system-type 'darwin)))

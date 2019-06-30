@@ -51,7 +51,7 @@ Other  _C_   : combine       _r_   : resolve       _k_   : kill current
             ("C" smerge-combine-with-next)
             ("r" smerge-resolve)
             ("k" smerge-kill-current)
-            ("q" nil "quit" :color blue)))
+            ("q" nil "quit" :exit t)))
 
 (when (executable-find "git")
   ;; Git porcelain
