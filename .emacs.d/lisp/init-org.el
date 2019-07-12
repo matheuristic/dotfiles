@@ -155,6 +155,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("<tab>" org-global-cycle "cycle-visibility")
     ("i" org-toggle-inline-images "toggle-imgs")
     ("I" org-indent-mode "org-indent-mode")
+    ("p" org-toggle-pretty-entities "toggle-pretty-ents")
     ("s" org-sort "sort" :exit t)
     ("o" org-occur "org-occur" :exit t)
     ("r" org-refile "org-refile" :exit t)

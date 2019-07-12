@@ -8,6 +8,7 @@
 
 ;;; Code:
 
+(require 'init-org)
 (require 'init-ui-hydra)
 
 ;; project interaction library
@@ -73,6 +74,17 @@ Cache   _cc_  : cache current file        _cC_  : clear cache
     ("C" projectile-compile-project "compile")
     ("p" projectile-switch-project "switch project")
     ("q" nil "quit" :exit t)))
+
+;; support org-mode TODOs for projectile projects
+;; project TODOs are reflected in the Org agenda
+;; use org-capture to store TODOs for the current buffer's project
+(use-package org-projectile
+  :pin "MELPA"
+  :after (org projectile)
+  :config
+  (setq org-projectile-projects-file "~/org/projects.org"
+        org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+  (push (org-projectile-project-todo-entry) org-capture-templates))
 
 (provide 'init-proj)
 

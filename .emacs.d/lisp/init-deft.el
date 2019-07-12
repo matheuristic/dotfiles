@@ -11,6 +11,7 @@
 (require 'init-org)
 
 ;; assign deft default customization variable values if not already set
+(defvar deft-auto-save-interval 0) ;; disable auto-saving buffers opened by deft
 (defvar deft-default-extension "org")
 (defvar deft-directory "~/org")
 (defvar deft-extensions '("org"))
