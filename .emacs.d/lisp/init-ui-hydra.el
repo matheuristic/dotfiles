@@ -20,6 +20,13 @@ Note that `hyperbole' provides `hycontrol' which has similar functionality."
   :type 'boolean
   :group 'init-ui-hydra-el)
 
+(defun my-goto-line (&optional line)
+  "Goes to line ARG if there is a prefix and the end of buffer otherwise."
+  (interactive "P")
+  (if line
+      (goto-line line)
+    (end-of-buffer)))
+
 (defun my-open-finder (&optional path)
   "Opens a new Finder window to PATH, or the current buffer file or directory in that order if PATH is nil. Mac OS X-only."
   (interactive)
@@ -93,7 +100,7 @@ Note that `hyperbole' provides `hycontrol' which has similar functionality."
     ("l" forward-char "right")
     ("b" backward-word "wd-left")
     ("w" forward-word "wd-right")
-    ("0" move-beginning-of-line "ln-begin")
+    ("^" back-to-indentation "ln-begin")
     ("$" move-end-of-line "ln-end")
     ("(" backward-sentence "sent-left")
     (")" forward-sentence "sent-right")
@@ -103,15 +110,18 @@ Note that `hyperbole' provides `hycontrol' which has similar functionality."
     ("." forward-sexp "sexp-right")
     ("[" backward-list "list-left")
     ("]" forward-list "list-right")
-    ("S-SPC" scroll-down "pg-up")
-    ("SPC" scroll-up "pg-down")
+    ("C-b" scroll-down "pg-up")
+    ("C-f" scroll-up "pg-down")
     ("<" scroll-right "pg-left")
     (">" scroll-left "pg-right")
-    ("C-SPC" set-mark-command "set-mark")
+    ("SPC" set-mark-command "set-mark")
     ("x" exchange-point-and-mark "xchg-mark")
     ("gg" beginning-of-buffer "beg-buf")
-    ("G" end-of-buffer "end-buf")
-    ("gl" goto-line "goto-line")
+    ("G" my-goto-line "goto/end-buf")
+    ("/" (progn (isearch-forward-regexp) (my-hydra/navigation/body)) "search-fwd" :exit t)
+    ("?" (progn (isearch-backward-regexp) (my-hydra/navigation/body)) "search-bwd" :exit t)
+    ("n" isearch-repeat-forward "rep-srch-fwd")
+    ("N" isearch-repeat-backward "rep-srch-bwd")
     ("q" nil "quit" :exit t))
   (defhydra my-hydra/registers (:color teal :columns 4)
     "Registers"

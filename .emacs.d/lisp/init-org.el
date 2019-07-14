@@ -25,6 +25,13 @@
                         ("easy" . ?e) ("medium" . ?m) ("hard" . ?h)
                         (:endgroup)
                         ("urgent" . ?u)))
+(defvar org-journal-dir "~/org/journal/") ;; default directory for org journals
+
+(defun my-save-buffer-and-exit()
+  "Convenience function to save buffer and kill it and its window."
+  (interactive)
+  (save-buffer)
+  (kill-buffer-and-window))
 
 ;; Org-mode
 ;;
@@ -48,7 +55,9 @@
           ("q" nil "quit"))
   :config
   (require 'org-agenda)
-  (setq org-agenda-start-on-weekday nil
+  (setq org-agenda-restore-windows-after-quit t
+        org-agenda-start-on-weekday nil
+        org-agenda-window-setup 'only-window ;; full-frame Agenda view
         org-catch-invisible-edits 'error
         org-confirm-babel-evaluate nil ;; don't confirm before evaluating code blocks in Org documents
         org-edit-src-content-indentation 2
@@ -68,6 +77,7 @@
         org-src-strip-leading-and-trailing-blank-lines t
         org-src-tab-acts-natively t
         org-src-window-setup 'current-window ;; reuse Org file window for editing source blocks when using "C-c '"
+        org-startup-indented nil
         ;; Diagram of possible task state transitions
         ;;     -------------------------
         ;;     |                       |
@@ -84,8 +94,7 @@
                             (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANX(c@/!)"))
         org-treat-S-cursor-todo-selection-as-state-change nil
         org-use-fast-todo-selection t
-        org-use-speed-commands t
-        org-startup-indented nil)
+        org-use-speed-commands t)
   (defhydra my-hydra/org-agenda (:color amaranth :hint nil)
     "
 Org agenda
@@ -152,15 +161,18 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("ns" org-narrow-to-subtree "narrow-subtree")
     ("nb" org-narrow-to-block "narrow-block")
     ("nw" widen "widen")
-    ("<tab>" org-global-cycle "cycle-visibility")
     ("i" org-toggle-inline-images "toggle-imgs")
-    ("I" org-indent-mode "org-indent-mode")
-    ("p" org-toggle-pretty-entities "toggle-pretty-ents")
+    ("I" org-indent-mode "toggle-indent")
+    ("p" org-toggle-pretty-entities "toggle-prettify")
+    ("<tab>" org-cycle "cycle-viz")
+    ("<S-tab>" org-global-cycle "cycle-viz-global")
+    ("/" org-sparse-tree "sparse-tree" :exit t)
     ("s" org-sort "sort" :exit t)
-    ("o" org-occur "org-occur" :exit t)
-    ("r" org-refile "org-refile" :exit t)
-    ("t" org-todo "org-todo" :exit t)
-    ("a" org-archive-subtree-default :exit t)
+    ("o" org-occur "occur" :exit t)
+    ("r" org-refile "refile" :exit t)
+    ("t" org-todo "state" :exit t)
+    ("T" org-set-tags-command "tags" :exit t)
+    ("a" org-archive-subtree-default "archive" :exit t)
     ("q" nil "quit" :exit t))
   ;; use variable pitch font in Org-mode for graphical Emacs, as it looks better
   (when (display-graphic-p)
@@ -194,7 +206,8 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
 (use-package org-bullets
   :pin "MELPA"
   :after org
-  :hook (org-mode . org-bullets-mode))
+  :hook (org-mode . org-bullets-mode)
+  :config (setq org-bullets-bullet-list '("■" "◆" "▲" "▶")))
 
 ;; Gantt charts via LaTeX
 ;;
@@ -226,6 +239,30 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
   :load-path "site-lisp/org-gantt"
   :ensure nil
   :after org)
+
+;; journaling using Org documents
+(use-package org-journal
+  :pin "MELPA"
+  :after org
+  :bind (:map org-journal-mode-map
+         ("C-x C-s" . my-save-buffer-and-exit))
+  :init
+  ;; org-capture helper function from https://github.com/bastibe/org-journal
+  (defun my-org-journal-find-location ()
+    "Find location of today's Org journal, for use with `org-capture'."
+    ;; Open today's journal, but specify a non-nil prefix argument in order to
+    ;; inhibit inserting the heading; org-capture will insert the heading.
+    (org-journal-new-entry t)
+    ;; Position point on the journal's top-level heading so that org-capture
+    ;; will add the new entry as a child entry.
+    (goto-char (point-min)))
+  ;; add org-capture-template for new journal entries
+  (push '("j" "Journal" entry (function my-org-journal-find-location)
+              "* %(format-time-string org-journal-time-format)%^{Title}\n%i%?")
+        org-capture-templates)
+  (setq org-journal-date-prefix "#+TITLE: Daily Journal "
+        org-journal-file-format "%Y%m%d.org"
+        org-journal-file-type 'daily))
 
 ;; export Org documents to reveal.js presentations
 ;; https://gitlab.com/oer/org-re-reveal
