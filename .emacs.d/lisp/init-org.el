@@ -55,7 +55,8 @@
           ("q" nil "quit"))
   :config
   (require 'org-agenda)
-  (setq org-agenda-restore-windows-after-quit t
+  (setq org-adapt-indentation nil ;; don't auto indent node text when promoting or demoting nodes
+        org-agenda-restore-windows-after-quit t
         org-agenda-start-on-weekday nil
         org-agenda-window-setup 'only-window ;; full-frame Agenda view
         org-catch-invisible-edits 'error
