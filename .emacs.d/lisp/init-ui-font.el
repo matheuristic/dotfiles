@@ -20,7 +20,7 @@
   :group 'init-ui-font-el)
 
 (defcustom init-ui-font-variable-pitch-list '("Constantia"
-                                              "Hoefler Text"
+                                              "Charter"
                                               "DejaVu Serif")
   "List of fonts, by priority, to use for the variable pitch face."
   :type '(repeat string)

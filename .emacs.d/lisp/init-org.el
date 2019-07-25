@@ -201,7 +201,19 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
       (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
       ;; properly indent by using fixed-pitch font
       (require 'org-indent) ;; make sure org-indent face is defined
-      (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch)))))
+      (set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))))
+  ;; maximize org-capture buffer
+  (defun my-org-capture-setup (&rest args)
+    "Save window configuration prior to `org-capture'."
+    (set-frame-parameter nil 'my-org-capture-prior-config (current-window-configuration)))
+  (defun my-org-capture-teardown ()
+    "Restore window configuration prior to `org-capture'."
+    (let ((prior-window-configuration (frame-parameter nil 'my-org-capture-prior-config)))
+      (when prior-window-configuration
+        (set-window-configuration prior-window-configuration))))
+  (advice-add 'org-capture :before 'my-org-capture-setup)
+  (add-hook 'org-capture-mode-hook 'delete-other-windows)
+  (add-hook 'org-capture-after-finalize-hook 'my-org-capture-teardown))
 
 ;; UTF-8 bullets for org-mode
 (use-package org-bullets

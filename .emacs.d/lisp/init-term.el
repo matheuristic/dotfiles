@@ -13,10 +13,11 @@
 ;; make shell prompts read-only
 (setq comint-prompt-read-only t)
 
-;; close term buffers on exit
-(defadvice term-handle-exit (after term-kill-buffer-on-exit activate)
-  "Kill term buffer on term session end."
+;; kill eshell and term buffers when their sessions end
+(defun my-term-handle-exit--term-kill-buffer-on-exit (&rest args)
+  "Kill eshell or term buffer on session exit."
   (kill-buffer))
+(advice-add 'term-handle-exit :after #'my-term-handle-exit--term-kill-buffer-on-exit)
 
 ;; Eshell
 (use-package eshell
@@ -28,12 +29,17 @@
   :config
   (require 'em-term)
   (require 'em-smart)
-  (add-to-list 'eshell-visual-commands '("htop" "lftp" "ssh" "vim"))
-  (add-to-list 'eshell-visual-subcommands '("diff" "git" "log" "show" "ssh" "vagrant")))
+  ;; run visual commands in term sessions
+  (dolist (cmd '("htop" "lftp" "ssh" "tail" "watch" "vim"))
+    (add-to-list 'eshell-visual-commands cmd))
+  (dolist (subcmd '(("git" "log" "diff" "show")
+                    ("sudo" "vi" "vim")
+                    ("vagrant" "ssh")))
+    (add-to-list 'eshell-visual-subcommands subcmd)))
 
 ;; term
 (use-package term
-  :ensure nil
+  :ensure nil ;; built-in
   :commands (ansi-term term)
   :bind (:map term-mode-map
          ("C-c s-m" . my-hydra/term/body)

@@ -341,6 +341,14 @@ Windows  _L_ : line-wise   _W_ : word-wise
             ("A" mc/insert-letters "insert-letters" :exit t)
             ("q" nil "quit" :exit t)))
 
+;; manage system processes
+(when (eq system-type 'gnu/linux)
+  (use-package proced
+    :ensure nil ;; built-in
+    :commands proced
+    :bind ("C-x p" . proced)
+    :init (setq proced-format 'medium)))
+
 ;; recently opened files
 (use-package recentf
   :ensure nil ;; built-in
