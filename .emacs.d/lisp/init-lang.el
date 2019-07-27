@@ -278,6 +278,12 @@ Help        _h_   : object  _H_   : browser _A_   : apropos
     ;; Markdown table of contents
     (use-package markdown-toc
       :pin "MELPA")
+    ;; render mathematical expressions in HTML preview
+    (setq markdown-xhtml-header-content
+      (concat "<script type=\"text/javascript\" async"
+              " src=\"https://cdnjs.cloudflare.com/ajax/libs/mathjax/"
+              "2.7.5/MathJax.js?config=TeX-MML-AM_CHTML\">"
+              "</script>"))
     (defhydra my-hydra/markdown-mode (:color teal :hint nil)
       "
 Markdown mode
