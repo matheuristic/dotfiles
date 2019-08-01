@@ -18,7 +18,7 @@
 (defvar org-refile-targets '((nil . (:maxlevel . 9)) ;; current buffer
                              (org-agenda-files . (:maxlevel . 3)))) ;; files for agenda display
 (defvar org-refile-use-outline-path 'file) ;; allows refile to top level
-(defvar org-tag-alist '((:startgroup) ;; tags within the same group are mutually exclusive
+(defvar org-tag-alist '((:startgroup) ;; tags in the same group are mutually exclusive
                         ("@home" . ?H) ("@work" . ?W)
                         (:endgroup)
                         (:startgroup)
@@ -91,11 +91,23 @@
         ;;     v   v  v  it is waiting for) |
         ;;     CANX.... ---------------------
         ;;     (note records why it was cancelled)
-        org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+        org-todo-keywords '((sequence "NEXT(n)" "TODO(t)" "|" "DONE(d!)")
                             (sequence "WAIT(w@/!)" "HOLD(h@/!)" "|" "CANX(c@/!)"))
         org-treat-S-cursor-todo-selection-as-state-change nil
         org-use-fast-todo-selection t
         org-use-speed-commands t)
+  ;; add custom agenda commands that only show undated tasks in list view
+  (dolist (my-custom-cmd
+           '(("N" "Three-day agenda and undated TODO entries"
+               ((agenda "" ((org-agenda-span 3)))
+                (alltodo ""
+                         ((org-agenda-todo-ignore-with-date t)
+                          (org-agenda-sorting-strategy '(todo-state-up priority-down effort-up category-keep alpha-up))))))
+             ("u" "Undated TODO entries"
+              (alltodo ""
+                       ((org-agenda-todo-ignore-with-date t)
+                        (org-agenda-sorting-strategy '(todo-state-up priority-down effort-up category-keep alpha-up)))))))
+    (add-to-list 'org-agenda-custom-commands my-custom-cmd))
   (defhydra my-hydra/org-agenda (:color amaranth :hint nil)
     "
 Org agenda
@@ -175,7 +187,7 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
     ("T" org-set-tags-command "tags" :exit t)
     ("a" org-archive-subtree-default "archive" :exit t)
     ("q" nil "quit" :exit t))
-  ;; use variable pitch font in Org-mode for graphical Emacs, as it looks better
+  ;; use variable pitch font for Org-mode in graphical Emacs
   (when (display-graphic-p)
     (with-eval-after-load 'init-ui-font
       (require 'org-mouse) ;; Org-mode mouse support
@@ -224,15 +236,15 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
 
 ;; Gantt charts via LaTeX
 ;;
-;; assumes org-gantt package is present on the system; to install the package,
-;; clone the repo https://github.com/swillner/org-gantt in ~/.emacs.d/site-lisp
+;; assumes org-gantt package is installed. To install, git clone the repository
+;; at https://github.com/swillner/org-gantt into ~/.emacs.d/site-lisp
 ;;
-;; create an org-gantt-chart dynamic block in a Org document, select a given
+;; to create an org-gantt-chart dynamic block in a Org document, select a given
 ;; Org subtree using the :ID: property, populate it using "C-c C-x C-u" and
 ;; export the document to LaTeX via the export menu ("C-c C-e")
 ;;
-;; the subtree tasks should have either: A. scheduled ("C-c C-s") and deadline
-;; ("C-c C-d") dates; or B. scheduled date for the first child task,
+;; subtree tasks should have either: A. scheduled ("C-c C-s") and deadline
+;; ("C-c C-d") dates, or B. a scheduled date for the first child task,
 ;; :ORDERED: t for parents, and :Effort: <time-string> for task length
 ;; and :LINKED-TO: <id_list> to indicate downstream tasks for children
 ;;
