@@ -13,8 +13,21 @@
 (defvar org-agenda-files '("~/org/inbox.org"
                            "~/org/gtd.org"
                            "~/org/tickler.org"))
-(defvar org-capture-templates '(("t" "Todo [inbox]" entry (file "~/org/inbox.org") "* TODO %i%?")
-                                ("T" "Tickler" entry (file "~/org/tickler.org") "* %i%? \n %U")))
+(defvar org-capture-templates '(("t" "Todo" entry (file "~/org/inbox.org")
+                                 "* TODO %i%?\n%U")
+                                ("r" "Respond" entry (file "~/org/inbox.org")
+                                 "* NEXT Respond to %i%?\n%U")
+                                ("i" "Interrupt Task" entry (file "~/org/inbox.org")
+                                 "* NEXT %i%?\n%U"
+                                 :jump-to-captured t :clock-in t :clock-resume t)
+                                ("n" "Note" entry (file "~/org/inbox.org")
+                                 "* %i%? :note:\n%U")
+                                ("s" "Someday" entry (file "~/org/inbox.org")
+                                 "* %i%? :someday:\n%U")
+                                ("l" "Link" entry (file "~/org/inbox.org")
+                                 "* %a%?\n%U")
+                                ("y" "Paste" entry (file "~/org/inbox.org")
+                                 "* %?\n%U\n%c")))
 (defvar org-refile-targets '((nil . (:maxlevel . 9)) ;; current buffer
                              (org-agenda-files . (:maxlevel . 3)))) ;; files for agenda display
 (defvar org-refile-use-outline-path 'file) ;; allows refile to top level
@@ -24,14 +37,10 @@
                         (:startgroup)
                         ("easy" . ?e) ("medium" . ?m) ("hard" . ?h)
                         (:endgroup)
+                        ("note" . ?n)
+                        ("someday" . ?s)
                         ("urgent" . ?u)))
 (defvar org-journal-dir "~/org/journal/") ;; default directory for org journals
-
-(defun my-save-buffer-and-exit()
-  "Convenience function to save buffer and kill it and its window."
-  (interactive)
-  (save-buffer)
-  (kill-buffer-and-window))
 
 ;; Org-mode
 ;;
@@ -100,13 +109,11 @@
   (dolist (my-custom-cmd
            '(("N" "Three-day agenda and undated TODO entries"
                ((agenda "" ((org-agenda-span 3)))
-                (alltodo ""
-                         ((org-agenda-todo-ignore-with-date t)
-                          (org-agenda-sorting-strategy '(todo-state-up priority-down effort-up category-keep alpha-up))))))
+                (alltodo "" ((org-agenda-todo-ignore-with-date t)
+                             (org-agenda-sorting-strategy '(todo-state-up priority-down effort-up category-keep alpha-up))))))
              ("u" "Undated TODO entries"
-              (alltodo ""
-                       ((org-agenda-todo-ignore-with-date t)
-                        (org-agenda-sorting-strategy '(todo-state-up priority-down effort-up category-keep alpha-up)))))))
+              (alltodo "" ((org-agenda-todo-ignore-with-date t)
+                           (org-agenda-sorting-strategy '(todo-state-up priority-down effort-up category-keep alpha-up)))))))
     (add-to-list 'org-agenda-custom-commands my-custom-cmd))
   (defhydra my-hydra/org-agenda (:color amaranth :hint nil)
     "
@@ -269,8 +276,6 @@ Other       _gr_  : reload       _gd_  : go to date   _._   : go to today
 (use-package org-journal
   :pin "MELPA"
   :after org
-  :bind (:map org-journal-mode-map
-         ("C-x C-s" . my-save-buffer-and-exit))
   :init
   ;; org-capture helper function from https://github.com/bastibe/org-journal
   (defun my-org-journal-find-location ()

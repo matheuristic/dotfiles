@@ -366,11 +366,17 @@ Windows  _L_ : line-wise   _W_ : word-wise
 
 ;; display available bindings in popup
 (use-package which-key
+  :pin "MELPA"
   :delight which-key-mode
   :bind ("C-c s-w k" . which-key-show-top-level)
   :init
   (setq which-key-allow-multiple-replacements t
-        which-key-compute-remaps t)
+        which-key-compute-remaps t
+        ;; configure for manual activation using C-h in the middle of a key seq
+        ;; see https://github.com/justbur/emacs-which-key#manual-activation
+        which-key-idle-delay 10000
+        which-key-idle-secondary-delay 0.05
+        which-key-show-early-on-C-h t)
   (which-key-mode 1))
 
 ;; visualize and cleanup whitespace
