@@ -219,6 +219,9 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
     :init (setq ess-eval-visibly 'nowait
                 ess-default-style 'RStudio)
     :config
+    ;; concurrent major mode support in Sweave and R Markdown
+    (use-package poly-R
+      :pin "MELPA")
     (defhydra my-hydra/ess (:color teal :hint nil)
       "
 Emacs Speaks Statistics
@@ -275,6 +278,9 @@ Help        _h_   : object  _H_   : browser _A_   : apropos
            :map gfm-mode-map
            ("C-c s-m" . my-hydra/markdown-mode/body))
     :config
+    ;; concurrent major mode support in Markdown
+    (use-package poly-markdown
+      :pin "MELPA")
     ;; Markdown table of contents
     (use-package markdown-toc
       :pin "MELPA")
