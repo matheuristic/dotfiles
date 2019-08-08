@@ -82,9 +82,10 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (global-set-key [C-wheel-right] (lambda () (interactive) (scroll-left (window-total-width))))
   (global-set-key [C-wheel-left] (lambda () (interactive) (scroll-right (window-total-width)))))
 
-;; on Mac OS X, use left Option as Meta
+;; on Mac OS X, use left Option as Meta and file polling for auto-revert
 (when (eq system-type 'darwin)
-  (setq mac-option-modifier 'meta
+  (setq auto-revert-use-notify nil ;; OS X does not support file notifications
+        mac-option-modifier 'meta
         mac-right-option-modifier nil))
 
 ;; framework for temporary or repeatable bindings
