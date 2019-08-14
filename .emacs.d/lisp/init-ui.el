@@ -350,6 +350,22 @@ Windows  _L_ : line-wise   _W_ : word-wise
     :bind ("C-x p" . proced)
     :init (setq proced-format 'medium)))
 
+;; buffer-local `auto-save-visited-mode'
+;; example usage: if some directory (e.g. the directory where files in
+;; `org-agenda-files' are stored) is a cloud-enabled shared folder and there is
+;; a need to reflect external changes as well auto-save the files on changes to
+;; keep the buffer, local and remote files in sync, create a .dir-locals.el
+;; file in the folder with contents
+;; --
+;; ;; Directory-local settings
+;; ((nil . ((eval . (auto-revert-mode 1)) ;; auto-revert files
+;;          (eval . (real-auto-save-mode 1))))) ;; buffer-local auto-save
+;; --
+(use-package real-auto-save
+  :pin "MELPA"
+  :defer t
+  :config (setq real-auto-save-interval 10)) ;; save interval in seconds
+
 ;; recently opened files
 (use-package recentf
   :ensure nil ;; built-in

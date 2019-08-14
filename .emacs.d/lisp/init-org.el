@@ -6,17 +6,6 @@
 
 ;; Set up Org-mode
 
-;; If the org-agenda-files directory is a cloud-enabled shared folder, it's
-;; recommended to create a .dir-locals.el file in the folder with contents
-;; --
-;; ;; Directory-local settings
-;; ((nil . ((eval . (auto-revert-mode 1)) ;; auto-revert files
-;;          (eval . (auto-save-visited-mode 1))))) ;; auto-save files
-;; --
-;; This will auto-revert the Org agenda files to reflect external changes, and
-;; auto-save the files on changes to reduce odds of the buffer and file being
-;; out-of-sync
-
 ;;; Code:
 
 (require 'init-ui-hydra)
