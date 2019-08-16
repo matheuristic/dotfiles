@@ -286,10 +286,18 @@ Help        _h_   : object  _H_   : browser _A_   : apropos
       :pin "MELPA")
     ;; render mathematical expressions in HTML preview
     (setq markdown-xhtml-header-content
-      (concat "<script type=\"text/javascript\" async"
-              " src=\"https://cdnjs.cloudflare.com/ajax/libs/mathjax/"
-              "2.7.5/MathJax.js?config=TeX-MML-AM_CHTML\">"
-              "</script>"))
+          (concat "<script type=\"text/x-mathjax-config\">"
+                  "MathJax.Hub.Config({"
+                  "  tex2jax: {"
+                  "    inlineMath: [ ['$','$'], [\"\\(\",\"\\)\"] ],"
+                  "    processEscapes: true"
+                  "  }"
+                  "});"
+                  "</script>"
+                  "<script type=\"text/javascript\" async"
+                  "        src=\"https://cdnjs.cloudflare.com/ajax/libs/"
+                  "mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML\">"
+                  "</script>"))
     (defhydra my-hydra/markdown-mode (:color teal :hint nil)
       "
 Markdown mode
@@ -341,8 +349,9 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
 ;;
 ;; graphviz and java needs to be installed on the system
 ;;
-;; the plantuml.jar file needs to be downloaded to `plantuml-jar-path',
-;; e.g. using "M-x plantuml-download-jar"
+;; the plantuml.jar file needs to be downloaded to `plantuml-jar-path' (the
+;; default value is "~/plantuml.jar") which can be done manually or by using
+;; "M-x plantuml-download-jar"
 ;;
 ;; there is also Org source block support (edit a block with "C-c '" and
 ;; evaluate with "C-c C-c"), for example:
@@ -364,7 +373,7 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
   (use-package plantuml-mode
     :defer t
     :mode ("\\.p\\(lant\\)?uml" . plantuml-mode)
-    :init (setq plantuml-jar-path (expand-file-name "~/plantuml.jar"))
+    :init (setq plantuml-default-exec-mode 'jar)
     :config (with-eval-after-load 'org
               (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
               (setq org-plantuml-jar-path plantuml-jar-path)
