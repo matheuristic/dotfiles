@@ -23,9 +23,27 @@
 (use-package eshell
   :ensure nil ;; built-in
   :commands (eshell eshell-command)
-  :init (setq eshell-review-quick-commands nil
-              eshell-smart-space-goes-to-end t
-              eshell-where-to-jump 'begin)
+  :bind ("C-c s-e s" . my-eshell-with-name)
+  :init
+  (setq eshell-review-quick-commands nil
+        eshell-smart-space-goes-to-end t
+        eshell-where-to-jump 'begin)
+  ;; adapted from https://arte.ebrahimi.org/blog/named-eshell-buffers
+  (defun my-eshell-with-name ()
+    "Open new or switch to existing named eshell buffer."
+    (interactive)
+    (let* ((my-es-bufs (seq-filter
+                        (lambda (buf)
+                          (string-match-p "*eshell*" (buffer-name buf)))
+                        (buffer-list)))
+           (my-es-buf-name-list (mapcar #'buffer-name my-es-bufs))
+           (my-es-buf-name (completing-read
+                            "Eshell Buffer : " my-es-buf-name-list)))
+      (if (member my-es-buf-name (mapcar #'buffer-name (buffer-list)))
+          (switch-to-buffer my-es-buf-name)
+        (progn
+          (eshell 42)
+          (rename-buffer (concat "*eshell*<" my-es-buf-name ">"))))))
   :config
   (require 'em-term)
   (require 'em-smart)
