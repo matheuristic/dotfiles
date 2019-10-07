@@ -150,6 +150,9 @@ Windows  _L_ : line-wise   _W_ : word-wise
     ("q" nil "quit" :exit t))
   (global-set-key (kbd "C-c s-e d") 'my-hydra/ediff/body))
 
+;; edit regions in separate buffers, used by other packages like markdown-mode
+(use-package edit-indirect)
+
 ;; Eldoc
 (use-package eldoc
   :ensure nil ;; built-in

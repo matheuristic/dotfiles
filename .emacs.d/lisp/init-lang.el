@@ -219,9 +219,6 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
     :init (setq ess-eval-visibly 'nowait
                 ess-default-style 'RStudio)
     :config
-    ;; concurrent major mode support in Sweave and R Markdown
-    (use-package poly-R
-      :pin "MELPA")
     (defhydra my-hydra/ess (:color teal :hint nil)
       "
 Emacs Speaks Statistics
@@ -256,9 +253,7 @@ Help        _h_   : object  _H_   : browser _A_   : apropos
       ("H" ess-display-help-in-browser)
       ("A" ess-display-help-apropos)
       ("q" nil "quit"))
-    ;; polymodes for hybrid R formats (Rnw, Rmd, Rhtml, Rbrew, Rcpp, cppR, etc)
-    (when (member "r" init-lang-enable-list)
-      (use-package poly-R))))
+    ))
 
 ;; JSON
 (when (member "json" init-lang-enable-list)
@@ -272,15 +267,13 @@ Help        _h_   : object  _H_   : browser _A_   : apropos
     :commands (markdown-mode gfm-mode)
     :mode (("README\\.md\\'" . gfm-mode)
            ("\\.md\\'" . markdown-mode)
-           ("\\.markdown\\'" . markdown-mode))
+           ("\\.markdown\\'" . markdown-mode)
+           ("\\.Rmd\\'" . markdown-mode)) ; R markdown
     :bind (:map markdown-mode-map
            ("C-c s-m" . my-hydra/markdown-mode/body)
            :map gfm-mode-map
            ("C-c s-m" . my-hydra/markdown-mode/body))
     :config
-    ;; concurrent major mode support in Markdown
-    (use-package poly-markdown
-      :pin "MELPA")
     ;; Markdown table of contents
     (use-package markdown-toc
       :pin "MELPA")
@@ -298,6 +291,8 @@ Help        _h_   : object  _H_   : browser _A_   : apropos
                   "        src=\"https://cdnjs.cloudflare.com/ajax/libs/"
                   "mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML\">"
                   "</script>"))
+    ;; syntax highlighting in fenced code blocks
+    (setq markdown-fontify-code-blocks-natively t)
     (defhydra my-hydra/markdown-mode (:color teal :hint nil)
       "
 Markdown mode
