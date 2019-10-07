@@ -252,8 +252,7 @@ Help        _h_   : object  _H_   : browser _A_   : apropos
       ("h" ess-display-help-on-object)
       ("H" ess-display-help-in-browser)
       ("A" ess-display-help-apropos)
-      ("q" nil "quit"))
-    ))
+      ("q" nil "quit"))))
 
 ;; JSON
 (when (member "json" init-lang-enable-list)
