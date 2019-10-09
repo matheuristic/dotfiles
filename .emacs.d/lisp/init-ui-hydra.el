@@ -14,7 +14,7 @@
   "Hydra-specific settings."
   :group 'convenience)
 
-(defcustom init-ui-hydra-load-frames-windows-hydra nil
+(defcustom init-ui-hydra-load-frames-windows-hydra t
   "Whether to load frames and windows hydras.
 Note that `hyperbole' provides `hycontrol' which has similar functionality."
   :type 'boolean
@@ -215,10 +215,10 @@ Note that `hyperbole' provides `hycontrol' which has similar functionality."
     ("-" (lambda (n) (interactive "p") (my-enlarge-frame 0 (- n))) "shrink-v")
     (">" (lambda (n) (interactive "p") (my-enlarge-frame n 0)) "enlarge-h")
     ("<" (lambda (n) (interactive "p") (my-enlarge-frame (- n) 0)) "shrink-h")
-    ("}" (lambda (n) (interactive "p") (my-move-frame-pct 0 n)) "move-d")
     ("{" (lambda (n) (interactive "p") (my-move-frame-pct 0 (- n))) "move-u")
-    (")" (lambda (n) (interactive "p") (my-move-frame-pct n 0)) "move-r")
+    ("}" (lambda (n) (interactive "p") (my-move-frame-pct 0 n)) "move-d")
     ("(" (lambda (n) (interactive "p") (my-move-frame-pct (- n) 0)) "move-l")
+    (")" (lambda (n) (interactive "p") (my-move-frame-pct n 0)) "move-r")
     ("m" make-frame "make")
     ("d" delete-frame "delete")
     ("o" delete-other-frames "only")

@@ -179,14 +179,6 @@ Windows  _L_ : line-wise   _W_ : word-wise
   :ensure nil ;; built-in
   :commands hl-line-mode)
 
-;; hypertextual information manager, https://www.gnu.org/software/hyperbole/
-(use-package hyperbole
-  :defer 1
-  :bind (("C-c s-\\" . hycontrol-enable-windows-mode) ;; HyControl
-         ("<s-return>" . hkey-either) ;; action/assist
-         ("C-c s-h b" . hyperbole-toggle-bindings)) ;; to access global bindings overwritten by hyperbole default bindings
-  :init (setq hkey-init-override-local-keys nil)) ;; don't unbind mode-specific keys that conflict with hyperbole's defaults
-
 ;; advanced buffer menu
 (use-package ibuffer
   :ensure nil ;; built-in
@@ -354,11 +346,11 @@ Windows  _L_ : line-wise   _W_ : word-wise
     :init (setq proced-format 'medium)))
 
 ;; buffer-local `auto-save-visited-mode'
-;; example usage: if some directory (e.g. the directory where files in
-;; `org-agenda-files' are stored) is a cloud-enabled shared folder and there is
-;; a need to reflect external changes as well auto-save the files on changes to
-;; keep the buffer, local and remote files in sync, create a .dir-locals.el
-;; file in the folder with contents
+;; example usage: if some directory (e.g. where files in `org-agenda-files' are
+;; stored) is a cloud-enabled shared folder and external changes should be
+;; reflected with files auto-saved on changes so that the buffer, local and
+;; remote files are kept in sync, create a .dir-locals.el file in the folder
+;; with contents
 ;; --
 ;; ;; Directory-local settings
 ;; ((nil . ((eval . (auto-revert-mode 1)) ;; auto-revert files
