@@ -276,6 +276,10 @@ Help        _h_   : object  _H_   : browser _A_   : apropos
     ;; Markdown table of contents
     (use-package markdown-toc
       :pin "MELPA")
+    ;; Github-flavored Markdown/Org preview using grip
+    ;; requires Python grip package be installed
+    (use-package grip-mode
+      :bind (:map markdown-mode-command-map ("g" . grip-mode)))
     ;; render mathematical expressions in HTML preview
     (setq markdown-xhtml-header-content
           (concat "<script type=\"text/x-mathjax-config\">"
@@ -305,6 +309,7 @@ Move        _H_ : promote   _L_ : demote    _J_ : move down _K_ : move up
 
 Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
             _t_ : table     _T_/_C-T_: insert/remove table of contents
+            _v_ : preview   _g_ : grip-mode
 
 "
       ("b" markdown-insert-bold)
@@ -330,6 +335,8 @@ Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
       ("t" markdown-insert-table)
       ("T" markdown-toc-generate-or-refresh-toc)
       ("C-T" markdown-toc-delete-toc)
+      ("v" markdown-export-and-preview)
+      ("g" grip-mode)
       ("q" nil "quit"))))
 
 ;; Pandoc wrapper for converting between document formats
