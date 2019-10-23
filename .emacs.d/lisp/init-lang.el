@@ -300,43 +300,48 @@ Help        _h_   : object  _H_   : browser _A_   : apropos
       "
 Markdown mode
 
-Formatting  _b_ : bold      _i_ : italic    _c_ : code      _p_ : pre-formatted
-            _B_ : blockquote
+Keymaps     _c_ : commands  _s_ : styles
 
-Headings    _h_ : automatic _1_.._6_ : h1..h6
+Outline     _n_ : next      _p_ : prev      _f_ : fwd-level _b_ : bwd-level
+            _←_ : promote   _→_ : demote    _↓_ : move-down _↑_ : move-up
 
-Move        _H_ : promote   _L_ : demote    _J_ : move down _K_ : move up
+Shift-Rgn   _<_ : left      _>_ : right
 
-Other       _l_ : link      _u_ : uri       _f_ : footnote  _w_ : wiki-link
-            _t_ : table     _T_/_C-T_: insert/remove table of contents
-            _v_ : preview   _g_ : grip-mode
+Toggle      _E_ : math      _F_ : code-font _I_ : images    _L_ : url
+            _M_ : markup
+
+Other       _d_ : do        _o_ : follow    _'_ : edit code block
+            _t_/_C-t_ : insert/remove table of contents
 
 "
-      ("b" markdown-insert-bold)
-      ("i" markdown-insert-italic)
-      ("c" markdown-insert-code)
-      ("p" markdown-insert-pre)
-      ("B" markdown-insert-blockquote)
-      ("h" markdown-insert-header-dwim)
-      ("1" markdown-insert-header-atx-1)
-      ("2" markdown-insert-header-atx-2)
-      ("3" markdown-insert-header-atx-3)
-      ("4" markdown-insert-header-atx-4)
-      ("5" markdown-insert-header-atx-5)
-      ("6" markdown-insert-header-atx-6)
-      ("H" markdown-promote :color red)
-      ("L" markdown-demote :color red)
-      ("J" markdown-move-down :color red)
-      ("K" markdown-move-up :color red)
-      ("l" markdown-insert-link)
-      ("u" markdown-insert-uri)
-      ("f" markdown-insert-footnote)
-      ("w" markdown-insert-wiki-link)
-      ("t" markdown-insert-table)
-      ("T" markdown-toc-generate-or-refresh-toc)
-      ("C-T" markdown-toc-delete-toc)
-      ("v" markdown-export-and-preview)
-      ("g" grip-mode)
+      ;; keymaps
+      ("c" (lambda () (interactive) (setq unread-command-events (listify-key-sequence "\C-c\C-c"))))
+      ("s" (lambda () (interactive) (setq unread-command-events (listify-key-sequence "\C-c\C-s"))))
+      ;; outline
+      ("n" markdown-outline-next :color red)
+      ("p" markdown-outline-previous :color red)
+      ("f" markdown-outline-next-same-level :color red)
+      ("b" markdown-outline-previous-same-level :color red)
+      ("<left>" markdown-promote :color red)
+      ("<right>" markdown-demote :color red)
+      ("<down>" markdown-move-down :color red)
+      ("<up>" markdown-move-up :color red)
+      ;; shift region
+      ("<" markdown-outdent-region :color red)
+      (">" markdown-indent-region :color red)
+      ;; toggle user interface
+      ("E" markdown-toggle-math)
+      ("F" markdown-toggle-fontify-code-blocks-natively)
+      ("I" markdown-toggle-inline-images)
+      ("L" markdown-toggle-url-hiding)
+      ("M" markdown-toggle-markup-hiding)
+      ;; other
+      ("d" markdown-do)
+      ("o" markdown-follow-thing-at-point)
+      ("'" markdown-edit-code-block)
+      ("t" markdown-toc-generate-or-refresh-toc)
+      ("C-t" markdown-toc-delete-toc)
+      ;; quit
       ("q" nil "quit"))))
 
 ;; Pandoc wrapper for converting between document formats
