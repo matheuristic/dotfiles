@@ -10,15 +10,7 @@
 
 (require 'cl-extra)
 
-(defgroup init-ui-hydra-el nil
-  "Hydra-specific settings."
-  :group 'convenience)
-
-(defcustom init-ui-hydra-load-frames-windows-hydra t
-  "Whether to load frames and windows hydras.
-Note that `hyperbole' provides `hycontrol' which has similar functionality."
-  :type 'boolean
-  :group 'init-ui-hydra-el)
+;; helper functions
 
 (defun my-goto-line (&optional line)
   "Goes to line ARG if there is a prefix and the end of buffer otherwise."
@@ -36,6 +28,37 @@ Note that `hyperbole' provides `hycontrol' which has similar functionality."
     (if (eq system-type 'darwin)
         (apply 'start-process my-process-args)
       (message "my-open-in-finder is Mac OS X-only"))))
+
+(defun my-transpose-windows (selector)
+  "Transpose buffers between current window and window after calling SELECTOR."
+  (let ((from-win (selected-window))
+        (from-buf (window-buffer)))
+    (funcall selector)
+    (set-window-buffer from-win (window-buffer))
+    (set-window-buffer (selected-window) from-buf)))
+
+(defun my-enlarge-frame (w h)
+  "Enlarge width, height of selected frame by W, H lines (shrink if negative)."
+  (let ((this-frame (selected-frame)))
+    (set-frame-width this-frame (+ (frame-width this-frame) w))
+    (set-frame-height this-frame (+ (frame-height this-frame) h))))
+
+(defun my-move-frame (x y)
+  "Move selected frame by X pixels horizontally and Y pixels vertically."
+  (let* ((this-frame (selected-frame))
+         (fpos (frame-position this-frame)))
+    (set-frame-position this-frame (+ (car fpos) x) (+ (cdr fpos) y))))
+
+(defun my-move-frame-pct (x y)
+  "Move selected frame within display by X% horizontally and Y% vertically."
+  (my-move-frame (* x (/ (x-display-pixel-width) 100))
+                 (* y (/ (x-display-pixel-height) 100))))
+
+(defun my-make-frame (x y)
+  "Make new frame, offset by X pixels horizontally and Y pixels vertically."
+  (let ((cur-pos (frame-position)))
+    (select-frame (make-frame (list (cons 'left (+ x (car cur-pos)))
+                                    (cons 'top (+ y (cdr cur-pos))))))))
 
 ;; framework for temporary and repeatable bindings
 (use-package hydra
@@ -74,6 +97,24 @@ Note that `hyperbole' provides `hycontrol' which has similar functionality."
     ("R" desktop-revert "revert")
     ("d" desktop-change-dir "dir")
     ("q" nil "quit"))
+  (defhydra my-hydra/frame (:color amaranth :columns 4)
+    "Frame"
+    ("p" (other-frame -1) "previous")
+    ("n" other-frame "next")
+    ("s" select-frame-by-name "select")
+    ("M" toggle-frame-maximized "maximize")
+    ("+" (lambda (n) (interactive "p") (my-enlarge-frame 0 n)) "enlarge-v")
+    ("-" (lambda (n) (interactive "p") (my-enlarge-frame 0 (- n))) "shrink-v")
+    (">" (lambda (n) (interactive "p") (my-enlarge-frame n 0)) "enlarge-h")
+    ("<" (lambda (n) (interactive "p") (my-enlarge-frame (- n) 0)) "shrink-h")
+    ("{" (lambda (n) (interactive "p") (my-move-frame-pct 0 (- n))) "move-u")
+    ("}" (lambda (n) (interactive "p") (my-move-frame-pct 0 n)) "move-d")
+    ("(" (lambda (n) (interactive "p") (my-move-frame-pct (- n) 0)) "move-l")
+    (")" (lambda (n) (interactive "p") (my-move-frame-pct n 0)) "move-r")
+    ("m" (lambda () (interactive) (my-make-frame 15 20)) "make")
+    ("d" delete-frame "delete")
+    ("o" delete-other-frames "only")
+    ("q" nil "quit" :exit t))
   (defhydra my-hydra/help (:color teal :columns 4)
     "Help"
     ("a" apropos-command "apropos-cmd")
@@ -173,56 +214,6 @@ Note that `hyperbole' provides `hycontrol' which has similar functionality."
     ("-" text-scale-decrease "zoom-out")
     ("0" (text-scale-adjust 0) "zoom-reset")
     ("q" nil "quit" :exit t))
-  (global-set-key (kbd "C-c s-b m") 'my-hydra/bookmarks/body)
-  (global-set-key (kbd "C-c s-b f") 'my-hydra/buffer/body)
-  (global-set-key (kbd "C-c s-h h") 'my-hydra/help/body)
-  (global-set-key (kbd "C-c s-d k") 'my-hydra/desktop/body)
-  (global-set-key (kbd "C-c s-s") 'my-hydra/search/body)
-  (global-set-key (kbd "C-c s-n") 'my-hydra/navigation/body)
-  (global-set-key (kbd "C-c s-r r") 'my-hydra/registers/body)
-  (global-set-key (kbd "C-c s-v i") 'my-hydra/visual/body))
-
-;; load frames and windows hydras
-(when init-ui-hydra-load-frames-windows-hydra
-  (defun my-transpose-windows (selector)
-    "Transpose buffers between current window and window after calling SELECTOR."
-    (let ((from-win (selected-window))
-          (from-buf (window-buffer)))
-      (funcall selector)
-      (set-window-buffer from-win (window-buffer))
-      (set-window-buffer (selected-window) from-buf)))
-  (defun my-enlarge-frame (w h)
-    "Enlarge width, height of selected frame by W, H lines (shrink if negative)."
-    (let ((this-frame (selected-frame)))
-      (set-frame-width this-frame (+ (frame-width this-frame) w))
-      (set-frame-height this-frame (+ (frame-height this-frame) h))))
-  (defun my-move-frame (x y)
-    "Move selected frame by X pixels horizontally and Y pixels vertically."
-    (let* ((this-frame (selected-frame))
-           (fpos (frame-position this-frame)))
-      (set-frame-position this-frame (+ (car fpos) x) (+ (cdr fpos) y))))
-  (defun my-move-frame-pct (x y)
-    "Move selected frame within display by X% horizontally and Y% vertically."
-    (my-move-frame (* x (/ (x-display-pixel-width) 100))
-                   (* y (/ (x-display-pixel-height) 100))))
-  (defhydra my-hydra/frame (:color amaranth :columns 4)
-    "Frame"
-    ("p" (other-frame -1) "previous")
-    ("n" other-frame "next")
-    ("s" select-frame-by-name "select")
-    ("M" toggle-frame-maximized "maximize")
-    ("+" (lambda (n) (interactive "p") (my-enlarge-frame 0 n)) "enlarge-v")
-    ("-" (lambda (n) (interactive "p") (my-enlarge-frame 0 (- n))) "shrink-v")
-    (">" (lambda (n) (interactive "p") (my-enlarge-frame n 0)) "enlarge-h")
-    ("<" (lambda (n) (interactive "p") (my-enlarge-frame (- n) 0)) "shrink-h")
-    ("{" (lambda (n) (interactive "p") (my-move-frame-pct 0 (- n))) "move-u")
-    ("}" (lambda (n) (interactive "p") (my-move-frame-pct 0 n)) "move-d")
-    ("(" (lambda (n) (interactive "p") (my-move-frame-pct (- n) 0)) "move-l")
-    (")" (lambda (n) (interactive "p") (my-move-frame-pct n 0)) "move-r")
-    ("m" make-frame "make")
-    ("d" delete-frame "delete")
-    ("o" delete-other-frames "only")
-    ("q" nil "quit" :exit t))
   (defhydra my-hydra/window (:color amaranth :columns 4)
     "Window"
     ("n" next-multiframe-window "next")
@@ -249,7 +240,15 @@ Note that `hyperbole' provides `hycontrol' which has similar functionality."
     ("d" delete-window "delete")
     ("D" kill-buffer-and-window "delete-buf")
     ("q" nil "quit" :exit t))
+  (global-set-key (kbd "C-c s-b m") 'my-hydra/bookmarks/body)
+  (global-set-key (kbd "C-c s-b f") 'my-hydra/buffer/body)
   (global-set-key (kbd "C-c s-f") 'my-hydra/frame/body)
+  (global-set-key (kbd "C-c s-h h") 'my-hydra/help/body)
+  (global-set-key (kbd "C-c s-d k") 'my-hydra/desktop/body)
+  (global-set-key (kbd "C-c s-s") 'my-hydra/search/body)
+  (global-set-key (kbd "C-c s-n") 'my-hydra/navigation/body)
+  (global-set-key (kbd "C-c s-r r") 'my-hydra/registers/body)
+  (global-set-key (kbd "C-c s-v i") 'my-hydra/visual/body)
   (global-set-key (kbd "C-c s-w w") 'my-hydra/window/body))
 
 (provide 'init-ui-hydra)

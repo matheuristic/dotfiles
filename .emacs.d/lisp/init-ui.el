@@ -321,23 +321,35 @@ Windows  _L_ : line-wise   _W_ : word-wise
   :init (setq mc/always-run-for-all nil
               mc/always-repeat-command nil
               mc/insert-numbers-default 1)
-  :config (defhydra my-hydra/multiple-cursors (:color amaranth :columns 3)
-            "Multiple-cursors"
-            ("l" mc/edit-lines "edit-lines" :exit t)
-            ("a" mc/mark-all-like-this "mark-all-like" :exit t)
-            ("s" mc/mark-all-in-region-regexp "mark-regex-rgn" :exit t)
-            ("<mouse-1>" mc/add-cursor-on-click "mark-click")
-            ("p" mc/mark-previous-like-this "mark-prev")
-            ("P" mc/skip-to-previous-like-this "skip-prev")
-            ("M-p" mc/unmark-previous-like-this "unmark-prev")
-            ("n" mc/mark-next-like-this "mark-next")
-            ("N" mc/skip-to-next-like-this "skip-next")
-            ("M-n" mc/unmark-next-like-this "unmark-next")
-            ("0" mc/insert-numbers "insert-numbers" :exit t)
-            ("A" mc/insert-letters "insert-letters" :exit t)
-            ("q" nil "quit" :exit t)))
+  :config (defhydra my-hydra/multiple-cursors (:color pink :hint nil
+                                               :post (mc/keyboard-quit))
+            "
+Multiple-cursors
 
-;; manage system processes
+Mark    _C-<_: add-prev _C->_: add-next _C-%_: add-all  _C-s_: search
+        _C-,_: skp-prev _C-._: skp-next _M-<_: rm-prev  _M->_: rm-next
+        _C-|_: edit-lns _<mouse-1>_: add/rm
+Misc    _C-{_: number   _C-}_: letter                 _C-g_: quit
+"
+            ("C-<" mc/mark-previous-like-this)
+            ("C-," mc/skip-to-previous-like-this)
+            ("M-<" mc/unmark-previous-like-this)
+            ("C->" mc/mark-next-like-this)
+            ("C-." mc/skip-to-next-like-this)
+            ("M->" mc/unmark-next-like-this)
+            ("C-%" mc/mark-all-like-this)
+            ("C-s" mc/mark-all-in-region-regexp)
+            ("<mouse-1>" mc/add-cursor-on-click)
+            ("<down-mouse-1>" ignore)
+            ("<drag-mouse-1>" ignore)
+            ("<wheel-up>" scroll-down-line)
+            ("<wheel-down" scroll-up-line)
+            ("C-{" mc/insert-numbers)
+            ("C-}" mc/insert-letters)
+            ("C-|" mc/edit-lines)
+            ("C-g" nil :exit t)))
+
+;; manage system processes in Linux
 (when (eq system-type 'gnu/linux)
   (use-package proced
     :ensure nil ;; built-in
