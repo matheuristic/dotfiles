@@ -421,8 +421,11 @@ Misc    _C-{_: number   _C-}_: letter                 _C-g_: quit
   :defer 1
   :delight yas-minor-mode
   :bind (:map yas-minor-mode-map
+         ("C-c s-y s" . my-hydra/yasnippet/body)
          ("C-S-SPC" . yas-expand)
-         ("C-c s-y s" . my-hydra/yasnippet/body))
+         :map yas-keymap
+         ("C-S-SPC" . yas-next-field-or-maybe-expand)
+         ("M-S-SPC" . yas-prev-field))
   :config
   (use-package yasnippet-snippets) ;; official snippets
   (use-package auto-yasnippet) ;; enable creation of temporary snippets
@@ -439,10 +442,14 @@ Misc    _C-{_: number   _C-}_: letter                 _C-g_: quit
     ("q" nil "quit"))
   ;; remove default bindings to avoid conflicts with other packages
   ;; removing prefix bindings also removes bindings using them
+  ;; for example, <tab>s and <backtab>s are used by company-tng
   (unbind-key "\C-c&" yas-minor-mode-map)
   (unbind-key "\C-c" yas-minor-mode-map)
-  (unbind-key "<tab>" yas-minor-mode-map)
-  (unbind-key "TAB" yas-minor-mode-map)
+  (dolist (keymap (list yas-minor-mode-map yas-keymap))
+    (unbind-key "<tab>" keymap)
+    (unbind-key "TAB" keymap))
+  (unbind-key "<backtab>" yas-keymap)
+  (unbind-key "S-<tab>" yas-keymap)
   (yas-global-mode 1))
 
 (require 'init-ui-color)
