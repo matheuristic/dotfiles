@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Set up hydra package
+;; Set up transitional bindings using the hydra package
 
 ;;; Code:
 
@@ -178,6 +178,10 @@
     ("l" list-registers "list")
     ("v" view-register "view")
     ("q" nil "quit"))
+  ;; ripgrep usage front-end
+  (if (executable-find "rg")
+    (use-package deadgrep
+      :bind ("<f5>" . deadgrep)))
   (defhydra my-hydra/search (:color teal :columns 3)
     "Search"
     ("gg" grep "grep")
@@ -185,6 +189,7 @@
     ("gl" lgrep "lgrep")
     ("gf" grep-find "grep-find")
     ("gz" rzgrep "rzgrep")
+    ("gR" (lambda () (interactive) (if (fboundp 'deadgrep) (call-interactively 'deadgrep) (message "ripgrep not installed"))) "ripgrep")
     ("oo" occur "occur")
     ("om" multi-occur "multi-occur")
     ("ob" multi-occur-in-matching-buffers "multi-occur-match-buf")
@@ -216,6 +221,8 @@
     ("q" nil "quit" :exit t))
   (defhydra my-hydra/window (:color amaranth :columns 4)
     "Window"
+    ("u" winner-undo "winner-undo")
+    ("r" winner-redo "winner-redo")
     ("n" next-multiframe-window "next")
     ("p" previous-multiframe-window "previous")
     ("v" split-window-right "split-v")

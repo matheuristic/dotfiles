@@ -416,6 +416,11 @@ Misc    _C-{_: number   _C-}_: letter                 _C-g_: quit
             ("r" whitespace-report "report")
             ("q" nil "quit")))
 
+;; traverse window config changes, use C-c <left> to undo / C-c <right> to redo
+(use-package winner
+  :ensure nil ;; built-in
+  :hook (after-init . winner-mode))
+
 ;; expandable snippet template system
 (use-package yasnippet
   :defer 1
