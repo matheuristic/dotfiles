@@ -51,6 +51,8 @@
   (defhydra my-hydra/dired (:color pink :columns 4)
     "Dired"
     ("RET" (progn (dired-find-file) (when (eq major-mode 'dired-mode) (my-hydra/dired/body))) "open" :exit t)
+    ("{" find-name-dired "find-name" :exit t)
+    ("}" find-grep-dired "find-grep" :exit t)
     ("/" my-hydra/dired-filter/body "→ filter" :exit t)
     ("(" dired-hide-details-mode "toggle-details")
     (")" dired-omit-mode "toggle-omit")
