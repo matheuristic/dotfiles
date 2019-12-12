@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Set up support for programming languages and their tooling
+;; Set up support for programming languages
 
 ;;; Code:
 
@@ -15,7 +15,8 @@
   :group 'convenience)
 
 (defcustom init-lang-enable-list '("bibtex" "csv" "docker" "json" "julia"
-                                   "markdown" "plantuml" "python" "r" "yaml")
+                                   "lisp" "markdown" "plantuml" "python" "r"
+                                   "scheme" "yaml")
   "List of languages for which to enable support."
   :type '(repeat string)
   :group 'init-lang-el)
@@ -259,6 +260,10 @@ Help        _h_   : object  _H_   : browser _A_   : apropos
   (use-package json-mode
     :commands json-mode))
 
+;; LISP
+(when (member "lisp" init-lang-enable-list)
+  (require 'init-lang-lisp))
+
 ;; Markdown
 (when (member "markdown" init-lang-enable-list)
   (use-package markdown-mode
@@ -388,6 +393,10 @@ Other       _d_ : do        _o_ : follow    _'_ : edit code block
 ;; Python
 (when (member "python" init-lang-enable-list)
   (require 'init-lang-python))
+
+;; Scheme
+(when (member "scheme" init-lang-enable-list)
+  (require 'init-lang-scheme))
 
 ;; YAML
 (when (member "yaml" init-lang-enable-list)
