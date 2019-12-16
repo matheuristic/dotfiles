@@ -8,7 +8,7 @@
 
 ;;; Code:
 
-;; default to using sbcl if inferior-lisp-program is not specified
+;; default to sbcl if inferior-lisp-program is not specified
 (defvar inferior-lisp-program "sbcl --dynamic-space-size 1024")
 
 ;; company-mode completion backend for SLIME

@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Set up support for programming languages
+;; Set up programming language support
 
 ;;; Code:
 
@@ -32,7 +32,7 @@
   (setq lsp-print-io nil ;; set to t (nil) to enable (disable) logging of packets between emacs and the LS
         lsp-eldoc-enable-hover nil ;; don't have eldoc display hover info
         lsp-eldoc-enable-signature-help t ;; display signature help in minibuffer
-        lsp-eldoc-prefer-signature-help t ;; prefer displaying signature help over hover
+        lsp-eldoc-prefer-signature-help t ;; prefer displaying signature help to hover
         lsp-eldoc-render-all nil ;; don't show all returned from document/onHover, only symbol info
         lsp-enable-on-type-formatting nil ;; don't have the LS auto format the document when typing
         lsp-prefer-flymake t) ;; set to nil to prefer flycheck to flymake

@@ -8,9 +8,10 @@
 
 ;;; Code:
 
-;; default to using only chez scheme in geiser
-(defvar geiser-active-implementations '(chez))
+;; uncomment to use chez as the default scheme in geiser
+;; (defvar geiser-active-implementations '(chez))
 
+;; Geiser
 (use-package geiser
   :defer
   :pin "MELPA")

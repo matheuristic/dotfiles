@@ -349,6 +349,17 @@ Misc    _C-{_: number   _C-}_: letter                 _C-g_: quit
             ("C-|" mc/edit-lines)
             ("C-g" nil :exit t)))
 
+;; paredit
+(use-package paredit
+  :defer
+  :hook ((emacs-lisp-mode . paredit-mode)
+         (eval-expression-minibuffer-setup . paredit-mode) ;; when entering minibuffer via `eval-expression`
+         (lisp-interaction-mode . paredit-mode) ;; *scratch*
+         (lisp-mode . paredit-mode)
+         (scheme-mode . paredit-mode))
+  :config (with-eval-after-load 'minions
+             (add-to-list 'minions-direct 'paredit-mode)))
+
 ;; manage system processes in Linux
 (when (eq system-type 'gnu/linux)
   (use-package proced
