@@ -23,17 +23,24 @@
 ** MacPorts
 ***  Recommended packages
 #+begin_src
+aspell
+aspell-dict-en
 autoconf
 automake
 bat
+clojure
 fish
 fzf
 go
 htop
 lftp
 openjdk8 / openjdk11
+qpdf
+p7zip
 ripgrep
+rlwrap
 tmux
+unrar
 xsv
 #+end_src
 *** Migration process after upgrading to a new version of OS X
@@ -45,9 +52,13 @@ See instructions [[https://trac.macports.org/wiki/Migration][here]].
 - [[https://github.com/jorgebucaran/fisher][fisher]] can be used to manage fish packages.
 *** Recommended packages
 #+begin_src
+fish-nvm
 fzf
 pure
 z
 #+end_src
+** Clojure
+- Clojure can be installed via MacPorts (install the `clojure` and one of the `openjdk*` packages). Java jar dependencies will be downloaded to `~/.m2` after running `clojure` the first time.
+- For managing builds and dependencies, install `lein` which can be done manually. See the [[https://leiningen.org/][Leiningen website]] for instructions. Java jar dependencies will be downloaded to `~/.lein/self-installs`.
 * Usage tips
 - ~Control-Command-Q~ locks the screen
