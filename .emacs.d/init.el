@@ -22,20 +22,28 @@
 (dolist (project (directory-files site-lisp-dir t "\\w+"))
   (if (file-directory-p project) (add-to-list 'load-path project)))
 
+;; font list by priority, used in lisp/init-ui-font.el
 (setq init-ui-font-default-list '("IBM Plex Mono"
-                                  "Iosevka Slab"
                                   "Consolas"
                                   "Menlo"
                                   "DejaVu Sans Mono")
       init-ui-font-variable-pitch-list '("IBM Plex Serif"
+                                         "Alegreya"
                                          "Constantia"
-                                         "Hoefler Text"
+                                         "Charter"
                                          "DejaVu Serif"))
 
-(setq init-lang-python-ms-executable (concat "~/Projects/random/Microsoft"
-                                             "/python-language-server/output"
-                                             "/bin/Release/osx-x64/publish"
-                                             "/Microsoft.Python.LanguageServer"))
+;; set directory where conda is installed, used in lisp/init-lang-python.el
+(setq conda-anaconda-home "~/miniconda3/")
+
+;; path to MS Python Language Server binary, used by lisp/init-lang-python.el
+(setq lsp-python-ms-executable "~/.local/bin/Microsoft.Python.LanguageServer")
+
+;; Use ~/org/*.org for Org agenda files, used in lisp/init-org.el
+(setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
+
+;; use multimarkdown for processing markdown files in markdown-mode
+(setq markdown-command "multimarkdown")
 
 (require 'init-master)
 
