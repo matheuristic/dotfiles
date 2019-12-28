@@ -11,10 +11,17 @@
 ;; default to sbcl if inferior-lisp-program is not specified
 (defvar inferior-lisp-program "sbcl --dynamic-space-size 1024")
 
+;; use paredit-mode when editing lisp
+(add-hook 'lisp-mode-hook #'paredit-mode)
+
+;; color delimiters when editing lisp
+(with-eval-after-load 'rainbow-delimiters
+  (add-hook 'lisp-mode-hook #'rainbow-delimiters-mode))
+
 ;; company-mode completion backend for SLIME
 (use-package slime-company
-  :defer
-  :config (setq slime-company-major-modes '(lisp-mode clojure-mode slime-repl-mode)))
+  :defer t
+  :config (setq slime-company-major-modes '(lisp-mode slime-repl-mode)))
 
 ;; SLIME
 (use-package slime

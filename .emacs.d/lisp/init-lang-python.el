@@ -34,19 +34,22 @@
   :ensure nil ;; built-in
   :defer t)
 
-;; configure flymake for Python if not using flycheck
-(if (not (featurep 'flycheck))
-    (with-eval-after-load 'flymake
-      (defun flymake-pylint-init ()
-        (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                           'flymake-create-temp-inplace))
-               (local-file (file-relative-name
-                            temp-file
-                            (file-name-directory buffer-file-name))))
-          (list "epylint" (list local-file))))
-      (add-to-list 'flymake-allowed-file-name-masks
-                   '("\\.py\\'" flymake-pylint-init)))
-  (add-hook 'python-mode-hook '(lambda () (flycheck-mode))))
+;; if not using lsp-mode, use pylint as linter in Flymake or Flycheck
+;; (requires pylint be installed)
+(with-eval-after-load 'init-lang
+  (when (not (featurep 'lsp-mode))
+    (if (not (featurep 'flycheck))
+        (with-eval-after-load 'flymake
+          (defun flymake-pylint-init ()
+            (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                               'flymake-create-temp-inplace))
+                   (local-file (file-relative-name
+                                temp-file
+                                (file-name-directory buffer-file-name))))
+              (list "epylint" (list local-file))))
+          (add-to-list 'flymake-allowed-file-name-masks
+                       '("\\.py\\'" flymake-pylint-init)))
+      (add-hook 'python-mode-hook '(lambda () (flycheck-mode))))))
 
 ;; lsp-mode support for Microsoft Python Language Server
 (when init-lang-python-ms-executable
@@ -100,7 +103,7 @@
                                                     venv-current-name
                                                     15 nil nil "…"))
                                          ""))
-                               t)) ;; add current conda env to mode-line, if any
+                               t)) ;; add current python env to mode-line, if any
     (defhydra my-hydra/virtualenv (:color teal :columns 4)
       "virtualenv"
       ("w" venv-workon "workon")

@@ -353,10 +353,8 @@ Misc    _C-{_: number   _C-}_: letter                 _C-g_: quit
 (use-package paredit
   :defer
   :hook ((emacs-lisp-mode . paredit-mode)
-         (eval-expression-minibuffer-setup . paredit-mode) ;; when entering minibuffer via `eval-expression`
-         (lisp-interaction-mode . paredit-mode) ;; *scratch*
-         (lisp-mode . paredit-mode)
-         (scheme-mode . paredit-mode))
+         (eval-expression-minibuffer-setup . paredit-mode) ;; when in minibuffer via `eval-expression`
+         (lisp-interaction-mode . paredit-mode)) ;; *scratch*
   :config (with-eval-after-load 'minions
              (add-to-list 'minions-direct 'paredit-mode)))
 
@@ -367,6 +365,10 @@ Misc    _C-{_: number   _C-}_: letter                 _C-g_: quit
     :commands proced
     :bind ("C-x p" . proced)
     :init (setq proced-format 'medium)))
+
+;; rainbow delimiters
+(use-package rainbow-delimiters
+    :defer t)
 
 ;; buffer-local `auto-save-visited-mode'
 ;; example usage: if some directory (e.g. where files in `org-agenda-files' are

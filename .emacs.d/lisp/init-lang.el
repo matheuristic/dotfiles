@@ -14,9 +14,9 @@
   "Language-specific settings."
   :group 'convenience)
 
-(defcustom init-lang-enable-list '("bibtex" "csv" "docker" "json" "julia"
-                                   "lisp" "markdown" "plantuml" "python" "r"
-                                   "scheme" "yaml")
+(defcustom init-lang-enable-list '("bibtex" "clojure" "csv" "docker" "json"
+                                   "julia" "lisp" "markdown" "plantuml"
+                                   "python" "r" "scheme" "yaml")
   "List of languages for which to enable support."
   :type '(repeat string)
   :group 'init-lang-el)
@@ -36,7 +36,7 @@
         lsp-eldoc-render-all nil ;; don't show all returned from document/onHover, only symbol info
         lsp-enable-on-type-formatting nil ;; don't have the LS auto format the document when typing
         lsp-prefer-flymake t) ;; set to nil to prefer flycheck to flymake
-  ;; install LSP company backend for LSP-driven completion
+  ;; LSP company backend for LSP-driven completion
   (use-package company-lsp
     :pin "MELPA"
     :commands company-lsp
@@ -49,7 +49,7 @@ Server  _R_ : restart            _S_   : shutdown         _M-l_ : IO log
 
 Symbol  _o_   : describe         _fd_  : find declaration _fD_  : find defn
         _fi_  : find implementn  _fr_  : find references  _ft_  : find type defn
-        _h_   : highlight        _M-r_   : rename
+        _h_   : highlight        _M-r_ : rename
 
 Lens    _lm_  : lsp-lens-mode    _ls_  : show lenses      _lh_  : hide lenses
 
@@ -85,6 +85,7 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
 ;; front-end for interacting with debug servers
 (use-package dap-mode
   :pin "MELPA"
+  :commands dap-mode
   :after lsp-mode
   :bind (:map dap-mode-map
          ("C-c s-d b" . my-hydra/dap/body))
@@ -205,6 +206,10 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
                (format "\\cite{%s}" path))))))
       (org-link-set-parameters "ebib" :export 'my-org-ebib-export)
       (bind-key "C-c s-b i" 'ebib-insert-citation org-mode-map))))
+
+;; Clojure
+(when (member "clojure" init-lang-enable-list)
+  (require 'init-lang-clojure))
 
 ;; Emacs Speaks Statistics
 ;; has built-in flymake support (requires R lintr be installed)

@@ -41,6 +41,7 @@
     :bind (:map flymake-mode-map
            ("C-c s-e e" . my-hydra/flymake/body))
     :config
+    (use-package flymake-quickdef) ;; macro for quick Flymake backend defns
     (use-package flymake-diagnostic-at-point
       :hook ((emacs-lisp-mode . flymake-mode)
              (flymake-mode . flymake-diagnostic-at-point-mode))
