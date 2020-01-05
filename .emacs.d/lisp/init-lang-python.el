@@ -41,7 +41,7 @@
                                                       conda-env-current-name
                                                       15 nil nil "…"))
                                            ""))
-                                 t)) ;; add current conda env to mode-line, if any
+                                 t))
       (defhydra my-hydra/conda (:color teal :columns 4)
         "conda"
         ("a" conda-env-activate "activate")
@@ -63,7 +63,7 @@
                                                     venv-current-name
                                                     15 nil nil "…"))
                                          ""))
-                               t)) ;; add current python env to mode-line, if any
+                               t))
     (defhydra my-hydra/virtualenv (:color teal :columns 4)
       "virtualenv"
       ("w" venv-workon "workon")

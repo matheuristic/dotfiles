@@ -384,7 +384,7 @@ Misc    _C-{_: number   _C-}_: letter                 _C-g_: quit
 (use-package real-auto-save
   :pin "MELPA"
   :defer t
-  :config (setq real-auto-save-interval 10)) ;; save interval in seconds
+  :config (setq real-auto-save-interval 10)) ;; save interval, in seconds
 
 ;; recently opened files
 (use-package recentf

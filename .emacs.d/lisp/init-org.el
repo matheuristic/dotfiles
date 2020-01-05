@@ -10,23 +10,27 @@
 
 (require 'init-ui-hydra)
 
-(defvar org-agenda-files '("~/org/inbox.org"
-                           "~/org/gtd.org"
-                           "~/org/tickler.org"))
-(defvar org-capture-templates '(("t" "Todo" entry (file "~/org/inbox.org")
+(defvar org-directory (file-name-as-directory (file-truename "~/org")))
+
+(defvar my-org-agenda-inbox (concat org-directory "inbox.org"))
+(defvar org-agenda-files (cons my-org-agenda-inbox
+                               (mapcar '(lambda (x) (concat org-directory x))
+                                       '("gtd.org"
+                                         "tickler.org"))))
+(defvar org-capture-templates '(("t" "Todo" entry (file my-org-agenda-inbox)
                                  "* TODO %i%?\n%U")
-                                ("r" "Respond" entry (file "~/org/inbox.org")
+                                ("r" "Respond" entry (file my-org-agenda-inbox)
                                  "* NEXT Respond to %i%?\n%U")
-                                ("i" "Interrupt Task" entry (file "~/org/inbox.org")
+                                ("i" "Interrupt Task" entry (file my-org-agenda-inbox)
                                  "* NEXT %i%?\n%U"
                                  :jump-to-captured t :clock-in t :clock-resume t)
-                                ("n" "Note" entry (file "~/org/inbox.org")
+                                ("n" "Note" entry (file my-org-agenda-inbox)
                                  "* %i%? :note:\n%U")
-                                ("s" "Someday" entry (file "~/org/inbox.org")
+                                ("s" "Someday" entry (file my-org-agenda-inbox)
                                  "* %i%? :someday:\n%U")
-                                ("l" "Link" entry (file "~/org/inbox.org")
+                                ("l" "Link" entry (file my-org-agenda-inbox)
                                  "* %a%?\n%U")
-                                ("y" "Paste" entry (file "~/org/inbox.org")
+                                ("y" "Paste" entry (file my-org-agenda-inbox)
                                  "* %?\n%U\n%c")))
 (defvar org-refile-targets '((nil . (:maxlevel . 9)) ;; current buffer
                              (org-agenda-files . (:maxlevel . 3)))) ;; files for agenda display
@@ -40,7 +44,7 @@
                         ("note" . ?n)
                         ("someday" . ?s)
                         ("urgent" . ?u)))
-(defvar org-journal-dir "~/org/journal/") ;; default directory for org journals
+(defvar org-journal-dir (concat org-directory "journal/")) ;; default directory for org journals
 
 ;; Org-mode
 ;;

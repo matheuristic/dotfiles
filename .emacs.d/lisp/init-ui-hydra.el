@@ -4,7 +4,7 @@
 
 ;;; Commentary:
 
-;; Set up transitional bindings using the hydra package
+;; Set up basic transitional bindings using the hydra package
 
 ;;; Code:
 
@@ -178,9 +178,10 @@
     ("l" list-registers "list")
     ("v" view-register "view")
     ("q" nil "quit"))
-  ;; ripgrep usage front-end
+  ;; front-end for using ripgrep (faster grep)
   (if (executable-find "rg")
     (use-package deadgrep
+      :defer t
       :bind ("<f5>" . deadgrep)))
   (defhydra my-hydra/search (:color teal :columns 3)
     "Search"

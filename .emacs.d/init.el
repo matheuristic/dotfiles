@@ -39,8 +39,11 @@
 ;; path to MS Python Language Server binary, used by lisp/init-lang-python.el
 (setq lsp-python-ms-executable "~/.local/bin/Microsoft.Python.LanguageServer")
 
-;; Use ~/org/*.org for Org agenda files, used in lisp/init-org.el
-(setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
+;; Set default directory for Org files to ~/org
+(setq org-directory (file-name-as-directory (file-truename "~/org/")))
+
+;; Use top-level Org files in default Org directory for Org agenda files
+(setq org-agenda-files (file-expand-wildcards (concat org-directory "*.org")))
 
 ;; use multimarkdown for processing markdown files in markdown-mode
 (setq markdown-command "multimarkdown")

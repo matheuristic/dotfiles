@@ -19,7 +19,7 @@
 
 ;; IDE
 (use-package cider
-  :defer t
+  :after clojure-mode
   :bind (:map clojure-mode-map
          ("C-c s-m" . my-hydra/cider/body))
   :hook ((cider-mode . eldoc-mode)

@@ -143,8 +143,8 @@
 (require 'init-org)
 (require 'init-lang)
 
-;; Deft layer
-(require 'init-deft)
+;; zettelkasten layer
+(require 'init-zettel)
 
 ;; revert earlier optimizations for reducing startup time
 (setq gc-cons-threshold (* 2 1000 1000)
