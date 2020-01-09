@@ -29,14 +29,14 @@
   :bind (:map lsp-mode-map
          ("C-c s-l" . my-hydra/lsp/body))
   :config
-  (setq lsp-print-io nil ;; set to t (nil) to enable (disable) logging of packets between emacs and the LS
+  (setq lsp-print-io nil ;; disable logging of packets between emacs and the LS
         lsp-eldoc-enable-hover nil ;; don't have eldoc display hover info
         lsp-eldoc-enable-signature-help t ;; display signature help in minibuffer
         lsp-eldoc-prefer-signature-help t ;; prefer displaying signature help to hover
         lsp-eldoc-render-all nil ;; don't show all returned from document/onHover, only symbol info
-        lsp-enable-on-type-formatting nil ;; don't have the LS auto format the document when typing
-        lsp-prefer-flymake t) ;; set to nil to prefer flycheck to flymake
-  ;; LSP company backend for LSP-driven completion
+        lsp-enable-on-type-formatting nil ;; don't have the LS automatically format the document when typing
+        lsp-prefer-flymake (if (featurep 'flycheck) nil t)) ;; prefer flycheck for syntax checking if it's loaded, otherwise prefer flymake
+  ;; company backend for LSP-driven completion
   (use-package company-lsp
     :pin "MELPA"
     :commands company-lsp
@@ -45,7 +45,7 @@
     "
 Language Server
 
-Server  _R_ : restart            _S_   : shutdown         _M-l_ : IO log
+Server  _R_   : (re)start        _S_   : shutdown         _M-l_ : IO log
 
 Symbol  _o_   : describe         _fd_  : find declaration _fD_  : find defn
         _fi_  : find implementn  _fr_  : find references  _ft_  : find type defn
@@ -58,7 +58,7 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
 
 "
     ;; Server
-    ("R" lsp-restart-workspace)
+    ("R" (condition-case nil (lsp-restart-workspace) (error (lsp))))
     ("S" lsp-shutdown-workspace)
     ("M-l" lsp-switch-to-io-log-buffer)
     ;; Symbol at point

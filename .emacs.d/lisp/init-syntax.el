@@ -46,6 +46,13 @@
       :hook ((emacs-lisp-mode . flymake-mode)
              (flymake-mode . flymake-diagnostic-at-point-mode))
       :config (setq flymake-diagnostic-at-point-error-prefix "» "))
+    ;; Compress Flymake mode-line name
+    (defun my-flymake-modeline-filter (ret)
+      "Filter function for `flymake--mode-line-format`."
+      (setf (seq-elt (car ret) 1) " FlyM")
+      ret)
+    (advice-add #'flymake--mode-line-format
+                :filter-return #'my-flymake-modeline-filter)
     (defun my-toggle-flymake-diagnostics ()
       "Toggles flymake diagnostics window for current buffer."
       (interactive)
