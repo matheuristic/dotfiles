@@ -321,7 +321,10 @@ Windows  _L_ : line-wise   _W_ : word-wise
   :init (setq mc/always-run-for-all nil
               mc/always-repeat-command nil
               mc/insert-numbers-default 1)
+  ;; disable prefix interpretations
+  ;; see https://stackoverflow.com/questions/53798055/hydra-disable-interpretation-of-prefix-argument
   :config (defhydra my-hydra/multiple-cursors (:color pink :hint nil
+                                               :base-map (make-sparse-keymap)
                                                :post (mc/keyboard-quit))
             "
 Multiple-cursors

@@ -202,7 +202,11 @@ Other   _FB_  : format buffer    _FR_  : format region    _X_   : execute action
                (format "(<cite>%s</cite>)" path)))
             ((eq format 'latex)
              (if desc
-                 (format "%s\\cite[%s][%s]{%s}" (concat desc-name " ") desc-pre-note desc-post-note path)
+                 (format "%s\\cite%s%s{%s}"
+                         (concat desc-name " ")
+                         (if (string= "" desc-pre-note) "" (format "[%s]" desc-pre-note))
+                         (if (string= "" desc-post-note) "" (format "[%s]" desc-post-note))
+                         path)
                (format "\\cite{%s}" path))))))
       (org-link-set-parameters "ebib" :export 'my-org-ebib-export)
       (bind-key "C-c s-b i" 'ebib-insert-citation org-mode-map))))
