@@ -18,6 +18,7 @@
 - [[https://www.royalapplications.com/ts/mac/features][Royal TSX]]
 - [[https://www.talend.com/products/talend-open-studio/][Talend Open Studio]] /(Data Integration; Data Quality; Big Data, if needed; requires OpenJDK which can be installed via MacPorts)/
 - [[https://github.com/yihui/tinytex][TinyTeX]]
+- [[https://github.com/Zettlr/Zettlr][Zettlr]] /(Zettelkasten Markdown editor/)
 - [[https://www.zotero.org/][Zotero]]
 * Application-specific configuration
 ** MacPorts
