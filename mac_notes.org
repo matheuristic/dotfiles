@@ -3,9 +3,11 @@
 - [[https://www.google.com/chrome/][Chrome]]
 - [[https://cyberduck.io/][Cyberduck]]
 - [[https://www.devontechnologies.com/apps/devonthink][DevonThink Pro]] /(license needed)/
+- [[https://discordapp.com/][Discord]]
 - [[https://docs.docker.com/docker-for-mac/install/][Docker]]
 - [[https://emacsformacosx.com/][Emacs for OS X]]
 - [[https://www.mozilla.org/en-US/firefox/new/][Firefox]]
+- [[https://github.com/git-up/GitUp][GitUp]] /(or use [[https://magit.vc/][Magit]] in Emacs)/
 - [[http://tentouchapps.com/grafio/][Grafio]] /(license needed)/ *(coming soon)*
 - [[https://www.toketaware.com/ithoughts-osx][iThoughts]] /(license needed or via App Store)/
 - [[https://www.macports.org/][MacPorts]]
@@ -16,8 +18,10 @@
 - [[https://www.getpostman.com/][Postman]]
 - [[https://eggerapps.at/postico/][Postico]]
 - [[https://www.royalapplications.com/ts/mac/features][Royal TSX]]
+- [[https://slack.com/][Slack]]
 - [[https://www.talend.com/products/talend-open-studio/][Talend Open Studio]] /(Data Integration; Data Quality; Big Data, if needed; requires OpenJDK which can be installed via MacPorts)/
 - [[https://github.com/yihui/tinytex][TinyTeX]]
+- [[https://github.com/aahung/Unshaky][Unshaky]] /(workaround for double keypress issue on butterfly keyboards)/
 - [[https://github.com/Zettlr/Zettlr][Zettlr]] /(Zettelkasten Markdown editor/)
 - [[https://www.zotero.org/][Zotero]]
 * Application-specific configuration
@@ -45,7 +49,7 @@ unrar
 xsv
 #+end_src
 *** Migration process after upgrading to a new version of OS X
-See instructions [[https://trac.macports.org/wiki/Migration][here]].
+- See instructions [[https://trac.macports.org/wiki/Migration][here]].
 ** friendly interactive shell (fish)
 *** Setup
 - [[https://github.com/fish-shell/fish-shell][fish]] can be installed via MacPorts.
@@ -61,5 +65,12 @@ z
 ** Clojure
 - Clojure can be installed via MacPorts (install the `clojure` and one of the `openjdk*` packages). Java jar dependencies will be downloaded to `~/.m2` after running `clojure` the first time.
 - For managing builds and dependencies, install `lein` which can be done manually. See the [[https://leiningen.org/][Leiningen website]] for instructions. Java jar dependencies will be downloaded to `~/.lein/self-installs`.
+** R
+*** Compiling C programs using Xcode 10+
+- From Xcode 10 onwards (i.e. OS X 10.14 onwards), C headers are no longer installed to ~/usr/local/include~ rooted at the system root ~/~ by default.
+- Headers are instead installed to a subsystem rooted at ~/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk~ (i.e. at ~/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include~).
+- Compilation flags need to set to point to the approprate paths for R to properly compile C programs using Clang, e.g. see ~.R/Makevars~ file in this repository.
+- For more information, see this [[https://thecoatlessprofessor.com/programming/cpp/r-compiler-tools-for-rcpp-on-macos/][blog post]].
+- The above should be handled automatically in the [[https://cran.r-project.org/bin/macosx/][official R installer]], but needs to be done manually for R installed by other means, e.g. installing ~r-base~ via [[https://docs.conda.io/en/latest/miniconda.html][conda]].
 * Usage tips
-- ~Control-Command-Q~ locks the screen
+- ~Control-Command-Q~ locks the screen.

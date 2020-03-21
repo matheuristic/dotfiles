@@ -3,6 +3,7 @@
 Generally, use [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]] over [[https://www.anaconda.com/distribution/][Anaconda]] since the latter installs a lot of extraneous packages.
 * Recommended workflow
 - A new environment for Python package development or where package Python packages will be directly installed from [[https://pypi.org/][PyPI]] should first have ~pip~ installed via ~conda~.
+- R environments installed via ~conda~ (via ~r-base~) on machines running Xcode 10+ (Mac OS X 10.14+) require the Clang compilation flags to be set appropriately, which can be done by copying ~.R/Makevars~ in this repository to ~.R/Makevars~ on the local machine.
 - Within an environment, don't mix packages from the ~conda-forge~ and standard ~conda~ channels, use one of them and stick with it as far as possible for all conda installed packages in that environment.
 * Duplicating environments
 A conda environment can be saved via

@@ -12,6 +12,7 @@ User configuration files for:
 * Pylint
 * GNU Screen
 * tmux
+* R (for installations via `conda` on Mac OS X)
 * Vim
 * X11 (urxvt and xterm)
 

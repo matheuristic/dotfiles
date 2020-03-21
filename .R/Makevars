@@ -1,0 +1,16 @@
+# ~/.R/Makevars : add/override R system and package-specific compilation flags
+
+# For more information, see
+# https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Customizing-package-compilation
+
+# Compilation flags for XCode 10+ (Mac OS X 10.14+)
+# Comment out the section below if running on Windows/Linux
+# clang: start
+CFLAGS=-isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+CCFLAGS=-isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+CXXFLAGS=-isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+CPPFLAGS=-isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include
+
+SHLIB_CXXLDFLAGS+=-Wl,-rpath,${R_HOME}/lib ${R_HOME}/lib/libc++abi.1.dylib
+SHLIB_CXX14LDFLAGS+=-Wl,-rpath,${R_HOME}/lib ${R_HOME}/lib/libc++abi.1.dylib
+# clang: end
