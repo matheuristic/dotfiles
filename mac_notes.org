@@ -47,7 +47,6 @@ qpdf
 p7zip
 ripgrep
 rlwrap
-starship
 tmux
 unrar
 wget
@@ -62,8 +61,10 @@ xsv
 - [[https://github.com/jorgebucaran/fisher][fisher]] can be used to manage fish packages.
 *** Recommended packages
 #+begin_src
+done
 fish-nvm
 fzf
+pure
 z
 #+end_src
 ** Clojure

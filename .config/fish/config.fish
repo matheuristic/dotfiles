@@ -33,11 +33,6 @@ if test -d $HOME/cdbookmarks
     set -x CDPATH . $HOME/cdbookmarks
 end
 
-# Set fish prompt using starship if installed
-if type -q starship
-    starship init fish | source
-end
-
 # Source local aliases
 if test -f ~/.config/fish/alias.fish
     source ~/.config/fish/alias.fish
