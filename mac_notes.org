@@ -25,7 +25,7 @@
 - [[https://slack.com/][Slack]]
 - [[https://github.com/yihui/tinytex][TinyTeX]]
 - [[https://github.com/aahung/Unshaky][Unshaky]] /(workaround for double keypress issue on butterfly keyboards)/
-- [[https://github.com/Zettlr/Zettlr][Zettlr]] /(Zettelkasten Markdown editor/)
+- [[https://github.com/Zettlr/Zettlr][Zettlr]] /(Zettelkasten Markdown editor)/
 - [[https://www.zotero.org/][Zotero]]
 * Application-specific configuration
 ** MacPorts
@@ -59,17 +59,26 @@ xsv
 - [[https://github.com/fish-shell/fish-shell][fish]] can be installed via MacPorts.
 - Set up a profile in [[https://support.apple.com/guide/terminal/welcome/mac][Terminal]] (or [[https://www.iterm2.com/][iterm2]]) with "Shell > Startup > Run Command" enabled and set to the installed fish binary. Set it as the default profile.
 - [[https://github.com/jorgebucaran/fisher][fisher]] can be used to manage fish packages.
+- If using the ~done~ fish package, install [[https://github.com/julienXX/terminal-notifier][terminal-notifier]] for notifications with icons. Download a release bundle, unzip the app to some path (e.g. ~/path/to/terminal-notifier.app~), create the following wrapper script (change the path as is necessary) and put it in one of the ~$PATH~ directories:
+#+begin_src
+#!/bin/bash
+
+# Wrapper for the terminal-notifier app
+# https://github.com/julienXX/terminal-notifier
+
+/path/to/terminal-notifier.app/Contents/MacOS/terminal-notifier $@
+#+end_src
 *** Recommended packages
 #+begin_src
-done
-fish-nvm
-fzf
-pure
-z
+franciscolourenco/done
+jethrokuan/fzf
+jethrokuan/z
+jorgebucaran/fish-nvm
+rafaelrinaldi/pure
 #+end_src
 ** Clojure
-- Clojure can be installed via MacPorts (install the ~clojure~ and one of the ~openjdk*~ packages). Java jar dependencies will be downloaded to ~~/.m2~ after running ~clojure~ the first time.
-- For managing builds and dependencies, install ~lein~ which can be done manually. See the [[https://leiningen.org/][Leiningen website]] for instructions. Java jar dependencies will be downloaded to ~~/.lein/self-installs~.
+- Clojure can be installed via MacPorts (install the ~clojure~ and one of the ~openjdk*~ packages). Java jar dependencies will be downloaded to =~/.m2= after running ~clojure~ the first time.
+- For managing builds and dependencies, install ~lein~ which can be done manually. See the [[https://leiningen.org/][Leiningen website]] for instructions. Java jar dependencies will be downloaded to =~/.lein/self-installs=.
 ** R
 *** Compiling C programs using Xcode 10+
 - From Xcode 10 onwards (i.e. OS X 10.14 onwards), C headers are no longer installed to ~/usr/local/include~ rooted at the system root ~/~ by default.
