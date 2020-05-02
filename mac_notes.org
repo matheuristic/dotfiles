@@ -10,6 +10,9 @@
 - [[https://github.com/git-up/GitUp][GitUp]] /(or use [[https://magit.vc/][Magit]] in Emacs)/
 - [[http://tentouchapps.com/grafio/][Grafio]] /(license needed)/ *(coming soon)*
 - [[https://www.toketaware.com/ithoughts-osx][iThoughts]] /(license needed or via App Store)/
+- [[https://www.iterm2.com/][iTerm2]]
+- [[https://jumpdesktop.com/][Jump Desktop]] /(paid)/
+- [[http://kablock.com/][Ka-Block!]]
 - [[https://www.macports.org/][MacPorts]]
 - [[https://www.office.com/][Microsoft Office]] /(license needed)/
 - [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]]
@@ -17,9 +20,9 @@
 - [[https://pdfexpert.com/][PDF Expert]] /(license needed)/ or [[https://smilesoftware.com/store][PDFPenPro]] /(license needed)/
 - [[https://www.getpostman.com/][Postman]]
 - [[https://eggerapps.at/postico/][Postico]]
+- [[https://qxmledit.org/][QXmlEdit]]
 - [[https://www.royalapplications.com/ts/mac/features][Royal TSX]]
 - [[https://slack.com/][Slack]]
-- [[https://www.talend.com/products/talend-open-studio/][Talend Open Studio]] /(Data Integration; Data Quality; Big Data, if needed; requires OpenJDK which can be installed via MacPorts)/
 - [[https://github.com/yihui/tinytex][TinyTeX]]
 - [[https://github.com/aahung/Unshaky][Unshaky]] /(workaround for double keypress issue on butterfly keyboards)/
 - [[https://github.com/Zettlr/Zettlr][Zettlr]] /(Zettelkasten Markdown editor/)
@@ -36,16 +39,18 @@ bat
 clojure
 fish
 fzf
-go
 htop
 lftp
+mosh
 openjdk8 / openjdk11
 qpdf
 p7zip
 ripgrep
 rlwrap
+starship
 tmux
 unrar
+wget
 xsv
 #+end_src
 *** Migration process after upgrading to a new version of OS X
@@ -59,18 +64,17 @@ xsv
 #+begin_src
 fish-nvm
 fzf
-pure
 z
 #+end_src
 ** Clojure
-- Clojure can be installed via MacPorts (install the `clojure` and one of the `openjdk*` packages). Java jar dependencies will be downloaded to `~/.m2` after running `clojure` the first time.
-- For managing builds and dependencies, install `lein` which can be done manually. See the [[https://leiningen.org/][Leiningen website]] for instructions. Java jar dependencies will be downloaded to `~/.lein/self-installs`.
+- Clojure can be installed via MacPorts (install the ~clojure~ and one of the ~openjdk*~ packages). Java jar dependencies will be downloaded to ~~/.m2~ after running ~clojure~ the first time.
+- For managing builds and dependencies, install ~lein~ which can be done manually. See the [[https://leiningen.org/][Leiningen website]] for instructions. Java jar dependencies will be downloaded to ~~/.lein/self-installs~.
 ** R
 *** Compiling C programs using Xcode 10+
 - From Xcode 10 onwards (i.e. OS X 10.14 onwards), C headers are no longer installed to ~/usr/local/include~ rooted at the system root ~/~ by default.
 - Headers are instead installed to a subsystem rooted at ~/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk~ (i.e. at ~/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include~).
 - Compilation flags need to set to point to the approprate paths for R to properly compile C programs using Clang, e.g. see ~.R/Makevars~ file in this repository.
 - For more information, see this [[https://thecoatlessprofessor.com/programming/cpp/r-compiler-tools-for-rcpp-on-macos/][blog post]].
-- The above should be handled automatically in the [[https://cran.r-project.org/bin/macosx/][official R installer]], but needs to be done manually for R installed by other means, e.g. installing ~r-base~ via [[https://docs.conda.io/en/latest/miniconda.html][conda]].
+- The above should be handled automatically in the [[https://cran.r-project.org/bin/macosx/][official R installer]] but needs to be done manually for R installed by other means, e.g. installing ~r-base~ via [[https://docs.conda.io/en/latest/miniconda.html][conda]].
 * Usage tips
 - ~Control-Command-Q~ locks the screen.
