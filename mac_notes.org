@@ -13,6 +13,7 @@
 - [[https://www.iterm2.com/][iTerm2]]
 - [[https://jumpdesktop.com/][Jump Desktop]] /(paid)/
 - [[http://kablock.com/][Ka-Block!]]
+- [[https://sw.kovidgoyal.net/kitty/][kitty]]
 - [[https://www.macports.org/][MacPorts]]
 - [[https://www.office.com/][Microsoft Office]] /(license needed)/
 - [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]]
@@ -28,6 +29,24 @@
 - [[https://github.com/Zettlr/Zettlr][Zettlr]] /(Zettelkasten Markdown editor)/
 - [[https://www.zotero.org/][Zotero]]
 * Application-specific configuration
+** kitty
+*** Using Option as Meta or Alt
+To use the Option key as Meta or Alt, add the following line to the =~/.config/kitty.conf= file:
+#+begin_src
+macos_option_as_alt all
+#+end_src
+If only the left Option key or right Option key is to be used, ~left~ or ~right~ can be specified in place of ~all~.
+*** Syncing the kitty terminfo file to remote systems
+It is usually recommended to make sure the /kitty/ terminfo files are sync'ed over to any new remote server being connected to.
+To do this, the first time ssh'ing in can be done using
+#+begin_src sh
+$ kitty +kitten ssh myserver
+#+end_src
+or the terminfo file can be copied using
+#+begin_src sh
+infocmp xterm-kitty | ssh myserver tic -x -o \~/.terminfo /dev/stdin
+#+end_src
+orjust copy over the local kitty terminfo file to the other system as =~/.terminfo/x/xterm-kitty=.
 ** MacPorts
 ***  Recommended packages
 #+begin_src
@@ -57,7 +76,9 @@ xsv
 ** friendly interactive shell (fish)
 *** Setup
 - [[https://github.com/fish-shell/fish-shell][fish]] can be installed via MacPorts.
-- Set up a profile in [[https://support.apple.com/guide/terminal/welcome/mac][Terminal]] (or [[https://www.iterm2.com/][iterm2]]) with "Shell > Startup > Run Command" enabled and set to the installed fish binary. Set it as the default profile.
+- Set up terminal to use fish as the shell.
+  - For [[https://sw.kovidgoyal.net/kitty/][kitty]], in =~/.config/kitty/kitty.conf=, set the shell to the installed fish binary with the ~--login~ option, i.e. add the line ~shell /path/to/bin/fish --login~ (modify ~/path/to/bin/fish~ as necessary).
+  - For [[https://support.apple.com/guide/terminal/welcome/mac][Terminal]] or [[https://www.iterm2.com/][iterm2]], set up a profile that runs ~fish~ on start. For example, in the Terminal app open "Preferences > Profiles" and create a new profile, enable "Shell > Startup > Run Command" and set its value to the installed fish binary (with the ~--login~ option as necessary). Set the new profile as the default profile.
 - [[https://github.com/jorgebucaran/fisher][fisher]] can be used to manage fish packages.
 - If using the ~done~ fish package, install [[https://github.com/julienXX/terminal-notifier][terminal-notifier]] for notifications with icons. Download a release bundle, unzip the app to some path (e.g. ~/path/to/terminal-notifier.app~), create the following wrapper script (change the path as is necessary) and put it in one of the ~$PATH~ directories:
 #+begin_src
