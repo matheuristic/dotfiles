@@ -1,0 +1,56 @@
+#+title: Fonts
+* Bitmap (and bitmap-derived) Fonts
+More useful for lower DPI screens.
+** Dina
+Great monospaced bitmap font for coding ([[https://www.dcmembers.com/jibsen/download/61/][link]]).
+A third-party remastered TTF version is also available ([[https://github.com/zshoals/Dina-Font-TTF-Remastered][link]]).
+The TTF font was created at 10pt size, but is still reasonable to use at 16pt.
+** Greybeard (remastered UW ttyp0 fonts)
+This is the [[https://people.mpi-inf.mpg.de/~uwe/misc/uw-ttyp0/][UW ttyp0]] monospaced bitmap font compiled using alternate glyphs ([[https://github.com/flowchartsman/greybeard][link]]).
+It has bitmap strikes in the following pixel sizes: 11, 12, 13, 14, 15, 16, 17, 18 and 22.
+Each of these has a bold variant, and italic variants are provided in 15, 16, 17 and 18.
+This is a little thin to be used effectively in HiDPI systems, but it has very good unicode coverage and works well as a fallback font.
+** Pixel Operator
+Variable and monospaced bitmap font ([[https://notabug.org/HarvettFox96/ttf-pixeloperator][link]]).
+Good alternative to Dina.
+The variable version wells work together with Dina.
+Also works great at 16pt size.
+** ProFontIIx Nerd Font Mono
+[[https://www.nerdfonts.com/][Nerd Fonts]] ([[https://github.com/ryanoasis/nerd-fonts][Github]]) build of [[http://tobiasjung.name/profont/][ProFont]], patched to add a lot of icon glyphs from [[https://github.com/FortAwesome/Font-Awesome][Font Awesome]], [[http://vorillaz.github.io/devicons/][Devicons]], [[https://github.com/github/octicons][Octicons]] and others.
+** GNU Unifont
+Unicode bitmap font with enormous glyph coverage ([[http://unifoundry.com/unifont/index.html][link]]). It is fairly lightweight (about 12 megabytes) for a font with very large coverage, and so it works well as a backup font.
+#+begin_src emacs-lisp :eval no
+;; fallback font for when the display face does not have a character glyph
+(set-fontset-font "fontset-default" 'unicode "Unifont")
+#+end_src
+* Outline Fonts
+Tends to work better for high DPI screens.
+** B612
+Font released by Airbus and Intactile DESIGN ([[https://b612-font.com/][link]], [[https://github.com/polarsys/b612][Github]]).
+The font uses a non-slashed zero by default ([[https://en.wikipedia.org/wiki/Symbol_(typeface)][symbol]] ~0030~), but there is also a slashed zero glyph in the private use area (unicode symbol ~E007~).
+In Emacs, it is possible to change the standard display table to display slashed zeros in place of the regular non-slashed zeros by loading the following code (e.g. in the startup configuration).
+#+begin_src emacs-lisp :eval no
+;; the following displays '0' as '\ue007' (B612 font slashed zero)
+(setq standard-display-table (make-display-table))
+(aset standard-display-table ?0 [?])
+#+end_src
+** ET Book
+Bembo-like typeface similar to the one used in Edward Tufte's books ([[https://edwardtufte.github.io/et-book/][link]], [[https://github.com/edwardtufte/et-book][Github]]). Mostly useful for typesetting print documents.
+** IBM Plex
+IBM's open-source corporate typeface ([[https://github.com/IBM/plex][Github]]). Distinctly IBM font designed to work well in user interface environments.
+** Input
+Large family of fonts with monospace, sans proportional and serif proportional variants ([[https://input.fontbureau.com/][link]]).
+Has good narrow, condensed and compressed fonts with large x-height.
+** Iosevka
+Condensed monospace typeface for code with possible customizations ([[https://typeof.net/Iosevka/][link]], [[https://github.com/be5invis/Iosevka][Github]]). Also has quasi-proportional typeface families. The monospace typeface has regular and extended widths. The extended width version can be used in Emacs by setting the face attribute ~:width~ to the symbol ~expanded~ (see following code).
+#+begin_src emacs-lisp :eval no
+(set-face-attribute 'default nil :family "Iosevka"
+                    :height 140 :weight 'normal :width 'expanded)
+#+end_src
+** Recursive
+Monospace and Sans fonts commissioned by Google Fonts ([[https://www.recursive.design/][link]], [[https://github.com/arrowtype/recursive/][Github]]).
+The ~Code~ version shifts the code ligatures from their usual OpenType feature ~dlig~ to the Opentype feature ~calt~ which makes them easier to use in code editors.
+** Source Code/Sans/Serif Pro
+Family of fonts created by Adobe with monospaced ([[https://github.com/adobe-fonts/source-code-pro][Source Code Pro]]), sans proportional ([[https://github.com/adobe-fonts/source-sans-pro][Source Sans Pro]]) and Serif ([[https://github.com/adobe-fonts/source-serif-pro][Source Serif Pro]]) variants.
+Readable at smaller size when antialiasing is turned off.
+Also has a Pan-CJK version ([[https://github.com/adobe-fonts/source-han-mono][Source Han Mono]], [[https://github.com/adobe-fonts/source-han-sans][Source Han Sans]], [[https://github.com/adobe-fonts/source-han-serif][Source Han Serif]]).

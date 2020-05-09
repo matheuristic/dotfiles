@@ -8,17 +8,13 @@
 - [[https://emacsformacosx.com/][Emacs for OS X]]
 - [[https://www.mozilla.org/en-US/firefox/new/][Firefox]]
 - [[https://github.com/git-up/GitUp][GitUp]] /(or use [[https://magit.vc/][Magit]] in Emacs)/
-- [[http://tentouchapps.com/grafio/][Grafio]] /(license needed)/ *(coming soon)*
 - [[https://www.toketaware.com/ithoughts-osx][iThoughts]] /(license needed or via App Store)/
-- [[https://www.iterm2.com/][iTerm2]]
 - [[https://jumpdesktop.com/][Jump Desktop]] /(paid)/
 - [[http://kablock.com/][Ka-Block!]]
-- [[https://sw.kovidgoyal.net/kitty/][kitty]]
 - [[https://www.macports.org/][MacPorts]]
 - [[https://www.office.com/][Microsoft Office]] /(license needed)/
 - [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]]
 - [[https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-macos/][OpenVPN]] /(as needed)/
-- [[https://pdfexpert.com/][PDF Expert]] /(license needed)/ or [[https://smilesoftware.com/store][PDFPenPro]] /(license needed)/
 - [[https://www.getpostman.com/][Postman]]
 - [[https://eggerapps.at/postico/][Postico]]
 - [[https://qxmledit.org/][QXmlEdit]]
@@ -31,22 +27,9 @@
 * Application-specific configuration
 ** kitty
 *** Using Option as Meta or Alt
-To use the Option key as Meta or Alt, add the following line to the =~/.config/kitty.conf= file:
-#+begin_src
-macos_option_as_alt all
-#+end_src
-If only the left Option key or right Option key is to be used, ~left~ or ~right~ can be specified in place of ~all~.
+- Set the ~macos_option_as_alt all~ option in the =~/.config/kitty.conf= file (replace ~left~ or ~right~ instead of ~all~ to only use the left or right Option key).
 *** Syncing the kitty terminfo file to remote systems
-It is usually recommended to make sure the /kitty/ terminfo files are sync'ed over to any new remote server being connected to.
-To do this, the first time ssh'ing in can be done using
-#+begin_src sh
-$ kitty +kitten ssh myserver
-#+end_src
-or the terminfo file can be copied using
-#+begin_src sh
-infocmp xterm-kitty | ssh myserver tic -x -o \~/.terminfo /dev/stdin
-#+end_src
-orjust copy over the local kitty terminfo file to the other system as =~/.terminfo/x/xterm-kitty=.
+- For a new server, options are to ssh in the first time with ~kitty +kitten ssh myserver~, to copy over the terminfo file with =infocmp xterm-kitty | ssh myserver tic -x -o \~/.terminfo /dev/stdin=, or to manually copy over the terminfo file to =~/.terminfo/x/xterm-kitty= on the server.
 ** MacPorts
 ***  Recommended packages
 #+begin_src
@@ -100,6 +83,20 @@ rafaelrinaldi/pure
 ** Clojure
 - Clojure can be installed via MacPorts (install the ~clojure~ and one of the ~openjdk*~ packages). Java jar dependencies will be downloaded to =~/.m2= after running ~clojure~ the first time.
 - For managing builds and dependencies, install ~lein~ which can be done manually. See the [[https://leiningen.org/][Leiningen website]] for instructions. Java jar dependencies will be downloaded to =~/.lein/self-installs=.
+** TinyTex
+*** Installation
+- If using ~conda~, it's better to install via the command line ([[https://yihui.org/tinytex/#for-other-users][link]]).
+- Install and remove packages using the ~tlmgr~ command line program ([[https://yihui.org/tinytex/#maintenance][link]]).
+- Upgrading TexLive versions are easiest by fullying removing the =~/Library/TinyTex= directory and re-installing the currently installed packages which can be listed using ~tlmgr list | grep -e '^i' | cut -d ' ' -f 2 | sed -e 's/://g' | grep -v 'x86_64-darwin'~.
+*** Useful additional Tex packages
+#+begin_src
+biber
+capt-of
+fancyhdr
+pgf
+ulem
+wrapfig
+#+end_src
 ** R
 *** Compiling C programs using Xcode 10+
 - From Xcode 10 onwards (i.e. OS X 10.14 onwards), C headers are no longer installed to ~/usr/local/include~ rooted at the system root ~/~ by default.
