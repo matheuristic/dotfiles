@@ -2,16 +2,67 @@
 * Anaconda vs Miniconda
 Generally, use [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]] over [[https://www.anaconda.com/distribution/][Anaconda]] since the latter installs a lot of extraneous packages.
 * Recommended workflow
-- A new environment for Python package development or where package Python packages will be directly installed from [[https://pypi.org/][PyPI]] should first have ~pip~ installed via ~conda~.
-- R environments installed via ~conda~ (via ~r-base~) on machines running Xcode 10+ (Mac OS X 10.14+) require the Clang compilation flags to be set appropriately, which can be done by copying ~.R/Makevars~ in this repository to ~.R/Makevars~ on the local machine.
+- A new environment for Python package development, or where package Python packages will be directly installed from [[https://pypi.org/][PyPI]], should be created with the ~python=<PYTHON_VERSION>~ parameter or first have ~pip~ installed via ~conda~ to facilitate environment-specific pip installs.
+- R environments installed via ~conda~ (specifically, the ~r-base~ package) on machines running Xcode 10+ (Mac OS X 10.14+) require the Clang compilation flags to be set appropriately, which can be done by copying ~.R/Makevars~ in this repository to ~.R/Makevars~ on the local machine.
 - Within an environment, don't mix packages from the ~conda-forge~ and standard ~conda~ channels, use one of them and stick with it as far as possible for all conda installed packages in that environment.
-* Duplicating environments
-A conda environment can be saved via
+* Creating environments
+An empty environment with only ~conda~ tooling can be installed (replace ~newenv~ as desired) with
+
 #+begin_src sh
-$ conda env export > environment.yaml
+conda create -n newenv
 #+end_src
-(change ~environment.yaml~ to another output file name as needed) and recreated via
+
+and a Python-development environment can be installed by specifying an additional ~python=<PYTHON_VERSION>~ parameter, e.g.
+
 #+begin_src sh
-$ conda env create -f environment.yaml
+conda create -n newenv python=3.8
 #+end_src
-*Note*: a saved environment lists the environment's name, its prefix path, conda channels and installed conda packages and their versions, but /not/ any packages installed via ~pip~ (those should be tracked in a separate file, typically ~requirements.txt~).
+
+*NOTE*: Environments created with the ~python=<PYTHON_VERSION>~ parameter also installs an environment-specific ~pip~ automatically.
+* Exporting environments
+Conda environments can be exported and used for recreating the environments on the same machine or elsewhere.
+There are a number of use cases, which can determine how the environment should be backed up.
+** Exact package build versions (backup on same machine, or duplicating to a cloned machine)
+Export all details of the conda environment using
+
+#+begin_src sh
+conda env export > environment.yml
+#+end_src
+
+*NOTE*: This exports the environment's name, its prefix path, conda channels, installed conda packages and their builds, and installed pip packages and their versions.
+** Same package versions, have packages installed using pip (duplicating to a different machine)
+Export the environment with its package versions but no prefix path and build versions using
+
+#+begin_src sh
+conda env export --no-builds | grep -e "^prefix" -v > environment.yml
+#+end_src
+
+*NOTE*: Some package versions have builds on one operating system but not another, so this method of saving the environment will not work in those instances.
+** No package version requirements, have packages installed using pip
+Export the environment information with no prefix path and package versions using
+
+#+begin_src sh
+conda env export --no-builds | grep -e "^prefix" -v | cut -f 1 -d "=" > environment.yml
+#+end_src
+
+*NOTE*: Make sure the project using this environment doesn't depend on an obsolete API in any of the installed packages.
+** Same package versions, no packages installed using pip
+Export the environment information with no prefix path, package versions and only conda packages that were explicitly requested to be installed using
+
+#+begin_src sh
+conda env export --from-history | grep -e '^prefix' -v > environment.yml
+#+end_src
+
+*NOTE*: This has the advantage of only listing explicitly requested packages and not ones pulled in as dependencies.
+Make sure no packages were installed via pip if using this approach.
+* Recreating conda environments from an environment file
+
+Recreate an environment from some environment file ~environment.yml~ using
+
+#+begin_src sh
+conda env env create -n envname -f environment.yml
+#+end_src
+
+where the environment is recreated in a new environment ~envname~ (change as desired).
+
+*NOTE*: If the ~-n envname~ option is not specified, the ~name~ entry in the environment file is used as the new environment name.

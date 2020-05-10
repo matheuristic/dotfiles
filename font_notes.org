@@ -1,5 +1,5 @@
-#+title: Fonts
-* Bitmap (and bitmap-derived) Fonts
+#+title: Font Notes
+* Bitmap (and bitmap-derived) fonts
 More useful for lower DPI screens.
 ** Dina
 Great monospaced bitmap font for coding ([[https://www.dcmembers.com/jibsen/download/61/][link]]).
@@ -18,13 +18,16 @@ Also works great at 16pt size.
 ** ProFontIIx Nerd Font Mono
 [[https://www.nerdfonts.com/][Nerd Fonts]] ([[https://github.com/ryanoasis/nerd-fonts][Github]]) build of [[http://tobiasjung.name/profont/][ProFont]], patched to add a lot of icon glyphs from [[https://github.com/FortAwesome/Font-Awesome][Font Awesome]], [[http://vorillaz.github.io/devicons/][Devicons]], [[https://github.com/github/octicons][Octicons]] and others.
 ** GNU Unifont
-Unicode bitmap font with enormous glyph coverage ([[http://unifoundry.com/unifont/index.html][link]]). It is fairly lightweight (about 12 megabytes) for a font with very large coverage, and so it works well as a backup font.
-#+begin_src emacs-lisp :eval no
-;; fallback font for when the display face does not have a character glyph
-(set-fontset-font "fontset-default" 'unicode "Unifont")
-#+end_src
-* Outline Fonts
+Unicode bitmap font with enormous glyph coverage ([[http://unifoundry.com/unifont/index.html][link]]). It is fairly lightweight (about 12 megabytes) for a font with very large coverage, and is most useful for debugging Unicode issues.
+* Outline fonts
 Tends to work better for high DPI screens.
+** Aganè
+Sans-serif font inspired by Noorda, Frutiger and Avenir ([[https://www.behance.net/gallery/48243243/Agane-Typeface-Free-font][link1]], [[https://www.graphicpear.com/agane-free-font/][link2]]).
+Has a ~S~ variant with shorter ascenders and descenders designed for display and signage.
+Also has a companion icon pack for Adobe Illustrator ([[https://www.behance.net/gallery/49310919/Agane-Icons-Free-Download][link]])
+** Aileron
+Neo-grotesque sans-serif font ([[http://dotcolon.net/font/aileron/][link]]).
+Similar to Helvetica but ~l~ is distinct from ~I~.
 ** B612
 Font released by Airbus and Intactile DESIGN ([[https://b612-font.com/][link]], [[https://github.com/polarsys/b612][Github]]).
 The font uses a non-slashed zero by default ([[https://en.wikipedia.org/wiki/Symbol_(typeface)][symbol]] ~0030~), but there is also a slashed zero glyph in the private use area (unicode symbol ~E007~).
@@ -34,23 +37,106 @@ In Emacs, it is possible to change the standard display table to display slashed
 (setq standard-display-table (make-display-table))
 (aset standard-display-table ?0 [?])
 #+end_src
+** DM Mono/Sans/Serif
+Font families designed by Colophon Foundry for DeepMind ([[https://github.com/googlefonts/dm-mono][DM Mono link]], [[https://github.com/googlefonts/dm-fonts][DM Sans/Serif link]]).
+Low contrast geometric fonts intended for use at smaller text sizes.
 ** ET Book
 Bembo-like typeface similar to the one used in Edward Tufte's books ([[https://edwardtufte.github.io/et-book/][link]], [[https://github.com/edwardtufte/et-book][Github]]). Mostly useful for typesetting print documents.
+** Fivo Sans
+Neo-grotesque typeface ([[https://www.behance.net/gallery/53653425/Fivo-Sans-Free-Font-Family][link]]).
 ** IBM Plex
-IBM's open-source corporate typeface ([[https://github.com/IBM/plex][Github]]). Distinctly IBM font designed to work well in user interface environments.
+IBM's open-source corporate typeface ([[https://github.com/IBM/plex][Github]]). Has monospace, sans-serif and serif families. Distinctly IBM font designed to work well in various user interface environments.
 ** Input
-Large family of fonts with monospace, sans proportional and serif proportional variants ([[https://input.fontbureau.com/][link]]).
-Has good narrow, condensed and compressed fonts with large x-height.
+Font with monospace, sans-serif and serif families ([[https://input.fontbureau.com/][link]]).
+Large x-height with many customization options available.
+Free for personal use.
+** Inconsolata
+Open source monospace font with a wide array of weights ([[https://github.com/googlefonts/Inconsolata][link]]).
+Also has a variant family Ligconsolata that exposes ligatures by default in the OpenType feature ~liga~, aimed at use in text editors.
 ** Iosevka
-Condensed monospace typeface for code with possible customizations ([[https://typeof.net/Iosevka/][link]], [[https://github.com/be5invis/Iosevka][Github]]). Also has quasi-proportional typeface families. The monospace typeface has regular and extended widths. The extended width version can be used in Emacs by setting the face attribute ~:width~ to the symbol ~expanded~ (see following code).
+Condensed monospace typeface for code with a wide array of customization options ([[https://typeof.net/Iosevka/][link]], [[https://github.com/be5invis/Iosevka][Github]]).
+The ~ss08~ ([[https://github.com/fabrizioschiavi/pragmatapro][Pragmata Pro]] Style) stylistic set is particularly nice.
+The typeface also has quasi-proportional families -- Aile (Helvetica-like sans-serif), Etoile (serif) and Sparkle (mixed sans-serif and serif, with similar character spacing to Etoile).
+The monospace typeface has regular and extended widths.
+The extended width version can be used in Emacs by setting the face attribute ~:width~ to the symbol ~expanded~ (see following code).
 #+begin_src emacs-lisp :eval no
 (set-face-attribute 'default nil :family "Iosevka"
                     :height 140 :weight 'normal :width 'expanded)
 #+end_src
+** Literata
+Serif typeface intended for long-form reading, e.g. in eBooks ([[https://github.com/googlefonts/literata][link]]).
+** Noto
+Massive font family by Google that aims to support all languages ([[https://www.google.com/get/noto/][link]]).
+Good choice as a fallback font for esoteric languages in Emacs ([[https://idiocy.org/emacs-fonts-and-fontsets.html][link]]).
 ** Recursive
 Monospace and Sans fonts commissioned by Google Fonts ([[https://www.recursive.design/][link]], [[https://github.com/arrowtype/recursive/][Github]]).
 The ~Code~ version shifts the code ligatures from their usual OpenType feature ~dlig~ to the Opentype feature ~calt~ which makes them easier to use in code editors.
+** Reforma
+Typeface commissioned by the Universidad Nacional de Córdoba in Argentina ([[https://pampatype.com/reforma][link]]).
+It has three subfamilies of fonts -- Reforma 1918 (serif), Reforma 2018 (sans-serif) and Reforma 1969 (an intermediate hybrid).
+Interesting combinations are possible among its different styles -- the sans typeface for display use and the serif for body text, or the reverse.
 ** Source Code/Sans/Serif Pro
 Family of fonts created by Adobe with monospaced ([[https://github.com/adobe-fonts/source-code-pro][Source Code Pro]]), sans proportional ([[https://github.com/adobe-fonts/source-sans-pro][Source Sans Pro]]) and Serif ([[https://github.com/adobe-fonts/source-serif-pro][Source Serif Pro]]) variants.
 Readable at smaller size when antialiasing is turned off.
 Also has a Pan-CJK version ([[https://github.com/adobe-fonts/source-han-mono][Source Han Mono]], [[https://github.com/adobe-fonts/source-han-sans][Source Han Sans]], [[https://github.com/adobe-fonts/source-han-serif][Source Han Serif]]).
+** Space Grotesk
+Sans typeface derived from Space Mono ([[https://fonts.floriankarsten.com/space-grotesk][link]], [[https://github.com/floriankarsten/space-grotesk][Github]]).
+** Symbola
+Font from the [[https://dn-works.com/ufas/][Unicode Fonts for Ancient Scripts]] project.
+Symbola focuses on Multilingual support and Symbol blocks in [[https://unicode.org/standard/standard.html][The Unicode Standard]].
+It works well as a fallback font in Emacs for when the default typeface does not have a character glyph (see following code).
+For more information on configuring fonts in Emacs, see this [[https://idiocy.org/emacs-fonts-and-fontsets.html][link]].
+Free for personal use.
+#+begin_src emacs-lisp :eval no
+;; fallback font for when the display face does not have a character glyph
+(set-fontset-font t nil "Symbola" nil 'append)
+#+end_src
+** Syne
+Typeface designed for the Synesthésie art center in Saint-Denis suburb of Paris ([[https://www.lucasdescroix.fr/words/atypical-gathering][link]], [[https://gitlab.com/bonjour-monde/fonderie/syne-typeface][Gitlab]]).
+It has five subfamilies with distinct styles: Extra (display), Regular (regular text), Bold (bold text), Italic (handwritten look) and Mono (distorted look).
+** Wremena
+Serif typeface similar to Times New Roman but with sharp, triangular serifs are more pronounced in heavier weights ([[http://typefaces.temporarystate.net/preview/Wremena][link]]).
+* Display fonts
+Aimed for use at large sizes for headlines and titles.
+** Azonix
+Modern display sans font with a science-fiction feel ([[https://www.dafont.com/azonix.font][link]]).
+** BluuNext
+Bold serif display typeface alternative to Time New Roman or Caslon Graphique ([[https://velvetyne.fr/fonts/bluu/][link]], [[https://github.com/velvetyne/BluuNext][Github]]).
+** Colus
+Display sans font inspired by stone and wooden carved letter incriptions ([[https://www.fontfabric.com/fonts/colus/][link]]).
+** Espoir
+Display sans font inspired by late 19th century engraving fonts ([[https://www.behance.net/gallery/63716173/Espoir-Font-Family-(Free-Download)][link]]).
+Free for personal and non-profit project use.
+** Fivo Sans Modern
+Display version of Fivo Sans ([[https://www.behance.net/gallery/54442585/Fivo-Sans-Modern-Free-Display-Font-Family][link]]).
+** Kraft Mono
+Monospace geometric typeface well-suited as a headliner/display face ([[http://chasse-ouverte.erg.be/fonts/kraft-mono/][link]]).
+** K95 Alphabet
+Geometric Art Deco-esque display font ([[http://www.k95.it/k95_alfabeto_free_font/][link]]).
+Open usage except that ~K~, ~9~ and ~5~ cannot be used to design a brand or logo.
+** Le Murmure
+Condensed sans display typeface designed for French design agency Murmure ([[https://velvetyne.fr/fonts/le-murmure/][link]], [[https://gitlab.com/velvetyne/murmure][Gitlab]]).
+** Majesti Banner
+Serif display typeface ([[http://www.losttype.com/font/?name=majesti_banner][link]]).
+Has high contrast letterforms, ball terminals and ligatures.
+Pay-what-you-want for personal use.
+** Millimetre
+Geometric sans display typeface similar to Eurostile ([[https://velvetyne.fr/fonts/millimetre/][link]], [[https://gitlab.com/StudioTriple/Millimetre/][Gitlab]]).
+** Milton Grotesque
+Geometric display sans typeface by the Vintage Type Company ([[http://blog.vintagetype.co/miltongrotesque/][link]]).
+Free for desktop and print usage, requires a commercial license for web usage.
+** MOON 2.0
+Rounded display typeface ([[https://www.behance.net/gallery/23468357/www.studentshow.com/gallery/23468357/Moon-Free-Font][link]]).
+Free for personal use.
+** Morganite
+Super condensed display sans typeface ([[https://gumroad.com/l/jPYXU][link]]).
+** Optician Sans
+Uppercase display sans typeface based on historical eye charts and optotypes ([[https://optician-sans.com/][link]], [[https://github.com/anewtypeofinterference/Optician-Sans][Github]]).
+** Playfair Display
+Transitional display serif typeface ([[https://fonts.google.com/specimen/Playfair+Display][link]], [[https://github.com/clauseggers/Playfair-Display][Github]]).
+Pairs well with the Georgia typeface as body text.
+** Space Mono
+Monospace font designed for Google Design ([[https://fonts.google.com/specimen/Space+Mono][link]], [[https://github.com/googlefonts/spacemono][Github]]).
+** XPLOT
+Cartoon display typeface ([[https://www.behance.net/gallery/24031061/XPLOR-Free-Typeface][link]]).
+Free for personal use.
