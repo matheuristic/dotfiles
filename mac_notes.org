@@ -44,6 +44,7 @@ fzf
 htop
 lftp
 mosh
+notmuch
 openjdk8 / openjdk11
 qpdf
 p7zip
@@ -88,6 +89,13 @@ rafaelrinaldi/pure
 - If using ~conda~, it's better to install via the command line ([[https://yihui.org/tinytex/#for-other-users][link]]).
 - Install and remove packages using the ~tlmgr~ command line program ([[https://yihui.org/tinytex/#maintenance][link]]).
 - Upgrading TexLive versions are easiest by fullying removing the =~/Library/TinyTex= directory and re-installing the currently installed packages which can be listed using ~tlmgr list | grep -e '^i' | cut -d ' ' -f 2 | sed -e 's/://g' | grep -v 'x86_64-darwin'~.
+- If using the fish shell, add the following to the fish configuration file =~/.config/fish/config.fish= or a file it sources.
+#+begin_src
+# TinyTex
+if test -d $HOME/Library/TinyTeX/bin/x86_64-darwin
+    set PATH $HOME/Library/TinyTeX/bin/x86_64-darwin $PATH
+end
+#+end_src
 *** Useful additional Tex packages
 #+begin_src
 biber
