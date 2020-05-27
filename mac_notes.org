@@ -18,6 +18,7 @@
 - [[https://www.getpostman.com/][Postman]]
 - [[https://eggerapps.at/postico/][Postico]]
 - [[https://qxmledit.org/][QXmlEdit]]
+- [[https://racket-lang.org/][Racket]]
 - [[https://www.royalapplications.com/ts/mac/features][Royal TSX]]
 - [[https://slack.com/][Slack]]
 - [[https://github.com/yihui/tinytex][TinyTeX]]
@@ -39,6 +40,7 @@ autoconf
 automake
 bat
 clojure
+dict
 fish
 fzf
 htop
@@ -96,14 +98,22 @@ if test -d $HOME/Library/TinyTeX/bin/x86_64-darwin
     set PATH $HOME/Library/TinyTeX/bin/x86_64-darwin $PATH
 end
 #+end_src
-*** Useful additional Tex packages
+*** Useful Tex packages
 #+begin_src
+amsfonts
+amsmath
 biber
+booktabs
 capt-of
+epstopdf-pkg
 fancyhdr
+geometry
+hyperref
 pgf
+pgfplots
 ulem
 wrapfig
+xcolor
 #+end_src
 ** R
 *** Compiling C programs using Xcode 10+
