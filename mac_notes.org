@@ -55,6 +55,7 @@ rlwrap
 tmux
 unrar
 wget
+wordnet
 xsv
 #+end_src
 *** Migration process after upgrading to a new version of OS X
