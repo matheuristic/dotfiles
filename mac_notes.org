@@ -1,31 +1,50 @@
 #+TITLE: Mac OS X Notes
 * Applications
+** Recommended
 - [[https://www.google.com/chrome/][Chrome]]
 - [[https://cyberduck.io/][Cyberduck]]
-- [[https://www.devontechnologies.com/apps/devonthink][DevonThink Pro]] /(license needed)/
-- [[https://discordapp.com/][Discord]]
+- [[https://www.devontechnologies.com/apps/devonthink][DevonThink Pro]] (/license needed/)
 - [[https://docs.docker.com/docker-for-mac/install/][Docker]]
 - [[https://emacsformacosx.com/][Emacs for OS X]]
 - [[https://www.mozilla.org/en-US/firefox/new/][Firefox]]
-- [[https://github.com/git-up/GitUp][GitUp]] /(or use [[https://magit.vc/][Magit]] in Emacs)/
-- [[https://www.toketaware.com/ithoughts-osx][iThoughts]] /(license needed or via App Store)/
-- [[https://github.com/laurent22/joplin][Joplin]]
-- [[https://jumpdesktop.com/][Jump Desktop]] /(paid)/
+- [[https://jumpdesktop.com/][Jump Desktop]] (/paid/)
 - [[http://kablock.com/][Ka-Block!]]
 - [[https://www.macports.org/][MacPorts]]
-- [[https://www.office.com/][Microsoft Office]] /(license needed)/
+- [[https://www.office.com/][Microsoft Office]] (/license needed/)
 - [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]]
-- [[https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-macos/][OpenVPN]] /(as needed)/
+- [[https://github.com/pigigaldi/Pock][Pock]] (/Mac OS X Dock in Touch Bar/)
 - [[https://www.getpostman.com/][Postman]]
 - [[https://eggerapps.at/postico/][Postico]]
-- [[https://qxmledit.org/][QXmlEdit]]
-- [[https://racket-lang.org/][Racket]]
 - [[https://www.royalapplications.com/ts/mac/features][Royal TSX]]
+- [[https://skim-app.sourceforge.io/][Skim]] (/PDF reader and note taker/)
 - [[https://slack.com/][Slack]]
 - [[https://github.com/yihui/tinytex][TinyTeX]]
-- [[https://github.com/aahung/Unshaky][Unshaky]] /(workaround for double keypress issue on butterfly keyboards)/
-- [[https://github.com/Zettlr/Zettlr][Zettlr]] /(Zettelkasten Markdown editor)/
+- [[https://github.com/aahung/Unshaky][Unshaky]] (/workaround for double keypress issue on butterfly keyboards/)
 - [[https://www.zotero.org/][Zotero]]
+** Other useful apps
+- [[https://1password.com/][1Password]]
+- [[https://bitwarden.com/][BitWarden]]
+- [[https://calibre-ebook.com/][Calibre]] 
+- [[https://discordapp.com/][Discord]]
+- [[https://fontforge.org/en-US/][FontForge]]
+- [[https://www.gimp.org/][GIMP]]
+- [[https://github.com/git-up/GitUp][GitUp]] (/or use [[https://magit.vc/][Magit]] in Emacs/)
+- [[https://inkscape.org/][Inkscape]]
+- [[https://www.toketaware.com/ithoughts-osx][iThoughts]] (/license needed or via App Store/)
+- [[https://github.com/laurent22/joplin][Joplin]]
+- [[https://krita.org/en/][Krita]]
+- [[https://www.knime.com/knime-analytics-platform][KNIME]] (/data mining/)
+- [[https://github.com/fespinoza/LinkedIdeas][Linked Ideas]] (/like [[https://www.literatureandlatte.com/scapple/overview][Scapple]]; available on App Store/)
+- [[https://github.com/hql287/Manta][Manta]] (/invoicing app/)
+- [[https://ranchero.com/netnewswire/][NetNewsWire]]
+- [[https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-macos/][OpenVPN]] (/as needed/)
+- [[https://qxmledit.org/][QXmlEdit]]
+- [[https://racket-lang.org/][Racket]]
+- [[https://github.com/syncthing/syncthing-macos][Syncthing]] (/file synchronization/)
+- [[https://tunnelblick.net/][TunnelBlick]] (/OpenVPN alternative/)
+- [[https://www.vagrantup.com/][Vagrant]]
+- [[https://www.yworks.com/products/yed][yEd]]
+- [[https://github.com/Zettlr/Zettlr][Zettlr]] (/Zettelkasten Markdown editor/)
 * Application-specific configuration
 ** kitty
 *** Using Option as Meta or Alt
@@ -138,13 +157,17 @@ xcolor
 - [[https://github.com/jlevy/the-art-of-command-line][GitHub - jlevy/the-art-of-command-line: Master the command line, in one page]]
 - [[https://github.com/Idnan/bash-guide][GitHub - Idnan/bash-guide: A guide to learn bash]]
 - [[https://www.datascienceatthecommandline.com/][Data Science at the Command Line]]
+** Online tools
+- [[https://app.diagrams.net/][diagrams.net]] (/diagramming tool, formerly draw.io/)
 ** Package lists
 - [[https://github.com/agarrharr/awesome-cli-apps][GitHub - agarrharr/awesome-cli-apps]]
 - [[https://github.com/jondot/awesome-devenv][GitHub - jondot/awesome-devenv]]
 - [[https://github.com/jorgebucaran/awesome-fish][GitHub - jorgebucaran/awesome-fish]]
+- [[https://github.com/jaywcjlove/awesome-mac][GitHub - jaywcjlove/awesome-mac]]
 - [[https://github.com/herrbischoff/awesome-macos-command-line][GitHub - herrbischoff/awesome-macos-command-line]]
 - [[https://github.com/alebcay/awesome-shell][GitHub - alebcay/awesome-shell]]
 - [[https://github.com/kahun/awesome-sysadmin][GitHub - kahun/awesome-sysadmin]]
+- [[https://github.com/serhii-londar/open-source-mac-os-apps][GitHub - serhii-londar/open-source-mac-os-apps]]
 - [[https://github.com/dbohdan/structured-text-tools][GitHub - dbohdan/structured-text-tools]]
 ** TSV utilities
 eBay's [[https://github.com/eBay/tsv-utils][TSV utilities]] provide tooling for filtering, computing
@@ -152,10 +175,14 @@ statistics, joining and so on for large tabular data files (CSV, TSV).
 Not in MacPorts but the project's Github page provides Linux and MacOS
 binary releases that can be extracted to a directory in ~PATH~.
 Alternatives are [[https://github.com/johnkerl/miller][miller]] or individual tools like [[https://github.com/BurntSushi/xsv][xsv]] and [[https://github.com/saulpw/visidata][Visidata]].
+** Useful nodeJS packages
+- [[https://github.com/nock/nock][nock]] : HTTP server mocking (more full featured)
+- [[https://github.com/stoplightio/prism][Prism]] : HTTP server mocking (more lightweight)
 ** Useful Python packages
 Easiest to install via conda and create a symlink to the binary in
 =~/miniconda3/envs/ENVNAME/bin= (the environment's =bin= directory)
 within =~/.local/bin= (or some directory that is in ~PATH~).
-- ~textract~ : Wrapper for tools extracting text from several document formats
-- ~visidata~ : A command-line multitool for tabular data
+- ~mitmproxy~ : Interactive HTTPS proxy.
+- ~textract~ : Wrapper for tools extracting text from several document formats.
+- ~visidata~ : A command-line multitool for tabular data.
 For other good Python packages, see [[https://github.com/vinta/awesome-python][Awesome Python]].
