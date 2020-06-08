@@ -3,6 +3,7 @@
 ** Recommended
 - [[https://www.google.com/chrome/][Chrome]]
 - [[https://cyberduck.io/][Cyberduck]]
+- [[https://dbeaver.io/][DBeaver]]
 - [[https://www.devontechnologies.com/apps/devonthink][DevonThink Pro]] (/license needed/)
 - [[https://docs.docker.com/docker-for-mac/install/][Docker]]
 - [[https://emacsformacosx.com/][Emacs for OS X]]
@@ -12,40 +13,42 @@
 - [[https://www.macports.org/][MacPorts]]
 - [[https://www.office.com/][Microsoft Office]] (/license needed/)
 - [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]]
-- [[https://github.com/pigigaldi/Pock][Pock]] (/Mac OS X Dock in Touch Bar/)
-- [[https://www.getpostman.com/][Postman]]
-- [[https://eggerapps.at/postico/][Postico]]
+- [[https://github.com/pigigaldi/Pock][Pock]]
 - [[https://www.royalapplications.com/ts/mac/features][Royal TSX]]
-- [[https://skim-app.sourceforge.io/][Skim]] (/PDF reader and note taker/)
+- [[https://skim-app.sourceforge.io/][Skim]]
 - [[https://slack.com/][Slack]]
 - [[https://github.com/yihui/tinytex][TinyTeX]]
-- [[https://github.com/aahung/Unshaky][Unshaky]] (/workaround for double keypress issue on butterfly keyboards/)
-- [[https://www.zotero.org/][Zotero]]
+- [[https://github.com/aahung/Unshaky][Unshaky]] (/double keypress issue workaround for butterfly keyboards/)
 ** Other useful apps
 - [[https://1password.com/][1Password]]
 - [[https://bitwarden.com/][BitWarden]]
-- [[https://calibre-ebook.com/][Calibre]] 
+- [[https://calibre-ebook.com/][Calibre]]
 - [[https://discordapp.com/][Discord]]
 - [[https://fontforge.org/en-US/][FontForge]]
 - [[https://www.gimp.org/][GIMP]]
 - [[https://github.com/git-up/GitUp][GitUp]] (/or use [[https://magit.vc/][Magit]] in Emacs/)
 - [[https://inkscape.org/][Inkscape]]
-- [[https://www.toketaware.com/ithoughts-osx][iThoughts]] (/license needed or via App Store/)
+- [[https://insomnia.rest/][Insomnia]] (/Core---REST/GraphQL API explorer; Designer---API designer/)
+- [[https://www.toketaware.com/ithoughts-osx][iThoughts]] (/license needed; available on App Store/)
 - [[https://github.com/laurent22/joplin][Joplin]]
 - [[https://krita.org/en/][Krita]]
-- [[https://www.knime.com/knime-analytics-platform][KNIME]] (/data mining/)
+- [[https://www.knime.com/knime-analytics-platform][KNIME]]
+- [[https://www.postman.com/][Postman]] (/less nice UX than Insomnia; CI/CD support with [[https://github.com/postmanlabs/newman][Newman]]/)
 - [[https://github.com/fespinoza/LinkedIdeas][Linked Ideas]] (/like [[https://www.literatureandlatte.com/scapple/overview][Scapple]]; available on App Store/)
-- [[https://github.com/hql287/Manta][Manta]] (/invoicing app/)
+- [[https://github.com/hql287/Manta][Manta]]
 - [[https://ranchero.com/netnewswire/][NetNewsWire]]
-- [[https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-macos/][OpenVPN]] (/as needed/)
+- [[https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-macos/][OpenVPN]]
+- [[https://eggerapps.at/postico/][Postico]] (/better PostgreSQL UX, but only one window per connection/)
 - [[https://qxmledit.org/][QXmlEdit]]
 - [[https://racket-lang.org/][Racket]]
-- [[https://github.com/syncthing/syncthing-macos][Syncthing]] (/file synchronization/)
+- [[https://github.com/syncthing/syncthing-macos][Syncthing]]
 - [[https://tunnelblick.net/][TunnelBlick]] (/OpenVPN alternative/)
 - [[https://www.vagrantup.com/][Vagrant]]
 - [[https://www.yworks.com/products/yed][yEd]]
-- [[https://github.com/Zettlr/Zettlr][Zettlr]] (/Zettelkasten Markdown editor/)
+- [[https://github.com/Zettlr/Zettlr][Zettlr]]
+- [[https://www.zotero.org/][Zotero]]
 * Application-specific configuration
+** TODO alacritty
 ** kitty
 *** Using Option as Meta or Alt
 - Set the ~macos_option_as_alt all~ option in the =~/.config/kitty.conf= file (replace ~left~ or ~right~ instead of ~all~ to only use the left or right Option key).
@@ -176,8 +179,9 @@ Not in MacPorts but the project's Github page provides Linux and MacOS
 binary releases that can be extracted to a directory in ~PATH~.
 Alternatives are [[https://github.com/johnkerl/miller][miller]] or individual tools like [[https://github.com/BurntSushi/xsv][xsv]] and [[https://github.com/saulpw/visidata][Visidata]].
 ** Useful nodeJS packages
-- [[https://github.com/nock/nock][nock]] : HTTP server mocking (more full featured)
-- [[https://github.com/stoplightio/prism][Prism]] : HTTP server mocking (more lightweight)
+- HTTP server mocking
+  - [[https://github.com/nock/nock][nock]] : more full featured
+  - [[https://github.com/stoplightio/prism][Prism]] : more lightweight, can use Postman collections
 ** Useful Python packages
 Easiest to install via conda and create a symlink to the binary in
 =~/miniconda3/envs/ENVNAME/bin= (the environment's =bin= directory)
