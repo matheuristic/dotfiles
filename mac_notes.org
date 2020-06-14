@@ -28,7 +28,7 @@
 - [[https://www.gimp.org/][GIMP]]
 - [[https://github.com/git-up/GitUp][GitUp]] (/or use [[https://magit.vc/][Magit]] in Emacs/)
 - [[https://inkscape.org/][Inkscape]]
-- [[https://insomnia.rest/][Insomnia]] (/Core---REST/GraphQL API explorer; Designer---API designer/)
+- [[https://insomnia.rest/][Insomnia]] (/Core---REST/GraphQL explorer; Designer---API designer/)
 - [[https://www.toketaware.com/ithoughts-osx][iThoughts]] (/license needed; available on App Store/)
 - [[https://github.com/laurent22/joplin][Joplin]]
 - [[https://krita.org/en/][Krita]]
@@ -38,8 +38,9 @@
 - [[https://github.com/hql287/Manta][Manta]]
 - [[https://ranchero.com/netnewswire/][NetNewsWire]]
 - [[https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-macos/][OpenVPN]]
-- [[https://eggerapps.at/postico/][Postico]] (/better PostgreSQL UX, but only one window per connection/)
+- [[https://eggerapps.at/postico/][Postico]] (/better PostgreSQL UX; some limitations in free version/)
 - [[https://qxmledit.org/][QXmlEdit]]
+- [[https://github.com/rxhanson/Rectangle][Rectangle]]
 - [[https://racket-lang.org/][Racket]]
 - [[https://github.com/syncthing/syncthing-macos][Syncthing]]
 - [[https://tunnelblick.net/][TunnelBlick]] (/OpenVPN alternative/)
