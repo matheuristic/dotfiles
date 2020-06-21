@@ -38,6 +38,7 @@
 - [[https://github.com/hql287/Manta][Manta]]
 - [[https://ranchero.com/netnewswire/][NetNewsWire]]
 - [[https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-macos/][OpenVPN]]
+- [[https://github.com/sveinbjornt/Platypus][Platypus]]
 - [[https://eggerapps.at/postico/][Postico]] (/better PostgreSQL UX; some limitations in free version/)
 - [[https://qxmledit.org/][QXmlEdit]]
 - [[https://github.com/rxhanson/Rectangle][Rectangle]]
@@ -67,6 +68,7 @@ clojure
 dict
 fish
 fzf
+glances (can also install via conda)
 htop
 jq
 mosh
@@ -81,6 +83,7 @@ unrar
 wget
 wordnet
 xsv
+visidata (can also install via conda)
 #+end_example
 *** Other useful but less used packages
 #+begin_example
