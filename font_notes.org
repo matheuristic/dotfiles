@@ -1,4 +1,7 @@
 #+title: Font Notes
+* Installing fonts
+** Mac OS
+Use the Font Book app.
 * Bitmap (and bitmap-derived) fonts
 More useful for lower DPI screens.
 ** Dina
@@ -28,6 +31,11 @@ Also has a companion icon pack for Adobe Illustrator ([[https://www.behance.net/
 ** Aileron
 Neo-grotesque sans-serif font ([[http://dotcolon.net/font/aileron/][link]]).
 Similar to Helvetica but ~l~ is distinct from ~I~.
+** Alegreya
+Font family with sans-serif ([[https://www.huertatipografica.com/en/fonts/alegreya-sans-ht][link]], [[https://github.com/huertatipografica/Alegreya-Sans][Github]]) and serif ([[https://www.huertatipografica.com/en/fonts/alegreya-ht-pro][link]], [[https://github.com/huertatipografica/Alegreya][Github]]) variants designed for long-form text.
+** Alma Mono
+Monospaced font with multiple weights, no italics ([[http://almamono.com/][link]]).
+Free for personal use.
 ** B612
 Font released by Airbus and Intactile DESIGN ([[https://b612-font.com/][link]], [[https://github.com/polarsys/b612][Github]]).
 The font uses a non-slashed zero by default ([[https://en.wikipedia.org/wiki/Symbol_(typeface)][symbol]] ~0030~), but there is also a slashed zero glyph in the private use area (unicode symbol ~E007~).
@@ -37,11 +45,19 @@ In Emacs, it is possible to change the standard display table to display slashed
 (setq standard-display-table (make-display-table))
 (aset standard-display-table ?0 [?])
 #+end_src
+** Bembo-like fonts
+Bembo is the typeface used in Edward Tufte's books, based off well-suited for typesetting print documents.
+Several digitized versions, free, commercial and proprietary, were created.
+ET Book is an earlier webfont version commissioned by Edward Tufte ([[https://edwardtufte.github.io/et-book/][link]], [[https://github.com/edwardtufte/et-book][Github]]).
+XETBook is expands on ET Book with added characters, OpenType ligatures and old-style figures ([[https://github.com/dbenjaminmiller/xetbook][Github]]).
+ETbb further expands on XETBook to include a full set of figure styles, small caps, superior and inferior figures and LaTeX support ([[https://ctan.org/pkg/etbb?lang=en][link]]).
+Currently, ETbb is preferred as it has the widest glyph coverage and the most alternate glyphs.
 ** DM Mono/Sans/Serif
 Font families designed by Colophon Foundry for DeepMind ([[https://github.com/googlefonts/dm-mono][DM Mono link]], [[https://github.com/googlefonts/dm-fonts][DM Sans/Serif link]]).
 Low contrast geometric fonts intended for use at smaller text sizes.
-** ET Book
-Bembo-like typeface similar to the one used in Edward Tufte's books ([[https://edwardtufte.github.io/et-book/][link]], [[https://github.com/edwardtufte/et-book][Github]]). Mostly useful for typesetting print documents.
+** Fira
+Font family by Mozilla with sans-serif, serif and monospaced variants ([[http://mozilla.github.io/Fira/][link]], [[https://github.com/mozilla/Fira][Github]]).
+The monospaced variant has a fork *Fira Code* ([[https://github.com/tonsky/FiraCode][Github]]) that adds ligatures and fixes line height inconsistencies with bold fonts.
 ** Fivo Sans
 Neo-grotesque typeface ([[https://www.behance.net/gallery/53653425/Fivo-Sans-Free-Font-Family][link]]).
 ** IBM Plex
@@ -53,6 +69,10 @@ Free for personal use.
 ** Inconsolata
 Open source monospace font with a wide array of weights ([[https://github.com/googlefonts/Inconsolata][link]]).
 Also has a variant family Ligconsolata that exposes ligatures by default in the OpenType feature ~liga~, aimed at use in text editors.
+** Inria
+Proportional font family with sans-serif and serif fonts designed for Inria ([[https://black-foundry.com/work/inria/][link]], [[https://github.com/BlackFoundryCom/InriaFonts][Github]]).
+** Inter
+Proportional font family with sans-serif and serif fonts designed for screen usage ([[https://rsms.me/inter/][link]], [[https://github.com/rsms/inter/][Github]]).
 ** Iosevka
 Condensed monospace typeface for code with a wide array of customization options ([[https://typeof.net/Iosevka/][link]], [[https://github.com/be5invis/Iosevka][Github]]).
 The ~ss08~ ([[https://github.com/fabrizioschiavi/pragmatapro][Pragmata Pro]] Style) stylistic set is particularly nice.
@@ -65,6 +85,14 @@ The extended width version can be used in Emacs by setting the face attribute ~:
 #+end_src
 ** Literata
 Serif typeface intended for long-form reading, e.g. in eBooks ([[https://github.com/googlefonts/literata][link]]).
+** M+ FONTS
+M+ FONTS is a Japanese sans-serif font family with good coverage for Kana and Kanji glyphs.
+The 1 variant has contrasting straight lines and curves, while the 2 variant is more curvy.
+The P and C variants have proportional Latin glyphs with the C variant optimized for typesetting.
+The M and MN variants have monospaced half-width Latin glyphs with MN variant optimized for programming (e.g. slashed zeros).
+Notes that Japanese glyphs are always monospaced full-width, and that line height for the font family is very tall.
+** Merriweather
+Large x-height variable serif text face designed for screen reading ([[https://github.com/EbenSorkin/Merriweather][Github]]).
 ** Noto
 Massive font family by Google that aims to support all languages ([[https://www.google.com/get/noto/][link]]).
 Good choice as a fallback font for esoteric languages in Emacs ([[https://idiocy.org/emacs-fonts-and-fontsets.html][link]]).
@@ -75,6 +103,8 @@ The ~Code~ version shifts the code ligatures from their usual OpenType feature ~
 Typeface commissioned by the Universidad Nacional de Córdoba in Argentina ([[https://pampatype.com/reforma][link]]).
 It has three subfamilies of fonts -- Reforma 1918 (serif), Reforma 2018 (sans-serif) and Reforma 1969 (an intermediate hybrid).
 Interesting combinations are possible among its different styles -- the sans typeface for display use and the serif for body text, or the reverse.
+** Roboto
+Family of fonts commissioned by Google for Android and Chrome OS, and the recommended font for Google's Material Design visual language ([[https://github.com/googlefonts/roboto][Github]]).
 ** Source Code/Sans/Serif Pro
 Family of fonts created by Adobe with monospaced ([[https://github.com/adobe-fonts/source-code-pro][Source Code Pro]]), sans proportional ([[https://github.com/adobe-fonts/source-sans-pro][Source Sans Pro]]) and Serif ([[https://github.com/adobe-fonts/source-serif-pro][Source Serif Pro]]) variants.
 Readable at smaller size when antialiasing is turned off.

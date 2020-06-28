@@ -35,3 +35,8 @@ $ curl -LSs https://raw.githubusercontent.com/matheuristic/dotfiles/master/${fil
 ```
 
 Replace `${filename}` with the name of the file to be retrieved.
+
+## Deploying config files using GNU Stow
+
+- [GNU Stow](https://www.gnu.org/software/stow/)
+- [Using GNU Stow to manage your dotfiles](http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html)

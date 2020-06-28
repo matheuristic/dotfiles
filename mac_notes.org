@@ -13,7 +13,7 @@
 - [[https://www.macports.org/][MacPorts]]
 - [[https://www.office.com/][Microsoft Office]] (/license needed/)
 - [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]]
-- [[https://github.com/pigigaldi/Pock][Pock]]
+- [[https://github.com/rxhanson/Rectangle][Rectangle]]
 - [[https://www.royalapplications.com/ts/mac/features][Royal TSX]]
 - [[https://skim-app.sourceforge.io/][Skim]]
 - [[https://slack.com/][Slack]]
@@ -33,6 +33,7 @@
 - [[https://github.com/laurent22/joplin][Joplin]]
 - [[https://krita.org/en/][Krita]]
 - [[https://www.knime.com/knime-analytics-platform][KNIME]]
+- [[https://github.com/pigigaldi/Pock][Pock]]
 - [[https://www.postman.com/][Postman]] (/less nice UX than Insomnia; CI/CD support with [[https://github.com/postmanlabs/newman][Newman]]/)
 - [[https://github.com/fespinoza/LinkedIdeas][Linked Ideas]] (/like [[https://www.literatureandlatte.com/scapple/overview][Scapple]]; available on App Store/)
 - [[https://github.com/hql287/Manta][Manta]]
@@ -41,7 +42,6 @@
 - [[https://github.com/sveinbjornt/Platypus][Platypus]]
 - [[https://eggerapps.at/postico/][Postico]] (/better PostgreSQL UX; some limitations in free version/)
 - [[https://qxmledit.org/][QXmlEdit]]
-- [[https://github.com/rxhanson/Rectangle][Rectangle]]
 - [[https://racket-lang.org/][Racket]]
 - [[https://github.com/syncthing/syncthing-macos][Syncthing]]
 - [[https://tunnelblick.net/][TunnelBlick]] (/OpenVPN alternative/)
@@ -68,7 +68,6 @@ clojure
 dict
 fish
 fzf
-glances (can also install via conda)
 htop
 jq
 mosh
@@ -78,12 +77,12 @@ qpdf
 p7zip
 ripgrep
 rlwrap
+stow
 tmux
 unrar
 wget
 wordnet
 xsv
-visidata (can also install via conda)
 #+end_example
 *** Other useful but less used packages
 #+begin_example
@@ -101,7 +100,22 @@ tin
   - For [[https://sw.kovidgoyal.net/kitty/][kitty]], in =~/.config/kitty/kitty.conf=, set the shell to the installed fish binary with the ~--login~ option, i.e. add the line ~shell /path/to/bin/fish --login~ (modify ~/path/to/bin/fish~ as necessary).
   - For [[https://support.apple.com/guide/terminal/welcome/mac][Terminal]] or [[https://www.iterm2.com/][iterm2]], set up a profile that runs ~fish~ on start. For example, in the Terminal app open "Preferences > Profiles" and create a new profile, enable "Shell > Startup > Run Command" and set its value to the installed fish binary (with the ~--login~ option as necessary). Set the new profile as the default profile.
 - [[https://github.com/jorgebucaran/fisher][fisher]] can be used to manage fish packages.
-- If using the ~done~ fish package, install [[https://github.com/julienXX/terminal-notifier][terminal-notifier]] for notifications with icons. Download a release bundle, unzip the app to some path (e.g. ~/path/to/terminal-notifier.app~), create the following wrapper script (change the path as is necessary) and put it in one of the ~$PATH~ directories:
+*** Recommended packages
+#+begin_example
+franciscolourenco/done
+jethrokuan/fzf
+jethrokuan/z
+jorgebucaran/fish-bax
+jorgebucaran/fish-nvm
+rafaelrinaldi/pure
+#+end_example
+- The [[https://github.com/franciscolourenco/done][done fish package]] enables notifications when long running
+  processes complete and the terminal window is not in the foreground.
+  Add icons to notifications by installing [[https://github.com/julienXX/terminal-notifier][terminal-notifier]], i.e.
+  download a release bundle, extract the app to some path (e.g.
+  ~/path/to/terminal-notifier.app~), create the following
+  =terminal-notifier= wrapper script (change the path as is
+  necessary), and put it in one of the ~$PATH~ directories:
 #+begin_src sh
 #!/bin/bash
 
@@ -110,20 +124,38 @@ tin
 
 /path/to/terminal-notifier.app/Contents/MacOS/terminal-notifier $@
 #+end_src
-*** Recommended packages
+- The [[https://github.com/jorgebucaran/fish-bax][fish-bax]] provides a ~bax~ command for running bash
+  scripts and replaying the environment changes in fish. For example:
 #+begin_example
-franciscolourenco/done
-jethrokuan/fzf
-jethrokuan/z
-jorgebucaran/fish-nvm
-rafaelrinaldi/pure
+$ bax source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+#+end_example
+- The [[https://github.com/jorgebucaran/fish-nvm][fish-nvm package]] provides a pure-fish Node.js version manager.
+  For example:
+#+begin_example
+$ nvm use lts
+#+end_example
+- The [[https://github.com/jethrokuan/fzf][fzf fish package]] integrates fish with the [[https://github.com/junegunn/fzf][fzf]] tool (which needs
+  to be installed on the system). Useful bindings:
+| Binding | Description                                        |
+|---------+----------------------------------------------------|
+| ~C-o~   | Find a file and insert it into the command-line    |
+| ~C-r~   | Search command history                             |
+| ~M-c~   | Find a sub-directory and cd into it                |
+| ~M-S-c~ | Like ~M-c~ but includes hidden directories         |
+| ~M-o~   | Find a file and open it using ~$EDITOR~            |
+| ~M-S-o~ | Find a file and open it using ~xdg-open~ or ~open~ |
+- The [[https://github.com/jethrokuan/z][z fish package]] tracks visited directories, and when called with a
+  directory name part jumps to a matching directory with the highest
+  frecency rank. For example:
+#+begin_example
+$ z proj
 #+end_example
 ** Clojure
 - Clojure can be installed via MacPorts (install the ~clojure~ and one of the ~openjdk*~ packages). Java jar dependencies will be downloaded to =~/.m2= after running ~clojure~ the first time.
 - For managing builds and dependencies, install ~lein~ which can be done manually. See the [[https://leiningen.org/][Leiningen website]] for instructions. Java jar dependencies will be downloaded to =~/.lein/self-installs=.
 ** TinyTex
 *** Installation
-- If using ~conda~, it's better to install via the command line ([[https://yihui.org/tinytex/#for-other-users][link]]).
+- It is generally better to do a standalone install via the command line ([[https://yihui.org/tinytex/#for-other-users][link]]).
 - Install and remove packages using the ~tlmgr~ command line program ([[https://yihui.org/tinytex/#maintenance][link]]).
 - Upgrading TexLive versions are easiest by fullying removing the =~/Library/TinyTex= directory and re-installing the currently installed packages which can be listed using ~tlmgr list | grep -e '^i' | cut -d ' ' -f 2 | sed -e 's/://g' | grep -v 'x86_64-darwin'~.
 - If using the fish shell, add the following to the fish configuration file =~/.config/fish/config.fish= or a file it sources.
@@ -190,7 +222,13 @@ Alternatives are [[https://github.com/johnkerl/miller][miller]] or individual to
 Easiest to install via conda and create a symlink to the binary in
 =~/miniconda3/envs/ENVNAME/bin= (the environment's =bin= directory)
 within =~/.local/bin= (or some directory that is in ~PATH~).
+- ~glances~: Cross platform system monitoring tool like ~top~ and ~htop~.
 - ~mitmproxy~ : Interactive HTTPS proxy.
 - ~textract~ : Wrapper for tools extracting text from several document formats.
 - ~visidata~ : A command-line multitool for tabular data.
 For other good Python packages, see [[https://github.com/vinta/awesome-python][Awesome Python]].
+** Alternative package managers
+Besides MacPorts and Conda, the following package managers could be
+useful for reproducible builds or software installation.
+- Nix ([[https://nixos.org/][link]], [[https://github.com/NixOS][Github]])
+- Spack ([[https://spack.io/][link]], [[https://github.com/spack/spack][Github]])
