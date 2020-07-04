@@ -6,6 +6,12 @@ if test -d /opt/local/bin
     set PATH /opt/local/bin /opt/local/sbin "$PATH"
 end
 
+# Nix (single-user)
+# uses the bax command from the fish-bax package
+if test -e "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  bax source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+end
+
 # Dotnet SDK
 if test -d "$HOME/dotnet-sdk"
     set PATH "$HOME/dotnet-sdk" "$PATH"
@@ -15,6 +21,11 @@ end
 # Go
 if test -d "$HOME/go/bin"
     set PATH "$HOME/go/bin" "$PATH"
+end
+
+# Racket
+if test -d "$HOME/racket/bin"
+    set PATH "$HOME/racket/bin" "$PATH"
 end
 
 # TinyTex

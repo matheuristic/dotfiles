@@ -1,5 +1,8 @@
 # ~/.R/Makevars : add/override R system and package-specific compilation flags
 
+# Compilation flag overrides for conda-installed R on Mac OS
+# No need to install this file if using official R or R installed via Macports
+
 # For more information, see
 # https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Customizing-package-compilation
 

@@ -66,3 +66,11 @@ conda env env create -n envname -f environment.yml
 where the environment is recreated in a new environment ~envname~ (change as desired).
 
 *NOTE*: If the ~-n envname~ option is not specified, the ~name~ entry in the environment file is used as the new environment name.
+* A note on R in conda
+- If using R in conda, do not install any packages using R's
+  ~install.packages()~ command.
+- All R packages should be installed through conda.
+- By extension, conda R should only be used to for software builds
+  involving R packages that exist in conda package repositories.
+- These packages, by convention, have package names that being with
+  the ~r-~ prefix, for example ~r-tidyverse~.

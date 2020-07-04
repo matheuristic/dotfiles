@@ -1,4 +1,4 @@
-#+TITLE: Mac OS X Notes
+#+TITLE: Mac OS Notes
 * Applications
 ** Recommended
 - [[https://www.google.com/chrome/][Chrome]]
@@ -53,9 +53,15 @@
 ** TODO alacritty
 ** kitty
 *** Using Option as Meta or Alt
-- Set the ~macos_option_as_alt all~ option in the =~/.config/kitty.conf= file (replace ~left~ or ~right~ instead of ~all~ to only use the left or right Option key).
+- Set the ~macos_option_as_alt all~ option in the
+  =~/.config/kitty.conf= file (replace ~left~ or ~right~ instead of
+  ~all~ to only use the left or right Option key).
 *** Syncing the kitty terminfo file to remote systems
-- For a new server, options are to ssh in the first time with ~kitty +kitten ssh myserver~, to copy over the terminfo file with =infocmp xterm-kitty | ssh myserver tic -x -o \~/.terminfo /dev/stdin=, or to manually copy over the terminfo file to =~/.terminfo/x/xterm-kitty= on the server.
+- For a new server, options are to ssh in the first time with ~kitty
+  +kitten ssh myserver~, to copy over the terminfo file with =infocmp
+  xterm-kitty | ssh myserver tic -x -o \~/.terminfo /dev/stdin=, or to
+  manually copy over the terminfo file to =~/.terminfo/x/xterm-kitty=
+  on the server.
 ** MacPorts
 ***  Recommended packages
 #+begin_example
@@ -74,6 +80,7 @@ mosh
 notmuch
 openjdk8 / openjdk11
 qpdf
+pandoc
 p7zip
 ripgrep
 rlwrap
@@ -97,8 +104,16 @@ tin
 *** Setup
 - [[https://github.com/fish-shell/fish-shell][fish]] can be installed via MacPorts.
 - Set up terminal to use fish as the shell.
-  - For [[https://sw.kovidgoyal.net/kitty/][kitty]], in =~/.config/kitty/kitty.conf=, set the shell to the installed fish binary with the ~--login~ option, i.e. add the line ~shell /path/to/bin/fish --login~ (modify ~/path/to/bin/fish~ as necessary).
-  - For [[https://support.apple.com/guide/terminal/welcome/mac][Terminal]] or [[https://www.iterm2.com/][iterm2]], set up a profile that runs ~fish~ on start. For example, in the Terminal app open "Preferences > Profiles" and create a new profile, enable "Shell > Startup > Run Command" and set its value to the installed fish binary (with the ~--login~ option as necessary). Set the new profile as the default profile.
+  - For [[https://sw.kovidgoyal.net/kitty/][kitty]], in =~/.config/kitty/kitty.conf=, set the shell to the
+    installed fish binary with the ~--login~ option, i.e. add the line
+    ~shell /path/to/bin/fish --login~ (modify ~/path/to/bin/fish~ as
+    necessary).
+  - For [[https://support.apple.com/guide/terminal/welcome/mac][Terminal]] or [[https://www.iterm2.com/][iterm2]], set up a profile that runs ~fish~ on
+    start. For example, in the Terminal app open "Preferences >
+    Profiles" and create a new profile, enable "Shell > Startup > Run
+    Command" and set its value to the installed fish binary (with the
+    ~--login~ option as necessary). Set the new profile as the default
+    profile.
 - [[https://github.com/jorgebucaran/fisher][fisher]] can be used to manage fish packages.
 *** Recommended packages
 #+begin_example
@@ -124,7 +139,7 @@ rafaelrinaldi/pure
 
 /path/to/terminal-notifier.app/Contents/MacOS/terminal-notifier $@
 #+end_src
-- The [[https://github.com/jorgebucaran/fish-bax][fish-bax]] provides a ~bax~ command for running bash
+- The [[https://github.com/jorgebucaran/fish-bax][fish-bax package]] provides a ~bax~ command for running bash
   scripts and replaying the environment changes in fish. For example:
 #+begin_example
 $ bax source "$HOME/.nix-profile/etc/profile.d/nix.sh"
@@ -151,13 +166,20 @@ $ nvm use lts
 $ z proj
 #+end_example
 ** Clojure
-- Clojure can be installed via MacPorts (install the ~clojure~ and one of the ~openjdk*~ packages). Java jar dependencies will be downloaded to =~/.m2= after running ~clojure~ the first time.
-- For managing builds and dependencies, install ~lein~ which can be done manually. See the [[https://leiningen.org/][Leiningen website]] for instructions. Java jar dependencies will be downloaded to =~/.lein/self-installs=.
+- Clojure can be installed via MacPorts (install the ~clojure~ and one
+  of the ~openjdk*~ packages). Java jar dependencies will be
+  downloaded to =~/.m2= after running ~clojure~ the first time.
+- For managing builds and dependencies, install ~lein~ which can be
+  done manually. See the [[https://leiningen.org/][Leiningen website]] for instructions. Java jar
+  dependencies will be downloaded to =~/.lein/self-installs=.
 ** TinyTex
 *** Installation
 - It is generally better to do a standalone install via the command line ([[https://yihui.org/tinytex/#for-other-users][link]]).
 - Install and remove packages using the ~tlmgr~ command line program ([[https://yihui.org/tinytex/#maintenance][link]]).
-- Upgrading TexLive versions are easiest by fullying removing the =~/Library/TinyTex= directory and re-installing the currently installed packages which can be listed using ~tlmgr list | grep -e '^i' | cut -d ' ' -f 2 | sed -e 's/://g' | grep -v 'x86_64-darwin'~.
+- Upgrading TexLive versions are easiest by fullying removing the =~/Library/TinyTex= directory and re-installing the currently installed packages which can be listed using the following command.
+#+begin_example
+$ tlmgr list | grep -e '^i' | cut -d ' ' -f 2 | sed -e 's/://g' | grep -v 'x86_64-darwin'
+#+end_example
 - If using the fish shell, add the following to the fish configuration file =~/.config/fish/config.fish= or a file it sources.
 #+begin_example
 # TinyTex
@@ -183,12 +205,42 @@ wrapfig
 xcolor
 #+end_example
 ** R
+*** Installing via MacPorts
+R can be installed via Macports by running either as root or using ~sudo~.
+#+begin_example
+$ port install tk +quartz
+$ port install R +accelerate +cairo +gcc10 +java +quartz +recommended +tcltk -x11
+#+end_example
+- The ~accelerate~ variant uses Apple's [[https://developer.apple.com/documentation/accelerate][Accelerate]] framework which
+  include linear algebra libraries.
+- The ~cairo~ variant is required for image support.
+- The ~gcc10~ variant uses MacPorts GCC 10 to compile R.
+- The ~java~ variant enables Java support.
+- The ~quartz~ variant enables Quartz support. This conflicts with the
+  ~x11~ variant, so they can't be both enabled simultaneously.
+- The ~recommended~ variant installs a number of recommended packages
+  by default.
+- The ~tcltk~ variant installs support for TclTk. Note this depends on
+  MacPorts ~tk~ which needs to be installed with ~quartz~ variant
+  enabled for Quartz support (~+quartz~).
+*** RStudio
+[[https://rstudio.com/][RStudio]] is an IDE for R. See [[https://support.rstudio.com/hc/en-us/articles/200486138-Changing-R-versions-for-RStudio-desktop][here]] for information on base R
+installations required for the IDE.
 *** Compiling C programs using Xcode 10+
-- From Xcode 10 onwards (i.e. OS X 10.14 onwards), C headers are no longer installed to ~/usr/local/include~ rooted at the system root ~/~ by default.
-- Headers are instead installed to a subsystem rooted at ~/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk~ (i.e. at ~/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include~).
-- Compilation flags need to set to point to the approprate paths for R to properly compile C programs using Clang, e.g. see ~.R/Makevars~ file in this repository.
+- From Xcode 10 onwards (i.e. OS X 10.14 onwards), C headers are no
+  longer installed to ~/usr/local/include~ rooted at the system root
+  ~/~ by default.
+- Headers are instead installed to a subsystem rooted at
+  ~/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk~ (i.e. at
+  ~/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include~).
+- Compilation flags need to set to point to the approprate paths for R
+  to properly compile C programs using Clang, e.g. see ~.R/Makevars~
+  file in this repository.
 - For more information, see this [[https://thecoatlessprofessor.com/programming/cpp/r-compiler-tools-for-rcpp-on-macos/][blog post]].
-- The above should be handled automatically in the [[https://cran.r-project.org/bin/macosx/][official R installer]] but needs to be done manually for R installed by other means, e.g. installing ~r-base~ via [[https://docs.conda.io/en/latest/miniconda.html][conda]].
+- *Note*: This is handled automatically handled in the [[https://cran.r-project.org/bin/macosx/][official R
+  installer]] as well as installation via MacPorts. It only needs to be
+  done manually for R installations via specific channels like when
+  installing ~r-base~ via [[https://docs.conda.io/en/latest/miniconda.html][conda]].
 * Usage tips
 - ~Control-Command-Q~ locks the screen.
 * Miscellany
