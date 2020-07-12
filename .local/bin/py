@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Wrapper script to use jupyter or ipython, if available, over python
+
+PY_CMD="python"
+PY_EXTRA_ARGS=""
+
+if command -v jupyter-console
+then
+  PY_CMD="jupyter-console"
+  if echo "$INSIDE_EMACS" | grep -q -e ",comint$"
+  then
+    PY_EXTRA_ARGS="$PY_EXTRA_ARGS --simple-prompt"
+  fi
+elif command -v ipython
+then
+  PY_CMD="ipython"
+  if echo "$INSIDE_EMACS" | grep -q -e ",comint$"
+  then
+    PY_EXTRA_ARGS="$PY_EXTRA_ARGS --simple-prompt -i"
+  fi
+else  # python
+  if echo "$INSIDE_EMACS" | grep -q -e ",comint$"
+  then
+    PY_EXTRA_ARGS="$PY_EXTRA_ARGS -i"
+  fi
+fi
+
+$PY_CMD $PY_EXTRA_ARGS $@
