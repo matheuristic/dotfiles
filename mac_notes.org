@@ -43,6 +43,7 @@
 - [[https://eggerapps.at/postico/][Postico]] (/better PostgreSQL UX; some limitations in free version/)
 - [[https://qxmledit.org/][QXmlEdit]]
 - [[https://racket-lang.org/][Racket]]
+- [[https://rstudio.com/][RStudio]]
 - [[https://github.com/syncthing/syncthing-macos][Syncthing]]
 - [[https://tunnelblick.net/][TunnelBlick]] (/OpenVPN alternative/)
 - [[https://www.vagrantup.com/][Vagrant]]
@@ -279,6 +280,15 @@ within =~/.local/bin= (or some directory that is in ~PATH~).
 - ~textract~ : Wrapper for tools extracting text from several document formats.
 - ~visidata~ : A command-line multitool for tabular data.
 For other good Python packages, see [[https://github.com/vinta/awesome-python][Awesome Python]].
+*** Fancy Python REPL
+- Command line
+  - [[https://ipython.org/][IPython]]
+  - [[https://github.com/jupyter/jupyter_console][Jupyter console]] started with the ~jupyter console~ or
+    ~jupyter-console~ command (it is IPython with additional
+    Jupyter-specific functionality layered on).
+- Graphical (GUI or browser-based)
+  - [[https://github.com/jupyter/notebook][Jupyter notebook]] started with the ~jupyter notebook~ command.
+  - [[https://github.com/jupyter/qtconsole][Jupyter Qtconsole]] started with the ~jupyter qtconsole~ command.
 ** Alternative package managers
 Besides MacPorts and Conda, the following package managers could be
 useful for reproducible builds or software installation.

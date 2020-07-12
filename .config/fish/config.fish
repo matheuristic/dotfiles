@@ -8,7 +8,7 @@ end
 
 # Nix (single-user)
 # uses the bax command from the fish-bax package
-if test -e "$HOME/.nix-profile/etc/profile.d/nix.sh"
+if status --is-login; and test -e "$HOME/.nix-profile/etc/profile.d/nix.sh"
   bax source "$HOME/.nix-profile/etc/profile.d/nix.sh"
 end
 
