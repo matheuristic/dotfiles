@@ -2,9 +2,9 @@
 
 # ESCAPE CHARACTER
 
-# Remap the CTRL-a escape sequence to "Ctrl-`" (Ctrl-Backtick) instead.
-# To input a backtick regularly, hit "Ctrl-` `" (Ctrl-Backtick Backtick).
-#escape ^``
+# Remap the CTRL-a escape sequence to "Ctrl-\" (Ctrl-Backslash) instead.
+# To input a backslash regularly, hit "Ctrl-\ \" (Ctrl-Backslash Backslash).
+escape ^\\
 
 # STARTUP PROGRAMS
 
@@ -30,7 +30,7 @@ defscrollback   4096    # Define size of scrollback buffer in lines. Default: 10
 # PATH AND SYSTEM FILE VALUED VARIABLES
 
 hardcopydir     $HOME/.hardcopy # Directory containing all hardcopies
-#shell           zsh  # Default process started when screen creates a new window
+#shell           fish  # Default process started when screen creates a new window
 term            screen-256color # Default TERM environment variable in each screen window.
                                 # To allow 256 colors, set to one that supports it,
                                 # for example 'screen-256color'
@@ -39,7 +39,7 @@ term            screen-256color # Default TERM environment variable in each scre
 
 # Show window list in hardstatus line, and put hardstatus on the last line
 hardstatus      on
-hardstatus      alwayslastline "%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]"
+hardstatus      alwayslastline "%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{y} %d/%m %{W}%c %{g}]"
 
 # Set the colors for messages and text marking
 sorendition     GK
