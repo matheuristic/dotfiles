@@ -43,7 +43,7 @@
 - [[https://eggerapps.at/postico/][Postico]] (/better PostgreSQL UX; some limitations in free version/)
 - [[https://qxmledit.org/][QXmlEdit]]
 - [[https://racket-lang.org/][Racket]]
-- [[https://rstudio.com/][RStudio]]
+- [[https://rstudio.com/][RStudio]] (/requires base R be installed, see below/)
 - [[https://github.com/syncthing/syncthing-macos][Syncthing]]
 - [[https://tunnelblick.net/][TunnelBlick]] (/OpenVPN alternative/)
 - [[https://www.vagrantup.com/][Vagrant]]
