@@ -16,7 +16,7 @@ set autoindent  " use indent level from the previous line
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
 "set backup      " keep backups (it is usually better to use version control)
 "set backupdir=~/.vimfiles/backup//,.,~/tmp/,~/ " backup file folders, appending '//' uses the full path in the filename
-set directory=~/.vimfiles/swap//,.,~/tmp,/var/tmp,/tmp " swapfile folders, appending '//' uses the full path in the filename
+"set directory=~/.vimfiles/swap//,.,~/tmp,/var/tmp,/tmp " swapfile folders, appending '//' uses the full path in the filename
 "set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
 "set complete=.,w,b,u,U,t,i,d " extra scanning on keyword completion
 set complete+=k " also use dictionaries on keyword completion
@@ -39,9 +39,9 @@ set showmode    " show current mode
 set smartcase   " override 'ignorecase' if search pattern has upper case chars, only used when 'ignorecase' is set
 set smarttab    " tabs inserts shiftwidth space
 "set softtabstop=4 " num spaces a tab counts for while in insert mode
-set swapfile    " use swapfiles, swapfile location is determined by 'directory'
+"set swapfile    " use swapfiles, swapfile location is determined by 'directory'
 "set tabstop=8   " length of a real tab
-set ttyfast     " smoother output
+"set ttyfast     " smoother output
 set wildmode=list:longest,full " command-line tab completion options
 
 " Prefer rg (ripgrep) to grep for grepping {{{2
@@ -203,7 +203,7 @@ if has('autocmd')
     " For Python, use cindent with the appropriate keywords
     autocmd FileType python
           \ if has('cindent')
-          \ | set cindent cinwords=class,def,elif,else,except,finally,for,if,try,while
+          \ | set cindent cinwords=class,def,elif,else,except,finally,for,if,try,while,with
           \ | endif
   augroup END " }}}2
   augroup web " {{{2
