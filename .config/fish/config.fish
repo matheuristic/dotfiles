@@ -33,6 +33,11 @@ if test -d "$HOME/Library/TinyTeX/bin/x86_64-darwin"
     set PATH "$HOME/Library/TinyTeX/bin/x86_64-darwin" "$PATH"
 end
 
+# Rust
+if test -d "$HOME/.cargo/bin"
+    set PATH "$HOME/.cargo/bin" "$PATH"
+end
+
 # User-installed
 if test -d "$HOME/.local/bin"
     set PATH "$HOME/.local/bin" "$PATH"

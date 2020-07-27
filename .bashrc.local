@@ -1,9 +1,18 @@
 # ~/.bash_local: local bash path and environment settings
 
+# MacPorts packages
+if [ -d /opt/local/bin ]; then
+  export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+fi
+
+# Nix packages
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+  . $HOME/.nix-profile/etc/profile.d/nix.sh
+fi
+
 # conda environments
 CONDAPATH=$HOME/miniconda3
 if [[ -d "$CONDAPATH" ]]; then
-  #export PATH=$CONDAPATH/bin:$PATH
   . $CONDAPATH/etc/profile.d/conda.sh
 fi
 
@@ -14,10 +23,25 @@ if [[ -d "$DOTNETSDKPATH" ]]; then
   export DOTNET_CLI_TELEMETRY_OPTOUT=1
 fi
 
+# racket support
+if [ -d $HOME/racket/bin ]; then
+  export PATH=$HOME/racket/bin:$PATH
+fi
+
+# rust packages installed using Cargo
+if [ -d $HOME/.cargo/bin ]; then
+  export PATH=$HOME/.cargo/bin:$PATH
+fi
+
 # locally installed packages
 LOCALPKGPATH=$HOME/.local
 if [[ -d "$LOCALPKGPATH/bin" ]]; then
-  export PATH=$HOME/.local/bin:$PATH
+  export PATH=$LOCALPKGPATH/bin:$PATH
+fi
+
+# local pip config
+if [ -e $HOME/pip.conf ]; then
+  export PIP_CONFIG_FILE=$HOME/pip.conf
 fi
 
 # Prevent Mac from sleeping for given time: $ keepawake <hrs>
