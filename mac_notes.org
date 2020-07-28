@@ -289,6 +289,33 @@ For other good Python packages, see [[https://github.com/vinta/awesome-python][A
 - Graphical (GUI or browser-based)
   - [[https://github.com/jupyter/notebook][Jupyter notebook]] started with the ~jupyter notebook~ command.
   - [[https://github.com/jupyter/qtconsole][Jupyter Qtconsole]] started with the ~jupyter qtconsole~ command.
+** Useful Rust packages
+Rust development packages are easiest to install using Cargo. Cargo
+can be installed with MacPorts.
+#+begin_example
+$ port install cargo
+#+end_example
+Cargo installs binaries to =~/.cargo/bin= so it needs to be added to path.
+For Bash, add to =~/.bash_profile= or =~/.bashrc= the following line.
+#+begin_example
+export PATH=$HOME/.cargo/bin:$PATH
+#+end_example
+For fish, add to =~/.config/fish/config.fish= the following line.
+#+begin_example
+set PATH "$HOME/.cargo/bin" "$PATH"
+#+end_example
+*** Monolith for saving webpages to a single HTML file
+Monolith is a tool for saving complete webpages to a single HTML file
+with embedded CSS, images and Javascript. There are binaries for Linux
+and Windows, but installing it on Mac OS requires compiling it from
+source. The following shows install instructions using MacPorts.
+#+begin_example
+$ port install openssl
+$ port install pkgconfig
+$ git clone https://github.com/Y2Z/monolith.git
+$ cd monolith
+$ make install
+#+end_example
 ** Alternative package managers
 Besides MacPorts and Conda, the following package managers could be
 useful for reproducible builds or software installation.
