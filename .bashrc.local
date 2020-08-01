@@ -5,6 +5,11 @@ if [ -d /opt/local/bin ]; then
   export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 fi
 
+# Initialize NVM installed using MacPorts
+if [ -e /opt/local/share/nvm/init-nvm.sh ]; then
+  . /opt/local/share/nvm/init-nvm.sh
+fi
+
 # Nix packages
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
   . $HOME/.nix-profile/etc/profile.d/nix.sh
