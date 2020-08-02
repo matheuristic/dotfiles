@@ -1,0 +1,228 @@
+#+title: Chrome OS notes
+#+author: matheuristic
+* Enable Linux apps
+Go to Settings > Linux (Beta), and enable.
+* Setup Box sync
+** Install rclone binary
+Static binaries are available from https://rclone.org/downloads/
+
+If using the static binaries, make sure it's somewhere on the ~$PATH~ so it can
+be called easily.
+#+begin_example
+cd .local/bin
+ln -s /path/to/rclone
+#+end_example
+** Configure new rclone remote config for Box
+1. Run "rclone config"
+2. Select "n" (new remote)
+3. Enter a name for the new remote, e.g. "Box"
+4. Enter the number associated with Box (number may change with rclone versions, it is "6" as of v1.52)
+5. Leave blank for client id
+6. Leave blank for client secret
+7. Leave blank for box config file
+8. For box subtype, enter the number associated to act on behalf of "user" (or "enterprise" if it is an enterprise account)
+9. Enter "n" (No) when asked whether to edit advanced config.
+10. Enter "y" (Yes) when asked whether to use auto config.
+11. A Box app web page to give authorization to rclone to access the Box account will open (may have to use the alternate URL with host 127.0.0.1 if the initial redirection does not work). Log in to authorize rclone.
+12. Select "y" (Yes) to indicate the config is ok.
+** Usage
+*** List directories in the top level
+#+begin_example
+rclone lsd Box:
+#+end_example
+*** List all files
+#+begin_example
+rclone ls Box:
+#+end_example
+*** Mount Box to a given directory
+Make sure the mount directory exists
+#+begin_example
+mkdir -p ~/Box
+#+end_example
+Use "rclone mount" to create a FUSE mount. A minimal version of this.
+#+begin_example
+rclone mount Box: ~/Box
+#+end_example
+It is generally recommended to mount Box with caching enabled. This increases
+compatibility with most other apps, since they typically assume the ability to
+do simultaneously read/writes to a file, but comes at the cost of higher disk
+usage and files only syncing back remotely (to Box) when they are closed.
+#+begin_example
+rclone mount Box: ~/Box --vfs-cache-mode full
+#+end_example
+For more information, see https://rclone.org/commands/rclone_mount/
+*** Unmount mounted Box directory
+#+begin_example
+fusermount -u ~/Box
+#+end_example
+** Automount on startup using systemd
+*** Systemd service unit configuration file
+Save the following script to =~/.config/systemd/user/rclone-box.service=
+(change =USERNAME= to the actual username, and modify the path to the rclone
+binary =/home/USERNAME/.local/bin/rclone= as needed)
+#+begin_example
+# ~/.config/systemd/user/rclone-box.service
+[Unit]
+Description=Box (rclone)
+After=
+
+[Service]
+Type=simple
+# Make sure rclone and mount point exists
+ExecStartPre=/usr/bin/test -x /home/USERNAME/.local/bin/rclone
+ExecStartPre=/usr/bin/test -d /home/USERNAME/Box
+ExecStartPre=/usr/bin/test -w /home/USERNAME/Box
+# Mount on start
+ExecStart=/home/USERNAME/.local/bin/rclone mount Box: /home/USERNAME/Box --vfs-cache-mode full
+# Unmount on stop
+ExecStop=/bin/fusermount -u /home/USERNAME/Box
+# Always restart if the process exists
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target
+#+end_example
+*** Enabling the service to start automatically
+#+begin_example
+systemctl --user enable rclone-box.service
+#+end_example
+*** Disabling the service to start automatically
+#+begin_example
+systemctl --user disable rclone-box.service
+#+end_example
+*** Starting the service manually
+#+begin_example
+systemctl --user start rclone-box.service
+#+end_example
+*** Stopping the service manually
+#+begin_example
+systemctl --user stop rclone-box.service
+#+end_example
+*** References
+- https://blog.victormendonca.com/2018/05/14/creating-a-simple-systemd-user-service/
+* Setup symlinks for Org and Zettelkasten folders
+#+begin_example
+cd
+ln -s ~/Box/org
+ln -s ~/Box/zettelkasten
+#+end_example
+* Install conda
+Download the newest miniconda version for Linux from
+https://docs.conda.io/en/latest/miniconda.html
+
+For arm64 systems, try
+miniforge from https://github.com/conda-forge/miniforge instead.
+
+Follow the instructions to install miniconda or miniforge.
+* Install Emacs
+Make sure conda is installed.
+#+begin_example
+conda create -n emacs
+conda activate emacs
+conda config --add channels conda-forge
+wget -O ~/.mime.types https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
+mkdir -p ~/.local/bin && cd ~/.local/bin
+ln -s ~/miniconda3/envs/emacs/bin/emacs
+ln -s ~/miniconda3/envs/emacs/bin/emacsclient
+#+end_example
+Download a PNG version of the Emacs icon and save it to
+=~/.local/bin/share/icons/emacs.png= (it will be used for the app
+icon).
+
+Create ~/.local/bin/share/applications/emacs.desktop with the
+following contents. Change username and and path to PNG icon as
+needed.
+#+BEGIN_SRC emacs-lisp
+[Desktop Entry]
+Version=1.0
+Name=Emacs
+GenericName=Text Editor
+Comment=View and edit files
+Exec=/home/username/miniconda3/envs/emacs/bin/emacs %F
+Type=Application
+Terminal=false
+Categories=Utility;Development;TextEditor;
+Icon=/home/username/.local/share/icons/emacs.png
+#+END_SRC
+* Install neuron
+Download neuron-linux-bundle (updated nightly) from
+https://github.com/srid/neuron/releases/tag/nightly
+and symlink it to =neuron= somewhere on the ~$PATH~.
+#+begin_example
+wget https://github.com/srid/neuron/releases/download/nightly/neuron-linux-bundle
+chmod +x neuron-linux-bundle
+cd ~/.local/bin
+ln -s /path/to/neuron-linux-bundle neuron
+#+end_example
+* Install NVM
+Easiest to do a Git install of NVM ([[https://github.com/nvm-sh/nvm#git-install][link]]).
+#+begin_example
+cd
+git clone https://github.com/nvm-sh/nvm.git .nvm
+cd .nvm
+#+end_example
+Run ~git tag~ to see the available release versions. ~git checkout~
+the newest release version (tag). For example, if ~v0.35.3~ is the
+newest version, then run the following.
+#+begin_example
+git checkout v0.35.3
+#+end_example
+Add the following lines to =~/.profile= (recommended), =~/.bashrc= or
+=~/.zshrc= to source the NVM startup script during shell startup.
+#+begin_example
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#+end_example
+* Install applications used by Emacs config
+- aspell
+- aspell english dictionary
+- fish shell
+- OpenJDK
+- ripgrep
+#+begin_example
+sudo apt install aspell aspell-en fish openjdk-11-jdk ripgrep
+#+end_example
+* Install monolith
+Linux binaries are available from https://github.com/Y2Z/monolith/releases
+(change x86_64 to armhf as necessary)
+#+begin_example
+wget https://github.com/Y2Z/monolith/releases/download/v2.3.0/monolith-gnu-linux-x86_64
+chmod +x monolith-gnu-linux-x86_64
+cd ~/.local/bin
+ln -s /path/to/monolith-gnu-linux-x86_64 monolith
+#+end_example
+* Install LanguageTool
+Download the Desktop version from https://languagetool.org/
+(or similarly the newest zip file from the https://languagetool.org/download/ listings)
+and uncompress it to some folder, followed by symlinking it in the =~/jars=
+folder as follows.
+#+begin_example
+cd ~/jars
+ln -s /path/to/languagetool-commandline.jar
+#+end_example
+* Install fonts
+Create the user fonts directory.
+#+begin_example
+mkdir ~/.fonts
+#+end_example
+Copy fonts into the =~/.fonts= directory. The following fonts are needed
+for the Emacs config at this [[https://github.com/matheuristic/emacs-config][link]].
+- Iosevka SS08
+- Iosevka Aile
+- all-the-icons fonts
+- Symbola
+Rebuild the font cache.
+#+begin_example
+fc-cache -fv
+#+end_example
+* Install notdeft
+#+begin_example
+sudo apt install build-essential pkg-config libtclap-dev libxapian-dev
+cd ~/.emacs.d/site-lisp
+git clone https://github.com/hasu/notdeft.git
+cd notdeft/xapian
+make
+#+end_example
