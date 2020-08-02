@@ -74,7 +74,6 @@ bat
 clojure
 dict
 fish
-fzf
 htop
 jq
 mosh
@@ -119,7 +118,6 @@ tin
 *** Recommended packages
 #+begin_example
 franciscolourenco/done
-jethrokuan/fzf
 jethrokuan/z
 jorgebucaran/fish-bax
 jorgebucaran/fish-nvm

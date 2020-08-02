@@ -2,6 +2,11 @@
 #+author: matheuristic
 * Enable Linux apps
 Go to Settings > Linux (Beta), and enable.
+* Setup dotfiles
+Install [[https://www.gnu.org/software/stow/][GNU Stow.]] Follow the instructions in =README.md= to set up
+symlinks in the home directory to the config files. Make sure to
+specify the ~--no-folding~ option to ~stow~ so the directory structure
+for the package is created rather than symlinked if it does not exist.
 * Setup Box sync
 ** Install rclone binary
 Static binaries are available from https://rclone.org/downloads/
@@ -106,6 +111,10 @@ systemctl --user stop rclone-box.service
 cd
 ln -s ~/Box/org
 ln -s ~/Box/zettelkasten
+#+end_example
+* Install build tools
+#+begin_example
+sudo apt install build-essential cmake
 #+end_example
 * Install conda
 Download the newest miniconda version for Linux from
@@ -218,11 +227,17 @@ Rebuild the font cache.
 #+begin_example
 fc-cache -fv
 #+end_example
-* Install notdeft
+* Install (if not already present) and compile notdeft
 #+begin_example
-sudo apt install build-essential pkg-config libtclap-dev libxapian-dev
 cd ~/.emacs.d/site-lisp
 git clone https://github.com/hasu/notdeft.git
-cd notdeft/xapian
+sudo apt install pkg-config libtclap-dev libxapian-dev
+cd ~/.emacs.d/site-lisp/notdeft
 make
+cd xapian
+make
+#+end_example
+* Install compilation dependencies for emacs-libvterm
+#+begin_example
+sudo apt install cmake libtool-bin
 #+end_example
