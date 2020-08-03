@@ -62,9 +62,12 @@ fusermount -u ~/Box
 #+end_example
 ** Automount on startup using systemd
 *** Systemd service unit configuration file
-Save the following script to =~/.config/systemd/user/rclone-box.service=
-(change =USERNAME= to the actual username, and modify the path to the rclone
-binary =/home/USERNAME/.local/bin/rclone= as needed)
+Save the following to =~/.config/systemd/user/rclone-box.service=
+(change ~USERNAME~ and paths in ~ExecStart~ and/or ~ExecStartPost~ as
+needed). An alternative configuration where the directory structure,
+filenames and attributes are pre-cached and persisted is also included
+but commented out (this option is only safe when there are not
+multiple users uploading to the remote storage at the same time).
 #+begin_example
 # ~/.config/systemd/user/rclone-box.service
 [Unit]
@@ -72,13 +75,25 @@ Description=Box (rclone)
 After=
 
 [Service]
-Type=simple
+Type=notify
 # Make sure rclone and mount point exists
 ExecStartPre=/usr/bin/test -x /home/USERNAME/.local/bin/rclone
 ExecStartPre=/usr/bin/test -d /home/USERNAME/Box
 ExecStartPre=/usr/bin/test -w /home/USERNAME/Box
 # Mount on start
+# ---
+# Option 1 (standard mount)
 ExecStart=/home/USERNAME/.local/bin/rclone mount Box: /home/USERNAME/Box --vfs-cache-mode full
+# Option 2 (pre-caching)
+# Start a remote control interface so that a pre-caching of directory
+# structure, filenames and attributes can be triggered using a
+# vfs/refresh command to the remote control API. Additionally,
+# increase --attr-timeout, --vfs-cache-max-age and --dir-cache-time
+# for more persistent cache. Note that his setup is only safe when
+# there aren't multiple users uploading the same file at the same time
+# ExecStart=/home/USERNAME/.local/bin/rclone mount Box: /home/USERNAME/Box --rc --vfs-cache-mode full --vfs-cache-max-age 720h --dir-cache-time 720h --attr-timeout 1m --poll-interval 30s
+# ExecStartPost=/home/USERNAME/.local/bin/rclone rc vfs/refresh recursive=true --rc-addr 127.0.0.1:5572 _async=true
+# ---
 # Unmount on stop
 ExecStop=/bin/fusermount -u /home/USERNAME/Box
 # Always restart if the process exists
@@ -241,3 +256,34 @@ make
 #+begin_example
 sudo apt install cmake libtool-bin
 #+end_example
+* Setup org-protocol
+Create the file =~/.local/share/applications/org-protocol.desktop=
+with the following contents. Change the ~USERNAME~ and/or paths
+in the ~Exec~ and ~Icon~ entries as needed.
+#+begin_example
+[Desktop Entry]
+Name=Org-Protocol
+Exec=/home/USERNAME/miniconda3/envs/emacs/bin/emacsclient %u
+Type=Application
+Terminal=false
+MimeType=x-scheme-handler/org-protocol;
+Icon=/home/USERNAME/.local/share/icons/emacs.png
+#+end_example
+Run the following to have ~emacsclient~ be the default handler for
+~org-protocol://~ URLs. This will add the appropriate entry to
+=~/.config/mimeapps.list= or =~/.local/share/applications.mimeapps.list=.
+#+begin_example
+xdg-mime default org-protocol.desktop x-scheme-handler/org-protocol
+#+end_example
+Note that the org-protocol URL handler only works within the Linux
+container. The org-protocol handler cannot be triggered from the
+Chrome browser Chrome OS into the container, but it can be triggered
+from a Firefox browser run from within the container.
+* Install Firefox browser
+Mainly for org-protocol use, but also an alternative to using Chrome.
+#+begin_example
+sudo apt install firefox-esr
+#+end_example
+It is typically a good idea to install [[https://github.com/gorhill/uBlock][uBlock Origin]] for content blocking.
+Add the org-protocol bookmarklets as described in the Emacs literate
+config as needed (requires org-protocol handler be configured).
