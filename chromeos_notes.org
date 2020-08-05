@@ -81,16 +81,25 @@ ExecStartPre=/usr/bin/test -x /home/USERNAME/.local/bin/rclone
 ExecStartPre=/usr/bin/test -d /home/USERNAME/Box
 ExecStartPre=/usr/bin/test -w /home/USERNAME/Box
 # Mount on start
+# The --rc flag starts rclone's remote control service.
+# This is pretty useful for the ability to manually refresh
+# the directory structure and file attributes before directory
+# cache expiry using
+# $ rclone rc vfs/refresh --fast-list recursive=true
 # ---
+###
 # Option 1 (standard mount)
-ExecStart=/home/USERNAME/.local/bin/rclone mount Box: /home/USERNAME/Box --vfs-cache-mode full
-# Option 2 (pre-caching)
-# Start a remote control interface so that a pre-caching of directory
-# structure, filenames and attributes can be triggered using a
-# vfs/refresh command to the remote control API. Additionally,
-# increase --attr-timeout, --vfs-cache-max-age and --dir-cache-time
-# for more persistent cache. Note that his setup is only safe when
-# there aren't multiple users uploading the same file at the same time
+###
+ExecStart=/home/USERNAME/.local/bin/rclone mount Box: /home/USERNAME/Box --rc --vfs-cache-mode full
+###
+# Option 2 (persistent cache and pre-caching on startup)
+# Increase --attr-timeout, --vfs-cache-max-age and --dir-cache-time
+# for more persistent cache. After mounting, pre-caching of the
+# directory structure, filenames and attributes is triggered using
+# a vfs/refresh command to the remote control API.
+# Note that this setup is only safe when there aren't multiple users
+# uploading the same file at the same time
+###
 # ExecStart=/home/USERNAME/.local/bin/rclone mount Box: /home/USERNAME/Box --rc --vfs-cache-mode full --vfs-cache-max-age 720h --dir-cache-time 720h --attr-timeout 1m --poll-interval 30s
 # ExecStartPost=/home/USERNAME/.local/bin/rclone rc vfs/refresh recursive=true --rc-addr 127.0.0.1:5572 _async=true
 # ---
@@ -200,6 +209,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 #+end_example
+Install an LTS version of Node.js.
+#+begin_example
+nvm install --lts
+#+end_example
 * Install applications used by Emacs config
 - aspell
 - aspell english dictionary
@@ -287,3 +300,44 @@ sudo apt install firefox-esr
 It is typically a good idea to install [[https://github.com/gorhill/uBlock][uBlock Origin]] for content blocking.
 Add the org-protocol bookmarklets as described in the Emacs literate
 config as needed (requires org-protocol handler be configured).
+* Install non-Latin fonts
+#+begin_example
+sudo apt install fonts-noto-core fonts-noto-cjk
+#+end_example
+* Install z for jumping to frecent directories in Bash
+Easiest to clone the z repository and symlink the script. Change the
+path within which the repository is cloned as needed.
+#+begin_example
+cd /path/to
+git clone https://github.com/rupa/z.git
+#+end_example
+Add the following to =~/.bashrc= or a file that it sources.
+#+begin_example
+. /path/to/z/z.sh
+#+end_example
+Optionally, add =z.1= to the ~$MANPATH~ as desired.
+This involves symlinking man page somewhere
+#+begin_example
+mkdir -p ~/.local/share/man/man1
+cd ~/.local/share/man/man1
+ln -s /path/to/z/z.1
+#+end_example
+and extending ~MANPATH~ in the =~/.bashrc= file by adding something
+like the following (note a leading ~:~ is needed to keep the default
+~man~ search locations in addition to the specified search paths).
+#+begin_example
+export MANPATH="$MANPATH:$HOME/.local/share/man"
+#+end_example
+* Install fish packages
+[[https://github.com/jorgebucaran/fisher][Fisher]] is a fish package manager, and can be installed as follows.
+#+begin_example
+mkdir -p ~/.config/fish/functions
+cd ~/.config/fish/functions
+wget https://github.com/jorgebucaran/fisher/raw/main/fisher.fish
+#+end_example
+Examples showing installation of some recommended fish packages.
+#+begin_example
+fisher add jethrokuan/z
+fisher add jorgebucaran/fish-bax
+fisher add rafaelrinaldi/pure
+#+end_example
