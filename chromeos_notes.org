@@ -7,6 +7,13 @@ Install [[https://www.gnu.org/software/stow/][GNU Stow.]] Follow the instruction
 symlinks in the home directory to the config files. Make sure to
 specify the ~--no-folding~ option to ~stow~ so the directory structure
 for the package is created rather than symlinked if it does not exist.
+
+The following example symlinks the fish config files to the
+appropriate directory tree in ~$HOME~ using ~stow~, and should be run
+from the repository root folder.
+#+begin_example
+stow -t $HOME --no-folding fish
+#+end_example
 * Setup Box sync
 ** Install rclone binary
 Static binaries are available from https://rclone.org/downloads/
@@ -21,15 +28,20 @@ ln -s /path/to/rclone
 1. Run "rclone config"
 2. Select "n" (new remote)
 3. Enter a name for the new remote, e.g. "Box"
-4. Enter the number associated with Box (number may change with rclone versions, it is "6" as of v1.52)
+4. Enter the number associated with Box (number may change with rclone
+   versions, it is "6" as of v1.52)
 5. Leave blank for client id
 6. Leave blank for client secret
 7. Leave blank for box config file
-8. For box subtype, enter the number associated to act on behalf of "user" (or "enterprise" if it is an enterprise account)
-9. Enter "n" (No) when asked whether to edit advanced config.
-10. Enter "y" (Yes) when asked whether to use auto config.
-11. A Box app web page to give authorization to rclone to access the Box account will open (may have to use the alternate URL with host 127.0.0.1 if the initial redirection does not work). Log in to authorize rclone.
-12. Select "y" (Yes) to indicate the config is ok.
+8. For box subtype, enter the number associated to act on behalf of
+   "user" (or "enterprise" if it is an enterprise account)
+9. Enter "n" (No) when asked whether to edit advanced config
+10. Enter "y" (Yes) when asked whether to use auto config
+11. A Box app web page to give authorization to rclone to access the
+    Box account will open (may have to use the alternate URL with host
+    127.0.0.1 if the initial redirection does not work). Log in to
+    authorize rclone
+12. Select "y" (Yes) to indicate the config is ok
 ** Usage
 *** List directories in the top level
 #+begin_example
@@ -40,18 +52,19 @@ rclone lsd Box:
 rclone ls Box:
 #+end_example
 *** Mount Box to a given directory
-Make sure the mount directory exists
+Make sure the mount directory exists.
 #+begin_example
 mkdir -p ~/Box
 #+end_example
-Use "rclone mount" to create a FUSE mount. A minimal version of this.
+Use "rclone mount" to create a FUSE mount. A minimal version follows.
 #+begin_example
 rclone mount Box: ~/Box
 #+end_example
-It is generally recommended to mount Box with caching enabled. This increases
-compatibility with most other apps, since they typically assume the ability to
-do simultaneously read/writes to a file, but comes at the cost of higher disk
-usage and files only syncing back remotely (to Box) when they are closed.
+It is generally recommended to mount Box with caching enabled. This
+increases compatibility with most other apps since they typically
+assume the ability to do simultaneously read/writes to a file, but
+comes at the cost of higher disk usage and files only syncing back
+remotely (to Box) when closed.
 #+begin_example
 rclone mount Box: ~/Box --vfs-cache-mode full
 #+end_example
@@ -137,15 +150,15 @@ ln -s ~/Box/org
 ln -s ~/Box/zettelkasten
 #+end_example
 * Install build tools
+Make sure C/C++ compilation tools are installed.
 #+begin_example
 sudo apt install build-essential cmake
 #+end_example
 * Install conda
 Download the newest miniconda version for Linux from
-https://docs.conda.io/en/latest/miniconda.html
-
-For arm64 systems, try
-miniforge from https://github.com/conda-forge/miniforge instead.
+https://docs.conda.io/en/latest/miniconda.html (for arm64 systems,
+download miniforge from https://github.com/conda-forge/miniforge
+instead).
 
 Follow the instructions to install miniconda or miniforge.
 * Install Emacs
@@ -160,25 +173,25 @@ ln -s ~/miniconda3/envs/emacs/bin/emacs
 ln -s ~/miniconda3/envs/emacs/bin/emacsclient
 #+end_example
 Download a PNG version of the Emacs icon and save it to
-=~/.local/bin/share/icons/emacs.png= (it will be used for the app
-icon).
+=~/.local/bin/share/icons/emacs.png= (rename as desired).
 
 Create ~/.local/bin/share/applications/emacs.desktop with the
-following contents. Change username and and path to PNG icon as
-needed.
+following contents. Change USERNAME and PNG icon path as needed.
 #+BEGIN_SRC emacs-lisp
 [Desktop Entry]
 Version=1.0
 Name=Emacs
 GenericName=Text Editor
 Comment=View and edit files
-Exec=/home/username/miniconda3/envs/emacs/bin/emacs %F
+Exec=/home/USERNAME/miniconda3/envs/emacs/bin/emacs %F
 Type=Application
 Terminal=false
 Categories=Utility;Development;TextEditor;
-Icon=/home/username/.local/share/icons/emacs.png
+Icon=/home/USERNAME/.local/share/icons/emacs.png
 #+END_SRC
 * Install neuron
+[[https://github.com/srid/neuron][Neuron]] is a zettelkasten app.
+
 Download neuron-linux-bundle (updated nightly) from
 https://github.com/srid/neuron/releases/tag/nightly
 and symlink it to =neuron= somewhere on the ~$PATH~.
@@ -232,10 +245,10 @@ cd ~/.local/bin
 ln -s /path/to/monolith-gnu-linux-x86_64 monolith
 #+end_example
 * Install LanguageTool
-Download the Desktop version from https://languagetool.org/
-(or similarly the newest zip file from the https://languagetool.org/download/ listings)
-and uncompress it to some folder, followed by symlinking it in the =~/jars=
-folder as follows.
+Download the Desktop version from https://languagetool.org/ (or the
+newest zip file from the https://languagetool.org/download/ listings),
+uncompress it to some folder, and symlinking it in the =~/jars= folder
+as follows.
 #+begin_example
 cd ~/jars
 ln -s /path/to/languagetool-commandline.jar
@@ -249,7 +262,7 @@ Copy fonts into the =~/.fonts= directory. The following fonts are needed
 for the Emacs config at this [[https://github.com/matheuristic/emacs-config][link]].
 - Iosevka SS08
 - Iosevka Aile
-- all-the-icons fonts
+- All fonts from [[https://github.com/domtronn/all-the-icons.el/tree/master/fonts][all-the-icons]]
 - Symbola
 Rebuild the font cache.
 #+begin_example

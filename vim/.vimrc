@@ -13,7 +13,7 @@ if &compatible | finish | endif " don't source script if vi compatible-mode is s
 
 set autoindent  " use indent level from the previous line
 "set autoread    " watch for file changes made by external programs
-set backspace=indent,eol,start " Allow backspacing over everything in insert mode
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
 "set backup      " keep backups (it is usually better to use version control)
 "set backupdir=~/.vimfiles/backup//,.,~/tmp/,~/ " backup file folders, appending '//' uses the full path in the filename
 "set directory=~/.vimfiles/swap//,.,~/tmp,/var/tmp,/tmp " swapfile folders, appending '//' uses the full path in the filename
@@ -51,7 +51,6 @@ if executable('rg')
 else
   set grepprg=grep\ -nH\ $* " set grep to always show filename
 endif " }}}2
-
 " Set 'cindent' indentation to shiftwidth {{{2
 if has('cindent')
   set cinoptions=>1s
@@ -339,7 +338,8 @@ if has('quickfix')
 endif
 " }}}2
 " Toggle whether mouse is enabled {{{2
-nnoremap <silent> <Leader>M :if &mouse == 'a' <Bar> set mouse= <Bar> else <Bar> set mouse=a <Bar> endif <Bar> set mouse?<CR>
+nnoremap <silent> <Leader>M :if &mouse == 'a' <Bar> set mouse= <Bar>
+      \ else <Bar> set mouse=a <Bar> endif <Bar> set mouse?<CR>
 " }}}2
 " Unhighlight search results (from https://github.com/tpope/vim-sensible) {{{2
 if has('extra_search')
