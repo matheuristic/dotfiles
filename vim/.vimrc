@@ -22,6 +22,7 @@ set backspace=indent,eol,start " Allow backspacing over everything in insert mod
 set complete+=k " also use dictionaries on keyword completion
 set expandtab   " expand tabs into spaces (use <C-v><Tab> in insert mode for a real tab)
 set formatoptions+=j " delete comment leader when joining comment lines
+set formatoptions+=mM " correctly break multibyte characters like CJK ones
 "set gdefault    " substitute all matches in a string by default
 "set ignorecase  " make searches case-insensitive
 set laststatus=2 " always show status line, even when editing just one file
@@ -119,7 +120,7 @@ endif
 " Set syntax highlighting colorscheme {{{2
 if has('syntax') && !exists('colors_name') && (&t_Co >= 8)
   syntax enable
-  colorscheme default
+  colorscheme elflord
 endif
 " }}}2
 " Set the terminal emulator title to path of file being edited {{{2
@@ -325,6 +326,18 @@ if has('quickfix')
   nnoremap <silent> <Leader>qlc :lclose<CR>
 endif
 " }}}2
+" Navigate quickfix errors and locations {{{2
+if has('quickfix')
+  nnoremap [q :cprevious<CR>
+  nnoremap ]q :cnext<CR>
+  nnoremap [Q :cfirst<CR>
+  nnoremap ]Q :clast<CR>
+  nnoremap [l :lprevious<CR>
+  nnoremap ]l :lnext<CR>
+  nnoremap [L :lfirst<CR>
+  nnoremap ]L :llast<CR>
+endif
+" }}}2
 " Toggle whether mouse is enabled {{{2
 nnoremap <silent> <Leader>M :if &mouse == 'a' <Bar> set mouse= <Bar> else <Bar> set mouse=a <Bar> endif <Bar> set mouse?<CR>
 " }}}2
@@ -366,9 +379,9 @@ nnoremap <silent> <Leader>Sm :set modeline! modeline?<CR>
 " }}}2
 " Toggle commenting using gc[c|motion] like in vim-commentary {{{2
 if has('eval')
-  nnoremap gcc :<c-u>.,.+<c-r>=v:count<cr>call <SID>toggleComment()<cr>
-  nnoremap gc :<c-u>set opfunc=<SID>commentOp<cr>g@
-  xnoremap gc :call <SID>toggleComment()<cr>
+  nnoremap gcc :<c-u>.,.+<c-r>=v:count<CR>call <SID>toggleComment()<CR>
+  nnoremap gc :<c-u>set opfunc=<SID>commentOp<CR>g@
+  xnoremap gc :call <SID>toggleComment()<CR>
 endif
 " }}}2
 
