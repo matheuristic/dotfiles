@@ -2,6 +2,11 @@
 #+author: matheuristic
 * Enable Linux apps
 Go to Settings > Linux (Beta), and enable.
+* Terminal Settings window
+~Ctrl-Shift-p~ in the terminal opens the Terminal Settings window.
+Suggested settings:
+- /Behavior/ \to /Bell/ \to Disable.
+- /Behavior/ \to /Show terminal dimensions when resized/ \to Enable.
 * Setup dotfiles
 Install [[https://www.gnu.org/software/stow/][GNU Stow.]] Follow the instructions in =README.md= to set up
 symlinks in the home directory to the config files. Make sure to
