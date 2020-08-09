@@ -8,7 +8,11 @@ Suggested settings:
 - /Behavior/ \to /Bell/ \to Disable.
 - /Behavior/ \to /Show terminal dimensions when resized/ \to Enable.
 * Setup dotfiles
-Install [[https://www.gnu.org/software/stow/][GNU Stow.]] Follow the instructions in =README.md= to set up
+Install [[https://www.gnu.org/software/stow/][GNU Stow.]]
+#+begin_example
+sudo apt install stow
+#+end_example
+Follow the instructions in =README.md= to set up
 symlinks in the home directory to the config files. Make sure to
 specify the ~--no-folding~ option to ~stow~ so the directory structure
 for the package is created rather than symlinked if it does not exist.
@@ -161,9 +165,9 @@ sudo apt install build-essential cmake
 #+end_example
 * Install conda
 Download the newest miniconda version for Linux from
-https://docs.conda.io/en/latest/miniconda.html (for arm64 systems,
-download miniforge from https://github.com/conda-forge/miniforge
-instead).
+https://docs.conda.io/en/latest/miniconda.html (except for
+installation on arm64 systems for which miniforge should be downloaded
+from https://github.com/conda-forge/miniforge instead).
 
 Follow the instructions to install miniconda or miniforge.
 * Install Emacs
@@ -358,4 +362,23 @@ Examples showing installation of some recommended fish packages.
 fisher add jethrokuan/z
 fisher add jorgebucaran/fish-bax
 fisher add rafaelrinaldi/pure
+#+end_example
+* Upgrading Debian packages
+#+begin_example
+sudo apt update
+sudo apt upgrade
+#+end_example
+* Upgrading conda packages
+** Base (if using miniconda)
+#+begin_example
+conda activate base
+conda update -c defaults --all
+conda deactivate
+#+end_example
+*Note*: If using miniforge, just follow the /Current environment/ instructions.
+** Specific environments (including base for miniforge)
+#+begin_example
+conda activate name-of-environment
+conda update --all
+conda deactivate
 #+end_example
