@@ -1,14 +1,50 @@
-#+TITLE: Conda Notes
+#+title: Conda Notes
+#+author: matheuristic
 
-* Anaconda vs Miniconda
+* Anaconda, Miniconda and Miniforge
 
-Generally, use [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]] over [[https://www.anaconda.com/distribution/][Anaconda]] since the latter installs a lot of extraneous packages.
+Conda is a package manager and environment management tool useful for
+developing and deploying applications.
+
+[[https://www.anaconda.com/distribution/][Anaconda]] is a full-fat distribution with a lot of default packages
+installed created and maintained by [[https://www.anaconda.com/][Anaconda, Inc]]. [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]] is a
+minimal version of Anaconda that includes only minimal tools needed
+for package and environment management. [[https://github.com/conda-forge/miniforge][Miniforge]] is a variant of
+Miniconda that uses the [[https://conda-forge.org/][~conda-forge~]] channel by default. Miniforge is
+also the only variant that supports arm64 machines currently.
+
+It is recommended to install Miniconda or Miniforge because of the
+smaller disk usage as only packages to be used are installed.
 
 * Recommended workflow
 
 - A new environment for Python package development, or where package Python packages will be directly installed from [[https://pypi.org/][PyPI]], should be created with the ~python=<PYTHON_VERSION>~ parameter or first have ~pip~ installed via ~conda~ to facilitate environment-specific pip installs.
 - R environments installed via ~conda~ (specifically, the ~r-base~ package) on machines running Xcode 10+ (Mac OS X 10.14+) require the Clang compilation flags to be set appropriately, which can be done by copying ~.R/Makevars~ in this repository to ~.R/Makevars~ on the local machine.
 - Within an environment, don't mix packages from the ~conda-forge~ and standard ~conda~ channels, use one of them and stick with it as far as possible for all conda installed packages in that environment.
+
+* Managing channels
+
+Conda calls different repositories /channels/.
+
+Not all packages are available from the ~defaults~ channel, but they
+may be in the [[https://conda-forge.org/][conda-forge]] repository (the ~conda-forge~ channel).
+
+#+begin_example
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+#+end_example
+
+The first channel in the channel list has the highest priority while
+the last has the lowest priority. The channels can be (re-)ordered by
+(re-)adding them using ~--prepend~ (add to top) or ~--append~ (add to
+bottom).
+
+#+begin_example
+conda config --prepend channels new_channel
+conda config --append channels new_channel
+#+end_example
+
+*Note*: strict channel priority is enabled by default in ~conda>=5.0~.
 
 * Creating environments
 
@@ -25,6 +61,17 @@ conda create -n newenv python=3.8
 #+end_src
 
 *NOTE*: Environments created with the ~python=<PYTHON_VERSION>~ parameter also installs an environment-specific ~pip~ automatically.
+
+Environments can be created using only a specific channel as well (for
+instance a user maintained channel or using a specific channel like
+~defaults~, ~bioforge~ or ~conda-forge~). The difference between the
+two commands below is that the second specifically excludes channels
+besides the ones specified using ~-c~ (or ~--channel~).
+
+#+begin_src sh
+conda create -c bioforge -n newenv python=3.8
+conda create -c bioforge --override-channels -n newenv python=3.8
+#+end_src
 
 * Exporting environments
 

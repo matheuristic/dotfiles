@@ -170,6 +170,13 @@ installation on arm64 systems for which miniforge should be downloaded
 from https://github.com/conda-forge/miniforge instead).
 
 Follow the instructions to install miniconda or miniforge.
+
+Enable the [[https://conda-forge.org/][conda-forge]] repository.
+#+begin_example
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+#+end_example
+*Note*: strict channel priority is enabled by default in ~conda>=5.0~.
 * Install Emacs
 Make sure conda is installed.
 #+begin_example
