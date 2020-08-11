@@ -370,6 +370,25 @@ fisher add jethrokuan/z
 fisher add jorgebucaran/fish-bax
 fisher add rafaelrinaldi/pure
 #+end_example
+* Install DevSkim CLI
+DevSkim performs static code analysis for potential security issues
+for a broad range of languages including C, C++, Python and SQL.
+Download the newest CLI release from the [[https://github.com/microsoft/DevSkim/releases][Devskim Github repository]].
+(Change the paths and version numbers below as necessary.)
+#+begin_example
+wget https://github.com/microsoft/DevSkim/releases/download/v0.4.183/DevSkim_linux_0.4.183.zip
+wget https://github.com/microsoft/DevSkim/releases/download/v0.4.183/HASHES.txt
+shasum -a 256 DevSkim_linux_0.4.183.zip
+#+end_example
+Check that the SHA256 hash matches.
+Uncompress it, make the =devskim= binary executable and create symlink
+to it somewhere in ~$PATH~.
+#+begin_example
+unzip DevSkim_linux_0.4.183.zip
+chmod +x DevSkim_linux_0.4.183/devskim
+cd ~/.local/bin
+ln -s /path/to/DevSkim_linux_0.4.183/devskim
+#+end_example
 * Upgrading Debian packages
 #+begin_example
 sudo apt update
