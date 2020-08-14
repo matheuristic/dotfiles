@@ -260,15 +260,6 @@ chmod +x monolith-gnu-linux-x86_64
 cd ~/.local/bin
 ln -s /path/to/monolith-gnu-linux-x86_64 monolith
 #+end_example
-* Install LanguageTool
-Download the Desktop version from https://languagetool.org/ (or the
-newest zip file from the https://languagetool.org/download/ listings),
-uncompress it to some folder, and symlinking it in the =~/jars= folder
-as follows.
-#+begin_example
-cd ~/jars
-ln -s /path/to/languagetool-commandline.jar
-#+end_example
 * Install fonts
 Create the user fonts directory.
 #+begin_example
@@ -388,6 +379,21 @@ unzip DevSkim_linux_0.4.183.zip
 chmod +x DevSkim_linux_0.4.183/devskim
 cd ~/.local/bin
 ln -s /path/to/DevSkim_linux_0.4.183/devskim
+#+end_example
+* Install dictionaries and lexical databases
+Aspell (dictionary tool), desired language dictionaries and Wordnet
+(lexical database) can be installed from the Debian repositories.
+#+begin_example
+sudo apt install aspell aspell-en wordnet
+#+end_example
+* Install LanguageTool
+Download the Desktop version from https://languagetool.org/ (or the
+newest zip file from the https://languagetool.org/download/ listings),
+uncompress it to some folder, and symlinking it in the =~/jars= folder
+as follows.
+#+begin_example
+cd ~/jars
+ln -s /path/to/languagetool-commandline.jar
 #+end_example
 * Upgrading Debian packages
 #+begin_example
