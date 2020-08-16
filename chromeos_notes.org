@@ -317,9 +317,15 @@ Mainly for org-protocol use, but also an alternative to using Chrome.
 #+begin_example
 sudo apt install firefox-esr
 #+end_example
-It is typically a good idea to install [[https://github.com/gorhill/uBlock][uBlock Origin]] for content blocking.
+Recommended extensions to install:
+- [[https://github.com/gorhill/uBlock][uBlock Origin]] for list-based blocking of ad networks and trackers.
+  Also enable /I am an advanced user/ in the extension settings to
+  enable [[https://github.com/gorhill/uBlock/wiki/Dynamic-filtering][dynamic filtering]].
+- [[https://privacybadger.org/][Privacy Badger]] for heuristic blocking of trackers.
+- [[https://decentraleyes.org/][Decentraleyes]] for local content delivery network emulation (adds
+  another layer of privacy protection).
 Add the org-protocol bookmarklets as described in the Emacs literate
-config as needed (requires org-protocol handler be configured).
+configuration as needed (requires org-protocol handler be configured).
 * Install non-Latin fonts
 #+begin_example
 sudo apt install fonts-noto-core fonts-noto-cjk
@@ -414,3 +420,7 @@ conda activate name-of-environment
 conda update --all
 conda deactivate
 #+end_example
+* Hardware workaround notes
+- Screen artifacts may occur in bands on the screen on a Pixelbook.
+  When that happens, try opening [[chrome://flags][chrome://flags]] and changing the
+  /Double buffered compositing/ setting to /Enabled/.
