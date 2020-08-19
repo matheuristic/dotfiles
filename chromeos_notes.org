@@ -420,7 +420,3 @@ conda activate name-of-environment
 conda update --all
 conda deactivate
 #+end_example
-* Hardware workaround notes
-- Screen artifacts may occur in bands on the screen on a Pixelbook.
-  When that happens, try opening [[chrome://flags][chrome://flags]] and changing the
-  /Double buffered compositing/ setting to /Enabled/.
