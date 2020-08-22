@@ -401,6 +401,20 @@ as follows.
 cd ~/jars
 ln -s /path/to/languagetool-commandline.jar
 #+end_example
+* Install firejail
+[[https://firejail.wordpress.com/][Firejail]] provides the ability to run applications in a sandbox.
+Installing the recommended packages end up pulling in a lot of
+dependencies, so it is probably better to just keep to the base
+application and default profiles.
+#+begin_example
+sudo apt install firejail firejail-profiles --no-install-recommends
+#+end_example
+Sandbox applications by starting them via the ~firejail~ command.
+#+begin_example
+firejail [--profile=/path/to/firejail/profile] <command> [<options>]
+firejail firefox
+firejail vlc
+#+end_example
 * Upgrading Debian packages
 #+begin_example
 sudo apt update
