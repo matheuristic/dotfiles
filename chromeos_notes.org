@@ -158,6 +158,12 @@ cd
 ln -s ~/Box/org
 ln -s ~/Box/zettelkasten
 #+end_example
+* Install The Unarchiver
+This package provides CLI tools ~lsar~ for listing archive contents
+and ~unar~ for extracting files from archives.
+#+begin_example
+sudo apt install unar
+#+end_example
 * Install build tools
 Make sure C/C++ compilation tools are installed.
 #+begin_example
@@ -270,6 +276,7 @@ for the Emacs config at this [[https://github.com/matheuristic/emacs-config][lin
 - Iosevka SS08
 - Iosevka Aile
 - All fonts from [[https://github.com/domtronn/all-the-icons.el/tree/master/fonts][all-the-icons]]
+- Sarasa Gothic
 - Symbola
 Rebuild the font cache.
 #+begin_example
