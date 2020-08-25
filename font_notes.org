@@ -75,10 +75,11 @@ Proportional font family with sans-serif and serif fonts designed for Inria ([[h
 Proportional font family with sans-serif and serif fonts designed for screen usage ([[https://rsms.me/inter/][link]], [[https://github.com/rsms/inter/][Github]]).
 ** Iosevka
 Condensed monospace typeface for code with a wide array of customization options ([[https://typeof.net/Iosevka/][link]], [[https://github.com/be5invis/Iosevka][Github]]).
-The ~ss08~ ([[https://github.com/fabrizioschiavi/pragmatapro][Pragmata Pro]] Style) stylistic set is particularly nice.
 The typeface also has quasi-proportional families -- Aile (Helvetica-like sans-serif), Etoile (serif) and Sparkle (mixed sans-serif and serif, with similar character spacing to Etoile).
 The monospace typeface has regular and extended widths.
 The extended width version can be used in Emacs by setting the face attribute ~:width~ to the symbol ~expanded~ (see following code).
+One of the stylistic sets ~ss08~ tries to emulate [[https://github.com/fabrizioschiavi/pragmatapro][Pragmata Pro]], but if pairing with one of the Iosevka quasi-proportional families then it is better to use the either the default style (if pairing with Aile) or the Slab style (if pairing with Etoile).
+There is also a CJK font [[https://github.com/be5invis/Sarasa-Gothic][Sarasa Gothic]] that is based on Iosevka and Source Han Sans.
 #+begin_src emacs-lisp :eval no
 (set-face-attribute 'default nil :family "Iosevka"
                     :height 140 :weight 'normal :width 'expanded)
