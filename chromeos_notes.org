@@ -252,10 +252,11 @@ nvm install --lts
 - aspell
 - aspell english dictionary
 - fish shell
+- libnotify
 - OpenJDK
 - ripgrep
 #+begin_example
-sudo apt install aspell aspell-en fish openjdk-11-jdk ripgrep
+sudo apt install aspell aspell-en fish libnotify-bin openjdk-11-jdk ripgrep
 #+end_example
 * Install monolith
 Linux binaries are available from https://github.com/Y2Z/monolith/releases
