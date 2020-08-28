@@ -24,14 +24,14 @@ set expandtab   " expand tabs into spaces (use <C-v><Tab> in insert mode for a r
 set formatoptions+=j " delete comment leader when joining comment lines
 set formatoptions+=mM " correctly break multibyte characters like CJK ones
 "set gdefault    " substitute all matches in a string by default
+set hidden      " hide buffers instead of unloading them, which allows unsaved buffers to be pushed to the background
 "set ignorecase  " make searches case-insensitive
+set nojoinspaces " do not insert two spaces after '.', '?' and '!' on line joins
 set laststatus=2 " always show status line, even when editing just one file
+set lazyredraw  " don't redraw screen when executing macros and registers
 "set list        " highlight tabs and trailing whitespace
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,nbsp:. " chars for displaying whitespace when 'list' is set
-"set hidden      " hide abandoned buffers instead of unloading them
-set nojoinspaces " do not insert two spaces after '.', '?' and '!' on line joins
 "set nomodeline  " do not have files overwrite settings from this vimrc
-"set nowrap      " do not wrap text
 "set scrolloff=1 " num lines from top or bottom of window to begin scrolling
 set sidescrolloff=5 " num lines from left or right of window to begin scrolling
 set shiftwidth=2 " number of spaces for each indent level
@@ -44,6 +44,7 @@ set smarttab    " tabs inserts shiftwidth space
 "set tabstop=8   " length of a real tab
 "set ttyfast     " smoother output
 set wildmode=list:longest,full " command-line tab completion options
+"set nowrap      " do not wrap text
 
 " Prefer rg (ripgrep) to grep for grepping {{{2
 if executable('rg')
@@ -284,6 +285,8 @@ let mapleader=' ' " }}}2
 " Buffer manipulation and navigation {{{2
 nnoremap <silent> <Leader>bl :buffers<CR>
 nnoremap <silent> <Leader>bd :bdelete<CR>
+nnoremap <silent> <Leader>bn :bnext<CR>
+nnoremap <silent> <Leader>bp :bprevious<CR>
 nnoremap <Leader>bg :buffer!<Space>
 nnoremap <Leader>bad :badd<Space>
 nnoremap <silent> <Leader>bal :ball<CR>
