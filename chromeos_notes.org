@@ -424,10 +424,20 @@ firejail firefox
 firejail vlc
 #+end_example
 * Install Racket (optional)
-If developing in [[https://racket-lang.org/][Racket]], [[https://download.racket-lang.org/][download]] the installer for the latest
-version, make it executable using ~chmod +x~ and install it. Add the
-Racket bin directory to ~$PATH~ (and optionally the man pages
-directory to ~$MANPATH~) as necessary.
+If developing in [[https://racket-lang.org/][Racket]], there are several options for installing it:
+** In a conda environment
+Install it in a conda environment from the ~conda-forge~ channel (see
+the /Install conda/ section for how to enable the channel). This
+installs a minimal version of Racket in that environment.
+#+begin_example
+conda create -n racket
+conda activate racket
+conda install racket
+#+end_example
+** System-wide or at the user level
+[[https://download.racket-lang.org/][Download]] the installer for the latest version, make it executable
+using ~chmod +x~ and install it. Add the Racket bin directory to
+~$PATH~ and the man pages directory to ~$MANPATH~ as necessary.
 * Upgrading Debian packages
 #+begin_example
 sudo apt update
