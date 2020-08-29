@@ -434,6 +434,15 @@ conda create -n racket
 conda activate racket
 conda install racket
 #+end_example
+For development (rather than deployment or build jobs), install the
+packages in the main Racket distribution as well (the options below
+run the command non-interactively and auto-installs dependencies;
+alternatively run without those options and answer ~a~ to any of the
+install dependency prompts). Building dependencies may take a while.
+#+begin_example
+conda activate racket
+raco pkg install --batch --deps search-auto main-distribution
+#+end_example
 ** System-wide or at the user level
 [[https://download.racket-lang.org/][Download]] the installer for the latest version, make it executable
 using ~chmod +x~ and install it. Add the Racket bin directory to
