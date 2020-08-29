@@ -423,6 +423,11 @@ firejail [--profile=/path/to/firejail/profile] <command> [<options>]
 firejail firefox
 firejail vlc
 #+end_example
+* Install Racket (optional)
+If developing in [[https://racket-lang.org/][Racket]], [[https://download.racket-lang.org/][download]] the installer for the latest
+version, make it executable using ~chmod +x~ and install it. Add the
+Racket bin directory to ~$PATH~ (and optionally the man pages
+directory to ~$MANPATH~) as necessary.
 * Upgrading Debian packages
 #+begin_example
 sudo apt update
