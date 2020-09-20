@@ -259,13 +259,19 @@ nvm install --lts
 sudo apt install aspell aspell-en fish libnotify-bin openjdk-11-jdk ripgrep
 #+end_example
 * Install monolith
-Linux binaries are available from https://github.com/Y2Z/monolith/releases
-(change x86_64 to armhf as necessary)
+Linux binaries are available from
+https://github.com/Y2Z/monolith/releases (change x86_64 to armhf as
+necessary).
 #+begin_example
 wget https://github.com/Y2Z/monolith/releases/download/v2.3.0/monolith-gnu-linux-x86_64
 chmod +x monolith-gnu-linux-x86_64
 cd ~/.local/bin
 ln -s /path/to/monolith-gnu-linux-x86_64 monolith
+#+end_example
+Another useful utility for downloading websites that supplements
+monolith is [[https://www.httrack.com/][HTTrack]].
+#+begin_example
+sudo apt install httrack
 #+end_example
 * Install fonts
 Create the user fonts directory.

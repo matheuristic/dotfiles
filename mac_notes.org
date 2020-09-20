@@ -93,6 +93,7 @@ xsv
 #+end_example
 *** Other useful but less used packages
 #+begin_example
+httrack
 lftp
 miller
 tig
