@@ -64,7 +64,7 @@
   manually copy over the terminfo file to =~/.terminfo/x/xterm-kitty=
   on the server.
 ** MacPorts
-***  Recommended packages
+*** Recommended packages
 #+begin_example
 aspell
 aspell-dict-en
@@ -96,6 +96,7 @@ xsv
 httrack
 lftp
 miller
+proselint
 tig
 tin
 #+end_example

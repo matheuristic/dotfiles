@@ -10,6 +10,7 @@ User configuration files for:
 * [Neovim](https://neovim.io/)
 * [NPM](https://www.npmjs.com/)
 * [PostgreSQL](https://www.postgresql.org/) aliases
+* [Proselint](https://github.com/amperser/proselint)
 * [Pylint](https://www.pylint.org/)
 * [GNU Screen](https://www.gnu.org/software/screen/)
 * [tmux](https://github.com/tmux/tmux)

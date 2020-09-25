@@ -273,6 +273,16 @@ monolith is [[https://www.httrack.com/][HTTrack]].
 #+begin_example
 sudo apt install httrack
 #+end_example
+* Install proselint
+[[https://github.com/amperser/proselint][Proselint]] is a linter for English prose. Proselint can be configured using the =~/.config/proselint/config= file.
+#+begin_example
+conda create -n proselint
+conda activate proselint
+conda install proselint
+conda deactivate
+cd ~/.local/bin
+ln -s ~/miniconda3/envs/proselint/bin/proselint
+#+end_example
 * Install fonts
 Create the user fonts directory.
 #+begin_example
