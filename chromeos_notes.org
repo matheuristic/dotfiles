@@ -283,6 +283,16 @@ conda deactivate
 cd ~/.local/bin
 ln -s ~/miniconda3/envs/proselint/bin/proselint
 #+end_example
+* Install ShellCheck
+[[https://github.com/koalaman/shellcheck][ShellCheck]] is a static analyzer for Bash and sh scripts.
+#+begin_example
+conda create -n shellcheck
+conda activate shellcheck
+conda install shellcheck
+conda deactivate
+cd ~/.local/bin
+ln -s ~/miniconda3/envs/shellcheck/bin/shellcheck
+#+end_example
 * Install fonts
 Create the user fonts directory.
 #+begin_example

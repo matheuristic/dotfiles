@@ -80,10 +80,12 @@ mosh
 notmuch
 openjdk8 / openjdk11
 qpdf
-pandoc
 p7zip
+pandoc
+proselint
 ripgrep
 rlwrap
+shellcheck
 stow
 tmux
 unrar
@@ -96,7 +98,6 @@ xsv
 httrack
 lftp
 miller
-proselint
 tig
 tin
 #+end_example
