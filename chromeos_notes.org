@@ -273,16 +273,6 @@ monolith is [[https://www.httrack.com/][HTTrack]].
 #+begin_example
 sudo apt install httrack
 #+end_example
-* Install proselint
-[[https://github.com/amperser/proselint][Proselint]] is a linter for English prose. Proselint can be configured using the =~/.config/proselint/config= file.
-#+begin_example
-conda create -n proselint
-conda activate proselint
-conda install proselint
-conda deactivate
-cd ~/.local/bin
-ln -s ~/miniconda3/envs/proselint/bin/proselint
-#+end_example
 * Install ShellCheck
 [[https://github.com/koalaman/shellcheck][ShellCheck]] is a static analyzer for Bash and sh scripts.
 #+begin_example
@@ -434,6 +424,16 @@ as follows.
 #+begin_example
 cd ~/jars
 ln -s /path/to/languagetool-commandline.jar
+#+end_example
+(/Optional/) If disk space allows and the processor is sufficiently
+fast, download the 8GB English n-gram data set for LanguageTool from
+[[https://languagetool.org/download/ngram-data/][here]] and unzip it to the =~/languagetool/ngram-data= directory.
+#+begin_example
+mkdir -p ~/languagetool/ngram-data/en
+cd ~/languagetool/ngram-data/en
+wget https://languagetool.org/download/ngram-data/ngrams-en-20150817.zip
+unzip ngrams-en-20150817.zip
+rm ngrams-en-20150817.zip
 #+end_example
 * Install firejail
 [[https://firejail.wordpress.com/][Firejail]] provides the ability to run applications in a sandbox.

@@ -82,7 +82,6 @@ openjdk8 / openjdk11
 qpdf
 p7zip
 pandoc
-proselint
 ripgrep
 rlwrap
 shellcheck
