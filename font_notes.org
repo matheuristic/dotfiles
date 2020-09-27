@@ -52,6 +52,11 @@ ET Book is an earlier webfont version commissioned by Edward Tufte ([[https://ed
 XETBook is expands on ET Book with added characters, OpenType ligatures and old-style figures ([[https://github.com/dbenjaminmiller/xetbook][Github]]).
 ETbb further expands on XETBook to include a full set of figure styles, small caps, superior and inferior figures and LaTeX support ([[https://ctan.org/pkg/etbb?lang=en][link]]).
 Currently, ETbb is preferred as it has the widest glyph coverage and the most alternate glyphs.
+** Courier Prime
+Courier Prime, Courier Prime Sans and Courier Prime Code are a family
+of fonts that are metric equivalent to Courier New and Courier Final
+Draft ([[https://quoteunquoteapps.com/courierprime/][link]], [[https://github.com/quoteunquoteapps/CourierPrime][Github]]). It is designed for screenplays but the Code
+variant is also a good coding font.
 ** DM Mono/Sans/Serif
 Font families designed by Colophon Foundry for DeepMind ([[https://github.com/googlefonts/dm-mono][DM Mono link]], [[https://github.com/googlefonts/dm-fonts][DM Sans/Serif link]]).
 Low contrast geometric fonts intended for use at smaller text sizes.
