@@ -473,6 +473,43 @@ raco pkg install --batch --deps search-auto main-distribution
 [[https://download.racket-lang.org/][Download]] the installer for the latest version, make it executable
 using ~chmod +x~ and install it. Add the Racket bin directory to
 ~$PATH~ and the man pages directory to ~$MANPATH~ as necessary.
+* Install Leiningen (optional)
+[[https://leiningen.org/][Leiningen]] is a build automation and dependency management tool for
+Clojure projects. To install it, [[https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein][download]] the ~lein~ script, make it
+executable using ~chmod +x~ and put it in a ~$PATH~ directory. On the
+first invocation, it will download and run the self-installer. A Java
+distribution like OpenJDK also needs to be installed.
+#+begin_example
+mkdir -p ~/packages/leiningen
+cd ~/packages/leiningen
+wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+chmod +x lein
+cd ~/.local/bin
+ln -s ~/packages/leiningen/lein
+#+end_example
+* Install Maven (optional)
+[[https://maven.apache.org/][Maven]] is a build automation and dependency management tool for Java
+projects. To install it, [[https://maven.apache.org/download.cgi][download]] the binary zip archive (ensure the
+checksum matches), uncompress it and add the =bin= directory to
+~$PATH~ so its binaries are in the executable search path. A Java
+distribution like OpenJDK also needs to be installed.
+#+begin_example
+mkdir -p ~/packages/maven
+cd ~/packages/maven
+wget <maven_binary_zip_url>
+unzip <maven_binary_zip>
+cd ~
+ln -s ~/packages/maven/maven-X.Y.Z maven
+#+end_example
+Continuing on the example above which symlinks uncompressed Maven
+folder to =~/maven=, add the following to =~/.profile= (recommended),
+=~/.bashrc= or =~/.zshrc= so =~/maven/bin= is in ~$PATH~.
+#+begin_example
+# Maven
+if [ -d "$HOME/maven/bin" ] ; then
+    PATH="$HOME/maven/bin:$PATH"
+fi
+#+end_example
 * Upgrading Debian packages
 #+begin_example
 sudo apt update
