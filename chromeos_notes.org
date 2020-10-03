@@ -152,9 +152,10 @@ systemctl --user stop rclone-box.service
 #+end_example
 *** References
 - https://blog.victormendonca.com/2018/05/14/creating-a-simple-systemd-user-service/
-* Setup symlinks for Org and Zettelkasten folders
+* Setup symlinks for bibliography, Org and Zettelkasten folders
 #+begin_example
 cd
+ln -s ~/Box/bib
 ln -s ~/Box/org
 ln -s ~/Box/zettelkasten
 #+end_example
