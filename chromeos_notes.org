@@ -298,16 +298,6 @@ Rebuild the font cache.
 #+begin_example
 fc-cache -fv
 #+end_example
-* Install (if not already present) and compile notdeft
-#+begin_example
-cd ~/.emacs.d/site-lisp
-git clone https://github.com/hasu/notdeft.git
-sudo apt install pkg-config libtclap-dev libxapian-dev
-cd ~/.emacs.d/site-lisp/notdeft
-make
-cd xapian
-make
-#+end_example
 * Install compilation dependencies for emacs-libvterm
 #+begin_example
 sudo apt install cmake libtool-bin
