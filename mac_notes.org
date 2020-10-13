@@ -13,6 +13,7 @@
 - [[https://www.macports.org/][MacPorts]]
 - [[https://www.office.com/][Microsoft Office]] (/license needed/)
 - [[https://docs.conda.io/en/latest/miniconda.html][Miniconda]]
+- [[https://mos.caldis.me/][Mos]] ([[https://github.com/Caldis/Mos][GitHub]], /independent scroll direction for mice/)
 - [[https://github.com/rxhanson/Rectangle][Rectangle]]
 - [[https://www.royalapplications.com/ts/mac/features][Royal TSX]]
 - [[https://skim-app.sourceforge.io/][Skim]]
