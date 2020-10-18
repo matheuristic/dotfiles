@@ -281,7 +281,7 @@ monolith is [[https://www.httrack.com/][HTTrack]].
 #+begin_example
 sudo apt install httrack
 #+end_example
-* Install pandoc
+* Install Pandoc
 Make sure conda is installed.
 #+begin_example
 conda activate myenv
@@ -290,6 +290,8 @@ conda deactivate
 mkdir -p ~/.local/bin && cd ~/.local/bin
 ln -s ~/miniconda3/envs/myenv/bin/pandoc
 #+end_example
+Alternatively, download an appropriate [[https://github.com/jgm/pandoc/releases][release binary]] and put it in
+one of the ~$PATH~ directories.
 * Install ShellCheck
 [[https://github.com/koalaman/shellcheck][ShellCheck]] is a static analyzer for Bash and sh scripts.
 #+begin_example
