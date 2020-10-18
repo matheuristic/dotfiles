@@ -95,6 +95,7 @@ xsv
 #+end_example
 *** Other useful but less used packages
 #+begin_example
+clusterssh
 httrack
 lftp
 miller
@@ -277,9 +278,10 @@ Easiest to install via conda and create a symlink to the binary in
 =~/miniconda3/envs/ENVNAME/bin= (the environment's =bin= directory)
 within =~/.local/bin= (or some directory that is in ~PATH~).
 - ~glances~: Cross platform system monitoring tool like ~top~ and ~htop~.
-- ~mitmproxy~ : Interactive HTTPS proxy.
-- ~textract~ : Wrapper for tools extracting text from several document formats.
-- ~visidata~ : A command-line multitool for tabular data.
+- ~mitmproxy~: Interactive HTTPS proxy.
+- ~pyinstaller~: Bundles Python application and its dependencies into a single package.
+- ~textract~: Wrapper for tools extracting text from several document formats.
+- ~visidata~: A command-line multitool for tabular data.
 For other good Python packages, see [[https://github.com/vinta/awesome-python][Awesome Python]].
 *** Fancy Python REPL
 - Command line

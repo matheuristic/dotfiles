@@ -178,22 +178,31 @@ from https://github.com/conda-forge/miniforge instead).
 
 Follow the instructions to install miniconda or miniforge.
 
-Enable the [[https://conda-forge.org/][conda-forge]] repository.
+Enable the [[https://conda-forge.org/][conda-forge]] repository if miniconda was installed, which
+also sets it to be the highest priority repository by default.
 #+begin_example
 conda config --add channels conda-forge
 conda config --set channel_priority strict
 #+end_example
 *Note*: strict channel priority is enabled by default in ~conda>=5.0~.
+
+Create a environment for machine-specific tooling that do not require
+their own environments (change the name ~myenv~ as desired).
+
+#+begin_example
+conda create -n myenv
+#+end_example
+
 * Install Emacs
 Make sure conda is installed.
 #+begin_example
-conda create -n emacs
-conda activate emacs
-conda config --add channels conda-forge
+conda activate myenv
+conda install emacs
+conda deactivate
 wget -O ~/.mime.types https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
 mkdir -p ~/.local/bin && cd ~/.local/bin
-ln -s ~/miniconda3/envs/emacs/bin/emacs
-ln -s ~/miniconda3/envs/emacs/bin/emacsclient
+ln -s ~/miniconda3/envs/myenv/bin/emacs
+ln -s ~/miniconda3/envs/myenv/bin/emacsclient
 #+end_example
 Download a PNG version of the Emacs icon and save it to
 =~/.local/bin/share/icons/emacs.png= (rename as desired).
@@ -206,7 +215,7 @@ Version=1.0
 Name=Emacs
 GenericName=Text Editor
 Comment=View and edit files
-Exec=/home/USERNAME/miniconda3/envs/emacs/bin/emacs %F
+Exec=/home/USERNAME/miniconda3/envs/myenv/bin/emacs %F
 Type=Application
 Terminal=false
 Categories=Utility;Development;TextEditor;
@@ -272,15 +281,23 @@ monolith is [[https://www.httrack.com/][HTTrack]].
 #+begin_example
 sudo apt install httrack
 #+end_example
+* Install pandoc
+Make sure conda is installed.
+#+begin_example
+conda activate myenv
+conda install pandoc
+conda deactivate
+mkdir -p ~/.local/bin && cd ~/.local/bin
+ln -s ~/miniconda3/envs/myenv/bin/pandoc
+#+end_example
 * Install ShellCheck
 [[https://github.com/koalaman/shellcheck][ShellCheck]] is a static analyzer for Bash and sh scripts.
 #+begin_example
-conda create -n shellcheck
-conda activate shellcheck
+conda activate myenv
 conda install shellcheck
 conda deactivate
 cd ~/.local/bin
-ln -s ~/miniconda3/envs/shellcheck/bin/shellcheck
+ln -s ~/miniconda3/envs/myenv/bin/shellcheck
 #+end_example
 * Install fonts
 Create the user fonts directory.
@@ -309,7 +326,7 @@ in the ~Exec~ and ~Icon~ entries as needed.
 #+begin_example
 [Desktop Entry]
 Name=Org-Protocol
-Exec=/home/USERNAME/miniconda3/envs/emacs/bin/emacsclient %u
+Exec=/home/USERNAME/miniconda3/envs/myenv/bin/emacsclient %u
 Type=Application
 Terminal=false
 MimeType=x-scheme-handler/org-protocol;
@@ -440,7 +457,11 @@ firejail vlc
 #+end_example
 * Install Racket (optional)
 If developing in [[https://racket-lang.org/][Racket]], there are several options for installing it:
-** In a conda environment
+** System-wide or at the user level (better for development work)
+[[https://download.racket-lang.org/][Download]] the installer for the latest version, make it executable
+using ~chmod +x~ and install it. Add the Racket bin directory to
+~$PATH~ and the man pages directory to ~$MANPATH~ as necessary.
+** In a conda environment (better for deployment for build jobs)
 Install it in a conda environment from the ~conda-forge~ channel (see
 the /Install conda/ section for how to enable the channel). This
 installs a minimal version of Racket in that environment.
@@ -458,10 +479,6 @@ install dependency prompts). Building dependencies may take a while.
 conda activate racket
 raco pkg install --batch --deps search-auto main-distribution
 #+end_example
-** System-wide or at the user level
-[[https://download.racket-lang.org/][Download]] the installer for the latest version, make it executable
-using ~chmod +x~ and install it. Add the Racket bin directory to
-~$PATH~ and the man pages directory to ~$MANPATH~ as necessary.
 * Install Leiningen (optional)
 [[https://leiningen.org/][Leiningen]] is a build automation and dependency management tool for
 Clojure projects. To install it, [[https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein][download]] the ~lein~ script, make it
