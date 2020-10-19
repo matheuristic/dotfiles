@@ -221,6 +221,9 @@ Terminal=false
 Categories=Utility;Development;TextEditor;
 Icon=/home/USERNAME/.local/share/icons/emacs.png
 #+END_SRC
+
+Note that the [[https://github.com/conda-forge/emacs-feedstock][Emacs package in conda-forge]] is compiled with the Lucid
+graphical toolkit, so it will not be styled by the active GTK theme.
 * Install NVM
 Easiest to do a Git install of NVM ([[https://github.com/nvm-sh/nvm#git-install][link]]).
 #+begin_example
@@ -359,6 +362,13 @@ Recommended extensions to install:
 Add the org-protocol bookmarklets as described in the Emacs literate
 configuration as needed (requires org-protocol handler be configured).
 * Install non-Latin fonts
+Option 1 with more complete coverage (more disk space required).
+Installs the metapackage that pulls in all the Noto font packages.
+#+begin_example
+sudo apt install fonts-noto
+#+end_example
+Option 2 with basic coverage (less disk space required). Installs the
+core and basic CJK Noto fonts.
 #+begin_example
 sudo apt install fonts-noto-core fonts-noto-cjk
 #+end_example
