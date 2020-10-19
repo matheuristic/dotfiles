@@ -224,6 +224,9 @@ Icon=/home/USERNAME/.local/share/icons/emacs.png
 
 Note that the [[https://github.com/conda-forge/emacs-feedstock][Emacs package in conda-forge]] is compiled with the Lucid
 graphical toolkit, so it will not be styled by the active GTK theme.
+Note the [[https://emacs.stackexchange.com/questions/33065/on-linux-why-should-one-choose-lucid-over-gtk-gui-for-emacs][pros and cons of using Lucid versus GTK in Emacs]]. In
+particular even though using Lucid results in Emacs not looking as
+nice, it tends to be more robust against display-related issues.
 * Install NVM
 Easiest to do a Git install of NVM ([[https://github.com/nvm-sh/nvm#git-install][link]]).
 #+begin_example
@@ -528,6 +531,13 @@ if [ -d "$HOME/maven/bin" ] ; then
     PATH="$HOME/maven/bin:$PATH"
 fi
 #+end_example
+* Install Disk Usage Analyzer/baobab (optional)
+Disk Usage Analyzer (also known as baobab) provides a tree and
+graphical view into disk usage by the different elements. It is useful
+for identifying elements that are using heavy amounts of disk space.
+#+begin_example
+sudo apt install baobab --no-install-recommends
+#+end_example
 * Install neuron (optional)
 [[https://github.com/srid/neuron][Neuron]] is a zettelkasten app.
 
@@ -558,4 +568,24 @@ conda deactivate
 conda activate name-of-environment
 conda update --all
 conda deactivate
+#+end_example
+* APT usage notes
+** Reverse dependencies
+Search for the reverse dependencies of some given package ~PACKAGE~
+(installed packages directly or indirectly depending on ~PACKAGE~).
+#+begin_example
+apt-cache rdepends --no-suggests --no-conflicts --no-breaks --no-replaces --no-enhances --installed --recurse PACKAGE
+#+end_example
+** Install a package without its recommended packages
+It can be better to not install recommended dependencies of a package
+~PACKAGE~, usually when those recommended dependencies are very heavy.
+#+begin_example
+apt-get install --no-install-recommends PACKAGE
+#+end_example
+** Simulate installing a package
+Simulate installing a PACKAGE, useful for seeing what changes would be
+made by a installing or uninstalling a specific package ~PACKAGE~.
+#+begin_example
+apt-get install --dry-run PACKAGE
+apt-get remove --dry-run PACKAGE
 #+end_example
