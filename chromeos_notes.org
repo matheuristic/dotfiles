@@ -159,6 +159,34 @@ ln -s ~/Box/bib
 ln -s ~/Box/org
 ln -s ~/Box/zettelkasten
 #+end_example
+* Install dar
+[[http://dar.linux.free.fr/][dar (disk archive)]] is an archiving tool for nix platforms. It supports
+encryption. Also supports recovery records if [[https://github.com/Parchive/par2cmdline/][par2]] is installed.
+#+begin_example
+sudo apt install dar
+#+end_example
+Simple usage examples (archive creation and extraction).
+#+begin_example
+dar -c backup_file_without_extension -g file1 -g file2 ... -g fileN
+dar -x backup_file_without_extension
+#+end_example
+Use the ~-K~ or ~--key~ option to encrypt the archive. Prefer AES as
+it is better vetted.
+#+begin_example
+dar -c backup_file_without_extension -g file1 -K aes:some_pw_str
+#+end_example
+Additional documentation is available [[http://dar.linux.free.fr/doc/index.html][here]].
+* Install par2
+Create recovery records for files with [[https://github.com/Parchive/par2cmdline/][par2]].
+#+begin_example
+sudo apt install par2
+#+end_example
+Simple usage examples (create record for, verifying and repairing files).
+#+begin_example
+par2 create some_files.par2 file1 file2 file3
+par2 verify some_files.par2
+par2 repair some_files.par2
+#+end_example
 * Install The Unarchiver
 This package provides CLI tools ~lsar~ for listing archive contents
 and ~unar~ for extracting files from archives.
