@@ -355,6 +355,26 @@ fc-cache -fv
 #+begin_example
 sudo apt install cmake libtool-bin
 #+end_example
+* Install pikchr
+[[https://pikchr.org/][Pikchr]] is a [[https://en.wikipedia.org/wiki/Pic_language][PIC]]-like markup language for diagramming, intended for
+embedding in fenced code blocks within other markup language
+documents.
+To install:
+1. Make sure ~build-essentials~ is installed via APT as GCC is
+   required to compile the source code.
+2. Download the latest source code tarball from the [[https://pikchr.org/home/info?name=trunk][code repository]].
+   (Replace =<hash>= below with the hash of the latest check-in.)
+3. Compile using ~make~.
+4. Copy/symlink the ~lemon~ and ~pikchr~ binaries to a ~$PATH~ dir.
+#+begin_example
+wget https://pikchr.org/home/tarball/<hash>/pikchr-<hash>.tar.gz
+tar xzf pikchr-<hash>.tar.gz
+cd pikchr-<hash>
+make
+cd ~/.local/bin
+ln -s /path/to/pikchr-<hash>/lemon
+ln -s /path/to/pikchr-<hash>/pikchr
+#+end_example
 * Setup org-protocol
 Create the file =~/.local/share/applications/org-protocol.desktop=
 with the following contents. Change the ~USERNAME~ and/or paths
