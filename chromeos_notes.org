@@ -199,28 +199,29 @@ Make sure C/C++ compilation tools are installed.
 sudo apt install build-essential cmake
 #+end_example
 * Install conda
-Download the newest miniconda version for Linux from
-https://docs.conda.io/en/latest/miniconda.html (except for
-installation on arm64 systems for which miniforge should be downloaded
-from https://github.com/conda-forge/miniforge instead).
+Download the appropriate version of [[https://github.com/conda-forge/miniforge][miniforge]] which uses the
+[[https://conda-forge.org/][conda-forge]] repository by default. An alternative is [[https://docs.conda.io/en/latest/miniconda.html][miniconda]] which
+uses Anaconda's repository by default.
 
 Follow the instructions to install miniconda or miniforge.
 
-Enable the [[https://conda-forge.org/][conda-forge]] repository if miniconda was installed, which
-also sets it to be the highest priority repository by default.
+If using miniconda, enable the [[https://conda-forge.org/][conda-forge]] repository as follows,
+which also sets it as the highest priority repository by default.
 #+begin_example
 conda config --add channels conda-forge
 conda config --set channel_priority strict
 #+end_example
 *Note*: strict channel priority is enabled by default in ~conda>=5.0~.
 
-Create a environment for machine-specific tooling that do not require
-their own environments (change the name ~myenv~ as desired).
-
+Next, create a environment for machine-specific tooling that do not
+require their own environments (change the name ~myenv~ as desired).
 #+begin_example
 conda create -n myenv
 #+end_example
 
+The following sections assume miniforge installed to the default
+directory =~/miniforge3/=. (The default directory for miniconda
+is =~/miniconda3/= if that is installed instead.)
 * Install Emacs
 Make sure conda is installed.
 #+begin_example
@@ -229,8 +230,8 @@ conda install emacs
 conda deactivate
 wget -O ~/.mime.types https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
 mkdir -p ~/.local/bin && cd ~/.local/bin
-ln -s ~/miniconda3/envs/myenv/bin/emacs
-ln -s ~/miniconda3/envs/myenv/bin/emacsclient
+ln -s ~/miniforge3/envs/myenv/bin/emacs
+ln -s ~/miniforge3/envs/myenv/bin/emacsclient
 #+end_example
 Download a PNG version of the Emacs icon and save it to
 =~/.local/bin/share/icons/emacs.png= (rename as desired).
@@ -243,7 +244,7 @@ Version=1.0
 Name=Emacs
 GenericName=Text Editor
 Comment=View and edit files
-Exec=/home/USERNAME/miniconda3/envs/myenv/bin/emacs %F
+Exec=/home/USERNAME/miniforge3/envs/myenv/bin/emacs %F
 Type=Application
 Terminal=false
 Categories=Utility;Development;TextEditor;
@@ -322,7 +323,7 @@ conda activate myenv
 conda install pandoc
 conda deactivate
 mkdir -p ~/.local/bin && cd ~/.local/bin
-ln -s ~/miniconda3/envs/myenv/bin/pandoc
+ln -s ~/miniforge3/envs/myenv/bin/pandoc
 #+end_example
 Alternatively, download an appropriate [[https://github.com/jgm/pandoc/releases][release binary]] and put it in
 one of the ~$PATH~ directories.
@@ -333,7 +334,7 @@ conda activate myenv
 conda install shellcheck
 conda deactivate
 cd ~/.local/bin
-ln -s ~/miniconda3/envs/myenv/bin/shellcheck
+ln -s ~/miniforge3/envs/myenv/bin/shellcheck
 #+end_example
 * Install fonts
 Create the user fonts directory.
@@ -382,7 +383,7 @@ in the ~Exec~ and ~Icon~ entries as needed.
 #+begin_example
 [Desktop Entry]
 Name=Org-Protocol
-Exec=/home/USERNAME/miniconda3/envs/myenv/bin/emacsclient %u
+Exec=/home/USERNAME/miniforge3/envs/myenv/bin/emacsclient %u
 Type=Application
 Terminal=false
 MimeType=x-scheme-handler/org-protocol;
@@ -610,7 +611,7 @@ conda activate base
 conda update -c defaults --all
 conda deactivate
 #+end_example
-*Note*: If using miniforge, just follow the /Current environment/ instructions.
+*Note*: If using miniforge, just follow the /Specific environments/ instructions.
 ** Specific environments (including base for miniforge)
 #+begin_example
 conda activate name-of-environment
