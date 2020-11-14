@@ -57,6 +57,9 @@ if has('title')
   set title
 endif " }}}2
 
+" Don't reuse netrw buffers
+let g:netrw_fastbrowse = 0
+
 " Disable Python 2 support
 let g:loaded_python_provider = 0
 
@@ -259,6 +262,7 @@ if exists('g:loaded_minpac')
   " }}}3
   " }}}2
   " 6. Other {{{2
+  call minpac#add('justinmk/vim-dirvish') " directory viewer, replaces netrw
   call minpac#add('tpope/vim-obsession') " continuously updated session files {{{3
   nnoremap <Leader>of :Obsession<Space>
   nnoremap <silent> <Leader>oo :Obsession<CR>
