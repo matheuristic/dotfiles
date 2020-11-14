@@ -43,6 +43,7 @@ set smarttab    " tabs inserts shiftwidth space
 "set swapfile    " use swapfiles, swapfile location is determined by 'directory'
 "set tabstop=8   " length of a real tab
 "set ttyfast     " smoother output
+set nowildmenu   " don't use enhanced command line completion
 set wildmode=list:longest,full " command-line tab completion options
 "set nowrap      " do not wrap text
 

@@ -4,8 +4,13 @@
 " Section: Options {{{1
 " ---------------------
 
+if &compatible
+  set nocompatible
+endif
+
 "set backup      " keep backups, usually better to use version control
 "set backupdir=~/.nvimfiles/backup//,.,~/tmp/,~/ " backup file folders, appending // uses the full path in the name
+set completeopt=longest,menuone,preview " triggering autocompletion menu only inserts the longest common text of all matches
 set directory=~/.nvimfiles/swap//,.,~/tmp,/var/tmp,/tmp " swapfile folders, appending // uses the full path in the name
 set expandtab   " expand tabs into spaces; use <C-v><Tab> for a real tab
 set hidden      " hide abandoned buffers instead of unloading them
@@ -13,6 +18,8 @@ set hidden      " hide abandoned buffers instead of unloading them
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,nbsp:. " chars for displaying whitespace when 'list' is set
 set nojoinspaces " do not insert two spaces after '.', '?' and '!' on line joins
 set swapfile    " use swapfiles
+set wildmenu    " use enhanced command line completion
+set wildmode=longest:full,full " command-line tab completion options, see https://github.com/neovim/neovim/issues/10771#issuecomment-521210434
 
 " Use ripgrep if available {{{2
 if executable('rg')
@@ -50,12 +57,20 @@ if has('title')
   set title
 endif " }}}2
 
+" Disable Python 2 support
+let g:loaded_python_provider = 0
+
 " }}}1
 " Section: Basic Keymappings {{{1
 " -------------------------
 
 " Remap <Leader> from '\' to <Space> {{{2
 let mapleader=' ' " }}}2
+
+" Remap jk and kj to <ESC> {{{2
+inoremap jk <ESC>
+inoremap kj <ESC>
+" }}}2
 
 " Buffer manipulation and navigation {{{2
 nnoremap <silent> <Leader>bl :buffers<CR>
@@ -153,9 +168,18 @@ nnoremap <silent> <Leader>Sm :set modeline! modeline?<CR>
 " To delete unneeded packages, run in Neovim:
 "   :call minpac#clean()
 
+" Many packages also use Neovim's Python3 integration, so be sure
+" to install the pynvim PyPI package either using pip:
+"   $ pip install pynvim
+" or in a conda environment (run Neovim from this environment):
+"   $ conda activate someenv
+"   $ conda install pynvim
+" To verify that Python3 integration is enabled:
+"   :echo has("python3")
+
 packadd minpac
 
-if exists('*minpac#init')
+if exists('g:loaded_minpac')
   " Initialize minpac
   call minpac#init()
 
@@ -163,30 +187,22 @@ if exists('*minpac#init')
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
   " 1. Interface {{{2
-  call minpac#add('chriskempson/base16-vim', {'type': 'opt'}) " color scheme {{{3
-  colorscheme base16-grayscale-dark " }}}3
   call minpac#add('vim-airline/vim-airline') " status line {{{3
   call minpac#add('vim-airline/vim-airline-themes') " status line themes
   let g:airline_theme='base16_grayscale' " }}}3
-  call minpac#add('mhinz/vim-startify') " fancy start screen {{{3
-  if has('autocmd')
-    augroup startify " run startify on new tabs
-      autocmd!
-      autocmd TabNewEntered * if bufname('%') == '' | Startify | endif
-    augroup END
-  endif " }}}3
   call minpac#add('Yggdroot/indentLine') " visually display indent levels {{{3
   let g:indentLine_char='▏' " modify indent char
   nnoremap <silent> <Leader>il :IndentLinesToggle<CR>
   " }}}3
   call minpac#add('liuchengxu/vim-which-key') " display available keybindings in a popup {{{3
   nnoremap <silent> <Leader> :<c-u>WhichKey '<Leader>'<CR>
+  " }}}3
   " }}}2
   " 2. Editing {{{2
   call minpac#add('mbbill/undotree') " undo history visualizer {{{3
   nnoremap <silent> <Leader>u :UndotreeToggle<CR>
   " }}}3
-  call minpac#add('terryma/vim-multiple-cursors') " multiple selection like Sublime Text
+  call minpac#add('mg979/vim-visual-multi') " multiple selection like Sublime Text
   call minpac#add('tpope/vim-abolish') " search, substitute and abbreviate word variants
   call minpac#add('tpope/vim-commentary') " toggle commenting of lines
   call minpac#add('tpope/vim-surround') " mappings to manipulate parentheses, brackets and quotes
@@ -214,12 +230,12 @@ if exists('*minpac#init')
   " }}}3
   " }}}2
   " 4. Snippets {{{2
-  call minpac#add('SirVer/ultisnips') " snippet manager, requires Python pynvim package be installed
+  call minpac#add('SirVer/ultisnips') " snippet manager, needs Vim compiled with +python3 feature
   call minpac#add('honza/vim-snippets') " default snippets
-  let g:UltiSnipsExpandTrigger="<NUL>" " disable expand trigger
+  let g:UltiSnipsExpandTrigger="<tab>" " expand snippet
   let g:UltiSnipsListTriggers="<c-tab>" " choose expansion from completing snippet list
-  let g:UltiSnipsJumpForwardTrigger="<tab>" " jump to next placeholder in snippet
-  let g:UltiSnipsJumpBackwardTrigger="<s-tab>" " jump to prev placeholder in snippet
+  let g:UltiSnipsJumpForwardTrigger="<c-j>" " jump to next placeholder in snippet
+  let g:UltiSnipsJumpBackwardTrigger="<c-k>" " jump to prev placeholder in snippet
   " }}}2
   " 5. Version control {{{2
   call minpac#add('tpope/vim-fugitive') " Git wrapper {{{3
@@ -250,6 +266,7 @@ if exists('*minpac#init')
   " }}}3
   call minpac#add('tpope/vim-projectionist') " project-specific configuration
   call minpac#add('tpope/vim-sleuth') " auto-adjust 'shiftwidth' and 'expandtab'
+  call minpac#add('tpope/vim-vinegar') " extend netrw capabilities
   " }}}2
 endif
 
