@@ -381,6 +381,9 @@ nnoremap <silent> <Leader>L :set list! list?<CR>
 " Toggle modeline (reload file with :e to effect change) {{{2
 nnoremap <silent> <Leader>Sm :set modeline! modeline?<CR>
 " }}}2
+" Toggle line numbers {{{2
+nnoremap <silent> <Leader>n :set number! number?<CR>
+" }}}2
 " Toggle commenting using gc[c|motion] like in vim-commentary {{{2
 if has('eval')
   nnoremap gcc :<c-u>.,.+<c-r>=v:count<CR>call <SID>toggleComment()<CR>

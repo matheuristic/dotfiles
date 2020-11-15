@@ -158,6 +158,9 @@ nnoremap <silent> <Leader>L :set list! list?<CR>
 " Toggle modeline (reload file with :e to effect change) {{{2
 nnoremap <silent> <Leader>Sm :set modeline! modeline?<CR>
 " }}}2
+" Toggle line numbers {{{2
+nnoremap <silent> <Leader>n :set number! number?<CR>
+" }}}2
 
 " }}}1
 " Section: Packages {{{1
@@ -191,11 +194,12 @@ if exists('g:loaded_minpac')
 
   " 1. Interface {{{2
   call minpac#add('robertmeta/nofrils') " buffer colorscheme {{{3
+  let g:nofrils_heavycomments=0 " low contrast comments
+  let g:nofrils_heavylinenumbers=0 " low contrast line numbers
   let g:nofrils_strbackgrounds=1 " highlight string backgrounds
-  let g:nofrils_heavycomments=1 " high contrast comments
-  nnoremap <silent> <Leader>C1 :NofrilsFocusNormal<CR>
-  nnoremap <silent> <Leader>C2 :NofrilsFocusCode<CR>
-  nnoremap <silent> <Leader>C3 :NofrilsFocusComments<CR>
+  nnoremap <silent> <Leader>C1 :let g:nofrils_heavycomments=!g:nofrils_heavycomments<CR>:NofrilsDark<CR>:echo "g:nofrils_heavycomments=" . string(g:nofrils_heavycomments)<CR>
+  nnoremap <silent> <Leader>C2 :let g:nofrils_heavylinenumbers=!g:nofrils_heavylinenumbers<CR>:NofrilsDark<CR>:echo "g:nofrils_heavylinenumbers=" . string(g:nofrils_heavylinenumbers)<CR>
+  nnoremap <silent> <Leader>C3 :let g:nofrils_strbackgrounds=!g:nofrils_strbackgrounds<CR>:NofrilsDark<CR>:echo "g:nofrils_strbackgrounds=" . string(g:nofrils_strbackgrounds)<CR>
   silent! colorscheme nofrils-dark
   " }}}3
   call minpac#add('vim-airline/vim-airline') " status line {{{3
