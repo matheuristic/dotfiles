@@ -283,7 +283,6 @@ if exists('g:loaded_minpac')
   " }}}3
   call minpac#add('tpope/vim-projectionist') " project-specific configuration
   call minpac#add('tpope/vim-sleuth') " auto-adjust 'shiftwidth' and 'expandtab'
-  call minpac#add('tpope/vim-vinegar') " extend netrw capabilities
   " }}}2
 endif
 
