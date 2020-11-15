@@ -171,7 +171,7 @@ nnoremap <silent> <Leader>Sm :set modeline! modeline?<CR>
 " To delete unneeded packages, run in Neovim:
 "   :call minpac#clean()
 
-" Many packages also use Neovim's Python3 integration, so be sure
+" Many packages also use Neovim's Python3 integration, so it may be necessary
 " to install the pynvim PyPI package either using pip:
 "   $ pip install pynvim
 " or in a conda environment (run Neovim from this environment):
@@ -233,12 +233,10 @@ if exists('g:loaded_minpac')
   " }}}3
   " }}}2
   " 4. Snippets {{{2
-  call minpac#add('SirVer/ultisnips') " snippet manager, needs Vim compiled with +python3 feature
+  call minpac#add('tomtom/tlib_vim') " dependency for vim-snipmate
+  call minpac#add('MarcWeber/vim-addon-mw-utils') " dependency for vim-snipmate
+  call minpac#add('garbas/vim-snipmate') " snippet manager
   call minpac#add('honza/vim-snippets') " default snippets
-  let g:UltiSnipsExpandTrigger="<tab>" " expand snippet
-  let g:UltiSnipsListTriggers="<c-tab>" " choose expansion from completing snippet list
-  let g:UltiSnipsJumpForwardTrigger="<c-j>" " jump to next placeholder in snippet
-  let g:UltiSnipsJumpBackwardTrigger="<c-k>" " jump to prev placeholder in snippet
   " }}}2
   " 5. Version control {{{2
   call minpac#add('tpope/vim-fugitive') " Git wrapper {{{3
