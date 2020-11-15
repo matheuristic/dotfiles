@@ -190,10 +190,21 @@ if exists('g:loaded_minpac')
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
   " 1. Interface {{{2
+  call minpac#add('robertmeta/nofrils') " buffer colorscheme {{{3
+  let g:nofrils_strbackgrounds=1 " highlight string backgrounds
+  let g:nofrils_heavycomments=1 " high contrast comments
+  nnoremap <silent> <Leader>C1 :NofrilsFocusNormal<CR>
+  nnoremap <silent> <Leader>C2 :NofrilsFocusCode<CR>
+  nnoremap <silent> <Leader>C3 :NofrilsFocusComments<CR>
+  silent! colorscheme nofrils-dark
+  " }}}3
   call minpac#add('vim-airline/vim-airline') " status line {{{3
   call minpac#add('vim-airline/vim-airline-themes') " status line themes
-  let g:airline_theme='base16_grayscale' " }}}3
+  let g:airline_theme='minimalist' " minimal airline theme
+  set noshowmode " don't show --INSERT-- or --VISUAL-- in the command line
+  " }}}3
   call minpac#add('Yggdroot/indentLine') " visually display indent levels {{{3
+  let g:indentLine_enabled=0 " don't enable by default, enable manually
   let g:indentLine_char='▏' " modify indent char
   nnoremap <silent> <Leader>il :IndentLinesToggle<CR>
   " }}}3
