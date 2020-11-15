@@ -70,12 +70,7 @@ let g:loaded_python_provider = 0
 " Remap <Leader> from '\' to <Space> {{{2
 let mapleader=' ' " }}}2
 
-" Remap jk and kj to <ESC> {{{2
-inoremap jk <ESC>
-inoremap kj <ESC>
-" }}}2
-
-" Buffer manipulation and navigation {{{2
+" Buffer manipulation and navigation ('b') {{{2
 nnoremap <silent> <Leader>bl :buffers<CR>
 nnoremap <silent> <Leader>bd :bdelete<CR>
 nnoremap <silent> <Leader>bn :bnext<CR>
@@ -84,7 +79,8 @@ nnoremap <Leader>bg :buffer!<Space>
 nnoremap <Leader>bad :badd<Space>
 nnoremap <silent> <Leader>bal :ball<CR>
 " }}}2
-" Tab and window manipulation and navigation {{{2
+
+" Tab and window manipulation and navigation ('t' and 'w') {{{2
 if has('windows')
   " Tab commands
   nnoremap <silent> <Leader>tl :tabs<CR>
@@ -114,7 +110,8 @@ if has('windows')
         \ . max(map(range(1, line('$')), "virtcol([v:val, '$'])-1"))<CR>
 endif
 " }}}2
-" Quickfix error and location window manipulation {{{2
+
+" Quickfix error and location window manipulation ('q') {{{2
 if has('quickfix')
   nnoremap <silent> <Leader>qco :copen<CR>
   nnoremap <silent> <Leader>qcc :cclose<CR>
@@ -122,44 +119,51 @@ if has('quickfix')
   nnoremap <silent> <Leader>qlc :lclose<CR>
 endif
 " }}}2
-" Unhighlight search results (from https://github.com/tpope/vim-sensible) {{{2
+
+" Settings ('s') {{{2
+" Toggle folding {{{3
+if has('folding')
+  nnoremap <silent> <Leader>sf :set foldenable! foldenable?<CR>
+endif
+" }}}3
+" Toggle highlighting of listchars {{{3
+nnoremap <silent> <Leader>sl :set list! list?<CR>
+" }}}3
+" Toggle modeline (reload file with :e to effect change) {{{3
+nnoremap <silent> <Leader>sm :set modeline! modeline?<CR>
+" }}}3
+" Toggle line numbers {{{3
+nnoremap <silent> <Leader>sn :set number! number?<CR>
+" }}}3
+" Toggle paste mode {{{3
+nnoremap <silent> <Leader>sp :set paste! paste?<CR>
+" }}}3
+" Toggle spell check {{{3
+if has('syntax')
+  nnoremap <silent> <Leader>ss :set spell! spell?<CR>
+endif
+" }}}3
+" Toggle wrapping of lines {{{3
+nnoremap <silent> <Leader>sw :set wrap! wrap?<CR>
+" }}}3
+" Toggle syntax highlighting {{{3
+if has('syntax')
+  nnoremap <silent> <Leader>sy :if exists('g:syntax_on') <Bar> syntax off <Bar>
+        \ else <Bar> syntax enable <Bar> endif <CR>
+        \:redraw<CR>
+        \:echo "syntax enabled=" . string(exists("g:syntax_on"))<CR>
+endif
+" }}}2
+
+" Other {{{2
+" Change directory to current file's {{{3
+nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
+" }}}3
+" Unhighlight search results (from https://github.com/tpope/vim-sensible) {{{3
 if has('extra_search')
   nnoremap <silent> <Leader>l :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR>
 endif
-" }}}2
-" Change directory to current file's {{{2
-nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
-" }}}2
-" Toggle folding {{{2
-if has('folding')
-  nnoremap <silent> <Leader>F :set foldenable! foldenable?<CR>
-endif
-" }}}2
-" Toggle spell check {{{2
-if has('syntax')
-  nnoremap <silent> <Leader>Sp :set spell! spell?<CR>
-endif
-" }}}2
-" Toggle wrapping of lines {{{2
-nnoremap <silent> <Leader>W :set wrap! wrap?<CR>
-" }}}2
-" Toggle paste mode {{{2
-nnoremap <silent> <Leader>P :set paste! paste?<CR>
-" }}}2
-" Toggle syntax highlighting {{{2
-if has('syntax')
-  nnoremap <silent> <Leader>Ss :if exists('g:syntax_on') <Bar> syntax off <Bar>
-        \ else <Bar> syntax enable <Bar> endif <CR>
-endif
-" }}}2
-" Toggle highlighting of listchars {{{2
-nnoremap <silent> <Leader>L :set list! list?<CR>
-" }}}2
-" Toggle modeline (reload file with :e to effect change) {{{2
-nnoremap <silent> <Leader>Sm :set modeline! modeline?<CR>
-" }}}2
-" Toggle line numbers {{{2
-nnoremap <silent> <Leader>n :set number! number?<CR>
+" }}}3
 " }}}2
 
 " }}}1
