@@ -1,6 +1,10 @@
 " ~/.config/nvim/init.vim.local - Sample machine-local config file for Nvim
 " Author: matheuristic
 
+" Settings {{{1
+"set notermguicolors " uncomment to disable 24-bit RGB color for terminals that are not ISO-8613-3 compatible
+" }}}1
+
 " Plugins {{{1
 if exists('g:loaded_minpac')
   call minpac#add('Vimjas/vim-python-pep8-indent') " nicer Python indentation

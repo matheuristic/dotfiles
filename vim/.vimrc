@@ -280,6 +280,11 @@ endif
 " Section: Keymappings {{{1
 " -------------------------
 
+" Remap jk and kj to <ESC> {{{2
+inoremap jk <ESC>
+inoremap kj <ESC>
+" }}}2
+
 " Remap <Leader> from '\' to <Space> {{{2
 let mapleader=' ' " }}}2
 
