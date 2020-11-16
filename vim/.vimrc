@@ -321,10 +321,54 @@ if has('windows')
   nnoremap <Leader>tg :tabnext<Space>
   nnoremap <Leader>td :tabdo<Space>
   " Window commands
+  " Tab commands
+  nnoremap <silent> <Leader>tl :tabs<CR>
+  nnoremap <silent> <Leader>te :tabedit<CR>
+  nnoremap <silent> <Leader>tc :tabclose<CR>
+  nnoremap <silent> <Leader>tn :tabnext<CR>
+  nnoremap <silent> <Leader>tp :tabprevious<CR>
+  nnoremap <silent> <Leader>t0 :tabfirst<CR>
+  nnoremap <silent> <Leader>t1 :tabnext 1<CR>
+  nnoremap <silent> <Leader>t2 :tabnext 2<CR>
+  nnoremap <silent> <Leader>t3 :tabnext 3<CR>
+  nnoremap <silent> <Leader>t4 :tabnext 4<CR>
+  nnoremap <silent> <Leader>t5 :tabnext 5<CR>
+  nnoremap <silent> <Leader>t6 :tabnext 6<CR>
+  nnoremap <silent> <Leader>t7 :tabnext 7<CR>
+  nnoremap <silent> <Leader>t8 :tabnext 8<CR>
+  nnoremap <silent> <Leader>t9 :tabnext 9<CR>
+  nnoremap <silent> <Leader>t$ :tablast<CR>
+  nnoremap <Leader>tm :tabmove<Space>
+  nnoremap <Leader>tg :tabnext<Space>
+  nnoremap <Leader>td :tabdo<Space>
+  " Window commands
+  nnoremap <silent> <Leader>ws :split<CR>
+  nnoremap <silent> <Leader>wv :vsplit<CR>
+  nnoremap <silent> <Leader>wc :close<CR>
+  nnoremap <silent> <Leader>wo :only<CR>
+  nnoremap <silent> <Leader>wh <C-w>h
+  nnoremap <silent> <Leader>wj <C-w>j
+  nnoremap <silent> <Leader>wk <C-w>k
+  nnoremap <silent> <Leader>wl <C-w>l
+  nnoremap <silent> <Leader>ww <C-w>w
+  nnoremap <silent> <Leader>wr <C-w>r
+  nnoremap <silent> <Leader>wR <C-w>R
+  nnoremap <silent> <Leader>wx <C-w>x
+  nnoremap <silent> <Leader>wT <C-w>T
+  nnoremap <silent> <Leader>wH <C-w>H
+  nnoremap <silent> <Leader>wJ <C-w>J
+  nnoremap <silent> <Leader>wK <C-w>K
+  nnoremap <silent> <Leader>wL <C-w>L
+  nnoremap <silent> <Leader>w+ <C-w>+
+  nnoremap <silent> <Leader>w- <C-w>-
+  nnoremap <silent> <Leader>w< <C-w><
+  nnoremap <silent> <Leader>w> <C-w>>
+  nnoremap <silent> <Leader>w= <C-w>=
   " Resize window height to fit number of lines of buffer
-  nnoremap <silent> <Leader>wr :execute ":resize " . line('$')<CR>
+  nnoremap <silent> <Leader>wf :execute ":resize " . line('$')<CR>
   " Resize window width to fit max line width of buffer
-  nnoremap <silent> <Leader>wR :execute ":vertical resize " . max(map(range(1, line('$')), "virtcol([v:val, '$'])-1"))<CR>
+  nnoremap <silent> <Leader>wF :execute ":vertical resize "
+        \ . max(map(range(1, line('$')), "virtcol([v:val, '$'])-1"))<CR>
 endif
 " }}}2
 
