@@ -231,10 +231,24 @@ if exists('g:loaded_minpac')
   let g:nofrils_heavycomments=0 " low contrast comments
   let g:nofrils_heavylinenumbers=0 " low contrast line numbers
   let g:nofrils_strbackgrounds=1 " highlight string backgrounds
-  nnoremap <silent> <Leader>C1 :let g:nofrils_heavycomments=!g:nofrils_heavycomments<CR>:NofrilsDark<CR>:echo "g:nofrils_heavycomments=" . string(g:nofrils_heavycomments)<CR>
-  nnoremap <silent> <Leader>C2 :let g:nofrils_heavylinenumbers=!g:nofrils_heavylinenumbers<CR>:NofrilsDark<CR>:echo "g:nofrils_heavylinenumbers=" . string(g:nofrils_heavylinenumbers)<CR>
-  nnoremap <silent> <Leader>C3 :let g:nofrils_strbackgrounds=!g:nofrils_strbackgrounds<CR>:NofrilsDark<CR>:echo "g:nofrils_strbackgrounds=" . string(g:nofrils_strbackgrounds)<CR>
-  silent! colorscheme nofrils-dark
+  let g:my_nofrils_use_dark=1 " 0=use light theme, 1=use dark theme
+  if g:my_nofrils_use_dark
+    silent! colorscheme nofrils-dark
+  else
+    silent! colorscheme nofrils-light
+  endif
+  function! s:setNofrilsColorscheme()
+    if g:my_nofrils_use_dark
+      execute "NofrilsDark"
+    else
+      execute "NofrilsLight"
+    endif
+  endfunction
+  nnoremap <silent> <Leader>CC :let g:my_nofrils_use_dark=!g:my_nofrils_use_dark<CR>:call <SID>setNofrilsColorscheme()<CR>:echo "g:my_nofrils_use_dark=" . string(g:my_nofrils_use_dark)<CR>
+  nnoremap <silent> <Leader>C1 :let g:nofrils_heavycomments=!g:nofrils_heavycomments<CR>:call <SID>setNofrilsColorscheme()<CR>:echo "g:nofrils_heavycomments=" . string(g:nofrils_heavycomments)<CR>
+  nnoremap <silent> <Leader>C2 :let g:nofrils_heavylinenumbers=!g:nofrils_heavylinenumbers<CR>:call <SID>setNofrilsColorscheme()<CR>:echo "g:nofrils_heavylinenumbers=" . string(g:nofrils_heavylinenumbers)<CR>
+  nnoremap <silent> <Leader>C3 :let g:nofrils_strbackgrounds=!g:nofrils_strbackgrounds<CR>:call <SID>setNofrilsColorscheme()<CR>:echo "g:nofrils_strbackgrounds=" . string(g:nofrils_strbackgrounds)<CR>
+  silent! call <SID>setNofrilsColorscheme()
   " }}}3
   call minpac#add('vim-airline/vim-airline') " status line {{{3
   call minpac#add('vim-airline/vim-airline-themes') " status line themes
