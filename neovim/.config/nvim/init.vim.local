@@ -52,12 +52,14 @@ if exists('g:loaded_minpac')
   nnoremap <silent> <Leader>a/ :ALESymbolSearch<Space>
   nnoremap <silent> <Leader>ai :ALEImport<CR>
   nnoremap <silent> <Leader>aI :ALEOrganizeImports<CR>
-  nnoremap <silent> <Leader>ar :ALERename<CR>
+  nnoremap <silent> <Leader>aR :ALERename<CR>
   nnoremap <silent> <Leader>ac :ALECodeAction<CR>
   nnoremap <silent> <Leader>a. :ALEGoToDefinition<CR>
   nnoremap <silent> <Leader>at :ALEGoToTypeDefinition<CR>
-  nnoremap <silent> <Leader>af :ALEFindReferences<CR>
+  nnoremap <silent> <Leader>ar :ALEFindReferences<CR>
   nnoremap <silent> <Leader>ad :ALEDocumentation<CR>
+  nnoremap <silent> <Leader>af :ALEFix<CR>
+  nnoremap <silent> <Leader>aF :ALEFixSuggest<CR>
   inoremap <silent> <C-Space> <C-\><C-O>:ALEComplete<CR>
   " }}}2
 endif
