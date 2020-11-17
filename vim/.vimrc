@@ -25,7 +25,7 @@ set formatoptions+=j " delete comment leader when joining comment lines
 set formatoptions+=mM " correctly break multibyte characters like CJK ones
 "set gdefault    " substitute all matches in a string by default
 set hidden      " hide buffers instead of unloading them, which allows unsaved buffers to be pushed to the background
-"set ignorecase  " make searches case-insensitive
+"set ignorecase  " make searches case-insensitive, force case-insensitive or case-sensitive with \c or \C in search string
 set nojoinspaces " do not insert two spaces after '.', '?' and '!' on line joins
 set laststatus=2 " always show status line, even when editing just one file
 set lazyredraw  " don't redraw screen when executing macros and registers
@@ -395,6 +395,9 @@ endif
 " }}}2
 
 " Settings ('s') {{{2
+" Toggle default case-sensitivity of search {{{3
+nnoremap <silent> <Leader>sc :set ignorecase! ignorecase?<CR>
+" }}}3
 " Toggle folding {{{3
 if has('folding')
   nnoremap <silent> <Leader>sf :set foldenable! foldenable?<CR>

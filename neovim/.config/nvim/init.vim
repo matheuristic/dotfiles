@@ -148,6 +148,9 @@ endif
 " }}}2
 
 " Settings ('s') {{{2
+" Toggle default case-sensitivity of search {{{3
+nnoremap <silent> <Leader>sc :set ignorecase! ignorecase?<CR>
+" }}}3
 " Toggle folding {{{3
 if has('folding')
   nnoremap <silent> <Leader>sf :set foldenable! foldenable?<CR>
