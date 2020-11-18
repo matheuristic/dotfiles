@@ -237,31 +237,20 @@ if exists('g:loaded_minpac')
   let g:nofrils_heavylinenumbers = 0 " low contrast line numbers
   let g:nofrils_strbackgrounds = 1 " highlight string backgrounds
   let g:my_nofrils_colorscheme = 2 " 0=acme, 1=dark, 2=light, 3=sepia
-  if g:my_nofrils_colorscheme == 0
-    silent! colorscheme nofrils-acme
-  elseif g:my_nofrils_colorscheme == 1
-    silent! colorscheme nofrils-dark
-  elseif g:my_nofrils_colorscheme == 2
-    silent! colorscheme nofrils-light
-  elseif g:my_nofrils_colorscheme == 3
-    silent! colorscheme nofrils-sepia
-  else
-    echoerr "g:my_nofrils_colorscheme should take value from {0,1,2,3}"
-  endif
-  function! s:setNofrilsColorscheme(echo_name)
+  function! s:setNofrilsColorscheme(echo_colorname)
     if g:my_nofrils_colorscheme == 0
-      let colorname = "NofrilsAcme"
+      let colorname = "nofrils-acme"
     elseif g:my_nofrils_colorscheme == 1
-      let colorname = "NofrilsDark"
+      let colorname = "nofrils-dark"
     elseif g:my_nofrils_colorscheme == 2
-      let colorname = "NofrilsLight"
+      let colorname = "nofrils-light"
     elseif g:my_nofrils_colorscheme == 3
-      let colorname = "NofrilsSepia"
+      let colorname = "nofrils-sepia"
     else
       echoerr "g:my_nofrils_colorscheme should take value from {0,1,2,3}"
     endif
-    execute colorname
-    if a:echo_name
+    execute "colorscheme " . colorname
+    if a:echo_colorname
       echo colorname
     endif
   endfunction
@@ -272,14 +261,14 @@ if exists('g:loaded_minpac')
       let incr = 1
     endif
     let g:my_nofrils_colorscheme = (g:my_nofrils_colorscheme + incr) % 4
-    call s:setNofrilsColorscheme(1)
+    call s:setNofrilsColorscheme(v:true)
   endfunction
   nnoremap <silent> <Leader>sCr :call <SID>rotateNofrilsColorscheme(0)<CR>
   nnoremap <silent> <Leader>sCR :call <SID>rotateNofrilsColorscheme(1)<CR>
-  nnoremap <silent> <Leader>sC1 :let g:nofrils_heavycomments=!g:nofrils_heavycomments<CR>:call <SID>setNofrilsColorscheme(0)<CR>:echo "g:nofrils_heavycomments=" . string(g:nofrils_heavycomments)<CR>
-  nnoremap <silent> <Leader>sC2 :let g:nofrils_heavylinenumbers=!g:nofrils_heavylinenumbers<CR>:call <SID>setNofrilsColorscheme(0)<CR>:echo "g:nofrils_heavylinenumbers=" . string(g:nofrils_heavylinenumbers)<CR>
-  nnoremap <silent> <Leader>sC3 :let g:nofrils_strbackgrounds=!g:nofrils_strbackgrounds<CR>:call <SID>setNofrilsColorscheme(0)<CR>:echo "g:nofrils_strbackgrounds=" . string(g:nofrils_strbackgrounds)<CR>
-  silent! call <SID>setNofrilsColorscheme(0)
+  nnoremap <silent> <Leader>sC1 :let g:nofrils_heavycomments=!g:nofrils_heavycomments<CR>:NofrilsFocusNormal<CR>:echo "g:nofrils_heavycomments=" . string(g:nofrils_heavycomments)<CR>
+  nnoremap <silent> <Leader>sC2 :let g:nofrils_heavylinenumbers=!g:nofrils_heavylinenumbers<CR>:NofrilsFocusNormal<CR>:echo "g:nofrils_heavylinenumbers=" . string(g:nofrils_heavylinenumbers)<CR>
+  nnoremap <silent> <Leader>sC3 :let g:nofrils_strbackgrounds=!g:nofrils_strbackgrounds<CR>:NofrilsFocusNormal<CR>:echo "g:nofrils_strbackgrounds=" . string(g:nofrils_strbackgrounds)<CR>
+  silent! call <SID>setNofrilsColorscheme(v:false)
   " }}}3
   call minpac#add('vim-airline/vim-airline') " status line {{{3
   call minpac#add('vim-airline/vim-airline-themes') " status line themes
@@ -327,9 +316,12 @@ if exists('g:loaded_minpac')
   " }}}3
   " }}}2
   " 4. Snippets {{{2
-  call minpac#add('tomtom/tlib_vim') " dependency for vim-snipmate
-  call minpac#add('MarcWeber/vim-addon-mw-utils') " dependency for vim-snipmate
-  call minpac#add('garbas/vim-snipmate') " snippet manager
+  call minpac#add('SirVer/ultisnips') " snippet manager {{{3
+  let g:UltiSnipsExpandTrigger = "<tab>"
+  let g:UltiSnipsListSnippets = "<c-tab>"
+  let g:UltiSnipsJumpForwardTrigger = "<c-j>"
+  let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
+  " }}}3
   call minpac#add('honza/vim-snippets') " default snippets
   " }}}2
   " 5. Version control {{{2
