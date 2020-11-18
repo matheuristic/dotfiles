@@ -273,6 +273,17 @@ if has('eval')
       call setline(lnum, substitute(getline(lnum), pattern, replace, ''))
     endfor
   endfunction
+
+  if has('syntax')
+    function! s:toggleSyntaxHighlighting()
+      if exists('g:syntax_on')
+        execute "syntax off"
+      else
+        execute "syntax enable"
+      endif
+      echo "syntax enabled=" . string(exists("g:syntax_on"))
+    endfunction
+  endif
 endif
 " }}}2
 
@@ -425,10 +436,7 @@ nnoremap <silent> <Leader>sw :set wrap! wrap?<CR>
 " }}}3
 " Toggle syntax highlighting {{{3
 if has('syntax')
-  nnoremap <silent> <Leader>sy :if exists('g:syntax_on') <Bar> syntax off <Bar>
-        \ else <Bar> syntax enable <Bar> endif <CR>
-        \:redraw<CR>
-        \:echo "syntax enabled=" . string(exists("g:syntax_on"))<CR>
+  nnoremap <silent> <Leader>sy :call <SID>toggleSyntaxHighlighting()<CR>
 endif
 " }}}3
 " Toggle whether mouse is enabled {{{3

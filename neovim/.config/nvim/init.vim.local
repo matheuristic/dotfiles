@@ -7,24 +7,6 @@
 
 " Plugins {{{1
 if exists('g:loaded_minpac')
-  call minpac#add('Vimjas/vim-python-pep8-indent') " nicer Python indentation
-  call minpac#add('numirias/semshi', {'do': 'UpdateRemotePlugins'}) " semantic highlighting for Python {{{2
-  nnoremap <silent> <Leader>St :Semshi toggle<CR>
-  nnoremap <silent> <Leader>Sh :Semshi highlight<CR>
-  nnoremap <silent> <Leader>Sl :Semshi clear<CR>
-  nnoremap <silent> <Leader>SP :Semshi pause<CR>
-  nnoremap <silent> <Leader>Sr :Semshi rename<CR>
-  nnoremap <silent> <Leader>Se :Semshi error<CR>
-  nnoremap <silent> <Leader>Sge :Semshi goto error<CR>
-  nnoremap <silent> <Leader>Sgc :Semshi goto class next<CR>
-  nnoremap <silent> <Leader>SgC :Semshi goto class prev<CR>
-  nnoremap <silent> <Leader>Sgf :Semshi goto function next<CR>
-  nnoremap <silent> <Leader>SgF :Semshi goto function prev<CR>
-  nnoremap <silent> <Leader>Sgn :Semshi goto name next<CR>
-  nnoremap <silent> <Leader>SgN :Semshi goto name prev<CR>
-  nnoremap <silent> <Leader>Sgp :Semshi goto parameterUnused<CR>
-  nnoremap <silent> <Leader>Sgu :Semshi goto unresolved first<CR>
-  " }}}2
   call minpac#add('dense-analysis/ale') " linting engine and LSP client {{{2
   let g:ale_linters = {
         \ 'awk': ['gawk'],
@@ -60,7 +42,24 @@ if exists('g:loaded_minpac')
   nnoremap <silent> <Leader>ad :ALEDocumentation<CR>
   nnoremap <silent> <Leader>af :ALEFix<CR>
   nnoremap <silent> <Leader>aF :ALEFixSuggest<CR>
-  inoremap <silent> <C-Space> <C-\><C-O>:ALEComplete<CR>
   " }}}2
+  call minpac#add('numirias/semshi', {'do': 'UpdateRemotePlugins'}) " semantic highlighting for Python {{{2
+  nnoremap <silent> <Leader>St :Semshi toggle<CR>
+  nnoremap <silent> <Leader>Sh :Semshi highlight<CR>
+  nnoremap <silent> <Leader>Sl :Semshi clear<CR>
+  nnoremap <silent> <Leader>SP :Semshi pause<CR>
+  nnoremap <silent> <Leader>Sr :Semshi rename<CR>
+  nnoremap <silent> <Leader>Se :Semshi error<CR>
+  nnoremap <silent> <Leader>Sge :Semshi goto error<CR>
+  nnoremap <silent> <Leader>Sgc :Semshi goto class next<CR>
+  nnoremap <silent> <Leader>SgC :Semshi goto class prev<CR>
+  nnoremap <silent> <Leader>Sgf :Semshi goto function next<CR>
+  nnoremap <silent> <Leader>SgF :Semshi goto function prev<CR>
+  nnoremap <silent> <Leader>Sgn :Semshi goto name next<CR>
+  nnoremap <silent> <Leader>SgN :Semshi goto name prev<CR>
+  nnoremap <silent> <Leader>Sgp :Semshi goto parameterUnused<CR>
+  nnoremap <silent> <Leader>Sgu :Semshi goto unresolved first<CR>
+  " }}}2
+  call minpac#add('Vimjas/vim-python-pep8-indent') " nicer Python indentation
 endif
 " }}}1

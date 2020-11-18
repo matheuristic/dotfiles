@@ -178,10 +178,15 @@ nnoremap <silent> <Leader>sw :set wrap! wrap?<CR>
 " }}}3
 " Toggle syntax highlighting {{{3
 if has('syntax')
-  nnoremap <silent> <Leader>sy :if exists('g:syntax_on') <Bar> syntax off <Bar>
-        \ else <Bar> syntax enable <Bar> endif <CR>
-        \:redraw<CR>
-        \:echo "syntax enabled=" . string(exists("g:syntax_on"))<CR>
+  function! s:toggleSyntaxHighlighting()
+    if exists('g:syntax_on')
+      execute "syntax off"
+    else
+      execute "syntax enable"
+    endif
+    echo "syntax enabled=" . string(exists("g:syntax_on"))
+  endfunction
+  nnoremap <silent> <Leader>sy :call <SID>toggleSyntaxHighlighting()<CR>
 endif
 " }}}2
 
@@ -228,27 +233,53 @@ if exists('g:loaded_minpac')
 
   " 1. Interface {{{2
   call minpac#add('robertmeta/nofrils') " buffer colorscheme {{{3
-  let g:nofrils_heavycomments=0 " low contrast comments
-  let g:nofrils_heavylinenumbers=0 " low contrast line numbers
-  let g:nofrils_strbackgrounds=1 " highlight string backgrounds
-  let g:my_nofrils_use_dark=1 " 0=use light theme, 1=use dark theme
-  if g:my_nofrils_use_dark
+  let g:nofrils_heavycomments = 0 " low contrast comments
+  let g:nofrils_heavylinenumbers = 0 " low contrast line numbers
+  let g:nofrils_strbackgrounds = 1 " highlight string backgrounds
+  let g:my_nofrils_colorscheme = 2 " 0=acme, 1=dark, 2=light, 3=sepia
+  if g:my_nofrils_colorscheme == 0
+    silent! colorscheme nofrils-acme
+  elseif g:my_nofrils_colorscheme == 1
     silent! colorscheme nofrils-dark
-  else
+  elseif g:my_nofrils_colorscheme == 2
     silent! colorscheme nofrils-light
+  elseif g:my_nofrils_colorscheme == 3
+    silent! colorscheme nofrils-sepia
+  else
+    echoerr "g:my_nofrils_colorscheme should take value from {0,1,2,3}"
   endif
-  function! s:setNofrilsColorscheme()
-    if g:my_nofrils_use_dark
-      execute "NofrilsDark"
+  function! s:setNofrilsColorscheme(echo_name)
+    if g:my_nofrils_colorscheme == 0
+      let colorname = "NofrilsAcme"
+    elseif g:my_nofrils_colorscheme == 1
+      let colorname = "NofrilsDark"
+    elseif g:my_nofrils_colorscheme == 2
+      let colorname = "NofrilsLight"
+    elseif g:my_nofrils_colorscheme == 3
+      let colorname = "NofrilsSepia"
     else
-      execute "NofrilsLight"
+      echoerr "g:my_nofrils_colorscheme should take value from {0,1,2,3}"
+    endif
+    execute colorname
+    if a:echo_name
+      echo colorname
     endif
   endfunction
-  nnoremap <silent> <Leader>CC :let g:my_nofrils_use_dark=!g:my_nofrils_use_dark<CR>:call <SID>setNofrilsColorscheme()<CR>:echo "g:my_nofrils_use_dark=" . string(g:my_nofrils_use_dark)<CR>
-  nnoremap <silent> <Leader>C1 :let g:nofrils_heavycomments=!g:nofrils_heavycomments<CR>:call <SID>setNofrilsColorscheme()<CR>:echo "g:nofrils_heavycomments=" . string(g:nofrils_heavycomments)<CR>
-  nnoremap <silent> <Leader>C2 :let g:nofrils_heavylinenumbers=!g:nofrils_heavylinenumbers<CR>:call <SID>setNofrilsColorscheme()<CR>:echo "g:nofrils_heavylinenumbers=" . string(g:nofrils_heavylinenumbers)<CR>
-  nnoremap <silent> <Leader>C3 :let g:nofrils_strbackgrounds=!g:nofrils_strbackgrounds<CR>:call <SID>setNofrilsColorscheme()<CR>:echo "g:nofrils_strbackgrounds=" . string(g:nofrils_strbackgrounds)<CR>
-  silent! call <SID>setNofrilsColorscheme()
+  function! s:rotateNofrilsColorscheme(reverse_direction)
+    if a:reverse_direction
+      let incr = 3 " equals to -1 modulo 4
+    else
+      let incr = 1
+    endif
+    let g:my_nofrils_colorscheme = (g:my_nofrils_colorscheme + incr) % 4
+    call s:setNofrilsColorscheme(1)
+  endfunction
+  nnoremap <silent> <Leader>sCr :call <SID>rotateNofrilsColorscheme(0)<CR>
+  nnoremap <silent> <Leader>sCR :call <SID>rotateNofrilsColorscheme(1)<CR>
+  nnoremap <silent> <Leader>sC1 :let g:nofrils_heavycomments=!g:nofrils_heavycomments<CR>:call <SID>setNofrilsColorscheme(0)<CR>:echo "g:nofrils_heavycomments=" . string(g:nofrils_heavycomments)<CR>
+  nnoremap <silent> <Leader>sC2 :let g:nofrils_heavylinenumbers=!g:nofrils_heavylinenumbers<CR>:call <SID>setNofrilsColorscheme(0)<CR>:echo "g:nofrils_heavylinenumbers=" . string(g:nofrils_heavylinenumbers)<CR>
+  nnoremap <silent> <Leader>sC3 :let g:nofrils_strbackgrounds=!g:nofrils_strbackgrounds<CR>:call <SID>setNofrilsColorscheme(0)<CR>:echo "g:nofrils_strbackgrounds=" . string(g:nofrils_strbackgrounds)<CR>
+  silent! call <SID>setNofrilsColorscheme(0)
   " }}}3
   call minpac#add('vim-airline/vim-airline') " status line {{{3
   call minpac#add('vim-airline/vim-airline-themes') " status line themes
