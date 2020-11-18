@@ -10,7 +10,7 @@ endif
 
 "set backup      " keep backups, usually better to use version control
 "set backupdir=~/.nvimfiles/backup//,.,~/tmp/,~/ " backup file folders, appending // uses the full path in the name
-set completeopt=longest,menuone,preview " triggering autocompletion menu only inserts the longest common text of all matches
+set completeopt=longest,menuone " triggering autocompletion menu only inserts the longest common text of all matches
 set directory=~/.nvimfiles/swap//,.,~/tmp,/var/tmp,/tmp " swapfile folders, appending // uses the full path in the name
 set expandtab   " expand tabs into spaces; use <C-v><Tab> for a real tab
 set hidden      " hide abandoned buffers instead of unloading them

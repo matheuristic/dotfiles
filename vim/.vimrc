@@ -78,7 +78,7 @@ endif
 " }}}2
 " Insert mode completion options (<C-n> and <C-p>) {{{2
 if has('insert_expand')
-  set completeopt=longest,menuone,preview
+  set completeopt=longest,menuone
 endif
 " }}}2
 " Visually indicate wrapped lines {{{2
