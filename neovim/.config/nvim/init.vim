@@ -63,6 +63,24 @@ let g:netrw_fastbrowse = 0
 " Disable Python 2 support
 let g:loaded_python_provider = 0
 
+" Use Solarized Light colors for the terminal emulator
+let g:terminal_color_0  = '#073642' " black          = base02
+let g:terminal_color_1  = '#dc322f' " red            = red
+let g:terminal_color_2  = '#859900' " green          = green
+let g:terminal_color_3  = '#b58900' " yellow         = yellow
+let g:terminal_color_4  = '#268bd2' " blue           = blue
+let g:terminal_color_5  = '#d33682' " magenta        = magenta
+let g:terminal_color_6  = '#2aa198' " cyan           = cyan
+let g:terminal_color_7  = '#eee8d5' " white          = base2
+let g:terminal_color_8  = '#002b36' " bright black   = base03
+let g:terminal_color_9  = '#cb4b16' " bright red     = orange
+let g:terminal_color_10 = '#586e75' " bright green   = base01
+let g:terminal_color_11 = '#657b83' " bright yellow  = base00
+let g:terminal_color_12 = '#839496' " bright blue    = base0
+let g:terminal_color_13 = '#6c71c4' " bright magenta = violet
+let g:terminal_color_14 = '#93a1a1' " bright cyan    = base1
+let g:terminal_color_15 = '#fdf6e3' " bright white   = base3
+
 " }}}1
 " Section: Basic Keymappings {{{1
 " -------------------------
@@ -198,6 +216,9 @@ nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
 if has('extra_search')
   nnoremap <silent> <Leader>l :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR>
 endif
+" }}}3
+" Terminal emulator {{{3
+nnoremap <silent> <Leader>T :terminal<CR>
 " }}}3
 " }}}2
 
