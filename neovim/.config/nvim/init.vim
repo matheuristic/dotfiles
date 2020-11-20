@@ -379,6 +379,38 @@ if exists('g:loaded_minpac')
 endif
 
 " }}}1
+" Section: Functions {{{1
+" -------------------------
+
+function! s:preventNestedNeovim()
+  if !empty($NVIM_LISTEN_ADDRESS) && $NVIM_LISTEN_ADDRESS !=# v:servername
+    let g:r=sockconnect('pipe', $NVIM_LISTEN_ADDRESS, {'rpc':v:true})
+    let g:f=fnameescape(expand('%:p'))
+    noautocmd bwipe
+    if empty(g:f)
+      call rpcrequest(g:r, "nvim_command", "enew ")
+    else
+      call rpcrequest(g:r, "nvim_command", "edit ".g:f)
+    endif
+    qall
+  endif
+endfunction
+
+" }}}1
+" Section: Autocommands {{{1
+" --------------------------
+
+if has('autocmd')
+  augroup prevent_nested_neovim
+    autocmd!
+    " when in a Neovim terminal, add a buffer to the existing session
+    " rather than nesting, adapted from
+    " https://gist.github.com/nelstrom/ced14300f689bf5ffafac592d3aa9373
+    autocmd VimEnter * call s:preventNestedNeovim()
+  augroup END
+endif
+
+" }}}1
 " Section: Local Vim Config {{{1
 " ------------------------------
 
