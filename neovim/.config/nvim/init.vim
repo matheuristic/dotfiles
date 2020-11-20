@@ -383,8 +383,18 @@ endif
 " -------------------------
 
 function! s:preventNestedNeovim()
-  if !empty($NVIM_LISTEN_ADDRESS) && $NVIM_LISTEN_ADDRESS !=# v:servername
-    let g:r=sockconnect('pipe', $NVIM_LISTEN_ADDRESS, {'rpc':v:true})
+  if !empty($NVIM) && $NVIM !=# v:servername
+    " Forward-compatible env var, planned for Neovim 0.6+
+    " See https://github.com/neovim/neovim/pull/11009
+    let nvim_parent_addr = $NVIM
+  elseif !empty($NVIM_LISTEN_ADDRESS) && $NVIM_LISTEN_ADDRESS !=# v:servername
+    " Backward-compatible env var
+    let nvim_parent_addr = $NVIM_LISTEN_ADDRESS
+  else
+    let nvim_parent_addr = v:null
+  endif
+  if !empty(nvim_parent_addr)
+    let g:r=sockconnect('pipe', nvim_parent_addr, {'rpc':v:true})
     let g:f=fnameescape(expand('%:p'))
     noautocmd bwipe
     if empty(g:f)
