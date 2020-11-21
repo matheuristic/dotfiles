@@ -4,9 +4,10 @@
 " Section: Options {{{1
 " ---------------------
 
-if &compatible
-  set nocompatible
-endif
+" Vi non-compatible mode, usually set automatically
+" if &compatible
+"   set nocompatible
+" endif
 
 "set backup      " keep backups, usually better to use version control
 "set backupdir=~/.nvimfiles/backup//,.,~/tmp/,~/ " backup file folders, appending // uses the full path in the name
@@ -296,11 +297,6 @@ if exists('g:loaded_minpac')
   let g:airline_theme='minimalist' " minimal airline theme
   set noshowmode " don't show --INSERT-- or --VISUAL-- in the command line
   " }}}3
-  call minpac#add('Yggdroot/indentLine') " visually display indent levels {{{3
-  let g:indentLine_enabled=0 " don't enable by default, enable manually
-  let g:indentLine_char='▏' " modify indent char
-  nnoremap <silent> <Leader>il :IndentLinesToggle<CR>
-  " }}}3
   call minpac#add('liuchengxu/vim-which-key') " display available keybindings in a popup {{{3
   nnoremap <silent> <Leader> :<c-u>WhichKey '<Leader>'<CR>
   " }}}3
@@ -366,7 +362,7 @@ if exists('g:loaded_minpac')
   nnoremap <silent> <Leader>gv :GV<CR>
   " }}}3
   " }}}2
-  " 6. Other {{{2
+  " 6. Other non-programming {{{2
   call minpac#add('justinmk/vim-dirvish') " directory viewer, replaces netrw
   call minpac#add('tpope/vim-obsession') " continuously updated session files {{{3
   nnoremap <Leader>of :Obsession<Space>
@@ -375,6 +371,80 @@ if exists('g:loaded_minpac')
   " }}}3
   call minpac#add('tpope/vim-projectionist') " project-specific configuration
   call minpac#add('tpope/vim-sleuth') " auto-adjust 'shiftwidth' and 'expandtab'
+  " }}}2
+  " 7. Programming / General {{{2
+  call minpac#add('dense-analysis/ale') " linting engine and LSP client {{{3
+  let g:ale_linters = {
+        \ 'awk': ['gawk'],
+        \ 'bash': ['shellcheck'],
+        \ 'cython': ['cython'],
+        \ 'python': ['flake8', 'mypy', 'pylint'],
+        \ 'sh': ['shellcheck'],
+        \ }
+  let g:ale_fixers = {
+        \ 'json': ['jq'],
+        \ 'python': ['black'],
+        \ }
+  nnoremap <silent> <Leader>aT :ALEToggleBuffer<CR>
+  nnoremap <silent> <Leader>ah :ALEHover<CR>
+  nnoremap <silent> <Leader>aL :ALELint<CR>
+  nnoremap <silent> <Leader>aH :ALEDetail<CR>
+  nnoremap <silent> <Leader>a? :ALEInfo<CR>
+  nnoremap <silent> <Leader>al :ALEResetBuffer<CR>
+  nnoremap <silent> <Leader>as :ALELintStop<CR>
+  nnoremap <silent> <Leader>aS :ALEStopAllLSPs<CR>
+  nnoremap <silent> <Leader>a[ :ALEPreviousWrap<CR>
+  nnoremap <silent> <Leader>a] :ALENextWrap<CR>
+  nnoremap <silent> <Leader>a{ :ALEFirst<CR>
+  nnoremap <silent> <Leader>a} :ALELast<CR>
+  nnoremap <silent> <Leader>a/ :ALESymbolSearch<Space>
+  nnoremap <silent> <Leader>ai :ALEImport<CR>
+  nnoremap <silent> <Leader>aI :ALEOrganizeImports<CR>
+  nnoremap <silent> <Leader>aR :ALERename<CR>
+  nnoremap <silent> <Leader>ac :ALECodeAction<CR>
+  nnoremap <silent> <Leader>a. :ALEGoToDefinition<CR>
+  nnoremap <silent> <Leader>at :ALEGoToTypeDefinition<CR>
+  nnoremap <silent> <Leader>ar :ALEFindReferences<CR>
+  nnoremap <silent> <Leader>ad :ALEDocumentation<CR>
+  nnoremap <silent> <Leader>af :ALEFix<CR>
+  nnoremap <silent> <Leader>aF :ALEFixSuggest<CR>
+  " }}}3
+  " }}}2
+  " 8. Programming / Python {{{2
+  call minpac#add('davidhalter/jedi-vim') " autocompletion for Python {{{3
+  " jedi-vim configuration
+  let g:jedi#auto_initialization = 1
+  let g:jedi#auto_vim_configuration = 0
+  let g:jedi#popup_on_dot = 1
+  let g:jedi#popup_select_first = 0
+  let g:jedi#show_call_signatures = 2 " show signatures in command line instead of popup window
+  " jedi-vim mappings
+  let g:jedi#completions_command = "<C-Space>"
+  let g:jedi#goto_command = "<Leader>jd"
+  let g:jedi#goto_assignments_command = "<Leader>jg"
+  let g:jedi#goto_stubs_command = "<Leader>js"
+  let g:jedi#documentation_command = "K"
+  let g:jedi#rename_command = "<Leader>jr"
+  let g:jedi#usages_command = "<Leader>jn"
+  " }}}3
+  call minpac#add('Vimjas/vim-python-pep8-indent') " nicer Python indentation
+  " }}}2
+  " 9. Programming / Database {{{2
+  " Database
+  call minpac#add('tpope/vim-dadbod') " database interface
+  " call minpac#add('kristijanhusak/vim-dadbod-completion') " completion support for database interface {{{3
+  " " Omnifunc support
+  " autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni
+  " " }}}3
+  call minpac#add('kristijanhusak/vim-dadbod-ui') " nicer frontend for database interface {{{3
+  nnoremap <silent> <Leader>D :DBUI<CR>
+  " Example of configuring connection details, define in init.vim.local
+  " let g:dbs = {
+  "       \ 'dev': 'postgres://postgres:mypassword@localhost:5432/my-dev-db',
+  "       \ 'staging': 'postgres://postgres:mypassword@localhost:5432/my-staging-db',
+  "       \ 'wp': 'mysql://root@localhost/wp_awesome',
+  "       \ }
+  " }}}3
   " }}}2
 endif
 
