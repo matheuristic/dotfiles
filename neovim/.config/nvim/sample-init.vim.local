@@ -3,8 +3,9 @@
 
 "set notermguicolors " uncomment to disable 24-bit RGB color for terminals that are not ISO-8613-3 compatible
 
-" let g:dbs = { " db connection strings for vim-dadbod-ui
-"       \ 'dev': 'postgres://postgres:mypassword@localhost:5432/my-dev-db',
-"       \ 'staging': 'postgres://postgres:mypassword@localhost:5432/my-staging-db',
-"       \ 'wp': 'mysql://root@localhost/wp_awesome',
-"       \ }
+" DB connection strings for vim-dadbod-ui
+"let g:dbs = {
+"      \ 'dev': 'postgres://postgres:mypassword@localhost:5432/my-dev-db',
+"      \ 'staging': 'postgres://postgres:mypassword@localhost:5432/my-staging-db',
+"      \ 'wp': 'mysql://root@localhost/wp_awesome',
+"      \ }
