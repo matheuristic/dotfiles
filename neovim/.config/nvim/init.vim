@@ -1,61 +1,48 @@
 " ~/.config/nvim/init.vim - Config file for Nvim
 " Author: matheuristic
 
-" Section: Options {{{1
-" ---------------------
+" Section: Base install requirements {{{1
+" ---------------------------------------
 
-" Vi non-compatible mode, usually set automatically
-" if &compatible
-"   set nocompatible
-" endif
+" 1. Create the backup, swap and undo directories
+"    $ mkdir -p $XDG_DATA_HOME/nvim/backup
+"    $ mkdir -p $XDG_DATA_HOME/nvim/swap
+"    $ mkdir -p $XDG_DATA_HOME/nvim/undo
 
-"set backup      " keep backups, usually better to use version control
-"set backupdir=~/.nvimfiles/backup//,.,~/tmp/,~/ " backup file folders, appending // uses the full path in the name
+" 2. Install ripgrep
+
+" 3. Install the pynvim PyPI package in the Neovim usage environments
+
+" }}}1
+" Section: Base configuration {{{1
+" --------------------------------
+
+filetype plugin indent on " enable filetype detection for plugins and indents
+
+set nobackup    " no backups by default, usually better to use version control
+set backupdir=~/.config/nvim/backup//,.,~/tmp " backup file folders, appending // uses the full path in the name
 set completeopt=longest,menuone " triggering autocompletion menu only inserts the longest common text of all matches
-set directory=~/.nvimfiles/swap//,.,~/tmp,/var/tmp,/tmp " swapfile folders, appending // uses the full path in the name
+set directory=~/.config/nvim/swap//,.,~/tmp,/var/tmp,/tmp " swapfile folders, appending // uses the full path in the name
 set expandtab   " expand tabs into spaces; use <C-v><Tab> for a real tab
+set foldenable  " enable folding
+set foldmethod=marker " use markers to specify folds
 set hidden      " hide abandoned buffers instead of unloading them
-"set list        " highlight tabs and trailing whitespace
-set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,nbsp:. " chars for displaying whitespace when 'list' is set
+set inccommand=nosplit " show effects of commands incrementally in the current window
 set nojoinspaces " do not insert two spaces after '.', '?' and '!' on line joins
+set nolist       " do not highlight tabs and trailing whitespace by default
+set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,nbsp:. " chars for displaying whitespace when 'list' is set
+set showbreak=…\ " show '… ' at start of each continued line
 set swapfile    " use swapfiles
+set termguicolors " use GUI colors in the terminal (requires 24-bit color support)
+set title " Set the terminal emulator title to path of file being edited
+set undofile    " persist undo history to disk
+set undodir=~/.config/nvim/undo//,.,~/tmp " undo file folders, appending // uses the full path in the name
 set wildmenu    " use enhanced command line completion
 set wildmode=longest:full,full " command-line tab completion options, see https://github.com/neovim/neovim/issues/10771#issuecomment-521210434
 
 " Use ripgrep if available {{{2
 if executable('rg')
   set grepprg=rg\ --vimgrep
-endif " }}}2
-
-" Enable filetype detection for plugins and indents {{{2
-if has('autocmd')
-  filetype plugin indent on
-endif " }}}2
-" Enable folding {{{2
-if has('folding')
-  set foldenable
-  set foldmethod=marker
-endif " }}}2
-" Visually indicate wrapped lines {{{2
-if has('linebreak')
-  set showbreak=…\  " show '… ' at start of each continued line
-endif " }}}2
-" Show effects of commands incrementally while typing
-if has('nvim')
-  set inccommand=nosplit " only show effects within the current window
-endif
-" Persistent undo {{{2
-if has("persistent_undo")
-  set undofile
-  set undodir=~/.nvimfiles/undo//,. " undo file folders, appending // uses the full path in the name
-endif " }}}2
-" Use GUI colors in the terminal (requires 24-bit color support) {{{2
-if has("termguicolors")
-  set termguicolors
-endif " }}}2
-" Set the terminal emulator title to path of file being edited {{{2
-if has('title')
-  set title
 endif " }}}2
 
 " Don't reuse netrw buffers
@@ -82,9 +69,30 @@ let g:terminal_color_13 = '#6c71c4' " bright magenta = violet
 let g:terminal_color_14 = '#93a1a1' " bright cyan    = base1
 let g:terminal_color_15 = '#fdf6e3' " bright white   = base3
 
+" When in a Neovim terminal, starting a new Neovim session opens
+" buffers in the parent session instead of nesting, adapted from
+" https://gist.github.com/nelstrom/ced14300f689bf5ffafac592d3aa9373
+function! s:preventNestedNeovim()
+  if !empty($NVIM_LISTEN_ADDRESS) && $NVIM_LISTEN_ADDRESS !=# v:servername
+    let g:r=sockconnect('pipe', $NVIM_LISTEN_ADDRESS, {'rpc':v:true})
+    let g:f=fnameescape(expand('%:p'))
+    noautocmd bwipe
+    if empty(g:f)
+      call rpcrequest(g:r, "nvim_command", "enew ")
+    else
+      call rpcrequest(g:r, "nvim_command", "edit ".g:f)
+    endif
+    qall
+  endif
+endfunction
+augroup prevent_nested_neovim
+  autocmd!
+  autocmd VimEnter * call s:preventNestedNeovim()
+augroup END
+
 " }}}1
-" Section: Basic Keymappings {{{1
-" -------------------------
+" Section: Base key mapping {{{1
+" ------------------------------
 
 " Remap jk and kj to <ESC> {{{2
 inoremap jk <ESC>
@@ -105,65 +113,61 @@ nnoremap <silent> <Leader>bal :ball<CR>
 " }}}2
 
 " Tab and window manipulation and navigation ('t' and 'w') {{{2
-if has('windows')
-  " Tab commands
-  nnoremap <silent> <Leader>tl :tabs<CR>
-  nnoremap <silent> <Leader>te :tabedit<CR>
-  nnoremap <silent> <Leader>tc :tabclose<CR>
-  nnoremap <silent> <Leader>tn :tabnext<CR>
-  nnoremap <silent> <Leader>tp :tabprevious<CR>
-  nnoremap <silent> <Leader>t0 :tabfirst<CR>
-  nnoremap <silent> <Leader>t1 :tabnext 1<CR>
-  nnoremap <silent> <Leader>t2 :tabnext 2<CR>
-  nnoremap <silent> <Leader>t3 :tabnext 3<CR>
-  nnoremap <silent> <Leader>t4 :tabnext 4<CR>
-  nnoremap <silent> <Leader>t5 :tabnext 5<CR>
-  nnoremap <silent> <Leader>t6 :tabnext 6<CR>
-  nnoremap <silent> <Leader>t7 :tabnext 7<CR>
-  nnoremap <silent> <Leader>t8 :tabnext 8<CR>
-  nnoremap <silent> <Leader>t9 :tabnext 9<CR>
-  nnoremap <silent> <Leader>t$ :tablast<CR>
-  nnoremap <Leader>tm :tabmove<Space>
-  nnoremap <Leader>tg :tabnext<Space>
-  nnoremap <Leader>td :tabdo<Space>
-  " Window commands
-  nnoremap <silent> <Leader>ws :split<CR>
-  nnoremap <silent> <Leader>wv :vsplit<CR>
-  nnoremap <silent> <Leader>wc :close<CR>
-  nnoremap <silent> <Leader>wo :only<CR>
-  nnoremap <silent> <Leader>wh <C-w>h
-  nnoremap <silent> <Leader>wj <C-w>j
-  nnoremap <silent> <Leader>wk <C-w>k
-  nnoremap <silent> <Leader>wl <C-w>l
-  nnoremap <silent> <Leader>ww <C-w>w
-  nnoremap <silent> <Leader>wr <C-w>r
-  nnoremap <silent> <Leader>wR <C-w>R
-  nnoremap <silent> <Leader>wx <C-w>x
-  nnoremap <silent> <Leader>wT <C-w>T
-  nnoremap <silent> <Leader>wH <C-w>H
-  nnoremap <silent> <Leader>wJ <C-w>J
-  nnoremap <silent> <Leader>wK <C-w>K
-  nnoremap <silent> <Leader>wL <C-w>L
-  nnoremap <silent> <Leader>w+ <C-w>+
-  nnoremap <silent> <Leader>w- <C-w>-
-  nnoremap <silent> <Leader>w< <C-w><
-  nnoremap <silent> <Leader>w> <C-w>>
-  nnoremap <silent> <Leader>w= <C-w>=
-  " Resize window height to fit number of lines of buffer
-  nnoremap <silent> <Leader>wf :execute ":resize " . line('$')<CR>
-  " Resize window width to fit max line width of buffer
-  nnoremap <silent> <Leader>wF :execute ":vertical resize "
-        \ . max(map(range(1, line('$')), "virtcol([v:val, '$'])-1"))<CR>
-endif
+" Tab commands
+nnoremap <silent> <Leader>tl :tabs<CR>
+nnoremap <silent> <Leader>te :tabedit<CR>
+nnoremap <silent> <Leader>tc :tabclose<CR>
+nnoremap <silent> <Leader>tn :tabnext<CR>
+nnoremap <silent> <Leader>tp :tabprevious<CR>
+nnoremap <silent> <Leader>t0 :tabfirst<CR>
+nnoremap <silent> <Leader>t1 :tabnext 1<CR>
+nnoremap <silent> <Leader>t2 :tabnext 2<CR>
+nnoremap <silent> <Leader>t3 :tabnext 3<CR>
+nnoremap <silent> <Leader>t4 :tabnext 4<CR>
+nnoremap <silent> <Leader>t5 :tabnext 5<CR>
+nnoremap <silent> <Leader>t6 :tabnext 6<CR>
+nnoremap <silent> <Leader>t7 :tabnext 7<CR>
+nnoremap <silent> <Leader>t8 :tabnext 8<CR>
+nnoremap <silent> <Leader>t9 :tabnext 9<CR>
+nnoremap <silent> <Leader>t$ :tablast<CR>
+nnoremap <Leader>tm :tabmove<Space>
+nnoremap <Leader>tg :tabnext<Space>
+nnoremap <Leader>td :tabdo<Space>
+" Window commands
+nnoremap <silent> <Leader>ws :split<CR>
+nnoremap <silent> <Leader>wv :vsplit<CR>
+nnoremap <silent> <Leader>wc :close<CR>
+nnoremap <silent> <Leader>wo :only<CR>
+nnoremap <silent> <Leader>wh <C-w>h
+nnoremap <silent> <Leader>wj <C-w>j
+nnoremap <silent> <Leader>wk <C-w>k
+nnoremap <silent> <Leader>wl <C-w>l
+nnoremap <silent> <Leader>ww <C-w>w
+nnoremap <silent> <Leader>wr <C-w>r
+nnoremap <silent> <Leader>wR <C-w>R
+nnoremap <silent> <Leader>wx <C-w>x
+nnoremap <silent> <Leader>wT <C-w>T
+nnoremap <silent> <Leader>wH <C-w>H
+nnoremap <silent> <Leader>wJ <C-w>J
+nnoremap <silent> <Leader>wK <C-w>K
+nnoremap <silent> <Leader>wL <C-w>L
+nnoremap <silent> <Leader>w+ <C-w>+
+nnoremap <silent> <Leader>w- <C-w>-
+nnoremap <silent> <Leader>w< <C-w><
+nnoremap <silent> <Leader>w> <C-w>>
+nnoremap <silent> <Leader>w= <C-w>=
+" Resize window height to fit number of lines of buffer
+nnoremap <silent> <Leader>wf :execute ":resize " . line('$')<CR>
+" Resize window width to fit max line width of buffer
+nnoremap <silent> <Leader>wF :execute ":vertical resize "
+      \ . max(map(range(1, line('$')), "virtcol([v:val, '$'])-1"))<CR>
 " }}}2
 
 " Quickfix error and location window manipulation ('q') {{{2
-if has('quickfix')
-  nnoremap <silent> <Leader>qco :copen<CR>
-  nnoremap <silent> <Leader>qcc :cclose<CR>
-  nnoremap <silent> <Leader>qlo :lopen<CR>
-  nnoremap <silent> <Leader>qlc :lclose<CR>
-endif
+nnoremap <silent> <Leader>qco :copen<CR>
+nnoremap <silent> <Leader>qcc :cclose<CR>
+nnoremap <silent> <Leader>qlo :lopen<CR>
+nnoremap <silent> <Leader>qlc :lclose<CR>
 " }}}2
 
 " Settings ('s') {{{2
@@ -171,9 +175,7 @@ endif
 nnoremap <silent> <Leader>sc :set ignorecase! ignorecase?<CR>
 " }}}3
 " Toggle folding {{{3
-if has('folding')
-  nnoremap <silent> <Leader>sf :set foldenable! foldenable?<CR>
-endif
+nnoremap <silent> <Leader>sf :set foldenable! foldenable?<CR>
 " }}}3
 " Toggle highlighting of listchars {{{3
 nnoremap <silent> <Leader>sl :set list! list?<CR>
@@ -188,25 +190,21 @@ nnoremap <silent> <Leader>sn :set number! number?<CR>
 nnoremap <silent> <Leader>sp :set paste! paste?<CR>
 " }}}3
 " Toggle spell check {{{3
-if has('syntax')
-  nnoremap <silent> <Leader>ss :set spell! spell?<CR>
-endif
+nnoremap <silent> <Leader>ss :set spell! spell?<CR>
 " }}}3
 " Toggle wrapping of lines {{{3
 nnoremap <silent> <Leader>sw :set wrap! wrap?<CR>
 " }}}3
 " Toggle syntax highlighting {{{3
-if has('syntax')
-  function! s:toggleSyntaxHighlighting()
-    if exists('g:syntax_on')
-      execute "syntax off"
-    else
-      execute "syntax enable"
-    endif
-    echo "syntax enabled=" . string(exists("g:syntax_on"))
-  endfunction
-  nnoremap <silent> <Leader>sy :call <SID>toggleSyntaxHighlighting()<CR>
-endif
+function! s:toggleSyntaxHighlighting()
+  if exists('g:syntax_on')
+    execute "syntax off"
+  else
+    execute "syntax enable"
+  endif
+  echo "syntax enabled=" . string(exists("g:syntax_on"))
+endfunction
+nnoremap <silent> <Leader>sy :call <SID>toggleSyntaxHighlighting()<CR>
 " }}}2
 
 " Other {{{2
@@ -214,9 +212,7 @@ endif
 nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
 " }}}3
 " Unhighlight search results (from https://github.com/tpope/vim-sensible) {{{3
-if has('extra_search')
-  nnoremap <silent> <Leader>l :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR>
-endif
+nnoremap <silent> <Leader>l :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR>
 " }}}3
 " Terminal emulator {{{3
 nnoremap <silent> <Leader>T :terminal<CR>
@@ -363,6 +359,10 @@ if exists('g:loaded_minpac')
   " }}}3
   " }}}2
   " 6. Other non-programming {{{2
+  call minpac#add('editorconfig/editorconfig-vim') " EditorConfig plugin {{{3
+  let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+  autocmd FileType gitcommit let b:EditorConfig_disable = 1
+  " }}}3
   call minpac#add('justinmk/vim-dirvish') " directory viewer, replaces netrw
   call minpac#add('tpope/vim-obsession') " continuously updated session files {{{3
   nnoremap <Leader>of :Obsession<Space>
@@ -432,11 +432,11 @@ if exists('g:loaded_minpac')
   " 9. Programming / Database {{{2
   " Database
   call minpac#add('tpope/vim-dadbod') " database interface
-  " call minpac#add('kristijanhusak/vim-dadbod-completion') " completion support for database interface {{{3
-  " " Omnifunc support
-  " autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni
-  " " }}}3
-  call minpac#add('kristijanhusak/vim-dadbod-ui') " nicer frontend for database interface {{{3
+  call minpac#add('kristijanhusak/vim-dadbod-completion') " completion support for vim-dadbod {{{3
+  " Omnifunc support
+  autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni
+  " }}}3
+  call minpac#add('kristijanhusak/vim-dadbod-ui') " front end interface for vim-dadbod {{{3
   nnoremap <silent> <Leader>D :DBUI<CR>
   " Example of configuring connection details, define in init.vim.local
   " let g:dbs = {
@@ -449,39 +449,7 @@ if exists('g:loaded_minpac')
 endif
 
 " }}}1
-" Section: Functions {{{1
-" -------------------------
-
-function! s:preventNestedNeovim()
-  if !empty($NVIM_LISTEN_ADDRESS) && $NVIM_LISTEN_ADDRESS !=# v:servername
-    let g:r=sockconnect('pipe', $NVIM_LISTEN_ADDRESS, {'rpc':v:true})
-    let g:f=fnameescape(expand('%:p'))
-    noautocmd bwipe
-    if empty(g:f)
-      call rpcrequest(g:r, "nvim_command", "enew ")
-    else
-      call rpcrequest(g:r, "nvim_command", "edit ".g:f)
-    endif
-    qall
-  endif
-endfunction
-
-" }}}1
-" Section: Autocommands {{{1
-" --------------------------
-
-if has('autocmd')
-  augroup prevent_nested_neovim
-    autocmd!
-    " when in a Neovim terminal, add a buffer to the existing session
-    " rather than nesting, adapted from
-    " https://gist.github.com/nelstrom/ced14300f689bf5ffafac592d3aa9373
-    autocmd VimEnter * call s:preventNestedNeovim()
-  augroup END
-endif
-
-" }}}1
-" Section: Local Vim Config {{{1
+" Section: Local Vim config {{{1
 " ------------------------------
 
 if filereadable(expand("~/.config/nvim/init.vim.local"))

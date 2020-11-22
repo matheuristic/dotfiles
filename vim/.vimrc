@@ -15,7 +15,7 @@ set autoindent  " use indent level from the previous line
 "set autoread    " watch for file changes made by external programs
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 "set backup      " keep backups (it is usually better to use version control)
-"set backupdir=~/.vimfiles/backup//,.,~/tmp/,~/ " backup file folders, appending '//' uses the full path in the filename
+"set backupdir=~/.vimfiles/backup//,.,~/tmp " backup file folders, appending '//' uses the full path in the filename
 "set directory=~/.vimfiles/swap//,.,~/tmp,/var/tmp,/tmp " swapfile folders, appending '//' uses the full path in the filename
 "set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
 "set complete=.,w,b,u,U,t,i,d " extra scanning on keyword completion
