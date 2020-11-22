@@ -1,4 +1,4 @@
-" ~/.config/nvim/init.vim - Config file for Nvim
+" ~/.config/nvim/init.vim - Config file for Neovim
 " Author: matheuristic
 
 " Section: Base install requirements {{{1
@@ -449,8 +449,8 @@ if exists('g:loaded_minpac')
 endif
 
 " }}}1
-" Section: Local Vim config {{{1
-" ------------------------------
+" Section: Local Neovim config {{{1
+" ---------------------------------
 
 if filereadable(expand("~/.config/nvim/init.vim.local"))
   source ~/.config/nvim/init.vim.local
