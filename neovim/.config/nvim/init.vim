@@ -378,7 +378,7 @@ if exists('g:loaded_minpac')
         \ 'awk': ['gawk'],
         \ 'bash': ['shellcheck'],
         \ 'cython': ['cython'],
-        \ 'python': ['flake8', 'mypy', 'pylint'],
+        \ 'python': ['mypy', 'pylint'],
         \ 'sh': ['shellcheck'],
         \ }
   let g:ale_fixers = {

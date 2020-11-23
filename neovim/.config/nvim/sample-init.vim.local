@@ -4,8 +4,16 @@
 "set notermguicolors " uncomment to disable 24-bit RGB color for terminals that are not ISO-8613-3 compatible
 
 " Add ALE linters and fixers
-"let g:ale_linters.python += ['pyright']
-"let g:ale_fixers.sql = ['pgformatter']
+"let g:ale_linters.go        = ['golint']
+"let g:ale_linters.python    = ['pylint', 'pyright']
+"let g:ale_linters.yaml      = ['yamllint']
+"let g:ale_fixers.css        = ['prettier']
+"let g:ale_fixers.go         = ['goimports']
+"let g:ale_fixers.javascript = ['prettier-eslint']
+"let g:ale_fixers.json       = ['prettier']
+"let g:ale_fixers.markdown   = ['prettier']
+"let g:ale_fixers.sql        = ['pgformatter']
+"let g:ale_fixers.yaml       = ['prettier']
 
 " DB connection strings for vim-dadbod-ui
 "let g:dbs = {
