@@ -307,8 +307,7 @@ if exists('g:loaded_minpac')
   call minpac#add('tpope/vim-surround') " mappings to manipulate parentheses, brackets and quotes
   call minpac#add('tpope/vim-unimpaired') " handy bracket mappings
   call minpac#add('ervandew/supertab') " tab completion in insert mode {{{3
-  let g:SuperTabCrMapping = 1 " <Enter> when the popup menu only closes the menu and does not add a new line to the text
-  let g:SuperTabClosePreviewOnPopupClose = 1 " try to close preview window when completion popup closes
+  let g:SuperTabClosePreviewOnPopupClose = 1 " try to close preview window when the completion popup is closed
   " }}}3
   " }}}2
   " 3. Search {{{2

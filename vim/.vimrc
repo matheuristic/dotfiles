@@ -296,11 +296,6 @@ inoremap jk <ESC>
 inoremap kj <ESC>
 " }}}2
 
-" <Enter> in insert mode popup menu closes it without adding a new line {{{2
-" For details, see https://vim.fandom.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE#Completion_Options
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" }}}2
-
 " Remap <Leader> from '\' to <Space> {{{2
 let mapleader=' ' " }}}2
 
