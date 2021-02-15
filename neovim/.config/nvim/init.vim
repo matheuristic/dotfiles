@@ -306,6 +306,10 @@ if exists('g:loaded_minpac')
   call minpac#add('tpope/vim-commentary') " toggle commenting of lines
   call minpac#add('tpope/vim-surround') " mappings to manipulate parentheses, brackets and quotes
   call minpac#add('tpope/vim-unimpaired') " handy bracket mappings
+  call minpac#add('ervandew/supertab') " tab completion in insert mode {{{3
+  let g:SuperTabCrMapping = 1 " <Enter> when the popup menu only closes the menu and does not add a new line to the text
+  let g:SuperTabClosePreviewOnPopupClose = 1 " try to close preview window when completion popup closes
+  " }}}3
   " }}}2
   " 3. Search {{{2
   call minpac#add('junegunn/fzf', {'do': '!./install --bin'}) " fuzzy file search {{{3
