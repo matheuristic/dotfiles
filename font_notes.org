@@ -24,6 +24,9 @@ Also works great at 16pt size.
 Unicode bitmap font with enormous glyph coverage ([[http://unifoundry.com/unifont/index.html][link]]). It is fairly lightweight (about 12 megabytes) for a font with very large coverage, and is most useful for debugging Unicode issues.
 * Outline fonts
 Tends to work better for high DPI screens.
+** 3270
+Font derived from and similar to the IBM 3270 font but in a modern format and with more characters ([[https://github.com/rbanffy/3270font][Github]]).
+On Debian systems, this is available as the ~fonts-3270~ package installable via APT.
 ** Aganè
 Sans-serif font inspired by Noorda, Frutiger and Avenir ([[https://www.behance.net/gallery/48243243/Agane-Typeface-Free-font][link1]], [[https://www.graphicpear.com/agane-free-font/][link2]]).
 Has a ~S~ variant with shorter ascenders and descenders designed for display and signage.
@@ -31,6 +34,11 @@ Also has a companion icon pack for Adobe Illustrator ([[https://www.behance.net/
 ** Aileron
 Neo-grotesque sans-serif font ([[http://dotcolon.net/font/aileron/][link]]).
 Similar to Helvetica but ~l~ is distinct from ~I~.
+** APL385
+Public domain fonts designed for use with APL ([[https://www.apl385.com/fonts/index.htm][link]]).
+APL385 Unicode is the monospaced version of the font and APL333 Unicode is the proportional version of the font.
+There is also a font APL386 ([[https://abrudz.github.io/APL386/][link]], [[https://github.com/abrudz/APL386][Github]]) that is expands on AP385 with more characters.
+Note that these fonts do not come with italics.
 ** Alegreya
 Font family with sans-serif ([[https://www.huertatipografica.com/en/fonts/alegreya-sans-ht][link]], [[https://github.com/huertatipografica/Alegreya-Sans][Github]]) and serif ([[https://www.huertatipografica.com/en/fonts/alegreya-ht-pro][link]], [[https://github.com/huertatipografica/Alegreya][Github]]) variants designed for long-form text.
 ** Alma Mono
