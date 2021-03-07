@@ -99,6 +99,7 @@ clusterssh
 httrack
 lftp
 miller
+pdfpc +quartz +video
 tig
 tin
 #+end_example
@@ -277,6 +278,7 @@ Alternatives are [[https://github.com/johnkerl/miller][miller]] or individual to
 Easiest to install via conda and create a symlink to the binary in
 =~/miniconda3/envs/ENVNAME/bin= (the environment's =bin= directory)
 within =~/.local/bin= (or some directory that is in ~PATH~).
+- ~cuckoo~: Execute untrusted files in a sandbox and analyze behavior ([[https://cuckoosandbox.org/][link]]).
 - ~glances~: Cross platform system monitoring tool like ~top~ and ~htop~.
 - ~mitmproxy~: Interactive HTTPS proxy.
 - ~pyinstaller~: Bundles Python application and its dependencies into a single package.

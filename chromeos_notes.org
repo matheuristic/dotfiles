@@ -316,6 +316,24 @@ monolith is [[https://www.httrack.com/][HTTrack]].
 #+begin_example
 sudo apt install httrack
 #+end_example
+* Install MuPDF
+[[https://www.mupdf.com/][MuPDF]] is a lightweight PDF and E-book viewer. Available in the Debian
+repos, but the following installs a newer version from conda-forge
+instead.
+#+begin_example
+conda activate myenv
+conda install mupdf
+conda deactivate
+mkdir -p ~/.local/bin && cd ~/.local/bin
+ln -s ~/miniforge3/envs/myenv/bin/mupdf
+#+end_example
+Some programs use the mailcap file to determine what programs to run.
+If such programs are used, add the following line to the =~/.mailcap=
+file (create it if it does not exist; modify the ~-r~ value to the
+appropriate resolution DPI value).
+#+begin_example
+application/pdf;$HOME/.local/bin/mupdf-gl -r 196 '%s'
+#+end_example
 * Install Pandoc
 Make sure conda is installed.
 #+begin_example
