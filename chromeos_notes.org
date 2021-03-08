@@ -534,15 +534,20 @@ firejail vlc
 * Install J (optional)
 For development in [[https://www.jsoftware.com/][J]], install and configure the interpreter.
 
-Download the release in zip form for Linux and extract it to a target
-directory (=$HOME/packages/j= for the path and J version ~j902~ is
-used, change as needed).
+Download the release in zip form for Linux, extract it to a target
+directory , and symlink the =jconsole= binary to =ijconsole= (as
+=jconsole= is also the name of the Java console) in a directory
+somewhere on the ~$PATH~. (J version ~j902~, =$HOME/packages/j= for
+the install path, =$HOME/.local/bin= for the directory on the ~$PATH~
+are assumed below, change as needed.)
 #+begin_example
 $ mkdir -p $HOME/packages/j
 $ cd $HOME/packages/j
 $ wget http://some/url/for/j902_linux64.tar.gz
 $ tar xzf j902_linux64.tar.gz
 $ rm -f latest && ln -s j902 latest
+$ cd $HOME/.local/bin
+$ ln -s $HOME/packages/j/latest/bin/jconsole ijconsole
 #+end_example
 
 Make sure libraries are installed. Start =$HOME/packages/j/latest/bin/jconsole= and run the following.
