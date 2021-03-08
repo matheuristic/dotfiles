@@ -250,12 +250,6 @@ Terminal=false
 Categories=Utility;Development;TextEditor;
 Icon=/home/USERNAME/.local/share/icons/emacs.png
 #+END_SRC
-
-Note that the [[https://github.com/conda-forge/emacs-feedstock][Emacs package in conda-forge]] is compiled with the Lucid
-graphical toolkit, so it will not be styled by the active GTK theme.
-Note the [[https://emacs.stackexchange.com/questions/33065/on-linux-why-should-one-choose-lucid-over-gtk-gui-for-emacs][pros and cons of using Lucid versus GTK in Emacs]]. In
-particular even though using Lucid results in Emacs not looking as
-nice, it tends to be more robust against display-related issues.
 * Install NVM
 Easiest to do a Git install of NVM ([[https://github.com/nvm-sh/nvm#git-install][link]]).
 #+begin_example
@@ -536,6 +530,78 @@ Sandbox applications by starting them via the ~firejail~ command.
 firejail [--profile=/path/to/firejail/profile] <command> [<options>]
 firejail firefox
 firejail vlc
+#+end_example
+* Install J (optional)
+For development in [[https://www.jsoftware.com/][J]], install and configure the interpreter.
+
+Download the release in zip form for Linux and extract it to a target
+directory (=$HOME/packages/j= for the path and J version ~j902~ is
+used, change as needed).
+#+begin_example
+$ mkdir -p $HOME/packages/j
+$ cd $HOME/packages/j
+$ wget http://some/url/for/j902_linux64.tar.gz
+$ tar xzf j902_linux64.tar.gz
+$ rm -f latest && ln -s j902 latest
+#+end_example
+
+Make sure libraries are installed. Start =$HOME/packages/j/latest/bin/jconsole= and run the following.
+#+begin_example
+   install 'all'
+   exit''
+#+end_example
+
+Install the required system libraries for the J QT IDE. The following installs the Qt libraries in the ~myenv~ conda environment, so change as needed.
+#+begin_example
+$ sudo apt install libpci3
+$ conda activate myenv
+$ conda install qt
+$ conda deactivate
+#+end_example
+
+Make sure J Qt IDE libraries are updated.
+#+begin_example
+$ cd $HOME/packages/j/latest
+$ ./updatejqt.sh
+#+end_example
+
+Create a script =$HOME/.local/bin/jqt= with the following contents for
+easier launching of the J Qt IDE. Change the script path to somewhere
+else on the ~$PATH~ or the contents of the script (typically
+~CONDA_INSTALL_DIR~, ~CONDA_QT_ENV~ or ~J_BIN_PATH~) as needed.
+#+begin_example
+#!/bin/bash
+
+# Run JQt
+# - The Qt IDE must already be installed (run updatejqt.sh from the install directory)
+# - libpci3 must be installed (Debian and Debian-derivatives)
+# - qt must be installed (via conda using the conda-forge channel)
+# - Set CONDA_INSTALL_DIR to the install directory for conda
+# - Set CONDA_QT_ENV below to the conda environment where Qt is installed
+# - Set J_BIN_PATH below to the path of the jqt binary
+# - Put this file or a symlink to it in one of the directories on $PATH
+
+CONDA_INSTALL_DIR=$HOME/miniconda3
+CONDA_QT_ENV=myenv
+J_BIN_PATH=$HOME/packages/j/latest/bin/jqt
+
+LD_LIBRARY_PATH="$CONDA_INSTALL_DIR/envs/$CONDA_QT_ENV/lib:$LD_LIBRARY_PATH" "$J_BIN_PATH" "$@"
+#+end_example
+
+Create a file =$HOME/.local/share/applications/jqt.desktop= with the
+following contents, changing ~USERNAME~ to the current user name and
+the paths as needed.
+#+begin_example
+[Desktop Entry]
+Version=1.0
+Name=JQt
+GenericName=Integrated Development Environment
+Comment=Development environment for J projects
+Exec=/home/USERNAME/.local/bin/jqt %F
+Type=Application
+Terminal=false
+Categories=Utility;Development;IDE;
+Icon=/home/USERNAME/packages/j/latest/bin/icons/app.png
 #+end_example
 * Install Racket (optional)
 If developing in [[https://racket-lang.org/][Racket]], there are several options for installing it:
