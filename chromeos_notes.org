@@ -606,7 +606,7 @@ Exec=/home/USERNAME/.local/bin/jqt %F
 Type=Application
 Terminal=false
 Categories=Utility;Development;IDE;
-Icon=/home/USERNAME/packages/j/latest/bin/icons/app.png
+Icon=/home/USERNAME/packages/j/latest/bin/icons/jgreen.png
 #+end_example
 * Install Racket (optional)
 If developing in [[https://racket-lang.org/][Racket]], there are several options for installing it:
