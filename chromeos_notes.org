@@ -152,11 +152,23 @@ systemctl --user stop rclone-box.service
 #+end_example
 *** References
 - https://blog.victormendonca.com/2018/05/14/creating-a-simple-systemd-user-service/
-* Setup symlinks for bibliography, Org and Zettelkasten folders
+* Setup Org folders
+Create =~/org=, clone the Org agenda and read-it-later folders, and
+symlink them to the =~/org/agenda= and =~/org/readitlater= directories.
+Change the paths and repository names below as needed.
+#+begin_example
+mkdir -p ~/org
+cd /path/to/my/projects/folder
+git clone https://some.git.server/agenda-repo-name.git
+git clone https://some.git.server/read-it-later-repo-name.git
+cd ~/org
+ln -s /path/to/my/projects/folder/agenda-repo-name agenda
+ln -s /path/to/my/projects/folder/read-it-later-repo-name readitlater
+#+end_example
+* Setup symlinks for bibliography and Zettelkasten folders
 #+begin_example
 cd
 ln -s ~/Box/bib
-ln -s ~/Box/org
 ln -s ~/Box/zettelkasten
 #+end_example
 * Install dar

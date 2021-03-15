@@ -1,0 +1,24 @@
+#+title: Git notes
+#+author: matheuristic
+* Syncing a fork with upstream
+To sync a fork with upstream:
+1. Configure a remote that points to the upstream repository.
+2. Fetch and merge upstream commits.
+** Configure remote pointing to upstream repository
+See [[https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork][Github link]] for more information.
+Note that newer repositories have their primary branch names ~main~ instead of ~master~.
+#+begin_example
+git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
+#+end_example
+Check that the remote is configured using the following.
+#+begin_example
+git remote -v
+#+end_example
+** Fetch and merge upstream commits.
+See [[https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork][Github link]] for more information.
+Note that newer repositories have their primary branch names ~main~ instead of ~master~.
+#+begin_example
+git fetch upstream
+git checkout master
+git merge upstream/master
+#+end_example
