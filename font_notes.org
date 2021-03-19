@@ -2,6 +2,11 @@
 * Installing fonts
 ** Mac OS
 Use the Font Book app.
+** Linux (including Crostini on Chrome OS)
+#+begin_example
+cp some-font.ttf another-font.ttc ~/.fonts/
+f
+#+end_example
 * Bitmap (and bitmap-derived) fonts
 More useful for lower DPI screens.
 ** Dina
@@ -86,6 +91,8 @@ Also has a variant family Ligconsolata that exposes ligatures by default in the 
 Proportional font family with sans-serif and serif fonts designed for Inria ([[https://black-foundry.com/work/inria/][link]], [[https://github.com/BlackFoundryCom/InriaFonts][Github]]).
 ** Inter
 Proportional font family with sans-serif and serif fonts designed for screen usage ([[https://rsms.me/inter/][link]], [[https://github.com/rsms/inter/][Github]]).
+** Julia Mono
+Monospaced font designed for use with [[https://julialang.org/][Julia]] but works well as a programming font in general ([[https://cormullion.github.io/pages/2020-07-26-JuliaMono/][link]], [[https://github.com/cormullion/juliamono][Github]]).
 ** Iosevka
 Condensed monospace typeface for code with a wide array of customization options ([[https://typeof.net/Iosevka/][link]], [[https://github.com/be5invis/Iosevka][Github]]).
 The typeface also has quasi-proportional families -- Aile (Helvetica-like sans-serif), Etoile (serif) and Sparkle (mixed sans-serif and serif, with similar character spacing to Etoile).
@@ -184,3 +191,7 @@ Monospace font designed for Google Design ([[https://fonts.google.com/specimen/S
 ** XPLOT
 Cartoon display typeface ([[https://www.behance.net/gallery/24031061/XPLOR-Free-Typeface][link]]).
 Free for personal use.
+* Links
+- [[https://aplwiki.com/wiki/Fonts][APL Fonts]]
+- [[https://coding-fonts.css-tricks.com/][Coding Fonts]]
+- [[https://devfonts.gafi.dev/][Dev Fonts]]
