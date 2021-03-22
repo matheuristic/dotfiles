@@ -109,8 +109,6 @@ Font extending Donald Knuth's Computer Modern fonts and a main font in LaTeX ([[
 Comes in text, math, monospaced and other versions.
 ** Literata
 Serif typeface intended for long-form reading, e.g. in eBooks ([[https://github.com/googlefonts/literata][link]]).
-** Lotion
-Monospaced programming font ([[https://font.nina.coffee/][link]], [[https://gitlab.com/nefertiti/lotion-dist][Gitlab]]).
 ** M+ FONTS
 M+ FONTS is a Japanese sans-serif font family with good coverage for Kana and Kanji glyphs.
 The 1 variant has contrasting straight lines and curves, while the 2 variant is more curvy.
