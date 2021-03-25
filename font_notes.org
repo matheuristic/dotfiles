@@ -5,7 +5,7 @@ Use the Font Book app.
 ** Linux (including Crostini on Chrome OS)
 #+begin_example
 cp some-font.ttf another-font.ttc ~/.fonts/
-f
+fc-cache -fv
 #+end_example
 * Bitmap (and bitmap-derived) fonts
 More useful for lower DPI screens.
@@ -198,5 +198,5 @@ Monospace font designed for Google Design ([[https://fonts.google.com/specimen/S
 - [[https://devfonts.gafi.dev/][Dev Fonts]]
 - [[https://www.huertatipografica.com/en][Huerta Tipográfica]]
 - [[https://open-foundry.com/fonts][Open Foundry]]
-- [[https://www.theleagueofmoveabletype.com/][The League of Moveable Type – the first open-source font foundry]]
+- [[https://www.theleagueofmoveabletype.com/][The League of Moveable Type – the first open-source font foundry]] ([[https://github.com/theleagueof][Github]])
 - [[https://velvetyne.fr/][Velvetyne]]
