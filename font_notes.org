@@ -65,6 +65,8 @@ ET Book is an earlier webfont version commissioned by Edward Tufte ([[https://ed
 XETBook is expands on ET Book with added characters, OpenType ligatures and old-style figures ([[https://github.com/dbenjaminmiller/xetbook][Github]]).
 ETbb further expands on XETBook to include a full set of figure styles, small caps, superior and inferior figures and LaTeX support ([[https://ctan.org/pkg/etbb?lang=en][link]]).
 Currently, ETbb is preferred as it has the widest glyph coverage and the most alternate glyphs.
+** Cooper Hewitt
+Contemporary sans-serif, designed by Pentagram for the Cooper Hewitt Smithsonian Design Museum ([[https://www.cooperhewitt.org/open-source-at-cooper-hewitt/cooper-hewitt-the-typeface-by-chester-jenkins/][link]], [[https://github.com/cooperhewitt/cooperhewitt-typeface][Github]]).
 ** Courier Prime
 Courier Prime, Courier Prime Sans and Courier Prime Code are a family
 of fonts that are metric equivalent to Courier New and Courier Final
@@ -120,6 +122,8 @@ Large x-height variable serif text face designed for screen reading ([[https://g
 ** Noto
 Massive font family by Google that aims to support all languages ([[https://www.google.com/get/noto/][link]]).
 Good choice as a fallback font for esoteric languages in Emacs ([[https://idiocy.org/emacs-fonts-and-fontsets.html][link]]).
+** Public Sans
+Neutral sans-serif typeface for text or display ([[https://public-sans.digital.gov/][link]], [[https://github.com/uswds/public-sans][Github]]).
 ** Recursive
 Monospace and Sans fonts commissioned by Google Fonts ([[https://www.recursive.design/][link]], [[https://github.com/arrowtype/recursive/][Github]]).
 The ~Code~ version shifts the code ligatures from their usual OpenType feature ~dlig~ to the Opentype feature ~calt~ which makes them easier to use in code editors.
@@ -156,6 +160,8 @@ Aimed for use at large sizes for headlines and titles.
 Modern display sans font with a science-fiction feel ([[https://www.dafont.com/azonix.font][link]]).
 ** BluuNext
 Bold serif display typeface alternative to Time New Roman or Caslon Graphique ([[https://velvetyne.fr/fonts/bluu/][link]], [[https://github.com/velvetyne/BluuNext][Github]]).
+** Cantique
+Calligraphic yet geometric typeface inspired by post-Romantic French bookplates ([[https://velvetyne.fr/fonts/cantique/][link]]).
 ** Colus
 Display sans font inspired by stone and wooden carved letter incriptions ([[https://www.fontfabric.com/fonts/colus/][link]]).
 ** Espoir
@@ -176,12 +182,6 @@ Has high contrast letterforms, ball terminals and ligatures.
 Pay-what-you-want for personal use.
 ** Millimetre
 Geometric sans display typeface similar to Eurostile ([[https://velvetyne.fr/fonts/millimetre/][link]], [[https://gitlab.com/StudioTriple/Millimetre/][Gitlab]]).
-** Milton Grotesque
-Geometric display sans typeface by the Vintage Type Company ([[http://blog.vintagetype.co/miltongrotesque/][link]]).
-Free for desktop and print usage, requires a commercial license for web usage.
-** MOON 2.0
-Rounded display typeface ([[https://www.behance.net/gallery/23468357/www.studentshow.com/gallery/23468357/Moon-Free-Font][link]]).
-Free for personal use.
 ** Morganite
 Super condensed display sans typeface ([[https://gumroad.com/l/jPYXU][link]]).
 ** Optician Sans
@@ -191,10 +191,12 @@ Transitional display serif typeface ([[https://fonts.google.com/specimen/Playfai
 Pairs well with the Georgia typeface as body text.
 ** Space Mono
 Monospace font designed for Google Design ([[https://fonts.google.com/specimen/Space+Mono][link]], [[https://github.com/googlefonts/spacemono][Github]]).
-** XPLOT
-Cartoon display typeface ([[https://www.behance.net/gallery/24031061/XPLOR-Free-Typeface][link]]).
-Free for personal use.
 * Links
 - [[https://aplwiki.com/wiki/Fonts][APL Fonts]]
+- [[https://beautifulwebtype.com/][Beautiful Web Type]]
 - [[https://coding-fonts.css-tricks.com/][Coding Fonts]]
 - [[https://devfonts.gafi.dev/][Dev Fonts]]
+- [[https://www.huertatipografica.com/en][Huerta Tipográfica]]
+- [[https://open-foundry.com/fonts][Open Foundry]]
+- [[https://www.theleagueofmoveabletype.com/][The League of Moveable Type – the first open-source font foundry]]
+- [[https://velvetyne.fr/][Velvetyne]]
