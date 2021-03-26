@@ -75,6 +75,8 @@ variant is also a good coding font.
 ** DM Mono/Sans/Serif
 Font families designed by Colophon Foundry for DeepMind ([[https://github.com/googlefonts/dm-mono][DM Mono link]], [[https://github.com/googlefonts/dm-fonts][DM Sans/Serif link]]).
 Low contrast geometric fonts intended for use at smaller text sizes.
+** Drafting Mono
+Monospaced font inspired by typewriters ([[https://indestructibletype.com/Drafting/][link]], [[https://github.com/indestructible-type/Drafting][Github]]).
 ** Fira
 Font family by Mozilla with sans-serif, serif and monospaced variants ([[http://mozilla.github.io/Fira/][link]], [[https://github.com/mozilla/Fira][Github]]).
 The monospaced variant has a fork *Fira Code* ([[https://github.com/tonsky/FiraCode][Github]]) that adds ligatures and fixes line height inconsistencies with bold fonts.
