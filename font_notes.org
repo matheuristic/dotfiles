@@ -200,5 +200,6 @@ Monospace font designed for Google Design ([[https://fonts.google.com/specimen/S
 - [[https://devfonts.gafi.dev/][Dev Fonts]]
 - [[https://www.huertatipografica.com/en][Huerta Tipográfica]]
 - [[https://open-foundry.com/fonts][Open Foundry]]
+- [[http://luc.devroye.org/fonts.html][On snot and fonts / Luc Devroye]]
 - [[https://www.theleagueofmoveabletype.com/][The League of Moveable Type – the first open-source font foundry]] ([[https://github.com/theleagueof][Github]])
 - [[https://velvetyne.fr/][Velvetyne]]
