@@ -165,11 +165,10 @@ cd ~/org
 ln -s /path/to/my/projects/folder/agenda-repo-name agenda
 ln -s /path/to/my/projects/folder/read-it-later-repo-name readitlater
 #+end_example
-* Setup symlinks for bibliography and Zettelkasten folders
+* Setup symlinks for bibliography
 #+begin_example
 cd
 ln -s ~/Box/bib
-ln -s ~/Box/zettelkasten
 #+end_example
 * Install dar
 [[http://dar.linux.free.fr/][dar (disk archive)]] is an archiving tool for nix platforms. It supports
