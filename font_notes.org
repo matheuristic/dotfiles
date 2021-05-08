@@ -124,6 +124,9 @@ Large x-height variable serif text face designed for screen reading ([[https://g
 ** Noto
 Massive font family by Google that aims to support all languages ([[https://www.google.com/get/noto/][link]]).
 Good choice as a fallback font for esoteric languages in Emacs ([[https://idiocy.org/emacs-fonts-and-fontsets.html][link]]).
+** Pragmata Pro
+Commercial coding font ([[https://fsd.it/shop/fonts/pragmatapro/][link]]).
+The full version can be somewhat expensive, but has very broad glyph coverage.
 ** Public Sans
 Neutral sans-serif typeface for text or display ([[https://public-sans.digital.gov/][link]], [[https://github.com/uswds/public-sans][Github]]).
 ** Recursive
