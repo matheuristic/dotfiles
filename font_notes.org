@@ -32,10 +32,6 @@ Tends to work better for high DPI screens.
 ** 3270
 Font derived from and similar to the IBM 3270 font but in a modern format and with more characters ([[https://github.com/rbanffy/3270font][Github]]).
 On Debian systems, this is available as the ~fonts-3270~ package installable via APT.
-** Aganè
-Sans-serif font inspired by Noorda, Frutiger and Avenir ([[https://www.behance.net/gallery/48243243/Agane-Typeface-Free-font][link1]], [[https://www.graphicpear.com/agane-free-font/][link2]]).
-Has a ~S~ variant with shorter ascenders and descenders designed for display and signage.
-Also has a companion icon pack for Adobe Illustrator ([[https://www.behance.net/gallery/49310919/Agane-Icons-Free-Download][link]])
 ** Aileron
 Neo-grotesque sans-serif font ([[http://dotcolon.net/font/aileron/][link]]).
 Similar to Helvetica but ~l~ is distinct from ~I~.
@@ -82,6 +78,7 @@ Font family by Mozilla with sans-serif, serif and monospaced variants ([[http://
 The monospaced variant has a fork *Fira Code* ([[https://github.com/tonsky/FiraCode][Github]]) that adds ligatures and fixes line height inconsistencies with bold fonts.
 ** Fivo Sans
 Neo-grotesque typeface ([[https://www.behance.net/gallery/53653425/Fivo-Sans-Free-Font-Family][link]]).
+Has a display version Fivo Sans Modern ([[https://www.behance.net/gallery/54442585/Fivo-Sans-Modern-Free-Display-Font-Family][link]]).
 ** IBM Plex
 IBM's open-source corporate typeface ([[https://github.com/IBM/plex][Github]]). Has monospace, sans-serif and serif families. Distinctly IBM font designed to work well in various user interface environments.
 ** Input
@@ -121,6 +118,8 @@ The M and MN variants have monospaced half-width Latin glyphs with MN variant op
 Notes that Japanese glyphs are always monospaced full-width, and that line height for the font family is very tall.
 ** Merriweather
 Large x-height variable serif text face designed for screen reading ([[https://github.com/EbenSorkin/Merriweather][Github]]).
+** Millimetre
+Geometric sans display typeface similar to Eurostile ([[https://velvetyne.fr/fonts/millimetre/][link]], [[https://gitlab.com/StudioTriple/Millimetre/][Gitlab]]).
 ** Noto
 Massive font family by Google that aims to support all languages ([[https://www.google.com/get/noto/][link]]).
 Good choice as a fallback font for esoteric languages in Emacs ([[https://idiocy.org/emacs-fonts-and-fontsets.html][link]]).
@@ -142,8 +141,9 @@ Family of fonts commissioned by Google for Android and Chrome OS, and the recomm
 Family of fonts created by Adobe with monospaced ([[https://github.com/adobe-fonts/source-code-pro][Source Code Pro]]), sans proportional ([[https://github.com/adobe-fonts/source-sans-pro][Source Sans Pro]]) and Serif ([[https://github.com/adobe-fonts/source-serif-pro][Source Serif Pro]]) variants.
 Readable at smaller size when antialiasing is turned off.
 Also has a Pan-CJK version ([[https://github.com/adobe-fonts/source-han-mono][Source Han Mono]], [[https://github.com/adobe-fonts/source-han-sans][Source Han Sans]], [[https://github.com/adobe-fonts/source-han-serif][Source Han Serif]]).
-** Space Grotesk
-Sans typeface derived from Space Mono ([[https://fonts.floriankarsten.com/space-grotesk][link]], [[https://github.com/floriankarsten/space-grotesk][Github]]).
+** Space Grotesk/Mono
+Space Mono is a monospace font designed for Google Design ([[https://fonts.google.com/specimen/Space+Mono][link]], [[https://github.com/googlefonts/spacemono][Github]]).
+Space Grotesk is a sans-serif typeface derived from Space Mono ([[https://fonts.floriankarsten.com/space-grotesk][link]], [[https://github.com/floriankarsten/space-grotesk][Github]]).
 ** Symbola
 Font from the [[https://dn-works.com/ufas/][Unicode Fonts for Ancient Scripts]] project.
 Symbola focuses on Multilingual support and Symbol blocks in [[https://unicode.org/standard/standard.html][The Unicode Standard]].
@@ -157,45 +157,6 @@ Free for personal use.
 ** Syne
 Typeface designed for the Synesthésie art center in Saint-Denis suburb of Paris ([[https://www.lucasdescroix.fr/words/atypical-gathering][link]], [[https://gitlab.com/bonjour-monde/fonderie/syne-typeface][Gitlab]]).
 It has five subfamilies with distinct styles: Extra (display), Regular (regular text), Bold (bold text), Italic (handwritten look) and Mono (distorted look).
-** Wremena
-Serif typeface similar to Times New Roman but with sharp, triangular serifs are more pronounced in heavier weights ([[http://typefaces.temporarystate.net/preview/Wremena][link]]).
-* Display fonts
-Aimed for use at large sizes for headlines and titles.
-** Azonix
-Modern display sans font with a science-fiction feel ([[https://www.dafont.com/azonix.font][link]]).
-** BluuNext
-Bold serif display typeface alternative to Time New Roman or Caslon Graphique ([[https://velvetyne.fr/fonts/bluu/][link]], [[https://github.com/velvetyne/BluuNext][Github]]).
-** Cantique
-Calligraphic yet geometric typeface inspired by post-Romantic French bookplates ([[https://velvetyne.fr/fonts/cantique/][link]]).
-** Colus
-Display sans font inspired by stone and wooden carved letter incriptions ([[https://www.fontfabric.com/fonts/colus/][link]]).
-** Espoir
-Display sans font inspired by late 19th century engraving fonts ([[https://www.behance.net/gallery/63716173/Espoir-Font-Family-(Free-Download)][link]]).
-Free for personal and non-profit project use.
-** Fivo Sans Modern
-Display version of Fivo Sans ([[https://www.behance.net/gallery/54442585/Fivo-Sans-Modern-Free-Display-Font-Family][link]]).
-** Kraft Mono
-Monospace geometric typeface well-suited as a headliner/display face ([[http://chasse-ouverte.erg.be/fonts/kraft-mono/][link]]).
-** K95 Alphabet
-Geometric Art Deco-esque display font ([[http://www.k95.it/k95_alfabeto_free_font/][link]]).
-Open usage except that ~K~, ~9~ and ~5~ cannot be used to design a brand or logo.
-** Le Murmure
-Condensed sans display typeface designed for French design agency Murmure ([[https://velvetyne.fr/fonts/le-murmure/][link]], [[https://gitlab.com/velvetyne/murmure][Gitlab]]).
-** Majesti Banner
-Serif display typeface ([[http://www.losttype.com/font/?name=majesti_banner][link]]).
-Has high contrast letterforms, ball terminals and ligatures.
-Pay-what-you-want for personal use.
-** Millimetre
-Geometric sans display typeface similar to Eurostile ([[https://velvetyne.fr/fonts/millimetre/][link]], [[https://gitlab.com/StudioTriple/Millimetre/][Gitlab]]).
-** Morganite
-Super condensed display sans typeface ([[https://gumroad.com/l/jPYXU][link]]).
-** Optician Sans
-Uppercase display sans typeface based on historical eye charts and optotypes ([[https://optician-sans.com/][link]], [[https://github.com/anewtypeofinterference/Optician-Sans][Github]]).
-** Playfair Display
-Transitional display serif typeface ([[https://fonts.google.com/specimen/Playfair+Display][link]], [[https://github.com/clauseggers/Playfair-Display][Github]]).
-Pairs well with the Georgia typeface as body text.
-** Space Mono
-Monospace font designed for Google Design ([[https://fonts.google.com/specimen/Space+Mono][link]], [[https://github.com/googlefonts/spacemono][Github]]).
 * Links
 - [[https://aplwiki.com/wiki/Fonts][APL Fonts]]
 - [[https://beautifulwebtype.com/][Beautiful Web Type]]
