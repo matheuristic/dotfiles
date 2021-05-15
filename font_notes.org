@@ -166,4 +166,5 @@ It has five subfamilies with distinct styles: Extra (display), Regular (regular 
 - [[https://open-foundry.com/fonts][Open Foundry]]
 - [[http://luc.devroye.org/fonts.html][On snot and fonts / Luc Devroye]]
 - [[https://www.theleagueofmoveabletype.com/][The League of Moveable Type – the first open-source font foundry]] ([[https://github.com/theleagueof][Github]])
+- [[https://int10h.org/oldschool-pc-fonts/][The Ultimate Oldschool PC Font Pack]]
 - [[https://velvetyne.fr/][Velvetyne]]
