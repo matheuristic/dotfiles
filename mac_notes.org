@@ -126,7 +126,7 @@ franciscolourenco/done
 jethrokuan/z
 jorgebucaran/fish-bax
 jorgebucaran/fish-nvm
-rafaelrinaldi/pure
+jorgebucaran/hydro
 #+end_example
 - The [[https://github.com/franciscolourenco/done][done fish package]] enables notifications when long running
   processes complete and the terminal window is not in the foreground.

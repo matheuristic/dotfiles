@@ -482,7 +482,7 @@ Examples showing installation of some recommended fish packages.
 #+begin_example
 fisher add jethrokuan/z
 fisher add jorgebucaran/fish-bax
-fisher add rafaelrinaldi/pure
+fisher add jorgebucaran/hydro
 #+end_example
 * Install DevSkim CLI
 DevSkim performs static code analysis for potential security issues
@@ -528,7 +528,7 @@ wget https://languagetool.org/download/ngram-data/ngrams-en-20150817.zip
 unzip ngrams-en-20150817.zip
 rm ngrams-en-20150817.zip
 #+end_example
-* Install firejail
+* Install firejail (optional)
 [[https://firejail.wordpress.com/][Firejail]] provides the ability to run applications in a sandbox.
 Installing the recommended packages end up pulling in a lot of
 dependencies, so it is probably better to just keep to the base
@@ -686,18 +686,6 @@ graphical view into disk usage by the different elements. It is useful
 for identifying elements that are using heavy amounts of disk space.
 #+begin_example
 sudo apt install baobab --no-install-recommends
-#+end_example
-* Install neuron (optional)
-[[https://github.com/srid/neuron][Neuron]] is a zettelkasten app.
-
-Download neuron-linux-bundle (updated nightly) from
-https://github.com/srid/neuron/releases/tag/nightly
-and symlink it to =neuron= somewhere on the ~$PATH~.
-#+begin_example
-wget https://github.com/srid/neuron/releases/download/nightly/neuron-linux-bundle
-chmod +x neuron-linux-bundle
-cd ~/.local/bin
-ln -s /path/to/neuron-linux-bundle neuron
 #+end_example
 * Upgrading Debian packages
 #+begin_example
