@@ -25,7 +25,10 @@ hook global InsertCompletionHide .* %{ unmap window insert <tab> <c-n>; unmap wi
 
 # IDE setup, see https://github.com/mawww/kakoune/wiki/IDE
 # Start the editor using "kak -e ide" to call this automatically
-def ide -docstring "Launch IDE window configuration" %{
+define-command ide \
+    -params 0 \
+    -docstring "Launch IDE window configuration" \
+%{
     rename-client main
     set global jumpclient main
 
@@ -46,12 +49,25 @@ def ide -docstring "Launch IDE window configuration" %{
 }
 
 # Remove trailing whitespace, from https://github.com/occivink/config
-def remove-trailing-whitespace -docstring "Remove trailing whitespace in buffer" %{
+define-command remove-trailing-whitespace \
+    -params 0 \
+    -docstring "Remove trailing whitespace in buffer" \
+%{
     try %{
         execute-keys -draft '%<a-s>ghgl<a-i><space>d'
         echo -markup "{Information}Removed trailing whitespace"
     } catch %{
         echo -markup "{Information}No trailing whitespace to remove"
+    }
+}
+
+# Count words in selection, adapted from https://discuss.kakoune.com/t/a-simple-word-count-command/1140/3
+define-command word-count \
+    -params 0 \
+    -docstring "Count words in selection using 'wc'" \
+%{
+    evaluate-commands -client %val{client} echo %sh{
+        printf '%s' "$kak_selection" | wc
     }
 }
 
@@ -61,6 +77,7 @@ map global bufs n ': buffer-next<ret>'                   -docstring "buffer next
 map global bufs p ': buffer-previous<ret>'               -docstring "buffer prev"
 map global bufs d ': delete-buffer<ret>'                 -docstring "buffer del"
 map global bufs r ': rename-buffer '                     -docstring "buffer rename"
+map global bufs w ': eval -draft %{ exec ''%'' ; eval word-count}<ret>' -docstring "buffer word count (wc)"
 map global bufs F ': format-buffer<ret>'                 -docstring "format buffer"
 map global bufs W ': remove-trailing-whitespace<ret>'    -docstring "remove trailing whitespace"
 map global bufs R ': autorestore-restore-buffer<ret>'    -docstring "restore buffer backup"
@@ -110,16 +127,16 @@ map global user c ': comment-line<ret>'                      -docstring "(un)com
 map global user C ': comment-block<ret>'                     -docstring "(un)comment sel using block comments"
 map global user e ': evaluate-commands %val{selection}<ret>' -docstring "evaluate region as kakoune commands"
 # User modes
-map global user b ': enter-user-mode bufs<ret>'              -docstring "⯈ buffers mode"
-map global user g ': enter-user-mode git<ret>'               -docstring "⯈ git mode"
-map global user L ': enter-user-mode lint<ret>'              -docstring "⯈ lint mode"
-map global user S ': enter-user-mode settings<ret>'          -docstring "⯈ settings mode"
-map global user V ': enter-user-mode visual<ret>'            -docstring "⯈ visual mode"
+map global user b ': enter-user-mode bufs<ret>'              -docstring "> buffers mode"
+map global user g ': enter-user-mode git<ret>'               -docstring "> git mode"
+map global user L ': enter-user-mode lint<ret>'              -docstring "> lint mode"
+map global user S ': enter-user-mode settings<ret>'          -docstring "> settings mode"
+map global user V ': enter-user-mode visual<ret>'            -docstring "> visual mode"
 
 # LSP support
 eval %sh{kak-lsp --kakoune -s $kak_session}                  # Not needed if you load it with plug.kak.
 lsp-enable
-map global user l ': enter-user-mode lsp<ret>'               -docstring '⯈ lsp mode'
+map global user l ': enter-user-mode lsp<ret>'               -docstring '> lsp mode'
 
 # Load machine-local and directory-local Kakoune config file
 hook global BufCreate (.*/)?(\.?kakrc\.local) %{
