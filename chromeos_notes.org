@@ -204,6 +204,23 @@ and ~unar~ for extracting files from archives.
 #+begin_example
 sudo apt install unar
 #+end_example
+* Install Wayland clipboard tools
+ChromeOS uses the Wayland display server, so copying and pasting in
+and out of the Crostini container is through the Wayland clipboard.
+Generally, this can be done using [[https://github.com/bugaevc/wl-clipboard][wl-clipboard]] (see [[https://www.reddit.com/r/chromeos/comments/kf3fxo/linux_beta_penguin_how_to_copy_file_contents_from/][link]]) version
+~2.0.0~ or greater. If the version installable via ~apt~ is less than
+this, the [[https://packages.debian.org/sid/wl-clipboard][Debian Sid package]] can be downloaded and installed using
+~dpkg~. The following example shows this (replace the version number
+as necessary):
+#+begin_example
+wget http://ftp.us.debian.org/debian/pool/main/w/wl-clipboard/wl-clipboard_2.0.0-1_amd64.deb -O wl-clipboard.deb
+sudo dpkg -i wl-clipboard.deb
+#+end_example
+Note that the Crostini terminal has native support for doing this
+manually, where selecting a region using a mouse will copy to the
+Wayland clipboard from the terminal and ~C-S-v~ will paste from the
+Wayland clipboard into the terminal. Some programs like Emacs also
+support copy and pasting from the Wayland clipboard automatically.
 * Install build tools
 Make sure C/C++ compilation tools are installed.
 #+begin_example
@@ -233,6 +250,44 @@ conda create -n myenv
 The following sections assume miniforge installed to the default
 directory =~/miniforge3/=. (The default directory for miniconda
 is =~/miniconda3/= if that is installed instead.)
+* Install Kakoune
+[[https://kakoune.org/][Kakoune]] is a modern editor inspired by Vim. Use ~stow~ to install the
+~kakoune~ config files.
+#+begin_example
+stow -t $HOME --no-folding kakoune
+#+end_example
+For an up-to-date version, build from [[https://github.com/mawww/kakoune][source]]. This requires the
+following Debian packages be installed.
+#+begin_example
+sudo apt install build-essential libncurses-dev git
+#+end_example
+Clone the repository, git out the latest stable version, build the
+binaries and install it. The instructions below install the binaries
+to the ~$HOME/.local~ prefix directory, so change it as needed.
+Alternatively, use the provided ~install-kakoune.sh~ script in the
+Kakoune config directory which does the steps below.
+#+begin_example
+git clone https://github.com/mawww/kakoune.git
+cd kakoune/src
+make
+make man
+PREFIX=$HOME/.local make install
+cd ../..
+rm -rf kakoune
+#+end_example
+Download the latest [[https://github.com/kak-lsp/kak-lsp][kak-lsp]] binary and copy it to a path location. The
+instructions below installs ~kak-lsp~ binary to ~$HOME/.local~ so
+change it as needed. Alternatively, use the provided
+~install-kak-lsp.sh~ script in the Kakoune config directory which does
+the steps below.
+#+begin_example
+mkdir tmp-kak-lsp && cd tmp-kak-lsp
+wget https://github.com/kak-lsp/kak-lsp/releases/download/v10.0.0/kak-lsp-v10.0.0-x86_64-unknown-linux-musl.tar.gz -O kak-lsp.tar.gz
+tar xzf kak-lsp.tar.gz
+mv kak-lsp $HOME/.local/bin
+cd .. && rm -rf tmp-kak-lsp
+#+end_example
+Any required LSP servers should be installed manually (e.g. Pyright should be installed using ~npm~).
 * Install Emacs
 Make sure conda is installed.
 #+begin_example
