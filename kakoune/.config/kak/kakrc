@@ -2,6 +2,9 @@
 
 # Don't show an assistant graphic
 set-option global ui_options ncurses_assistant=none
+# When exiting insert, don't automatically remove trailing whitespace
+# See https://github.com/mawww/kakoune/issues/2175
+set-option global disabled_hooks .*-trim-indent
 
 # Line numbers
 add-highlighter global/number-lines number-lines -hlcursor
@@ -15,9 +18,32 @@ add-highlighter global/wrap wrap -word -indent
 # Colorscheme
 colorscheme gruvbox
 
-# <tab>/<s-tab> for insert completion selection
+# <tab>/<s-tab> for insert completion selection (consistent with command line)
+# Use <C-v><tab> to insert a tab character
 hook global InsertCompletionShow .* %{   map window insert <tab> <c-n>;   map window insert <s-tab> <c-p> }
 hook global InsertCompletionHide .* %{ unmap window insert <tab> <c-n>; unmap window insert <s-tab> <c-p> }
+
+# IDE setup, see https://github.com/mawww/kakoune/wiki/IDE
+# Start the editor using "kak -e ide" to call this automatically
+def ide -docstring "Launch IDE window configuration" %{
+    rename-client main
+    set global jumpclient main
+
+    new rename-client tools
+    set global toolsclient tools
+
+    # new rename-client docs
+    # set global docsclient docs
+
+    repl-new
+
+    nop %sh{
+        if [ "$TMUX" != "" ]; then
+            tmux select-layout main-vertical
+            tmux select-pane -t 0
+        fi
+    }
+}
 
 # Remove trailing whitespace, from https://github.com/occivink/config
 def remove-trailing-whitespace -docstring "Remove trailing whitespace in buffer" %{
@@ -43,6 +69,7 @@ declare-user-mode git
 map global git b ': repl tig blame -C "+%val{cursor_line}" -- "%val{buffile}"<ret>' -docstring "git blame selection"
 map global git c ': git commit<ret>'                     -docstring "git commit"
 map global git d ': git diff<ret>'                       -docstring "git diff"
+map global git g ': git '                                -docstring "git prompt"
 map global git l ': repl-new tig log -- "%val{buffile}"<ret>' -docstring "git log (file)"
 map global git L ': repl-new tig<ret>'                   -docstring "git log (project)"
 map global git s ': repl-new tig status<ret>'            -docstring "git status"
@@ -94,5 +121,11 @@ eval %sh{kak-lsp --kakoune -s $kak_session}                  # Not needed if you
 lsp-enable
 map global user l ': enter-user-mode lsp<ret>'               -docstring '⯈ lsp mode'
 
-# Load local Kakoune config file
-try %{ source "%val{config}/local.kak" }
+# Load machine-local and directory-local Kakoune config file
+hook global BufCreate (.*/)?(\.?kakrc\.local) %{
+    set-option buffer filetype kak
+}
+# Machine-local config file - $HOME/.config/kak/kakrc.local
+try %{ source "%val{config}/kakrc.local" }
+# Directory-local config file (e.g. for projects) - .kakrc.local
+try %{ source .kakrc.local }
