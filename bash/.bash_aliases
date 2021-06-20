@@ -24,3 +24,5 @@ command -v sha1sum > /dev/null || alias sha1sum="shasum"  # alias `shasum` to `s
 # Intuitive map function.  E.g. list directories containing some file:
 # $ find . -name .gitattributes | map dirname
 alias map="xargs -n1"
+# Show disk usage for current directory and its child directories, sorted ascending
+alias dusorted="du -sh * | sort -rh"
