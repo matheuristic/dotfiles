@@ -122,11 +122,11 @@ tin
 - [[https://github.com/jorgebucaran/fisher][fisher]] can be used to manage fish packages.
 *** Recommended packages
 #+begin_example
+edc/bass
 franciscolourenco/done
 jethrokuan/z
-jorgebucaran/fish-bax
-jorgebucaran/fish-nvm
-jorgebucaran/hydro
+pure-fish/pure
+FabioAntunes/fish-nvm
 #+end_example
 - The [[https://github.com/franciscolourenco/done][done fish package]] enables notifications when long running
   processes complete and the terminal window is not in the foreground.
@@ -143,16 +143,13 @@ jorgebucaran/hydro
 
 /path/to/terminal-notifier.app/Contents/MacOS/terminal-notifier $@
 #+end_src
-- The [[https://github.com/jorgebucaran/fish-bax][fish-bax package]] provides a ~bax~ command for running bash
+- The [[https://github.com/edc/bass][bass package]] provides a ~bass~ command for running bash
   scripts and replaying the environment changes in fish. For example:
 #+begin_example
-$ bax source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+$ bass source "$HOME/.nix-profile/etc/profile.d/nix.sh"
 #+end_example
-- The [[https://github.com/jorgebucaran/fish-nvm][fish-nvm package]] provides a pure-fish Node.js version manager.
-  For example:
-#+begin_example
-$ nvm use lts
-#+end_example
+- The [[https://github.com/jorgebucaran/fish-nvm][fish-nvm package]] provides a wrapper for the [[https://github.com/nvm-sh/nvm][NVM]] Node.js version
+  manager. NVM should be installed in the usual way with Bash or ZSH.
 - The [[https://github.com/jethrokuan/fzf][fzf fish package]] integrates fish with the [[https://github.com/junegunn/fzf][fzf]] tool (which needs
   to be installed on the system). Useful bindings:
 | Binding | Description                                        |

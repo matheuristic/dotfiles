@@ -198,6 +198,16 @@ par2 create some_files.par2 file1 file2 file3
 par2 verify some_files.par2
 par2 repair some_files.par2
 #+end_example
+* Install tmux
+[[https://github.com/tmux/tmux][tmux]] is a terminal multiplexer that enables multiple terminal sessions
+to be run in the same window and also allows those sessions to be detached, run in the background, and re-attached later.
+#+begin_example
+sudo apt install tmux
+#+end_example
+This repository has a tmux config that can be installed with ~stow~.
+#+begin_example
+stow -t $HOME --no-folding tmux
+#+end_example
 * Install The Unarchiver
 This package provides CLI tools ~lsar~ for listing archive contents
 and ~unar~ for extracting files from archives.
@@ -250,6 +260,34 @@ conda create -n myenv
 The following sections assume miniforge installed to the default
 directory =~/miniforge3/=. (The default directory for miniconda
 is =~/miniconda3/= if that is installed instead.)
+* Install Emacs
+Make sure conda is installed.
+#+begin_example
+conda activate myenv
+conda install emacs
+conda deactivate
+wget -O ~/.mime.types https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
+mkdir -p ~/.local/bin && cd ~/.local/bin
+ln -s ~/miniforge3/envs/myenv/bin/emacs
+ln -s ~/miniforge3/envs/myenv/bin/emacsclient
+#+end_example
+Download a PNG version of the Emacs icon and save it to
+=~/.local/bin/share/icons/emacs.png= (rename as desired).
+
+Create ~/.local/bin/share/applications/emacs.desktop with the
+following contents. Change USERNAME and PNG icon path as needed.
+#+BEGIN_SRC emacs-lisp
+[Desktop Entry]
+Version=1.0
+Name=Emacs
+GenericName=Text Editor
+Comment=View and edit files
+Exec=/home/USERNAME/miniforge3/envs/myenv/bin/emacs %F
+Type=Application
+Terminal=false
+Categories=Utility;Development;TextEditor;
+Icon=/home/USERNAME/.local/share/icons/emacs.png
+#+END_SRC
 * Install Kakoune
 [[https://kakoune.org/][Kakoune]] is a modern editor inspired by Vim. Use ~stow~ to install the
 ~kakoune~ config files.
@@ -287,35 +325,10 @@ tar xzf kak-lsp.tar.gz
 mv kak-lsp $HOME/.local/bin
 cd .. && rm -rf tmp-kak-lsp
 #+end_example
-Any required LSP servers should be installed manually (e.g. Pyright should be installed using ~npm~).
-* Install Emacs
-Make sure conda is installed.
-#+begin_example
-conda activate myenv
-conda install emacs
-conda deactivate
-wget -O ~/.mime.types https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
-mkdir -p ~/.local/bin && cd ~/.local/bin
-ln -s ~/miniforge3/envs/myenv/bin/emacs
-ln -s ~/miniforge3/envs/myenv/bin/emacsclient
-#+end_example
-Download a PNG version of the Emacs icon and save it to
-=~/.local/bin/share/icons/emacs.png= (rename as desired).
-
-Create ~/.local/bin/share/applications/emacs.desktop with the
-following contents. Change USERNAME and PNG icon path as needed.
-#+BEGIN_SRC emacs-lisp
-[Desktop Entry]
-Version=1.0
-Name=Emacs
-GenericName=Text Editor
-Comment=View and edit files
-Exec=/home/USERNAME/miniforge3/envs/myenv/bin/emacs %F
-Type=Application
-Terminal=false
-Categories=Utility;Development;TextEditor;
-Icon=/home/USERNAME/.local/share/icons/emacs.png
-#+END_SRC
+Any required [[https://microsoft.github.io/language-server-protocol/][LSP]] servers should be installed manually (e.g. [[https://github.com/microsoft/pyright][Pyright]]
+should be installed using [[https://www.npmjs.com/][npm]], in turn best installed using [[https://github.com/nvm-sh/nvm][NVM]]). It
+is also highly recommended to install and run Kakoune (~kak~) from
+within a Tmux session.
 * Install NVM
 Easiest to do a Git install of NVM ([[https://github.com/nvm-sh/nvm#git-install][link]]).
 #+begin_example
@@ -535,10 +548,12 @@ wget https://github.com/jorgebucaran/fisher/raw/main/fisher.fish
 #+end_example
 Examples showing installation of some recommended fish packages.
 #+begin_example
+fisher add edc/bass
 fisher add jethrokuan/z
-fisher add jorgebucaran/fish-bax
-fisher add jorgebucaran/hydro
+fisher add pure-fish/pure
+fisher add FabioAntunes/fish-nvm
 #+end_example
+[[https://github.com/FabioAntunes/fish-nvm][fish-nvm]] in the example packages above requires [[https://github.com/nvm-sh/nvm][NVM]] be installed.
 * Install DevSkim CLI
 DevSkim performs static code analysis for potential security issues
 for a broad range of languages including C, C++, Python and SQL.
