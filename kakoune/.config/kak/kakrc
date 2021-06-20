@@ -26,9 +26,11 @@ hook global InsertCompletionHide .* %{ unmap window insert <tab> <c-n>; unmap wi
 # IDE setup, see https://github.com/mawww/kakoune/wiki/IDE
 # Start the editor using "kak -e ide" to call this automatically
 define-command ide \
-    -params 0 \
+    -params 0..1 \
     -docstring "Launch IDE window configuration" \
 %{
+    try %{ rename-session %arg{1} }
+
     rename-client main
     set global jumpclient main
 
@@ -137,6 +139,9 @@ map global user V ': enter-user-mode visual<ret>'            -docstring "> visua
 eval %sh{kak-lsp --kakoune -s $kak_session}                  # Not needed if you load it with plug.kak.
 lsp-enable
 map global user l ': enter-user-mode lsp<ret>'               -docstring '> lsp mode'
+
+# Load separate Kakoune config files
+try %{ source "%val{config}/rc/j.kak" }                      # J language
 
 # Load machine-local and directory-local Kakoune config file
 hook global BufCreate (.*/)?(\.?kakrc\.local) %{
