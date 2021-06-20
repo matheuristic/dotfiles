@@ -43,10 +43,11 @@ declare-user-mode git
 map global git b ': repl tig blame -C "+%val{cursor_line}" -- "%val{buffile}"<ret>' -docstring "git blame selection"
 map global git c ': git commit<ret>'                     -docstring "git commit"
 map global git d ': git diff<ret>'                       -docstring "git diff"
-map global git l ': repl tig log -- "%val{buffile}"<ret>' -docstring "git log (file)"
-map global git L ': repl tig<ret>'                       -docstring "git log (project)"
-map global git s ': repl tig status<ret>'                -docstring "git status"
+map global git l ': repl-new tig log -- "%val{buffile}"<ret>' -docstring "git log (file)"
+map global git L ': repl-new tig<ret>'                   -docstring "git log (project)"
+map global git s ': repl-new tig status<ret>'            -docstring "git status"
 map global git t ': git diff --staged<ret>'              -docstring "git diff (staged)"
+map global git w ': git add<ret>: git update-diff<ret>'  -docstring "git add and update diff"
 
 declare-user-mode lint
 map global lint e ': lint-enable<ret>'                   -docstring 'lint enable'
@@ -70,8 +71,8 @@ map global visual w ': add-highlighter global/show-whitespaces show-whitespaces<
 map global visual W ': remove-highlighter global/show-whitespaces<ret>'               -docstring "show whitespace off"
 
 # REPL
-map global user r ': repl<ret>'                              -docstring "REPL create"
-map global user s ': send-text<ret>'                         -docstring "REPL send text"
+map global user r ': repl-new<ret>'                          -docstring "REPL create"
+map global user s ': repl-send-text<ret>'                    -docstring "REPL send text"
 # Window system clipboard integration
 map global user y "|%val{config}/bin/clip-copy.sh<ret>"      -docstring "clip-yank"
 map global user P "!%val{config}/bin/clip-paste.sh<ret>"     -docstring "clip-paste before"
@@ -83,6 +84,7 @@ map global user C ': comment-block<ret>'                     -docstring "(un)com
 map global user e ': evaluate-commands %val{selection}<ret>' -docstring "evaluate region as kakoune commands"
 # User modes
 map global user b ': enter-user-mode bufs<ret>'              -docstring "⯈ buffers mode"
+map global user g ': enter-user-mode git<ret>'               -docstring "⯈ git mode"
 map global user L ': enter-user-mode lint<ret>'              -docstring "⯈ lint mode"
 map global user S ': enter-user-mode settings<ret>'          -docstring "⯈ settings mode"
 map global user V ': enter-user-mode visual<ret>'            -docstring "⯈ visual mode"
