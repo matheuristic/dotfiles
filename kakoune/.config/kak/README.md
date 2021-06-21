@@ -34,3 +34,26 @@ If installing on MacOS, follow instructions above to symlink
 ```shell
 ./install-kak-lsp.sh
 ```
+
+## repl-new and repl-send-text workaround for Kakoune version <= 2020.09.01
+
+For Kakoune version `2020.09.01` or earlier, the aliases `repl-new` and
+`repl-send-text` are named `repl` and `send-text` respectively. The provided
+`kakrc` uses `repl-new` and `repl-send-text`, so they need to be defined. To
+do this, create a local config file `$HOME/.config/kak/kakrc.local` with
+the following contents.
+
+```
+hook global ModuleLoaded tmux-repl %{
+    alias global repl-new tmux-repl-horizontal
+    alias global repl-send-text tmux-send-text
+}
+hook global ModuleLoaded kitty-repl %{
+    alias global repl-new kitty-repl
+    alias global repl-send-text kitty-send-text
+}
+hook global ModuleLoaded x11-repl %{
+    alias global repl-new x11-repl
+    alias global repl-send-text x11-send-text
+}
+```
