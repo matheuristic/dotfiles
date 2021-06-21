@@ -128,6 +128,7 @@ map global user R "|%val{config}/bin/clip-paste.sh<ret>"     -docstring "clip-re
 map global user c ': comment-line<ret>'                      -docstring "(un)comment sel using line comments"
 map global user C ': comment-block<ret>'                     -docstring "(un)comment sel using block comments"
 map global user e ': evaluate-commands %val{selection}<ret>' -docstring "evaluate region as kakoune commands"
+map global user q '|fmt --width 80<ret>'                     -docstring "wrap to 80 columns"  # like 'gq' in vim
 # User modes
 map global user b ': enter-user-mode bufs<ret>'              -docstring "> buffers mode"
 map global user g ': enter-user-mode git<ret>'               -docstring "> git mode"

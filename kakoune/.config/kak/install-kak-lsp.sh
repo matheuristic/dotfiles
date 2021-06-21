@@ -5,25 +5,29 @@
 BINDIR=$HOME/.local/bin
 mkdir -p "${BINDIR}"
 
-XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
-CFGDIR="${XDG_CONFIG_HOME}/kak-lsp"
-
 # kak-lsp https://github.com/kak-lsp/kak-lsp
 VERSION=10.0.0
+
 case $(uname) in
   Linux)
     ARCH=unknown-linux-musl
+    XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
     ;;
   Darwin)
     ARCH=apple-darwin
+    # See https://docs.rs/dirs/3.0.2/dirs/fn.config_dir.html
+    XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/Library/Preferences}
     ;;
   *)
     echo "unsupported system architecture"
     exit 1
     ;;
 esac
+
+CFGDIR="${XDG_CONFIG_HOME}/kak-lsp"
 TMPDIR=kak-lsp-v${VERSION}
 TMPFILE=kak-lsp-v${VERSION}-x86_64-${ARCH}.tar.gz
+
 URL="https://github.com/kak-lsp/kak-lsp/releases/download/v${VERSION}/${TMPFILE}"
 echo "Create work directory: ${TMPDIR}"
 mkdir -p ${TMPDIR}
