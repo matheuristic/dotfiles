@@ -117,7 +117,7 @@ map global visual w ': add-highlighter global/show-whitespaces show-whitespaces<
 map global visual W ': remove-highlighter global/show-whitespaces<ret>'               -docstring "show whitespace off"
 
 # REPL
-map global user r ': repl-new<ret>'                          -docstring "REPL create"
+map global user <a-r> ': repl-new<ret>'                      -docstring "REPL create"
 map global user s ': repl-send-text<ret>'                    -docstring "REPL send text"
 # Window system clipboard integration
 map global user y "|%val{config}/bin/clip-copy.sh<ret>"      -docstring "clip-yank"
