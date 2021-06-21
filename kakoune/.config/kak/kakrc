@@ -23,9 +23,6 @@ colorscheme gruvbox
 hook global InsertCompletionShow .* %{   map window insert <tab> <c-n>;   map window insert <s-tab> <c-p> }
 hook global InsertCompletionHide .* %{ unmap window insert <tab> <c-n>; unmap window insert <s-tab> <c-p> }
 
-# Alias repl-new to tmux-repl-horizontal (for Kakoune versions <= 2020.09.01)
-try %{ alias global repl-new tmux-repl-horizontal }
-
 # IDE setup, see https://github.com/mawww/kakoune/wiki/IDE
 # Start the editor using "kak -e ide" to call this automatically
 define-command ide \
