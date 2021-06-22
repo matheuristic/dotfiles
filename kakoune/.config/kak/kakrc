@@ -120,7 +120,7 @@ map global visual W ': remove-highlighter global/show-whitespaces<ret>'         
 map global user <a-r> ': repl-new<ret>'                      -docstring "REPL create"
 map global user s ': repl-send-text<ret>'                    -docstring "REPL send text"
 # Window system clipboard integration
-map global user y "|%val{config}/bin/clip-copy.sh<ret>"      -docstring "clip-yank"
+map global user y "<a-|>%val{config}/bin/clip-copy.sh<ret>"  -docstring "clip-yank"
 map global user P "!%val{config}/bin/clip-paste.sh<ret>"     -docstring "clip-paste before"
 map global user p "<a-!>%val{config}/bin/clip-paste.sh<ret>" -docstring "clip-paste after"
 map global user R "|%val{config}/bin/clip-paste.sh<ret>"     -docstring "clip-replace"
@@ -139,6 +139,7 @@ map global user V ': enter-user-mode visual<ret>'            -docstring "> visua
 # LSP support
 eval %sh{kak-lsp --kakoune -s $kak_session}                  # Not needed if you load it with plug.kak.
 lsp-enable
+lsp-auto-hover-enable
 map global user l ': enter-user-mode lsp<ret>'               -docstring '> lsp mode'
 
 # Load separate Kakoune config files
