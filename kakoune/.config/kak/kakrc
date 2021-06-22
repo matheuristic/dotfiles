@@ -85,7 +85,8 @@ map global bufs W ': remove-trailing-whitespace<ret>'    -docstring "remove trai
 map global bufs R ': autorestore-restore-buffer<ret>'    -docstring "restore buffer backup"
 
 declare-user-mode git
-map global git b ': repl tig blame -C "+%val{cursor_line}" -- "%val{buffile}"<ret>' -docstring "git blame selection"
+map global git b ': git blame<ret>'                      -docstring "git blame enable"
+map global git B ': git hide-blame<ret>'                 -docstring "git blame disable"
 map global git c ': git commit<ret>'                     -docstring "git commit"
 map global git d ': git diff<ret>'                       -docstring "git diff"
 map global git g ': git '                                -docstring "git prompt"
