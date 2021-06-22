@@ -139,7 +139,6 @@ map global user V ': enter-user-mode visual<ret>'            -docstring "> visua
 # LSP support
 eval %sh{kak-lsp --kakoune -s $kak_session}                  # Not needed if you load it with plug.kak.
 lsp-enable
-lsp-auto-hover-enable
 map global user l ': enter-user-mode lsp<ret>'               -docstring '> lsp mode'
 
 # Load separate Kakoune config files
