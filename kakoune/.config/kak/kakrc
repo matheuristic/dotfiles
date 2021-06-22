@@ -90,9 +90,9 @@ map global git B ': git hide-blame<ret>'                 -docstring "git blame d
 map global git c ': git commit<ret>'                     -docstring "git commit"
 map global git d ': git diff<ret>'                       -docstring "git diff"
 map global git g ': git '                                -docstring "git prompt"
-map global git l ': repl-new tig log -- "%val{buffile}"<ret>' -docstring "git log (file)"
-map global git L ': repl-new tig<ret>'                   -docstring "git log (project)"
-map global git s ': repl-new tig status<ret>'            -docstring "git status"
+map global git l ': git log -- "%val{buffile}"<ret>'     -docstring "git log (file)"
+map global git L ': git log<ret>'                        -docstring "git log (project)"
+map global git s ': git status<ret>'                     -docstring "git status"
 map global git t ': git diff --staged<ret>'              -docstring "git diff (staged)"
 map global git w ': git add<ret>: git update-diff<ret>'  -docstring "git add and update diff"
 

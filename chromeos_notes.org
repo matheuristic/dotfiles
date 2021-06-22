@@ -198,12 +198,6 @@ par2 create some_files.par2 file1 file2 file3
 par2 verify some_files.par2
 par2 repair some_files.par2
 #+end_example
-* Install tig
-[[https://github.com/jonas/tig][tig]] is a text-mode interface to [[https://git-scm.com/][git]]. The Kakoune configuration below
-uses this program.
-#+begin_example
-sudo apt install tig
-#+end_example
 * Install tmux
 [[https://github.com/tmux/tmux][tmux]] is a terminal multiplexer that enables multiple terminal sessions
 to be run in the same window and also allows those sessions to be detached, run in the background, and re-attached later.
@@ -617,6 +611,11 @@ Sandbox applications by starting them via the ~firejail~ command.
 firejail [--profile=/path/to/firejail/profile] <command> [<options>]
 firejail firefox
 firejail vlc
+#+end_example
+* Install tig (optional)
+[[https://github.com/jonas/tig][tig]] is a text-mode interface to [[https://git-scm.com/][git]].
+#+begin_example
+sudo apt install tig
 #+end_example
 * Install J (optional)
 For development in [[https://www.jsoftware.com/][J]], install and configure the interpreter.
