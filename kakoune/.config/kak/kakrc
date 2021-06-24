@@ -99,16 +99,16 @@ map global git w ': git add<ret>: git update-diff<ret>'  -docstring "git add and
 declare-user-mode lint
 map global lint l ': lint-buffer<ret>'                   -docstring 'lint buffer'
 map global lint h ': lint-hide-diagnostics<ret>'         -docstring 'lint hide diagnostics'
-map global lint n ': lint-next-message<ret>'               -docstring 'lint next error'
-map global lint p ': lint-prev-message<ret>'               -docstring 'lint prev error'
+map global lint n ': lint-next-message<ret>'             -docstring 'lint next message'
+map global lint p ': lint-previous-message<ret>'         -docstring 'lint prev message'
 map global lint b ': b *lint-output*<ret>'               -docstring 'goto lint buffer'
 
 declare-user-mode settings
-map global settings o ': echo %opt{'                  -docstring 'echo option'
-map global settings r ': echo %reg{'                  -docstring 'echo register'
-map global settings v ': echo %val{'                  -docstring 'echo value'
-map global settings O ': set-option '                 -docstring 'set option'
-map global settings R ': set-register '               -docstring 'set register'
+map global settings o ': echo %opt{'                     -docstring 'echo option'
+map global settings r ': echo %reg{'                     -docstring 'echo register'
+map global settings v ': echo %val{'                     -docstring 'echo value'
+map global settings O ': set-option '                    -docstring 'set option'
+map global settings R ': set-register '                  -docstring 'set register'
 
 declare-user-mode visual
 map global visual m ': add-highlighter global/show-matching show-matching<ret>'       -docstring "show matching brackets on"
