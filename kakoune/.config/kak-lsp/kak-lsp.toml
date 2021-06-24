@@ -25,6 +25,12 @@ readonly = "default+d"
 # set to 0 to disable
 timeout = 1800 # seconds = 30 minutes
 
+[language.bash]
+filetypes = ["sh"]
+roots = [".git", ".hg"]
+command = "bash-language-server"
+args = ["start"]
+
 [language.c_cpp]
 filetypes = ["c", "cpp"]
 roots = ["compile_commands.json", ".clangd"]

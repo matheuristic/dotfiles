@@ -97,11 +97,10 @@ map global git t ': git diff --staged<ret>'              -docstring "git diff (s
 map global git w ': git add<ret>: git update-diff<ret>'  -docstring "git add and update diff"
 
 declare-user-mode lint
-map global lint e ': lint-enable<ret>'                   -docstring 'lint enable'
-map global lint E ': lint-disable<ret>'                  -docstring 'lint disable'
 map global lint l ': lint-buffer<ret>'                   -docstring 'lint buffer'
-map global lint n ': lint-next-error<ret>'               -docstring 'lint next error'
-map global lint p ': lint-prev-error<ret>'               -docstring 'lint prev error'
+map global lint h ': lint-hide-diagnostics<ret>'         -docstring 'lint hide diagnostics'
+map global lint n ': lint-next-message<ret>'               -docstring 'lint next error'
+map global lint p ': lint-prev-message<ret>'               -docstring 'lint prev error'
 map global lint b ': b *lint-output*<ret>'               -docstring 'goto lint buffer'
 
 declare-user-mode settings
@@ -151,6 +150,7 @@ try %{
 
 # Load separate Kakoune config files
 try %{ source "%val{config}/rc/j.kak" }                      # J language
+try %{ source "%val{config}/rc/sh.kak" }                     # bash/sh shell scripts
 
 # Load machine-local and directory-local Kakoune config file
 hook global BufCreate (.*/)?(\.?kakrc\.local) %{
