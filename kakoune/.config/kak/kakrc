@@ -156,24 +156,24 @@ try %{                                                # fzf.kak
             fi
         }
     }
-    map global user f ': fzf-mode<ret>' -docstring "> fzf"
+    map global user f ': fzf-mode<ret>'                  -docstring "> fzf"
 }
 
 # LSP support
 try %{
-    eval %sh{kak-lsp --kakoune -s $kak_session}                  # Not needed if you load it with plug.kak.
+    eval %sh{kak-lsp --kakoune -s $kak_session}          # Not needed if you load it with plug.kak.
     lsp-enable
     # entry point from user mode
-    map global user l ': enter-user-mode lsp<ret>'               -docstring '> lsp mode'
+    map global user l ': enter-user-mode lsp<ret>'       -docstring '> lsp mode'
     # extra mappings in lsp mode
-    map global lsp  <a-s> ': lsp-start<ret>'                     -docstring 'start session'
-    map global lsp  <a-d> ': lsp-disable<ret>'                   -docstring 'disable kak-lsp'
-    map global lsp  <a-e> ': lsp-enable<ret>'                    -docstring 'enable kak-lsp'
+    map global lsp  <a-s> ': lsp-start<ret>'             -docstring 'start session'
+    map global lsp  <a-d> ': lsp-disable<ret>'           -docstring 'disable kak-lsp'
+    map global lsp  <a-e> ': lsp-enable<ret>'            -docstring 'enable kak-lsp'
 }
 
 # Load separate Kakoune config files
-try %{ source "%val{config}/rc/j.kak" }                      # J language
-try %{ source "%val{config}/rc/sh.kak" }                     # bash/sh shell scripts
+try %{ source "%val{config}/rc/j.kak" }                  # J language
+try %{ source "%val{config}/rc/sh.kak" }                 # bash/sh shell scripts
 
 # Load machine-local and directory-local Kakoune config file
 hook global BufCreate (.*/)?(\.?kakrc\.local) %{
