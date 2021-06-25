@@ -5,7 +5,7 @@ for cmd in `echo "pbcopy wl-copy xclip xsel" | sed -e 's/ +/\n/g'`; do
 done
 case $clipboardtool in
     pbcopy)  paste="pbpaste";;                   # MacOS
-    wl-copy) paste="wl-paste";;                  # Linux (Wayland)
+    wl-copy) paste="wl-paste -n";;               # Linux (Wayland)
     xclip)   paste="xclip -o";;                  # Linux (X11)
     xsel)    paste="xsel --output --clipboard";; # Linux (X11)
     *)       echo "No supported clipboard tool" >&2; exit 1
