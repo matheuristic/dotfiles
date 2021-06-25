@@ -567,10 +567,10 @@ ln -s $HOME/miniforge3/envs/myenv/bin/bat $HOME/.local/bin/bat
 [[https://github.com/junegunn/fzf][fzf]] is a command-line fuzzy finder. Change the fzf version and paths
 below as appropriate.
 #+begin_example
-wget https://github.com/junegunn/fzf/releases/download/0.27.2/fzf-0.27.2-linux_amd64.tar.gz -O fzf.tar.gz
-tar xzf fzf.tar.gz
-mv fzf $HOME/.local/bin
-rm -f fzf.tar.gz
+conda activate myenv
+conda install fzf
+conda deactivate
+ln -s $HOME/miniforge3/envs/myenv/bin/fzf $HOME/.local/bin/fzf
 #+end_example
 * Install DevSkim CLI
 DevSkim performs static code analysis for potential security issues
