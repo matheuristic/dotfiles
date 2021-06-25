@@ -22,14 +22,34 @@ Install the next packages (Debian, modify as needed):
 - `build-essential`
 - `libncurses-dev`
 
+If an argument is provided to the script, it is interpreted as the Git tag
+to check out before compilation. Use it to specify a specific version to
+compile. If no argument is provided, the latest commit is used.
+
 ```shell
 ./install-kakoune.sh
+```
+
+or to compile for a specific Git tag (change `v2020.09.01` as appropriate)
+
+```shell
+./install-kakoune.sh v2020.09.01
+```
+
+## Installing kakoune plugins
+
+The plugin versions are specified in the shell script.
+
+```shell
+./install-plugins.sh
 ```
 
 ## Installing kak-lsp (LSP client)
 
 If installing on MacOS, follow instructions above to symlink
 `kak-lsp.toml` to the correct location.
+
+The `kak-lsp` version is specified in the shell script.
 
 ```shell
 ./install-kak-lsp.sh

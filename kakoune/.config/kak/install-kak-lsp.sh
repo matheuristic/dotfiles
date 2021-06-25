@@ -1,11 +1,11 @@
 #!/bin/sh
 
-# Setup plugins
+# Setup kak-lsp https://github.com/kak-lsp/kak-lsp
 
 BINDIR=$HOME/.local/bin
 mkdir -p "${BINDIR}"
 
-# kak-lsp https://github.com/kak-lsp/kak-lsp
+# kak-lsp release version
 VERSION=10.0.0
 
 case $(uname) in

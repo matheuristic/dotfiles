@@ -109,6 +109,7 @@ map global settings r ': echo %reg{'                     -docstring 'echo regist
 map global settings v ': echo %val{'                     -docstring 'echo value'
 map global settings O ': set-option '                    -docstring 'set option'
 map global settings R ': set-register '                  -docstring 'set register'
+map global settings <a-o> ': unset-option '              -docstring 'unset option'
 
 declare-user-mode visual
 map global visual m ': add-highlighter global/show-matching show-matching<ret>'       -docstring "show matching brackets on"
@@ -135,6 +136,28 @@ map global user g ': enter-user-mode git<ret>'               -docstring "> git m
 map global user L ': enter-user-mode lint<ret>'              -docstring "> lint mode"
 map global user S ': enter-user-mode settings<ret>'          -docstring "> settings mode"
 map global user V ': enter-user-mode visual<ret>'            -docstring "> visual mode"
+
+# Load plugins
+try %{                                                # fzf.kak
+    source "%val{config}/plugins/fzf.kak/rc/fzf.kak"  # base module
+    evaluate-commands %sh{                            # extension modules
+        # See https://github.com/mawww/kakoune/blob/master/doc/pages/expansions.asciidoc
+        # for shell expansions
+        find -L "$kak_config/plugins/fzf.kak/rc/modules/" -name '*.kak' -exec printf 'source "%s"\n' {} \;
+    }
+    # Use rg and bat for file find and preview
+    hook global ModuleLoaded fzf %{
+        evaluate-commands %sh{
+            if command -v rg > /dev/null 2>&1; then
+                printf "set global fzf_file_command 'rg'\n"
+            fi
+            if command -v bat > /dev/null 2>&1; then
+                printf "set global fzf_highlight_command 'bat'\n"
+            fi
+        }
+    }
+    map global user f ': fzf-mode<ret>' -docstring "> fzf"
+}
 
 # LSP support
 try %{
