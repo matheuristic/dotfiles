@@ -163,12 +163,33 @@ try %{                                                # fzf.kak
 try %{
     eval %sh{kak-lsp --kakoune -s $kak_session}          # Not needed if you load it with plug.kak.
     lsp-enable
-    # entry point from user mode
+    # Entry point from user mode
     map global user l ': enter-user-mode lsp<ret>'       -docstring '> lsp mode'
-    # extra mappings in lsp mode
+    # Extra mappings in lsp mode
     map global lsp  <a-s> ': lsp-start<ret>'             -docstring 'start session'
     map global lsp  <a-d> ': lsp-disable<ret>'           -docstring 'disable kak-lsp'
     map global lsp  <a-e> ': lsp-enable<ret>'            -docstring 'enable kak-lsp'
+}
+
+# nnn support as a side bar file explorer
+try %{
+    define-command browse-nnn %{
+        repl-new "EDITOR='%val{config}/bin/kak-edit-in-sess.sh %val{client} %val{session}' NNN_USE_EDITOR=1 nnn -R -e"
+        # Resize nnn pane to width 30 if larger than that
+        nop %sh{
+            targetWidth=30
+            if [ "$TMUX" != "" ]; then
+                tmux swap-pane -s 0 -t 1
+                tmux select-pane -t 0
+                currentWidth=$(tmux run 'printf "#{pane_width}"')
+                if [ $currentWidth -gt $targetWidth ]; then
+                    resizeNum=$(expr $currentWidth - $targetWidth)
+                    tmux resize-pane -t 0 -L $resizeNum
+                fi
+            fi
+        }
+    }
+    map global user n ': browse-nnn<ret>' -docstring 'browse files with nnn'
 }
 
 # Load separate Kakoune config files
