@@ -7,5 +7,6 @@
 TGTCLIENT=$1
 TGTSESS=$2
 TGTFILE=$3
+REALPATHBIN=$(command -v realpath || command -v grealpath)
 
-echo "eval -client ${TGTCLIENT} %{ edit $(realpath ${TGTFILE}) }" | kak -p ${TGTSESS}
+echo "eval -client ${TGTCLIENT} %{ edit $(${REALPATHBIN} ${TGTFILE}) }" | kak -p ${TGTSESS}
