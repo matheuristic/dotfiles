@@ -1,12 +1,11 @@
 #!/bin/sh
 
 # Opens a file in a given Kakoune client and session
-# Requires realpath which is on Linux systems but which has to be installed on
-# MacOS either using MacPorts or Homebrew
 
-TGTCLIENT=$1
-TGTSESS=$2
-TGTFILE=$3
-REALPATHBIN=$(command -v realpath || command -v grealpath)
+CLIENT=$1
+SESS=$2
+FILE=$3
 
-echo "eval -client ${TGTCLIENT} %{ edit $(${REALPATHBIN} ${TGTFILE}) }" | kak -p ${TGTSESS}
+# Use POSIX solution to get absolute path of file as realpath and readlink are
+# GNU coreutils and not POSIX tools, see https://stackoverflow.com/a/3915420
+echo "eval -client ${CLIENT} %{ edit $(echo "$(cd "$(dirname "${FILE}")"; pwd -P)/$(basename "${FILE}")") }" | kak -p ${SESS}
