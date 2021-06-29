@@ -174,7 +174,7 @@ try %{
 # nnn support as a side bar file explorer
 try %{
     define-command browse-nnn %{
-        repl-new "EDITOR='%val{config}/bin/kak-edit-in-sess.sh %val{client} %val{session}' NNN_USE_EDITOR=1 nnn -R -e"
+        repl-new "EDITOR='%val{config}/bin/kak-edit-in-sess.sh %val{client} %val{session}' NNN_USE_EDITOR=1 nnn -Reo"
         # Resize nnn pane to width 30 if larger than that
         nop %sh{
             targetWidth=30
