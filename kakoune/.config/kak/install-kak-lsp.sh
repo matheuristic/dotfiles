@@ -2,11 +2,12 @@
 
 # Setup kak-lsp https://github.com/kak-lsp/kak-lsp
 
-BINDIR=$HOME/.local/bin
-mkdir -p "${BINDIR}"
-
 # kak-lsp release version
-VERSION=10.0.0
+VERSION=${1:-10.0.0}
+
+PREFIX=${PREFIX:-$HOME/.local}
+BINDIR=${BINDIR:-$PREFIX/bin}
+mkdir -p "${BINDIR}"
 
 case $(uname) in
   Linux)

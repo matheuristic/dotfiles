@@ -6,16 +6,21 @@
 # - build-essential
 # - libncurses-dev
 
-TAG=$1
+# Kakoune release version
+VERSION=${1:-2020.09.01}
+
 PREFIX=${PREFIX:-$HOME/.local}
 
-echo "Cloning source"
-git clone https://github.com/mawww/kakoune.git
-cd kakoune/src
-if [ "${TAG}" != "" ]; then
-  echo "Checking out tag: ${TAG}"
-  git checkout "tags/${TAG}"
-fi
+URL="https://github.com/mawww/kakoune/releases/download/v${VERSION}/kakoune-${VERSION}.tar.bz2"
+TMPDIR=kakoune-${VERSION}
+TMPFILE=kakoune-${VERSION}.tar.bz2
+
+echo "Downloading source for release v${VERSION} to ${TMPFILE}"
+wget "${URL}" -O "${TMPFILE}"
+echo "Expanding ${TMPFILE}"
+tar xjf "${TMPFILE}"
+echo "Entering ${TMPDIR}/src"
+cd "${TMPDIR}/src"
 
 echo "Building binaries and manpages"
 make
@@ -24,5 +29,6 @@ make man
 echo "Installing binaries and manpages to prefix: ${PREFIX}"
 PREFIX="${PREFIX}" make install
 cd ../..
-rm -rf kakoune
+echo "Removing work directory and source"
+rm -rf "${TMPDIR}" "${TMPFILE}"
 echo "Done"

@@ -22,18 +22,20 @@ Install the next packages (Debian, modify as needed):
 - `build-essential`
 - `libncurses-dev`
 
-If an argument is provided to the script, it is interpreted as the Git tag
-to check out before compilation. Use it to specify a specific version to
-compile. If no argument is provided, the latest commit is used.
+The `install-kakoune.sh` script can be used to compile a specific release
+and install it to a given prefix directory.
+
+If not argument is provided to the script, the default version in the
+script is used.
 
 ```shell
 ./install-kakoune.sh
 ```
 
-or to compile for a specific Git tag (change `v2020.09.01` as appropriate)
+To install a specific version, provide it as an argument to the script.
 
 ```shell
-./install-kakoune.sh v2020.09.01
+./install-kakoune.sh 2020.09.01
 ```
 
 ## Installing kakoune plugins
@@ -53,6 +55,12 @@ The `kak-lsp` version is specified in the shell script.
 
 ```shell
 ./install-kak-lsp.sh
+```
+
+To install a specific version, provide it as an argument to the script.
+
+```shell
+./install-kak-lsp.sh 10.0.0
 ```
 
 ## repl-new and repl-send-text workaround for Kakoune version <= 2020.09.01
