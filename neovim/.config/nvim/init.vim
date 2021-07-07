@@ -99,8 +99,8 @@ inoremap jk <ESC>
 inoremap kj <ESC>
 " }}}2
 
-" Remap <Leader> from '\' to <Space> {{{2
-let mapleader=' ' " }}}2
+" Remap <Leader> from '\' to ',' {{{2
+let mapleader=',' " }}}2
 
 " Buffer manipulation and navigation ('b') {{{2
 nnoremap <silent> <Leader>bl :buffers<CR>
@@ -317,6 +317,22 @@ if exists('g:loaded_minpac')
   "   :Commits  - vim-fugitive
   "   :Rg       - rg (ripgrep) needs to be installed on the system
   "   :Snippets - UltiSnips
+  " The fzf preview window colors uses bat by default, so its colors are
+  " determined by the selected bat theme on systems with bat installed
+  " https://github.com/junegunn/fzf.vim/issues/969#issuecomment-611611154
+  " Use a light theme for the fzf preview window as needed
+  " https://github.com/junegunn/fzf.vim/issues/969#issuecomment-706137418
+  function ToggleBatEnvVar()
+    if (&background == "light")
+        let $BAT_THEME='Monokai Extended Light'
+    else
+        let $BAT_THEME=''
+    endif
+  endfunction
+  augroup update_bat_theme
+    autocmd!
+    autocmd colorscheme * call ToggleBatEnvVar()
+  augroup end
   nnoremap <silent> <Leader>fb :Buffers<CR>
   nnoremap <silent> <Leader>fc :Commits<CR>
   nnoremap <silent> <Leader>ff :Files<CR>
