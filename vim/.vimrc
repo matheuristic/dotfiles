@@ -296,8 +296,8 @@ inoremap jk <ESC>
 inoremap kj <ESC>
 " }}}2
 
-" Remap <Leader> from '\' to <Space> {{{2
-let mapleader=' ' " }}}2
+" Remap <Leader> from '\' to ',' {{{2
+let mapleader=',' " }}}2
 
 " Buffer manipulation and navigation ('b') {{{2
 nnoremap <silent> <Leader>bl :buffers<CR>
