@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Comment STDIN text using argument as the leading comment string
+# Comment STDIN or piped text using argument as the leading comment string
 # (default comment string is '#')
 COMMENTCHAR=${1:-"#"}
 sed "s/.*/${COMMENTCHAR} &/"

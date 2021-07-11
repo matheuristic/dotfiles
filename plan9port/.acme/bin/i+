@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Increase indent of STDIN text using argument as indentation
+# Increase indent of STDIN or piped text using argument as indentation
 # (default indentation is the tab character)
 INDENTCHAR=${1:-"	"}
 sed "s/.*/$INDENTCHAR&/"
