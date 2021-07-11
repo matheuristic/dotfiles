@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Run rg with Acme right-click (button 3) parsable output format
+
+if command -v rg >/dev/null 2>&1 ; then
+  rg --no-heading --color=never -n "$@"
+else 
+  echo 'rg not installed.' 1>&2 
+  exit 1
+fi

@@ -1,0 +1,42 @@
+#!/usr/bin/env rc
+
+# ~/.local/bin/acme.rc - Launcher for plan9port Acme text editor
+
+# Fonts (run '9p ls font' to see available non-Plan 9 fonts)
+# varfont=$PLAN9/font/lucsans/euro.8.font
+# fixfont=$PLAN9/font/lucm.unicode.9.font
+varfont=/mnt/font/Iosevka-Slab/21a/font
+fixfont=/mnt/font/Iosevka-Fixed-Slab/21a/font
+
+# Width of a tab in 0 glyph width multiples
+tabstop=4
+
+# Default shell settings for win windows
+SHELL=rc
+TERM=dumb
+PAGER=nobs
+
+# Add Acme helper script dir to the search path if it exists
+if (test -d $home/.acme/bin) {
+  PATH=$PATH:$home/.acme/bin
+}
+
+# Update tag line current dir when using cd in win windows
+fn cd { builtin cd $1 && awd $sysname }
+
+# Run only a single instance of plumber
+p=`{pgrep plumber}
+if (~ $#p 0) plumber
+
+# Run only a single instance of fontsrv
+f=`{pgrep fontsrv}
+if (~ $#f 0) fontsrv &
+
+# Load ~/acme.dump if it exists
+loaddump=`{test -e $home/acme.dump && echo -l $home/acme.dump}
+
+# This seems to work around some random stalls when starting up Acme
+sleep 0.1
+
+# Run Acme text editor with command line params
+acme -f $varfont -F $fixfont $loaddump $*

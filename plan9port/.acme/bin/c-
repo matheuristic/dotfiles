@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Uncomment STDIN text using argument as the leading comment string
+# (default comment string is '#')
+COMMENTCHAR=${1:-"#"}
+sed "s/^\([\t ]*\)${COMMENTCHAR} \?\(.*\)/\1\2/"

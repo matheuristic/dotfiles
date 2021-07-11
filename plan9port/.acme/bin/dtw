@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Delete trailing whitespace from STDIN text
+sed 's/[ 	]*$//'

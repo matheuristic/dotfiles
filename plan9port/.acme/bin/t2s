@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Change leading tabs to spaces, where leading tabs are each converted to an
+# argument length sequence of spaces (default is $tabstop or 4 if undefined)
+# Also see https://stackoverflow.com/questions/9222281/replace-leading-whitespace-with-sed-or-similar
+SPACESPERTAB=$(printf "%*s" "${1:-${tabstop:-4}}" "")
+sed ":a;s/^\(	*\)	/\1${SPACESPERTAB}/;ta"
