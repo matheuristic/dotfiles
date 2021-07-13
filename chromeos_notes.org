@@ -824,6 +824,13 @@ for identifying elements that are using heavy amounts of disk space.
 #+begin_example
 sudo apt install baobab --no-install-recommends
 #+end_example
+* Install rlwrap (optional)
+[[https://github.com/hanslub42/rlwrap][rlwrap]] adds command line editing functionality for CLI tools by
+leveraging [[https://tiswww.case.edu/php/chet/readline/rltop.html][GNU Readline]]. Useful for extending CLI tools with line
+editing capabilities when not provided by default.
+#+begin_example
+sudo apt install rlwrap
+#+end_example
 * Install nnn (optional)
 [[https://github.com/jarun/nnn][nnn]] is a terminal file manager. It is typically installable via the
 system package manager, but can also be installed using conda (see
