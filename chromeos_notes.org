@@ -576,8 +576,8 @@ unzip ngrams-en-20150817.zip
 rm ngrams-en-20150817.zip
 #+end_example
 * Install Plan 9 from User Space
-[[https://9fans.github.io/plan9port/][Plan 9 from User Space]] ([[https://github.com/9fans/plan9port][Github]]) is a port of several [[http://9p.io/plan9/][Plan 9]] tools to
-*nix systems.
+[[https://9fans.github.io/plan9port/][Plan 9 from User Space]] (plan9port, [[https://github.com/9fans/plan9port][Github]]) is a port of several [[http://9p.io/plan9/][Plan 9]]
+tools to *nix systems.
 #+begin_example
 sudo apt install libfontconfig1-dev libx11-dev libxext-dev libxt-dev
 mkdir $HOME/packages
@@ -587,82 +587,20 @@ cd plan9port
 ./INSTALL
 #+end_example
 Follow the instructions to add the Plan 9 from User Space binaries to
-the paths for the main shell used if desired. The next steps are to
-allow for launching Acme, one of the Plan 9 text editors, directly
-from the dock. Create an rc wrapper file =~/.local/bin/rc.sh= with the
-following contents:
+the paths for the main shell used if desired. Symlink the helper
+scripts using ~stow~ from the root of this repository.
 #+begin_example
-#!/bin/sh
-
-# ~/.local/bin/rc.sh - Wrapper for Plan 9 rc
-
-# Note than for a typical installation, PLAN9 is usually /usr/local/plan9
-export PLAN9=$HOME/packages/plan9port
-export PATH=$PATH:$PLAN9/bin
-
-"$PLAN9/bin/rc" "$@"
+stow -t $HOME --no-folding plan9port
 #+end_example
-Also create a wrapper script =~/.local/bin/acme.rc= for launching
-Acme, one of the Plan 9 text editors, from a shell that has the Plan 9
-binaries on the path.
-#+begin_example
-#!/usr/bin/env rc
-
-# ~/.local/bin/acme.rc - Launcher for plan9port Acme text editor
-
-# Fonts (run '9p ls font' to see available non-Plan 9 fonts)
-# varfont=$PLAN9/font/lucsans/euro.8.font
-# fixfont=$PLAN9/font/lucm.unicode.9.font
-varfont=/mnt/font/Iosevka-Slab/21a/font
-fixfont=/mnt/font/Iosevka-Fixed-Slab/21a/font
-
-# Width of a tab in 0 glyph width multiples
-tabstop=4
-
-# Default shell settings for win windows
-SHELL=rc
-TERM=dumb
-PAGER=nobs
-
-# Add Acme helper script dir to the search path if it exists
-if (test -d $home/.acme/bin) {
-  PATH=$PATH:$home/.acme/bin
-}
-
-# Update tag line current dir when using cd in win windows
-fn cd { builtin cd $1 && awd $sysname }
-
-# Run only a single instance of plumber
-p=`{pgrep plumber}
-if (~ $#p 0) plumber
-
-# Run only a single instance of fontsrv
-f=`{pgrep fontsrv}
-if (~ $#f 0) fontsrv &
-
-# Load ~/acme.dump if it exists
-loaddump=`{test -e $home/acme.dump && echo -l $home/acme.dump}
-
-# This seems to work around some random stalls when starting up Acme
-sleep 0.1
-
-# Run Acme text editor with command line params
-acme -f $varfont -F $fixfont $loaddump $*
-#+end_example
-Create a wrapper script that use =rc.sh= and =acme.rc= to launch Acme
-from environments that do not have Plan 9 binaries on their paths.
-#+begin_example
-#!/usr/bin/env sh
-
-# Wrapper to launch Acme from environments without Plan 9 binaries in their
-# path directories.
-
-$HOME/.local/bin/rc.sh $HOME/.local/bin/acme.rc "$@"
-#+end_example
-Create a scaled down version of =mac/spaceglenda.png= in the Plan 9
-repo (to 240x240) and save it to
-=~/.local/share/icons/spaceglenda240.png= for use as an Xdesktop icon.
-Create the Xdesktop application file
+This should create the symlinks to the launch scripts
+=~/.local/bin/rc.sh= (launcher for the Plan 9 shell ~rc~),
+=~/.local/bin/acme.rc= (launcher for [[http://acme.cat-v.org/][Acme]]) and =~/.local/bin/acme.sh=
+(wrapper to use =rc.sh= to run =acme.rc=), and the =~/.acme/bin/=
+directory containing symlinks to various helper scripts for Acme. To
+create a dock menu item for Acme, create a scaled down version of
+=mac/spaceglenda.png= in the plan9port repository (at resolution
+240x240), save it to =~/.local/share/icons/spaceglenda240.png= and
+create the [[https://www.freedesktop.org/wiki/][freedesktop.org]] desktop entry specification file at
 =~/.local/share/applications/acme.desktop= with the following
 contents.
 #+begin_example
@@ -670,7 +608,7 @@ contents.
 Name=Acme
 Comment=A text editor that is the successor of sam
 GenericName=Text Editor
-Exec=/home/thiam/.local/bin/acme.sh %f
+Exec=/home/thiam/.local/bin/acme.sh -f /mnt/font/Iosevka-Slab/21a/font -F /mnt/font/Iosevka-Fixed-Slab/21a/font %f
 TryExec=/home/thiam/.local/bin/acme.sh
 Icon=/home/thiam/.local/share/icons/spaceglenda240.png
 Categories=Utility;Development;TextEditor;
@@ -678,9 +616,7 @@ Terminal=false
 Type=Application
 Version=1.0
 #+end_example
-Note that the =plan9port/.acme/bin= directory in this repository
-contains various helper scripts for Acme (e.g. =i+= and =i-= for
-indenting and unindenting text).
+Note that Plan 9 also comes with another editor [[http://sam.cat-v.org/][Sam]] (which has a [[https://github.com/deadpixi/sam][fork]] with more features) which supports a client-server model that can be less latency-sensitive for remote file editing.
 * Install Kakoune (optional)
 [[https://kakoune.org/][Kakoune]] is a modern editor inspired by Vim. Use ~stow~ to install the
 ~kakoune~ config files.

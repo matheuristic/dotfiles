@@ -2,14 +2,17 @@
 
 # ~/.local/bin/acme.rc - Launcher for plan9port Acme text editor
 
-# Fonts (run '9p ls font' to see available non-Plan 9 fonts)
-# varfont=$PLAN9/font/lucsans/euro.8.font
-# fixfont=$PLAN9/font/lucm.unicode.9.font
-varfont=/mnt/font/Iosevka-Slab/21a/font
-fixfont=/mnt/font/Iosevka-Fixed-Slab/21a/font
+# To use custom fonts (run '9p ls font' to see available non-Plan 9 fonts),
+# run acme.rc with
+#   -f $font   : Set variable font ( default: $PLAN9/font/lucsans/euro.8.font )
+#   -F $lfont  : Set fixed font ( default: $PLAN9/font/lucm/unicode.9.font )
+# Plan 9 fonts have the path $PLAN9/font/<FONTNAME>/<FONTFILE>
+# Non-Plan 9 fonts served by fontsrv have the path /mnt/font/<FONTNAME>/<FONTSIZE>a/font
+# E.g.
+#   acme -f /mnt/font/Iosevka-Slab/21a/font -F /mnt/font/Iosevka-Fixed-Slab/21a/font
 
-# Width of a tab in 0 glyph width multiples
-tabstop=4
+# Default width of a tab in 0 glyph width multiples
+if (~ $#tabstop 0) tabstop=4
 
 # Default shell settings for win windows
 SHELL=rc
@@ -39,4 +42,4 @@ loaddump=`{test -e $home/acme.dump && echo -l $home/acme.dump}
 sleep 0.1
 
 # Run Acme text editor with command line params
-acme -f $varfont -F $fixfont $loaddump $*
+acme $loaddump $*

@@ -4,4 +4,8 @@
 export PLAN9=$HOME/packages/plan9port
 export PATH=$PATH:$PLAN9/bin
 
-"$PLAN9/bin/rc" "$@"
+if command -v rlwrap >/dev/null 2>&1; then
+  rlwrap "$PLAN9/bin/rc" "$@"
+else
+  "$PLAN9/bin/rc" "$@"
+fi
