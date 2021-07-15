@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# Surround STDIN or piped text with brackets of given type
+
+LEFTBRACKET=${1:-'('}
+
+case $LEFTBRACKET in
+  \()
+    RIGHTBRACKET=')'
+    ;;
+  \{)
+    RIGHTBRACKET='}'
+    ;;
+  \[)
+    RIGHTBRACKET=']'
+    ;;
+  \<)
+    RIGHTBRACKET='>'
+    ;;
+  \")
+    RIGHTBRACKET='"'
+    ;;
+  \')
+    RIGHTBRACKET="'"
+    ;;
+  \*)
+    RIGHTBRACKET='*'
+    ;;		
+  \*\*)
+    RIGHTBRACKET='**'
+    ;;
+  \_)
+    RIGHTBRACKET='_'
+    ;;
+  \`)
+    RIGHTBRACKET='`'
+    ;;
+  \$)
+    RIGHTBRACKET='$'
+    ;;
+  *)
+    echo "Unsupport bracket type: ${LEFTBRACKET}" >&2
+    exit 1
+esac
+
+printf "${LEFTBRACKET}$(cat)${RIGHTBRACKET}"
