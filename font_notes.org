@@ -79,6 +79,8 @@ The monospaced variant has a fork *Fira Code* ([[https://github.com/tonsky/FiraC
 ** Fivo Sans
 Neo-grotesque typeface ([[https://www.behance.net/gallery/53653425/Fivo-Sans-Free-Font-Family][link]]).
 Has a display version Fivo Sans Modern ([[https://www.behance.net/gallery/54442585/Fivo-Sans-Modern-Free-Display-Font-Family][link]]).
+** Go
+Font family designed for the [[https://golang.org/][Go]] programming language with proportional sans serif and fixed-width serif variants ([[https://blog.golang.org/go-fonts][link]], [[https://go.googlesource.com/image/+/refs/heads/master/font/gofont/ttfs/][Google Git]]).
 ** IBM Plex
 IBM's open-source corporate typeface ([[https://github.com/IBM/plex][Github]]). Has monospace, sans-serif and serif families. Distinctly IBM font designed to work well in various user interface environments.
 ** Input

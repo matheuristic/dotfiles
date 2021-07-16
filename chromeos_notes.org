@@ -393,7 +393,7 @@ mkdir ~/.fonts
 #+end_example
 Copy fonts into the =~/.fonts= directory. The following fonts are needed
 for the Emacs config at this [[https://github.com/matheuristic/emacs-config][link]].
-- Iosevka SS08
+- Iosevka
 - Iosevka Aile
 - All fonts from [[https://github.com/domtronn/all-the-icons.el/tree/master/fonts][all-the-icons]]
 - Sarasa Gothic
@@ -608,7 +608,7 @@ contents.
 Name=Acme
 Comment=A text editor that is the successor of sam
 GenericName=Text Editor
-Exec=/home/thiam/.local/bin/acme.sh -f /mnt/font/Iosevka-Slab/21a/font -F /mnt/font/Iosevka-Fixed-Slab/21a/font %f
+Exec=/home/thiam/.local/bin/acme.sh -f /mnt/font/GoRegular/21a/font -F /mnt/font/GoMono/21a/font %f
 TryExec=/home/thiam/.local/bin/acme.sh
 Icon=/home/thiam/.local/share/icons/spaceglenda240.png
 Categories=Utility;Development;TextEditor;
@@ -616,7 +616,10 @@ Terminal=false
 Type=Application
 Version=1.0
 #+end_example
-Note that Plan 9 also comes with another editor [[http://sam.cat-v.org/][Sam]] (which has a [[https://github.com/deadpixi/sam][fork]] with more features) which supports a client-server model that can be less latency-sensitive for remote file editing.
+Note that the above desktop entry specification file uses the Go
+fonts. Also note that Plan 9 also comes with another editor [[http://sam.cat-v.org/][Sam]] (which
+has a [[https://github.com/deadpixi/sam][fork]] with more features) which supports a client-server model
+that can be less latency-sensitive for remote file editing.
 * Install Kakoune (optional)
 [[https://kakoune.org/][Kakoune]] is a modern editor inspired by Vim. Use ~stow~ to install the
 ~kakoune~ config files.
@@ -842,6 +845,9 @@ conda deactivate
 mkdir -p $HOME/.local/bin
 ln -s $HOME/miniforge3/envs/myenv/bin/nnn $HOME/.local/bin/nnn
 #+end_example
+* Install par (optional)
+[[http://www.nicemice.net/par/][par]] ([[https://bitbucket.org/amc-nicemice/par/src/master/][Bitbucket]]) is a paragraph reformatter like ~fmt~ but keeps
+prefixes and suffixes intact.
 * Upgrading Debian packages
 #+begin_example
 sudo apt update
