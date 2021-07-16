@@ -19,9 +19,13 @@ SHELL=rc
 TERM=dumb
 PAGER=nobs
 
-# Add Acme helper script dir to the search path if it exists
-if (test -d $home/.acme/bin) {
-  PATH=$PATH:$home/.acme/bin
+# Add some directories to the search path if they exist
+# - $home/.acme/bin : Acme helper scripts
+# - $home/go/bin : Go compiled binaries
+# - /opt/local/bin
+# - /usr/local/bin
+for (d in /usr/local/bin /opt/local/bin $home/go/bin $home/.acme/bin) {
+  if (test -d $d) PATH=$d:$PATH
 }
 
 # Update tag line current dir when using cd in win windows
