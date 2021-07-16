@@ -1,10 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env rc
 
 # Run rg with Acme right-click (button 3) parsable output format
+# Requires ripgrep be installed on the system
 
-if command -v rg >/dev/null 2>&1 ; then
-  rg --no-heading --color=never -n "$@"
-else 
-  echo 'rg not installed.' 1>&2 
-  exit 1
-fi
+rg --no-heading --color=never -n $*

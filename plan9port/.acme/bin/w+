@@ -1,12 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env rc
 
-# Wrap STDIN or piped text to the argument width (default is 70)
-WIDTH=${1:-70}
-if command -v par >/dev/null 2>&1 ; then
-  par w"$WIDTH"rq
-elif command -v fmt >/dev/null 2>&1 ; then
-  fmt -w "$WIDTH"
-else
-  echo "Either par or fmt must be installed" >&2
-  exit 1
-fi
+# Wrap STDIN or piped text to width given by argument (default is 70)
+# Uses par ( http://www.nicemice.net/par/ ) if installed, otherwise uses fmt
+width=$1
+if (~ $#width 0) width=70
+par 'w'^$width^'rq' >[2]/dev/null || fmt -w $width

@@ -1,46 +1,38 @@
-#!/bin/sh
+#!/usr/bin/env rc
 
 # Surround STDIN or piped text with brackets of given type
 
-LEFTBRACKET=${1:-'('}
+leftbracket=$1
+if (~ $#leftbracket 0) leftbracket='('
 
-case $LEFTBRACKET in
-  \()
-    RIGHTBRACKET=')'
-    ;;
-  \{)
-    RIGHTBRACKET='}'
-    ;;
-  \[)
-    RIGHTBRACKET=']'
-    ;;
-  \<)
-    RIGHTBRACKET='>'
-    ;;
-  \")
-    RIGHTBRACKET='"'
-    ;;
-  \')
-    RIGHTBRACKET="'"
-    ;;
-  \*)
-    RIGHTBRACKET='*'
-    ;;		
-  \*\*)
-    RIGHTBRACKET='**'
-    ;;
-  \_)
-    RIGHTBRACKET='_'
-    ;;
-  \`)
-    RIGHTBRACKET='`'
-    ;;
-  \$)
-    RIGHTBRACKET='$'
-    ;;
-  *)
-    echo "Unsupported bracket type: ${LEFTBRACKET}" >&2
-    exit 1
-esac
+switch($leftbracket) {
+case '('
+  rightbracket=')'
+case '{'
+  rightbracket='}'
+case '['
+  rightbracket=']'
+case '<'
+  rightbracket='>'
+case '"'
+  rightbracket='"'
+case `{echo ''''}
+  rightbracket=''''
+case '*'
+  rightbracket='*'
+case '**'
+  rightbracket='**'
+case '_'
+  rightbracket='_'
+case '`'
+  rightbracket='`'
+case '/'
+  rightbracket='/'
+case '$'
+  rightbracket='$'
+case *
+  echo 'Unsupported bracket type: '^$leftbracket >[1=2]
+  exit 1
+}
 
-printf "${LEFTBRACKET}$(cat)${RIGHTBRACKET}"
+echo -n $leftbracket^`{cat}^$rightbracket

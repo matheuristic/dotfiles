@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env rc
 
 # Unwrap STDIN or piped text, joining multiline text into a single line
 # https://stackoverflow.com/questions/1251999/how-can-i-replace-a-newline-n-using-sed

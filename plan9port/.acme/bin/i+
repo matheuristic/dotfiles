@@ -1,6 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env rc
 
 # Increase indent of STDIN or piped text using argument as indentation
 # (default indentation is the tab character)
-INDENTCHAR=${1:-"	"}
-sed "s/.*/$INDENTCHAR&/"
+indent=$1
+if (~ $#indent 0) indent='	'
+# escape special chars otherwise interpreted by sed in $indent
+# https://stackoverflow.com/questions/407523/escape-a-string-for-a-sed-replace-pattern
+indent=`{echo $indent | sed -e 's/[]\/$*.^[]/\\&/g'}
+sed 's/.*/'^$indent^'&/'
