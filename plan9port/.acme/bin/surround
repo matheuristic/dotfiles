@@ -39,7 +39,7 @@ case $LEFTBRACKET in
     RIGHTBRACKET='$'
     ;;
   *)
-    echo "Unsupport bracket type: ${LEFTBRACKET}" >&2
+    echo "Unsupported bracket type: ${LEFTBRACKET}" >&2
     exit 1
 esac
 

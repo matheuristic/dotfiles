@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Wrap STDIN or piped text to the argument width (default is 70)
+WIDTH=${1:-70}
+if command -v par >/dev/null 2>&1 ; then
+  par w"$WIDTH"rq
+elif command -v fmt >/dev/null 2>&1 ; then
+  fmt -w "$WIDTH"
+else
+  echo "Either par or fmt must be installed" >&2
+  exit 1
+fi

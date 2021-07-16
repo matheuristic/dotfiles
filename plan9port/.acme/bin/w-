@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Unwrap STDIN or piped text, joining multiline text into a single line
+# https://stackoverflow.com/questions/1251999/how-can-i-replace-a-newline-n-using-sed
+sed ':a;N;s/[	 ]*\n/ /g;ta'
