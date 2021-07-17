@@ -33,6 +33,10 @@ for (d in /usr/local/bin \
   if (test -d $d) PATH=$d:$PATH
 }
 
+# Use Acme as the default editor through a helper script
+# Requires the acmeed script from https://moriendi.org/tools/acme/
+if (test -x $home/.acme/bin/acmeed) EDITOR=acmeed
+
 # Update tag line current dir when using cd in win windows
 fn cd { builtin cd $1 && awd $sysname }
 
