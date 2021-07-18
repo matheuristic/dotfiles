@@ -4,7 +4,4 @@
 # (default indentation is the tab character)
 indent=$1
 if (~ $#indent 0) indent='	'
-# escape special chars otherwise interpreted by sed in $indent
-# https://stackoverflow.com/questions/407523/escape-a-string-for-a-sed-replace-pattern
-indent=`{echo $indent | sed -e 's/[]\/$*.^[]/\\&/g'}
 sed 's/.*/'^$indent^'&/'

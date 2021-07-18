@@ -4,7 +4,4 @@
 # (default comment string is '#')
 comment=$1
 if (~ $#comment 0) comment='#'
-# escape special chars otherwise interpreted by sed in $comment
-# https://stackoverflow.com/questions/407523/escape-a-string-for-a-sed-replace-pattern
-comment=`{echo $comment | sed -e 's/[]\/$*.^[]/\\&/g'}
 sed 's/.*/'^$comment^' &/'
