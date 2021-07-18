@@ -324,15 +324,28 @@ nvm install --lts
 sudo apt install aspell aspell-en fish libnotify-bin openjdk-11-jdk ripgrep
 #+end_example
 * Install jq
-jq is in most distributions' package repositories, but binaries are
-available from the [[https://github.com/stedolan/jq][GitHub]] repository under /Releases/. Change the
-path, version and target arch below as appropriate.
+[[https://stedolan.github.io/jq/][jq]] is a JSON processor and is in most distributions' package
+repositories, but binaries are available from the [[https://github.com/stedolan/jq][GitHub]] repository
+under /Releases/. Change the path, version and target arch below as
+appropriate.
 #+begin_example
 wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
 chmod +x jq-linux64
 cd ~/.local/bin
 ln -s /path/to/jq-linux64 jq
 #+end_example
+* Install yq
+[[https://mikefarah.gitbook.io/yq/][yq]] is a YAML processor like jq. Binaries are available from the [[https://github.com/mikefarah/yq][Github]]
+repository under /Releases/. Change the path, version and arch below
+as appropriate.
+#+begin_example
+wget https://github.com/mikefarah/yq/releases/download/v4.11.0/yq_linux_amd64
+chmod +x yq_linux_amd64
+cd ~/.local/bin
+ln -s /path/to/yq_linux_amd64 yq
+#+end_example
+Note that there is [[https://kislyuk.github.io/yq/][another]] yq ([[https://github.com/kislyuk/yq][Github]]) tool that has similar
+functionality but achieves that by wrapping jq instead.
 * Install monolith
 Linux binaries are available from
 https://github.com/Y2Z/monolith/releases (change x86_64 to armhf as
@@ -617,9 +630,23 @@ Type=Application
 Version=1.0
 #+end_example
 Note that the above desktop entry specification file uses the Go
-fonts. Also note that Plan 9 also comes with another editor [[http://sam.cat-v.org/][Sam]] (which
-has a [[https://github.com/deadpixi/sam][fork]] with more features) which supports a client-server model
-that can be less latency-sensitive for remote file editing.
+fonts. Also, Plan 9 also comes with another editor [[http://sam.cat-v.org/][Sam]] (which has a
+[[https://github.com/deadpixi/sam][fork]] with more features) which supports a client-server model that is
+well-suited remote file editing under high network latency. Some
+useful addons or tools for Acme include [[https://github.com/lewis-weinberger/adir][adir]] (better directory viewer)
+and [[https://github.com/fhs/acme-lsp][acme-lsp]] (LSP client). Sample install instructions using [[https://9fans.github.io/plan9port/man/man1/rc.html][rc]] as follows.
+Installing acme-lsp:
+#+begin_example
+GO111MODULE=on go get github.com/fhs/acme-lsp/cmd/acme-lsp@latest
+GO111MODULE=on go get github.com/fhs/acme-lsp/cmd/L@latest
+#+end_example
+Installing adir:
+#+begin_example
+cd $home/packages
+git clone https://github.com/lewis-weinberger/adir.git
+cd adir
+mk install BIN=$home/.acme/bin
+#+end_example
 * Install Kakoune (optional)
 [[https://kakoune.org/][Kakoune]] is a modern editor inspired by Vim. Use ~stow~ to install the
 ~kakoune~ config files.
@@ -848,6 +875,11 @@ ln -s $HOME/miniforge3/envs/myenv/bin/nnn $HOME/.local/bin/nnn
 * Install par (optional)
 [[http://www.nicemice.net/par/][par]] ([[https://bitbucket.org/amc-nicemice/par/src/master/][Bitbucket]]) is a paragraph reformatter like ~fmt~ but keeps
 prefixes and suffixes intact.
+* Install Guitar (optional)
+[[https://soramimi.github.io/Guitar/][Guitar]] ([[https://github.com/soramimi/Guitar][Github]]) is a Qt5 GUI [[https://git-scm.com/][Git]] client. [[https://appimage.org/][AppImage]] continuous and
+release builds are available from the Github page. These builds can be
+downloaded, made executable and run directly. Debian packages (in
+addition to Windows and Mac packages) are also [[https://files.soramimi.jp/guitar/][available]].
 * Upgrading Debian packages
 #+begin_example
 sudo apt update
