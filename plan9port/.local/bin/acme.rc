@@ -11,6 +11,10 @@
 # E.g.
 #   acme -f /mnt/font/Iosevka-Slab/21a/font -F /mnt/font/Iosevka-Fixed-Slab/21a/font
 
+# To display labels of pressed buttons, set environment variable visibleclicks=1
+# E.g.
+#   visibleclicks=1 acme
+
 # Default width of a tab in 0 glyph width multiples
 if (~ $#tabstop 0) tabstop=4
 
