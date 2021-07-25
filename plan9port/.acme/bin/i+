@@ -1,7 +1,0 @@
-#!/usr/bin/env rc
-
-# Increase indent of STDIN or piped text using argument as indentation
-# (default indentation is the tab character)
-indent=$1
-if (~ $#indent 0) indent='	'
-sed 's/.*/'^$indent^'&/'

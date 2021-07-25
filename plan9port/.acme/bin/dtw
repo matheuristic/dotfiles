@@ -1,4 +1,0 @@
-#!/usr/bin/env rc
-
-# Delete trailing whitespace from STDIN or piped text
-sed 's/[ 	]*$//'

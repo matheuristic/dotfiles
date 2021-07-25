@@ -588,65 +588,6 @@ wget https://languagetool.org/download/ngram-data/ngrams-en-20150817.zip
 unzip ngrams-en-20150817.zip
 rm ngrams-en-20150817.zip
 #+end_example
-* Install Plan 9 from User Space
-[[https://9fans.github.io/plan9port/][Plan 9 from User Space]] (plan9port, [[https://github.com/9fans/plan9port][Github]]) is a port of several [[http://9p.io/plan9/][Plan 9]]
-tools to *nix systems.
-#+begin_example
-sudo apt install libfontconfig1-dev libx11-dev libxext-dev libxt-dev
-mkdir $HOME/packages
-cd $HOME/packages
-git clone https://github.com/9fans/plan9port.git
-cd plan9port
-./INSTALL
-#+end_example
-Follow the instructions to add the Plan 9 from User Space binaries to
-the paths for the main shell used if desired. Symlink the helper
-scripts using ~stow~ from the root of this repository.
-#+begin_example
-stow -t $HOME --no-folding plan9port
-#+end_example
-This should create the symlinks to the launch scripts
-=~/.local/bin/rc.sh= (launcher for the Plan 9 shell ~rc~),
-=~/.local/bin/acme.rc= (launcher for [[http://acme.cat-v.org/][Acme]]) and =~/.local/bin/acme.sh=
-(wrapper to use =rc.sh= to run =acme.rc=), and the =~/.acme/bin/=
-directory containing symlinks to various helper scripts for Acme. To
-create a dock menu item for Acme, create a scaled down version of
-=mac/spaceglenda.png= in the plan9port repository (at resolution
-240x240), save it to =~/.local/share/icons/spaceglenda240.png= and
-create the [[https://www.freedesktop.org/wiki/][freedesktop.org]] desktop entry specification file at
-=~/.local/share/applications/acme.desktop= with the following
-contents.
-#+begin_example
-[Desktop Entry]
-Name=Acme
-Comment=A text editor that is the successor of sam
-GenericName=Text Editor
-Exec=/home/thiam/.local/bin/acme.sh -f /mnt/font/GoRegular/21a/font -F /mnt/font/GoMono/21a/font %f
-TryExec=/home/thiam/.local/bin/acme.sh
-Icon=/home/thiam/.local/share/icons/spaceglenda240.png
-Categories=Utility;Development;TextEditor;
-Terminal=false
-Type=Application
-Version=1.0
-#+end_example
-Note that the above desktop entry specification file uses the Go
-fonts. Also, Plan 9 also comes with another editor [[http://sam.cat-v.org/][Sam]] (which has a
-[[https://github.com/deadpixi/sam][fork]] with more features) which supports a client-server model that is
-well-suited remote file editing under high network latency. Some
-useful addons or tools for Acme include [[https://github.com/lewis-weinberger/adir][adir]] (better directory viewer)
-and [[https://github.com/fhs/acme-lsp][acme-lsp]] (LSP client). Sample install instructions using [[https://9fans.github.io/plan9port/man/man1/rc.html][rc]] as follows.
-Installing acme-lsp:
-#+begin_example
-GO111MODULE=on go get github.com/fhs/acme-lsp/cmd/acme-lsp@latest
-GO111MODULE=on go get github.com/fhs/acme-lsp/cmd/L@latest
-#+end_example
-Installing adir:
-#+begin_example
-cd $home/packages
-git clone https://github.com/lewis-weinberger/adir.git
-cd adir
-mk install BIN=$home/.acme/bin
-#+end_example
 * Install Kakoune (optional)
 [[https://kakoune.org/][Kakoune]] is a modern editor inspired by Vim. Use ~stow~ to install the
 ~kakoune~ config files.
