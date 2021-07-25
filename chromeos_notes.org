@@ -821,6 +821,21 @@ prefixes and suffixes intact.
 release builds are available from the Github page. These builds can be
 downloaded, made executable and run directly. Debian packages (in
 addition to Windows and Mac packages) are also [[https://files.soramimi.jp/guitar/][available]].
+* Install uni (optional)
+[[https://github.com/arp242/uni][uni]] is a command-line tool for querying the Unicode database. It can
+be used to identify codepoints in a string, search for codepoints,
+print codepoints by class/block/range, and find emojis. Binary
+releases are available and can be installed as below (modify the
+version, architecture and paths as desired).
+#+begin_example
+mkdir -p $HOME/packages/uni
+cd $HOME/packages/uni
+wget https://github.com/arp242/uni/releases/download/v2.2.1/uni-v2.2.1-linux-amd64.gz
+gunzip uni-v2.2.1-linux-amd64.gz
+ln -s uni-v2.2.1-linux-amd64 uni
+cd $HOME/.local/bin
+ln -s $HOME/packages/uni/uni
+#+end_example
 * Upgrading Debian packages
 #+begin_example
 sudo apt update
