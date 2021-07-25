@@ -1,0 +1,38 @@
+# ~/.zshrc.local.mac - Sample macOS ZSH local config
+
+# MacPorts
+if [ -d /opt/local/bin ]; then
+  PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+fi
+
+# Init MacPorts NVM, if installed
+if [ -e /opt/local/share/nvm/init-nvm.sh ]; then
+  . /opt/local/share/nvm/init-nvm.sh
+fi
+
+# Go support
+if [ -d $HOME/go/bin ]; then
+  PATH=$HOME/go/bin:$PATH
+fi
+
+# Local binaries
+if [ -d $HOME/.local/bin ]; then
+  PATH=$HOME/.local/bin:$PATH
+fi
+
+# Local manpages
+if [ -d $HOME/.local/share/man ]; then
+  MANPATH=$HOME/.local/share/man:$MANPATH
+fi
+
+# Prevent Mac from sleeping for given time: $ keepawake <hrs>
+if [ "x`uname`" == "xDarwin" ]; then
+    keepawake () {
+        KEEPAWAKEHRS=${1:-8}  # default 8 hours
+        KEEPAWAKESECS=$(( 60 * 60 * KEEPAWAKEHRS ))
+        echo "keeping machine awake for $KEEPAWAKEHRS hours"
+        echo "start : `date`"
+        echo "end   : `date -v +${KEEPAWAKEHRS}H`"
+        caffeinate -i -t $KEEPAWAKESECS
+    }
+fi
