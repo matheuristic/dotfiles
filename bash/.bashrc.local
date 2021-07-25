@@ -17,13 +17,13 @@ fi
 
 # conda environments
 CONDAPATH=$HOME/miniconda3
-if [[ -d "$CONDAPATH" ]]; then
+if [ -d "$CONDAPATH" ]; then
     . $CONDAPATH/etc/profile.d/conda.sh
 fi
 
 # dotnet support
 DOTNETSDKPATH=$HOME/dotnet-sdk
-if [[ -d "$DOTNETSDKPATH" ]]; then
+if [ -d "$DOTNETSDKPATH" ]; then
     export PATH=$HOME/dotnet-sdk:$PATH
     export DOTNET_CLI_TELEMETRY_OPTOUT=1
 fi
@@ -74,4 +74,12 @@ if [[ "x`uname`" == "xDarwin" ]]; then
         echo "end   : `date -v +${KEEPAWAKEHRS}H`"
         caffeinate -i -t $KEEPAWAKESECS
     }
+fi
+
+# Update Acme win tag when changing directories
+if [ "$winid" ]; then
+    _acme_cd () {
+        \cd "$@" && awd
+    }
+    alias cd=_acme_cd
 fi
