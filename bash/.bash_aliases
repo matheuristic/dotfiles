@@ -26,3 +26,4 @@ command -v sha1sum > /dev/null || alias sha1sum="shasum"  # alias `shasum` to `s
 alias map="xargs -n1"
 # Show disk usage for current directory and its child directories, sorted ascending
 alias dusorted="du -sh * | sort -rh"
+alias a="visibleclicks=1 $HOME/.local/bin/rc.sh $HOME/.local/bin/acme.rc -f /mnt/font/GoRegular/20a/font -F /mnt/font/GoMono/20a/font"

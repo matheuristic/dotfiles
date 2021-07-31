@@ -836,6 +836,35 @@ ln -s uni-v2.2.1-linux-amd64 uni
 cd $HOME/.local/bin
 ln -s $HOME/packages/uni/uni
 #+end_example
+* Configure git
+Get ~git-credential-netrc~ and put it somewhere on ~$PATH~.
+#+begin_example
+mkdir -p $HOME/packages/git-credential-netrc
+cd $HOME/packages/git-credential-netrc
+wget https://raw.githubusercontent.com/git/git/master/contrib/credential/netrc/git-credential-netrc.perl
+chmod +x git-credential-netrc.perl
+cd $HOME/.local/bin
+ln -s $HOME/packages/git-credential-netrc/git-credential-netrc.perl git-credential-netrc
+#+end_example
+Create a ~$HOME/.authinfo~ file with credentials in the following format:
+#+begin_example
+machine some.server.com login some_login password some_password protocol https
+machine another.server.com login another_login password another_password protocol https
+#+end_example
+Create or import a GPG key (not shown here). Create an encrypted
+version of the credentials file ~$HOME/.authinfo.gpg~ and delete the
+unencrypted version.
+#+begin_example
+gpg -e -r the_recipient $HOME/.authinfo
+rm $HOME/.authinfo
+#+end_example
+Configure git to use the encrypted credentials locally in a
+repository. Change ~--local~ to ~--global~ to use the encrypted
+credentials globally.
+#+begin_example
+git config --local credential.helper "netrc -f ~/.authinfo.gpg -v"
+#+end_example
+Adapted from [[https://grahamlopez.org/git/git_credentials.html][here]] and [[https://andrearichiardi.com/blog/posts/git-credential-netrc.html][here]].
 * Upgrading Debian packages
 #+begin_example
 sudo apt update
