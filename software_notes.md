@@ -44,6 +44,10 @@
 
   and index a dirtree with `cindex` before searching with `cgrep` or
   `csearch` commands.
+- [CotEditor](https://coteditor.com/)
+  ([Github](https://github.com/coteditor/)):
+  Like [Notepad++](https://notepad-plus-plus.org/) but for macOS.
+  (macOS)
 - [Docker](https://docs.docker.com/):
   Containerization platform
 - [Emacs](https://www.gnu.org/software/emacs/):
@@ -399,6 +403,10 @@
   Show open files, dirs, sockets and pipes
 - [Stow](https://www.gnu.org/software/stow/):
   Symlink farm manager, useful for managing dotfiles
+- [ueli](https://ueli.app/)
+  ([Github](https://github.com/oliverschwendener/ueli)):
+  Launcher like [Alfred](https://www.alfredapp.com/) but open-source.
+  (macOS, Windows)
 - [Zotero](https://www.zotero.org/):
   Reference management software to collect, organize, cite and share
   research material
