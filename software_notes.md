@@ -24,13 +24,33 @@
 
 ### Database
 
+- [Beekeeper Studio](https://www.beekeeperstudio.io/)
+  ([Github](https://github.com/beekeeper-studio/beekeeper-studio)):
+  SQLite, MySQL, MariaDB, Postgres, CockroachDB, Microsoft SQL Server
+  and Amazon Redshift client with a nicer interface than DBeaver but
+  not as featureful
 - [DBeaver](https://dbeaver.io/):
-  JDBC SQL client
+  JDBC SQL client, very full-featured but user interface is complex
+- [HeidiSQL](https://www.heidisql.com/)
+  ([Github](https://github.com/HeidiSQL/HeidiSQL))
+  MariaDB, MySQL, Microsoft SQL, PostgreSQL and SQLite client
+  (Windows)
+- [Robo 3T](https://github.com/Studio3T/robomongo):
+  MongoDB management tool, previously called Robomongo
 - [OctoSQL](https://github.com/cube2222/octosql):
   Join, analyze and transform data from multiple databases using SQL
-- [Postico](https://eggerapps.at/postico/)
-  PostgreSQL client
+- [Postico](https://eggerapps.at/postico/):
+  Commercial PostgreSQL client
   (macOS)
+- [RedisDesktopManager](https://github.com/uglide/RedisDesktopManager):
+  Redis management tool, Linux binaries are downloadable but Windows
+  and Mac binaries require either a
+  [subscription](https://rdm.dev/pricing) or
+  [compiling from source](https://docs.rdm.dev/en/latest/install/)
+- [Sequel Ace](https://sequel-ace.com/)
+  ([Github](https://github.com/Sequel-Ace/Sequel-Ace)):
+  MySQL and MariaDB client
+  (macOS, also available in the Mac App Store)
 
 ### Development (General)
 
