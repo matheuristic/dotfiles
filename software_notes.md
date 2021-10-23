@@ -24,6 +24,11 @@
 
 ### Database
 
+- [Azure Data
+  Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/)
+  ([Github](https://github.com/microsoft/azuredatastudio)):
+  Microsoft SQL Server, Azure SQL Database, PostgreSQL and Jupyter
+  Notebook client
 - [Beekeeper Studio](https://www.beekeeperstudio.io/)
   ([Github](https://github.com/beekeeper-studio/beekeeper-studio)):
   SQLite, MySQL, MariaDB, Postgres, CockroachDB, Microsoft SQL Server
@@ -137,6 +142,9 @@
   ([Github](https://github.com/Caldis/Mos)):
   Smooth scrolling and set scroll direction independently for the mouse
   (macOS)
+- [skhd](https://github.com/koekeishiya/skhd):
+  Hotkey daemon
+  (macOS)
 - [Unshaky](https://github.com/aahung/Unshaky):
   Works around double keypress issues for butterfly keyboards
   (macOS)
@@ -198,7 +206,7 @@
   Package manager for open-source software
   (macOS)
 
-### Programming languages
+### Programming language tooling
 
 - [Clojure](https://clojure.org/)
   - [Leiningen](https://leiningen.org/):
@@ -238,6 +246,9 @@
     Qt console for working with Jupyter kernels, provides a number of
     enhancements like inline figures, multi-line editing and tooltips
     compared to [IPython](https://github.com/ipython/ipython)
+  - [Pylint](https://pylint.org/)
+    ([Github](https://github.com/PyCQA/pylint)):
+    Linter
 - [R](https://www.r-project.org/):
   On macOS, install using MacPorts with
 
@@ -249,7 +260,13 @@
   where `+gcc11` should be changed to another GCC version as needed
   - [Radian](https://github.com/randy3k/radian):
     Fancier REPL command shell alternative
-  - [RStudio](https://rstudio.com/)
+  - [RStudio](https://rstudio.com/):
+    IDE for R
+- Shell ([Bash](https://www.gnu.org/software/bash/), [POSIX](https://www.grymoire.com/Unix/Sh.html), [KornShell](https://github.com/ksh93/ksh))
+  - [ShellCheck](https://github.com/koalaman/shellcheck):
+    Linter for shell scripts (sh, bash, ksh)
+  - [shfmt](https://github.com/mvdan/sh):
+    Formatter for shell scripts (sh, bash, ksh)
 
 ### Remote desktop
 
