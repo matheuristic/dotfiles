@@ -209,12 +209,20 @@
 ### Programming language tooling
 
 - [Clojure](https://clojure.org/)
+  - [clojure-lsp](https://github.com/clojure-lsp/clojure-lsp):
+    [LSP](https://microsoft.github.io/language-server-protocol/)
+    server for Clojure and Clojurescript
   - [Leiningen](https://leiningen.org/):
     Build automation and dependency management tool for Clojure
     projects
+- [DevSkim](https://github.com/microsoft/DevSkim):
+  Security analysis tool for various languages
 - [Go](https://golang.org/)
   - [golangci-lint](https://github.com/golangci/golangci-lint):
     Go linters aggregator with YAML-based configuration
+  - [gopls](https://pkg.go.dev/golang.org/x/tools/gopls):
+    [LSP](https://microsoft.github.io/language-server-protocol/)
+    server for the Go language
 - [Markdown](https://www.markdownguide.org/)
   - [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli):
     Command-line tool for linting Markdown using the
@@ -246,6 +254,10 @@
     Qt console for working with Jupyter kernels, provides a number of
     enhancements like inline figures, multi-line editing and tooltips
     compared to [IPython](https://github.com/ipython/ipython)
+  - [jedi-language-server](https://github.com/pappasam/jedi-language-server):
+    [LSP](https://microsoft.github.io/language-server-protocol/)
+    server for the [Jedi](https://github.com/pappasam/jedi-language-server)
+    Python tool
   - [Pylint](https://pylint.org/)
     ([Github](https://github.com/PyCQA/pylint)):
     Linter
