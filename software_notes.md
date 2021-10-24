@@ -215,8 +215,6 @@
   - [Leiningen](https://leiningen.org/):
     Build automation and dependency management tool for Clojure
     projects
-- [DevSkim](https://github.com/microsoft/DevSkim):
-  Security analysis tool for various languages
 - [Go](https://golang.org/)
   - [golangci-lint](https://github.com/golangci/golangci-lint):
     Go linters aggregator with YAML-based configuration
@@ -227,9 +225,12 @@
   - [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli):
     Command-line tool for linting Markdown using the
     [markdownlint](https://github.com/DavidAnson/markdownlint) library
-  - [prettier](https://github.com/prettier/prettier):
-    Code formatter for various languages, including CSS, GraphQL,
-    Javascript, JSON, Markdown, Typescript, YAML, etc
+  - [mdformat](https://mdformat.readthedocs.io/en/stable/)
+    ([Github](https://github.com/executablebooks/mdformat)):
+    Markdown formatter. Supports
+    [CommonMark](https://spec.commonmark.org/current/),
+    [GFM](https://github.github.com/gfm/), and
+    [MyST](https://myst-parser.readthedocs.io/en/latest/using/syntax.html)
   - [Textlint](https://textlint.github.io/):
     Text and markdown linting tool with multiple integrations
 - [J](https://code.jsoftware.com/wiki/Main_Page)
@@ -237,6 +238,12 @@
   - [Node Version Manager](https://github.com/nvm-sh/nvm):
     [Node.js](https://nodejs.org/en/) version manager for POSIX-compliant
     shells
+- Multi-language
+  - [DevSkim](https://github.com/microsoft/DevSkim):
+    Security analysis tool for various languages
+  - [prettier](https://github.com/prettier/prettier):
+    Code formatter for various languages, including CSS, GraphQL,
+    Javascript, JSON, Markdown, Typescript, YAML, etc
 - [Python](https://www.python.org/)
   - [pyinstaller](https://www.pyinstaller.org/)
     ([Github](https://github.com/pyinstaller/pyinstaller)):
