@@ -24,8 +24,7 @@
 
 ### Database
 
-- [Azure Data
-  Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/)
+- [Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/)
   ([Github](https://github.com/microsoft/azuredatastudio)):
   Microsoft SQL Server, Azure SQL Database, PostgreSQL and Jupyter
   Notebook client
@@ -92,7 +91,7 @@
 - [GNU cflow](https://www.gnu.org/software/cflow/):
   Call graph generator for C.
   [pycflow2dot](https://github.com/johnyf/pycflow2dot) integrates
-  cflow with the [Graphviz](http://www.graphviz.org/) `dot` tool to
+  `cflow` with the [Graphviz](http://www.graphviz.org/) `dot` tool to
   output the call graph to multiple formats
 - [Plan 9 from User Space](https://9fans.github.io/plan9port/)
   (plan9port):
