@@ -69,6 +69,13 @@
 
   and index a dirtree with `cindex` before searching with `cgrep` or
   `csearch` commands.
+- [CodeCompass](https://codecompass.net/)
+  ([Github](https://github.com/Ericsson/CodeCompass)):
+  Cross-platform source explorer, supports C, C++ and Java (and Python
+  if using the `pythonplugin` version)
+- [Code2flow](https://github.com/scottrogowski/code2flow/):
+  Call graph generator for dynamic languages, specifically Python,
+  Javascript, Ruby and PHP
 - [CotEditor](https://coteditor.com/)
   ([Github](https://github.com/coteditor/)):
   Like [Notepad++](https://notepad-plus-plus.org/) but for macOS.
@@ -82,10 +89,19 @@
   ([Github](https://github.com/git-up/GitUp)):
   GUI Git interface
   (macOS)
+- [GNU cflow](https://www.gnu.org/software/cflow/):
+  Call graph generator for C.
+  [pycflow2dot](https://github.com/johnyf/pycflow2dot) integrates
+  cflow with the [Graphviz](http://www.graphviz.org/) `dot` tool to
+  output the call graph to multiple formats
 - [Plan 9 from User Space](https://9fans.github.io/plan9port/)
   (plan9port):
   See [plan9port config
   repository](https://github.com/matheuristic/plan9port-config)
+- [Sourcetrail](https://www.sourcetrail.com/)
+  ([Github](https://github.com/CoatiSoftware/Sourcetrail)):
+  Cross-platform source explorer, supports C, C++, Java and Python.
+  Deprecated since the 2021.4 release
 - [QXmlEdit](http://qxmledit.org/)
   ([Github](https://github.com/lbellonda/qxmledit)):
   XML editor
