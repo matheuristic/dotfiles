@@ -59,7 +59,7 @@
   Go-based tool for indexing and searching with regexp on large
   codebases, install with
 
-  ```console
+  ```sh
   go get github.com/google/codesearch/cmd/...
   ```
 
@@ -280,7 +280,7 @@
 - [R](https://www.r-project.org/):
   On macOS, install using MacPorts with
 
-  ```console
+  ```sh
   port install tk +quartz
   port install R +cairo +gcc11 +java +openblas +openmp +quartz +recommended \
       +tcltk -x11
@@ -332,7 +332,7 @@
   Clone the repository somewhere and source the `z.sh` file in
   `$HOME/.bashrc` or `$HOME.zshrc`:
 
-  ```console
+  ```sh
   . /path/to/z.sh
   ```
 
@@ -342,7 +342,7 @@
   Python-based webserver for visualizing Python Pandas data structures,
   install the `dtale` package with `pip` or if using Conda run
 
-  ```console
+  ```sh
   conda install dtale -c conda-forge
   conda install -c plotly python-kaleido
   ```
@@ -422,7 +422,7 @@
 - [cspell](https://github.com/streetsidesoftware/cspell):
   Code-aware spellchecker, install with
 
-  ```console
+  ```sh
   npm install -g cspell
   ```
 
@@ -503,7 +503,7 @@ More information can also be found on
 
 ### Installing XCode command-line tools
 
-```console
+```sh
 sudo rm -rf /Library/Developer/CommandLineTools
 sudo xcode-select --install
 ```
