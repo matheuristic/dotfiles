@@ -37,15 +37,13 @@
   JDBC SQL client, very full-featured but user interface is complex
 - [HeidiSQL](https://www.heidisql.com/)
   ([Github](https://github.com/HeidiSQL/HeidiSQL))
-  MariaDB, MySQL, Microsoft SQL, PostgreSQL and SQLite client
-  (Windows)
+  MariaDB, MySQL, Microsoft SQL, PostgreSQL and SQLite client for Windows
 - [Robo 3T](https://github.com/Studio3T/robomongo):
   MongoDB management tool, previously called Robomongo
 - [OctoSQL](https://github.com/cube2222/octosql):
   Join, analyze and transform data from multiple databases using SQL
 - [Postico](https://eggerapps.at/postico/):
-  Commercial PostgreSQL client
-  (macOS)
+  Commercial PostgreSQL client for macOS
 - [RedisDesktopManager](https://github.com/uglide/RedisDesktopManager):
   Redis management tool, Linux binaries are downloadable but Windows
   and Mac binaries require either a
@@ -53,8 +51,7 @@
   [compiling from source](https://docs.rdm.dev/en/latest/install/)
 - [Sequel Ace](https://sequel-ace.com/)
   ([Github](https://github.com/Sequel-Ace/Sequel-Ace)):
-  MySQL and MariaDB client
-  (macOS, also available in the Mac App Store)
+  MySQL and MariaDB client for macOS
 
 ### Development (General)
 
@@ -62,7 +59,7 @@
   Go-based tool for indexing and searching with regexp on large
   codebases, install with
 
-  ```shell
+  ```console
   go get github.com/google/codesearch/cmd/...
   ```
 
@@ -77,17 +74,14 @@
   Javascript, Ruby and PHP
 - [CotEditor](https://coteditor.com/)
   ([Github](https://github.com/coteditor/)):
-  Like [Notepad++](https://notepad-plus-plus.org/) but for macOS.
-  (macOS)
+  Like [Notepad++](https://notepad-plus-plus.org/) but for macOS
 - [Docker](https://docs.docker.com/):
   Containerization platform
 - [Emacs](https://www.gnu.org/software/emacs/):
-  See [Emacs config
-  repository](https://github.com/matheuristic/emacs-config)
+  See [Emacs config repository](https://github.com/matheuristic/emacs-config)
 - [Gitup](https://gitup.co/)
   ([Github](https://github.com/git-up/GitUp)):
-  GUI Git interface
-  (macOS)
+  GUI Git interface for macOS
 - [GNU cflow](https://www.gnu.org/software/cflow/):
   Call graph generator for C.
   [pycflow2dot](https://github.com/johnyf/pycflow2dot) integrates
@@ -123,14 +117,17 @@
 ### File management
 
 - [Cyberduck](https://cyberduck.io/):
-  Client for FTP, SFTP, WebDAV and multiple cloud storage providers
-  (macOS, Windows)
+  Client for FTP, SFTP, WebDAV and multiple cloud storage providers,
+  available on macOS and Windows
+- [dar](http://dar.linux.free.fr/):
+  dar (or disk archive) is an archiving tool for Unix platforms.
+  Supports encryption, and also supports recovery records if
+  [par2](https://github.com/Parchive/par2cmdline/) is installed
 - [Double Commander](https://doublecmd.sourceforge.io/)
   ([Github](https://github.com/doublecmd/doublecmd)):
   Cross-platform two-panel GUI file manager inspired by Total Commander
 - [Marta](https://marta.sh/):
-  Commercial two-panel GUI file manager
-  (macOS)
+  Commercial two-panel GUI file manager for macOS
 - [Midnight Commander](https://midnight-commander.org/)
   ([Github](https://github.com/MidnightCommander/mc)):
   Cross-platform two-panel TUI file manager inspired by Total Commander,
@@ -155,21 +152,17 @@
 
 - [MOS](https://mos.caldis.me/)
   ([Github](https://github.com/Caldis/Mos)):
-  Smooth scrolling and set scroll direction independently for the mouse
-  (macOS)
+  Smooth scrolling and set scroll direction independently for the mouse in macOS
 - [skhd](https://github.com/koekeishiya/skhd):
-  Hotkey daemon
-  (macOS)
+  Hotkey daemon for macOS
 - [Unshaky](https://github.com/aahung/Unshaky):
-  Works around double keypress issues for butterfly keyboards
-  (macOS)
+  Works around double keypress issues for butterfly keyboards in macOS
 
 ### News
 
 - [NetNewsWire](https://netnewswire.com/)
   ([Github](https://github.com/Ranchero-Software/NetNewsWire)):
-  RSS reader
-  (macOS, iOS)
+  RSS reader for macOS (and iOS)
 - [Pan](http://pan.rebelbase.com/):
   Usenet newsreader
 
@@ -182,8 +175,7 @@
 - [jrnl](https://jrnl.sh/en/stable/):
   Command-line tool for journaling, alternative is Joplin or markdown
 - [LinkedIdeas](https://github.com/fespinoza/LinkedIdeas):
-  Mind-mapping tool
-  (macOS)
+  Mind-mapping tool for macOS
 - Markdown files:
   Plain markdown files can be used to keep notes, for a journal this
   could be one file a day with a header that identifies the file, e.g.
@@ -212,14 +204,16 @@
 
 ### Package managers
 
+- [Homebrew](https://brew.sh/)
+  ([Github](https://github.com/Homebrew/brew)):
+  macOS package manager for open-source software, alternative to MacPorts
 - [Miniforge](https://github.com/conda-forge/miniforge):
   Minimal installer for [Conda](https://conda.io/) pre-configured for
   [conda-forge](https://conda-forge.org/), with the Mambaforge variant
   recommended as it comes packaged with a Conda re-implementation
   [Mamba](https://github.com/mamba-org/mamba) that is much faster
 - [MacPorts](https://www.macports.org/):
-  Package manager for open-source software
-  (macOS)
+  macOS package manager for open-source software, alternative to Homebrew
 
 ### Programming language tooling
 
@@ -286,9 +280,10 @@
 - [R](https://www.r-project.org/):
   On macOS, install using MacPorts with
 
-  ```shell
+  ```console
   port install tk +quartz
-  port install R +cairo +gcc11 +java +openblas +openmp +quartz +recommended +tcltk -x11
+  port install R +cairo +gcc11 +java +openblas +openmp +quartz +recommended \
+      +tcltk -x11
   ```
 
   where `+gcc11` should be changed to another GCC version as needed
@@ -296,7 +291,9 @@
     Fancier REPL command shell alternative
   - [RStudio](https://rstudio.com/):
     IDE for R
-- Shell ([Bash](https://www.gnu.org/software/bash/), [POSIX](https://www.grymoire.com/Unix/Sh.html), [KornShell](https://github.com/ksh93/ksh))
+- Shell ([Bash](https://www.gnu.org/software/bash/),
+  [POSIX](https://www.grymoire.com/Unix/Sh.html),
+  [KornShell](https://github.com/ksh93/ksh))
   - [ShellCheck](https://github.com/koalaman/shellcheck):
     Linter for shell scripts (sh, bash, ksh)
   - [shfmt](https://github.com/mvdan/sh):
@@ -309,10 +306,9 @@
   to the host machine using [Jump Desktop](https://jumpdesktop.com/)
   using their
   [Fluid](https://support.jumpdesktop.com/hc/en-us/articles/216423983-General-Fluid-Remote-Desktop)
-  protocol (macOS, Windows)
+  protocol, available for macOS and Windows
 - [Royal TSX](https://royalapps.com/ts/mac/features):
-  RDP and VNC client
-  (macOS, Windows, iOS, Android)
+  Cross-platform RDP and VNC client
 
 ### Shell
 
@@ -336,7 +332,7 @@
   Clone the repository somewhere and source the `z.sh` file in
   `$HOME/.bashrc` or `$HOME.zshrc`:
 
-  ```shell
+  ```console
   . /path/to/z.sh
   ```
 
@@ -346,7 +342,7 @@
   Python-based webserver for visualizing Python Pandas data structures,
   install the `dtale` package with `pip` or if using Conda run
 
-  ```
+  ```console
   conda install dtale -c conda-forge
   conda install -c plotly python-kaleido
   ```
@@ -382,8 +378,7 @@
 ### VPN
 
 - [TunnelBlick](https://tunnelblick.net/):
-  Open source GUI for OpenVPN
-  (macOS)
+  Open source GUI for OpenVPN, available for macOS
 - [WireGuard](https://www.wireguard.com/):
   Simple and high-performance VPN
 
@@ -396,12 +391,11 @@
   Support](https://www.mozilla.org/en-US/firefox/enterprise/)
 - [Ka-Block!](http://kablock.com/)
   ([Github](https://github.com/dgraham/Ka-Block)):
-  Safari extension for blocking ads and trackers
-  (macOS, iOS)
+  Safari extension for blocking ads and trackers, for macOS and iOS
 - [Monolith](https://github.com/Y2Z/monolith.git):
   Save complete webpages to a single HTML file with embedded CSS,
   images and Javascript. Installable using HomeBrew or MacPorts on
-  macOS. Pre-built binaries are available for Windows and Linux.
+  macOS, and pre-built binaries are available for Windows and Linux
 
 ### Web development
 
@@ -421,21 +415,19 @@
 ### Window management
 
 - [Rectangle](https://github.com/rxhanson/Rectangle):
-  Move and resize windows using keyboard shortcuts and snap areas
-  (macOS)
+  Move and resize windows using keyboard shortcuts and snap areas in macOS
 
 ### Miscellaneous
 
 - [cspell](https://github.com/streetsidesoftware/cspell):
   Code-aware spellchecker, install with
 
-  ```shell
+  ```console
   npm install -g cspell
   ```
 
 - [DevonThink Pro](https://www.devontechnologies.com/apps/devonthink):
-  Commercial document management and search solution
-  (macOS)
+  Commercial document management and search solution for macOS
 - [enchant](https://github.com/AbiWord/enchant):
   Wrapper for abstracting different spell checking libararies into a
   single interface, with support for personal word lists (one word per
@@ -445,11 +437,10 @@
 - [FontForge](https://fontforge.org/):
   Font editor
 - [Hammerspoon](https://www.hammerspoon.org/):
-  Enables scripting with [Lua](https://www.lua.org/) to interact with
-  macOS APIs, for example it can be used to enable scrolling by moving
+  Enables macOS scripting with [Lua](https://www.lua.org/) to interact with
+  system APIs, for example it can be used to enable scrolling by moving
   the mouse when holding down the middle-button
   ([link](https://superuser.com/questions/303424/can-i-enable-scrolling-with-middle-button-drag-in-os-x))
-  (macOS)
 - [htop](https://htop.dev/)
   ([Github](https://github.com/htop-dev/htop)):
   TUI process viewer similar to `top` but with more features
@@ -464,7 +455,6 @@
 - [Platypus](https://github.com/sveinbjornt/Platypus)
   ([Github](https://github.com/sveinbjornt/Platypus)):
   Create macOS apps from command-line scripts
-  (macOS)
 - [PyCaret](https://pycaret.org/)
   ([Github](https://github.com/pycaret/pycaret)):
   Low-code Python-based machine learning library, best installed using
@@ -476,17 +466,44 @@
   Symlink farm manager, useful for managing dotfiles
 - [ueli](https://ueli.app/)
   ([Github](https://github.com/oliverschwendener/ueli)):
-  Launcher like [Alfred](https://www.alfredapp.com/) but open-source.
-  (macOS, Windows)
+  Launcher like [Alfred](https://www.alfredapp.com/) but open-source,
+  available for macOS and Windows
 - [Zotero](https://www.zotero.org/):
   Reference management software to collect, organize, cite and share
   research material
+
+## Linux notes
+
+Some notes also apply to BSD systems.
+
+### Linux development environment in ChromeOS
+
+Linux containers and VMs for ChromeOS are made available via the
+[Crostini](https://chromium.googlesource.com/chromiumos/docs/+/HEAD/containers_and_vms.md)
+framework.
+
+More information can also be found on
+[Reddit](https://www.reddit.com/r/Crostini/).
+
+- **Enabling**: Go to
+  `Settings > Developers (under Advanced) > Linux Development Environment`
+  and enable
+- **Terminal settings**: `Ctrl-Shift-p` in the Linux terminal
+- **Interacting with the Wayland clipboard**: Copying and pasting in
+  and out of the Crostini container via the Wayland clipboard in
+  ChromeOS (Wayland is the display manager) can be done using
+  [wl-clipboard](https://github.com/bugaevc/wl-clipboard) (see
+  [link](https://www.reddit.com/r/chromeos/comments/kf3fxo/linux_beta_penguin_how_to_copy_file_contents_from))
+  version `2.0.0` or greater (note that the Crostini terminal has
+  native support for the Wayland clipboard, in that selecting a region
+  will copy to the clipboard and `Ctrl-Shift-v` will paste from the
+  clipboard)
 
 ## Mac notes
 
 ### Installing XCode command-line tools
 
-```shell
+```console
 sudo rm -rf /Library/Developer/CommandLineTools
 sudo xcode-select --install
 ```
