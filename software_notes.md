@@ -179,19 +179,17 @@
 - Markdown files:
   Plain markdown files can be used to keep notes, for a journal this
   could be one file a day with a header that identifies the file, e.g.
-  use a dirtree like `$HOME/journal/JOURNALNAME/YYYY-MM/YYYYMMDD.md`
+  use a dirtree like `$HOME/journal/JOURNALNAME-YYYY.md`
   with contents like
 
   ```markdown
-  # YYYYMMDD DAYOFWEEK
-
-  ## HH:MM SUBJECT @TAG1 @TAG2
-
+  # Journal YYYY
+  ## YYYY-MM-DD DAYOFWEEK
+  ### HH:MMXM-HH:MMXM SUBJECT #TAG1 #TAG2
   DETAIL
   ```
 
   and the dirtree can be synced with Git or a cloud storage solution
-
 - [Org mode](https://orgmode.org/):
   [Emacs](https://www.gnu.org/software/emacs/) major mode for
   note-taking, TODO list management, authoring and literate
@@ -201,6 +199,10 @@
 - [Timewarrior](https://timewarrior.net/)
   Command-line tool for time-tracking, which can be integrated with
   Taskwarrior ([link](https://timewarrior.net/docs/taskwarrior/))
+- [Zettlr](https://www.zettlr.com/)
+  ([Github](https://github.com/Zettlr/Zettlr)):
+  Markdown editor with [Zettelkasten](https://zettelkasten.de/posts/overview/)
+  support
 
 ### Package managers
 
