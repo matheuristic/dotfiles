@@ -226,6 +226,12 @@
   - [Leiningen](https://leiningen.org/):
     Build automation and dependency management tool for Clojure
     projects
+- [Elixir](https://elixir-lang.org/)
+  - [Credo](https://github.com/rrrene/credo):
+    Static code analysis tool for projects with focus on teaching and
+    code consistency
+  - [ElixirLS](https://github.com/elixir-lsp/elixir-ls):
+    LSP server for the Elixir programming language
 - [Go](https://golang.org/)
   - [golangci-lint](https://github.com/golangci/golangci-lint):
     Go linters aggregator with YAML-based configuration
