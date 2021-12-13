@@ -437,8 +437,9 @@
 ### Miscellaneous
 
 - [Al Dente](https://github.com/davidwernhart/AlDente):
-  macOS tool to limit charging percentage (e.g. limiting max charge percentage
-  to 80% can help prolong battery life)
+  macOS tool to limit battery charging (e.g. keeping charge percentage at or
+  below 80% can help prolong battery life), requires a helper application that
+  can be installed and removed from the tool's settings
 - [cspell](https://github.com/streetsidesoftware/cspell):
   Code-aware spellchecker, install with
 
