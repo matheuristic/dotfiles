@@ -383,6 +383,15 @@
   Command-line tool for indexing, slicing, analyzing, splitting and
   joining CSV files
 
+### Virtualization
+
+- [UTM](https://github.com/utmapp/UTM):
+  iOS and macOS tool for managing [QEMU](https://www.qemu.org/)
+  virtual machines
+- [virt-manager](https://virt-manager.org/)
+  ([Github](https://github.com/virt-manager/virt-manager)):
+  Linux desktop tool for managing QEMU/KVM virtual machines
+
 ### VPN
 
 - [TunnelBlick](https://tunnelblick.net/):
@@ -427,6 +436,9 @@
 
 ### Miscellaneous
 
+- [Al Dente](https://github.com/davidwernhart/AlDente):
+  macOS tool to limit charging percentage (e.g. limiting max charge percentage
+  to 80% can help prolong battery life)
 - [cspell](https://github.com/streetsidesoftware/cspell):
   Code-aware spellchecker, install with
 
