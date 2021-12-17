@@ -22,6 +22,10 @@
   ([Github](https://github.com/Zettlr/Zettlr)):
   Markdown editor, designed to be used with Pandoc
 
+### Data pipelines
+- [Apache Airflow](https://airflow.apache.org/)
+- [Apache HOP](https://hop.apache.org/)
+
 ### Database
 
 - [Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/)
@@ -376,14 +380,21 @@
   Command-line utility for working with CSV, TSV and tabular JSON files.
   Has some similarities with `jq` and `xsv` but covers multiple formats
   and has more features at the cost of additional complexity
+- [PandasGUI](https://github.com/adamerose/PandasGUI):
+  Python GUI library for analyzing and visualizing Pandas DataFrames
 - [q](https://github.com/harelba/q):
   Command-line tool for running SQL directly on CSV files
+- [sc-im](https://github.com/andmarti1424/sc-im):
+  Terminal spreadsheet program
+- [Sweetviz](https://github.com/fbdesignpro/sweetviz):
+  Python library to visualize and compare data sets
 - [tsv-utils](https://github.com/eBay/tsv-utils):
   Command-line tool for tabular data, similar to xsv but supposedly
   faster for large datasets
 - [Visidata](https://www.visidata.org/)
   ([Github](https://github.com/saulpw/visidata)):
-  Command-line tabular data multitool
+  Terminal tabular data multitool, supports sources loadable via Pandas using
+  the `-f` option
 - [xsv](https://github.com/BurntSushi/xsv):
   Command-line tool for indexing, slicing, analyzing, splitting and
   joining CSV files

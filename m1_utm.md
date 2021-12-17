@@ -51,9 +51,12 @@ Create the following script somewhere (for example, this can be
 # Script to set resolution for current screen
 
 # For a Linux VM running under a MacBook Pro 16 2021 (M1 Pro), which
-# has resolution 3456x2234@60Hz, full-screen the VM window and run
+# has resolution 3456x2234@60Hz with the notch and 3456x2160 without the notch
+# (in a full-screen VM, since that does not include the notch, without
+# adjusting the resolution run "xrandr -q" to see the current resolution and
+# double it), full-screen the VM window and run
 #
-#   $ set-res.sh 3456 2234 60
+#   $ set-res.sh 3456 2160 60
 #
 # When running under UTM, make sure the SPICE tools are installed
 #
@@ -63,9 +66,9 @@ Create the following script somewhere (for example, this can be
 #
 # Note that cvt is used to get the required mode parameters:
 #
-#   $ cvt 3456 2234 60
-#   3456x2234 59.98 Hz (CVT) hsync: 138.80 kHz; pclk: 664.00 MHz
-#   Modeline "3456x2234_60.00"  664.00  3456 3744 4120 4784  2234 2237 2247 2314 -hsync +vsync
+#   $ cvt 3456 2160 60
+#   3456x2160 59.99 Hz (CVT 7.46MA) hsync: 134.20 kHz; pclk: 642.00 MHz
+#   Modeline "3456x2160_60.00"  642.00  3456 3744 4120 4784  2160 2163 2169 2237 -hsync +vsync
 
 RETINA=${RETINA:-1}  # Default to HiDPI
 
@@ -105,8 +108,8 @@ and the numbers reflect the fullscreen resolution of the machine).
 ```desktop
 [Desktop Entry]
 Version=1.0
-Name=Fullscreen Res
-Exec=/PATH/TO/set-res.sh 3456 2234
+Name=Fullscreen HiDPI
+Exec=/PATH/TO/set-res.sh 3456 2160
 Terminal=false
 Type=Application
 Comment=Set full-screen resolution for HiDPI machine
@@ -117,41 +120,6 @@ select `Allow Launching`. This allows for a simpler workflow for
 setting fullscreen Retina resolution---login to the VM, fullscreen the
 window, and double-click this desktop file (which should appear on the
 desktop with the description corresponding to the `Name` entry).
-
-### Deprecated
-
-Create the following script in the VM, say `mbp16-retina.sh` for a
-16-inch Macbook Pro (2021 model), and make it executable. The
-resolution in the script (`3456x2234`) is for a 16-inch Macbook Pro,
-and should be modified as appropriate for the host device.
-
-```sh
-#!/bin/sh
-
-# Script to set resolution for a Linux VM running under a MacBook Pro 16 2021 (M1 Pro)
-# which has resolution 3456x2234@60Hz
-
-# When running under UTM, make sure the SPICE tools are installed
-# > sudo apt install spice-vdagent spice-webdavd
-# and "Fit to screen" and "Retina mode" are enabled if using UTM
-
-# > cvt 3456 2234 60
-# 3456x2234 59.98 Hz (CVT) hsync: 138.80 kHz; pclk: 664.00 MHz
-# Modeline "3456x2234_60.00"  664.00  3456 3744 4120 4784  2234 2237 2247 2314 -hsync +vsync
-
-modename="3456x2234_60.00"
-xrandr --newmode $modename 664.00 3456 3744 4120 4784 2234 2237 2247 2314 -hsync +vsync
-
-currentdisplay=$(xrandr | grep -e " connected [^(]" | sed -e "s/\([A-Z0-9]\+\) connected.*/\1/")
-xrandr --addmode "$currentdisplay" "$modename"
-
-export GDK_SCALE=2
-export GDK_DPI_SCALE=0.5
-
-xrandr --output Virtual-1 --mode "3456x2234_60.00"
-```
-
-Expand the UTM session window to full-screen mode and run the script.
 
 ## Shared drives
 
@@ -186,3 +154,12 @@ been deprecated and now `ip` should be used instead (see
 ```sh
 ip addr
 ```
+
+## Minimal software list
+
+- [OpenJDK](https://openjdk.java.net/) (APT package `openjdk-17-jre`)
+- [Miniforge](https://github.com/conda-forge/miniforge) (Mambaforge)
+- [Emacs](https://snapcraft.io/emacs)
+- [Chromium](https://snapcraft.io/chromium)
+- [DBeaver](https://dbeaver.io/download/) (zip without Java included)
+- [Apache HOP](https://hop.apache.org/)
