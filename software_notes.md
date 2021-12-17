@@ -33,8 +33,13 @@
   SQLite, MySQL, MariaDB, Postgres, CockroachDB, Microsoft SQL Server
   and Amazon Redshift client with a nicer interface than DBeaver but
   not as featureful
-- [DBeaver](https://dbeaver.io/):
-  JDBC SQL client, very full-featured but user interface is complex
+- [DBeaver](https://dbeaver.io/)
+  ([Github](https://github.com/dbeaver/dbeaver)):
+  JDBC SQL client, very full-featured but user interface is complex (a
+  zip package is available from the website files
+  [archive](https://dbeaver.io/files/) which requires Java be
+  installed on the machine, e.g. via the `openjdk-17-jre` package or
+  another version)
 - [HeidiSQL](https://www.heidisql.com/)
   ([Github](https://github.com/HeidiSQL/HeidiSQL))
   MariaDB, MySQL, Microsoft SQL, PostgreSQL and SQLite client for Windows
@@ -537,17 +542,17 @@ sudo xcode-select --install
 
 1. Find the expiring key ID using `gpg --list-keys` (the key ID comes
    after the slash)
-2. Edit the key using `gpg --edit-key KEY_ID`
-3. View key and subkeys with the `list` command, where selected
+1. Edit the key using `gpg --edit-key KEY_ID`
+1. View key and subkeys with the `list` command, where selected
    keys/subkeys have and asterisk next to them
-4. Select/unselect a key using `key N` where `N` is the number of the
+1. Select/unselect a key using `key N` where `N` is the number of the
    desired key in the list
-5. The command `expire` will allow the interactive selection of a new
+1. The command `expire` will allow the interactive selection of a new
    expiry.
-6. Repeat as needed (may not be needed if multiple keys are selected
+1. Repeat as needed (may not be needed if multiple keys are selected
    and their expirations extended as above)
-7. Check new expirations using `list`
-8. Save with the `save` command
-9. Publish/disseminate the updated keys as appropriate
+1. Check new expirations using `list`
+1. Save with the `save` command
+1. Publish/disseminate the updated keys as appropriate
 
 Run `help` while in the GPG shell for additional commands available.
