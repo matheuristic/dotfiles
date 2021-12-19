@@ -4,6 +4,10 @@
 
 ### Authoring
 
+- [Manuskript](https://www.theologeek.ch/manuskript/)
+  ([Github](https://github.com/olivierkes/manuskript)):
+  Open-source tool for writers like
+  [Scrivener](https://www.literatureandlatte.com/scrivener/)
 - [Pandoc](https://pandoc.org/)
   ([Github](https://github.com/jgm/pandoc)):
   Universal markup converter
@@ -18,6 +22,9 @@
 - [TeXLive](https://www.tug.org/texlive/):
   TeX-distribution. There is also a repackaged version for macOS,
   [MacTeX](http://www.tug.org/mactex/), with extra Mac-specific tools
+- [Twine](https://twinery.org/)
+  ([Github](https://github.com/klembot/twinejs)):
+  Tool for authoring interactive, non-linear stories
 - [Zettlr](https://www.zettlr.com/)
   ([Github](https://github.com/Zettlr/Zettlr)):
   Markdown editor, designed to be used with Pandoc
@@ -64,6 +71,11 @@
 
 ### Development (General)
 
+- [cflow](https://www.gnu.org/software/cflow/):
+  Call graph generator for C.
+  [pycflow2dot](https://github.com/johnyf/pycflow2dot) integrates
+  `cflow` with the [Graphviz](http://www.graphviz.org/) `dot` tool to
+  output the call graph to multiple formats
 - [Code Search](https://github.com/google/codesearch):
   Go-based tool for indexing and searching with regexp on large
   codebases, install with
@@ -81,32 +93,33 @@
 - [Code2flow](https://github.com/scottrogowski/code2flow/):
   Call graph generator for dynamic languages, specifically Python,
   Javascript, Ruby and PHP
-- [CotEditor](https://coteditor.com/)
-  ([Github](https://github.com/coteditor/)):
-  Like [Notepad++](https://notepad-plus-plus.org/) but for macOS
 - [Docker](https://docs.docker.com/):
   Containerization platform
-- [Emacs](https://www.gnu.org/software/emacs/):
-  See [Emacs config repository](https://github.com/matheuristic/emacs-config)
 - [Gitup](https://gitup.co/)
   ([Github](https://github.com/git-up/GitUp)):
   GUI Git interface for macOS
-- [GNU cflow](https://www.gnu.org/software/cflow/):
-  Call graph generator for C.
-  [pycflow2dot](https://github.com/johnyf/pycflow2dot) integrates
-  `cflow` with the [Graphviz](http://www.graphviz.org/) `dot` tool to
-  output the call graph to multiple formats
+- [Meld](https://meldmerge.org/)
+  ([Gitlab](https://gitlab.gnome.org/GNOME/meld)):
+  GTK visual diff and merge tool
+- [ngrok](https://ngrok.com/):
+  Reverse proxy to expose a local web server to the internet (requires
+  an account, [frp](https://github.com/fatedier/frp) and
+  [localtunnel](https://github.com/localtunnel/localtunnel) are fully
+  free versions)
 - [Plan 9 from User Space](https://9fans.github.io/plan9port/)
   (plan9port):
   See [plan9port config
   repository](https://github.com/matheuristic/plan9port-config)
+- [task](https://taskfile.dev/)
+  ([Github](https://github.com/go-task/task)):
+  Task runner / build tool / simpler Make alternative
+- [QXmlEdit](http://qxmledit.org/)
+  ([Github](https://github.com/lbellonda/qxmledit)):
+  XML editor
 - [Sourcetrail](https://www.sourcetrail.com/)
   ([Github](https://github.com/CoatiSoftware/Sourcetrail)):
   Cross-platform source explorer, supports C, C++, Java and Python.
   Deprecated since the 2021.4 release
-- [QXmlEdit](http://qxmledit.org/)
-  ([Github](https://github.com/lbellonda/qxmledit)):
-  XML editor
 
 ### Document extraction
 
@@ -151,7 +164,10 @@
 ### Media creation and editing
 
 - [Ardour](https://ardour.org/):
-  Digital audio workstation
+  Multitrack audio recorder
+- [drawio-desktop](https://github.com/jgraph/drawio-desktop):
+  Electron build of [diagrams.net](https://www.diagrams.net/),
+  a web-based diagramming tool, for offline use
 - [GIMP](https://www.gimp.org/):
   Raster graphics editor
 - [Inkscape](https://inkscape.org/):
@@ -162,6 +178,9 @@
   Pattern-based music sequencer
 - [Krita](https://krita.org/en/):
   Raster graphics editor
+- [Synfig](https://www.synfig.org/)
+  ([Github](https://github.com/synfig/synfig/)):
+  Vector-based 2D animation software 
 - [yEd](https://www.yworks.com/products/yed):
   Diagramming tool
 
@@ -216,10 +235,9 @@
 - [Timewarrior](https://timewarrior.net/)
   Command-line tool for time-tracking, which can be integrated with
   Taskwarrior ([link](https://timewarrior.net/docs/taskwarrior/))
-- [Zettlr](https://www.zettlr.com/)
-  ([Github](https://github.com/Zettlr/Zettlr)):
-  Markdown editor with [Zettelkasten](https://zettelkasten.de/posts/overview/)
-  support
+- [Xournal++](https://xournalpp.github.io/)
+  ([Github](https://github.com/xournalpp/xournalpp/)):
+  Notetaking software with handwriting support
 
 ### Package managers
 
@@ -357,6 +375,8 @@
 - [rlwrap](https://github.com/hanslub42/rlwrap):
   `readline` wrapper to enable completion and history for any
   command-line tool taking keyboard input
+- [sttr](https://github.com/abhimanyu003/sttr):
+  Command-line tool for various string operations
 - [z](https://github.com/rupa/z):
   Track frecent directories and jump to them in Bash and Zsh.
   Clone the repository somewhere and source the `z.sh` file in
@@ -411,6 +431,27 @@
 - [xsv](https://github.com/BurntSushi/xsv):
   Command-line tool for indexing, slicing, analyzing, splitting and
   joining CSV files
+
+### Text editors
+
+- [CotEditor](https://coteditor.com/)
+  ([Github](https://github.com/coteditor/)):
+  Like [Notepad++](https://notepad-plus-plus.org/) but for macOS
+- [Emacs](https://www.gnu.org/software/emacs/):
+  See [Emacs config repository](https://github.com/matheuristic/emacs-config)
+- [Micro](https://micro-editor.github.io/):
+  Terminal text editor
+- [Nano](https://www.nano-editor.org/):
+  Lightweight terminal text editor
+- [QOwnNotes](https://www.qownnotes.org/)
+  ([Github](https://github.com/pbek/QOwnNotes)):
+  Markdown editor with Nextcloud and ownCloud integration
+- [Vim](https://www.vim.org/)/[Neovim](https://neovim.io/):
+  Terminal (with GUI options available) text editor that improves on vi
+- [Zettlr](https://www.zettlr.com/)
+  ([Github](https://github.com/Zettlr/Zettlr)):
+  Markdown editor with [Zettelkasten](https://zettelkasten.de/posts/overview/)
+  support
 
 ### Virtualization
 
@@ -471,6 +512,8 @@
   macOS tool to limit battery charging (e.g. keeping charge percentage at or
   below 80% can help prolong battery life), requires a helper application that
   can be installed and removed from the tool's settings
+- [Anki](https://apps.ankiweb.net/):
+  Flashcards software
 - [cspell](https://github.com/streetsidesoftware/cspell):
   Code-aware spellchecker, install with
 
@@ -499,6 +542,10 @@
 - [InvoicePlan](https://www.invoiceplane.com/)
   ([Github](https://github.com/InvoicePlane/InvoicePlane)):
   Self-hosted invoice management application
+- [Netron](https://github.com/lutzroeder/netron):
+  Neural network, deep learning and machine learning model viewer
+- [OmegaT](https://omegat.org/):
+  Translation memory tool
 - [pass](https://www.passwordstore.org/):
   Command-line password manager
 - [pdfpc](https://github.com/pdfpc/pdfpc)

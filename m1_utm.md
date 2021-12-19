@@ -159,6 +159,7 @@ ip addr
 
 - [Chromium](https://snapcraft.io/chromium)
 - [DBeaver](https://dbeaver.io/download/) (zip without Java included)
+- [drawio-desktop](https://snapcraft.io/drawio)
 - [Emacs](https://snapcraft.io/emacs)
 - [Miniforge](https://github.com/conda-forge/miniforge) (Mambaforge)
 - [OpenJDK](https://openjdk.java.net/) (APT package `openjdk-17-jre`)
