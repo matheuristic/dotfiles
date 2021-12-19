@@ -35,6 +35,9 @@
 
 ### Database
 
+- [Altair](https://altair.sirmuel.design/)
+  ([Github](https://github.com/altair-graphql/altair)):
+  Cross-platform GraphQL client
 - [Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/)
   ([Github](https://github.com/microsoft/azuredatastudio)):
   Microsoft SQL Server, Azure SQL Database, PostgreSQL and Jupyter
@@ -51,6 +54,10 @@
   [archive](https://dbeaver.io/files/) which requires Java be
   installed on the machine, e.g. via the `openjdk-17-jre` package or
   another version)
+- [DbGate](https://dbgate.org/)
+  ([Github](https://github.com/dbgate/dbgate)):
+  Cross-platform database client, supports MySQL, PostgreSQL, SQL Server,
+  MongoDB, SQLite, CSV files and others
 - [HeidiSQL](https://www.heidisql.com/)
   ([Github](https://github.com/HeidiSQL/HeidiSQL))
   MariaDB, MySQL, Microsoft SQL, PostgreSQL and SQLite client for Windows
@@ -93,6 +100,8 @@
 - [Code2flow](https://github.com/scottrogowski/code2flow/):
   Call graph generator for dynamic languages, specifically Python,
   Javascript, Ruby and PHP
+- [Cookiecutter](https://github.com/cookiecutter/cookiecutter):
+  Command-line tool to create projects from project templates
 - [Docker](https://docs.docker.com/):
   Containerization platform
 - [Gitup](https://gitup.co/)
@@ -101,15 +110,23 @@
 - [Meld](https://meldmerge.org/)
   ([Gitlab](https://gitlab.gnome.org/GNOME/meld)):
   GTK visual diff and merge tool
+- [MLflow](https://mlflow.org/):
+  Machine-learning model lifecycle management platform, in particular
+  tracking experiments and logging artifacts
 - [ngrok](https://ngrok.com/):
   Reverse proxy to expose a local web server to the internet (requires
   an account, [frp](https://github.com/fatedier/frp) and
   [localtunnel](https://github.com/localtunnel/localtunnel) are fully
   free versions)
+- [onefetch](https://github.com/o2sh/onefetch):
+  Command-line tool that displays project information and code
+  statistics for a local Git repository
 - [Plan 9 from User Space](https://9fans.github.io/plan9port/)
   (plan9port):
   See [plan9port config
   repository](https://github.com/matheuristic/plan9port-config)
+- [scc](https://github.com/boyter/scc):
+  Command line tool to count lines of code by language
 - [task](https://taskfile.dev/)
   ([Github](https://github.com/go-task/task)):
   Task runner / build tool / simpler Make alternative
@@ -161,10 +178,22 @@
   that bundles Syncthing with a wrapper that exposes functionality
   through a system tray icon
 
+### Input devices
+
+- [MOS](https://mos.caldis.me/)
+  ([Github](https://github.com/Caldis/Mos)):
+  Smooth scrolling and set scroll direction independently for the mouse in macOS
+- [skhd](https://github.com/koekeishiya/skhd):
+  Hotkey daemon for macOS
+- [Unshaky](https://github.com/aahung/Unshaky):
+  Works around double keypress issues for butterfly keyboards in macOS
+
 ### Media creation and editing
 
 - [Ardour](https://ardour.org/):
   Multitrack audio recorder
+- [Caire](https://github.com/esimov/caire):
+  Command-line tool for content-aware image resizing
 - [drawio-desktop](https://github.com/jgraph/drawio-desktop):
   Electron build of [diagrams.net](https://www.diagrams.net/),
   a web-based diagramming tool, for offline use
@@ -178,21 +207,18 @@
   Pattern-based music sequencer
 - [Krita](https://krita.org/en/):
   Raster graphics editor
+- [sfxr-qt](https://github.com/agateau/sfxr-qt):
+  [Qt](https://www.qt.io/) port of
+  [SFXR](http://www.drpetter.se/project_sfxr.html) for quickly
+  producing sound effects for games (
+  [JavaScript](https://github.com/chr15m/jsfxr) port available
+  [online](https://sfxr.me/), and sfxr is also available as a built-in
+  instrument in LMMS)
 - [Synfig](https://www.synfig.org/)
   ([Github](https://github.com/synfig/synfig/)):
   Vector-based 2D animation software 
 - [yEd](https://www.yworks.com/products/yed):
   Diagramming tool
-
-### Input devices
-
-- [MOS](https://mos.caldis.me/)
-  ([Github](https://github.com/Caldis/Mos)):
-  Smooth scrolling and set scroll direction independently for the mouse in macOS
-- [skhd](https://github.com/koekeishiya/skhd):
-  Hotkey daemon for macOS
-- [Unshaky](https://github.com/aahung/Unshaky):
-  Works around double keypress issues for butterfly keyboards in macOS
 
 ### News
 
@@ -261,6 +287,9 @@
   - [Leiningen](https://leiningen.org/):
     Build automation and dependency management tool for Clojure
     projects
+- [Coq](https://coq.inria.fr/)
+  ([Github](https://github.com/coq/coq))
+  - [Editor tooling](https://coq.inria.fr/user-interfaces.html)
 - [Elixir](https://elixir-lang.org/)
   - [Credo](https://github.com/rrrene/credo):
     Static code analysis tool for projects with focus on teaching and
@@ -360,16 +389,38 @@
 
 ### Shell
 
+- [atop](https://github.com/Atoptool/atop):
+  System resource monitor, runs as a daemon that logs process activity
 - [bat](https://github.com/sharkdp/bat):
   Command-line `cat` clone with syntax highlighting and Git integration
+- [btop](https://github.com/aristocratos/btop):
+  System resource monitor, alternative to top, [htop](https://htop.dev/),
+  [glances](https://nicolargo.github.io/glances/) and other interactive
+  process viewers
+- [Byobu](https://www.byobu.org/):
+  Collection of scripts and utilities layered on top of GNU Screen and
+  tmux (default) to enhance them and improve user experience
+- [fkill](https://github.com/sindresorhus/fkill-cli):
+  Command-line tool to interactively kill running user and system processes
+- [forkstat](https://github.com/ColinIanKing/forkstat):
+  Command-line program to log process forks, execs and exits (useful
+  for tracking runaway processes)
 - [fzf](https://github.com/junegunn/fzf):
   Command-line fuzzy finder
+- [grex](https://github.com/pemistahl/grex):
+  Command-line tool to generate regular expressions from user-provided
+  test-cases
+- [hollywood](https://github.com/dustinkirkland/hollywood):
+  Hollywood technobabble in a Byobu session
 - [Mosh](https://mosh.org/):
   SSH alternative that handles intermittent connectivity and persists
   connections when roaming across IP addresses
-- [tmux](https://github.com/tmux/tmux):
-  Terminal multiplexer, useful for managing and persisting remote
-  sessions over Mosh or SSH
+- [renameutils](https://www.nongnu.org/renameutils/):
+  Collection of programs to make renaming of files easier, like `qmv`
+  that allows editing file names with a text editor (GUI alternatives
+  include [KRename](https://userbase.kde.org/KRename),
+  [GPRename](http://gprename.sourceforge.net/) or
+  [Szyszka](https://github.com/qarmin/szyszka))
 - [ripgrep](https://github.com/BurntSushi/ripgrep):
   Command-line search tool like `grep`, but usually much faster
 - [rlwrap](https://github.com/hanslub42/rlwrap):
@@ -377,6 +428,9 @@
   command-line tool taking keyboard input
 - [sttr](https://github.com/abhimanyu003/sttr):
   Command-line tool for various string operations
+- [tmux](https://github.com/tmux/tmux):
+  Terminal multiplexer, useful for managing and persisting remote
+  sessions over Mosh or SSH
 - [z](https://github.com/rupa/z):
   Track frecent directories and jump to them in Bash and Zsh.
   Clone the repository somewhere and source the `z.sh` file in
@@ -408,6 +462,14 @@
 - [jq](https://stedolan.github.io/jq/)
   ([Github](https://github.com/stedolan/jq)):
   Command-line JSON processor
+- [Magic Wormhole](https://magic-wormhole.readthedocs.io/)
+  ([Github](https://github.com/magic-wormhole/magic-wormhole)):
+  Command-line tool and library for sending files from one computer to
+  another (note that this tool requires
+  [mailbox](https://github.com/magic-wormhole/magic-wormhole-mailbox-server)
+  and a
+  [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)
+  servers, which by default uses ones hosted by the project)
 - [Miller](https://miller.readthedocs.io/en/latest/)
   ([Github](https://github.com/johnkerl/miller)):
   Command-line utility for working with CSV, TSV and tabular JSON files.
@@ -431,6 +493,8 @@
 - [xsv](https://github.com/BurntSushi/xsv):
   Command-line tool for indexing, slicing, analyzing, splitting and
   joining CSV files
+- [yq](https://github.com/mikefarah/yq):
+  Command-line YAML processor
 
 ### Text editors
 
@@ -492,14 +556,24 @@
   API client and design platform, supporting GraphQL, REST and gRPC.
   Interfaceable from the command-line using
   [Insomnia Inso](https://insomnia.rest/products/inso)
+- [jo](https://github.com/jpmens/jo):
+  Small utility to create JSON objects on the command-line, useful
+  for quick crafting of JSON inputs to pipe to APIs in the terminal
+- [Killgrave](https://github.com/friendsofgo/killgrave):
+  HTTP mock server via a command-line interface and config files
+- [Mockoon](https://mockoon.com/)
+  ([Github](https://github.com/mockoon/mockoon)):
+  HTTP mock server
+- [mitmproxy](https://mitmproxy.org/):
+  Interactive HTTPS proxy
 - [Postman](https://www.postman.com/):
   API client, CI/CD support with
   [Newman](https://github.com/postmanlabs/newman)
 - [Prism](https://github.com/stoplightio/prism):
   HTTP mock server with behavior that can be specified from OpenAPI
   v2 (Swagger), OpenAPI v3 or Postman Collection files
-- [mitmproxy](https://mitmproxy.org/):
-  Interactive HTTPS proxy
+- [ttyplot](https://github.com/tenox7/ttyplot):
+  Real-time plotting tool in the terminal using stdin as data input
 
 ### Window management
 
@@ -514,8 +588,12 @@
   can be installed and removed from the tool's settings
 - [Anki](https://apps.ankiweb.net/):
   Flashcards software
+- [Aspell](http://aspell.net/)
+  ([Github](https://github.com/GNUAspell/aspell)):
+  Spell checker designed as a replacement for
+  [Ispell](https://www.gnu.org/software/ispell/ispell.html)
 - [cspell](https://github.com/streetsidesoftware/cspell):
-  Code-aware spellchecker, install with
+  Code-aware spell checker, install with
 
   ```sh
   npm install -g cspell
@@ -523,6 +601,10 @@
 
 - [DevonThink Pro](https://www.devontechnologies.com/apps/devonthink):
   Commercial document management and search solution for macOS
+- [Diagon](https://github.com/ArthurSonzogni/Diagon):
+  Command-line tool for transforming Markdown-style expressions into
+  ASCII art, [webapp](https://github.com/ArthurSonzogni/Diagon) and
+  [snap](https://snapcraft.io/diagon) available
 - [enchant](https://github.com/AbiWord/enchant):
   Wrapper for abstracting different spell checking libararies into a
   single interface, with support for personal word lists (one word per
@@ -542,8 +624,21 @@
 - [InvoicePlan](https://www.invoiceplane.com/)
   ([Github](https://github.com/InvoicePlane/InvoicePlane)):
   Self-hosted invoice management application
+- [LanguageTool](https://languagetool.org/):
+  Style and grammar checker, standalone Java version downloadable
+  [here](https://languagetool.org/download/) with snapshots available
+  [here](https://internal1.languagetool.org/snapshots/) (the latest
+  version is always downloadable via this
+  [link](https://languagetool.org/download/LanguageTool-stable.zip)),
+  [augmentable](https://dev.languagetool.org/finding-errors-using-n-gram-data.html)
+  with [n-gram](https://languagetool.org/download/ngram-data/) data
 - [Netron](https://github.com/lutzroeder/netron):
   Neural network, deep learning and machine learning model viewer
+- [Nuspell](https://nuspell.github.io/)
+  ([Github](https://github.com/nuspell/nuspell)):
+  Spell checker designed as a modern alternative to
+  [Hunspell](http://hunspell.github.io/)
+  ([Github](https://github.com/hunspell/hunspell))
 - [OmegaT](https://omegat.org/):
   Translation memory tool
 - [pass](https://www.passwordstore.org/):
@@ -558,11 +653,30 @@
   ([Github](https://github.com/pycaret/pycaret)):
   Low-code Python-based machine learning library, best installed using
   `pip` in its own Conda or Python virtual environment
+- [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
+  Terminal color-picker
+- [ROOT](https://root.cern/)
+  ([Github](https://github.com/root-project/root)):
+  CERN-developed framework for analyzing petabytes of data
+- [ScummVM](https://www.scummvm.org/)
+  ([Github](https://github.com/scummvm/scummvm)):
+  Program to run certain classical adventure and role-playing games
+  provided the games' data files are available
+- [slides](https://github.com/maaslalani/slides):
+  Terminal-based tool for presentations using Markdown files, with
+  different slides separated by `---` lines
 - [Sloth](https://github.com/sveinbjornt/Sloth)
   ([Github](https://github.com/sveinbjornt/Sloth)):
   Show open files, dirs, sockets and pipes
 - [Stow](https://www.gnu.org/software/stow/):
   Symlink farm manager, useful for managing dotfiles
+- [Sweet Home 3D](https://www.sweethome3d.com/)
+  ([Sourceforge](https://sourceforge.net/projects/sweethome3d/)):
+  Open-source interior design application, also available as an online
+  [webapp](https://www.sweethome3d.com/SweetHome3DOnlineManager.jsp)
+- [Tizonia](https://tizonia.org/)
+  ([Github](https://github.com/tizonia/tizonia-openmax-il)):
+  Command-line cloud music player
 - [ueli](https://ueli.app/)
   ([Github](https://github.com/oliverschwendener/ueli)):
   Launcher like [Alfred](https://www.alfredapp.com/) but open-source,
