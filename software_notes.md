@@ -727,10 +727,10 @@ sudo xcode-select --install
 
 #### Exporting ASCII-armored keys as QR codes
 
-First run `gpg --list-keys --with-subkey-fingerprint` to list the keys
-plus subkeys along with their fingerprints. Identify the encrypting
-subkey, if one exists, by the usage flag `[E]` (otherwise, create one or use
-the master key), and note its fingerprint.
+First run `gpg --list-keys --with-subkey-fingerprint` to list the keys plus
+subkeys along with their fingerprints. Identify the encrypting subkey, if one
+exists, by the usage flag `[E]` (otherwise, create one or use the master key),
+and note its fingerprint.
 
 The subkey and the public key can be exported in ASCII-armored format to QR
 code images as below (modifying appropriately `<KEY_EMAIL>` and
@@ -750,6 +750,8 @@ for file in subkey-??; do <"$file" qrencode -s 3 -d 150 -o "$file".qr; done
 
 The `*.qr` files can be viewed in a web browser, and scanned in as desired.
 Delete the `/tmp/keys-export/` folder when done.
+
+Adapted from [here](https://jherrlin.github.io/posts/emacs-gnupg-and-pass/).
 
 #### Extending key expirations
 
