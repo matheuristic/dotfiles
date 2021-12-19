@@ -148,10 +148,18 @@
   that bundles Syncthing with a wrapper that exposes functionality
   through a system tray icon
 
-### Image creation and editing
+### Media creation and editing
 
-- [GIMP](https://www.gimp.org/)
-- [Inkscape](https://inkscape.org/)
+- [Ardour](https://ardour.org/):
+  Digital audio workstation
+- [GIMP](https://www.gimp.org/):
+  Raster graphics editor
+- [Inkscape](https://inkscape.org/):
+  Vector graphics editor
+- [Kdenlive](https://kdenlive.org/en/):
+  Video editor
+- [LMMS](https://lmms.io/):
+  Pattern-based music sequencer
 - [Krita](https://krita.org/en/):
   Raster graphics editor
 - [yEd](https://www.yworks.com/products/yed):
@@ -260,6 +268,8 @@
   - [Textlint](https://textlint.github.io/):
     Text and markdown linting tool with multiple integrations
 - [J](https://code.jsoftware.com/wiki/Main_Page)
+  - [Jsource](https://github.com/jsoftware/jsource):
+    GPL-licensed source code for the J engine
 - [Javascript](https://github.com/tc39/ecma262)
   - [Node Version Manager](https://github.com/nvm-sh/nvm):
     [Node.js](https://nodejs.org/en/) version manager for POSIX-compliant
@@ -324,6 +334,9 @@
   using their
   [Fluid](https://support.jumpdesktop.com/hc/en-us/articles/216423983-General-Fluid-Remote-Desktop)
   protocol, available for macOS and Windows
+- [Remmina](https://remmina.org/)
+  ([GitLab](https://gitlab.com/Remmina/Remmina)):
+  Remote desktop client for POSIX systems
 - [Royal TSX](https://royalapps.com/ts/mac/features):
   Cross-platform RDP and VNC client
 
@@ -410,6 +423,8 @@
 
 ### VPN
 
+- [OpenVPN 3 Linux](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux):
+  OpenVPN 3 client for Linux
 - [TunnelBlick](https://tunnelblick.net/):
   Open source GUI for OpenVPN, available for macOS
 - [WireGuard](https://www.wireguard.com/):

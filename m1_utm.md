@@ -157,9 +157,8 @@ ip addr
 
 ## Minimal software list
 
-- [OpenJDK](https://openjdk.java.net/) (APT package `openjdk-17-jre`)
-- [Miniforge](https://github.com/conda-forge/miniforge) (Mambaforge)
-- [Emacs](https://snapcraft.io/emacs)
 - [Chromium](https://snapcraft.io/chromium)
 - [DBeaver](https://dbeaver.io/download/) (zip without Java included)
-- [Apache HOP](https://hop.apache.org/)
+- [Emacs](https://snapcraft.io/emacs)
+- [Miniforge](https://github.com/conda-forge/miniforge) (Mambaforge)
+- [OpenJDK](https://openjdk.java.net/) (APT package `openjdk-17-jre`)
