@@ -664,6 +664,8 @@
 - [Sloth](https://sveinbjorn.org/sloth)
   ([Github](https://github.com/sveinbjornt/Sloth)):
   macOS application to show open files, dirs, sockets and pipes
+- [Stacer](https://github.com/oguzhaninan/Stacer):
+  Linux system optimizer and monitoring GUI tool
 - [Stow](https://www.gnu.org/software/stow/):
   Symlink farm manager, useful for managing dotfiles
 - [Sweet Home 3D](https://www.sweethome3d.com/)
