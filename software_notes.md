@@ -751,13 +751,7 @@ Install `spice-vdagent` and `spice-webdavd`:
 sudo apt install spice-vdagent spice-webdavd
 ```
 
-Make the following modifications to the VM settings. The first is
-because `virtio-gpu-gl-pci` seems to be more stable than
-`virtio-ramfb-gl` (albeit supported by less guest OSes), the second is
-for Retina resolution (requires SPICE which is installed above).
-
-> Edit > Display > Emulated Display Card > Select "virtio-gpu-gl-pci
-> (GPU supported)"
+Make the following modifications to the VM settings.
 
 > Edit > Display > Resolution > Enable "Fit to screen" and
 > "Retina mode"
