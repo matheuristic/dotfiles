@@ -673,6 +673,8 @@
 - [Tizonia](https://tizonia.org/)
   ([Github](https://github.com/tizonia/tizonia-openmax-il)):
   Command-line cloud music player
+- [TomatoBar](https://github.com/ivoronin/TomatoBar):
+  macOS menu bar Pomodoro timer
 - [ueli](https://ueli.app/)
   ([Github](https://github.com/oliverschwendener/ueli)):
   Launcher like [Alfred](https://www.alfredapp.com/) but open-source,
@@ -730,7 +732,21 @@ Notes for using virtual machines via [UTM](https://mac.getutm.app/)
   Under this networking mode, run `ip addr` in the virtual machine to
   find the IP address of the virtual machine (which should look like
   `192.168.XXX.YYY`, and can used to ssh from the host into the VM).
+  Using bridged mode is similar, except IP address allocation is
+  deferred to the upstream router instead of using the host machine.
   For more info, see [link](https://kb.parallels.com/4948).
+- If networking in the VM stops working, sometimes it is because the
+  network configuration becomes invalid (e.g. if the MAC address
+  changes). To temporarily re-acquire an IP address, first figure out
+  the interface using `ip addr` (the name is something like `enp0s10`)
+  and run `sudo dhclient <INTERFACE>` to (re-)acquire an IP address. A
+  more permanent solution involves installing the `dhcpcd5` package
+  which is a DHCP client daemon via `sudo apt install dhcpcd5` (for
+  more info about this utility, see
+  [here](https://roy.marples.name/projects/dhcpcd/)). See
+  [here](https://unix.stackexchange.com/questions/534184/network-not-working-in-a-qemu-kvm-virtual-machine-running-arch-linux)
+  for more info about this topic in general (dicussion is for
+  ArchLinux but the concepts are similar)
 
 #### Useful links
 
