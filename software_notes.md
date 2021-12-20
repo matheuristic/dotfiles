@@ -722,6 +722,16 @@ sudo xcode-select --install
 Notes for using virtual machines via [UTM](https://mac.getutm.app/)
 ([Github](https://github.com/utmapp/UTM)) on M1 macOS machines.
 
+#### Usage notes
+
+- `Ctrl-Alt-g` toggles "capture mouse cursor"
+- The default networking mode for VMs is shared networking, in which
+  the host machine acts as a virtual router for the virtual machine.
+  Under this networking mode, run `ip addr` in the virtual machine to
+  find the IP address of the virtual machine (which should look like
+  `192.168.XXX.YYY`, and can used to ssh from the host into the VM).
+  For more info, see [link](https://kb.parallels.com/4948).
+
 #### Useful links
 
 - [UTM Wiki](https://github.com/utmapp/UTM/wiki)
@@ -863,16 +873,6 @@ listed
 [here](https://github.com/utmapp/UTM/wiki/Useful-tips#mounting-webdav-shares)
 (note that for an M1 machine, install the `davfs2` package rather than
 the `dav2fs` package).
-
-#### Find IP address
-
-Previously, this could be done via the `ifconfig` command but that has
-been deprecated and now `ip` should be used instead (see
-[link](https://ubuntu.com/blog/if-youre-still-using-ifconfig-youre-living-in-the-past)).
-
-```sh
-ip addr
-```
 
 #### Minimal software list
 
