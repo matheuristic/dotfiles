@@ -170,6 +170,10 @@
   [available](https://github.com/syncthing/syncthing-macos)
   that bundles Syncthing with a wrapper that exposes functionality
   through a system tray icon
+- [Timeshift](https://teejeetech.com/timeshift/)
+  ([Github](https://github.com/teejee2008/timeshift)):
+  System restore tool for Linux, similar to Time Machine in macOS or
+  System Restore in Windows
 
 ### Input devices
 
