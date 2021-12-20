@@ -148,6 +148,12 @@
 
 ### File management
 
+- [BorgBackup](https://www.borgbackup.org/)
+  ([Github](https://github.com/borgbackup/borg)):
+  Command-line deduplicating backup program supporting compression and
+  encryption, with frontends available like
+  [Vorta](https://vorta.borgbase.com/)
+  ([Github](https://github.com/borgbase/vorta))
 - [Cyberduck](https://cyberduck.io/):
   Client for FTP, SFTP, WebDAV and multiple cloud storage providers,
   available on macOS and Windows
@@ -173,7 +179,9 @@
 - [Timeshift](https://teejeetech.com/timeshift/)
   ([Github](https://github.com/teejee2008/timeshift)):
   System restore tool for Linux, similar to Time Machine in macOS or
-  System Restore in Windows
+  System Restore in Windows (note that this is targeted at backing up
+  only system files/settings and excludes user files by default, so
+  use it with another solution like BorgBackup+Vorta)
 
 ### Input devices
 
