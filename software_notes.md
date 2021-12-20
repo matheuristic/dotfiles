@@ -600,6 +600,10 @@
   ([Github](https://github.com/GNUAspell/aspell)):
   Spell checker designed as a replacement for
   [Ispell](https://www.gnu.org/software/ispell/ispell.html)
+- [ClamAV](https://www.clamav.net/)
+  ([Github](https://github.com/Cisco-Talos/clamav)):
+  Open-source antivirus engine, with frontends available like
+  [ClamTk](https://gitlab.com/dave_m/clamtk)
 - [cspell](https://github.com/streetsidesoftware/cspell):
   Code-aware spell checker, install with
 
