@@ -41,7 +41,8 @@
 ### Data Science and Analytics
 
 - [Cantor](https://cantor.kde.org/):
-  Interactive notebook for programming langs like Jupyter notebooks
+  Interactive notebook atop math programming languages like Jupyter
+  notebooks
 - [D-Tale](https://github.com/man-group/dtale):
   Python-based webserver for visualizing Python Pandas data structures,
   install the `dtale` package with `pip` or if using Conda run
@@ -53,7 +54,14 @@
 
   in the desired Conda environment (the second command is needed for
   "Export to PNG" for charts)
-- [Project Jupyter](https://jupyter.org/):
+- [JASP](https://jasp-stats.org/)
+  ([Github](https://github.com/jasp-stats/jasp-desktop)):
+  GUI program for statistical analysis, alternatives include
+  [SOFA](http://www.sofastatistics.com/home.php),
+  [PSPP](https://www.gnu.org/software/pspp/),
+  or the commercial [Prism](https://www.graphpad.com/) and
+  [Minitab](https://www.minitab.com/en-us/products/minitab/)
+- [Jupyter](https://jupyter.org/):
   Collection of tools for interactive development across multiple
   languages, like the web-based interactive
   [Jupyter notebook](https://github.com/jupyter/notebook),
@@ -66,10 +74,6 @@
 - [MLflow](https://mlflow.org/):
   Machine-learning model lifecycle management platform, in particular
   tracking experiments and logging artifacts
-- [PyCaret](https://pycaret.org/)
-  ([Github](https://github.com/pycaret/pycaret)):
-  Low-code Python-based machine learning library, best installed using
-  `pip` in its own Conda or Python virtual environment
 - [ROOT](https://root.cern/)
   ([Github](https://github.com/root-project/root)):
   CERN-developed framework for analyzing petabytes of data
@@ -80,8 +84,12 @@
   Scientific plotting application, alternatives are
   [SciDAVis](http://scidavis.sourceforge.net/)
   ([QtiPlot](https://www.qtiplot.com/) fork),
-  [AlphaPlot](https://github.com/narunlifescience/AlphaPlot) or
-  [LabPlot](https://labplot.kde.org/)
+  [AlphaPlot](https://github.com/narunlifescience/AlphaPlot) (SciDAVis
+  fork), [LabPlot](https://labplot.kde.org/),
+  [TOPCAT](http://www.star.bris.ac.uk/~mbt/topcat/) (good with large
+  and sparse datasets), [ROOT](https://root.cern/) (good with big
+  data, limited functionality), or the commercial options
+  [Origin/OriginPro](https://www.originlab.com/)
 
 ### Database
 
@@ -410,6 +418,8 @@
     Fancier REPL command shell alternative
   - [RStudio](https://rstudio.com/):
     IDE for R
+    - [esquisse](https://github.com/dreamRs/esquisse):
+      RStudio plug-in for interactive plot creation using ggplot2
 - Shell ([Bash](https://www.gnu.org/software/bash/),
   [POSIX](https://www.grymoire.com/Unix/Sh.html),
   [KornShell](https://github.com/ksh93/ksh))
