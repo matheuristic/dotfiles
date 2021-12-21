@@ -30,8 +30,41 @@
   Markdown editor, designed to be used with Pandoc
 
 ### Data pipelines
+
 - [Apache Airflow](https://airflow.apache.org/)
 - [Apache HOP](https://hop.apache.org/)
+
+### Data Science and Analytics
+
+- [D-Tale](https://github.com/man-group/dtale):
+  Python-based webserver for visualizing Python Pandas data structures,
+  install the `dtale` package with `pip` or if using Conda run
+
+  ```sh
+  conda install dtale -c conda-forge
+  conda install -c plotly python-kaleido
+  ```
+
+  in the desired Conda environment (the second command is needed for
+  "Export to PNG" for charts)
+- [MLflow](https://mlflow.org/):
+  Machine-learning model lifecycle management platform, in particular
+  tracking experiments and logging artifacts
+- [PyCaret](https://pycaret.org/)
+  ([Github](https://github.com/pycaret/pycaret)):
+  Low-code Python-based machine learning library, best installed using
+  `pip` in its own Conda or Python virtual environment
+- [ROOT](https://root.cern/)
+  ([Github](https://github.com/root-project/root)):
+  CERN-developed framework for analyzing petabytes of data
+- [Sweetviz](https://github.com/fbdesignpro/sweetviz):
+  Python library to visualize and compare data sets
+- [Veusz](https://veusz.github.io/)
+  ([Github](https://github.com/veusz/veusz)):
+  Scientific plotting application, alternative is
+  [SciDAVis](http://scidavis.sourceforge.net/)
+  ([QtiPlot](https://www.qtiplot.com/) fork) or
+  [LabPlot](https://labplot.kde.org/)
 
 ### Database
 
@@ -110,9 +143,6 @@
 - [Meld](https://meldmerge.org/)
   ([Gitlab](https://gitlab.gnome.org/GNOME/meld)):
   GTK visual diff and merge tool
-- [MLflow](https://mlflow.org/):
-  Machine-learning model lifecycle management platform, in particular
-  tracking experiments and logging artifacts
 - [ngrok](https://ngrok.com/):
   Reverse proxy to expose a local web server to the internet (requires
   an account, [frp](https://github.com/fatedier/frp) and
@@ -447,17 +477,6 @@
 
 ### Structured text and tabular data
 
-- [D-Tale](https://github.com/man-group/dtale):
-  Python-based webserver for visualizing Python Pandas data structures,
-  install the `dtale` package with `pip` or if using Conda run
-
-  ```sh
-  conda install dtale -c conda-forge
-  conda install -c plotly python-kaleido
-  ```
-
-  in the desired Conda environment (the second command is needed for
-  "Export to PNG" for charts)
 - [daff](https://paulfitz.github.io/daff/)
   ([Github](https://github.com/paulfitz/daff)):
   Diff but for tables
@@ -467,14 +486,6 @@
 - [jq](https://stedolan.github.io/jq/)
   ([Github](https://github.com/stedolan/jq)):
   Command-line JSON processor
-- [Magic Wormhole](https://magic-wormhole.readthedocs.io/)
-  ([Github](https://github.com/magic-wormhole/magic-wormhole)):
-  Command-line tool and library for sending files from one computer to
-  another (note that this tool requires
-  [mailbox](https://github.com/magic-wormhole/magic-wormhole-mailbox-server)
-  and a
-  [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)
-  servers, which by default uses ones hosted by the project)
 - [Miller](https://miller.readthedocs.io/en/latest/)
   ([Github](https://github.com/johnkerl/miller)):
   Command-line utility for working with CSV, TSV and tabular JSON files.
@@ -489,8 +500,6 @@
   XML editor
 - [sc-im](https://github.com/andmarti1424/sc-im):
   Terminal spreadsheet program
-- [Sweetviz](https://github.com/fbdesignpro/sweetviz):
-  Python library to visualize and compare data sets
 - [tsv-utils](https://github.com/eBay/tsv-utils):
   Command-line tool for tabular data, similar to xsv but supposedly
   faster for large datasets
@@ -644,6 +653,14 @@
   [link](https://languagetool.org/download/LanguageTool-stable.zip)),
   [augmentable](https://dev.languagetool.org/finding-errors-using-n-gram-data.html)
   with [n-gram](https://languagetool.org/download/ngram-data/) data
+- [Magic Wormhole](https://magic-wormhole.readthedocs.io/)
+  ([Github](https://github.com/magic-wormhole/magic-wormhole)):
+  Command-line tool and library for sending files from one computer to
+  another (note that this tool requires
+  [mailbox](https://github.com/magic-wormhole/magic-wormhole-mailbox-server)
+  and a
+  [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)
+  servers, which by default uses ones hosted by the project)
 - [Netron](https://github.com/lutzroeder/netron):
   Neural network, deep learning and machine learning model viewer
 - [Nuspell](https://nuspell.github.io/)
@@ -661,15 +678,8 @@
 - [Platypus](https://github.com/sveinbjornt/Platypus)
   ([Github](https://github.com/sveinbjornt/Platypus)):
   Create macOS apps from command-line scripts
-- [PyCaret](https://pycaret.org/)
-  ([Github](https://github.com/pycaret/pycaret)):
-  Low-code Python-based machine learning library, best installed using
-  `pip` in its own Conda or Python virtual environment
 - [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
   Terminal color-picker
-- [ROOT](https://root.cern/)
-  ([Github](https://github.com/root-project/root)):
-  CERN-developed framework for analyzing petabytes of data
 - [ScummVM](https://www.scummvm.org/)
   ([Github](https://github.com/scummvm/scummvm)):
   Program to run certain classical adventure and role-playing games
