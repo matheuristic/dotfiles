@@ -16,6 +16,10 @@
 - [QPDF](http://qpdf.sourceforge.net/)
   ([Github](https://github.com/qpdf/qpdf)):
   Command-line tool for manipulating PDF files
+- [Scribus](https://www.scribus.net/)
+  ([Mirror repo on Github](https://github.com/scribusproject/scribus)):
+  Desktop publishing software (for laying out pages) like Affinity
+  Publisher, InDesign or QuarkXPress
 - [Skim](https://skim-app.sourceforge.io/)
   ([SourceForge](https://sourceforge.net/projects/skim-app/)):
   Read and annotate PDF files
@@ -36,6 +40,8 @@
 
 ### Data Science and Analytics
 
+- [Cantor](https://cantor.kde.org/):
+  Interactive notebook for programming langs like Jupyter notebooks
 - [D-Tale](https://github.com/man-group/dtale):
   Python-based webserver for visualizing Python Pandas data structures,
   install the `dtale` package with `pip` or if using Conda run
@@ -47,6 +53,16 @@
 
   in the desired Conda environment (the second command is needed for
   "Export to PNG" for charts)
+- [Project Jupyter](https://jupyter.org/):
+  Collection of tools for interactive development across multiple
+  languages, like the web-based interactive
+  [Jupyter notebook](https://github.com/jupyter/notebook),
+  the web-based IDE that can work on these notesbooks plus data and code
+  [JupyterLab](https://github.com/jupyterlab/jupyterlab),
+  its multi-user version
+  [JupyterHub](https://github.com/jupyterhub/jupyterhub),
+  or tooling to convert Jupyter notebooks into standalone webapps
+  [Voilà](https://github.com/voila-dashboards/voila)
 - [MLflow](https://mlflow.org/):
   Machine-learning model lifecycle management platform, in particular
   tracking experiments and logging artifacts
@@ -61,9 +77,10 @@
   Python library to visualize and compare data sets
 - [Veusz](https://veusz.github.io/)
   ([Github](https://github.com/veusz/veusz)):
-  Scientific plotting application, alternative is
+  Scientific plotting application, alternatives are
   [SciDAVis](http://scidavis.sourceforge.net/)
-  ([QtiPlot](https://www.qtiplot.com/) fork) or
+  ([QtiPlot](https://www.qtiplot.com/) fork),
+  [AlphaPlot](https://github.com/narunlifescience/AlphaPlot) or
   [LabPlot](https://labplot.kde.org/)
 
 ### Database
@@ -372,13 +389,6 @@
     Terminal-base IDE for interactive Jupyter notebooks, see
     [here](https://blog.jupyter.org/nbterm-jupyter-notebooks-in-the-terminal-6a2b55d08b70)
     for more details
-  - [JupyterLab](https://jupyter.org/):
-    Web-based IDE for interactive Jupyter notebooks that support
-    a variety of kernels that span a number of languages
-  - [Jupyter Qt console](https://github.com/jupyter/qtconsole):
-    Qt console for working with Jupyter kernels, provides a number of
-    enhancements like inline figures, multi-line editing and tooltips
-    compared to [IPython](https://github.com/ipython/ipython)
   - [jedi-language-server](https://github.com/pappasam/jedi-language-server):
     [LSP](https://microsoft.github.io/language-server-protocol/)
     server for the [Jedi](https://github.com/pappasam/jedi-language-server)
@@ -789,8 +799,9 @@ For some reason, modifying the VM settings as follows reduces the
 frequency of slowdown in the VM after switching away and back from a
 UTM session.
 
-> Set CPU Cores in System > Show Advanced Settings (e.g. on an M1 Pro with 4
-> performance cores, this can be set to 4)
+> Set CPU Cores in System > Show Advanced Settings (this can be set up
+> to the number of CPU performance cores available; e.g., the 2021
+> Macbook Pro 16-inch has 8)
 
 > Enable Force Multicore in System > Show Advanced Settings
 
