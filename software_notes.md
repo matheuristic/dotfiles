@@ -388,6 +388,8 @@
     Code formatter for various languages, including CSS, GraphQL,
     Javascript, JSON, Markdown, Typescript, YAML, etc
 - [Python](https://www.python.org/)
+  For development, it is recommended to use `miniforge` (see above) to
+  manage environments.
   - [pyinstaller](https://www.pyinstaller.org/)
     ([Github](https://github.com/pyinstaller/pyinstaller)):
     Package Python programs into a single executable file
@@ -422,7 +424,12 @@
   sudo apt install build-essential libssl-dev libcurl4-openssl-dev libxml2-dev
   ```
 
-  in Ubuntu (modify as needed for other distributions)
+  in Ubuntu (modify as needed for other distributions).
+
+  For development, it is recommended to use
+  [renv](https://rstudio.github.io/renv/)
+  ([CRAN](https://cran.r-project.org/web/packages/renv/index.html),
+  [Github](https://github.com/rstudio/renv/)) to manage environments
   - [Radian](https://github.com/randy3k/radian):
     Fancier REPL command shell alternative
   - [RStudio](https://rstudio.com/):
