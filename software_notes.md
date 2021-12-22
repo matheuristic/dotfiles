@@ -790,7 +790,10 @@ Notes for using virtual machines via [UTM](https://mac.getutm.app/)
 
 #### Usage notes
 
-- `Ctrl-Alt-g` toggles "capture mouse cursor"
+- `Ctrl-Option` toggles "capture mouse cursor" (if using Emacs in the
+  virtual machine, it is better to enable "Use Command+Opt for input
+  capture/release" to change the `Ctrl-Option` binding to
+  `Command-Option` instead)
 - The default networking mode for VMs is shared networking, in which
   the host machine acts as a virtual router for the virtual machine.
   Under this networking mode, run `ip addr` in the virtual machine to
