@@ -837,6 +837,14 @@ UTM session.
 In the VM, disable monitor sleep (usually in Settings > Power > Blank Screen)
 by setting it to "Never".
 
+There seems to be some issue with the display randomly freezing (basically
+seems like the Spice session disconnecting) from the VM with the VM still
+running (as one can still SSH in), as of UTM release `2.4.1` when running
+the VM with QEMU 6.1. Using the older QEMU 5.2 instead seems to work
+around this issue (no or fewer session disconnects).
+
+> Set System > System to "QEMU 5.2 ARM Virtual Machine (virt-5.2)"
+
 #### Enabling retina resolution for Macbooks
 
 Install `spice-vdagent` and `spice-webdavd`:
