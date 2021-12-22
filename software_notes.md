@@ -413,7 +413,16 @@
       +tcltk -x11
   ```
 
-  where `+gcc11` should be changed to another GCC version as needed
+  where `+gcc11` should be changed to another GCC version as needed.
+
+  On Linux, to compile CRAN packages make sure to install the
+  necessary compilers, libraries and development headers, for example
+
+  ```sh
+  sudo apt install build-essential libssl-dev libcurl4-openssl-dev libxml2-dev
+  ```
+
+  in Ubuntu (modify as needed for other distributions)
   - [Radian](https://github.com/randy3k/radian):
     Fancier REPL command shell alternative
   - [RStudio](https://rstudio.com/):
