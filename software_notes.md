@@ -793,7 +793,7 @@ Notes for using virtual machines via [UTM](https://mac.getutm.app/)
 - `Ctrl-Option` toggles "capture mouse cursor" (if using Emacs in the
   virtual machine, it is better to enable "Use Command+Opt for input
   capture/release" to change the `Ctrl-Option` binding to
-  `Command-Option` instead)
+  `Command-Option` instead in the UTM app preferences)
 - The default networking mode for VMs is shared networking, in which
   the host machine acts as a virtual router for the virtual machine.
   Under this networking mode, run `ip addr` in the virtual machine to
@@ -837,15 +837,29 @@ UTM session.
 In the VM, disable monitor sleep (usually in Settings > Power > Blank Screen)
 by setting it to "Never".
 
-There seems to be some issue with the display randomly freezing (basically
-seems like the Spice session disconnecting) from the VM with the VM still
-running (as one can still SSH in), as of UTM release `2.4.1` when running
-the VM with QEMU 6.1. Using the older QEMU 5.2 instead seems to work
-around this issue (no or fewer session disconnects).
+#### Enabilng retina resolution for Macbooks
 
-> Set System > System to "QEMU 5.2 ARM Virtual Machine (virt-5.2)"
+Install `spice-vdagent` and `spice-webdavd`:
 
-#### Enabling retina resolution for Macbooks
+```sh
+sudo apt install spice-vdagent spice-webdavd
+```
+
+Make the following modifications to the VM settings.
+
+> Edit > Display > Resolution > Enable "Fit to screen" and
+> "Retina mode"
+
+Modify UTM preferences (Command-,) so native solution is always used.
+
+> Scaling > Enable "Always use native (HiDPI) resolution"
+
+In the virtual machine guest OS, scale all UI elements to 200% (the
+following is for Ubuntu running Gnome).
+
+> Settings app > Displays > Scale > Set to 200%
+
+#### Enabling retina resolution for Macbooks (DEPRECATED)
 
 Install `spice-vdagent` and `spice-webdavd`:
 
