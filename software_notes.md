@@ -110,7 +110,7 @@
   JDBC SQL client, very full-featured but user interface is complex (a
   zip package is available from the website files
   [archive](https://dbeaver.io/files/) which requires Java be
-  installed on the machine, e.g. via the `openjdk-17-jre` package or
+  installed on the machine, e.g. via the `openjdk-11-jre` package or
   another version)
 - [DbGate](https://dbgate.org/)
   ([Github](https://github.com/dbgate/dbgate)):
@@ -822,28 +822,65 @@ Notes for using virtual machines via [UTM](https://mac.getutm.app/)
 - [UTM Linux VM tips](https://github.com/utmapp/UTM/wiki/Useful-tips#linux)
 - [OpenVPN 3 Linux](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux)
 
-#### VM settings
+#### Debian install example
 
-For some reason, modifying the VM settings as follows reduces the
-frequency of slowdown in the VM after switching away and back from a
-UTM session.
-
-> Set CPU Cores in System > Show Advanced Settings (this can be set up
-> to the number of CPU performance cores available; e.g., the 2021
-> Macbook Pro 16-inch has 8)
-
-> Enable Force Multicore in System > Show Advanced Settings
-
-In the VM, disable monitor sleep (usually in Settings > Power > Blank Screen)
-by setting it to "Never".
-
-#### Enabilng retina resolution for Macbooks
-
-Install `spice-vdagent` and `spice-webdavd`:
+This assumes a fresh install of Debian (i.e., download the Debian
+aarch64 ISO and use that to install a new VM in UTM).
 
 ```sh
-sudo apt install spice-vdagent spice-webdavd
+apt install git
+apt install spice-vdagent spice-webdavd
+systemctl enable spice-vdagentd
+apt install flatpak gnome-software-plugin-flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub org.gnu.emacs
+flatpak install flathub org.jaspstats.JASP
+flatpak install flathub org.chromium.Chromium
+apt install openjdk-11-jre
 ```
+
+Disable sleep and suspend by creating a file
+`/etc/systemd/sleep.conf.d/nosuspend.conf` with the following
+contents.
+
+```ini
+[Sleep]
+AllowSuspend=no
+AllowHibernation=no
+AllowSuspendThenHibernate=no
+AllowHybridSleep=no
+```
+
+Install OpenVPN 3 (replace `bullseye` with the appropriate distro per
+[this](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux#DebianUbuntu)
+table).
+
+```sh
+apt install curl stow
+apt install apt-transport-https
+curl -fsSL https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/openvpn-repo-pkg-keyring.gpg
+curl -fsSL https://swupdate.openvpn.net/community/openvpn3/repos/openvpn3-bullseye.list >/etc/apt/sources.list.d/openvpn3.list
+apt update
+apt install openvpn3
+```
+
+Other software to download:
+
+- [btop](https://github.com/aristocratos/btop)
+- [Iosevka](https://github.com/be5invis/Iosevka) font (at least Aile,
+  regular if needed)
+- [DBeaver](https://github.com/dbeaver/dbeaver) (community edition,
+  aarch64-nojdk, make a copy of `dbeaver-ce.desktop` edited with the
+  correct paths and save it to `$HOME/.local/share/applications/`)
+- [Mambaforge](https://github.com/conda-forge/miniforge) (aarch64)
+
+Config changes:
+
+- In `Default Applications`, change the default browser to Chromium
+
+#### Enabling retina resolution for Macbooks
+
+Install `spice-vdagent` and `spice-webdavd` using the system package manager.
 
 Make the following modifications to the VM settings.
 
@@ -854,8 +891,8 @@ Modify UTM preferences (Command-,) so native solution is always used.
 
 > Scaling > Enable "Always use native (HiDPI) resolution"
 
-In the virtual machine guest OS, scale all UI elements to 200% (the
-following is for Ubuntu running Gnome).
+Run the virtual machine at fullscreen, and in the guest OS scale all
+UI elements to 200% (the following is for a system running GNOME).
 
 > Settings app > Displays > Scale > Set to 200%
 
@@ -882,14 +919,6 @@ listed
 [here](https://github.com/utmapp/UTM/wiki/Useful-tips#mounting-webdav-shares)
 (note that for an M1 machine, install the `davfs2` package rather than
 the `dav2fs` package).
-
-#### Minimal software list
-
-- [Chromium](https://snapcraft.io/chromium)
-- [DBeaver](https://dbeaver.io/download/) (zip without Java included)
-- [Emacs](https://snapcraft.io/emacs)
-- [Miniforge](https://github.com/conda-forge/miniforge) (Mambaforge)
-- [OpenJDK](https://openjdk.java.net/) (APT package `openjdk-17-jre`)
 
 ## Other notes
 

@@ -14,10 +14,7 @@ alias deblast='grep " install " /var/log/dpkg.log | tail -n 20'
 # RPM package management
 alias rpmlast='rpm -qa --last'
 # Python package management
-alias pip2updateuserpackages='pip2 freeze --user | grep -v "^\-e" | cut -d = -f 1 | xargs -n1 pip2 install --user --upgrade'
 alias pip3updateuserpackages='pip3 freeze --user | grep -v "^\-e" | cut -d = -f 1 | xargs -n1 pip3 install --user --upgrade'
-# Lynx
-alias lynx='lynx -cookies'
 # Hashing
 command -v md5sum > /dev/null || alias md5sum="md5"  # alias `md5` to `md5sum` in macOS
 command -v sha1sum > /dev/null || alias sha1sum="shasum"  # alias `shasum` to `sha1sum` in macOS
@@ -26,4 +23,3 @@ command -v sha1sum > /dev/null || alias sha1sum="shasum"  # alias `shasum` to `s
 alias map="xargs -n1"
 # Show disk usage for current directory and its child directories, sorted ascending
 alias dusorted="du -sh * | sort -rh"
-alias a="visibleclicks=1 $HOME/.local/bin/rc.sh $HOME/.local/bin/acme.rc -f /mnt/font/GoRegular/20a/font -F /mnt/font/GoMono/20a/font"
