@@ -136,6 +136,14 @@
 
 ### Development (General)
 
+- [asdf](https://asdf-vm.com/)
+  ([Github](https://github.com/asdf-vm/asdf)):
+  Project runtime version manager supporting multiple programming
+  languages, can act as an alternative to
+  [gvm](https://github.com/moovweb/gvm),
+  [nvm](https://github.com/nvm-sh/nvm),
+  [rbenv](https://github.com/rbenv/rbenv),
+  [pyenv](https://github.com/pyenv/pyenv) and others
 - [cflow](https://www.gnu.org/software/cflow/):
   Call graph generator for C.
   [pycflow2dot](https://github.com/johnyf/pycflow2dot) integrates
@@ -327,6 +335,9 @@
 
 ### Package managers
 
+- [Flatpak](https://flatpak.org/):
+  Utility for software packaging and deployment on Linux, with
+  [Flathub](https://flathub.org/) as the de facto standard repository
 - [Homebrew](https://brew.sh/)
   ([Github](https://github.com/Homebrew/brew)):
   macOS package manager for open-source software, alternative to MacPorts
@@ -337,6 +348,9 @@
   [Mamba](https://github.com/mamba-org/mamba) that is much faster
 - [MacPorts](https://www.macports.org/):
   macOS package manager for open-source software, alternative to Homebrew
+- [Snap](https://snapcraft.io/):
+  Utility for software packaging with deployment via a centralized
+  repository, developed by [Canonical](https://canonical.com/)
 
 ### Programming language tooling
 
