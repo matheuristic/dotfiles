@@ -368,6 +368,11 @@
   - [Credo](https://github.com/rrrene/credo):
     Static code analysis tool for projects with focus on teaching and
     code consistency
+  - [Dialyxir](https://github.com/jeremyjh/dialyxir):
+    Simplifies usage of the built-in
+    [Dialyzer](https://www.erlang.org/doc/man/dialyzer.html) with the
+    [Mix](https://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html)
+    build tool
   - [ElixirLS](https://github.com/elixir-lsp/elixir-ls):
     LSP server for the Elixir programming language
 - [Go](https://golang.org/)
