@@ -338,6 +338,9 @@
 - [Flatpak](https://flatpak.org/):
   Utility for software packaging and deployment on Linux, with
   [Flathub](https://flathub.org/) as the de facto standard repository
+  - [Flatseal](https://github.com/tchx84/Flatseal):
+    GUI utility for managing Flatpak app permissions, available on
+    [Flathub](https://flathub.org/apps/details/com.github.tchx84.Flatseal)
 - [Homebrew](https://brew.sh/)
   ([Github](https://github.com/Homebrew/brew)):
   macOS package manager for open-source software, alternative to MacPorts
@@ -351,6 +354,12 @@
 - [Snap](https://snapcraft.io/):
   Utility for software packaging with deployment via a centralized
   repository, developed by [Canonical](https://canonical.com/)
+
+### Presentation tools
+
+- [Marp](https://marp.app/): Create presentations from Markdown documentations,
+  usable via the [marp-cli](https://github.com/marp-team/marp-cli) command-line
+  tool and [Marp for VSCode](https://github.com/marp-team/marp-vscode)
 
 ### Programming language tooling
 
@@ -792,6 +801,24 @@ More information can also be found on
   native support for the Wayland clipboard, in that selecting a region
   will copy to the clipboard and `Ctrl-Shift-v` will paste from the
   clipboard)
+- **Flatpak issues**: Flatpak may need security nesting enabled to run
+  properly. If not enabled, errors may surface like the following.
+
+  ```console
+  $ flatpak run org.some.program
+  bwrap: Can't mount proc on /newroot/proc: Operation not permitted
+  error: ldconfig failed, exit status 256
+  ```
+
+  To enable security nesting, in ChromeOS do `Ctrl-Alt-t` to open
+  a crosh terminal, run
+
+  ```sh
+  vsh termina
+  lxc config set penguin security.nesting true
+  ```
+
+  and restart the computer so the new setting takes effect.
 
 ## Mac notes
 
@@ -989,3 +1016,64 @@ Adapted from [here](https://jherrlin.github.io/posts/emacs-gnupg-and-pass/).
 1. Publish/disseminate the updated keys as appropriate
 
 Run `help` while in the GPG shell for additional commands available.
+
+## Git
+
+### Credentials using .netrc file
+
+Many command-line tools integrate with `.netrc` files. It is possible
+to use this together with GnuPG to create an encrypted version
+`.netrc.gpg` and use it with Git.
+
+Emacs
+[auth-source](https://www.gnu.org/software/emacs/manual/html_mono/auth.html)
+users may want to use `$HOME/.authinfo` instead of `$HOME/.netrc`, in
+which case references to `$HOME/.netrc` and `$HOME/.netrc.gpg` below
+should be changed to `$HOME/.authinfo` and `$HOME/.authinfo.gpg`
+respectively.
+
+
+1. Get `git-credential-netrc` and put it somewhere on `$PATH`.
+
+   ```sh
+   mkdir -p $HOME/packages/git-credential-netrc
+   cd $HOME/packages/git-credential-netrc
+   wget https://raw.githubusercontent.com/git/git/master/contrib/credential/netrc/git-credential-netrc.perl
+   chmod +x git-credential-netrc.perl
+   cd $HOME/.local/bin
+   ln -s $HOME/packages/git-credential-netrc/git-credential-netrc.perl git-credential-netrc
+   ```
+   
+1. Create a `$HOME/.netrc` file with credentials as follows.
+
+   ```text
+   machine some.server.com login some_login password some_password
+   machine another.server.com login another_login password another_password
+   ```
+
+1. Create or import a GPG key (not shown here). Create an encrypted
+   version of the credentials file `$HOME/.netrc.gpg` and delete the
+   unencrypted version.
+
+   ```sh
+   gpg -e -r the_recipient $HOME/.netrc
+   rm $HOME/.netrc
+   ```
+
+1. Configure git to use the encrypted credentials locally in a
+   repository. Change `--local` to `--global` to use the encrypted
+   credentials globally.
+
+   ```sh
+   git config --local credential.helper "netrc -f ~/.netrc.gpg -v"
+   ```
+
+   Adapted from
+   [here](https://grahamlopez.org/git/git_credentials.html) and
+   [here](https://andrearichiardi.com/blog/posts/git-credential-netrc.html).
+
+**NOTES**:
+
+- Requires Perl with the Git module installed.
+- For Github users, this approach is good for storing tokens but using
+  SSH keys is also fine if granular permissioning is not required.
