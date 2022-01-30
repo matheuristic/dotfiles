@@ -3,8 +3,8 @@
 # No core dumps
 ulimit -S -c 0
 
-# Done if non-interactive
-tty -s || return
+# Done if non-interactive (uncomment next line for slightly faster Zsh scripts)
+# tty -s || return
 
 # Default permissions
 umask 077
