@@ -609,10 +609,12 @@
 
 ### VPN
 
-- [OpenVPN 3 Linux](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux):
-  OpenVPN 3 client for Linux
-- [TunnelBlick](https://tunnelblick.net/):
-  Open source GUI for OpenVPN, available for macOS
+- [OpenVPN](https://openvpn.net/vpn-client/):
+  OpenVPN client, note that Linux clients be should installed via the system
+  package manager (see
+  [here](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux));
+  an alternative is the macOS-only [TunnelBlick](https://tunnelblick.net/)
+  built on the older but still maintained OpenVPN 2 libraries
 - [WireGuard](https://www.wireguard.com/):
   Simple and high-performance VPN
 
