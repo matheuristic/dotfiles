@@ -822,6 +822,56 @@ More information can also be found on
 
 ## Mac notes
 
+### Basic CLI development environment using conda
+
+Conda can provide a basic CLI dev environment without XCode or its command-line
+tools installed. Some conda packages for this:
+
+- `bat`
+- `clang`
+- `gawk`
+- `git`
+- `go`
+- `htop`
+- `postgresql`
+- `python` and many packages in [PyPI](https://pypi.org/)
+- `r-base` and some [CRAN](https://cran.r-project.org/) packages
+- `ripgrep`
+- `sed`
+- `vim`
+- `visidata`
+
+Notes:
+
+- R packages begin with an `r-` prefix but only popular packages are available
+- Conda has an `emacs` package, but go with one of the standalone Emacs
+  applications ([Emacs for Mac OSX](https://emacsformacosx.com/) or the
+  [emacs-mac port](https://github.com/railwaycat/homebrew-emacsmacport)) as they
+  are better integrated with the system
+
+Example (assumes `$HOME/.local/bin` is in `$PATH`, `$HOME/.zshrc` exists):
+ 
+```sh
+# Install mambaforge for faster operations
+# $ chmod +x Mambaforge-MacOSX-arm64.sh
+# $ ./Mambaforge-MacOSX-arm64.sh                     # interactive install
+# $ eval "$(~/mambaforge/bin/conda shell.zsh hook)"  # modify path as needed
+# $ conda init
+# $ conda config --set auto_activate_base false
+# $ mamba init
+# Create basic tools environment rather than polluting base environment
+mamba create -n myenv
+mamba activate myenv
+mamba install bat git htop ripgrep
+cd $HOME/.local/bin
+ln -s $HOME/mambaforge/envs/myenv/bin/bat
+ln -s $HOME/mambaforge/envs/myenv/bin/htop
+ln -s $HOME/mambaforge/envs/myenv/bin/rg
+mamba deactivate
+# Create new environments as needed for each project, e.g.
+# > mamba create -n some-project python=3.9
+```
+
 ### Installing XCode command-line tools
 
 ```sh
