@@ -33,7 +33,7 @@ alias map='xargs -n1'   # map fn, e.g. $ find . -name '*.dll' | map dirname
 alias dusorted='du -sh * | sort -rh' # sorted disk usage for current directory
 
 # Prevent Mac from sleeping for given time: $ keepawake <hrs>
-if [ "x`uname`" == "xDarwin" ]; then
+if [[ "x`uname`" == "xDarwin" ]]; then
   keepawake () {
     KEEPAWAKEHRS=${1:-8}  # default 8 hours
     KEEPAWAKESECS=$(( 60 * 60 * KEEPAWAKEHRS ))
