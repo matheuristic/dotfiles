@@ -116,6 +116,14 @@
   ([Github](https://github.com/dbgate/dbgate)):
   Cross-platform database client, supports MySQL, PostgreSQL, SQL Server,
   MongoDB, SQLite, CSV files and others
+- [DuckDB](https://duckdb.org/)
+  ([Github](https://github.com/duckdb/duckdb)):
+  In-process SQL database with APIs for Python, R and other languages,
+  with Python support especially nice as it can work with Pandas
+  DataFrames ([link](https://duckdb.org/2021/05/14/sql-on-pandas.html))
+  so SQL queries can be run directly on Pandas DataFrames; an alternative
+  with comparable Pandas support is
+  [MonetDB/e-Python](https://github.com/MonetDBSolutions/MonetDBe-Python)
 - [HeidiSQL](https://www.heidisql.com/)
   ([Github](https://github.com/HeidiSQL/HeidiSQL))
   MariaDB, MySQL, Microsoft SQL, PostgreSQL and SQLite client for Windows
