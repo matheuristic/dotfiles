@@ -1063,11 +1063,9 @@ listed
 (note that for an M1 machine, install the `davfs2` package rather than
 the `dav2fs` package).
 
-## Other notes
+## GnuPG
 
-### GnuPG
-
-#### Exporting ASCII-armored keys as QR codes
+### Exporting ASCII-armored keys as QR codes
 
 First run `gpg --list-keys --with-subkey-fingerprint` to list the keys plus
 subkeys along with their fingerprints. Identify the encrypting subkey, if one
@@ -1095,7 +1093,7 @@ Delete the `/tmp/keys-export/` folder when done.
 
 Adapted from [here](https://jherrlin.github.io/posts/emacs-gnupg-and-pass/).
 
-#### Extending key expirations
+### Extending key expirations
 
 1. Find the expiring key ID using `gpg --list-keys` (the key ID comes
    after the slash)
@@ -1174,3 +1172,33 @@ respectively.
 - Requires Perl with the Git module installed.
 - For Github users, this approach is good for storing tokens but using
   SSH keys is also fine if granular permissioning is not required.
+
+### Syncing a fork with upstream
+
+To sync a fork with upstream:
+
+1. Configure a remote that points to the upstream repository.
+
+   ```sh
+   git remote add upstream \
+     https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
+   ```
+
+   Check that the remote is configured properly using `git remote -v`.
+
+   For more info, see the following
+   [link](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/configuring-a-remote-for-a-fork).
+
+1. Fetch and merge upstream commits.
+
+   ```sh
+   git fetch upstream
+   git checkout master
+   git merge upstream/master
+   ```
+
+   For more info, see the following
+   [link](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork).
+
+Note that newer repositories have their primary branch names as `main`
+instead of `master`.
