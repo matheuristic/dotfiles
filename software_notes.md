@@ -10,7 +10,8 @@
   [Scrivener](https://www.literatureandlatte.com/scrivener/)
 - [Pandoc](https://pandoc.org/)
   ([Github](https://github.com/jgm/pandoc)):
-  Universal markup converter
+  Universal markup converter; one alternative is
+  [MultiMarkdown](https://github.com/fletcher/MultiMarkdown-6)
   - [Pantable](https://github.com/ickc/pantable):
     Pandoc filter to convert CSV tables to and from Pandoc Markdown
 - [QPDF](http://qpdf.sourceforge.net/)
@@ -23,9 +24,13 @@
 - [Skim](https://skim-app.sourceforge.io/)
   ([SourceForge](https://sourceforge.net/projects/skim-app/)):
   Read and annotate PDF files
-- [TeXLive](https://www.tug.org/texlive/):
-  TeX-distribution. There is also a repackaged version for macOS,
-  [MacTeX](http://www.tug.org/mactex/), with extra Mac-specific tools
+- [Tectonic](https://tectonic-typesetting.github.io/)
+  ([Github](https://github.com/tectonic-typesetting/tectonic)):
+  TeX/LaTeX engine, automatically pulls in packages from
+  [CTAN](https://ctan.org/) as needed; an alternative to
+  the more comprehensive [TeXLive](https://www.tug.org/texlive/),
+  its macOS repackage [MacTeX](http://www.tug.org/mactex/), or the
+  lightweight [TinyTeX](https://github.com/yihui/tinytex)
 - [Twine](https://twinery.org/)
   ([Github](https://github.com/klembot/twinejs)):
   Tool for authoring interactive, non-linear stories
@@ -600,7 +605,7 @@
   ([Github](https://github.com/pbek/QOwnNotes)):
   Markdown editor with Nextcloud and ownCloud integration
 - [Vim](https://www.vim.org/)/[Neovim](https://neovim.io/):
-  Terminal (with GUI options available) text editor that improves on vi
+  Terminal text editor (GUI options available) that improves on vi
 - [Zettlr](https://www.zettlr.com/)
   ([Github](https://github.com/Zettlr/Zettlr)):
   Markdown editor with [Zettelkasten](https://zettelkasten.de/posts/overview/)
@@ -859,7 +864,9 @@ Notes:
   [emacs-mac port](https://github.com/railwaycat/homebrew-emacsmacport)) as they
   are better integrated with the system
 
-Example (assumes `$HOME/.local/bin` is in `$PATH`, `$HOME/.zshrc` exists):
+#### Installation
+
+Mambaforge. Assumes `$HOME/.local/bin` is in `$PATH` and `$HOME/.zshrc` exists.
  
 ```sh
 # Install mambaforge for faster operations
@@ -880,6 +887,36 @@ ln -s $HOME/mambaforge/envs/myenv/bin/rg
 mamba deactivate
 # Create new environments as needed for each project, e.g.
 # > mamba create -n some-project python=3.9
+```
+
+#### Authoring setup
+
+Authoring tools.
+
+```sh
+mamba create -n authoring
+mamba activate authoring
+mamba install tectonic
+mamba deactivate
+```
+
+Install [MultiMarkdown](https://github.com/fletcher/MultiMarkdown-6)
+for working with Markdown files (including conversion to LaTeX).
+Download the macOS zip file, unzip it and create a symlink to the
+`multimarkdown` binary in `$HOME/.local/bin/` or some `$PATH` dir.
+
+#### Python development setup
+
+Environment-independent Python development tools.
+
+```sh
+mamba create -n pyenv python=3.9
+mamba activate pyenv
+mamba install jedi-language-server black
+mamba deactivate
+cd $HOME/.local/bin
+ln -s $HOME/mambaforge/envs/pyenv/jedi-language-server
+ln -s $HOME/mambaforge/envs/pyenv/black
 ```
 
 ### Installing XCode command-line tools

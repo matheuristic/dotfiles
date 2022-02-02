@@ -292,8 +292,8 @@ endif
 " -------------------------
 
 " Remap jk and kj to <ESC> {{{2
-inoremap jk <ESC>
-inoremap kj <ESC>
+" inoremap jk <ESC>
+" inoremap kj <ESC>
 " }}}2
 
 " Remap <Leader> from '\' to ',' {{{2
@@ -446,19 +446,23 @@ nnoremap <silent> <Leader>sM :if &mouse == 'a' <Bar> set mouse= <Bar>
 " }}}2
 
 " Other {{{2
-" Unhighlight search results (from https://github.com/tpope/vim-sensible) {{{3
 " Change directory to current file's {{{3
 nnoremap <silent> <Leader>cd :cd %:p:h<CR>:pwd<CR>
-" }}}3
-if has('extra_search')
-  nnoremap <silent> <Leader>l :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR>
-endif
 " }}}3
 " Toggle commenting using gc[c|motion] like in vim-commentary {{{3
 if has('eval')
   nnoremap gcc :<c-u>.,.+<c-r>=v:count<CR>call <SID>toggleComment()<CR>
   nnoremap gc :<c-u>set opfunc=<SID>commentOp<CR>g@
   xnoremap gc :call <SID>toggleComment()<CR>
+endif
+" }}}3
+" Open new terminal window {{{3
+if has('terminal')
+  nnoremap <silent> <Leader>T :terminal<CR>
+endif
+" Unhighlight search results (from https://github.com/tpope/vim-sensible) {{{3
+if has('extra_search')
+  nnoremap <silent> <Leader>l :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR>
 endif
 " }}}3
 " }}}2

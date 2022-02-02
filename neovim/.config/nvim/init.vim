@@ -95,8 +95,8 @@ augroup END
 " ------------------------------
 
 " Remap jk and kj to <ESC> {{{2
-inoremap jk <ESC>
-inoremap kj <ESC>
+" inoremap jk <ESC>
+" inoremap kj <ESC>
 " }}}2
 
 " Remap <Leader> from '\' to ',' {{{2
