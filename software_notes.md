@@ -4,14 +4,35 @@
 
 ### Authoring
 
+- [Asciidoctor](https://asciidoctor.org/):
+  Asciidoc processor, supports direct conversion to PDF
+  using an [extension](https://asciidoctor.org/docs/asciidoctor-pdf/)
+  for converting to PDF; generally more pleasant for creating longer
+  or more complex docs than Markdown; install with RubyGems as follows
+
+  ```sh
+  gem install asciidoctor
+  gem install asciidoctor-pdf rghost rouge
+  ```
+
+  Compile to PDF using a command like
+
+  ```sh
+  asciidoctor -r asciidoctor-pdf -b pdf filename.asciidoc
+  ```
+
+  Also note that Kramdoc documents can be converted to Markdown using
+  the `kramdown-asciidoc` gem
 - [Manuskript](https://www.theologeek.ch/manuskript/)
   ([Github](https://github.com/olivierkes/manuskript)):
   Open-source tool for writers like
   [Scrivener](https://www.literatureandlatte.com/scrivener/)
 - [Pandoc](https://pandoc.org/)
   ([Github](https://github.com/jgm/pandoc)):
-  Universal markup converter; one alternative is
-  [MultiMarkdown](https://github.com/fletcher/MultiMarkdown-6)
+  Universal markup converter; alternatives are
+  [MultiMarkdown](https://github.com/fletcher/MultiMarkdown-6),
+  [Kramdown](https://kramdown.gettalong.org/), and
+  [cmark](https://github.com/commonmark/cmark)
   - [Pantable](https://github.com/ickc/pantable):
     Pandoc filter to convert CSV tables to and from Pandoc Markdown
 - [QPDF](http://qpdf.sourceforge.net/)
@@ -178,7 +199,20 @@
   if using the `pythonplugin` version)
 - [Code2flow](https://github.com/scottrogowski/code2flow/):
   Call graph generator for dynamic languages, specifically Python,
-  Javascript, Ruby and PHP
+  Javascript, Ruby and PHP; some examples of how to use follows
+
+  ```sh
+  # Zsh example, all Python files in dirtree
+  code2flow **/**.py
+  # Same as above, but targeting a specific function somemodule.func
+  # and showing its callers and callees up to 3 calls away
+  code2flow --target-function=somemodule.func \
+    --upstream-depth=3 \
+    --downstream-depth=3 \
+    **/**.py
+  ```
+
+  (see `code2flow --help` for more options)
 - [Cookiecutter](https://github.com/cookiecutter/cookiecutter):
   Command-line tool to create projects from project templates
 - [Docker](https://docs.docker.com/):
@@ -297,7 +331,7 @@
   instrument in LMMS)
 - [Synfig](https://www.synfig.org/)
   ([Github](https://github.com/synfig/synfig/)):
-  Vector-based 2D animation software 
+  Vector-based 2D animation software
 - [yEd](https://www.yworks.com/products/yed):
   Diagramming tool
 
@@ -383,6 +417,18 @@
   - [Leiningen](https://leiningen.org/):
     Build automation and dependency management tool for Clojure
     projects
+- [Common Lisp](https://common-lisp.net/):
+  Tooling
+  [survey](http://lisp-journey.gitlab.io/blog/state-of-the-common-lisp-ecosystem-2020/);
+  [Review](https://sabracrolleton.github.io/json-review) of Common Lisp JSON
+  libraries
+  - [Roswell](https://roswell.github.io/)
+    ([Github](https://github.com/roswell/roswell)):
+    Common Lisp implementation manager, installer and script runner
+  - [CLPM](https://gitlab.common-lisp.net/clpm/clpm):
+    Common Lisp Project Manager, a
+    [QuickLisp](https://www.quicklisp.org/)-compatible package manager that
+    allows pinning project-local package versions
 - [Coq](https://coq.inria.fr/)
   ([Github](https://github.com/coq/coq))
   - [Editor tooling](https://coq.inria.fr/user-interfaces.html)
@@ -422,6 +468,10 @@
   - [Node Version Manager](https://github.com/nvm-sh/nvm):
     [Node.js](https://nodejs.org/en/) version manager for POSIX-compliant
     shells
+- [Julia](https://julialang.org/)
+  - [Revise.jl](https://github.com/timholy/Revise.jl):
+    Automatically reload code on modification, useful to keep Julia
+    sessions running longer so less time is spent on compilation
 - Multi-language
   - [DevSkim](https://github.com/microsoft/DevSkim):
     Security analysis tool for various languages
@@ -867,7 +917,7 @@ Notes:
 #### Installation
 
 Mambaforge. Assumes `$HOME/.local/bin` is in `$PATH` and `$HOME/.zshrc` exists.
- 
+
 ```sh
 # Install mambaforge for faster operations
 # $ chmod +x Mambaforge-MacOSX-arm64.sh
@@ -879,39 +929,102 @@ Mambaforge. Assumes `$HOME/.local/bin` is in `$PATH` and `$HOME/.zshrc` exists.
 # Create basic tools environment rather than polluting base environment
 mamba create -n myenv
 mamba activate myenv
-mamba install bat git htop ripgrep
+mamba install bat git htop ripgrep tmux
 cd $HOME/.local/bin
-ln -s $HOME/mambaforge/envs/myenv/bin/bat
-ln -s $HOME/mambaforge/envs/myenv/bin/htop
-ln -s $HOME/mambaforge/envs/myenv/bin/rg
+ln -s $HOME/mambaforge/envs/myenv/bin/bat .
+ln -s $HOME/mambaforge/envs/myenv/bin/git .
+ln -s $HOME/mambaforge/envs/myenv/bin/htop .
+ln -s $HOME/mambaforge/envs/myenv/bin/rg .
+ln -s $HOME/mambaforge/envs/myenv/bin/tmux .
 mamba deactivate
 # Create new environments as needed for each project, e.g.
 # > mamba create -n some-project python=3.9
 ```
 
-#### Authoring setup
+#### LaTeX tools setup
 
-Authoring tools.
+Use Tectonic for LaTeX compilation.
+
+As of Jan 2022, there are no Pandoc binaries packaged for Darwin
+aarch64 (although Homebrew offers an option), so alternatives are
+listed below.
 
 ```sh
-mamba create -n authoring
-mamba activate authoring
+mamba create -n latextools
+mamba activate latextools
 mamba install tectonic
+mamba deactivate
+cd $HOME/.local/bin
+ln -s $HOME/mambaforge/envs/latextools/bin/tectonic .
+```
+
+#### Ruby tools setup
+
+Setup useful Ruby tools.
+
+- Asciidoctor for processing Asciidoc files, with extensions for
+  conversion to PDF, PDF optimization and syntax highlighting
+- Kramdown for processing Markdown files (of the Kramdown flavor), as
+  well as a converter to Asciidoc
+
+```sh
+mamba create -n rbtools
+mamba activate rbtools
+mamba install ruby
+gem install asciidoctor
+gem install asciidoctor-pdf rghost rouge
+gem install kramdown kramdown-asciidoc
 mamba deactivate
 ```
 
-Install [MultiMarkdown](https://github.com/fletcher/MultiMarkdown-6)
-for working with Markdown files (including conversion to LaTeX).
-Download the macOS zip file, unzip it and create a symlink to the
-`multimarkdown` binary in `$HOME/.local/bin/` or some `$PATH` dir.
+Create the following files with the given contents.
+
+`$HOME/.local/bin/asciidoctor`:
+
+```sh
+#!/bin/zsh
+source $HOME/mambaforge/etc/profile.d/conda.sh
+source $HOME/mambaforge/etc/profile.d/mamba.sh
+mamba activate rbtools
+asciidoctor "$@"
+```
+
+`$HOME/.local/bin/kramdown`:
+
+```sh
+#!/bin/zsh
+source $HOME/mambaforge/etc/profile.d/conda.sh
+source $HOME/mambaforge/etc/profile.d/mamba.sh
+mamba activate rbtools
+kramdown "$@"
+```
+
+`$HOME/.local/bin/kramdoc`:
+
+```sh
+#!/bin/zsh
+source $HOME/mambaforge/etc/profile.d/conda.sh
+source $HOME/mambaforge/etc/profile.d/mamba.sh
+mamba activate rbtools
+kramdoc "$@"
+```
+
+Make the files executable so they are easy to run on the command-line.
+
+```sh
+cd $HOME/.local/bin
+chmod +x asciidoctor
+chmod +x kramdown
+chmod +x kramdoc
+```
 
 #### Python development setup
 
 Environment-independent Python development tools.
 
 ```sh
-mamba create -n pyenv python=3.9
-mamba activate pyenv
+mamba create -n pydevtools python=3.9
+mamba activate pydevtools
 mamba install jedi-language-server black
 mamba deactivate
 cd $HOME/.local/bin
@@ -1138,7 +1251,7 @@ respectively.
    cd $HOME/.local/bin
    ln -s $HOME/packages/git-credential-netrc/git-credential-netrc.perl git-credential-netrc
    ```
-   
+
 1. Create a `$HOME/.netrc` file with credentials as follows.
 
    ```text
