@@ -32,6 +32,7 @@ fc-cache -fv
 - [Inter](https://github.com/rsms/inter)
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
+- [JuliaMono](https://github.com/cormullion/juliamono)
 - [M+](https://mplusfonts.github.io/)
 - [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_)
 - [Public Sans](https://public-sans.digital.gov/)
