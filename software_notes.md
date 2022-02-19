@@ -42,9 +42,6 @@
   ([Mirror repo on Github](https://github.com/scribusproject/scribus)):
   Desktop publishing software (for laying out pages) like Affinity
   Publisher, InDesign or QuarkXPress
-- [Skim](https://skim-app.sourceforge.io/)
-  ([SourceForge](https://sourceforge.net/projects/skim-app/)):
-  Read and annotate PDF files
 - [Tectonic](https://tectonic-typesetting.github.io/)
   ([Github](https://github.com/tectonic-typesetting/tectonic)):
   TeX/LaTeX engine, automatically pulls in packages from
@@ -255,9 +252,20 @@
   OCR engine and command-line program used by many other tools
   including Apache Tika above
 
-### Ebook
+### Ebook and PDF readers/annotators
 
 - [Calibre](https://calibre-ebook.com/)
+- [MuPDF](https://mupdf.com/):
+  Lightweight PDF reader, also supports XPS, EPUB and CBZ;
+  [sioyek](https://github.com/ahrm/sioyek) is a reader
+  built on top of this that provides additional features
+  useful for reading technical books and research papers;
+  an alternative is [Zathura](https://pwmt.org/projects/zathura/)
+- [Skim](https://skim-app.sourceforge.io/)
+  ([SourceForge](https://sourceforge.net/projects/skim-app/)):
+  Read and annotate PDF files, macOS app
+- [Xournal++](https://github.com/xournalpp/xournalpp):
+  Cross-platform handwriting notetaking and PDF annotation tool
 
 ### File management
 
