@@ -119,6 +119,15 @@
 
 ### Database
 
+- [PostgreSQL](https://www.postgresql.org/):
+  Open-source relational database
+- [ClickHouse](https://github.com/ClickHouse/ClickHouse):
+  High-performance time-series database; alternatives include
+  [TimescaleDB](https://github.com/timescale/timescaledb)
+  (PostgreSQL extension to better support time-series data)
+
+### Database client
+
 - [Altair](https://altair.sirmuel.design/)
   ([Github](https://github.com/altair-graphql/altair)):
   Cross-platform GraphQL client
@@ -252,7 +261,7 @@
   OCR engine and command-line program used by many other tools
   including Apache Tika above
 
-### Ebook and PDF readers/annotators
+### Ebook and PDF reading and annotation
 
 - [Calibre](https://calibre-ebook.com/)
 - [MuPDF](https://mupdf.com/):
