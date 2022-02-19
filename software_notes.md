@@ -61,14 +61,17 @@
 
 ### Data pipelines
 
-- [Apache Airflow](https://airflow.apache.org/)
+- [Apache Airflow](https://airflow.apache.org/):
+  Workflow/pipeline management tool; alternatives include
+  [Prefect](https://github.com/PrefectHQ/prefect),
+  [dbt](https://github.com/dbt-labs/dbt-core),
+  [Snakemake](https://snakemake.readthedocs.io/en/stable/), or see
+  [here](https://github.com/common-workflow-language/common-workflow-language/wiki/Existing-Workflow-systems)
 - [Apache HOP](https://hop.apache.org/)
+- [List of pipeline tools](https://github.com/pditommaso/awesome-pipeline)
 
 ### Data Science and Analytics
 
-- [Cantor](https://cantor.kde.org/):
-  Interactive notebook atop math programming languages like Jupyter
-  notebooks
 - [D-Tale](https://github.com/man-group/dtale):
   Python-based webserver for visualizing Python Pandas data structures,
   install the `dtale` package with `pip` or if using Conda run
@@ -472,6 +475,8 @@
   - [Revise.jl](https://github.com/timholy/Revise.jl):
     Automatically reload code on modification, useful to keep Julia
     sessions running longer so less time is spent on compilation
+  - [Pluto.jl](https://github.com/fonsp/Pluto.jl):
+    Lightweight reactive Julia notebooks
 - Multi-language
   - [DevSkim](https://github.com/microsoft/DevSkim):
     Security analysis tool for various languages

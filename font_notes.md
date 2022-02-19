@@ -37,6 +37,13 @@ fc-cache -fv
 - [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_)
 - [Public Sans](https://public-sans.digital.gov/)
 - [Reforma](https://www.unc.edu.ar/comunicaci%C3%B3n/identidad-reforma)
+- [Roboto](https://fonts.google.com/specimen/Roboto),
+  [Condensed](https://fonts.google.com/specimen/Roboto+Condensed),
+  [Serif](https://fonts.google.com/specimen/Roboto+Serif),
+  [Slab](https://fonts.google.com/specimen/Roboto+Slab),
+  [Mono](https://fonts.google.com/specimen/Roboto+Mono)
+  ([Noto](https://fonts.google.com/noto/fonts) variants for CJK and
+  other languages not supported by Roboto)
 - Source [Sans](https://github.com/adobe-fonts/source-sans),
   [Serif](https://github.com/adobe-fonts/source-serif),
   [Code Pro](https://github.com/adobe-fonts/source-code-pro) (CJK
