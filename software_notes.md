@@ -826,6 +826,8 @@
 - [pdfpc](https://github.com/pdfpc/pdfpc)
   ([Github](https://github.com/pdfpc/pdfpc)):
   Multi-monitor PDF presentation application
+- [Penpot](https://github.com/penpot/penpot):
+  Open source design and prototyping platform like Sketch and Figma
 - [Platypus](https://github.com/sveinbjornt/Platypus)
   ([Github](https://github.com/sveinbjornt/Platypus)):
   Create macOS apps from command-line scripts
