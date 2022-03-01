@@ -1101,6 +1101,12 @@ pip install tensorflow-metal
 pip install tensorflow-macos 
 ```
 
+To install [tensorflow-text](https://github.com/tensorflow/text) with
+Metal-support, see
+[here](https://github.com/sun1638650145/Libraries-and-Extensions-for-TensorFlow-for-Apple-Silicon)
+for compile instructions and pre-compiled wheels, and see
+[here](https://github.com/tensorflow/text/pull/756) for more info.
+
 ### Installing XCode command-line tools
 
 ```sh
