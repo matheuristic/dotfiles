@@ -1056,6 +1056,51 @@ ln -s $HOME/mambaforge/envs/pyenv/jedi-language-server
 ln -s $HOME/mambaforge/envs/pyenv/black
 ```
 
+#### Installing GPU ML libraries for darwin-aarch64 machines
+
+Metal-enabled [Tensorflow](https://www.tensorflow.org/)
+([link](https://developer.apple.com/metal/tensorflow-plugin/)),
+currently supports Python `3.8` and `3.9`.
+
+Note that `tensorflow-deps` versions follow base Tensorflow versions,
+so if using Tensorflow `2.6.X`, install `tensorflow-deps==2.6.0`.
+
+```sh
+mamba create -n tfenv python=3.8
+mamba activate tfenv
+conda config --env --add channels apple
+mamba install -c apple tensorflow-deps
+pip install tensorflow-metal
+pip install tensorflow-macos
+```
+
+Optional data.
+
+```sh
+pip install tensorflow-datasets
+```
+
+Check that tensorflow is using the GPU.
+The following should return a non-empty list.
+
+```python
+import tensorflow as tf
+tf.config.list_physical_devices("GPU")
+```
+
+Upgrading Metal-enabled Tensorflow by uninstalling and re-installing.
+Note that it is usually better to create a new environment and
+installing from scratch there instead.
+
+```sh
+mamba activate tfenv
+pip uninstall tensorflow-macos
+pip uninstall tensorflow-metal
+mamba install -c apple tensorflow-deps --force-reinstall
+pip install tensorflow-metal
+pip install tensorflow-macos 
+```
+
 ### Installing XCode command-line tools
 
 ```sh
