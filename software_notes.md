@@ -719,11 +719,7 @@
   macOS, and pre-built binaries are available for Windows and Linux
 
 ### Web development
-
-- [Insomnia](https://insomnia.rest/):
-  API client and design platform, supporting GraphQL, REST and gRPC.
-  Interfaceable from the command-line using
-  [Insomnia Inso](https://insomnia.rest/products/inso)
+  
 - [jo](https://github.com/jpmens/jo):
   Small utility to create JSON objects on the command-line, useful
   for quick crafting of JSON inputs to pipe to APIs in the terminal
@@ -736,7 +732,11 @@
   Interactive HTTPS proxy
 - [Postman](https://www.postman.com/):
   API client, CI/CD support with
-  [Newman](https://github.com/postmanlabs/newman)
+  [Newman](https://github.com/postmanlabs/newman);
+  alternatives are [Insomnia](https://insomnia.rest/) which has a
+  command-line interface [Inso](https://insomnia.rest/products/inso),
+  [httpie](https://httpie.io/) and [xh](https://github.com/ducaale/xh)
+  with the latter two being more CLI-based
 - [Prism](https://github.com/stoplightio/prism):
   HTTP mock server with behavior that can be specified from OpenAPI
   v2 (Swagger), OpenAPI v3 or Postman Collection files
