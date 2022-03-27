@@ -124,7 +124,9 @@
 - [ClickHouse](https://github.com/ClickHouse/ClickHouse):
   High-performance time-series database; alternatives include
   [TimescaleDB](https://github.com/timescale/timescaledb)
-  (PostgreSQL extension to better support time-series data)
+  (PostgreSQL extension to better support time-series data),
+  [InfluxDB](https://github.com/influxdata/influxdb), and
+  [QuestDB](https://github.com/questdb/questdb)
 
 ### Database client
 
@@ -909,6 +911,43 @@ More information can also be found on
 
   and restart the computer so the new setting takes effect.
 
+### Conda
+
+Mambaforge. Assumes `$HOME/.local/bin` is in `$PATH` and Bash is the
+user shell (and therefore also that `$HOME/.bashrc` exists).
+
+```sh
+# Install mambaforge for faster operations
+chmod +x Mambaforge-Linux-x86_64.sh
+./Mambaforge-Linux-x86_64.sh                      # interactive install
+eval "$(~/mambaforge/bin/conda shell.bash hook)"  # modify path as needed
+conda init
+conda config --set auto_activate_base false
+mamba init
+# Create new environments as needed for each project, e.g.
+# $ mamba create -n some-project python=3.9
+```
+
+Some tools (like `bat`, `htop`, etc) have newer versions in conda-forge
+than what is available in the system package manager. If desired,
+install these in a development environment and symlink them to a
+directory in `$PATH` (below assumes `$HOME/.local/bin` is in `$PATH`).
+
+```sh
+# Create a named environment rather than polluting base
+mamba create -n devtools
+mamba activate devtools
+mamba install bat black htop mdformat pandoc ripgrep
+cd $HOME/.local/bin
+ln -s $HOME/mambaforge/envs/devtools/bin/bat
+ln -s $HOME/mambaforge/envs/devtools/bin/black
+ln -s $HOME/mambaforge/envs/devtools/bin/htop
+ln -s $HOME/mambaforge/envs/devtools/bin/mdformat
+ln -s $HOME/mambaforge/envs/devtools/bin/pandoc
+ln -s $HOME/mambaforge/envs/devtools/bin/rg
+mamba deactivate
+```
+
 ## Mac notes
 
 ### Basic CLI development environment using conda
@@ -951,15 +990,15 @@ Mambaforge. Assumes `$HOME/.local/bin` is in `$PATH` and `$HOME/.zshrc` exists.
 # $ conda config --set auto_activate_base false
 # $ mamba init
 # Create basic tools environment rather than polluting base environment
-mamba create -n myenv
-mamba activate myenv
+mamba create -n devtools
+mamba activate devtools
 mamba install bat git htop ripgrep tmux
 cd $HOME/.local/bin
-ln -s $HOME/mambaforge/envs/myenv/bin/bat .
-ln -s $HOME/mambaforge/envs/myenv/bin/git .
-ln -s $HOME/mambaforge/envs/myenv/bin/htop .
-ln -s $HOME/mambaforge/envs/myenv/bin/rg .
-ln -s $HOME/mambaforge/envs/myenv/bin/tmux .
+ln -s $HOME/mambaforge/envs/devtools/bin/bat .
+ln -s $HOME/mambaforge/envs/devtools/bin/git .
+ln -s $HOME/mambaforge/envs/devtools/bin/htop .
+ln -s $HOME/mambaforge/envs/devtools/bin/rg .
+ln -s $HOME/mambaforge/envs/devtools/bin/tmux .
 mamba deactivate
 # Create new environments as needed for each project, e.g.
 # > mamba create -n some-project python=3.9
