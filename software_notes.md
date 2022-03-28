@@ -862,6 +862,12 @@
   ([Github](https://github.com/oliverschwendener/ueli)):
   Launcher like [Alfred](https://www.alfredapp.com/) but open-source,
   available for macOS and Windows
+- [WeasyPrint](https://github.com/Kozea/WeasyPrint):
+  Convert HTML to PDF files using a standalone rendering engine;
+  support for CSS grids is currently lacking
+  ([link](https://github.com/Kozea/WeasyPrint/issues/543));
+  alternative is opening the HTML file in a browser (headless or not)
+  and printing to PDF
 - [Zotero](https://www.zotero.org/):
   Reference management software to collect, organize, cite and share
   research material
