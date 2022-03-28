@@ -179,7 +179,7 @@
   ([Github](https://github.com/Sequel-Ace/Sequel-Ace)):
   MySQL and MariaDB client for macOS
 
-### Development (General)
+### Developer tooling (general)
 
 - [asdf](https://asdf-vm.com/)
   ([Github](https://github.com/asdf-vm/asdf)):
@@ -231,6 +231,9 @@
 - [Gitup](https://gitup.co/)
   ([Github](https://github.com/git-up/GitUp)):
   GUI Git interface for macOS
+- [grex](https://github.com/pemistahl/grex):
+  Command-line tool to generate regular expressions from user-provided
+  test-cases
 - [Meld](https://meldmerge.org/)
   ([Gitlab](https://gitlab.gnome.org/GNOME/meld)):
   GTK visual diff and merge tool
@@ -242,15 +245,23 @@
 - [onefetch](https://github.com/o2sh/onefetch):
   Command-line tool that displays project information and code
   statistics for a local Git repository
-- [Plan 9 from User Space](https://9fans.github.io/plan9port/)
-  (plan9port):
-  See [plan9port config
-  repository](https://github.com/matheuristic/plan9port-config)
+- [ripgrep](https://github.com/BurntSushi/ripgrep):
+  Command-line search tool like `grep`, but usually much faster
 - [scc](https://github.com/boyter/scc):
   Command line tool to count lines of code by language
+- [sttr](https://github.com/abhimanyu003/sttr):
+  Command-line tool for various string operations
 - [task](https://taskfile.dev/)
   ([Github](https://github.com/go-task/task)):
   Task runner / build tool / simpler Make alternative
+- [z](https://github.com/rupa/z):
+  Track frecent directories and jump to them in Bash and Zsh.
+  Clone the repository somewhere and source the `z.sh` file in
+  `$HOME/.bashrc` or `$HOME.zshrc`:
+
+  ```sh
+  . /path/to/z.sh
+  ```
 
 ### Document extraction
 
@@ -429,6 +440,12 @@
 - [Marp](https://marp.app/): Create presentations from Markdown documentations,
   usable via the [marp-cli](https://github.com/marp-team/marp-cli) command-line
   tool and [Marp for VSCode](https://github.com/marp-team/marp-vscode)
+- [pdfpc](https://github.com/pdfpc/pdfpc)
+  ([Github](https://github.com/pdfpc/pdfpc)):
+  Multi-monitor PDF presentation application
+- [slides](https://github.com/maaslalani/slides):
+  Terminal-based tool for presentations using Markdown files, with
+  different slides separated by `---` lines
 
 ### Programming language tooling
 
@@ -559,7 +576,7 @@
   - [shfmt](https://github.com/mvdan/sh):
     Formatter for shell scripts (sh, bash, ksh)
 
-### Remote desktop
+### Remote login and desktop
 
 - [Jump Desktop Connect](https://jumpdesktop.com/connect/):
   Remote desktop host software, required for client devices to connect
@@ -567,64 +584,14 @@
   using their
   [Fluid](https://support.jumpdesktop.com/hc/en-us/articles/216423983-General-Fluid-Remote-Desktop)
   protocol, available for macOS and Windows
+- [Mosh](https://mosh.org/):
+  SSH alternative that handles intermittent connectivity and persists
+  connections when roaming across IP addresses
 - [Remmina](https://remmina.org/)
   ([GitLab](https://gitlab.com/Remmina/Remmina)):
   Remote desktop client for POSIX systems
 - [Royal TSX](https://royalapps.com/ts/mac/features):
   Cross-platform RDP and VNC client
-
-### Shell
-
-- [atop](https://github.com/Atoptool/atop):
-  System resource monitor, runs as a daemon that logs process activity
-- [bat](https://github.com/sharkdp/bat):
-  Command-line `cat` clone with syntax highlighting and Git integration
-- [btop](https://github.com/aristocratos/btop):
-  System resource monitor, alternative to top, [htop](https://htop.dev/),
-  [glances](https://nicolargo.github.io/glances/) and other interactive
-  process viewers
-- [Byobu](https://www.byobu.org/):
-  Collection of scripts and utilities layered on top of GNU Screen and
-  tmux (default) to enhance them and improve user experience
-- [fkill](https://github.com/sindresorhus/fkill-cli):
-  Command-line tool to interactively kill running user and system processes
-- [forkstat](https://github.com/ColinIanKing/forkstat):
-  Command-line program to log process forks, execs and exits (useful
-  for tracking runaway processes)
-- [fzf](https://github.com/junegunn/fzf):
-  Command-line fuzzy finder
-- [grex](https://github.com/pemistahl/grex):
-  Command-line tool to generate regular expressions from user-provided
-  test-cases
-- [hollywood](https://github.com/dustinkirkland/hollywood):
-  Hollywood technobabble in a Byobu session
-- [Mosh](https://mosh.org/):
-  SSH alternative that handles intermittent connectivity and persists
-  connections when roaming across IP addresses
-- [renameutils](https://www.nongnu.org/renameutils/):
-  Collection of programs to make renaming of files easier, like `qmv`
-  that allows editing file names with a text editor (GUI alternatives
-  include [KRename](https://userbase.kde.org/KRename),
-  [GPRename](http://gprename.sourceforge.net/) or
-  [Szyszka](https://github.com/qarmin/szyszka))
-- [ripgrep](https://github.com/BurntSushi/ripgrep):
-  Command-line search tool like `grep`, but usually much faster
-- [rlwrap](https://github.com/hanslub42/rlwrap):
-  `readline` wrapper to enable completion and history for any
-  command-line tool taking keyboard input
-- [sttr](https://github.com/abhimanyu003/sttr):
-  Command-line tool for various string operations
-- [tmux](https://github.com/tmux/tmux):
-  Terminal multiplexer, useful for managing and persisting remote
-  sessions over Mosh or SSH
-- [z](https://github.com/rupa/z):
-  Track frecent directories and jump to them in Bash and Zsh.
-  Clone the repository somewhere and source the `z.sh` file in
-  `$HOME/.bashrc` or `$HOME.zshrc`:
-
-  ```sh
-  . /path/to/z.sh
-  ```
 
 ### Structured text and tabular data
 
@@ -663,6 +630,23 @@
   joining CSV files
 - [yq](https://github.com/mikefarah/yq):
   Command-line YAML processor
+
+### System and process
+
+- [atop](https://github.com/Atoptool/atop):
+  System resource monitor, runs as a daemon that logs process activity
+- [btop](https://github.com/aristocratos/btop):
+  System resource monitor, alternative to top, [htop](https://htop.dev/),
+  [glances](https://nicolargo.github.io/glances/) and other interactive
+  process viewers
+- [Byobu](https://www.byobu.org/):
+  Collection of scripts and utilities layered on top of GNU Screen and
+  tmux (default) to enhance them and improve user experience
+- [fkill](https://github.com/sindresorhus/fkill-cli):
+  Command-line tool to interactively kill running user and system processes
+- [forkstat](https://github.com/ColinIanKing/forkstat):
+  Command-line program to log process forks, execs and exits (useful
+  for tracking runaway processes)
 
 ### Text editors
 
@@ -762,6 +746,8 @@
   ([Github](https://github.com/GNUAspell/aspell)):
   Spell checker designed as a replacement for
   [Ispell](https://www.gnu.org/software/ispell/ispell.html)
+- [bat](https://github.com/sharkdp/bat):
+  Command-line `cat` clone with syntax highlighting and Git integration
 - [ClamAV](https://www.clamav.net/)
   ([Github](https://github.com/Cisco-Talos/clamav)):
   Open-source antivirus engine, with frontends available like
@@ -787,11 +773,18 @@
   list on Unix or Linux systems)
 - [FontForge](https://fontforge.org/):
   Font editor
+- [fzf](https://github.com/junegunn/fzf):
+  Command-line fuzzy finder
+- [Glow](https://github.com/charmbracelet/glow):
+  Terminal-based Markdown reader; alternative is
+  [mdcat](https://codeberg.org/flausch/mdcat/)
 - [Hammerspoon](https://www.hammerspoon.org/):
   Enables macOS scripting with [Lua](https://www.lua.org/) to interact with
   system APIs, for example it can be used to enable scrolling by moving
   the mouse when holding down the middle-button
   ([link](https://superuser.com/questions/303424/can-i-enable-scrolling-with-middle-button-drag-in-os-x))
+- [hollywood](https://github.com/dustinkirkland/hollywood):
+  Hollywood technobabble in a Byobu session
 - [htop](https://htop.dev/)
   ([Github](https://github.com/htop-dev/htop)):
   TUI process viewer similar to `top` but with more features
@@ -825,23 +818,30 @@
   Translation memory tool
 - [pass](https://www.passwordstore.org/):
   Command-line password manager
-- [pdfpc](https://github.com/pdfpc/pdfpc)
-  ([Github](https://github.com/pdfpc/pdfpc)):
-  Multi-monitor PDF presentation application
 - [Penpot](https://github.com/penpot/penpot):
   Open source design and prototyping platform like Sketch and Figma
+- [Plan 9 from User Space](https://9fans.github.io/plan9port/)
+  (plan9port):
+  See [plan9port config
+  repository](https://github.com/matheuristic/plan9port-config)
 - [Platypus](https://github.com/sveinbjornt/Platypus)
   ([Github](https://github.com/sveinbjornt/Platypus)):
   Create macOS apps from command-line scripts
+- [renameutils](https://www.nongnu.org/renameutils/):
+  Collection of programs to make renaming of files easier, like `qmv`
+  that allows editing file names with a text editor (GUI alternatives
+  include [KRename](https://userbase.kde.org/KRename),
+  [GPRename](http://gprename.sourceforge.net/) or
+  [Szyszka](https://github.com/qarmin/szyszka))
+- [rlwrap](https://github.com/hanslub42/rlwrap):
+  `readline` wrapper to enable completion and history for any
+  command-line tool taking keyboard input
 - [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
   Terminal color-picker
 - [ScummVM](https://www.scummvm.org/)
   ([Github](https://github.com/scummvm/scummvm)):
   Program to run certain classical adventure and role-playing games
   provided the games' data files are available
-- [slides](https://github.com/maaslalani/slides):
-  Terminal-based tool for presentations using Markdown files, with
-  different slides separated by `---` lines
 - [Sloth](https://sveinbjorn.org/sloth)
   ([Github](https://github.com/sveinbjornt/Sloth)):
   macOS application to show open files, dirs, sockets and pipes
@@ -856,6 +856,9 @@
 - [Tizonia](https://tizonia.org/)
   ([Github](https://github.com/tizonia/tizonia-openmax-il)):
   Command-line cloud music player
+- [tmux](https://github.com/tmux/tmux):
+  Terminal multiplexer, useful for managing and persisting remote
+  sessions over Mosh or SSH
 - [TomatoBar](https://github.com/ivoronin/TomatoBar):
   macOS menu bar Pomodoro timer
 - [ueli](https://ueli.app/)
