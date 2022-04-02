@@ -14,29 +14,65 @@ cp SOMEFONT.ttf ANOTHERFONT.ttc $HOME/.fonts/
 fc-cache -fv
 ```
 
-## Bitmap fonts
-
-- [Dina](https://www.dcmembers.com/jibsen/download/61/)
-  ([TTF version](https://github.com/zshoals/Dina-Font-TTF-Remastered))
-- [Pixel Operator](https://notabug.org/HarvettFox96/ttf-pixeloperator)
-- [Unifont](http://unifoundry.com/unifont/index.html)
-
-## Outline fonts
+## Monospace fonts
 
 - [APL385](https://www.apl385.com/fonts/)
-- [Cooper Hewitt](https://www.cooperhewitt.org/open-source-at-cooper-hewitt/cooper-hewitt-the-typeface-by-chester-jenkins/)
-- [Courier Prime](https://quoteunquoteapps.com/courierprime/)
-- [ETbb](https://ctan.org/pkg/etbb?lang=en)
-- [Go](https://go.dev/blog/go-fonts)
-- [IBM Plex](https://github.com/IBM/plex)
-- [Inter](https://github.com/rsms/inter)
+- [Dina](https://www.dcmembers.com/jibsen/download/61/) (bitmap,
+  [TTF version](https://github.com/zshoals/Dina-Font-TTF-Remastered))
+- [Drafting* Mono](https://github.com/indestructible-type/Drafting)
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
 - [JuliaMono](https://github.com/cormullion/juliamono)
-- [M+](https://mplusfonts.github.io/)
+- [Pixel Operator](https://notabug.org/HarvettFox96/ttf-pixeloperator)
+  (bitmap)
 - [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_)
+- [Space Mono](https://github.com/googlefonts/spacemono)
+- [Spleen](https://github.com/fcambus/spleen) (bitmap)
+- [Terminus](http://terminus-font.sourceforge.net/) (bitmap)
+- [Unifont](http://unifoundry.com/unifont/index.html) (bitmap)
+
+## Sans-serif proportional fonts
+
+- [Atkinson Hyperlegible](https://brailleinstitute.org/freefont)
+- [Barlow](https://github.com/jpt/barlow)
+- [Be Vietnam Pro](https://github.com/bettergui/BeVietnamPro)
+- [Cooper Hewitt](https://www.cooperhewitt.org/open-source-at-cooper-hewitt/cooper-hewitt-the-typeface-by-chester-jenkins/)
+- [Encode Sans](https://github.com/thundernixon/Encode-Sans)
+- [Open Sans](https://github.com/googlefonts/opensans)
+- [Outfit](https://github.com/Outfitio/Outfit-Fonts)
+- [Poppins](https://github.com/itfoundry/poppins)
+- [Plus Jakarta Sans](https://github.com/tokotype/PlusJakartaSans)
 - [Public Sans](https://public-sans.digital.gov/)
+- [Raleway](https://github.com/theleagueof/raleway)
+- [Readex Pro](https://github.com/ThomasJockin/readexpro) (expanded
+  [Lexend](https://github.com/googlefonts/lexend))
+- [Space Grotesk](https://github.com/floriankarsten/space-grotesk)
+
+## Serif proportional fonts
+
+- [Courier Prime](https://quoteunquoteapps.com/courierprime/)
+- [ETbb](https://ctan.org/pkg/etbb?lang=en)
+- [Fraunces](https://github.com/undercasetype/Fraunces)
+- [Inter](https://github.com/rsms/inter)
+- [Lora](https://github.com/cyrealtype/Lora-Cyrillic)
+- [Montagu Slab](https://github.com/floriankarsten/montagu-slab)
+- [Playfair](https://github.com/clauseggers/Playfair)
+- [Spectral](https://github.com/productiontype/spectral)
 - [Reforma](https://www.unc.edu.ar/comunicaci%C3%B3n/identidad-reforma)
+
+## Symbol fonts
+- [Symbola](https://dn-works.com/ufas/) (_free for personal use_)
+
+## Font families
+
+- [Go](https://go.dev/blog/go-fonts)
+- [IBM Plex](https://github.com/IBM/plex)
+- [Input](https://input.djr.com/) (_free for personal use_)
+- [Kurinto Font Folio](https://www.kurinto.com/)
+- [M+](https://mplusfonts.github.io/)
+  ([Github](https://github.com/coz-m/MPLUS_FONTS))
+- [Recursive](https://github.com/arrowtype/recursive)
+- [Red Hat](https://github.com/RedHatOfficial/RedHatFont)
 - [Roboto](https://fonts.google.com/specimen/Roboto),
   [Condensed](https://fonts.google.com/specimen/Roboto+Condensed),
   [Serif](https://fonts.google.com/specimen/Roboto+Serif),
@@ -50,11 +86,17 @@ fc-cache -fv
   [Sans](https://github.com/adobe-fonts/source-han-sans),
   [Serif](https://github.com/adobe-fonts/source-han-serif),
   [Mono](https://github.com/adobe-fonts/source-han-mono) variants)
-- [Symbola](https://dn-works.com/ufas/) (_free for personal use_)
 
 ## Links
 
 - [Beautiful Web Type](https://beautifulwebtype.com/)
-- [Fonts (APL Wiki)](https://aplwiki.com/wiki/Fonts)
+- [Google Font Updates](https://twitter.com/googlefonts?lang=us)
+- [Google Fonts Knowledge](https://fonts.google.com/knowledge)
 - [Programming Fonts](https://www.programmingfonts.org/)
+  ([Tumblr](https://programmingfonts.tumblr.com/))
+- [The League of Movable Type](https://www.theleagueofmoveabletype.com/)
+  ([Github](https://github.com/theleagueof))
 - [The Ultimate Oldschool PC Font Pack](https://int10h.org/oldschool-pc-fonts/)
+- [Typewolf](https://www.typewolf.com/)
+- [Velvetyne Type Foundry](https://velvetyne.fr/)
+  ([Gitlab](https://gitlab.com/velvetyne))
