@@ -34,19 +34,18 @@ fc-cache -fv
 ## Sans-serif proportional fonts
 
 - [Atkinson Hyperlegible](https://brailleinstitute.org/freefont)
-- [Barlow](https://github.com/jpt/barlow)
-- [Be Vietnam Pro](https://github.com/bettergui/BeVietnamPro)
 - [Cooper Hewitt](https://www.cooperhewitt.org/open-source-at-cooper-hewitt/cooper-hewitt-the-typeface-by-chester-jenkins/)
 - [Encode Sans](https://github.com/thundernixon/Encode-Sans)
+- [Jost*](https://github.com/indestructible-type/Jost) (Futura
+  alternative)
 - [Open Sans](https://github.com/googlefonts/opensans)
 - [Outfit](https://github.com/Outfitio/Outfit-Fonts)
-- [Poppins](https://github.com/itfoundry/poppins)
 - [Plus Jakarta Sans](https://github.com/tokotype/PlusJakartaSans)
 - [Public Sans](https://public-sans.digital.gov/)
-- [Raleway](https://github.com/theleagueof/raleway)
 - [Readex Pro](https://github.com/ThomasJockin/readexpro) (expanded
   [Lexend](https://github.com/googlefonts/lexend))
 - [Space Grotesk](https://github.com/floriankarsten/space-grotesk)
+- [Urbanist](https://github.com/coreyhu/Urbanist)
 
 ## Serif proportional fonts
 
@@ -56,9 +55,10 @@ fc-cache -fv
 - [Inter](https://github.com/rsms/inter)
 - [Lora](https://github.com/cyrealtype/Lora-Cyrillic)
 - [Montagu Slab](https://github.com/floriankarsten/montagu-slab)
+- [Newsreader](https://github.com/productiontype/Newsreader)
 - [Playfair](https://github.com/clauseggers/Playfair)
 - [Spectral](https://github.com/productiontype/spectral)
-- [Reforma](https://www.unc.edu.ar/comunicaci%C3%B3n/identidad-reforma)
+- [Reforma](https://pampatype.com/reforma)
 
 ## Symbol fonts
 - [Symbola](https://dn-works.com/ufas/) (_free for personal use_)
