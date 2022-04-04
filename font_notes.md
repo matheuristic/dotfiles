@@ -17,10 +17,7 @@ fc-cache -fv
 ## Monospace fonts
 
 - [APL385](https://www.apl385.com/fonts/)
-- [Cozette](https://github.com/slavfox/Cozette) (bitmap,
-  or vector TTF sharp at multiples of 9pt like 18pt on Linux)
-- [Dina](https://www.dcmembers.com/jibsen/download/61/) (bitmap,
-  [TTF version](https://github.com/zshoals/Dina-Font-TTF-Remastered))
+- [Cozette](https://github.com/slavfox/Cozette) (bitmap)
 - [Drafting* Mono](https://github.com/indestructible-type/Drafting)
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
@@ -29,8 +26,8 @@ fc-cache -fv
   (bitmap)
 - [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_)
 - [Space Mono](https://github.com/googlefonts/spacemono)
-- [Spleen](https://github.com/fcambus/spleen) (bitmap)
-- [Terminus](http://terminus-font.sourceforge.net/) (bitmap)
+- [Terminus](http://terminus-font.sourceforge.net/) (bitmap,
+  [TTF version](https://files.ax86.net/terminus-ttf/))
 - [Unifont](http://unifoundry.com/unifont/index.html) (bitmap)
 
 ## Sans-serif proportional fonts
