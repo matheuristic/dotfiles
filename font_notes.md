@@ -17,6 +17,8 @@ fc-cache -fv
 ## Monospace fonts
 
 - [APL385](https://www.apl385.com/fonts/)
+- [Cozette](https://github.com/slavfox/Cozette) (bitmap,
+  or vector TTF sharp at multiples of 9pt like 18pt on Linux)
 - [Dina](https://www.dcmembers.com/jibsen/download/61/) (bitmap,
   [TTF version](https://github.com/zshoals/Dina-Font-TTF-Remastered))
 - [Drafting* Mono](https://github.com/indestructible-type/Drafting)
