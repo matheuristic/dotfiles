@@ -606,9 +606,9 @@
   Command-line JSON processor
 - [Miller](https://miller.readthedocs.io/en/latest/)
   ([Github](https://github.com/johnkerl/miller)):
-  Command-line utility for working with CSV, TSV and tabular JSON files.
-  Has some similarities with `jq` and `xsv` but covers multiple formats
-  and has more features at the cost of additional complexity
+  Command-line tool for working with CSV, TSV and tabular JSON files.
+  Has some similarities with `jq` and `qsv`/`xsv` but covers multiple
+  formats and has more features at the cost of additional complexity
 - [PandasGUI](https://github.com/adamerose/PandasGUI):
   Python GUI library for analyzing and visualizing Pandas DataFrames
 - [q](https://github.com/harelba/q):
@@ -619,15 +619,15 @@
 - [sc-im](https://github.com/andmarti1424/sc-im):
   Terminal spreadsheet program
 - [tsv-utils](https://github.com/eBay/tsv-utils):
-  Command-line tool for tabular data, similar to xsv but supposedly
-  faster for large datasets
+  Command-line tool for tabular data, similar to `qsv`/`xsv` but
+  supposedly faster for large datasets
 - [Visidata](https://www.visidata.org/)
   ([Github](https://github.com/saulpw/visidata)):
   Terminal tabular data multitool, supports sources loadable via Pandas using
   the `-f` option
-- [xsv](https://github.com/BurntSushi/xsv):
+- [qsv](https://github.com/jqnatividad/qsv):
   Command-line tool for indexing, slicing, analyzing, splitting and
-  joining CSV files
+  joining CSV files; fork of [xsv](https://github.com/BurntSushi/xsv)
 - [yq](https://github.com/mikefarah/yq):
   Command-line YAML processor
 
