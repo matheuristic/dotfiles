@@ -86,10 +86,10 @@ if has('linebreak')
   set showbreak=...\  " put '... ' at start of each continued line
 endif
 " }}}2
-" Persistent undo {{{2
-if has("persistent_undo")
+" Persistent undo cache in ~/.vimfiles/undo/ if dir exists {{{2
+if has('persistent_undo') && isdirectory(expand("~/.vimfiles/undo"))
   set undofile
-  set undodir=~/.vimfiles/undo//,. " undo file folders, appending // uses the full path in the name
+  set undodir=~/.vimfiles/undo// " undo file folders, adding '//' uses full path in cache name
 endif
 " }}}2
 " Status line {{{2
