@@ -601,6 +601,8 @@
 - [gron](https://github.com/tomnomnom/gron):
   Flattens JSON into discrete assignments that work better with `grep`
   and `sed`
+- [hred](https://github.com/danburzo/hred):
+  Command-line HTML (and XML) to JSON converter
 - [jq](https://stedolan.github.io/jq/)
   ([Github](https://github.com/stedolan/jq)):
   Command-line JSON processor
@@ -869,8 +871,11 @@
   Convert HTML to PDF files using a standalone rendering engine;
   support for CSS grids is currently lacking
   ([link](https://github.com/Kozea/WeasyPrint/issues/543));
-  alternative is opening the HTML file in a browser (headless or not)
-  and printing to PDF
+  alternatives are
+  [wkhtmltopdf](https://github.com/wkhtmltopdf/wkhtmltopdf),
+  [percollate](https://github.com/danburzo/percollate) (which
+  additionally processes the page for better readability), or
+  opening the file in a browser (headless or not) and printing to PDF
 - [Zotero](https://www.zotero.org/):
   Reference management software to collect, organize, cite and share
   research material
