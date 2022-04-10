@@ -74,6 +74,11 @@ fc-cache -fv
 - [IBM Plex](https://github.com/IBM/plex)
 - [Input](https://input.djr.com/) (_free for personal use_)
 - [Kurinto Font Folio](https://www.kurinto.com/)
+- Lucida ([B&H](https://lucidafonts.com/),
+  [TUG](https://tug.org/store/lucida/index.html)) (_commercial_;
+  some versions licensed and distributed with specific platforms,
+  e.g., _Lucida Sans Unicode_ on Windows, _Lucida Grande_ on macOS)
+  ([detail](https://bigelowandholmes.typepad.com/bigelow-holmes/how-and-why-lucida/))
 - [M+](https://mplusfonts.github.io/)
   ([Github](https://github.com/coz-m/MPLUS_FONTS))
 - [Recursive](https://github.com/arrowtype/recursive)
@@ -97,7 +102,6 @@ fc-cache -fv
 - [Beautiful Web Type](https://beautifulwebtype.com/)
 - [Google Font Updates](https://twitter.com/googlefonts?lang=us)
 - [Google Fonts Knowledge](https://fonts.google.com/knowledge)
-- [How and why Lucida](https://bigelowandholmes.typepad.com/bigelow-holmes/how-and-why-lucida/)
 - [Programming Fonts](https://www.programmingfonts.org/)
   ([Tumblr](https://programmingfonts.tumblr.com/))
 - [The League of Movable Type](https://www.theleagueofmoveabletype.com/)
