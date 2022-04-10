@@ -34,20 +34,26 @@ fc-cache -fv
 
 - [Atkinson Hyperlegible](https://brailleinstitute.org/freefont)
 - [Cooper Hewitt](https://www.cooperhewitt.org/open-source-at-cooper-hewitt/cooper-hewitt-the-typeface-by-chester-jenkins/)
+- [Decovar](https://github.com/googlefonts/decovar)
+  (parametric axes, see [link](https://web.dev/variable-fonts/))
 - [Encode Sans](https://github.com/thundernixon/Encode-Sans)
-- [Jost*](https://github.com/indestructible-type/Jost) (Futura
-  alternative)
+- [Jost*](https://github.com/indestructible-type/Jost)
+  (Futura alternative)
 - [Open Sans](https://github.com/googlefonts/opensans)
 - [Outfit](https://github.com/Outfitio/Outfit-Fonts)
 - [Plus Jakarta Sans](https://github.com/tokotype/PlusJakartaSans)
 - [Public Sans](https://public-sans.digital.gov/)
 - [Readex Pro](https://github.com/ThomasJockin/readexpro) (expanded
   [Lexend](https://github.com/googlefonts/lexend))
+- [Roboto Flex](https://github.com/googlefonts/roboto-flex)
+  (parametric axes, see [link](https://web.dev/variable-fonts/))
 - [Space Grotesk](https://github.com/floriankarsten/space-grotesk)
 - [Urbanist](https://github.com/coreyhu/Urbanist)
 
 ## Serif proportional fonts
 
+- [Amstelvar](https://github.com/googlefonts/amstelvar)
+  (parametric axes, see [link](https://web.dev/variable-fonts/))
 - [Courier Prime](https://quoteunquoteapps.com/courierprime/)
 - [ETbb](https://ctan.org/pkg/etbb?lang=en)
 - [Fraunces](https://github.com/undercasetype/Fraunces)
@@ -91,11 +97,13 @@ fc-cache -fv
 - [Beautiful Web Type](https://beautifulwebtype.com/)
 - [Google Font Updates](https://twitter.com/googlefonts?lang=us)
 - [Google Fonts Knowledge](https://fonts.google.com/knowledge)
+- [How and why Lucida](https://bigelowandholmes.typepad.com/bigelow-holmes/how-and-why-lucida/)
 - [Programming Fonts](https://www.programmingfonts.org/)
   ([Tumblr](https://programmingfonts.tumblr.com/))
 - [The League of Movable Type](https://www.theleagueofmoveabletype.com/)
   ([Github](https://github.com/theleagueof))
 - [The Ultimate Oldschool PC Font Pack](https://int10h.org/oldschool-pc-fonts/)
 - [Typewolf](https://www.typewolf.com/)
+- [Variable fonts](https://variablefonts.typenetwork.com/)
 - [Velvetyne Type Foundry](https://velvetyne.fr/)
   ([Gitlab](https://gitlab.com/velvetyne))

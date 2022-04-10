@@ -603,6 +603,9 @@
   and `sed`
 - [hred](https://github.com/danburzo/hred):
   Command-line HTML (and XML) to JSON converter
+- [htmlq](https://github.com/mgdm/htmlq):
+  Like grep for HTML but using CSS selectors; alternative is
+  [cascadia](https://github.com/suntong/cascadia)
 - [jq](https://stedolan.github.io/jq/)
   ([Github](https://github.com/stedolan/jq)):
   Command-line JSON processor
@@ -777,6 +780,10 @@
   Font editor
 - [fzf](https://github.com/junegunn/fzf):
   Command-line fuzzy finder
+- [Godot](https://godotengine.org/):
+  Game engine; alternatives are
+  [Unreal Engine](https://www.unrealengine.com/),
+  [Unity](https://unity.com/) or [Heaps](https://heaps.io/)
 - [Glow](https://github.com/charmbracelet/glow):
   Terminal-based Markdown reader; alternative is
   [mdcat](https://codeberg.org/flausch/mdcat/)
@@ -873,9 +880,10 @@
   ([link](https://github.com/Kozea/WeasyPrint/issues/543));
   alternatives are
   [wkhtmltopdf](https://github.com/wkhtmltopdf/wkhtmltopdf),
-  [percollate](https://github.com/danburzo/percollate) (which
-  additionally processes the page for better readability), or
-  opening the file in a browser (headless or not) and printing to PDF
+  [percollate](https://github.com/danburzo/percollate) (slightly
+  different in that it's main goal is to process the page for
+  readability and supports PDF, EPUB and HTML output), or opening the
+  file in a browser (headless or not) and printing to PDF
 - [Zotero](https://www.zotero.org/):
   Reference management software to collect, organize, cite and share
   research material
