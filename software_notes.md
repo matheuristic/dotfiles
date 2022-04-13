@@ -164,6 +164,10 @@
 - [HeidiSQL](https://www.heidisql.com/)
   ([Github](https://github.com/HeidiSQL/HeidiSQL))
   MariaDB, MySQL, Microsoft SQL, PostgreSQL and SQLite client for Windows
+- [pgcli](https://www.pgcli.com/)
+  ([Github](https://github.com/dbcli/pgcli)):
+  Command-line alternative to `psql` with auto-completion as well as
+  syntax highlighting
 - [Robo 3T](https://github.com/Studio3T/robomongo):
   MongoDB management tool, previously called Robomongo
 - [OctoSQL](https://github.com/cube2222/octosql):
@@ -181,6 +185,8 @@
 
 ### Developer tooling (general)
 
+- [angle-grinder](https://github.com/rcoh/angle-grinder):
+  Command-line tool for analytics on logfiles, supports on-line usage
 - [asdf](https://asdf-vm.com/)
   ([Github](https://github.com/asdf-vm/asdf)):
   Project runtime version manager supporting multiple programming
@@ -226,8 +232,24 @@
   (see `code2flow --help` for more options)
 - [Cookiecutter](https://github.com/cookiecutter/cookiecutter):
   Command-line tool to create projects from project templates
+- [ctop](https://github.com/bcicen/ctop):
+  Like `top` but for Docker containers instead of system processes
+- [delta](https://github.com/dandavison/delta):
+  Command-line pager with highlighting for `git`, `diff` and `grep`
+- [direnv](https://direnv.net/)
+  ([Github](https://github.com/direnv/direnv)):
+  Load and unload environment variables depending on the current dir,
+  good for allowing project-specific environments (e.g., auto-switch
+  Kubernetes context, database parameters or Docker configurations);
+  alternative is [shadowenv](https://github.com/Shopify/shadowenv)
+  which uses a LISP variant instead of shell commands for configs
 - [Docker](https://docs.docker.com/):
   Containerization platform
+- [entr](http://eradman.com/entrproject/)
+  ([Github](https://github.com/eradman/entr)):
+  Run arbitrary commands when files change, similar to
+  [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch) for the Acme
+  editor; alternative is [reflex](https://github.com/cespare/reflex)
 - [Gitup](https://gitup.co/)
   ([Github](https://github.com/git-up/GitUp)):
   GUI Git interface for macOS
@@ -246,11 +268,17 @@
   Command-line tool that displays project information and code
   statistics for a local Git repository
 - [ripgrep](https://github.com/BurntSushi/ripgrep):
-  Command-line search tool like `grep`, but usually much faster
+  Command-line search tool like `grep`, but usually much faster;
+  [ripgrep-all](https://github.com/phiresky/ripgrep-all) is a
+  wrapper that extends file search support to additional file types
+  like PDF, DOCX, SQLite, JPEG, video files, etc
 - [scc](https://github.com/boyter/scc):
   Command line tool to count lines of code by language
 - [sttr](https://github.com/abhimanyu003/sttr):
   Command-line tool for various string operations
+- [strace](https://strace.io/)
+  ([Github](https://github.com/strace/strace)):
+  Linux command-line debugging utility that attaches to processes
 - [task](https://taskfile.dev/)
   ([Github](https://github.com/go-task/task)):
   Task runner / build tool / simpler Make alternative
@@ -277,6 +305,9 @@
 ### Ebook and PDF reading and annotation
 
 - [Calibre](https://calibre-ebook.com/)
+- [Foliate](https://johnfactotum.github.io/foliate/)
+  ([Github](https://github.com/johnfactotum/foliate)):
+  GTK eBook reader
 - [MuPDF](https://mupdf.com/):
   Lightweight PDF reader, also supports XPS, EPUB and CBZ;
   [sioyek](https://github.com/ahrm/sioyek) is a reader
@@ -609,6 +640,11 @@
 - [jq](https://stedolan.github.io/jq/)
   ([Github](https://github.com/stedolan/jq)):
   Command-line JSON processor
+- [jless](https://jless.io/):
+  ([Github](https://github.com/PaulJuliusMartinez/jless)):
+  Ncurses command-line JSON viewer
+- [jo](https://github.com/jpmens/jo):
+  Command-line utility for creating JSON objects
 - [Miller](https://miller.readthedocs.io/en/latest/)
   ([Github](https://github.com/johnkerl/miller)):
   Command-line tool for working with CSV, TSV and tabular JSON files.
@@ -711,6 +747,11 @@
 
 ### Web development
   
+- [dog](https://github.com/ogham/dog):
+  Alternative to `dig`
+- [Hurl](https://hurl.dev/)
+  ([Github](https://github.com/Orange-OpenSource/hurl)):
+  Command-line tool for running HTTP requests defined in a text file
 - [jo](https://github.com/jpmens/jo):
   Small utility to create JSON objects on the command-line, useful
   for quick crafting of JSON inputs to pipe to APIs in the terminal
@@ -741,6 +782,10 @@
 
 ### Miscellaneous
 
+- [age](https://github.com/FiloSottile/age):
+  Simple command-line encryption/decryption tool; alternative is
+  [eureka](https://github.com/mimoo/eureka) which is more limited
+  (no key files, generates a token to be used by recipient)
 - [Al Dente](https://github.com/davidwernhart/AlDente):
   macOS tool to limit battery charging (e.g. keeping charge percentage at or
   below 80% can help prolong battery life), requires a helper application that
@@ -758,24 +803,26 @@
   Open-source antivirus engine, with frontends available like
   [ClamTk](https://gitlab.com/dave_m/clamtk)
 - [cspell](https://github.com/streetsidesoftware/cspell):
-  Code-aware spell checker, install with
-
-  ```sh
-  npm install -g cspell
-  ```
-
+  Code-aware spell checker, install with `npm install -g cspell`
 - [DevonThink Pro](https://www.devontechnologies.com/apps/devonthink):
   Commercial document management and search solution for macOS
 - [Diagon](https://github.com/ArthurSonzogni/Diagon):
   Command-line tool for transforming Markdown-style expressions into
   ASCII art, [webapp](https://github.com/ArthurSonzogni/Diagon) and
   [snap](https://snapcraft.io/diagon) available
+- [duf](https://github.com/muesli/duf):
+  Command-line alternative to `df` with nicer user interface;
+  alternative is [lfs](https://github.com/Canop/lfs)
 - [enchant](https://github.com/AbiWord/enchant):
   Wrapper for abstracting different spell checking libararies into a
   single interface, with support for personal word lists (one word per
   line) at paths `$ENCHANT_CONFIG_DIR/<lang>.dic` (for example,
   `$HOME/.config/enchant/en_US.dic` for the US English personal word
   list on Unix or Linux systems)
+- [fd](https://github.com/sharkdp/fd):
+  Simpler command-line alternative to `find`
+- [fq](https://github.com/wader/fq):
+  Like `jq` but for binary formats
 - [FontForge](https://fontforge.org/):
   Font editor
 - [fzf](https://github.com/junegunn/fzf):
@@ -816,6 +863,10 @@
   and a
   [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)
   servers, which by default uses ones hosted by the project)
+- [moretools](https://joeyh.name/code/moreutils/):
+  Extra UNIX command-line tools, some useful ones include `vidir` for
+  mass renaming of files using vi (like `qmv` or Emacs Dired), and
+  `parallel` for running multiple jobs concurrently
 - [Netron](https://github.com/lutzroeder/netron):
   Neural network, deep learning and machine learning model viewer
 - [Nuspell](https://nuspell.github.io/)
@@ -827,6 +878,9 @@
   Translation memory tool
 - [pass](https://www.passwordstore.org/):
   Command-line password manager
+- [pdfgrep](https://pdfgrep.org/)
+  ([Github](https://gitlab.com/pdfgrep/pdfgrep)):
+  Command-line tool for searching text in PDF files
 - [Penpot](https://github.com/penpot/penpot):
   Open source design and prototyping platform like Sketch and Figma
 - [Plan 9 from User Space](https://9fans.github.io/plan9port/)
@@ -836,12 +890,21 @@
 - [Platypus](https://github.com/sveinbjornt/Platypus)
   ([Github](https://github.com/sveinbjornt/Platypus)):
   Create macOS apps from command-line scripts
+- [pv](http://www.ivarch.com/programs/pv.shtml)
+  ([Github](https://github.com/a-j-wood/pv)):
+  Like `cat` but prints progress to stderr
+- [rdfind](https://rdfind.pauldreik.se/)
+  ([Github](https://github.com/pauldreik/rdfind)):
+  Command-line tool to find duplicate files; alternative is
+  [fdupes](https://github.com/adrianlopezroche/fdupes)
 - [renameutils](https://www.nongnu.org/renameutils/):
   Collection of programs to make renaming of files easier, like `qmv`
-  that allows editing file names with a text editor (GUI alternatives
+  that allows editing file names with a text editor; GUI alternatives
   include [KRename](https://userbase.kde.org/KRename),
   [GPRename](http://gprename.sourceforge.net/) or
-  [Szyszka](https://github.com/qarmin/szyszka))
+  [Szyszka](https://github.com/qarmin/szyszka); a command-line
+  alternative is `vdir` (see the entry for moretools above), or
+  [f2](https://github.com/ayoisaiah/f2)
 - [rlwrap](https://github.com/hanslub42/rlwrap):
   `readline` wrapper to enable completion and history for any
   command-line tool taking keyboard input
@@ -870,6 +933,8 @@
   sessions over Mosh or SSH
 - [TomatoBar](https://github.com/ivoronin/TomatoBar):
   macOS menu bar Pomodoro timer
+- [tree](http://mama.indstate.edu/users/ice/tree/):
+  Command-line tool to list files in subdirectory tree depth-indented
 - [ueli](https://ueli.app/)
   ([Github](https://github.com/oliverschwendener/ueli)):
   Launcher like [Alfred](https://www.alfredapp.com/) but open-source,
