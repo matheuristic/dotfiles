@@ -863,10 +863,6 @@
   and a
   [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)
   servers, which by default uses ones hosted by the project)
-- [moretools](https://joeyh.name/code/moreutils/):
-  Extra UNIX command-line tools, some useful ones include `vidir` for
-  mass renaming of files using vi (like `qmv` or Emacs Dired), and
-  `parallel` for running multiple jobs concurrently
 - [Netron](https://github.com/lutzroeder/netron):
   Neural network, deep learning and machine learning model viewer
 - [Nuspell](https://nuspell.github.io/)
@@ -876,6 +872,8 @@
   ([Github](https://github.com/hunspell/hunspell))
 - [OmegaT](https://omegat.org/):
   Translation memory tool
+- [parallel](https://www.gnu.org/software/parallel/):
+  Command-line tool for executing jobs in parallel
 - [pass](https://www.passwordstore.org/):
   Command-line password manager
 - [pdfgrep](https://pdfgrep.org/)
@@ -902,9 +900,8 @@
   that allows editing file names with a text editor; GUI alternatives
   include [KRename](https://userbase.kde.org/KRename),
   [GPRename](http://gprename.sourceforge.net/) or
-  [Szyszka](https://github.com/qarmin/szyszka); a command-line
-  alternative is `vdir` (see the entry for moretools above), or
-  [f2](https://github.com/ayoisaiah/f2)
+  [Szyszka](https://github.com/qarmin/szyszka); other command-line
+  alternatives include [f2](https://github.com/ayoisaiah/f2)
 - [rlwrap](https://github.com/hanslub42/rlwrap):
   `readline` wrapper to enable completion and history for any
   command-line tool taking keyboard input
