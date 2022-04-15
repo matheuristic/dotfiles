@@ -105,9 +105,9 @@
     (La)TeX processor
   - [WeasyPrint](https://github.com/Kozea/WeasyPrint) or
     [percollate](https://github.com/danburzo/percollate):
-    Convert HTML to PDF files; percollate processes the page
-    for readability before conversion; alternative is
-    opening the file in a browser and printing to PDF
+    Convert HTML to PDF files; percollate processes the page for
+    readability before conversion; the file can also be directly
+    opened in a browser and printed to PDF
 - Document text extraction
   - [Apache Tika](http://tika.apache.org/):
     [Go](https://github.com/google/go-tika)
@@ -285,9 +285,9 @@
   - [gron](https://github.com/tomnomnom/gron):
     Flattens JSON into discrete assignments that work better
     with `grep` and `sed`
-  - [htmlq](https://github.com/mgdm/htmlq):
-    Like grep for HTML but using CSS selectors; alternative is
-    [cascadia](https://github.com/suntong/cascadia)
+  - [htmlq](https://github.com/mgdm/htmlq) or
+    [cascadia](https://github.com/suntong/cascadia):
+    Like grep for HTML but using CSS selectors
   - [jq](https://stedolan.github.io/jq/):
     Command-line JSON processor
   - [jless](https://jless.io/):
@@ -347,13 +347,13 @@
   - [virt-manager](https://virt-manager.org/):
     Linux desktop tool for managing QEMU/KVM virtual machines
 - VPN
-  - [OpenVPN](https://openvpn.net/vpn-client/):
+  - [OpenVPN](https://openvpn.net/vpn-client/)
+    or [TunnelBlick](https://tunnelblick.net/):
     OpenVPN client, note that Linux clients be should installed via
     the system package manager (see
     [here](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux));
-    an alternative is the macOS-only
-    [TunnelBlick](https://tunnelblick.net/)
-    built on the older but still maintained OpenVPN 2 libraries
+    TunnelBlick is macOS-only and built on the older but still
+    maintained OpenVPN 2 libraries
   - [WireGuard](https://www.wireguard.com/):
     Simple and high-performance VPN
 - Web browsing
@@ -386,10 +386,10 @@
   - [TwineJS](https://github.com/klembot/twinejs):
     Tool for authoring interactive, non-linear stories
 - Other
-  - [age](https://github.com/FiloSottile/age):
-    Simple command-line encryption/decryption tool; alternative is
-    [eureka](https://github.com/mimoo/eureka) which is more limited
-    (no key files, generates a token to be used by recipient)
+  - [age](https://github.com/FiloSottile/age) or
+    [eureka](https://github.com/mimoo/eureka):
+    Simple command-line encryption/decryption tool; eureka is more
+    limited (no key files; generates a token to be used by recipient)
   - [Al Dente](https://github.com/davidwernhart/AlDente):
     macOS tool to limit battery charging (e.g. keeping charge
     percentage at or below 80% can help prolong battery life)
