@@ -30,11 +30,11 @@
   - [ctop](https://github.com/bcicen/ctop):
     `top` for containers
   - [Docker](https://docs.docker.com/)
-- Data analytics apps:
+- Data analytics apps
   - [JASP](https://jasp-stats.org/)
   - [PSPP](https://www.gnu.org/software/pspp/)
   - [Veusz](https://veusz.github.io/)
-- Data pipelines:
+- Data pipelines
   - [Apache Airflow](https://airflow.apache.org/):
     Scheduling workflows
   - [Apache HOP](https://hop.apache.org/):
@@ -42,7 +42,7 @@
   - [Snakemake](https://snakemake.readthedocs.io/en/stable/) or
     [Nextflow](https://www.nextflow.io/)
     Run batch workflows
-- Database clients:
+- Database clients
   - [Altair](https://altair.sirmuel.design/):
     GraphQL client
   - [DBeaver](https://dbeaver.io/):
@@ -61,7 +61,7 @@
     Redis client
   - [Sequel Ace](https://github.com/Sequel-Ace/Sequel-Ace):
     MySQL, MariaDB client; macOS
-- Databases:
+- Databases
   - [ClickHouse](https://github.com/ClickHouse/ClickHouse):
     Time-series DB
   - [PostgreSQL](https://www.postgresql.org/):
@@ -84,7 +84,7 @@
     Vector graphics editor
   - [LinkedIdeas](https://github.com/fespinoza/LinkedIdeas):
     Mind-mapping tool
-- Digital design:
+- Digital design
   - [Penpot](https://github.com/penpot/penpot):
     Open source design and prototyping platform like Sketch and Figma
 - Document conversion and rendering
@@ -309,7 +309,7 @@
     Pandas using the `-f` option
   - [yq](https://github.com/mikefarah/yq):
     Command-line YAML processor
-- User experience and interface (GUI)
+- User experience and interface (graphical)
   - [skhd](https://github.com/koekeishiya/skhd):
     Hotkey daemon; macOS
   - [Rectangle](https://github.com/rxhanson/Rectangle):
@@ -320,7 +320,7 @@
     and available for Windows in addition to macOS
   - [Unshaky](https://github.com/aahung/Unshaky):
     Double keypress workaround for butterfly keyboards; macOS
-- User experience and interface (Terminal)
+- User experience and interface (terminal)
   - [direnv](https://github.com/direnv/direnv) or
     [shadowenv](https://github.com/Shopify/shadowenv):
     Load and unload env vars based on location
