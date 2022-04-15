@@ -103,6 +103,11 @@
     [TeXLive](https://www.tug.org/texlive/) or
     [TinyTeX](https://github.com/yihui/tinytex):
     (La)TeX processor
+  - [WeasyPrint](https://github.com/Kozea/WeasyPrint) or
+    [percollate](https://github.com/danburzo/percollate):
+    Convert HTML to PDF files; percollate processes the page
+    for readability before conversion; alternative is
+    opening the file in a browser and printing to PDF
 - Document text extraction
   - [Apache Tika](http://tika.apache.org/):
     [Go](https://github.com/google/go-tika)
@@ -423,11 +428,6 @@
     Todo list management (Taskwarrior) and time-tracking (Timewarrior)
   - [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch):
     Run command when files change, Acme editor-specific
-  - [WeasyPrint](https://github.com/Kozea/WeasyPrint) or
-    [percollate](https://github.com/danburzo/percollate):
-    Convert HTML to PDF files; percollate processes the page
-    for readability before conversion; alternative is
-    opening the file in a browser and printing to PDF
   - [Zotero](https://www.zotero.org/):
     Reference management software to collect, organize, cite and share
     research material
