@@ -82,8 +82,8 @@
     Raster graphics editor
   - [Inkscape](https://inkscape.org/):
     Vector graphics editor
-  - [LinkedIdeas](https://github.com/fespinoza/LinkedIdeas)
-    (mind-mapping)
+  - [LinkedIdeas](https://github.com/fespinoza/LinkedIdeas):
+    Mind-mapping tool
 - Digital design:
   - [Penpot](https://github.com/penpot/penpot):
     Open source design and prototyping platform like Sketch and Figma
@@ -238,8 +238,7 @@
     useful for tracking runaway processes
   - [htop](https://github.com/htop-dev/htop):
     System resource monitor, alternative to `top`
-  - [Sloth](https://sveinbjorn.org/sloth)
-    ([Github](https://github.com/sveinbjornt/Sloth)):
+  - [Sloth](https://sveinbjorn.org/sloth):
     macOS application to show open files, dirs, sockets and pipes
   - [Stacer](https://github.com/oguzhaninan/Stacer):
     Linux system optimizer and monitoring GUI tool
@@ -284,8 +283,7 @@
   - [htmlq](https://github.com/mgdm/htmlq):
     Like grep for HTML but using CSS selectors; alternative is
     [cascadia](https://github.com/suntong/cascadia)
-  - [jq](https://stedolan.github.io/jq/)
-    ([Github](https://github.com/stedolan/jq)):
+  - [jq](https://stedolan.github.io/jq/):
     Command-line JSON processor
   - [jless](https://jless.io/):
     Ncurses command-line JSON viewer
@@ -301,8 +299,7 @@
     to use, tsv-utils is supposedly faster for large datasets.
   - [QXmlEdit](http://qxmledit.org/):
     XML editor
-  - [Visidata](https://www.visidata.org/)
-    ([Github](https://github.com/saulpw/visidata)):
+  - [Visidata](https://www.visidata.org/):
     Terminal tabular data multitool, supports sources loadable via
     Pandas using the `-f` option
   - [yq](https://github.com/mikefarah/yq):
@@ -318,7 +315,7 @@
     and available for Windows in addition to macOS
   - [Unshaky](https://github.com/aahung/Unshaky):
     Double keypress workaround for butterfly keyboards; macOS
-- User experience and interface (terminal)
+- User experience and interface (Terminal)
   - [direnv](https://github.com/direnv/direnv) or
     [shadowenv](https://github.com/Shopify/shadowenv):
     Load and unload env vars based on location
@@ -328,8 +325,7 @@
     Hollywood technobabble in a Byobu session
   - [parallel](https://www.gnu.org/software/parallel/):
     Command-line tool for executing jobs in parallel
-  - [pv](http://www.ivarch.com/programs/pv.shtml)
-    ([Github](https://github.com/a-j-wood/pv)):
+  - [pv](http://www.ivarch.com/programs/pv.shtml):
     Like `cat` but prints progress to stderr
   - [rlwrap](https://github.com/hanslub42/rlwrap):
     `readline` wrapper to enable completion and history for any
@@ -343,8 +339,7 @@
   - [UTM](https://github.com/utmapp/UTM):
     iOS and macOS tool for managing [QEMU](https://www.qemu.org/)
     virtual machines
-  - [virt-manager](https://virt-manager.org/)
-    ([Github](https://github.com/virt-manager/virt-manager)):
+  - [virt-manager](https://virt-manager.org/):
     Linux desktop tool for managing QEMU/KVM virtual machines
 - VPN
   - [OpenVPN](https://openvpn.net/vpn-client/):
@@ -365,8 +360,7 @@
 - Web development
   - [dog](https://github.com/ogham/dog):
     Alternative to `dig`
-  - [Hurl](https://hurl.dev/)
-    ([Github](https://github.com/Orange-OpenSource/hurl)):
+  - [Hurl](https://hurl.dev/):
     Command-line tool for running HTTP requests defined in a text file
   - [frp](https://github.com/fatedier/frp):
     Reverse proxy, like [ngrok](https://ngrok.com/)
@@ -374,8 +368,7 @@
     [xh](https://github.com/ducaale/xh):
     Command-line API client; much lighter weight than
     [Postman](https://www.postman.com/)
-  - [Mockoon](https://mockoon.com/)
-    ([Github](https://github.com/mockoon/mockoon)):
+  - [Mockoon](https://github.com/mockoon/mockoon):
     HTTP mock server
   - [mitmproxy](https://mitmproxy.org/):
     Interactive HTTPS proxy
