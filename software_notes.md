@@ -1,954 +1,471 @@
 # Software notes
 
-## Software list
+## Open-source software
 
-### Authoring
-
-- [Asciidoctor](https://asciidoctor.org/):
-  Asciidoc processor, supports direct conversion to PDF
-  using an [extension](https://asciidoctor.org/docs/asciidoctor-pdf/)
-  for converting to PDF; generally more pleasant for creating longer
-  or more complex docs than Markdown; install with RubyGems as follows
-
-  ```sh
-  gem install asciidoctor
-  gem install asciidoctor-pdf rghost rouge
-  ```
-
-  Compile to PDF using a command like
-
-  ```sh
-  asciidoctor -r asciidoctor-pdf -b pdf filename.asciidoc
-  ```
-
-  Also note that Kramdoc documents can be converted to Markdown using
-  the `kramdown-asciidoc` gem
-- [Manuskript](https://www.theologeek.ch/manuskript/)
-  ([Github](https://github.com/olivierkes/manuskript)):
-  Open-source tool for writers like
-  [Scrivener](https://www.literatureandlatte.com/scrivener/)
-- [Pandoc](https://pandoc.org/)
-  ([Github](https://github.com/jgm/pandoc)):
-  Universal markup converter; alternatives are
-  [MultiMarkdown](https://github.com/fletcher/MultiMarkdown-6),
-  [Kramdown](https://kramdown.gettalong.org/), and
-  [cmark](https://github.com/commonmark/cmark)
-  - [Pantable](https://github.com/ickc/pantable):
-    Pandoc filter to convert CSV tables to and from Pandoc Markdown
-- [QPDF](http://qpdf.sourceforge.net/)
-  ([Github](https://github.com/qpdf/qpdf)):
-  Command-line tool for manipulating PDF files
-- [Scribus](https://www.scribus.net/)
-  ([Mirror repo on Github](https://github.com/scribusproject/scribus)):
-  Desktop publishing software (for laying out pages) like Affinity
-  Publisher, InDesign or QuarkXPress
-- [Tectonic](https://tectonic-typesetting.github.io/)
-  ([Github](https://github.com/tectonic-typesetting/tectonic)):
-  TeX/LaTeX engine, automatically pulls in packages from
-  [CTAN](https://ctan.org/) as needed; an alternative to
-  the more comprehensive [TeXLive](https://www.tug.org/texlive/),
-  its macOS repackage [MacTeX](http://www.tug.org/mactex/), or the
-  lightweight [TinyTeX](https://github.com/yihui/tinytex)
-- [Twine](https://twinery.org/)
-  ([Github](https://github.com/klembot/twinejs)):
-  Tool for authoring interactive, non-linear stories
-- [Zettlr](https://www.zettlr.com/)
-  ([Github](https://github.com/Zettlr/Zettlr)):
-  Markdown editor, designed to be used with Pandoc
-
-### Data pipelines
-
-- [Apache Airflow](https://airflow.apache.org/):
-  Workflow/pipeline management tool; alternatives include
-  [Prefect](https://github.com/PrefectHQ/prefect),
-  [dbt](https://github.com/dbt-labs/dbt-core),
-  [Snakemake](https://snakemake.readthedocs.io/en/stable/), or see
-  [here](https://github.com/common-workflow-language/common-workflow-language/wiki/Existing-Workflow-systems)
-- [Apache HOP](https://hop.apache.org/)
-- [List of pipeline tools](https://github.com/pditommaso/awesome-pipeline)
-
-### Data Science and Analytics
-
-- [D-Tale](https://github.com/man-group/dtale):
-  Python-based webserver for visualizing Python Pandas data structures,
-  install the `dtale` package with `pip` or if using Conda run
-
-  ```sh
-  conda install dtale -c conda-forge
-  conda install -c plotly python-kaleido
-  ```
-
-  in the desired Conda environment (the second command is needed for
-  "Export to PNG" for charts)
-- [JASP](https://jasp-stats.org/)
-  ([Github](https://github.com/jasp-stats/jasp-desktop)):
-  GUI program for statistical analysis, alternatives include
-  [SOFA](http://www.sofastatistics.com/home.php),
-  [PSPP](https://www.gnu.org/software/pspp/),
-  or the commercial [Prism](https://www.graphpad.com/) and
-  [Minitab](https://www.minitab.com/en-us/products/minitab/)
-- [Jupyter](https://jupyter.org/):
-  Collection of tools for interactive development across multiple
-  languages, like the web-based interactive
-  [Jupyter notebook](https://github.com/jupyter/notebook),
-  the web-based IDE that can work on these notesbooks plus data and code
-  [JupyterLab](https://github.com/jupyterlab/jupyterlab),
-  its multi-user version
-  [JupyterHub](https://github.com/jupyterhub/jupyterhub),
-  or tooling to convert Jupyter notebooks into standalone webapps
-  [Voilà](https://github.com/voila-dashboards/voila)
-- [MLflow](https://mlflow.org/):
-  Machine-learning model lifecycle management platform, in particular
-  tracking experiments and logging artifacts
-- [ROOT](https://root.cern/)
-  ([Github](https://github.com/root-project/root)):
-  CERN-developed framework for analyzing petabytes of data
-- [Sweetviz](https://github.com/fbdesignpro/sweetviz):
-  Python library to visualize and compare data sets
-- [Veusz](https://veusz.github.io/)
-  ([Github](https://github.com/veusz/veusz)):
-  Scientific plotting application, alternatives are
-  [SciDAVis](http://scidavis.sourceforge.net/)
-  ([QtiPlot](https://www.qtiplot.com/) fork),
-  [AlphaPlot](https://github.com/narunlifescience/AlphaPlot) (SciDAVis
-  fork), [LabPlot](https://labplot.kde.org/),
-  [TOPCAT](http://www.star.bris.ac.uk/~mbt/topcat/) (good with large
-  and sparse datasets), [ROOT](https://root.cern/) (good with big
-  data, limited functionality), or the commercial options
-  [Origin/OriginPro](https://www.originlab.com/)
-
-### Database
-
-- [PostgreSQL](https://www.postgresql.org/):
-  Open-source relational database
-- [ClickHouse](https://github.com/ClickHouse/ClickHouse):
-  High-performance time-series database; alternatives include
-  [TimescaleDB](https://github.com/timescale/timescaledb)
-  (PostgreSQL extension to better support time-series data),
-  [InfluxDB](https://github.com/influxdata/influxdb), and
-  [QuestDB](https://github.com/questdb/questdb)
-
-### Database client
-
-- [Altair](https://altair.sirmuel.design/)
-  ([Github](https://github.com/altair-graphql/altair)):
-  Cross-platform GraphQL client
-- [Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/)
-  ([Github](https://github.com/microsoft/azuredatastudio)):
-  Microsoft SQL Server, Azure SQL Database, PostgreSQL and Jupyter
-  Notebook client
-- [Beekeeper Studio](https://www.beekeeperstudio.io/)
-  ([Github](https://github.com/beekeeper-studio/beekeeper-studio)):
-  SQLite, MySQL, MariaDB, Postgres, CockroachDB, Microsoft SQL Server
-  and Amazon Redshift client with a nicer interface than DBeaver but
-  not as featureful
-- [DBeaver](https://dbeaver.io/)
-  ([Github](https://github.com/dbeaver/dbeaver)):
-  JDBC SQL client, very full-featured but user interface is complex (a
-  zip package is available from the website files
-  [archive](https://dbeaver.io/files/) which requires Java be
-  installed on the machine, e.g. via the `openjdk-11-jre` package or
-  another version)
-- [DbGate](https://dbgate.org/)
-  ([Github](https://github.com/dbgate/dbgate)):
-  Cross-platform database client, supports MySQL, PostgreSQL, SQL Server,
-  MongoDB, SQLite, CSV files and others
-- [DuckDB](https://duckdb.org/)
-  ([Github](https://github.com/duckdb/duckdb)):
-  In-process SQL database with APIs for Python, R and other languages,
-  with Python support especially nice as it can work with Pandas
-  DataFrames ([link](https://duckdb.org/2021/05/14/sql-on-pandas.html))
-  so SQL queries can be run directly on Pandas DataFrames; an alternative
-  with comparable Pandas support is
-  [MonetDB/e-Python](https://github.com/MonetDBSolutions/MonetDBe-Python)
-- [HeidiSQL](https://www.heidisql.com/)
-  ([Github](https://github.com/HeidiSQL/HeidiSQL))
-  MariaDB, MySQL, Microsoft SQL, PostgreSQL and SQLite client for Windows
-- [pgcli](https://www.pgcli.com/)
-  ([Github](https://github.com/dbcli/pgcli)):
-  Command-line alternative to `psql` with auto-completion as well as
-  syntax highlighting
-- [Robo 3T](https://github.com/Studio3T/robomongo):
-  MongoDB management tool, previously called Robomongo
-- [OctoSQL](https://github.com/cube2222/octosql):
-  Join, analyze and transform data from multiple databases using SQL
-- [Postico](https://eggerapps.at/postico/):
-  Commercial PostgreSQL client for macOS
-- [RedisDesktopManager](https://github.com/uglide/RedisDesktopManager):
-  Redis management tool, Linux binaries are downloadable but Windows
-  and Mac binaries require either a
-  [subscription](https://rdm.dev/pricing) or
-  [compiling from source](https://docs.rdm.dev/en/latest/install/)
-- [Sequel Ace](https://sequel-ace.com/)
-  ([Github](https://github.com/Sequel-Ace/Sequel-Ace)):
-  MySQL and MariaDB client for macOS
-
-### Developer tooling (general)
-
-- [angle-grinder](https://github.com/rcoh/angle-grinder):
-  Command-line tool for analytics on logfiles, supports on-line usage
-- [asdf](https://asdf-vm.com/)
-  ([Github](https://github.com/asdf-vm/asdf)):
-  Project runtime version manager supporting multiple programming
-  languages, can act as an alternative to
-  [gvm](https://github.com/moovweb/gvm),
-  [nvm](https://github.com/nvm-sh/nvm),
-  [rbenv](https://github.com/rbenv/rbenv),
-  [pyenv](https://github.com/pyenv/pyenv) and others
-- [cflow](https://www.gnu.org/software/cflow/):
-  Call graph generator for C.
-  [pycflow2dot](https://github.com/johnyf/pycflow2dot) integrates
-  `cflow` with the [Graphviz](http://www.graphviz.org/) `dot` tool to
-  output the call graph to multiple formats
-- [Code Search](https://github.com/google/codesearch):
-  Go-based tool for indexing and searching with regexp on large
-  codebases, install with
-
-  ```sh
-  go get github.com/google/codesearch/cmd/...
-  ```
-
-  and index a dirtree with `cindex` before searching with `cgrep` or
-  `csearch` commands.
-- [CodeCompass](https://codecompass.net/)
-  ([Github](https://github.com/Ericsson/CodeCompass)):
-  Cross-platform source explorer, supports C, C++ and Java (and Python
-  if using the `pythonplugin` version)
-- [Code2flow](https://github.com/scottrogowski/code2flow/):
-  Call graph generator for dynamic languages, specifically Python,
-  Javascript, Ruby and PHP; some examples of how to use follows
-
-  ```sh
-  # Zsh example, all Python files in dirtree
-  code2flow **/**.py
-  # Same as above, but targeting a specific function somemodule.func
-  # and showing its callers and callees up to 3 calls away
-  code2flow --target-function=somemodule.func \
-    --upstream-depth=3 \
-    --downstream-depth=3 \
-    **/**.py
-  ```
-
-  (see `code2flow --help` for more options)
-- [Cookiecutter](https://github.com/cookiecutter/cookiecutter):
-  Command-line tool to create projects from project templates
-- [ctop](https://github.com/bcicen/ctop):
-  Like `top` but for Docker containers instead of system processes
-- [delta](https://github.com/dandavison/delta):
-  Command-line pager with highlighting for `git`, `diff` and `grep`
-- [direnv](https://direnv.net/)
-  ([Github](https://github.com/direnv/direnv)):
-  Load and unload environment variables depending on the current dir,
-  good for allowing project-specific environments (e.g., auto-switch
-  Kubernetes context, database parameters or Docker configurations);
-  alternative is [shadowenv](https://github.com/Shopify/shadowenv)
-  which uses a LISP variant instead of shell commands for configs
-- [Docker](https://docs.docker.com/):
-  Containerization platform
-- [entr](http://eradman.com/entrproject/)
-  ([Github](https://github.com/eradman/entr)):
-  Run arbitrary commands when files change, similar to
-  [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch) for the Acme
-  editor; alternative is [reflex](https://github.com/cespare/reflex)
-- [Gitup](https://gitup.co/)
-  ([Github](https://github.com/git-up/GitUp)):
-  GUI Git interface for macOS
-- [grex](https://github.com/pemistahl/grex):
-  Command-line tool to generate regular expressions from user-provided
-  test-cases
-- [Meld](https://meldmerge.org/)
-  ([Gitlab](https://gitlab.gnome.org/GNOME/meld)):
-  GTK visual diff and merge tool
-- [ngrok](https://ngrok.com/):
-  Reverse proxy to expose a local web server to the internet (requires
-  an account, [frp](https://github.com/fatedier/frp) and
-  [localtunnel](https://github.com/localtunnel/localtunnel) are fully
-  free versions)
-- [onefetch](https://github.com/o2sh/onefetch):
-  Command-line tool that displays project information and code
-  statistics for a local Git repository
-- [ripgrep](https://github.com/BurntSushi/ripgrep):
-  Command-line search tool like `grep`, but usually much faster;
-  [ripgrep-all](https://github.com/phiresky/ripgrep-all) is a
-  wrapper that extends file search support to additional file types
-  like PDF, DOCX, SQLite, JPEG, video files, etc
-- [scc](https://github.com/boyter/scc):
-  Command line tool to count lines of code by language
-- [sttr](https://github.com/abhimanyu003/sttr):
-  Command-line tool for various string operations
-- [strace](https://strace.io/)
-  ([Github](https://github.com/strace/strace)):
-  Linux command-line debugging utility that attaches to processes
-- [task](https://taskfile.dev/)
-  ([Github](https://github.com/go-task/task)):
-  Task runner / build tool / simpler Make alternative
-- [z](https://github.com/rupa/z):
-  Track frecent directories and jump to them in Bash and Zsh.
-  Clone the repository somewhere and source the `z.sh` file in
-  `$HOME/.bashrc` or `$HOME.zshrc`:
-
-  ```sh
-  . /path/to/z.sh
-  ```
-
-### Document extraction
-
-- [Apache Tika](http://tika.apache.org/):
-  Detect and extract metadata and text from a wide array of filetypes.
-  Bindings are available for multiple languages like
-  [Python](https://github.com/chrismattmann/tika-python) or
-  [Go](https://github.com/google/go-tika)
-- [Tesseract](https://github.com/tesseract-ocr/tesseract):
-  OCR engine and command-line program used by many other tools
-  including Apache Tika above
-
-### Ebook and PDF reading and annotation
-
-- [Calibre](https://calibre-ebook.com/)
-- [Foliate](https://johnfactotum.github.io/foliate/)
-  ([Github](https://github.com/johnfactotum/foliate)):
-  GTK eBook reader
-- [MuPDF](https://mupdf.com/):
-  Lightweight PDF reader, also supports XPS, EPUB and CBZ;
-  [sioyek](https://github.com/ahrm/sioyek) is a reader
-  built on top of this that provides additional features
-  useful for reading technical books and research papers;
-  an alternative is [Zathura](https://pwmt.org/projects/zathura/)
-- [Skim](https://skim-app.sourceforge.io/)
-  ([SourceForge](https://sourceforge.net/projects/skim-app/)):
-  Read and annotate PDF files, macOS app
-- [Xournal++](https://github.com/xournalpp/xournalpp):
-  Cross-platform handwriting notetaking and PDF annotation tool
-
-### File management
-
-- [BorgBackup](https://www.borgbackup.org/)
-  ([Github](https://github.com/borgbackup/borg)):
-  Command-line deduplicating backup program supporting compression and
-  encryption, with frontends available like
-  [Vorta](https://vorta.borgbase.com/)
-  ([Github](https://github.com/borgbase/vorta))
-- [Cyberduck](https://cyberduck.io/):
-  Client for FTP, SFTP, WebDAV and multiple cloud storage providers,
-  available on macOS and Windows
-- [dar](http://dar.linux.free.fr/):
-  dar (or disk archive) is an archiving tool for Unix platforms.
-  Supports encryption, and also supports recovery records if
-  [par2](https://github.com/Parchive/par2cmdline/) is installed
-- [Double Commander](https://doublecmd.sourceforge.io/)
-  ([Github](https://github.com/doublecmd/doublecmd)):
-  Cross-platform two-panel GUI file manager inspired by Total Commander
-- [Marta](https://marta.sh/):
-  Commercial two-panel GUI file manager for macOS
-- [Midnight Commander](https://midnight-commander.org/)
-  ([Github](https://github.com/MidnightCommander/mc)):
-  Cross-platform two-panel TUI file manager inspired by Total Commander,
-- [Syncthing](https://syncthing.net/)
-  ([Github](https://github.com/syncthing/syncthing)):
-  Continuous file synchronization.
-  For macOS, a native tray application is
-  [available](https://github.com/syncthing/syncthing-macos)
-  that bundles Syncthing with a wrapper that exposes functionality
-  through a system tray icon
-- [Timeshift](https://teejeetech.com/timeshift/)
-  ([Github](https://github.com/teejee2008/timeshift)):
-  System restore tool for Linux, similar to Time Machine in macOS or
-  System Restore in Windows (note that this is targeted at backing up
-  only system files/settings and excludes user files by default, so
-  use it with another solution like BorgBackup+Vorta)
-
-### Input devices
-
-- [MOS](https://mos.caldis.me/)
-  ([Github](https://github.com/Caldis/Mos)):
-  Smooth scrolling and set scroll direction independently for the mouse in macOS
-- [skhd](https://github.com/koekeishiya/skhd):
-  Hotkey daemon for macOS
-- [Unshaky](https://github.com/aahung/Unshaky):
-  Works around double keypress issues for butterfly keyboards in macOS
-
-### Media creation and editing
-
-- [Ardour](https://ardour.org/):
-  Multitrack audio recorder
-- [Caire](https://github.com/esimov/caire):
-  Command-line tool for content-aware image resizing
-- [drawio-desktop](https://github.com/jgraph/drawio-desktop):
-  Electron build of [diagrams.net](https://www.diagrams.net/),
-  a web-based diagramming tool, for offline use
-- [GIMP](https://www.gimp.org/):
-  Raster graphics editor
-- [Inkscape](https://inkscape.org/):
-  Vector graphics editor
-- [Kdenlive](https://kdenlive.org/en/):
-  Video editor
-- [LMMS](https://lmms.io/):
-  Pattern-based music sequencer
-- [Krita](https://krita.org/en/):
-  Raster graphics editor
-- [sfxr-qt](https://github.com/agateau/sfxr-qt):
-  [Qt](https://www.qt.io/) port of
-  [SFXR](http://www.drpetter.se/project_sfxr.html) for quickly
-  producing sound effects for games (
-  [JavaScript](https://github.com/chr15m/jsfxr) port available
-  [online](https://sfxr.me/), and sfxr is also available as a built-in
-  instrument in LMMS)
-- [Synfig](https://www.synfig.org/)
-  ([Github](https://github.com/synfig/synfig/)):
-  Vector-based 2D animation software
-- [yEd](https://www.yworks.com/products/yed):
-  Diagramming tool
-
-### News
-
-- [NetNewsWire](https://netnewswire.com/)
-  ([Github](https://github.com/Ranchero-Software/NetNewsWire)):
-  RSS reader for macOS (and iOS)
-- [Pan](http://pan.rebelbase.com/):
-  Usenet newsreader
-
-### Note-taking and task-management
-
-- [iThoughts](https://www.toketaware.com/):
-  Commercial mind-mapping tool
-- [Joplin](https://joplinapp.org/):
-  Cross-platform note-taking app, alternative is jrnl or markdown
-- [jrnl](https://jrnl.sh/en/stable/):
-  Command-line tool for journaling, alternative is Joplin or markdown
-- [LinkedIdeas](https://github.com/fespinoza/LinkedIdeas):
-  Mind-mapping tool for macOS
-- Markdown files:
-  Plain markdown files can be used to keep notes, for a journal this
-  could be one file a day with a header that identifies the file, e.g.
-  use a dirtree like `$HOME/journal/JOURNALNAME-YYYY.md`
-  with contents like
-
-  ```markdown
-  # Journal YYYY
-  ## YYYY-MM-DD DAYOFWEEK
-  ### HH:MMXM-HH:MMXM SUBJECT #TAG1 #TAG2
-  DETAIL
-  ```
-
-  and the dirtree can be synced with Git or a cloud storage solution
-- [Org mode](https://orgmode.org/):
-  [Emacs](https://www.gnu.org/software/emacs/) major mode for
-  note-taking, TODO list management, authoring and literate
-  programming
-- [Taskwarrior](https://taskwarrior.org/)
-  Command-line tool for managing TODO list
-- [Timewarrior](https://timewarrior.net/)
-  Command-line tool for time-tracking, which can be integrated with
-  Taskwarrior ([link](https://timewarrior.net/docs/taskwarrior/))
-- [Xournal++](https://xournalpp.github.io/)
-  ([Github](https://github.com/xournalpp/xournalpp/)):
-  Notetaking software with handwriting support
-
-### Package managers
-
-- [Flatpak](https://flatpak.org/):
-  Utility for software packaging and deployment on Linux, with
-  [Flathub](https://flathub.org/) as the de facto standard repository
-  - [Flatseal](https://github.com/tchx84/Flatseal):
-    GUI utility for managing Flatpak app permissions, available on
+- Audio and video creation and editing
+  - [Ardour](https://ardour.org/):
+    Multitrack audio recorder, works
+    with [ReaPlugs](https://www.reaper.fm/reaplugs/) VST plugins
+  - [Kdenlive](https://kdenlive.org/en/):
+    Video editor
+  - [LMMS](https://lmms.io/):
+    Music sequencer
+  - [sfxr-qt](https://github.com/agateau/sfxr-qt):
+    SFX creator for games; Qt port of
+    [SFXR](http://www.drpetter.se/project_sfxr.html);
+    [JavaScript](https://github.com/chr15m/jsfxr) port available
+    [online](https://sfxr.me/); also built into LMMS
+  - [Synfig](https://github.com/synfig/synfig/):
+    2D vector animation
+- Backup
+  - [BorgBackup](https://www.borgbackup.org/):
+    File backup tool; frontends available like
+    [Vorta](https://vorta.borgbase.com/)
+  - [dar](http://dar.linux.free.fr/):
+    File archiving, supports recovery records using
+    [par2](https://github.com/Parchive/par2cmdline/)
+  - [Timeshift](https://teejeetech.com/timeshift/):
+    Like Windows System Restore but for Linux
+- Containerization
+  - [ctop](https://github.com/bcicen/ctop):
+    `top` for containers
+  - [Docker](https://docs.docker.com/)
+- Data analytics apps:
+  - [JASP](https://jasp-stats.org/)
+  - [PSPP](https://www.gnu.org/software/pspp/)
+  - [Veusz](https://veusz.github.io/)
+- Data pipelines:
+  - [Apache Airflow](https://airflow.apache.org/):
+    Scheduling workflows
+  - [Apache HOP](https://hop.apache.org/):
+    Fork of [Kettle/PDI](https://github.com/pentaho/pentaho-kettle)
+  - [Snakemake](https://snakemake.readthedocs.io/en/stable/) or
+    [Nextflow](https://www.nextflow.io/)
+    Run batch workflows
+- Database clients:
+  - [Altair](https://altair.sirmuel.design/):
+    GraphQL client
+  - [DBeaver](https://dbeaver.io/):
+    Client for any database that has a jDBC driver
+  - [DbGate](https://dbgate.org/):
+    Client for MySQL, PostgreSQL, SQL Server, MongoDB, Redis, SQLite,
+    Amazon Redshift, CockroachDB, MariaDB databases
+  - [OctoSQL](https://github.com/cube2222/octosql):
+    Make queries that can span MySQL, PostgreSQL databases along with
+    CSV and JSON
+  - [pgcli](https://www.pgcli.com/):
+    PostgreSQL command-line client
+  - [q](https://github.com/harelba/q):
+    Command-line tool for running SQL directly on CSV files
+  - [RedisDesktopManager](https://github.com/uglide/RedisDesktopManager):
+    Redis client
+  - [Sequel Ace](https://github.com/Sequel-Ace/Sequel-Ace):
+    MySQL, MariaDB client; macOS
+- Databases:
+  - [ClickHouse](https://github.com/ClickHouse/ClickHouse):
+    Time-series DB
+  - [PostgreSQL](https://www.postgresql.org/):
+    Relational DB; use
+    [TimescaleDB](https://github.com/timescale/timescaledb)
+    plugin to better support time-series
+- Desktop publishing
+  - [Scribus](https://www.scribus.net/)
+- Diagramming and image editing
+  - [Caire](https://github.com/esimov/caire):
+    Smart image resizing
+  - [drawio-desktop](https://github.com/jgraph/drawio-desktop) or
+    [yEd](https://www.yworks.com/products/yed):
+    Vector diagramming; drawio-desktop is the Electron build of
+    [diagrams.net](https://www.diagrams.net/)
+  - [GIMP](https://www.gimp.org/) or
+    [Krita](https://krita.org/en/):
+    Raster graphics editor
+  - [Inkscape](https://inkscape.org/):
+    Vector graphics editor
+  - [LinkedIdeas](https://github.com/fespinoza/LinkedIdeas)
+    (mind-mapping)
+- Digital design:
+  - [Penpot](https://github.com/penpot/penpot):
+    Open source design and prototyping platform like Sketch and Figma
+- Document conversion and rendering
+  - [Asciidoctor](https://asciidoctor.org/):
+    Asciidoc processor, has an
+    [extension](https://asciidoctor.org/docs/asciidoctor-pdf/)
+    for PDF generation
+  - [hred](https://github.com/danburzo/hred):
+    Command-line HTML (and XML) to JSON converter
+  - [Kramdown](https://kramdown.gettalong.org/):
+    Markdown processor, has an
+    [Asciidoc converter](https://github.com/asciidoctor/kramdown-asciidoc)
+  - [Pandoc](https://pandoc.org/):
+    Document converter, can also process Markdown
+  - [Tectonic](https://tectonic-typesetting.github.io/) or
+    [TeXLive](https://www.tug.org/texlive/) or
+    [TinyTeX](https://github.com/yihui/tinytex):
+    (La)TeX processor
+- Document text extraction
+  - [Apache Tika](http://tika.apache.org/):
+    [Go](https://github.com/google/go-tika)
+    [Python](https://github.com/chrismattmann/tika-python) bindings
+    available
+  - [Tesseract](https://github.com/tesseract-ocr/tesseract)
+- Ebook readers and library managers
+  - [Calibre](https://calibre-ebook.com/)
+  - [Foliate](https://johnfactotum.github.io/foliate/)
+- File management
+  - [Cyberduck](https://cyberduck.io/):
+    Remote FTP, SFTP, WebDAV, cloud storage; macOS and Windows
+  - [Double Commander](https://doublecmd.sourceforge.io/):
+    GUI Midnight Commander clone
+  - [Magic Wormhole](https://github.com/magic-wormhole/magic-wormhole):
+    Command-line tool and library for sending files from one computer to
+    another; note that this tool requires
+    [mailbox](https://github.com/magic-wormhole/magic-wormhole-mailbox-server)
+    and a
+    [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)
+    server, which by default uses one hosted by the project
+  - [Midnight Commander](https://midnight-commander.org/):
+    Terminal file manager
+  - [nnn](https://github.com/jarun/nnn):
+    Terminal file manager, fast
+  - [rdfind](https://github.com/pauldreik/rdfind) or
+    [fdupes](https://github.com/adrianlopezroche/fdupes):
+    Command-line tool to find duplicate files
+  - [renameutils](https://www.nongnu.org/renameutils/) or
+    [f2](https://github.com/ayoisaiah/f2) or
+    [KRename](https://userbase.kde.org/KRename) or
+    [GPRename](http://gprename.sourceforge.net/) or
+    [Szyszka](https://github.com/qarmin/szyszka):
+    Rename lots of files easily 
+  - [Stow](https://www.gnu.org/software/stow/):
+    Symlink farm manager, useful for managing dotfiles
+  - [Syncthing](https://syncthing.net/):
+    Continous file synchronization; macOS
+    [frontend](https://github.com/syncthing/syncthing-macos)
+    available
+  - [tree](http://mama.indstate.edu/users/ice/tree/):
+    Command-line tool to list files in subdir tree depth-indented
+- Newsreaders
+  - [NetNewsWire](https://github.com/Ranchero-Software/NetNewsWire):
+    RSS reader; iOS and macOS
+  - [Pan](http://pan.rebelbase.com/):
+    Usenet reader
+- Package/runtime managers
+  - [asdf](https://asdf-vm.com/):
+    Language runtime manager
+  - [Flatpak](https://flatpak.org/):
+    Application manager; [Flathub](https://flathub.org/) is the de
+    facto repository; for easier permissioning control install
     [Flathub](https://flathub.org/apps/details/com.github.tchx84.Flatseal)
-- [Homebrew](https://brew.sh/)
-  ([Github](https://github.com/Homebrew/brew)):
-  macOS package manager for open-source software, alternative to MacPorts
-- [Miniforge](https://github.com/conda-forge/miniforge):
-  Minimal installer for [Conda](https://conda.io/) pre-configured for
-  [conda-forge](https://conda-forge.org/), with the Mambaforge variant
-  recommended as it comes packaged with a Conda re-implementation
-  [Mamba](https://github.com/mamba-org/mamba) that is much faster
-- [MacPorts](https://www.macports.org/):
-  macOS package manager for open-source software, alternative to Homebrew
-- [Snap](https://snapcraft.io/):
-  Utility for software packaging with deployment via a centralized
-  repository, developed by [Canonical](https://canonical.com/)
+  - [MacPorts](https://www.macports.org/) or
+    [Homebrew](https://brew.sh/):
+    macOS package manager for open-source software
+  - [Miniforge](https://github.com/conda-forge/miniforge):
+    [Conda](https://conda.io/) pre-configured for
+    [conda-forge](https://conda-forge.org/); the Mambaforge variant
+    recommended as it comes with the Conda drop-in replacement
+    [Mamba](https://github.com/mamba-org/mamba) that is much faster
+- PDF readers and tools
+  - [MuPDF](https://mupdf.com/):
+    PDF reader
+  - [QPDF](https://github.com/qpdf/qpdf):
+    PDF transformations
+  - [sioyek](https://github.com/ahrm/sioyek) or
+    [Zathura](https://pwmt.org/projects/zathura/):
+    PDF reader for research and technical PDFs
+  - [Skim](https://skim-app.sourceforge.io/):
+    PDF reader and annotator; macOS
+  - [Xournal++](https://github.com/xournalpp/xournalpp):
+    Handwriting notebook with PDF annotation support
+- Presentations
+  - [Marp](https://marp.app/):
+    Markdown-based presentations; use via the command-line tool
+    [marp-cli](https://github.com/marp-team/marp-cli)
+  - [pdfpc](https://github.com/pdfpc/pdfpc):
+    Multi-monitor PDF presentations
+  - [slides](https://github.com/maaslalani/slides):
+    Terminal-based presentations using Markdown files
+- Project (codebase) tools
+  - [Cookiecutter](https://github.com/cookiecutter/cookiecutter)
+    Project templates
+  - [Gitup](https://github.com/git-up/GitUp)
+    Git GUI client; macOS
+  - [gogs](https://gogs.io/) or
+    [Soft Serve](https://github.com/charmbracelet/soft-serve):
+    Self-hosted Git server
+  - [onefetch](https://github.com/o2sh/onefetch):
+    Git repository information and statistics
+  - [scc](https://github.com/boyter/scc):
+    Count lines of code by language
+  - [task](https://github.com/go-task/task):
+    Easier-to-use [Make](https://www.gnu.org/software/make/)
+    alternative
+- Remote login and desktop
+  - [Mosh](https://mosh.org/):
+    Robust SSH alternative
+  - [Remmina](https://remmina.org/):
+    Remote desktop client for POSIX systems
+- Search
+  - [Code Search](https://github.com/google/codesearch):
+    Index with `cindex` then search with `cgrep` or `csearch`
+  - [fd](https://github.com/sharkdp/fd):
+    Simpler command-line alternative to `find`
+  - [fzf](https://github.com/junegunn/fzf):
+    Command-line fuzzy finder
+  - [pdfgrep](https://pdfgrep.org/):
+    Command-line tool for searching text in PDF files
+  - [ripgrep](https://github.com/BurntSushi/ripgrep):
+    `grep` alternative, extend to more file formats with
+    [ripgrep-all](https://github.com/phiresky/ripgrep-all)
+- Shell plugins
+  - [z](https://github.com/rupa/z):
+    Frecent directories, for Bash and Zsh
+- System administration
+  - [angle-grinder](https://github.com/rcoh/angle-grinder)
+    (log analyzer)
+  - [atop](https://github.com/Atoptool/atop):
+    System resource monitor, runs as a daemon that logs process
+    activity to disk
+  - [dua](https://github.com/Byron/dua-cli):
+    Check disk usage and delete unwanted data
+  - [duf](https://github.com/muesli/duf) or
+    [lfs](https://github.com/Canop/lfs):
+    Command-line alternative to `df` with nicer user interface
+  - [fkill](https://github.com/sindresorhus/fkill-cli):
+    Command-line tool to interactively kill running user and system procs
+  - [forkstat](https://github.com/ColinIanKing/forkstat):
+    Command-line program to log process forks, execs and exits;
+    useful for tracking runaway processes
+  - [htop](https://github.com/htop-dev/htop):
+    System resource monitor, alternative to `top`
+  - [Sloth](https://sveinbjorn.org/sloth)
+    ([Github](https://github.com/sveinbjornt/Sloth)):
+    macOS application to show open files, dirs, sockets and pipes
+  - [Stacer](https://github.com/oguzhaninan/Stacer):
+    Linux system optimizer and monitoring GUI tool
+  - [strace](https://strace.io/):
+    Process debugging
+- Text tools (general)
+  - [Aspell](http://aspell.net/) or
+    [Nuspell](https://nuspell.github.io/):
+    Spell checker
+  - [bat](https://github.com/sharkdp/bat):
+    Command-line `cat` clone with syntax highlighting and Git integration
+  - [cspell](https://github.com/streetsidesoftware/cspell):
+    Code-aware spell checker
+  - [daff](https://paulfitz.github.io/daff/):
+    Like `diff` but for tables
+  - [delta](https://github.com/dandavison/delta):
+    `diff` alternative
+  - [enchant](https://github.com/AbiWord/enchant):
+    Wrapper for abstracting different spell checking libraries into a
+    single interface, with support for personal word lists (one word per
+    line) at paths `$ENCHANT_CONFIG_DIR/<lang>.dic` (for example,
+    `$HOME/.config/enchant/en_US.dic` for the US English personal word
+    list on Unix or Linux systems)
+  - [LanguageTool](https://languagetool.org/):
+    Style and grammar checker; standalone Java version downloadable
+    [here](https://languagetool.org/download/) with snapshots available
+    [here](https://internal1.languagetool.org/snapshots/) (the link
+    [link](https://languagetool.org/download/LanguageTool-stable.zip)
+    has the latest version), which is
+    [augmentable](https://dev.languagetool.org/finding-errors-using-n-gram-data.html)
+    with [n-gram](https://languagetool.org/download/ngram-data/) data
+  - [Meld](https://meldmerge.org/):
+    GUI `diff` alternative
+  - [sttr](https://github.com/abhimanyu003/sttr):
+    Command-line tool for string operations
+- Text tools (structured)
+  - [fq](https://github.com/wader/fq):
+    Like `jq` but for binary formats
+  - [gron](https://github.com/tomnomnom/gron):
+    Flattens JSON into discrete assignments that work better
+    with `grep` and `sed`
+  - [htmlq](https://github.com/mgdm/htmlq):
+    Like grep for HTML but using CSS selectors; alternative is
+    [cascadia](https://github.com/suntong/cascadia)
+  - [jq](https://stedolan.github.io/jq/)
+    ([Github](https://github.com/stedolan/jq)):
+    Command-line JSON processor
+  - [jless](https://jless.io/):
+    Ncurses command-line JSON viewer
+  - [jo](https://github.com/jpmens/jo):
+    Command-line utility for creating JSON objects
+  - [Miller](https://github.com/johnkerl/miller) or
+    [qsv](https://github.com/jqnatividad/qsv)
+    (fork of [xsv](https://github.com/BurntSushi/xsv)) or
+    [tsv-utils](https://github.com/eBay/tsv-utils):
+    Command-line tool for working with CSV files;
+    tsv-utils also supports TSV files, and Miller also supports TSV
+    and tabular JSON files; Miller is more flexible, qsv is easier
+    to use, tsv-utils is supposedly faster for large datasets.
+  - [QXmlEdit](http://qxmledit.org/):
+    XML editor
+  - [Visidata](https://www.visidata.org/)
+    ([Github](https://github.com/saulpw/visidata)):
+    Terminal tabular data multitool, supports sources loadable via
+    Pandas using the `-f` option
+  - [yq](https://github.com/mikefarah/yq):
+    Command-line YAML processor
+- User experience and interface (GUI)
+  - [skhd](https://github.com/koekeishiya/skhd):
+    Hotkey daemon; macOS
+  - [Rectangle](https://github.com/rxhanson/Rectangle):
+    Move and resize windows using keyboard shortcuts and snap areas;
+    macOS
+  - [ueli](https://ueli.app/):
+    Launcher like [Alfred](https://www.alfredapp.com/) but open-source
+    and available for Windows in addition to macOS
+  - [Unshaky](https://github.com/aahung/Unshaky):
+    Double keypress workaround for butterfly keyboards; macOS
+- User experience and interface (terminal)
+  - [direnv](https://github.com/direnv/direnv) or
+    [shadowenv](https://github.com/Shopify/shadowenv):
+    Load and unload env vars based on location
+  - [entr](https://github.com/eradman/entr/):
+    Run command when files change
+  - [hollywood](https://github.com/dustinkirkland/hollywood):
+    Hollywood technobabble in a Byobu session
+  - [parallel](https://www.gnu.org/software/parallel/):
+    Command-line tool for executing jobs in parallel
+  - [pv](http://www.ivarch.com/programs/pv.shtml)
+    ([Github](https://github.com/a-j-wood/pv)):
+    Like `cat` but prints progress to stderr
+  - [rlwrap](https://github.com/hanslub42/rlwrap):
+    `readline` wrapper to enable completion and history for any
+    command-line tool taking keyboard input
+  - [tmux](https://github.com/tmux/tmux):
+    Terminal multiplexer, useful for managing and persisting remote
+    sessions over Mosh or SSH
+  - [ttyplot](https://github.com/tenox7/ttyplot):
+    Real-time plotting tool in the terminal using stdin as data input
+- Virtualization
+  - [UTM](https://github.com/utmapp/UTM):
+    iOS and macOS tool for managing [QEMU](https://www.qemu.org/)
+    virtual machines
+  - [virt-manager](https://virt-manager.org/)
+    ([Github](https://github.com/virt-manager/virt-manager)):
+    Linux desktop tool for managing QEMU/KVM virtual machines
+- VPN
+  - [OpenVPN](https://openvpn.net/vpn-client/):
+    OpenVPN client, note that Linux clients be should installed via
+    the system package manager (see
+    [here](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux));
+    an alternative is the macOS-only
+    [TunnelBlick](https://tunnelblick.net/)
+    built on the older but still maintained OpenVPN 2 libraries
+  - [WireGuard](https://www.wireguard.com/):
+    Simple and high-performance VPN
+- Web browsing
+  - [Ka-Block!](http://kablock.com/)
+    Safari extension for blocking ads and trackers; iOS and macOS
+  - [Monolith](https://github.com/Y2Z/monolith.git):
+    Save complete webpages to a single HTML file with embedded CSS,
+    images and Javascript
+- Web development
+  - [dog](https://github.com/ogham/dog):
+    Alternative to `dig`
+  - [Hurl](https://hurl.dev/)
+    ([Github](https://github.com/Orange-OpenSource/hurl)):
+    Command-line tool for running HTTP requests defined in a text file
+  - [frp](https://github.com/fatedier/frp):
+    Reverse proxy, like [ngrok](https://ngrok.com/)
+  - [httpie](https://httpie.io/) or
+    [xh](https://github.com/ducaale/xh):
+    Command-line API client; much lighter weight than
+    [Postman](https://www.postman.com/)
+  - [Mockoon](https://mockoon.com/)
+    ([Github](https://github.com/mockoon/mockoon)):
+    HTTP mock server
+  - [mitmproxy](https://mitmproxy.org/):
+    Interactive HTTPS proxy
+  - [Prism](https://github.com/stoplightio/prism):
+    HTTP mock server with behavior that can be specified from OpenAPI
+    v2 (Swagger), OpenAPI v3 or Postman Collection files
+- Word processing
+  - [Manuskript](https://www.theologeek.ch/manuskript/):
+    Word processor for writers like Scrivener
+  - [TwineJS](https://github.com/klembot/twinejs):
+    Tool for authoring interactive, non-linear stories
+- Other
+  - [age](https://github.com/FiloSottile/age):
+    Simple command-line encryption/decryption tool; alternative is
+    [eureka](https://github.com/mimoo/eureka) which is more limited
+    (no key files, generates a token to be used by recipient)
+  - [Al Dente](https://github.com/davidwernhart/AlDente):
+    macOS tool to limit battery charging (e.g. keeping charge
+    percentage at or below 80% can help prolong battery life)
+  - [Anki](https://apps.ankiweb.net/):
+    Flashcards software
+  - [ClamAV](https://www.clamav.net/):
+    Open-source antivirus engine, with frontends available like
+    [ClamTk](https://gitlab.com/dave_m/clamtk)
+  - [Diagon](https://github.com/ArthurSonzogni/Diagon):
+    Command-line tool for transforming Markdown-style expressions into
+    ASCII art, [webapp](https://github.com/ArthurSonzogni/Diagon) and
+    [snap](https://snapcraft.io/diagon) available
+  - [grex](https://github.com/pemistahl/grex):
+    Generate regex from test cases
+  - [Hammerspoon](https://www.hammerspoon.org/):
+    Use [Lua](https://www.lua.org/) for macOS scripts that can call
+    system APIs, for example middle-click-move mouse to scroll
+    ([link](https://superuser.com/questions/303424/can-i-enable-scrolling-with-middle-button-drag-in-os-x))
+  - [Joplin](https://joplinapp.org/):
+    Note-taking application with sync support; cross-platform
+  - [Netron](https://github.com/lutzroeder/netron):
+    Neural network, deep learning and machine learning model viewer
+  - [OmegaT](https://omegat.org/):
+    Translation memory tool
+  - [pass](https://www.passwordstore.org/):
+    Command-line password manager
+  - [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
+    Terminal color-picker
+  - [sc-im](https://github.com/andmarti1424/sc-im)
+    Terminal spreadsheet program
+  - [Sweet Home 3D](https://www.sweethome3d.com/):
+    Open-source interior design application, also available as an online
+    [webapp](https://www.sweethome3d.com/SweetHome3DOnlineManager.jsp)
+  - [Taskwarrior](https://taskwarrior.org/) and
+    [Timewarrior](https://timewarrior.net/):
+    Todo list management (Taskwarrior) and time-tracking (Timewarrior)
+  - [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch):
+    Run command when files change, Acme editor-specific
+  - [WeasyPrint](https://github.com/Kozea/WeasyPrint) or
+    [percollate](https://github.com/danburzo/percollate):
+    Convert HTML to PDF files; percollate processes the page
+    for readability before conversion; alternative is
+    opening the file in a browser and printing to PDF
+  - [Zotero](https://www.zotero.org/):
+    Reference management software to collect, organize, cite and share
+    research material
 
-### Presentation tools
+## Commercial software
 
-- [Marp](https://marp.app/): Create presentations from Markdown documentations,
-  usable via the [marp-cli](https://github.com/marp-team/marp-cli) command-line
-  tool and [Marp for VSCode](https://github.com/marp-team/marp-vscode)
-- [pdfpc](https://github.com/pdfpc/pdfpc)
-  ([Github](https://github.com/pdfpc/pdfpc)):
-  Multi-monitor PDF presentation application
-- [slides](https://github.com/maaslalani/slides):
-  Terminal-based tool for presentations using Markdown files, with
-  different slides separated by `---` lines
-
-### Programming language tooling
-
-- [Clojure](https://clojure.org/)
-  - [clojure-lsp](https://github.com/clojure-lsp/clojure-lsp):
-    [LSP](https://microsoft.github.io/language-server-protocol/)
-    server for Clojure and Clojurescript
-  - [Leiningen](https://leiningen.org/):
-    Build automation and dependency management tool for Clojure
-    projects
-- [Common Lisp](https://common-lisp.net/):
-  Tooling
-  [survey](http://lisp-journey.gitlab.io/blog/state-of-the-common-lisp-ecosystem-2020/);
-  [Review](https://sabracrolleton.github.io/json-review) of Common Lisp JSON
-  libraries
-  - [Roswell](https://roswell.github.io/)
-    ([Github](https://github.com/roswell/roswell)):
-    Common Lisp implementation manager, installer and script runner
-  - [CLPM](https://gitlab.common-lisp.net/clpm/clpm):
-    Common Lisp Project Manager, a
-    [QuickLisp](https://www.quicklisp.org/)-compatible package manager that
-    allows pinning project-local package versions
-- [Coq](https://coq.inria.fr/)
-  ([Github](https://github.com/coq/coq))
-  - [Editor tooling](https://coq.inria.fr/user-interfaces.html)
-- [Elixir](https://elixir-lang.org/)
-  - [Credo](https://github.com/rrrene/credo):
-    Static code analysis tool for projects with focus on teaching and
-    code consistency
-  - [Dialyxir](https://github.com/jeremyjh/dialyxir):
-    Simplifies usage of the built-in
-    [Dialyzer](https://www.erlang.org/doc/man/dialyzer.html) with the
-    [Mix](https://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html)
-    build tool
-  - [ElixirLS](https://github.com/elixir-lsp/elixir-ls):
-    LSP server for the Elixir programming language
-- [Go](https://golang.org/)
-  - [golangci-lint](https://github.com/golangci/golangci-lint):
-    Go linters aggregator with YAML-based configuration
-  - [gopls](https://pkg.go.dev/golang.org/x/tools/gopls):
-    [LSP](https://microsoft.github.io/language-server-protocol/)
-    server for the Go language
-- [Markdown](https://www.markdownguide.org/)
-  - [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli):
-    Command-line tool for linting Markdown using the
-    [markdownlint](https://github.com/DavidAnson/markdownlint) library
-  - [mdformat](https://mdformat.readthedocs.io/en/stable/)
-    ([Github](https://github.com/executablebooks/mdformat)):
-    Markdown formatter. Supports
-    [CommonMark](https://spec.commonmark.org/current/),
-    [GFM](https://github.github.com/gfm/), and
-    [MyST](https://myst-parser.readthedocs.io/en/latest/using/syntax.html)
-  - [Textlint](https://textlint.github.io/):
-    Text and markdown linting tool with multiple integrations
-- [J](https://code.jsoftware.com/wiki/Main_Page)
-  - [Jsource](https://github.com/jsoftware/jsource):
-    GPL-licensed source code for the J engine
-- [Javascript](https://github.com/tc39/ecma262)
-  - [Node Version Manager](https://github.com/nvm-sh/nvm):
-    [Node.js](https://nodejs.org/en/) version manager for POSIX-compliant
-    shells
-- [Julia](https://julialang.org/)
-  - [Revise.jl](https://github.com/timholy/Revise.jl):
-    Automatically reload code on modification, useful to keep Julia
-    sessions running longer so less time is spent on compilation
-  - [Pluto.jl](https://github.com/fonsp/Pluto.jl):
-    Lightweight reactive Julia notebooks
-- Multi-language
-  - [DevSkim](https://github.com/microsoft/DevSkim):
-    Security analysis tool for various languages
-  - [prettier](https://github.com/prettier/prettier):
-    Code formatter for various languages, including CSS, GraphQL,
-    Javascript, JSON, Markdown, Typescript, YAML, etc
-- [Python](https://www.python.org/)
-  For development, it is recommended to use `miniforge` (see above) to
-  manage environments.
-  - [pyinstaller](https://www.pyinstaller.org/)
-    ([Github](https://github.com/pyinstaller/pyinstaller)):
-    Package Python programs into a single executable file
-  - [IPython](https://github.com/ipython/ipython):
-    Fancier REPL command shell replacement
-  - [nbterm](https://github.com/davidbrochart/nbterm):
-    Terminal-base IDE for interactive Jupyter notebooks, see
-    [here](https://blog.jupyter.org/nbterm-jupyter-notebooks-in-the-terminal-6a2b55d08b70)
-    for more details
-  - [jedi-language-server](https://github.com/pappasam/jedi-language-server):
-    [LSP](https://microsoft.github.io/language-server-protocol/)
-    server for the [Jedi](https://github.com/pappasam/jedi-language-server)
-    Python tool
-  - [Pylint](https://pylint.org/)
-    ([Github](https://github.com/PyCQA/pylint)):
-    Linter
-- [R](https://www.r-project.org/):
-  On macOS, install using MacPorts with
-
-  ```sh
-  port install tk +quartz
-  port install R +cairo +gcc11 +java +openblas +openmp +quartz +recommended \
-      +tcltk -x11
-  ```
-
-  where `+gcc11` should be changed to another GCC version as needed.
-
-  On Linux, to compile CRAN packages make sure to install the
-  necessary compilers, libraries and development headers, for example
-
-  ```sh
-  sudo apt install build-essential libssl-dev libcurl4-openssl-dev libxml2-dev
-  ```
-
-  in Ubuntu (modify as needed for other distributions).
-
-  For development, it is recommended to use
-  [renv](https://rstudio.github.io/renv/)
-  ([CRAN](https://cran.r-project.org/web/packages/renv/index.html),
-  [Github](https://github.com/rstudio/renv/)) to manage environments
-  - [Radian](https://github.com/randy3k/radian):
-    Fancier REPL command shell alternative
+- Diagramming
+  - [iThoughts](https://www.toketaware.com/):
+    Mind-mapping tool
+- File management
+  - [DevonThink Pro](https://www.devontechnologies.com/apps/devonthink):
+    Document management and search solution; macOS
+- Integrated development environments
+  - [DataGrip](https://www.jetbrains.com/datagrip/):
+    Database admin-oriented IDE
+  - [DataSpell](https://www.jetbrains.com/dataspell/):
+    Data science-oriented IDE
+  - [PyCharm](https://www.jetbrains.com/pycharm/):
+    Python programming-oriented IDE; has open-source community edition
   - [RStudio](https://rstudio.com/):
-    IDE for R
-    - [esquisse](https://github.com/dreamRs/esquisse):
-      RStudio plug-in for interactive plot creation using ggplot2
-- Shell ([Bash](https://www.gnu.org/software/bash/),
-  [POSIX](https://www.grymoire.com/Unix/Sh.html),
-  [KornShell](https://github.com/ksh93/ksh))
-  - [ShellCheck](https://github.com/koalaman/shellcheck):
-    Linter for shell scripts (sh, bash, ksh)
-  - [shfmt](https://github.com/mvdan/sh):
-    Formatter for shell scripts (sh, bash, ksh)
-
-### Remote login and desktop
-
-- [Jump Desktop Connect](https://jumpdesktop.com/connect/):
-  Remote desktop host software, required for client devices to connect
-  to the host machine using [Jump Desktop](https://jumpdesktop.com/)
-  using their
-  [Fluid](https://support.jumpdesktop.com/hc/en-us/articles/216423983-General-Fluid-Remote-Desktop)
-  protocol, available for macOS and Windows
-- [Mosh](https://mosh.org/):
-  SSH alternative that handles intermittent connectivity and persists
-  connections when roaming across IP addresses
-- [Remmina](https://remmina.org/)
-  ([GitLab](https://gitlab.com/Remmina/Remmina)):
-  Remote desktop client for POSIX systems
-- [Royal TSX](https://royalapps.com/ts/mac/features):
-  Cross-platform RDP and VNC client
-
-### Structured text and tabular data
-
-- [daff](https://paulfitz.github.io/daff/)
-  ([Github](https://github.com/paulfitz/daff)):
-  Diff but for tables
-- [gron](https://github.com/tomnomnom/gron):
-  Flattens JSON into discrete assignments that work better with `grep`
-  and `sed`
-- [hred](https://github.com/danburzo/hred):
-  Command-line HTML (and XML) to JSON converter
-- [htmlq](https://github.com/mgdm/htmlq):
-  Like grep for HTML but using CSS selectors; alternative is
-  [cascadia](https://github.com/suntong/cascadia)
-- [jq](https://stedolan.github.io/jq/)
-  ([Github](https://github.com/stedolan/jq)):
-  Command-line JSON processor
-- [jless](https://jless.io/):
-  ([Github](https://github.com/PaulJuliusMartinez/jless)):
-  Ncurses command-line JSON viewer
-- [jo](https://github.com/jpmens/jo):
-  Command-line utility for creating JSON objects
-- [Miller](https://miller.readthedocs.io/en/latest/)
-  ([Github](https://github.com/johnkerl/miller)):
-  Command-line tool for working with CSV, TSV and tabular JSON files.
-  Has some similarities with `jq` and `qsv`/`xsv` but covers multiple
-  formats and has more features at the cost of additional complexity
-- [PandasGUI](https://github.com/adamerose/PandasGUI):
-  Python GUI library for analyzing and visualizing Pandas DataFrames
-- [q](https://github.com/harelba/q):
-  Command-line tool for running SQL directly on CSV files
-- [QXmlEdit](http://qxmledit.org/)
-  ([Github](https://github.com/lbellonda/qxmledit)):
-  XML editor
-- [sc-im](https://github.com/andmarti1424/sc-im):
-  Terminal spreadsheet program
-- [tsv-utils](https://github.com/eBay/tsv-utils):
-  Command-line tool for tabular data, similar to `qsv`/`xsv` but
-  supposedly faster for large datasets
-- [Visidata](https://www.visidata.org/)
-  ([Github](https://github.com/saulpw/visidata)):
-  Terminal tabular data multitool, supports sources loadable via Pandas using
-  the `-f` option
-- [qsv](https://github.com/jqnatividad/qsv):
-  Command-line tool for indexing, slicing, analyzing, splitting and
-  joining CSV files; fork of [xsv](https://github.com/BurntSushi/xsv)
-- [yq](https://github.com/mikefarah/yq):
-  Command-line YAML processor
-
-### System and process
-
-- [atop](https://github.com/Atoptool/atop):
-  System resource monitor, runs as a daemon that logs process activity
-- [btop](https://github.com/aristocratos/btop):
-  System resource monitor, alternative to top, [htop](https://htop.dev/),
-  [glances](https://nicolargo.github.io/glances/) and other interactive
-  process viewers
-- [Byobu](https://www.byobu.org/):
-  Collection of scripts and utilities layered on top of GNU Screen and
-  tmux (default) to enhance them and improve user experience
-- [fkill](https://github.com/sindresorhus/fkill-cli):
-  Command-line tool to interactively kill running user and system processes
-- [forkstat](https://github.com/ColinIanKing/forkstat):
-  Command-line program to log process forks, execs and exits (useful
-  for tracking runaway processes)
-
-### Text editors
-
-- [CotEditor](https://coteditor.com/)
-  ([Github](https://github.com/coteditor/)):
-  Like [Notepad++](https://notepad-plus-plus.org/) but for macOS
-- [Emacs](https://www.gnu.org/software/emacs/):
-  See [Emacs config repository](https://github.com/matheuristic/emacs-config)
-- [Micro](https://micro-editor.github.io/):
-  Terminal text editor
-- [Nano](https://www.nano-editor.org/):
-  Lightweight terminal text editor
-- [QOwnNotes](https://www.qownnotes.org/)
-  ([Github](https://github.com/pbek/QOwnNotes)):
-  Markdown editor with Nextcloud and ownCloud integration
-- [Vim](https://www.vim.org/)/[Neovim](https://neovim.io/):
-  Terminal text editor (GUI options available) that improves on vi
-- [Zettlr](https://www.zettlr.com/)
-  ([Github](https://github.com/Zettlr/Zettlr)):
-  Markdown editor with [Zettelkasten](https://zettelkasten.de/posts/overview/)
-  support
-
-### Virtualization
-
-- [UTM](https://github.com/utmapp/UTM):
-  iOS and macOS tool for managing [QEMU](https://www.qemu.org/)
-  virtual machines
-- [virt-manager](https://virt-manager.org/)
-  ([Github](https://github.com/virt-manager/virt-manager)):
-  Linux desktop tool for managing QEMU/KVM virtual machines
-
-### VPN
-
-- [OpenVPN](https://openvpn.net/vpn-client/):
-  OpenVPN client, note that Linux clients be should installed via the system
-  package manager (see
-  [here](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux));
-  an alternative is the macOS-only [TunnelBlick](https://tunnelblick.net/)
-  built on the older but still maintained OpenVPN 2 libraries
-- [WireGuard](https://www.wireguard.com/):
-  Simple and high-performance VPN
-
-### Web browsing
-
-- [Chrome](https://www.google.com/chrome/):
-  Google's web browser
-- [Firefox](https://www.mozilla.org/en-US/firefox/browsers/):
-  Mozilla's web browser, there is also an [Extended Release
-  Support](https://www.mozilla.org/en-US/firefox/enterprise/)
-- [Ka-Block!](http://kablock.com/)
-  ([Github](https://github.com/dgraham/Ka-Block)):
-  Safari extension for blocking ads and trackers, for macOS and iOS
-- [Monolith](https://github.com/Y2Z/monolith.git):
-  Save complete webpages to a single HTML file with embedded CSS,
-  images and Javascript. Installable using HomeBrew or MacPorts on
-  macOS, and pre-built binaries are available for Windows and Linux
-
-### Web development
-  
-- [dog](https://github.com/ogham/dog):
-  Alternative to `dig`
-- [Hurl](https://hurl.dev/)
-  ([Github](https://github.com/Orange-OpenSource/hurl)):
-  Command-line tool for running HTTP requests defined in a text file
-- [jo](https://github.com/jpmens/jo):
-  Small utility to create JSON objects on the command-line, useful
-  for quick crafting of JSON inputs to pipe to APIs in the terminal
-- [Killgrave](https://github.com/friendsofgo/killgrave):
-  HTTP mock server via a command-line interface and config files
-- [Mockoon](https://mockoon.com/)
-  ([Github](https://github.com/mockoon/mockoon)):
-  HTTP mock server
-- [mitmproxy](https://mitmproxy.org/):
-  Interactive HTTPS proxy
-- [Postman](https://www.postman.com/):
-  API client, CI/CD support with
-  [Newman](https://github.com/postmanlabs/newman);
-  alternatives are [Insomnia](https://insomnia.rest/) which has a
-  command-line interface [Inso](https://insomnia.rest/products/inso),
-  [httpie](https://httpie.io/) and [xh](https://github.com/ducaale/xh)
-  with the latter two being more CLI-based
-- [Prism](https://github.com/stoplightio/prism):
-  HTTP mock server with behavior that can be specified from OpenAPI
-  v2 (Swagger), OpenAPI v3 or Postman Collection files
-- [ttyplot](https://github.com/tenox7/ttyplot):
-  Real-time plotting tool in the terminal using stdin as data input
-
-### Window management
-
-- [Rectangle](https://github.com/rxhanson/Rectangle):
-  Move and resize windows using keyboard shortcuts and snap areas in macOS
-
-### Miscellaneous
-
-- [age](https://github.com/FiloSottile/age):
-  Simple command-line encryption/decryption tool; alternative is
-  [eureka](https://github.com/mimoo/eureka) which is more limited
-  (no key files, generates a token to be used by recipient)
-- [Al Dente](https://github.com/davidwernhart/AlDente):
-  macOS tool to limit battery charging (e.g. keeping charge percentage at or
-  below 80% can help prolong battery life), requires a helper application that
-  can be installed and removed from the tool's settings
-- [Anki](https://apps.ankiweb.net/):
-  Flashcards software
-- [Aspell](http://aspell.net/)
-  ([Github](https://github.com/GNUAspell/aspell)):
-  Spell checker designed as a replacement for
-  [Ispell](https://www.gnu.org/software/ispell/ispell.html)
-- [bat](https://github.com/sharkdp/bat):
-  Command-line `cat` clone with syntax highlighting and Git integration
-- [ClamAV](https://www.clamav.net/)
-  ([Github](https://github.com/Cisco-Talos/clamav)):
-  Open-source antivirus engine, with frontends available like
-  [ClamTk](https://gitlab.com/dave_m/clamtk)
-- [cspell](https://github.com/streetsidesoftware/cspell):
-  Code-aware spell checker, install with `npm install -g cspell`
-- [DevonThink Pro](https://www.devontechnologies.com/apps/devonthink):
-  Commercial document management and search solution for macOS
-- [Diagon](https://github.com/ArthurSonzogni/Diagon):
-  Command-line tool for transforming Markdown-style expressions into
-  ASCII art, [webapp](https://github.com/ArthurSonzogni/Diagon) and
-  [snap](https://snapcraft.io/diagon) available
-- [duf](https://github.com/muesli/duf):
-  Command-line alternative to `df` with nicer user interface;
-  alternative is [lfs](https://github.com/Canop/lfs)
-- [enchant](https://github.com/AbiWord/enchant):
-  Wrapper for abstracting different spell checking libararies into a
-  single interface, with support for personal word lists (one word per
-  line) at paths `$ENCHANT_CONFIG_DIR/<lang>.dic` (for example,
-  `$HOME/.config/enchant/en_US.dic` for the US English personal word
-  list on Unix or Linux systems)
-- [fd](https://github.com/sharkdp/fd):
-  Simpler command-line alternative to `find`
-- [fq](https://github.com/wader/fq):
-  Like `jq` but for binary formats
-- [FontForge](https://fontforge.org/):
-  Font editor
-- [fzf](https://github.com/junegunn/fzf):
-  Command-line fuzzy finder
-- [Godot](https://godotengine.org/):
-  Game engine; alternatives are
-  [Unreal Engine](https://www.unrealengine.com/),
-  [Unity](https://unity.com/) or [Heaps](https://heaps.io/)
-- [Glow](https://github.com/charmbracelet/glow):
-  Terminal-based Markdown reader; alternative is
-  [mdcat](https://codeberg.org/flausch/mdcat/)
-- [Hammerspoon](https://www.hammerspoon.org/):
-  Enables macOS scripting with [Lua](https://www.lua.org/) to interact with
-  system APIs, for example it can be used to enable scrolling by moving
-  the mouse when holding down the middle-button
-  ([link](https://superuser.com/questions/303424/can-i-enable-scrolling-with-middle-button-drag-in-os-x))
-- [hollywood](https://github.com/dustinkirkland/hollywood):
-  Hollywood technobabble in a Byobu session
-- [htop](https://htop.dev/)
-  ([Github](https://github.com/htop-dev/htop)):
-  TUI process viewer similar to `top` but with more features
-- [InvoicePlan](https://www.invoiceplane.com/)
-  ([Github](https://github.com/InvoicePlane/InvoicePlane)):
-  Self-hosted invoice management application
-- [LanguageTool](https://languagetool.org/):
-  Style and grammar checker, standalone Java version downloadable
-  [here](https://languagetool.org/download/) with snapshots available
-  [here](https://internal1.languagetool.org/snapshots/) (the latest
-  version is always downloadable via this
-  [link](https://languagetool.org/download/LanguageTool-stable.zip)),
-  [augmentable](https://dev.languagetool.org/finding-errors-using-n-gram-data.html)
-  with [n-gram](https://languagetool.org/download/ngram-data/) data
-- [Magic Wormhole](https://magic-wormhole.readthedocs.io/)
-  ([Github](https://github.com/magic-wormhole/magic-wormhole)):
-  Command-line tool and library for sending files from one computer to
-  another (note that this tool requires
-  [mailbox](https://github.com/magic-wormhole/magic-wormhole-mailbox-server)
-  and a
-  [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)
-  servers, which by default uses ones hosted by the project)
-- [Netron](https://github.com/lutzroeder/netron):
-  Neural network, deep learning and machine learning model viewer
-- [Nuspell](https://nuspell.github.io/)
-  ([Github](https://github.com/nuspell/nuspell)):
-  Spell checker designed as a modern alternative to
-  [Hunspell](http://hunspell.github.io/)
-  ([Github](https://github.com/hunspell/hunspell))
-- [OmegaT](https://omegat.org/):
-  Translation memory tool
-- [parallel](https://www.gnu.org/software/parallel/):
-  Command-line tool for executing jobs in parallel
-- [pass](https://www.passwordstore.org/):
-  Command-line password manager
-- [pdfgrep](https://pdfgrep.org/)
-  ([Github](https://gitlab.com/pdfgrep/pdfgrep)):
-  Command-line tool for searching text in PDF files
-- [Penpot](https://github.com/penpot/penpot):
-  Open source design and prototyping platform like Sketch and Figma
-- [Plan 9 from User Space](https://9fans.github.io/plan9port/)
-  (plan9port):
-  See [plan9port config
-  repository](https://github.com/matheuristic/plan9port-config)
-- [Platypus](https://github.com/sveinbjornt/Platypus)
-  ([Github](https://github.com/sveinbjornt/Platypus)):
-  Create macOS apps from command-line scripts
-- [pv](http://www.ivarch.com/programs/pv.shtml)
-  ([Github](https://github.com/a-j-wood/pv)):
-  Like `cat` but prints progress to stderr
-- [rdfind](https://rdfind.pauldreik.se/)
-  ([Github](https://github.com/pauldreik/rdfind)):
-  Command-line tool to find duplicate files; alternative is
-  [fdupes](https://github.com/adrianlopezroche/fdupes)
-- [renameutils](https://www.nongnu.org/renameutils/):
-  Collection of programs to make renaming of files easier, like `qmv`
-  that allows editing file names with a text editor; GUI alternatives
-  include [KRename](https://userbase.kde.org/KRename),
-  [GPRename](http://gprename.sourceforge.net/) or
-  [Szyszka](https://github.com/qarmin/szyszka); other command-line
-  alternatives include [f2](https://github.com/ayoisaiah/f2)
-- [rlwrap](https://github.com/hanslub42/rlwrap):
-  `readline` wrapper to enable completion and history for any
-  command-line tool taking keyboard input
-- [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
-  Terminal color-picker
-- [ScummVM](https://www.scummvm.org/)
-  ([Github](https://github.com/scummvm/scummvm)):
-  Program to run certain classical adventure and role-playing games
-  provided the games' data files are available
-- [Sloth](https://sveinbjorn.org/sloth)
-  ([Github](https://github.com/sveinbjornt/Sloth)):
-  macOS application to show open files, dirs, sockets and pipes
-- [Stacer](https://github.com/oguzhaninan/Stacer):
-  Linux system optimizer and monitoring GUI tool
-- [Stow](https://www.gnu.org/software/stow/):
-  Symlink farm manager, useful for managing dotfiles
-- [Sweet Home 3D](https://www.sweethome3d.com/)
-  ([Sourceforge](https://sourceforge.net/projects/sweethome3d/)):
-  Open-source interior design application, also available as an online
-  [webapp](https://www.sweethome3d.com/SweetHome3DOnlineManager.jsp)
-- [Tizonia](https://tizonia.org/)
-  ([Github](https://github.com/tizonia/tizonia-openmax-il)):
-  Command-line cloud music player
-- [tmux](https://github.com/tmux/tmux):
-  Terminal multiplexer, useful for managing and persisting remote
-  sessions over Mosh or SSH
-- [TomatoBar](https://github.com/ivoronin/TomatoBar):
-  macOS menu bar Pomodoro timer
-- [tree](http://mama.indstate.edu/users/ice/tree/):
-  Command-line tool to list files in subdirectory tree depth-indented
-- [ueli](https://ueli.app/)
-  ([Github](https://github.com/oliverschwendener/ueli)):
-  Launcher like [Alfred](https://www.alfredapp.com/) but open-source,
-  available for macOS and Windows
-- [WeasyPrint](https://github.com/Kozea/WeasyPrint):
-  Convert HTML to PDF files using a standalone rendering engine;
-  support for CSS grids is currently lacking
-  ([link](https://github.com/Kozea/WeasyPrint/issues/543));
-  alternatives are
-  [wkhtmltopdf](https://github.com/wkhtmltopdf/wkhtmltopdf),
-  [percollate](https://github.com/danburzo/percollate) (slightly
-  different in that it's main goal is to process the page for
-  readability and supports PDF, EPUB and HTML output), or opening the
-  file in a browser (headless or not) and printing to PDF
-- [Zotero](https://www.zotero.org/):
-  Reference management software to collect, organize, cite and share
-  research material
+    IDE for R; has open-source edition
+- Remote login and desktop
+  - [Jump Desktop](https://jumpdesktop.com/):
+    Remote desktop software, connect to host systems that have
+    [Jump Desktop Connect](https://jumpdesktop.com/connect/)
+    installed; macOS and Windows
+  - [Royal TSX](https://royalapps.com/ts/):
+    Cross-platform RDP and VNC client; has free version
+- Word processing
+  - [Scrivener](https://www.literatureandlatte.com/scrivener/overview):
+    Word processor for authoring books and screenplays
 
 ## Linux notes
 
