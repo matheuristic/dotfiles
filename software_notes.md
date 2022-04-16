@@ -32,6 +32,8 @@
   - [Docker](https://docs.docker.com/)
 - Data analytics apps
   - [JASP](https://jasp-stats.org/)
+  - [Netron](https://github.com/lutzroeder/netron):
+    Neural network, deep learning and machine learning model viewer
   - [PSPP](https://www.gnu.org/software/pspp/)
   - [Veusz](https://veusz.github.io/)
 - Data pipelines
@@ -320,7 +322,7 @@
     and available for Windows in addition to macOS
   - [Unshaky](https://github.com/aahung/Unshaky):
     Double keypress workaround for butterfly keyboards; macOS
-- User experience and interface (terminal)
+- User experience and interface (text)
   - [direnv](https://github.com/direnv/direnv) or
     [shadowenv](https://github.com/Shopify/shadowenv):
     Load and unload env vars based on location
@@ -410,8 +412,6 @@
     ([link](https://superuser.com/questions/303424/can-i-enable-scrolling-with-middle-button-drag-in-os-x))
   - [Joplin](https://joplinapp.org/):
     Note-taking application with sync support; cross-platform
-  - [Netron](https://github.com/lutzroeder/netron):
-    Neural network, deep learning and machine learning model viewer
   - [OmegaT](https://omegat.org/):
     Translation memory tool
   - [pass](https://www.passwordstore.org/):
