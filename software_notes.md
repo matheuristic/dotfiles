@@ -31,11 +31,14 @@
     `top` for containers
   - [Docker](https://docs.docker.com/)
 - Data analytics apps
-  - [JASP](https://jasp-stats.org/)
+  - [JASP](https://jasp-stats.org/):
+    GUI statistical analysis tool
   - [Netron](https://github.com/lutzroeder/netron):
     Neural network, deep learning and machine learning model viewer
-  - [PSPP](https://www.gnu.org/software/pspp/)
-  - [Veusz](https://veusz.github.io/)
+  - [PSPP](https://www.gnu.org/software/pspp/):
+    Open-source SPSS alternative
+  - [Veusz](https://veusz.github.io/):
+    Scientific plotting and graphing
 - Data pipelines
   - [Apache Airflow](https://airflow.apache.org/):
     Scheduling workflows
@@ -312,6 +315,10 @@
   - [yq](https://github.com/mikefarah/yq):
     Command-line YAML processor
 - User experience and interface (graphical)
+  - [LinearMouse](https://github.com/linearmouse/linearmouse) or
+    [Mos](https://github.com/Caldis/Mos):
+    Mouse enhancements like reverse scrolling, linear scrolling,
+    acceleration, etc, for external mice on macOS
   - [skhd](https://github.com/koekeishiya/skhd):
     Hotkey daemon; macOS
   - [Rectangle](https://github.com/rxhanson/Rectangle):
