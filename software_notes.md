@@ -89,6 +89,10 @@
     Vector graphics editor
   - [LinkedIdeas](https://github.com/fespinoza/LinkedIdeas):
     Mind-mapping tool
+  - [Pikchr](https://pikchr.org/) or
+    [PlantUML](https://plantuml.com/):
+    Markup language for diagramming, standalone or supported by
+    Markdown processers like Pandoc via plugins
 - Digital design
   - [Penpot](https://github.com/penpot/penpot):
     Open source design and prototyping platform like Sketch and Figma
@@ -252,8 +256,10 @@
     macOS application to show open files, dirs, sockets and pipes
   - [Stacer](https://github.com/oguzhaninan/Stacer):
     Linux system optimizer and monitoring GUI tool
-  - [strace](https://strace.io/):
-    Process debugging
+  - [eBPF/bcc](https://github.com/iovisor/bcc) or
+    [strace](https://strace.io/):
+    Process debugging;
+    eBPF/bcc [tutorial](https://ish-ar.io/python-ebpf-tracing/)
 - Text tools (general)
   - [Aspell](http://aspell.net/) or
     [Nuspell](https://nuspell.github.io/):
