@@ -17,6 +17,7 @@ User configuration files for:
 * [R](https://www.r-project.org/) (for installations via `conda` on Mac OS X)
 * [Ranger](https://github.com/ranger/ranger)
 * [Vim](https://www.vim.org/)
+* [Vis](https://github.com/martanne/vis)
 * [X11](https://www.x.org/wiki/) ([urxvt](http://software.schmorp.de/pkg/rxvt-unicode.html) and [xterm](https://invisible-island.net/xterm/))
 
 For Emacs configuration, see [here](https://github.com/matheuristic/emacs-config).
