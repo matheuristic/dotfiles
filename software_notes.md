@@ -138,10 +138,11 @@
     and a
     [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)
     server, which by default uses one hosted by the project
-  - [Midnight Commander](https://midnight-commander.org/):
+  - [Midnight Commander](https://midnight-commander.org/) or:
+    [nnn](https://github.com/jarun/nnn) or
+    [lf](https://github.com/gokcehan/lf) or
+    [broot](https://github.com/Canop/broot):
     Terminal file manager
-  - [nnn](https://github.com/jarun/nnn):
-    Terminal file manager, fast
   - [rdfind](https://github.com/pauldreik/rdfind) or
     [fdupes](https://github.com/adrianlopezroche/fdupes):
     Command-line tool to find duplicate files
@@ -209,7 +210,8 @@
     Self-hosted Git server
   - [onefetch](https://github.com/o2sh/onefetch):
     Git repository information and statistics
-  - [scc](https://github.com/boyter/scc):
+  - [scc](https://github.com/boyter/scc) or
+    [tokei](https://github.com/XAMPPRocky/tokei):
     Count lines of code by language
   - [task](https://github.com/go-task/task):
     Easier-to-use [Make](https://www.gnu.org/software/make/)
@@ -231,15 +233,19 @@
   - [ripgrep](https://github.com/BurntSushi/ripgrep):
     `grep` alternative, extend to more file formats with
     [ripgrep-all](https://github.com/phiresky/ripgrep-all)
-- Shell plugins
-  - [z](https://github.com/rupa/z):
-    Frecent directories, for Bash and Zsh
+- Shell enhancements
+  - [z](https://github.com/rupa/z) or
+    [zoxide](https://github.com/ajeetdsouza/zoxide):
+    Frecent directories; `z` is a plugin for Bash and Zsh, whereas
+    `zoxide` is more of a replacement for the `cd` command
 - System administration
   - [angle-grinder](https://github.com/rcoh/angle-grinder)
     (log analyzer)
   - [atop](https://github.com/Atoptool/atop):
     System resource monitor, runs as a daemon that logs process
     activity to disk
+  - [bandwhich](https://github.com/imsnif/bandwhich):
+    Network utilization by process, connection, remote IP, hostname, etc
   - [dua](https://github.com/Byron/dua-cli):
     Check disk usage and delete unwanted data
   - [duf](https://github.com/muesli/duf) or
@@ -250,7 +256,8 @@
   - [forkstat](https://github.com/ColinIanKing/forkstat):
     Command-line program to log process forks, execs and exits;
     useful for tracking runaway processes
-  - [htop](https://github.com/htop-dev/htop):
+  - [htop](https://github.com/htop-dev/htop) or
+    [bottom](https://github.com/ClementTsang/bottom):
     System resource monitor, alternative to `top`
   - [Sloth](https://sveinbjorn.org/sloth):
     macOS application to show open files, dirs, sockets and pipes
@@ -423,6 +430,8 @@
     Use [Lua](https://www.lua.org/) for macOS scripts that can call
     system APIs, for example middle-click-move mouse to scroll
     ([link](https://superuser.com/questions/303424/can-i-enable-scrolling-with-middle-button-drag-in-os-x))
+  - [hyperfine](https://github.com/sharkdp/hyperfine):
+    Benchmark shell commands
   - [Joplin](https://joplinapp.org/):
     Note-taking application with sync support; cross-platform
   - [OmegaT](https://omegat.org/):
