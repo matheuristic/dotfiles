@@ -52,9 +52,13 @@
     GraphQL client
   - [DBeaver](https://dbeaver.io/):
     Client for any database that has a jDBC driver
+  - [DataStation](https://github.com/multiprocessio/datastation):
+    Data IDE
   - [DbGate](https://dbgate.org/):
     Client for MySQL, PostgreSQL, SQL Server, MongoDB, Redis, SQLite,
     Amazon Redshift, CockroachDB, MariaDB databases
+  - [Jailer](https://github.com/Wisser/Jailer):
+    Subset databases and browse relational data
   - [OctoSQL](https://github.com/cube2222/octosql):
     Make queries that can span MySQL, PostgreSQL databases along with
     CSV and JSON
@@ -203,8 +207,11 @@
 - Project (codebase) tools
   - [Cookiecutter](https://github.com/cookiecutter/cookiecutter)
     Project templates
-  - [Gitup](https://github.com/git-up/GitUp)
-    Git GUI client; macOS
+  - [gitg](https://gitlab.gnome.org/GNOME/gitg) or
+    [Gitup](https://github.com/git-up/GitUp) or
+    [TortoiseGit](https://tortoisegit.org/):
+    Git GUI client; gitg is Linux-only and installable via Flathub,
+    Gitup is macOS-only, TortoiseGit is Windows-only
   - [gogs](https://gogs.io/) or
     [Soft Serve](https://github.com/charmbracelet/soft-serve):
     Self-hosted Git server
@@ -224,6 +231,13 @@
 - Search
   - [Code Search](https://github.com/google/codesearch):
     Index with `cindex` then search with `cgrep` or `csearch`
+  - [Meilisearch](https://github.com/meilisearch/meilisearch) or
+    [ElasticSearch](https://github.com/elastic/elasticsearch) or
+    [Toshi](https://github.com/toshi-search/Toshi):
+    Search engine server; ElasticSearch and Toshi are designed for
+    general-purpose search, while Meilisearch focuses on simpler
+    searches (algorithm is inverse-index to Levenshtein automaton
+    for handling typos to bucket sort for ranking documents)
   - [fd](https://github.com/sharkdp/fd):
     Simpler command-line alternative to `find`
   - [fzf](https://github.com/junegunn/fzf):
@@ -293,8 +307,11 @@
     has the latest version), which is
     [augmentable](https://dev.languagetool.org/finding-errors-using-n-gram-data.html)
     with [n-gram](https://languagetool.org/download/ngram-data/) data
-  - [Meld](https://meldmerge.org/):
-    GUI `diff` alternative
+  - [Meld](https://meldmerge.org/) or
+    [kdiff3](https://apps.kde.org/kdiff3/):
+    GUI `diff` alternative; Meld supports Windows and Linux, which has
+    also a [macOS port](https://github.com/yousseb/meld), and kdiff3
+    is Linux-only
   - [sttr](https://github.com/abhimanyu003/sttr):
     Command-line tool for string operations
 - Text tools (structured)
@@ -471,6 +488,9 @@
     Python programming-oriented IDE; has open-source community edition
   - [RStudio](https://rstudio.com/):
     IDE for R; has open-source edition
+- Project (codebase) tools
+  - [Sublime Merge](https://www.sublimemerge.com/):
+    GUI Git client for macOS
 - Remote login and desktop
   - [Jump Desktop](https://jumpdesktop.com/):
     Remote desktop software, connect to host systems that have
@@ -478,6 +498,9 @@
     installed; macOS and Windows
   - [Royal TSX](https://royalapps.com/ts/):
     Cross-platform RDP and VNC client; has free version
+- Text tools (general)
+  - [Beyond Compare](https://www.scootersoftware.com/):
+    Compare files and folders
 - Word processing
   - [Scrivener](https://www.literatureandlatte.com/scrivener/overview):
     Word processor for authoring books and screenplays
