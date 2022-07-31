@@ -177,6 +177,7 @@
     facto repository; for easier permissioning control install
     [Flathub](https://flathub.org/apps/details/com.github.tchx84.Flatseal)
   - [MacPorts](https://www.macports.org/) or
+    [Spack](https://spack.io/) or
     [Homebrew](https://brew.sh/):
     macOS package manager for open-source software
   - [Miniforge](https://github.com/conda-forge/miniforge):
@@ -790,6 +791,57 @@ for compile instructions and pre-compiled wheels, and see
 ```sh
 sudo rm -rf /Library/Developer/CommandLineTools
 sudo xcode-select --install
+```
+
+### Installing and using Spack
+
+Adapted from:
+https://spack.readthedocs.io/en/latest/getting_started.html#installation
+
+Spack is one of few package managers that does not require root
+permissions by default.
+
+```sh
+git clone -c feature.manyFiles=true https://github.com/spack/spack.git ~/spack
+# Following is for Bash/ZSH, see install instructions for other shells
+. ~/spack/share/spack/setup-env.sh
+# if needed, use a Python install other than the system one, for example
+#   export SPACK_PYTHON=$HOME/mambaforge/envs/pyenv/bin/python
+# see https://github.com/spack/spack/pull/31792
+# and https://github.com/spack/spack/issues/31735
+```
+
+Modify the shell config file to set up the environment setup when the
+shell starts. For Bash (`$HOME/.bashrc`) or ZSH (`$HOME/.zshrc`):
+
+```sh
+if [ -d $HOME/spack ]; then
+  . $HOME/spack/share/spack/setup-env.sh
+  # Can use a Python install other than the system one, for example
+  #   export SPACK_PYTHON=$HOME/mambaforge/envs/pyenv/bin/python
+fi
+```
+
+It is best practice to install packages within an environment, e.g.:
+
+```sh
+spack env create default
+spack env activate default
+spack install libvterm libtool cmake
+spack env deactivate
+```
+
+To use some environment by default (like the `default` environment
+created above), load it in the shell config startup, e.g. the above
+block in Bash and ZSH config example could be changed to:
+
+```sh
+if [ -d $HOME/spack ]; then
+  . $HOME/spack/share/spack/setup-env.sh
+  # Can use a Python install other than the system one, for example
+  #   export SPACK_PYTHON=$HOME/mambaforge/envs/pyenv/bin/python
+  spack env activate default
+fi
 ```
 
 ### Running virtual machines with UTM on M1 Macs
