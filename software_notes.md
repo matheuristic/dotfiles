@@ -112,6 +112,9 @@
     [Asciidoc converter](https://github.com/asciidoctor/kramdown-asciidoc)
   - [Pandoc](https://pandoc.org/):
     Document converter, can also process Markdown
+  - [shot-scraper](https://github.com/simonw/shot-scraper):
+    Command-line utility for taking partial or full screenshots of
+    websites
   - [Tectonic](https://tectonic-typesetting.github.io/) or
     [TeXLive](https://www.tug.org/texlive/) or
     [TinyTeX](https://github.com/yihui/tinytex):
@@ -477,6 +480,8 @@
 - Diagramming
   - [iThoughts](https://www.toketaware.com/):
     Mind-mapping tool
+  - [Monodraw](https://monodraw.helftone.com/):
+    ASCII art editor; macOS
 - File management
   - [DevonThink Pro](https://www.devontechnologies.com/apps/devonthink):
     Document management and search solution; macOS

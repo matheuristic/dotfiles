@@ -46,10 +46,57 @@ fi
 
 # Set paths as needed
 
+# go support
+if [ -d $HOME/go/bin ]; then
+  export PATH=$HOME/go/bin:$PATH
+fi
+
 # User-local binaries and manpages
 if [ -d $HOME/.local/bin ]; then
   PATH=$HOME/.local/bin:$PATH
 fi
 if [ -d $HOME/.local/share/man ]; then
   MANPATH=$HOME/.local/share/man:$MANPATH
+fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/thiam/mambaforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/thiam/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "/home/thiam/mambaforge/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/thiam/mambaforge/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "/home/thiam/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "/home/thiam/mambaforge/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
+
+# Update Acme window tag line with dir in which it's running
+if [ "$winid" ]; then
+    _acme_cd () {
+        builtin cd "$@" && awd
+    }
+    alias cd=_acme_cd
+fi
+
+# No fancy Zsh prompt when using dumb terminals
+if [[ "$TERM" == "dumb" ]]; then
+  unsetopt zle
+  unsetopt prompt_cr
+  unsetopt prompt_subst
+  if whence -w precmd >/dev/null; then
+      unfunction precmd
+  fi
+  if whence -w preexec >/dev/null; then
+      unfunction preexec
+  fi
+  PROMPT="%# "
+  RPROMPT=""
 fi
