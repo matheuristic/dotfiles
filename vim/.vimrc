@@ -18,7 +18,6 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 "set backupdir=~/.vimfiles/backup//,. " backup file folders, appending '//' uses the full path in the filename
 "set directory=~/.vimfiles/swap//,. " swapfile folders, appending '//' uses the full path in the filename
 "set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
-"set complete=.,w,b,u,U,t,i,d " extra scanning on keyword completion
 set complete+=k " also use dictionaries on keyword completion
 set expandtab   " expand tabs into spaces (use <C-v><Tab> in insert mode for a real tab)
 set formatoptions+=j " delete comment leader when joining comment lines
@@ -35,13 +34,14 @@ set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,nbsp:. " chars for displayin
 "set scrolloff=1 " num lines from top or bottom of window to begin scrolling
 set sidescrolloff=5 " num lines from left or right of window to begin scrolling
 set shiftwidth=2 " number of spaces for each indent level
-"set showmatch   " show matching brackets
+"set showmatch   " jump briefly to matching bracket and return
 set showmode    " show current mode
 set smartcase   " override 'ignorecase' if search pattern has upper case chars, only used when 'ignorecase' is set
 set smarttab    " tabs inserts shiftwidth space
 "set softtabstop=4 " num spaces a tab counts for while in insert mode
 "set swapfile    " use swapfiles, swapfile location is determined by 'directory'
 "set tabstop=8   " length of a real tab
+set tildeop     " make tilde (change char case) work as an operator
 "set ttyfast     " smoother output
 set nowildmenu   " don't use enhanced command line completion
 set wildmode=list:longest,full " command-line tab completion options
