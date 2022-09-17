@@ -1,0 +1,10 @@
+[diff]
+	# tool = meld
+	tool = xxdiff
+[difftool]
+	prompt = false
+[merge]
+	# tool = meld
+	tool = xxdiff
+[alias]
+	diffdir = difftool --dir-diff

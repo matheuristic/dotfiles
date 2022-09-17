@@ -312,10 +312,11 @@
     [augmentable](https://dev.languagetool.org/finding-errors-using-n-gram-data.html)
     with [n-gram](https://languagetool.org/download/ngram-data/) data
   - [Meld](https://meldmerge.org/) or
-    [kdiff3](https://apps.kde.org/kdiff3/):
+    [kdiff3](https://apps.kde.org/kdiff3/) or
+    [xxdiff](https://github.com/blais/xxdiff):
     GUI `diff` alternative; Meld supports Windows and Linux, which has
-    also a [macOS port](https://github.com/yousseb/meld), and kdiff3
-    is Linux-only
+    also a [macOS port](https://github.com/yousseb/meld), kdiff3
+    is Linux-only, xxdiff is lightweight but does not support Unicode
   - [sttr](https://github.com/abhimanyu003/sttr):
     Command-line tool for string operations
 - Text tools (structured)

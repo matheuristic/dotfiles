@@ -2,23 +2,28 @@
 
 User configuration files for:
 
-* [Bash](https://www.gnu.org/software/bash/)
-* [fish](https://fishshell.com/)
-* [Flake8](https://flake8.pycqa.org/en/latest/)
-* [Git](https://git-scm.com/) global [gitignore](https://git-scm.com/docs/gitignore) files
-* [kitty](https://sw.kovidgoyal.net/kitty/)
-* [Neovim](https://neovim.io/)
-* [NPM](https://www.npmjs.com/)
-* [PostgreSQL](https://www.postgresql.org/) aliases
-* [Proselint](https://github.com/amperser/proselint)
-* [Pylint](https://www.pylint.org/)
-* [GNU Screen](https://www.gnu.org/software/screen/)
-* [tmux](https://github.com/tmux/tmux)
-* [R](https://www.r-project.org/) (for installations via `conda` on Mac OS X)
-* [Ranger](https://github.com/ranger/ranger)
-* [Vim](https://www.vim.org/)
-* [Vis](https://github.com/martanne/vis)
-* [X11](https://www.x.org/wiki/) ([urxvt](http://software.schmorp.de/pkg/rxvt-unicode.html) and [xterm](https://invisible-island.net/xterm/))
+- [Bash](https://www.gnu.org/software/bash/)
+- [Elixir](https://elixir-lang.org/)
+- [fish](https://fishshell.com/)
+- [Flake8](https://flake8.pycqa.org/en/latest/)
+- [Git](https://git-scm.com/)
+- [kitty](https://sw.kovidgoyal.net/kitty/)
+- [Neovim](https://neovim.io/)
+- [NPM](https://www.npmjs.com/) using [nvm](https://github.com/nvm-sh/nvm)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Proselint](https://github.com/amperser/proselint)
+- [Python](https://www.python.org/) using
+  [Pylint](https://www.pylint.org/) for linting
+- [R](https://www.r-project.org/) (for installations via `conda` on Mac OS X)
+- [Ranger](https://github.com/ranger/ranger)
+- [GNU Screen](https://www.gnu.org/software/screen/)
+- [tmux](https://github.com/tmux/tmux)
+- [Vi](https://en.wikipedia.org/wiki/Vi)
+- [Vim](https://www.vim.org/)
+- [Vis](https://github.com/martanne/vis)
+- [xxdiff](https://github.com/blais/xxdiff)
+- [X11](https://www.x.org/wiki/) ([urxvt](http://software.schmorp.de/pkg/rxvt-unicode.html) and [xterm](https://invisible-island.net/xterm/))
+- ... and other utility scripts
 
 For Emacs configuration, see [here](https://github.com/matheuristic/emacs-config).
 
