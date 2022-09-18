@@ -133,6 +133,15 @@
 - Ebook readers and library managers
   - [Calibre](https://calibre-ebook.com/)
   - [Foliate](https://johnfactotum.github.io/foliate/)
+- Email
+  - [Apple Mail](https://support.apple.com/mail) or
+    [Evolution](https://wiki.gnome.org/Apps/Evolution) or
+    [Thunderbird](https://www.thunderbird.net/):
+    Thunderbird is a cross-platform graphical email client and has a
+    soft fork [Betterbird](https://www.betterbird.eu/) that applies
+    patches atop the ESR version; Apple Mail (macOS) and Evolution
+    (Linux) are platform-specific but are better integrated with the
+    OS and have better support for Microsoft Exchange and Office 365
 - File management
   - [Cyberduck](https://cyberduck.io/):
     Remote FTP, SFTP, WebDAV, cloud storage; macOS and Windows
@@ -197,7 +206,9 @@
     [Zathura](https://pwmt.org/projects/zathura/):
     PDF reader for research and technical PDFs
   - [Skim](https://skim-app.sourceforge.io/):
-    PDF reader and annotator; macOS
+    PDF reader and annotator; macOS; the built-in Apple
+    [Preview](https://support.apple.com/guide/preview/welcome/mac) on
+    macOS is usually good enough
   - [Xournal++](https://github.com/xournalpp/xournalpp):
     Handwriting notebook with PDF annotation support
 - Presentations
