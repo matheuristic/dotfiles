@@ -1,9 +1,6 @@
 # ~/.xxdiffrc - xxdiff config
 Geometry: 1200x700
 Accel.Exit: "Esc"
-Accel.ToggleVerticalLine: "Ctrl+Alt+L"
 DirDiffRecursive: true
-FontText: "PragmataPro,10,-1,5,50,0,0,0,0,0"
 Show.LineNumbers: true
-Show.VerticalLine: true
-VerticalLinePosition: 70
+FontText: "PragmataPro,10,-1,5,50,0,0,0,0,0"
