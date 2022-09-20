@@ -198,6 +198,13 @@
     recommended as it comes with the Conda drop-in replacement
     [Mamba](https://github.com/mamba-org/mamba) that is much faster
 - PDF readers and tools
+  - [diffpdf](https://tracker.debian.org/pkg/diffpdf)
+    ([source](http://www.qtrac.eu/diffpdf-foss.html)):
+    Diff two PDF files, Can be used with `git` by setting
+    `git config --global difftool.diffpdf.cmd 'diffpdf "$LOCAL" "$REMOTE"'`
+    and `git config --global alias.diffpdf "difftool -t diffpdf"` and
+    running e.g. `git diffpdf somecommit:somefile.pdf somefile.pdf`;
+    Linux
   - [MuPDF](https://mupdf.com/):
     PDF reader
   - [QPDF](https://github.com/qpdf/qpdf):
@@ -333,6 +340,8 @@
 - Text tools (structured)
   - [fq](https://github.com/wader/fq):
     Like `jq` but for binary formats
+  - [ghostwriter](https://github.com/wereturtle/ghostwriter):
+    Graphical Markdown editor; Windows and Linux (also on Flathub)
   - [gron](https://github.com/tomnomnom/gron):
     Flattens JSON into discrete assignments that work better
     with `grep` and `sed`
@@ -549,6 +558,11 @@ More information can also be found on
   native support for the Wayland clipboard, in that selecting a region
   will copy to the clipboard and `Ctrl-Shift-v` will paste from the
   clipboard)
+- **Opening URLS in the host Chrome browser**: To open a given URL in
+  the host Chrome browser, use `garcon-url-handler`, e.g.
+  `garcon-url-handler https://www.google.com -new-window` opens
+  the Google homepage in a new browser window (for more details, see
+  [link](https://support.google.com/chromebook/thread/102840796?hl=en&msgid=102977439))
 - **Flatpak issues**: Flatpak may need security nesting enabled to run
   properly. If not enabled, errors may surface like the following.
 
