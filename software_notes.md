@@ -237,8 +237,12 @@
   - [gogs](https://gogs.io/) or
     [Soft Serve](https://github.com/charmbracelet/soft-serve):
     Self-hosted Git server
+  - [kondo](https://github.com/tbillington/kondo):
+    Clean unneeded files like build artifacts from project directories
   - [onefetch](https://github.com/o2sh/onefetch):
     Git repository information and statistics
+  - [ruplacer](https://github.com/your-tools/ruplacer):
+    Find and replace recursively, like a combo of `find` and `sed -i`
   - [scc](https://github.com/boyter/scc) or
     [tokei](https://github.com/XAMPPRocky/tokei):
     Count lines of code by language
@@ -270,6 +274,9 @@
     `grep` alternative, extend to more file formats with
     [ripgrep-all](https://github.com/phiresky/ripgrep-all)
 - Shell enhancements
+  - [tldr](https://github.com/tldr-pages/tldr) or
+    [navi](https://github.com/denisidoro/navi):
+    Interactive command references on the command-line
   - [z](https://github.com/rupa/z) or
     [zoxide](https://github.com/ajeetdsouza/zoxide):
     Frecent directories; `z` is a plugin for Bash and Zsh, whereas
@@ -282,8 +289,10 @@
     activity to disk
   - [bandwhich](https://github.com/imsnif/bandwhich):
     Network utilization by process, connection, remote IP, hostname, etc
-  - [dua](https://github.com/Byron/dua-cli):
-    Check disk usage and delete unwanted data
+  - [dua](https://github.com/Byron/dua-cli) or
+    [dust](https://github.com/bootandy/dust):
+    Alternative to `du` for checking disk usage. dua also makes deletion
+    of unwanted data easy
   - [duf](https://github.com/muesli/duf) or
     [lfs](https://github.com/Canop/lfs):
     Command-line alternative to `df` with nicer user interface
@@ -303,6 +312,10 @@
     [strace](https://strace.io/):
     Process debugging;
     eBPF/bcc [tutorial](https://ish-ar.io/python-ebpf-tracing/)
+  - [hyperfine](https://github.com/sharkdp/hyperfine):
+    Command-line benchmarking tool that supports multiple and warmup
+    runs, export of results to various formats, etc; basically a
+    featureful alternative to the standard `time` command
 - Text tools (general)
   - [Aspell](http://aspell.net/) or
     [Nuspell](https://nuspell.github.io/):
@@ -321,6 +334,8 @@
     line) at paths `$ENCHANT_CONFIG_DIR/<lang>.dic` (for example,
     `$HOME/.config/enchant/en_US.dic` for the US English personal word
     list on Unix or Linux systems)
+  - [hexyl](https://github.com/sharkdp/hexyl):
+    Command-line hex viewer
   - [LanguageTool](https://languagetool.org/):
     Style and grammar checker; standalone Java version downloadable
     [here](https://languagetool.org/download/) with snapshots available
@@ -337,6 +352,9 @@
     is Linux-only, xxdiff is lightweight but does not support Unicode
   - [sttr](https://github.com/abhimanyu003/sttr):
     Command-line tool for string operations
+  - [uni](https://github.com/arp242/uni) or
+    [chars](https://github.com/antifuchs/chars):
+    Command-line tool for querying Unicode characters
 - Text tools (structured)
   - [fq](https://github.com/wader/fq):
     Like `jq` but for binary formats
@@ -411,6 +429,10 @@
   - [virt-manager](https://virt-manager.org/):
     Linux desktop tool for managing QEMU/KVM virtual machines
 - VPN
+  - [innernet](https://github.com/tonarino/innernet) or
+    [nebula](https://github.com/slackhq/nebula):
+    Overlay networking tool for creating a private network, like
+    [Tailscale](https://tailscale.com/)
   - [OpenVPN](https://openvpn.net/vpn-client/)
     or [TunnelBlick](https://tunnelblick.net/):
     OpenVPN client, note that Linux clients be should installed via
@@ -480,8 +502,9 @@
     Translation memory tool
   - [pass](https://www.passwordstore.org/):
     Command-line password manager
-  - [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
-    Terminal color-picker
+  - [pastel](https://github.com/sharkdp/pastel) or
+    [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
+    Terminal color picker
   - [sc-im](https://github.com/andmarti1424/sc-im)
     Terminal spreadsheet program
   - [Sweet Home 3D](https://www.sweethome3d.com/):
@@ -490,8 +513,9 @@
   - [Taskwarrior](https://taskwarrior.org/) and
     [Timewarrior](https://timewarrior.net/):
     Todo list management (Taskwarrior) and time-tracking (Timewarrior)
-  - [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch):
-    Run command when files change, Acme editor-specific
+  - [watchexec](https://github.com/watchexec/watchexec) or
+    [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch):
+    Run command when files change; Watch is Acme editor-specific
   - [Zotero](https://www.zotero.org/):
     Reference management software to collect, organize, cite and share
     research material

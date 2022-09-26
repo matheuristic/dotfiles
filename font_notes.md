@@ -22,8 +22,7 @@ fc-cache -fv
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
 - [JuliaMono](https://github.com/cormullion/juliamono)
-- [Pixel Operator](https://notabug.org/HarvettFox96/ttf-pixeloperator)
-  (bitmap)
+- [Monocraft](https://github.com/IdreesInc/Monocraft) (bitmap, emulates Minecraft typeface)
 - [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_)
 - [Space Mono](https://github.com/googlefonts/spacemono)
 - [Terminus](http://terminus-font.sourceforge.net/) (bitmap,
@@ -66,6 +65,8 @@ fc-cache -fv
 - [Reforma](https://pampatype.com/reforma)
 
 ## Symbol fonts
+- [Catrinity](https://catrinity-font.de/) (sans-serif)
+- [Quivira](http://www.quivira-font.com/) (serif)
 - [Symbola](https://dn-works.com/ufas/) (_free for personal use_)
 
 ## Font families
