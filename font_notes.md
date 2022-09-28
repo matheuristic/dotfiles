@@ -65,6 +65,8 @@ fc-cache -fv
   (parametric axes, see [link](https://web.dev/variable-fonts/))
 - [Space Grotesk](https://github.com/floriankarsten/space-grotesk)
 - [Urbanist](https://github.com/coreyhu/Urbanist)
+- [Work Sans](http://weiweihuanghuang.github.io/Work-Sans/)
+  ([Github](https://github.com/weiweihuanghuang/Work-Sans))
 - [Ysabeau](https://github.com/CatharsisFonts/Ysabeau)
 
 ## Serif proportional fonts
@@ -146,6 +148,8 @@ fc-cache -fv
   ([Github](https://github.com/theleagueof))
 - [The Ultimate Oldschool PC Font Pack](https://int10h.org/oldschool-pc-fonts/)
 - [Typewolf](https://www.typewolf.com/)
+- [Typographica](https://typographica.org/)
+  ([Library](https://library.typographica.org/))
 - [Variable fonts](https://variablefonts.typenetwork.com/)
 - [Velvetyne Type Foundry](https://velvetyne.fr/)
   ([Gitlab](https://gitlab.com/velvetyne))
