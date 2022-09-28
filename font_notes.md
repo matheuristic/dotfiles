@@ -19,6 +19,7 @@ fc-cache -fv
 - [APL385](https://www.apl385.com/fonts/)
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)
 - [Drafting* Mono](https://github.com/indestructible-type/Drafting)
+- [Fira Code](https://github.com/tonsky/FiraCode)
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
 - [JuliaMono](https://github.com/cormullion/juliamono)
@@ -37,8 +38,13 @@ fc-cache -fv
   ([Black](https://github.com/Omnibus-Type/ArchivoBlack)), and
   [Narrow](https://www.omnibus-type.com/fonts/archivo-narrow/)
   ([Github](https://github.com/Omnibus-Type/ArchivoNarrow))
+- Asap [Regular](https://www.omnibus-type.com/fonts/asap/)
+  ([Github](https://github.com/Omnibus-Type/Asap)), and
+  [Condensed](https://www.omnibus-type.com/fonts/asap-condensed/)
+  ([Github](https://github.com/Omnibus-Type/AsapCondensed))
 - [Atkinson Hyperlegible](https://brailleinstitute.org/freefont)
 - [Cooper Hewitt](https://www.cooperhewitt.org/open-source-at-cooper-hewitt/cooper-hewitt-the-typeface-by-chester-jenkins/)
+  ([Github](https://github.com/cooperhewitt/cooperhewitt-typeface))
 - [Decovar](https://github.com/googlefonts/decovar)
   (parametric axes, see [link](https://web.dev/variable-fonts/))
 - [Encode Sans](https://github.com/thundernixon/Encode-Sans)
@@ -52,6 +58,7 @@ fc-cache -fv
 - [Plein](https://www.fontshare.com/fonts/plein)
 - [Plus Jakarta Sans](https://github.com/tokotype/PlusJakartaSans)
 - [Public Sans](https://public-sans.digital.gov/)
+  ([Github](https://github.com/uswds/public-sans))
 - [Readex Pro](https://github.com/ThomasJockin/readexpro) (expanded
   [Lexend](https://github.com/googlefonts/lexend))
 - [Roboto Flex](https://github.com/googlefonts/roboto-flex)
@@ -64,6 +71,8 @@ fc-cache -fv
 
 - [Amstelvar](https://github.com/googlefonts/amstelvar)
   (parametric axes, see [link](https://web.dev/variable-fonts/))
+- [Bodoni](http://indestructible-type.github.io/Bodoni.html)
+  ([Github](https://github.com/indestructible-type/Bodoni))
 - [Castoro](https://github.com/TiroTypeworks/Castoro)
 - [Courier Prime](https://quoteunquoteapps.com/courierprime/)
 - [ETbb](https://ctan.org/pkg/etbb?lang=en)
@@ -83,6 +92,8 @@ fc-cache -fv
 - [Reforma](https://pampatype.com/reforma)
 
 ## Symbol fonts
+- [Asap Symbol](https://www.omnibus-type.com/fonts/asap-symbol/)
+  ([Github](https://github.com/Omnibus-Type/Asap-Symbol))
 - [Catrinity](https://catrinity-font.de/) (sans-serif)
 - [Quivira](http://www.quivira-font.com/) (serif)
 - [Symbola](https://dn-works.com/ufas/) (_free for personal use_)

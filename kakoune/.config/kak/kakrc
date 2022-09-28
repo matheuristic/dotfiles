@@ -121,10 +121,10 @@ map global visual W ': remove-highlighter global/show-whitespaces<ret>'         
 map global user <a-r> ': repl-new<ret>'                      -docstring "REPL create"
 map global user s ': repl-send-text<ret>'                    -docstring "REPL send text"
 # Window system clipboard integration
-map global user y "<a-|>%val{config}/bin/clip-copy.sh<ret>"  -docstring "clip-yank"
-map global user P "!%val{config}/bin/clip-paste.sh<ret>"     -docstring "clip-paste before"
-map global user p "<a-!>%val{config}/bin/clip-paste.sh<ret>" -docstring "clip-paste after"
-map global user R "|%val{config}/bin/clip-paste.sh<ret>"     -docstring "clip-replace"
+map global user y "<a-|>%val{config}/bin/cl-copy<ret>"       -docstring "clip-yank"
+map global user P "!%val{config}/bin/cl-paste<ret>"          -docstring "clip-paste before"
+map global user p "<a-!>%val{config}/bin/cl-paste<ret>"      -docstring "clip-paste after"
+map global user R "|%val{config}/bin/cl-paste<ret>"          -docstring "clip-replace"
 # Other
 map global user c ': comment-line<ret>'                      -docstring "(un)comment sel using line comments"
 map global user C ': comment-block<ret>'                     -docstring "(un)comment sel using block comments"
