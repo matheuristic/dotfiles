@@ -97,6 +97,7 @@ if [[ "$TERM" == "dumb" ]]; then
   if whence -w preexec >/dev/null; then
       unfunction preexec
   fi
-  PROMPT="%# "
+  # Set prompt so middle-clicking whole line reruns line's command
+  PROMPT=": %m; "
   RPROMPT=""
 fi

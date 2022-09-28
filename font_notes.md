@@ -36,10 +36,12 @@ fc-cache -fv
 - [Decovar](https://github.com/googlefonts/decovar)
   (parametric axes, see [link](https://web.dev/variable-fonts/))
 - [Encode Sans](https://github.com/thundernixon/Encode-Sans)
+- [Figtree](https://github.com/erikdkennedy/figtree)
 - [Jost*](https://github.com/indestructible-type/Jost)
   (Futura alternative)
 - [Open Sans](https://github.com/googlefonts/opensans)
 - [Outfit](https://github.com/Outfitio/Outfit-Fonts)
+- [Plein](https://www.fontshare.com/fonts/plein)
 - [Plus Jakarta Sans](https://github.com/tokotype/PlusJakartaSans)
 - [Public Sans](https://public-sans.digital.gov/)
 - [Readex Pro](https://github.com/ThomasJockin/readexpro) (expanded
@@ -69,6 +71,9 @@ fc-cache -fv
 - [Quivira](http://www.quivira-font.com/) (serif)
 - [Symbola](https://dn-works.com/ufas/) (_free for personal use_)
 
+## Script fonts
+- [Ballet](https://github.com/Omnibus-Type/Ballet)
+
 ## Font families
 
 - [Go](https://go.dev/blog/go-fonts)
@@ -82,6 +87,8 @@ fc-cache -fv
   ([detail](https://bigelowandholmes.typepad.com/bigelow-holmes/how-and-why-lucida/))
 - [M+](https://mplusfonts.github.io/)
   ([Github](https://github.com/coz-m/MPLUS_FONTS))
+- [New Computer Modern](https://tug.org/FontCatalogue/newcomputermodernroman/)
+  ([CTAN](https://www.ctan.org/tex-archive/fonts/newcomputermodern))
 - [Recursive](https://github.com/arrowtype/recursive)
 - [Red Hat](https://github.com/RedHatOfficial/RedHatFont)
 - [Roboto](https://fonts.google.com/specimen/Roboto),
@@ -103,6 +110,7 @@ fc-cache -fv
 - [Beautiful Web Type](https://beautifulwebtype.com/)
 - [Google Font Updates](https://twitter.com/googlefonts?lang=us)
 - [Google Fonts Knowledge](https://fonts.google.com/knowledge)
+- [On snot and fonts](http://luc.devroye.org/fonts.html)
 - [Programming Fonts](https://www.programmingfonts.org/)
   ([Tumblr](https://programmingfonts.tumblr.com/))
 - [The League of Movable Type](https://www.theleagueofmoveabletype.com/)
