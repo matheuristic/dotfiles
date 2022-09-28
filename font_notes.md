@@ -75,7 +75,8 @@ fc-cache -fv
   ([Github](https://github.com/indestructible-type/Bodoni))
 - [Castoro](https://github.com/TiroTypeworks/Castoro)
 - [Courier Prime](https://quoteunquoteapps.com/courierprime/)
-- [ETbb](https://ctan.org/pkg/etbb?lang=en)
+- [ETbb](https://tug.org/FontCatalogue/etbb/)
+  ([CTAN](https://ctan.org/pkg/etbb?lang=en))
 - [Fraunces](https://github.com/undercasetype/Fraunces)
 - Grenze [Regular](https://www.omnibus-type.com/fonts/grenze/)
   ([Github](https://github.com/Omnibus-Type/Grenze)), and
@@ -115,7 +116,7 @@ fc-cache -fv
 - [M+](https://mplusfonts.github.io/)
   ([Github](https://github.com/coz-m/MPLUS_FONTS))
 - [New Computer Modern](https://tug.org/FontCatalogue/newcomputermodernroman/)
-  ([CTAN](https://www.ctan.org/tex-archive/fonts/newcomputermodern))
+  ([CTAN](https://ctan.org/pkg/newcomputermodern?lang=en))
 - [Recursive](https://github.com/arrowtype/recursive)
 - [Red Hat](https://github.com/RedHatOfficial/RedHatFont)
 - [Roboto](https://fonts.google.com/specimen/Roboto),
