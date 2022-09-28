@@ -31,12 +31,20 @@ fc-cache -fv
 
 ## Sans-serif proportional fonts
 
+- Archivo [Regular](https://www.omnibus-type.com/fonts/archivo/)
+  ([Github](https://github.com/Omnibus-Type/Archivo)),
+  [Black](https://www.omnibus-type.com/fonts/archivo-black/)
+  ([Black](https://github.com/Omnibus-Type/ArchivoBlack)), and
+  [Narrow](https://www.omnibus-type.com/fonts/archivo-narrow/)
+  ([Github](https://github.com/Omnibus-Type/ArchivoNarrow))
 - [Atkinson Hyperlegible](https://brailleinstitute.org/freefont)
 - [Cooper Hewitt](https://www.cooperhewitt.org/open-source-at-cooper-hewitt/cooper-hewitt-the-typeface-by-chester-jenkins/)
 - [Decovar](https://github.com/googlefonts/decovar)
   (parametric axes, see [link](https://web.dev/variable-fonts/))
 - [Encode Sans](https://github.com/thundernixon/Encode-Sans)
 - [Figtree](https://github.com/erikdkennedy/figtree)
+- [FiraGO](https://bboxtype.com/typefaces/FiraGO/)
+  ([Github](https://github.com/bBoxType/FiraGO))
 - [Jost*](https://github.com/indestructible-type/Jost)
   (Futura alternative)
 - [Open Sans](https://github.com/googlefonts/opensans)
@@ -50,16 +58,24 @@ fc-cache -fv
   (parametric axes, see [link](https://web.dev/variable-fonts/))
 - [Space Grotesk](https://github.com/floriankarsten/space-grotesk)
 - [Urbanist](https://github.com/coreyhu/Urbanist)
+- [Ysabeau](https://github.com/CatharsisFonts/Ysabeau)
 
 ## Serif proportional fonts
 
 - [Amstelvar](https://github.com/googlefonts/amstelvar)
   (parametric axes, see [link](https://web.dev/variable-fonts/))
+- [Castoro](https://github.com/TiroTypeworks/Castoro)
 - [Courier Prime](https://quoteunquoteapps.com/courierprime/)
 - [ETbb](https://ctan.org/pkg/etbb?lang=en)
 - [Fraunces](https://github.com/undercasetype/Fraunces)
+- Grenze [Regular](https://www.omnibus-type.com/fonts/grenze/)
+  ([Github](https://github.com/Omnibus-Type/Grenze)), and
+  [Gotisch](https://www.omnibus-type.com/fonts/grenze-gotisch/)
+  ([Github](https://github.com/Omnibus-Type/Grenze-Gotisch))
 - [Inter](https://github.com/rsms/inter)
 - [Lora](https://github.com/cyrealtype/Lora-Cyrillic)
+- [Literata](https://www.type-together.com/literata-font)
+  ([Github](https://github.com/googlefonts/literata))
 - [Montagu Slab](https://github.com/floriankarsten/montagu-slab)
 - [Newsreader](https://github.com/productiontype/Newsreader)
 - [Playfair](https://github.com/clauseggers/Playfair)
@@ -110,6 +126,7 @@ fc-cache -fv
 - [Beautiful Web Type](https://beautifulwebtype.com/)
 - [Google Font Updates](https://twitter.com/googlefonts?lang=us)
 - [Google Fonts Knowledge](https://fonts.google.com/knowledge)
+- [Omnibus-Type](https://www.omnibus-type.com/)
 - [On snot and fonts](http://luc.devroye.org/fonts.html)
 - [Programming Fonts](https://www.programmingfonts.org/)
   ([Tumblr](https://programmingfonts.tumblr.com/))
