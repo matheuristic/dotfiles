@@ -229,6 +229,10 @@
 - Project (codebase) tools
   - [Cookiecutter](https://github.com/cookiecutter/cookiecutter)
     Project templates
+  - [EditorConfig](https://editorconfig.org/)
+    ([Github](https://github.com/editorconfig/)):
+    Define formatting conventions for project code and text files,
+    with multiple implementations and editor plugins to apply them
   - [gitg](https://gitlab.gnome.org/GNOME/gitg) or
     [Gitup](https://github.com/git-up/GitUp) or
     [TortoiseGit](https://tortoisegit.org/):
@@ -276,7 +280,11 @@
 - Shell enhancements
   - [tldr](https://github.com/tldr-pages/tldr) or
     [navi](https://github.com/denisidoro/navi):
-    Interactive command references on the command-line
+    Interactive command references on the command-line; tldr has
+    alternative client implementations
+    [tealdeer](https://github.com/dbrgn/tealdeer) or
+    [outfieldr](https://gitlab.com/ve-nt/outfieldr) that run much
+    faster than the usual Node.js and Python clients
   - [z](https://github.com/rupa/z) or
     [zoxide](https://github.com/ajeetdsouza/zoxide):
     Frecent directories; `z` is a plugin for Bash and Zsh, whereas
@@ -302,8 +310,13 @@
     Command-line program to log process forks, execs and exits;
     useful for tracking runaway processes
   - [htop](https://github.com/htop-dev/htop) or
+    [zenith](https://github.com/bvaisvil/zenith) or
     [bottom](https://github.com/ClementTsang/bottom):
     System resource monitor, alternative to `top`
+  - [lnav](https://lnav.org/)
+    ([Github](https://github.com/tstack/lnav)):
+    Log file viewer supporting multiple file formats and compression
+    types, and can consolidate multiple log files into a single view
   - [Sloth](https://sveinbjorn.org/sloth):
     macOS application to show open files, dirs, sockets and pipes
   - [Stacer](https://github.com/oguzhaninan/Stacer):
@@ -982,7 +995,7 @@ apt install openvpn3
 
 Other software to download:
 
-- [btop](https://github.com/aristocratos/btop)
+- [zenith](https://github.com/bvaisvil/zenith)
 - [Iosevka](https://github.com/be5invis/Iosevka) font (at least Aile,
   regular if needed)
 - [DBeaver](https://github.com/dbeaver/dbeaver) (community edition,
