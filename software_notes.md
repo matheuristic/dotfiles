@@ -459,8 +459,15 @@
   - [WireGuard](https://www.wireguard.com/):
     Simple and high-performance VPN
 - Web browsing
+  - [Bombadillo](https://bombadillo.colorfield.space/)
+    ([tildegit](https://tildegit.org/sloum/bombadillo)):
+    Gemini and Gopher TUI client, available on Debian or compile using
+    Go via `go install tildegit.org/sloum/bombadillo@latest`
   - [Ka-Block!](http://kablock.com/)
     Safari extension for blocking ads and trackers; iOS and macOS
+  - [Lagrange](https://gmi.skyjake.fi/lagrange/)
+    ([Github](https://github.com/skyjake/lagrange)):
+    Gemini GUI client
   - [Monolith](https://github.com/Y2Z/monolith.git):
     Save complete webpages to a single HTML file with embedded CSS,
     images and Javascript
