@@ -167,7 +167,7 @@
     [KRename](https://userbase.kde.org/KRename) or
     [GPRename](http://gprename.sourceforge.net/) or
     [Szyszka](https://github.com/qarmin/szyszka):
-    Rename lots of files easily 
+    Rename lots of files easily
   - [Stow](https://www.gnu.org/software/stow/):
     Symlink farm manager, useful for managing dotfiles
   - [Syncthing](https://syncthing.net/):
@@ -848,7 +848,7 @@ pip uninstall tensorflow-macos
 pip uninstall tensorflow-metal
 mamba install -c apple tensorflow-deps --force-reinstall
 pip install tensorflow-metal
-pip install tensorflow-macos 
+pip install tensorflow-macos
 ```
 
 To install [tensorflow-text](https://github.com/tensorflow/text) with
@@ -1191,3 +1191,31 @@ To sync a fork with upstream:
 
 Note that newer repositories have their primary branch names as `main`
 instead of `master`.
+
+### Rebasing to squash commits
+
+1. Rebase interactively from a base commit using Git's `rebase`
+   subcommand (e.g., `git rebase -i HEAD~3` bases on 3 commits ago).
+
+1. The command will spawn the default editor (`$EDITOR`) where commits
+   since the specified base can be squashed or picked. Note that the
+   earliest commit which is at the top has to be set to `pick`.
+
+1. After the file is saved and closed, the local repo is rebased.
+
+1. To push to the remote repository, it may be necessary to do
+   `git push -u origin --force-with-lease` rather than the usual
+   `git push -u origin` command.
+
+### Pruning branches no longer on the remote repository
+
+1. `git fetch --prune` to prune references no longer on remote.
+
+1. `git branch -vv` to show local branches, where the pruned branches
+   will have a `gone` tag.
+
+1. Run `git branch -d <branch>` on each pruned branch to delete it
+   (use `git branch -D` if branch isn't fully merged but unneeded).
+
+For more info, see the following StackOverflow
+[link](https://stackoverflow.com/questions/7726949/remove-tracking-branches-no-longer-on-remote).
