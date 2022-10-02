@@ -312,7 +312,10 @@
   - [htop](https://github.com/htop-dev/htop) or
     [zenith](https://github.com/bvaisvil/zenith) or
     [bottom](https://github.com/ClementTsang/bottom):
-    System resource monitor, alternative to `top`
+    System resource monitor, alternative to `top`; note that dumb
+    terminals or logging ncurses should not be used, in which case
+    do `top -b` to run `top` in batch mode (or `top -b -n NUMBER` to
+    limit the number of iterations to `NUMBER`)
   - [lnav](https://lnav.org/)
     ([Github](https://github.com/tstack/lnav)):
     Log file viewer supporting multiple file formats and compression
