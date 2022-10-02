@@ -3,9 +3,12 @@
 ## Open-source software
 
 - Audio and video creation and editing
-  - [Ardour](https://ardour.org/):
-    Multitrack audio recorder, works
-    with [ReaPlugs](https://www.reaper.fm/reaplugs/) VST plugins
+  - [Ardour](https://ardour.org/) or
+    [Zrythm](https://www.zrythm.org/):
+    Digital audio workstation; Ardour works with
+    [ReaPlugs](https://www.reaper.fm/reaplugs/) VST plugins; Ardour
+    seems more suited to audio recording and engineering, while Zrythm
+    seems more suited to MIDI electronic music production
   - [Kdenlive](https://kdenlive.org/en/):
     Video editor
   - [LMMS](https://lmms.io/):
