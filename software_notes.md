@@ -459,10 +459,13 @@
   - [WireGuard](https://www.wireguard.com/):
     Simple and high-performance VPN
 - Web browsing
-  - [Bombadillo](https://bombadillo.colorfield.space/)
+  - [Amfora](https://github.com/makeworld-the-better-one/amfora) or
+    [Bombadillo](https://bombadillo.colorfield.space/)
     ([tildegit](https://tildegit.org/sloum/bombadillo)):
-    Gemini and Gopher TUI client, available on Debian or compile using
-    Go via `go install tildegit.org/sloum/bombadillo@latest`
+    Gemini TUI clients, available on Debian or compile using
+    Go via `go install github.com/makeworld-the-better-one/amfora` or
+    `go install tildegit.org/sloum/bombadillo@latest`; Bombadillo
+    is also a Gopher client
   - [Ka-Block!](http://kablock.com/)
     Safari extension for blocking ads and trackers; iOS and macOS
   - [Lagrange](https://gmi.skyjake.fi/lagrange/)
