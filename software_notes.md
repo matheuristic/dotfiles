@@ -137,6 +137,10 @@
   - [Calibre](https://calibre-ebook.com/)
   - [Foliate](https://johnfactotum.github.io/foliate/)
 - Email
+  - [aerc](https://git.sr.ht/~rjarry/aerc):
+    TUI email client with [notmuch](https://notmuchmail.org/) support.
+    See the appropriate section below for how to set up Notmuch,
+    [Lieer](https://github.com/gauteh/lieer) and aerc for Gmail usage.
   - [Apple Mail](https://support.apple.com/mail) or
     [Evolution](https://wiki.gnome.org/Apps/Evolution) or
     [Thunderbird](https://www.thunderbird.net/):
@@ -151,8 +155,8 @@
   - [Double Commander](https://doublecmd.sourceforge.io/):
     GUI Midnight Commander clone
   - [Magic Wormhole](https://github.com/magic-wormhole/magic-wormhole):
-    Command-line tool and library for sending files from one computer to
-    another; note that this tool requires
+    Command-line tool and library for sending files from one computer
+    to another; note that this tool requires
     [mailbox](https://github.com/magic-wormhole/magic-wormhole-mailbox-server)
     and a
     [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)
@@ -472,8 +476,10 @@
   - [Ka-Block!](http://kablock.com/)
     Safari extension for blocking ads and trackers; iOS and macOS
   - [Lagrange](https://gmi.skyjake.fi/lagrange/)
-    ([Github](https://github.com/skyjake/lagrange)):
-    Gemini GUI client
+    ([Github](https://github.com/skyjake/lagrange)) or
+    [Kristall](https://kristall.random-projects.net/)
+    ([Github](https://github.com/MasterQ32/kristall)):
+    Gemini GUI client; Kristall also supports Gopher
   - [Monolith](https://github.com/Y2Z/monolith.git):
     Save complete webpages to a single HTML file with embedded CSS,
     images and Javascript
@@ -1232,3 +1238,335 @@ instead of `master`.
 
 For more info, see the following StackOverflow
 [link](https://stackoverflow.com/questions/7726949/remove-tracking-branches-no-longer-on-remote).
+
+## Using Notmuch, Lieer and aerc for GMail usage
+
+[Notmuch](https://notmuchmail.org/) is a backend system for indexing,
+tagging and searching emails.
+
+GMail has an IMAP interface, but that can be clunky and it is really
+geared toward OAuth2 clients. Notmuch can support GMail via OAuth2 by
+using [lieer](https://github.com/gauteh/lieer) to push and pull email
+and labels from GMail, storing them in a maildir and sychronizing
+labels with a Notmuch database.
+
+There are a number of front-ends that can be used with Notmuch.
+[aerc](https://git.sr.ht/~rjarry/aerc) is a relatively simple but
+flexible one to use.
+
+### Installing Notmuch and Lieer
+
+The following instructions show how to set up Notmuch, Lieer and
+aerc for use with GMail, in a Conda environment to avoid packaging
+conflicts with other software on the system.
+
+Environment variables for the build process (assume the
+`$HOME/packages` directory exists):
+
+```sh
+export NOTMUCHDIR=$HOME/packages/notmuch
+export LIEERDIR=$HOME/packages/lieer
+```
+
+Create Conda environment for Notmuch Python bindings and Lieer (using
+[mambaforge](https://github.com/conda-forge/miniforge#mambaforge)),
+and activate it:
+
+```sh
+CONDAENVIRON=email
+mamba create -n $CONDAENVIRON python=3.9
+mamba activate $CONDAENVIRON
+```
+
+Compile Notmuch bindings:
+
+```sh
+sudo apt install libxapian-dev libgmime-3.0-dev libtalloc-dev zlib1g-dev python3-sphinx texinfo install-info
+git clone git://git.notmuchmail.org/git/notmuch "$NOTMUCHDIR"
+cd "$NOTMUCHDIR"
+./configure --prefix=$HOME/.local
+make
+make install
+```
+
+Build Notmuch Python bindings and Lieer:
+
+```sh
+cd "$NOTMUCHDIR/bindings/python"
+pip install .
+git clone https://github.com/gauteh/lieer.git "$LIEERDIR"
+cd "$LIEERDIR"
+pip install .
+```
+
+Create wrapper scripts to call Lieer binaries `gmi` from outside the
+Conda environment:
+
+```sh
+cat > $HOME/.local/bin/gmi <<EOF
+#!/bin/bash
+
+# Wrapper script for running gmi
+
+source "$HOME/mambaforge/etc/profile.d/conda.sh"
+conda activate $CONDAENVIRON
+
+LD_LIBRARY_PATH=$NOTMUCHDIR/lib gmi "\$@"
+EOF
+chmod +x $HOME/.local/bin/gmi
+```
+
+Ok to deactivate the Conda environment now:
+
+```sh
+mamba deactivate
+```
+
+Create a basic Notmuch configuration file at `$HOME/.notmuch-config` using
+a setup wizard:
+
+```sh
+notmuch setup
+```
+
+Edit the `$HOME/.notmuch-config` configuration to reflect the following
+(no need to add any tags to unread emails since GMail already adds the
+`unread` tag automatically):
+
+```text
+[new]
+tags=
+ignore=/.*[.](json|lock|bak)$/
+```
+
+Create a mail directory and initialize the Notmuch database:
+
+```sh
+mkdir -p $HOME/.mail
+cd $HOME/.mail
+notmuch new
+```
+
+### Set up an application project that can use the GMail API
+
+Create a Google developer OAuth client ID and download its secrets
+file. The exact flow keeps changing, but core steps as of writing are
+as follows:
+
+Go to the Google developer console
+([link](https://console.developers.google.com/flows/enableapi?apiid=gmail))
+to create a new GMail project and API credentials for it.
+
+Note that the pages mentioned below are in the **APIs & Services**
+section.
+
+Enable the Gmail API (go to **Enabled APIs & Services** then click
+**+ ENABLE APIS AND SERVICES** then choose Gmail API). For what data
+will be processed, "User data" can be chosen.
+
+Set up the consent screen (go to **OAuth consent screen**). For user
+type, choose **Internal** if a GSuite user, else **External**. Give
+the application a name.
+
+Create the OAuth client ID (go to **Credentials**, then click **+
+CREATE CREDENTIALS**, then **OAuth client ID**). Choose *Desktop app*
+as the application type and name the application.
+
+Complete the setup, then download the OAuth client ID secret in JSON
+format.
+
+The rest of the instructions assume the client secret file is
+downloaded as the `$HOME/Downloads/client_secret_CLIENTID.json` file
+(where `CLIENTID` should be the acutal client ID).
+
+### Setting up the GMail account for Notmuch and Lieer
+
+Suppose a GMail user with email address `username@emailserver.com` is
+to be added (modify appropriately).
+
+Create a subdirectory for the user in the mail directory.
+
+```sh
+cd $HOME/.mail
+mkdir username@emailserver.com
+```
+
+Copy the client secret file to the local mailbox directory (i.e.,
+`$HOME/.mail/username@emailserver.com/`) and use it to authenticate
+(replace `CLIENTID` with the actual client ID):
+
+```sh
+cd $HOME/.mail/username@emailserver.com
+cp -a $HOME/Downloads/client_secret_CLIENTID.json .
+gmi init -c client_secret_CLIENTID.json username@emailserver.com
+```
+
+This pops up a web flow in the browser to authenticate. Now retrieve email:
+
+```sh
+gmi pull
+```
+
+**Note**: If there is a need to change client IDs or reset the client
+secret, it is possible to reauthenticate using a new client secret
+file:
+
+```sh
+gmi auth -f -c new_client_secret_CLIENTID.json
+```
+
+Back to setting up the GMail account in Notmuch.
+
+Configure a hook that runs `gmi pull` when `notmuch new` is called:
+
+```sh
+mkdir -p $HOME/.mail/.notmuch/hooks
+cat > $HOME/.mail/.notmuch/hooks/pre-new <<EOF
+#/bin/sh
+cd $HOME/.mail/username@emailserver.com
+$HOME/.local/bin/gmi sync
+EOF
+chmod +x $HOME/.mail/.notmuch/hooks/pre-new
+```
+
+After this setup, `notmuch new` should do two-way sync of mail and
+tags between the local database and GMail.
+
+Set up a convenience wrapper `gmi-send` for `gmi send` to send mail
+with this account:
+
+```sh
+cat > $HOME/.local/bin/gmi-send <<EOF
+!/bin/bash
+
+# Wrapper script for running "gmi send"
+$HOME/.local/bin/gmi send --quiet -t -C $HOME/.mail/username@emailserver.com "\$@"
+EOF
+chmod +x $HOME/.local/bin/gmi-send
+```
+
+If there are multiple accounts, this can be repeated with
+the change that lines of the following sort should be
+added to the hook file `$HOME/.mail/.notmuch/hook/pre-new`
+
+```sh
+cd $HOME/.mail/anotherusername@anotheremailserver.com
+$HOME/.local/bin/gmi sync
+```
+
+and there should be different `gmi-send` wrappers `gmi-send-NAME1`,
+`gmi-send-NAME2`, etc (change `NAME1`, `NAME2`, etc appropriately),
+for the different accounts instead of just one `gmi-send`.
+
+### Installing and setting up aerc
+
+Make sure the [Go](https://go.dev/) compiler is installed (easiest is
+using downloading from the website).
+
+Compile aerc and install it to a separate directory (best to do so
+because it needs to be run with specific library paths set):
+
+```sh
+export AERCSRC=$HOME/packages/aerc
+export AERCTGT=$HOME/aerc
+mkdir -p "$AERCTGT"
+git clone https://git.sr.ht/~rjarry/aerc "$AERCSRC"
+cd "$AERCSRC"
+LIBRARY_PATH="$NOTMUCHDIR/lib" CPATH="$NOTMUCHDIR/lib" GOFLAGS=-tags=notmuch PREFIX=$AERCTGT make install
+```
+
+Set up configuration files for aerc.
+
+Make the aerc config directory as needed, and copy the general
+settings template to it.
+
+```sh
+mkdir -p $HOME/.config/aerc
+cp -a $AERCTGT/usr/share/aerc/aerc.conf $HOME/.config/aerc/
+```
+
+Modify `$HOME/.config/aerc/aerc.conf` to reflect the following,
+which uses Notmuch to populate the address book using previous email
+correspondents:
+
+```text
+# ...
+[compose]
+# ...
+address-book-cmd='notmuch address "%s"'
+# ...
+```
+
+Account configuration (a junk `postpone` setting is specified since
+postponing emails, i.e. adding drafts, does not work with Lieer, see
+[link](https://github.com/gauteh/lieer/issues/64)):
+
+```sh
+cat > $HOME/.config/aerc/accounts.conf <<EOF
+[GMail]
+source         = notmuch://$HOME/.mail/
+check-mail-cmd = notmuch new
+outgoing       = $HOME/.local/bin/gmi-send
+query-map      = $HOME/.config/aerc/map.conf
+default        = Inbox
+from           = User name goes here <username@emailserver.com>
+postpone       = Drafts-DOESNOTWORKFORNOTMUCH
+EOF
+```
+
+"Folder" mapping for the account in aerc:
+
+```sh
+cat > $HOME/.config/aerc/map.conf <<EOF
+All=
+Drafts=tag:draft
+Inbox=tag:inbox and not tag:archived and not tag:deleted
+Sent=tag:sent
+Starred=tag:flagged
+Trash=tag:deleted
+EOF
+```
+
+For keybindings, copy over the default bindings...
+
+```sh
+cp -a $AERCTGT/usr/share/aerc/binds.conf $HOME/.config/aerc/
+```
+
+Modify `$HOME/.config/aerc/binds.conf` to reflect the following, which
+changes the message deletion bindings to tag messages appropriately
+and disables the default continue draft composition binding:
+
+```text
+# ...
+[messages]
+# ...
+# d =: :prompt 'Really delete this message?' 'delete-message'<Enter>
+D = :modify-labels -inbox +deleted<Enter>
+# ...
+<C-r> = :check-mail<Enter>
+[messages:folder=Drafts]
+# <Enter> = :recall<Enter>  # disabled, lieer doesn't work well with GMail drafts
+# ...
+[view]
+# ...
+D = :modify-labels -inbox +deleted<Enter>:close<Enter>
+# ...
+```
+
+Create a wrapper for running `aerc` with the appropriate libraries on
+the path:
+
+```sh
+cat > $HOME/.local/bin/aerc <<EOF
+#!/bin/sh
+
+LD_LIBRARY_PATH=$NOTMUCHDIR/lib $AERCTGT/bin/aerc "\$@"
+EOF
+```
+
+Calling `aerc` on the command line should now use the wrapper
+(assuming `$HOME/.local/bin` is a directory in `$PATH`).
+
+Note that the above instructions is for a single email account,
+and the setup for multiple email accounts would have changes.
