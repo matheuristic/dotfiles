@@ -1541,8 +1541,17 @@ and disables the default continue draft composition binding:
 # ...
 [messages]
 # ...
-# d =: :prompt 'Really delete this message?' 'delete-message'<Enter>
-D = :modify-labels -inbox +deleted<Enter>
+# d = :prompt 'Really delete this message?' 'delete-message'<Enter>
+# D = :delete<Enter>
+# A = :archive flat<Enter>
+d = :modify-labels -inbox +deleted<Enter>
+D = :modify-labels +inbox -deleted<Enter>
+u = :modify-labels +unread<Enter>
+U = :modify-labels -unread<Enter>
+s = :modify-labels +flagged<Enter>
+S = :modify-labels -flagged<Enter>
+a = :modify-labels -inbox<Enter>
+A = :modify-labels +inbox<Enter>
 # ...
 <C-r> = :check-mail<Enter>
 [messages:folder=Drafts]
@@ -1550,7 +1559,19 @@ D = :modify-labels -inbox +deleted<Enter>
 # ...
 [view]
 # ...
-D = :modify-labels -inbox +deleted<Enter>:close<Enter>
+# S = :save<Enter>
+W = :save<space>
+| = :pipe<space>
+# D = :delete<Enter>
+# A = :archive flat<Enter>
+d = :modify-labels -inbox +deleted<Enter>:close<Enter>
+D = :modify-labels +inbox -deleted<Enter>
+u = :modify-labels +unread<Enter>
+U = :modify-labels -unread<Enter>
+s = :modify-labels +flagged<Enter>
+S = :modify-labels -flagged<Enter>
+a = :modify-labels -inbox<Enter>:close<Enter>
+A = :modify-labels +inbox<Enter>
 # ...
 ```
 
