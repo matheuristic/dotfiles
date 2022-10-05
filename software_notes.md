@@ -377,6 +377,9 @@
     GUI `diff` alternative; Meld supports Windows and Linux, which has
     also a [macOS port](https://github.com/yousseb/meld), kdiff3
     is Linux-only, xxdiff is lightweight but does not support Unicode
+  - [par](http://www.nicemice.net/par/):
+    Paragraph reformatter, like a smarter version of `fmt` from GNU
+    [coreutils](https://www.gnu.org/software/coreutils/)
   - [sttr](https://github.com/abhimanyu003/sttr):
     Command-line tool for string operations
   - [uni](https://github.com/arp242/uni) or
