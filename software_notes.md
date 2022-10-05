@@ -1619,5 +1619,10 @@ EOF
 Calling `aerc` on the command line should now use the wrapper
 (assuming `$HOME/.local/bin` is a directory in `$PATH`).
 
+If using [Sourcehut](https://sr.ht/), collaboration is primarily over
+email as of writing, so some additional bindings to better facilitate
+the `git send-email` workflow will be useful. See
+[link](https://drewdevault.com/2022/07/25/Code-review-with-aerc.html).
+
 Note that the above instructions is for a single email account,
 and the setup for multiple email accounts would have changes.
