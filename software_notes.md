@@ -357,14 +357,18 @@
     line) at paths `$ENCHANT_CONFIG_DIR/<lang>.dic` (for example,
     `$HOME/.config/enchant/en_US.dic` for the US English personal word
     list on Unix or Linux systems)
+  - [FIGlet](http://www.figlet.org/)
+    ([Github](https://github.com/cmatsuoka/figlet)):
+    Convert text to large ASCII word art, additional fonts are
+    available [here](https://github.com/cmatsuoka/figlet-fonts)
   - [hexyl](https://github.com/sharkdp/hexyl):
     Command-line hex viewer
   - [LanguageTool](https://languagetool.org/):
     Style and grammar checker; standalone Java version downloadable
-    [here](https://languagetool.org/download/) with snapshots available
+    [here](https://languagetool.org/download/), snapshots available
     [here](https://internal1.languagetool.org/snapshots/) (the link
     [link](https://languagetool.org/download/LanguageTool-stable.zip)
-    has the latest version), which is
+    has the latest version), and is
     [augmentable](https://dev.languagetool.org/finding-errors-using-n-gram-data.html)
     with [n-gram](https://languagetool.org/download/ngram-data/) data
   - [Meld](https://meldmerge.org/) or
