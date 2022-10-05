@@ -475,11 +475,12 @@
 - Web browsing
   - [Amfora](https://github.com/makeworld-the-better-one/amfora) or
     [Bombadillo](https://bombadillo.colorfield.space/)
-    ([tildegit](https://tildegit.org/sloum/bombadillo)):
+    ([tildegit](https://tildegit.org/sloum/bombadillo)) or
+    [gcat](https://github.com/aaronjanse/gcat):
     Gemini TUI clients, available on Debian or compile using
     Go via `go install github.com/makeworld-the-better-one/amfora` or
     `go install tildegit.org/sloum/bombadillo@latest`; Bombadillo
-    is also a Gopher client
+    is also a Gopher client; use gcat in Acme or dumb terminals
   - [Ka-Block!](http://kablock.com/)
     Safari extension for blocking ads and trackers; iOS and macOS
   - [Lagrange](https://gmi.skyjake.fi/lagrange/)
