@@ -1247,6 +1247,25 @@ instead of `master`.
 For more info, see the following StackOverflow
 [link](https://stackoverflow.com/questions/7726949/remove-tracking-branches-no-longer-on-remote).
 
+### Reconciliation after accidentally using `mv` instead of `git mv`
+
+Suppose a version controlled file `a.txt` in a Git repository is to be
+moved to `b.txt`. Normally, that should be done using:
+
+```sh
+git mv a.txt b.txt
+```
+
+However, supposed that was done using `mv` instead. The following
+steps show how to reconcile the Git repository with the new filenames
+(basically `git rm` the old filename and `git add` the new filename):
+
+```sh
+mv a.txt b.txt
+git rm a.txt
+git add b.txt
+```
+
 ## Using Notmuch, Lieer and aerc for GMail usage
 
 [Notmuch](https://notmuchmail.org/) is a backend system for indexing,
