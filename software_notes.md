@@ -553,11 +553,15 @@
     [Timewarrior](https://timewarrior.net/):
     Todo list management (Taskwarrior) and time-tracking (Timewarrior)
   - [watchexec](https://github.com/watchexec/watchexec) or
+    [entr](https://github.com/eradman/entr) or
+    [Watchman](https://github.com/facebook/watchman) or
     [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch):
-    Run command when files change; Watch is Acme editor-specific
+    Run command when files change; Watch is Acme editor-specific,
+    Watchman is designed more as a per-user system service and has a
+    client-server architecture
   - [Zotero](https://www.zotero.org/):
-    Reference management software to collect, organize, cite and share
-    research material
+    Reference management software to collect, organize, cite and
+    share research material
 
 ## Commercial software
 
