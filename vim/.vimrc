@@ -19,7 +19,7 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 "set directory=~/.vimfiles/swap//,. " swapfile folders, appending '//' uses the full path in the filename
 "set binary noeol " do not autowrite <EOL> at end of file, resets 'textwidth', 'wrapmargin', 'modeline' and 'expandtab'
 set complete+=k " also use dictionaries on keyword completion
-set expandtab   " expand tabs into spaces (use <C-v><Tab> in insert mode for a real tab)
+"set expandtab   " expand tabs into spaces (use <C-v><Tab> in insert mode for a real tab)
 set formatoptions+=j " delete comment leader when joining comment lines
 set formatoptions+=mM " correctly break multibyte characters like CJK ones
 "set gdefault    " substitute all matches in a string by default
@@ -37,7 +37,7 @@ set shiftwidth=2 " number of spaces for each indent level
 "set showmatch   " jump briefly to matching bracket and return
 set showmode    " show current mode
 set smartcase   " override 'ignorecase' if search pattern has upper case chars, only used when 'ignorecase' is set
-set smarttab    " tabs inserts shiftwidth space
+"set smarttab    " tab inserts shiftwidth space
 "set softtabstop=4 " num spaces a tab counts for while in insert mode
 "set swapfile    " use swapfiles, swapfile location is determined by 'directory'
 "set tabstop=8   " length of a real tab
