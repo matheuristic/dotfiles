@@ -47,8 +47,9 @@ fi
 # Set paths as needed
 
 # go support
-if [ -d $HOME/go/bin ]; then
-  export PATH=$HOME/go/bin:$PATH
+if [ -d $HOME/go ]; then
+  export GOPATH=$HOME/go
+  export PATH=$GOPATH/bin:$PATH
 fi
 
 # User-local binaries and manpages
@@ -61,20 +62,20 @@ fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/thiam/mambaforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup=$("$HOME/mambaforge/bin/conda" 'shell.bash' 'hook' 2> /dev/null)
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/thiam/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/home/thiam/mambaforge/etc/profile.d/conda.sh"
+    if [ -f "$HOME/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "$HOME/mambaforge/etc/profile.d/conda.sh"
     else
-        export PATH="/home/thiam/mambaforge/bin:$PATH"
+        export PATH="$HOME/mambaforge/bin:$PATH"
     fi
 fi
 unset __conda_setup
 
-if [ -f "/home/thiam/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/home/thiam/mambaforge/etc/profile.d/mamba.sh"
+if [ -f "$HOME/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "$HOME/mambaforge/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
 
@@ -97,7 +98,7 @@ if [[ "$TERM" == "dumb" ]]; then
   if whence -w preexec >/dev/null; then
       unfunction preexec
   fi
-  # Set prompt so middle-clicking whole line reruns line's command
+  # Set prompt so middle-clicking line in Acme reruns line's command
   PROMPT=": %m; "
   RPROMPT=""
 fi
