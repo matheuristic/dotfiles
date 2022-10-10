@@ -135,6 +135,8 @@
   - [Tesseract](https://github.com/tesseract-ocr/tesseract)
 - Ebook readers and library managers
   - [Calibre](https://calibre-ebook.com/)
+  - [epub2txt2](https://github.com/kevinboone/epub2txt2):
+    Extract text from EPUB
   - [Foliate](https://johnfactotum.github.io/foliate/)
 - Email
   - [aerc](https://git.sr.ht/~rjarry/aerc):
