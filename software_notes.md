@@ -438,8 +438,6 @@
   - [direnv](https://github.com/direnv/direnv) or
     [shadowenv](https://github.com/Shopify/shadowenv):
     Load and unload env vars based on location
-  - [entr](https://github.com/eradman/entr/):
-    Run command when files change
   - [hollywood](https://github.com/dustinkirkland/hollywood):
     Hollywood technobabble in a Byobu session
   - [parallel](https://www.gnu.org/software/parallel/):
@@ -553,15 +551,19 @@
   - [sc-im](https://github.com/andmarti1424/sc-im)
     Terminal spreadsheet program
   - [Sweet Home 3D](https://www.sweethome3d.com/):
-    Open-source interior design application, also available as an online
+    Open-source interior design application, also available as a
     [webapp](https://www.sweethome3d.com/SweetHome3DOnlineManager.jsp)
   - [Taskwarrior](https://taskwarrior.org/) and
     [Timewarrior](https://timewarrior.net/):
     Todo list management (Taskwarrior) and time-tracking (Timewarrior)
-  - [watchexec](https://github.com/watchexec/watchexec) or
-    [entr](https://github.com/eradman/entr) or
-    [Watchman](https://github.com/facebook/watchman) or
-    [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch):
+  - [entr](https://eradman.com/entrproject/)
+    ([Github](https://github.com/eradman/entr)) or
+    [watchexec](https://watchexec.github.io/)
+    ([Github](https://github.com/watchexec/watchexec)) or
+    [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch)
+    ([Github, in `acme/Watch/` dir](https://github.com/9fans/go)) or
+    [Watchman](https://facebook.github.io/watchman/)
+    ([Github](https://github.com/facebook/watchman)):
     Run command when files change; Watch is Acme editor-specific,
     Watchman is designed more as a per-user system service and has a
     client-server architecture
