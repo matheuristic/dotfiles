@@ -252,6 +252,11 @@
     Self-hosted Git server
   - [kondo](https://github.com/tbillington/kondo):
     Clean unneeded files like build artifacts from project directories
+  - [Kythe](https://kythe.io/)
+    ([Github](https://github.com/kythe/kythe)):
+    Pluggable system for building code tools, comes with indexer
+    implementations for C++, Go and Java and other tools; see
+    [link](https://european-lisp-symposium.org/static/2020/godbout-slides.pdf)
   - [onefetch](https://github.com/o2sh/onefetch):
     Git repository information and statistics
   - [ruplacer](https://github.com/your-tools/ruplacer):
@@ -268,8 +273,18 @@
   - [Remmina](https://remmina.org/):
     Remote desktop client for POSIX systems
 - Search
-  - [Code Search](https://github.com/google/codesearch):
-    Index with `cindex` then search with `cgrep` or `csearch`
+  - [codesearch](https://github.com/google/codesearch) or
+    [hound](https://github.com/hound-search/hound) or
+    [zoekt](https://github.com/sourcegraph/zoekt):
+    Text search engine, good for source code; codesearch and hound are
+    based on [this paper](https://swtch.com/~rsc/regexp/regexp4.html);
+    codebase and zoekt have CLI interfaces, while hound and zoekt
+    (using zoekt-webserver) have web interfaces; codesearch provides
+    `cindex` (code indexer), `csearch` (search the resulting index),
+    and `cgrep` (grep but with pcregrep-like regexp syntax), and is
+    installable using Go by running
+   `go install -v github.com/google/codesearch/cmd/...@latest`;
+    zoekt is more featureful, e.g., works with various Git hosts
   - [Meilisearch](https://github.com/meilisearch/meilisearch) or
     [ElasticSearch](https://github.com/elastic/elasticsearch) or
     [Toshi](https://github.com/toshi-search/Toshi):
@@ -518,7 +533,15 @@
   - [age](https://github.com/FiloSottile/age) or
     [eureka](https://github.com/mimoo/eureka):
     Simple command-line encryption/decryption tool; eureka is more
-    limited (no key files; generates a token to be used by recipient)
+    limited (no key files; generates a token to be used by recipient);
+    or just use GnuPG, either without public key cryptography by
+    running `gpg -o FILE.gpg -c FILE` to encrypt a file with a
+    symmetric cipher using a passphrase where the encrypted file can
+    later be decrypted with `gpg -d FILE.gpg` and the same passphrase,
+    or with public key cryptography by encrypting a file using a
+    recipient's public key and `gpg -r EMAIL -o FILE.gpg -e FILE`
+    where the encrypted file can later be decrypted with the
+    recipient's private key and `gpg -d <file>.gpg`
   - [Al Dente](https://github.com/davidwernhart/AlDente):
     macOS tool to limit battery charging (e.g. keeping charge
     percentage at or below 80% can help prolong battery life)
@@ -556,17 +579,17 @@
   - [Taskwarrior](https://taskwarrior.org/) and
     [Timewarrior](https://timewarrior.net/):
     Todo list management (Taskwarrior) and time-tracking (Timewarrior)
-  - [entr](https://eradman.com/entrproject/)
-    ([Github](https://github.com/eradman/entr)) or
-    [watchexec](https://watchexec.github.io/)
-    ([Github](https://github.com/watchexec/watchexec)) or
-    [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch)
-    ([Github, in `acme/Watch/` dir](https://github.com/9fans/go)) or
-    [Watchman](https://facebook.github.io/watchman/)
-    ([Github](https://github.com/facebook/watchman)):
-    Run command when files change; Watch is Acme editor-specific,
-    Watchman is designed more as a per-user system service and has a
-    client-server architecture
+  - [entr](https://github.com/eradman/entr) or
+    [fswatch](https://github.com/emcrisostomo/fswatch) or
+    [watchexec](https://github.com/watchexec/watchexec) or
+    [watchfiles](https://github.com/samuelcolvin/watchfiles) or
+    [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch) or
+    [Watchman](https://github.com/facebook/watchman):
+    Run command when files change; entr, watchexec and watchfiles are
+    somewhat easier to use; fswatch is more a file watcher but can be
+    piped to xargs to run commands specific to the changed file(s);
+    Watch is Acme editor-specific; and Watchman has a client-server
+    architecture and is designed as more of a per-user system service
   - [Zotero](https://www.zotero.org/):
     Reference management software to collect, organize, cite and
     share research material
