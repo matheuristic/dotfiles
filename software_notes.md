@@ -273,18 +273,15 @@
   - [Remmina](https://remmina.org/):
     Remote desktop client for POSIX systems
 - Search
-  - [codesearch](https://github.com/google/codesearch) or
+  - [Code Search](https://github.com/google/codesearch) or
     [hound](https://github.com/hound-search/hound) or
     [zoekt](https://github.com/sourcegraph/zoekt):
     Text search engine, good for source code; codesearch and hound are
     based on [this paper](https://swtch.com/~rsc/regexp/regexp4.html);
     codebase and zoekt have CLI interfaces, while hound and zoekt
-    (using zoekt-webserver) have web interfaces; codesearch provides
-    `cindex` (code indexer), `csearch` (search the resulting index),
-    and `cgrep` (grep but with pcregrep-like regexp syntax), and is
-    installable using Go by running
-   `go install -v github.com/google/codesearch/cmd/...@latest`;
-    zoekt is more featureful, e.g., works with various Git hosts
+    (using zoekt-webserver) have web interfaces; hound and zoekt are
+    more featureful, e.g., works with various Git hosts; see the
+    **Working with large codebases** section below for a good use case
   - [Meilisearch](https://github.com/meilisearch/meilisearch) or
     [ElasticSearch](https://github.com/elastic/elasticsearch) or
     [Toshi](https://github.com/toshi-search/Toshi):
@@ -1654,3 +1651,103 @@ the `git send-email` workflow will be useful. See
 
 Note that the above instructions is for a single email account,
 and the setup for multiple email accounts would have changes.
+
+## Working with large codebases
+
+Grep (and ripgrep) can be used to search in moderately-sized codebases
+but does not scale well to large ones. There are instead indexers and
+index searching tools that should be used instead for those scenarios.
+These include Code Search, hound, zoekt, Xapian, and so on. Usage of
+Code Search, one of the simpler options, is illustrated here.
+
+### Installing and using Code Search
+
+To install Code Search, make sure Go is installed and run
+
+```sh
+go install -v github.com/google/codesearch/cmd/...@latest
+```
+
+Code Search includes three command-line tools. These are:
+
+- `cgrep`: Like `grep` but with `pcregrep`-like regexp syntax. Not discussed here, use it like one would `grep`.
+
+- `cindex`: Code indexer.
+
+- `csearch`: Index searcher.
+
+`cindex` is used to index files in given directories (includes files
+in their subdirectories), e.g.
+
+```sh
+cindex /path/to/repository1 /path/to/repository2  # and so on...
+```
+
+To reindex currently indexed directories, just run `cindex` without any arguments.
+
+```sh
+cindex
+```
+
+To search the index, use `csearch`. Usage examples:
+
+```sh
+# Line containing 'foo' or 'Foo' across all indexed files
+csearch '[Ff]oo'
+# Lines in a given repo starting with 'func ', show line number
+csearch -n -f '^/path/to/repo' '^func '
+# Lines containing any case-insensitive variation of 'bar'
+csearch -i 'bar'
+```
+
+There is also `cgrep` which can be used just like `grep`, the only
+difference being the regexp syntax it uses is PCRE. It is useful
+when searching unindexed files and maintaining regexp consistency
+with `csearch` usage. For example, a small set of test files can be
+constructed and `cgrep` used to iterate on regexps for a query before
+it is run on a huge indexed codebase.
+
+```console
+$ cat 'a^2 + b^2' > sometestfile.txt
+$ grep 'a^2' sometestfile.txt
+a^2 + b^2
+$ cgrep 'a^2' sometestfile.txt
+$ cgrep 'a\^2' sometestfile.txt
+sometestfile.txt:a^2 + b^2
+```
+
+For more usage info on these three commands, run them with `--help`
+option, i.e., `cgrep --help`, `cindex --help` and `csearch --help`.
+
+### Code Search index file and how to use multiple indexes
+
+The location of the index is controlled by `$CSEARCHINDEX`
+(environment variable). When `$CSEARCHINDEX` is not specified, the
+file `~/.csearchindex` is used as the index (and is created if it does
+not exist). This means the default behavior is that all indexing is
+into a single global file.
+
+To have an index per codebase or per group of codebases, `direnv` or
+`shadowenv` can be used to set `$CSEARCHINDEX` automatically when
+entering or leaving specific directories. For example, assuming
+`direnv` is installed, a codebase-specific `$CSEARCHINDEX` can be
+configured to be automatically set and unset when entering and leaving
+that codebase's directory as follows.
+
+```sh
+cd /path/to/repository/
+# Setup direnv config for this codebase
+cat >>.envrc <<EOF
+export CSEARCHINDEX=$PWD/.csearchindex
+EOF
+direnv allow .
+# Index the codebase
+cindex $PWD
+# Run if a Git repository to avoid syncing index and direnv config
+cat >> .gitignore <EOF
+# direnv config
+/.envrc
+# Code search index
+/.csearchindex
+EOF
+```
