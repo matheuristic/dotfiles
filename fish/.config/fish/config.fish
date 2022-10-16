@@ -54,6 +54,11 @@ if test -d "$HOME/cdbookmarks"
     set -x CDPATH . "$HOME/cdbookmarks"
 end
 
+# Direnv hook
+if command -v direnv >/dev/null 2>&1
+    direnv hook fish | source
+end
+
 # Source local aliases
 if test -f ~/.config/fish/alias.fish
     source ~/.config/fish/alias.fish

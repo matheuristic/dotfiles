@@ -449,7 +449,9 @@
 - User experience and interface (text)
   - [direnv](https://github.com/direnv/direnv) or
     [shadowenv](https://github.com/Shopify/shadowenv):
-    Load and unload env vars based on location
+    Load and unload env vars based on location; for `direnv`, config
+    files go into `$XDG_CONFIG_HOME/direnv/` and allowed directory
+    environment files are recorded in `$XDG_DATA_HOME/allow/`
   - [hollywood](https://github.com/dustinkirkland/hollywood):
     Hollywood technobabble in a Byobu session
   - [parallel](https://www.gnu.org/software/parallel/):
@@ -626,6 +628,31 @@
 - Word processing
   - [Scrivener](https://www.literatureandlatte.com/scrivener/overview):
     Word processor for authoring books and screenplays
+
+## XDG base directories
+
+Many software applications store their configuration and
+data according to the XDG base directory specification
+([link](https://specifications.freedesktop.org/basedir-spec/latest/)).
+
+For Linux, these are the default locations:
+
+- `$XDG_CACHE_HOME`: `~/.cache`
+- `$XDG_CONFIG_HOME`: `~/.config`
+- `$XDG_DATA_HOME`: `~/.local/share`
+- `$XDG_RUNTIME_DIR`: `run/user/UID`
+- `$XDG_STATE_HOME`: `~/.local/state`
+
+For macOS, these are the default locations:
+
+- `$XDG_CACHE_HOME`: `~/Library/Caches`
+- `$XDG_CONFIG_HOME`: `~/Library/Application Support`
+- `$XDG_DATA_HOME`: `~/Application Support`
+- `$XDG_RUNTIME_HOME`: `~/Library/Application Support`
+- `$XDG_STATE_HOME`: `~/Library/Application Support`
+
+For some more useful info, see
+[here](https://github.com/adrg/xdg/blob/master/README.md).
 
 ## Linux notes
 
