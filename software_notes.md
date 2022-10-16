@@ -629,30 +629,47 @@
   - [Scrivener](https://www.literatureandlatte.com/scrivener/overview):
     Word processor for authoring books and screenplays
 
-## XDG base directories
+## Standard directories for application configuration, data, etc
 
-Many software applications store their configuration and
-data according to the XDG base directory specification
+The different OSes have guidelines on where applications should store
+app-related files (cache, configuration, data, logs, etc) on the
+system. These are either official (Apple for macOS), or defined by a
+working group (like XDG for Linux and Unix).
+
+For Linux, many software applications store their configuration
+and data according to the XDG base directory specification
 ([link](https://specifications.freedesktop.org/basedir-spec/latest/)).
+This specification allows the user to define storage locations using
+environment variables. The following are some environment variables,
+what they are for, and their defaults when unspecified:
 
-For Linux, these are the default locations:
+- `$XDG_CACHE_HOME`: cache, defaults to `~/.cache`
+- `$XDG_CONFIG_HOME`: config, defaults to `~/.config`
+- `$XDG_CONFIG_DIRS`: fallback config, defaults to `/etc/xdg`
+- `$XDG_DATA_HOME`: data, defaults to `~/.local/share`
+- `$XDG_DATA_DIRS`: fallback data, defaults to
+  `/usr/local/share/:/usr/share/`
+- `$XDG_RUNTIME_DIR`: runtime file, defaults to No default, some apps
+  default to `run/user/UID`
+- `$XDG_STATE_HOME`: state files, logs, history, defaults to
+  `~/.local/state`, this is a more recent addition (see
+  [link](https://www.reddit.com/r/linux/comments/ny34vs/new_xdg_state_home_in_xdg_base_directory_spec/))
 
-- `$XDG_CACHE_HOME`: `~/.cache`
-- `$XDG_CONFIG_HOME`: `~/.config`
-- `$XDG_DATA_HOME`: `~/.local/share`
-- `$XDG_RUNTIME_DIR`: `run/user/UID`
-- `$XDG_STATE_HOME`: `~/.local/state`
+On macOS, Apple provides app config and data storage guidelines
+([link](https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/FileSystemOverview/FileSystemOverview.html#//apple_ref/doc/uid/TP40010672-CH2-SW1)), outlining directories where
+each app may create its own directory for storing its config and
+data files.
 
-For macOS, these are the default locations:
+- `~/Library/Application Support`: App data files except user docs
+- `~/Library/Caches`: App cache
+- `~/Library/Frameworks`: Cross-app frameworks
+- `~/Library/Preferences`: App-specific preference files that are
+  **created by macOS APIs**; note that preferences not created through
+  macOS APIs should go in `~/Library/Application Support` instead
 
-- `$XDG_CACHE_HOME`: `~/Library/Caches`
-- `$XDG_CONFIG_HOME`: `~/Library/Application Support`
-- `$XDG_DATA_HOME`: `~/Application Support`
-- `$XDG_RUNTIME_HOME`: `~/Library/Application Support`
-- `$XDG_STATE_HOME`: `~/Library/Application Support`
-
-For some more useful info, see
-[here](https://github.com/adrg/xdg/blob/master/README.md).
+Not all apps follow XDG or Apple's guidelines on the two systems,
+often for convenience or legacy reasons. For example, Vim by default
+uses `~/.vimrc` for the user config file on both Linux and macOS.
 
 ## Linux notes
 
