@@ -46,6 +46,10 @@ Session.vim
 # auto-generated tag files
 tags
 
+### Acme ###
+# guide file
+/guide
+
 ### OS generated files ###
 .DS_Store
 .DS_Store?
