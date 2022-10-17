@@ -83,6 +83,8 @@
 - Desktop publishing
   - [Scribus](https://www.scribus.net/)
 - Diagramming and image editing
+  - [ASCIIFlow](https://github.com/lewish/asciiflow):
+    Web-based ASCII drawing application. Can be run locally
   - [Caire](https://github.com/esimov/caire):
     Smart image resizing
   - [drawio-desktop](https://github.com/jgraph/drawio-desktop) or
