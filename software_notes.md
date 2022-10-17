@@ -355,6 +355,34 @@
     Command-line benchmarking tool that supports multiple and warmup
     runs, export of results to various formats, etc; basically a
     featureful alternative to the standard `time` command
+- Text editors and integrated development environments
+  - [Acme](https://en.wikipedia.org/wiki/Acme_(text_editor)):
+    Mouse-driven GUI text editor from
+    [Plan 9](https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs),
+    ported to Linux and macOS ([link](https://9fans.github.io/plan9port/),
+    [Github](https://github.com/9fans/plan9port))
+  - [Emacs](https://www.gnu.org/software/emacs/):
+    Extensible TUI and GUI text editor, macOS builds available from
+    [here](https://emacsformacosx.com/) or
+    [here](https://github.com/railwaycat/homebrew-emacsmacport/releases)
+  - [Helix](https://helix-editor.com/):
+    TUI editor like Kakoune, but designed to have many editor features
+    like [LSP](https://microsoft.github.io/language-server-protocol/)
+    support built into the editor
+  - [Kakoune](https://kakoune.org/):
+    TUI editor like vi, but implements an object-verb command model
+    rather than vi's verb-object command-model; designed to call out
+    to the shell for most features beyond basic editing
+  - [Vim](https://www.vim.org/) or
+    [Neovim](https://neovim.io/):
+    TUI text editor based on [vi](https://en.wikipedia.org/wiki/Vi);
+    Vim can be found pre-installed on many systems; Neovim is a
+    refactor of Vim
+  - [Visual Studio Code](https://code.visualstudio.com/) or
+    [VSCodium](https://vscodium.com/):
+    GUI IDE; VSCodium is a build of VSCode that is free of tracking and
+    Microsoft branding, but note that some Microsoft plugins like pylance
+    (Python LSP server) does not support it
 - Text tools (general)
   - [Aspell](http://aspell.net/) or
     [Nuspell](https://nuspell.github.io/):
