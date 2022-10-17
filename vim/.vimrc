@@ -33,7 +33,7 @@ set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,nbsp:. " chars for displayin
 "set nomodeline  " do not have files overwrite settings from this vimrc
 "set scrolloff=1 " num lines from top or bottom of window to begin scrolling
 set sidescrolloff=5 " num lines from left or right of window to begin scrolling
-set shiftwidth=2 " number of spaces for each indent level
+set shiftwidth=0 " number of spaces for each indent level
 "set showmatch   " jump briefly to matching bracket and return
 set showmode    " show current mode
 set smartcase   " override 'ignorecase' if search pattern has upper case chars, only used when 'ignorecase' is set
@@ -170,66 +170,6 @@ if has('autocmd')
     autocmd BufWritePost,FileWritePost  *.asc,*.gpg silent u
     autocmd BufWritePost,FileWritePost  *.asc,*.gpg set nobin
   augroup END " }}}2
-  augroup mail " {{{2
-    autocmd!
-    autocmd FileType mail if has('syntax') | set spell textwidth=70 wrap nonumber | endif
-  augroup END " }}}2
-  augroup programming " {{{2
-    autocmd!
-    " Display line numbers
-    autocmd FileType c,cpp,java,javascript,haskell,make,perl,python set number
-    " Omnifunc completions
-    autocmd FileType c,cpp,java,javascript,haskell,make,perl,python
-          \ if has('eval') || has('insert_expand')
-          \ | set omnifunc=syntaxcomplete#Complete
-          \ | endif
-    " For languages where whitespace is not important,
-    " expand tabs to 2 spaces and use 2 space indents
-    autocmd FileType c,cpp,java,javascript,perl set expandtab shiftwidth=2 tabstop=2
-    " For C (not C++) where comments have explicit end characters,
-    " automatically insert comment leader characters when starting a new line
-    " in the middle of a comment
-    autocmd FileType c set formatoptions+=ro
-    " For C-like languages, have automatic indentation:
-    autocmd FileType c,cpp if has('cindent') | set cindent | endif
-    " For Haskell, expand tabs to 2 spaces and set 2 space indents
-    autocmd FileType haskell set expandtab tabstop=2 shiftwidth=2
-    " In Makefiles, do not expand tabs to spaces, since actual tab characters
-    " are needed, and have indentation at 8 chars to be sure that all
-    " indents are tabs (despite the mappings later):
-    autocmd FileType make set noexpandtab nosmarttab shiftwidth=8 tabstop=8
-    " For Perl, have things in braces indenting themselves:
-    autocmd FileType perl if has('smartindent') | set smartindent | endif
-    " For Python, expand tabs to 4 spaces and set 4 space indents
-    autocmd FileType python set expandtab tabstop=4 shiftwidth=4
-    " For Python, use cindent with the appropriate keywords
-    autocmd FileType python
-          \ if has('cindent')
-          \ | set cindent cinwords=class,def,elif,else,except,finally,for,if,try,while,with
-          \ | endif
-  augroup END " }}}2
-  augroup web " {{{2
-    autocmd!
-    " For both CSS and HTML, display line numbers
-    autocmd FileType css,html,xhtml set number
-    " Omnifunc completions
-    autocmd FileType css,html,xhtml
-          \ if has('eval') || has('insert_expand')
-          \ | set omnifunc=syntaxcomplete#Complete
-          \ | endif
-    " For HTML, do not have Vim automatically add a <CR> or line break
-    " at the end of the last line if there isn't one, otherwise
-    " the default http headers will be sent
-    autocmd FileType html,xhtml set binary noeol
-    " For both CSS and HTML, use genuine tab characters for
-    " indentation to make files a few bytes smaller:
-    autocmd FileType css,html,xhtml set noexpandtab shiftwidth=2 tabstop=2
-    " For CSS, also have things in braces indented:
-    autocmd FileType css if has('smartindent') | set smartindent | endif
-    " For HTML, generally format text, but if a long line has been created,
-    " leave it alone when editing
-    autocmd FileType html,xhtml set formatoptions+=tl
-  augroup END " }}}2
 endif
 
 " }}}1
@@ -296,8 +236,9 @@ endif
 " inoremap kj <ESC>
 " }}}2
 
-" Remap <Leader> from '\' to ',' {{{2
-"let mapleader=','
+" Remap <Leader> from '\' to <Space> {{{2
+" nnoremap <SPACE> <Nop>
+" let mapleader=' '
 " }}}2
 
 " Buffer manipulation and navigation ('b') {{{2
