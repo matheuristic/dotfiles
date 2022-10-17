@@ -237,8 +237,8 @@ endif
 " }}}2
 
 " Remap <Leader> from '\' to <Space> {{{2
-" nnoremap <SPACE> <Nop>
-" let mapleader=' '
+nnoremap <SPACE> <Nop>
+let mapleader=' '
 " }}}2
 
 " Buffer manipulation and navigation ('b') {{{2
@@ -398,9 +398,10 @@ if has('eval')
   xnoremap gc :call <SID>toggleComment()<CR>
 endif
 " }}}3
-" Open new terminal window {{{3
+" Open new terminal window, and run region in shell {{{3
 if has('terminal')
   nnoremap <silent> <Leader>T :terminal<CR>
+  vnoremap <silent> <Leader>T :terminal sh<CR>
 endif
 " Unhighlight search results (from https://github.com/tpope/vim-sensible) {{{3
 if has('extra_search')
