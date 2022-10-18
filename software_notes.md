@@ -378,6 +378,10 @@
     TUI text editor based on [vi](https://en.wikipedia.org/wiki/Vi);
     Vim can be found pre-installed on many systems; Neovim is a
     refactor of Vim
+  - [Vis](https://github.com/martanne/vis):
+    TUI text editor combining vi modal editing with
+    [Sam](https://en.wikipedia.org/wiki/Sam_(text_editor)'s structural
+    regular expressions and command language
   - [Visual Studio Code](https://code.visualstudio.com/) or
     [VSCodium](https://vscodium.com/):
     GUI IDE; VSCodium is a build of VSCode that is free of tracking and
