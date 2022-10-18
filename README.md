@@ -7,6 +7,7 @@ User configuration files for:
 - [fish](https://fishshell.com/)
 - [Flake8](https://flake8.pycqa.org/en/latest/)
 - [Git](https://git-scm.com/)
+- [helix](https://helix-editor.com/)
 - [kitty](https://sw.kovidgoyal.net/kitty/)
 - [Neovim](https://neovim.io/)
 - [NPM](https://www.npmjs.com/) using [nvm](https://github.com/nvm-sh/nvm)

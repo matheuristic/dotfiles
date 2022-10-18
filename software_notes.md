@@ -392,7 +392,7 @@
     while `C-x o` switches focused window)
   - [Vis](https://github.com/martanne/vis):
     TUI text editor combining vi modal editing with
-    [Sam](https://en.wikipedia.org/wiki/Sam_(text_editor)'s structural
+    [Sam](https://en.wikipedia.org/wiki/Sam_(text_editor))'s structural
     regular expressions and command language
   - [Visual Studio Code](https://code.visualstudio.com/) or
     [VSCodium](https://vscodium.com/):
