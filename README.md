@@ -10,11 +10,12 @@ User configuration files for:
 - [kitty](https://sw.kovidgoyal.net/kitty/)
 - [Neovim](https://neovim.io/)
 - [NPM](https://www.npmjs.com/) using [nvm](https://github.com/nvm-sh/nvm)
+- [nvi2](https://github.com/lichray/nvi2)[^1]
 - [PostgreSQL](https://www.postgresql.org/)
 - [Proselint](https://github.com/amperser/proselint)
 - [Python](https://www.python.org/) using
   [Pylint](https://www.pylint.org/) for linting
-- [R](https://www.r-project.org/) (for installations via `conda` on Mac OS X)
+- [R](https://www.r-project.org/) (for installations via `conda` on macOS)
 - [Ranger](https://github.com/ranger/ranger)
 - [GNU Screen](https://www.gnu.org/software/screen/)
 - [tmux](https://github.com/tmux/tmux)
@@ -23,16 +24,21 @@ User configuration files for:
 - [Vis](https://github.com/martanne/vis)
 - [xxdiff](https://github.com/blais/xxdiff)
 - [X11](https://www.x.org/wiki/) ([urxvt](http://software.schmorp.de/pkg/rxvt-unicode.html) and [xterm](https://invisible-island.net/xterm/))
+- [Zsh](https://www.zsh.org/)
 - ... and other utility scripts
+
+For Acme configuration, see [here](https://github.com/plan9port-config).
 
 For Emacs configuration, see [here](https://github.com/matheuristic/emacs-config).
 
 For Org example documents, see [here](https://github.com/matheuristic/org-examples).
 
+[^1]: Note that nvi2 is easy to compile only on macOS and BSD systems. Additionally, see [here](https://mattwidmann.net/notes/configuring-the-defaults-of-nvi/) and [here](https://mattwidmann.net/notes/the-nvi-text-editor/) for more ideas on how to configure it.
+
 ## Deploying config files using GNU Stow
 
 Install [GNU Stow](https://www.gnu.org/software/stow/) (on a
-Debian-derived distribution use `sudo apt install stow`; on Mac OS use
+Debian-derived distribution use `sudo apt install stow`; on macOS use
 `sudo port install stow` if MacPorts is installed).
 
 Git clone the repository, and symlink each package's config files to
@@ -42,7 +48,7 @@ corresponds to a directory within the repository, and `stow` with the
 package at the target destination if it does not exist and
 symbolically link each file in the package to the corresponding
 location in the target destination, creating any required directories
-as needed. Two examples (tmux and fish) are show as follows.
+as needed. Two examples (tmux and fish) are shown as follows.
 
 ```Shell
 $ git clone https://github.com/matheuristic/dotfiles.git
@@ -69,3 +75,6 @@ types, for instance a login interactive shell.
   specified by `$BASH_ENV` on start.
 - Interactive shell. A interactive Bash shell reads ~/.bashrc on
   start.
+
+Note that while Bash is the default shell on most Linux systems,
+Zsh is the default shell on macOS systems.
