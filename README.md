@@ -10,7 +10,6 @@ User configuration files for:
 - [kitty](https://sw.kovidgoyal.net/kitty/)
 - [Neovim](https://neovim.io/)
 - [NPM](https://www.npmjs.com/) using [nvm](https://github.com/nvm-sh/nvm)
-- [nvi2](https://github.com/lichray/nvi2)[^1]
 - [PostgreSQL](https://www.postgresql.org/)
 - [Proselint](https://github.com/amperser/proselint)
 - [Python](https://www.python.org/) using
@@ -19,7 +18,10 @@ User configuration files for:
 - [Ranger](https://github.com/ranger/ranger)
 - [GNU Screen](https://www.gnu.org/software/screen/)
 - [tmux](https://github.com/tmux/tmux)
-- [Vi](https://en.wikipedia.org/wiki/Vi)
+- [Vi](https://en.wikipedia.org/wiki/Vi) (applicable to
+  [nvi](https://repo.or.cz/nvi.git),
+  [nvi2](https://github.com/lichray/nvi2) and
+  [openvi](https://github.com/johnsonjh/OpenVi))
 - [Vim](https://www.vim.org/)
 - [Vis](https://github.com/martanne/vis)
 - [xxdiff](https://github.com/blais/xxdiff)
@@ -32,8 +34,6 @@ For Acme configuration, see [here](https://github.com/plan9port-config).
 For Emacs configuration, see [here](https://github.com/matheuristic/emacs-config).
 
 For Org example documents, see [here](https://github.com/matheuristic/org-examples).
-
-[^1]: Note that nvi2 is easy to compile only on macOS and BSD systems. Additionally, see [here](https://mattwidmann.net/notes/configuring-the-defaults-of-nvi/) and [here](https://mattwidmann.net/notes/the-nvi-text-editor/) for more ideas on how to configure it.
 
 ## Deploying config files using GNU Stow
 

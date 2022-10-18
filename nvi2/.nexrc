@@ -1,38 +1,0 @@
-" ~/.nexrc - nvi2 cfg
-
-" Automatically indent new lines
-set autoindent
-" ^R to edit the colon command-line history
-set cedit=
-" Remember values of c and g for substitute commands like ed
-set edcompatible
-" Extended regular expressions, see re_format(7)
-set extended
-" Don't flash the screen on error
-set noflash
-" Don't try to get exclusive lock on an accessed file
-set nolock
-" Search is case-insensitive unless upper-case
-set iclower
-" Display row and column
-set ruler
-" Show left matching char when right one is inserted
-set showmatch
-" Show current editor mode and whether file is modified but unsaved
-set showmode
-" Make tilde take a motion, e.g. now ~w flips case of characters in the word
-set tildeop
-" Change window name to reflect current file name
-set windowname
-
-" gg in command-mode jumps to start of file, like in vim
-map gg 1G
-
-" Next nvi mappings are from https://mattwidmann.net/notes/modern-nvi-mappings/
-" <space>e finds and opens a file in the current git repository, requires fzf
-map  e ::!env FZF_DEFAULT_COMMAND='git ls-files' fzf >> %:editGIEdit :bg 
-" <space>f searches for word under point across files in the current git repository, requires fzf and overrides the z register
-map  f wb"zye::!echo % >> %:editGI:!git grep -n  h"zpwi7c fzf >> ::editGf:l"zyt:hDIEdit + h"zp:bg
-" <space>y and <space>p to copy to and paste from the macOS clipboard
-map  y :p:.,$!pbcopy:q
-map  p :read !pbpaste

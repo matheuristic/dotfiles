@@ -377,7 +377,19 @@
     [Neovim](https://neovim.io/):
     TUI text editor based on [vi](https://en.wikipedia.org/wiki/Vi);
     Vim can be found pre-installed on many systems; Neovim is a
-    refactor of Vim
+    refactor of Vim; other more lightweight clones of vi exist, like
+    [OpenVI](https://github.com/johnsonjh/OpenVi) and
+    [nvi2](https://github.com/lichray/nvi2) (see
+    [here](https://mattwidmann.net/notes/the-nvi-text-editor/),
+    [here](https://mattwidmann.net/notes/configuring-the-defaults-of-nvi/)
+    and [here](https://mattwidmann.net/notes/modern-nvi-mappings/) for
+    more info; easily compilable only on BSDs and macOS), but these
+    lack a good number of features added in vim and Neovim
+  - [Vile](https://invisible-island.net/vile/):
+    Vi Like Emacs (vile) combines vi modal editing with multiple
+    buffer and multiple window features of Emacs; bindings are a mix
+    of the two (for example, `i` enters insert mode from command mode
+    while `C-x o` switches focused window)
   - [Vis](https://github.com/martanne/vis):
     TUI text editor combining vi modal editing with
     [Sam](https://en.wikipedia.org/wiki/Sam_(text_editor)'s structural
