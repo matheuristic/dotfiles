@@ -121,7 +121,7 @@ endif
 " Set syntax highlighting colorscheme {{{2
 if has('syntax') && !exists('colors_name') && (&t_Co >= 8)
   syntax enable
-  colorscheme elflord
+  colorscheme default
 endif
 " }}}2
 " Set the terminal emulator title to path of file being edited {{{2
