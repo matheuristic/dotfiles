@@ -7,7 +7,7 @@ User configuration files for:
 - [fish](https://fishshell.com/)
 - [Flake8](https://flake8.pycqa.org/en/latest/)
 - [Git](https://git-scm.com/)
-- [helix](https://helix-editor.com/)
+- [Helix](https://helix-editor.com/)
 - [kitty](https://sw.kovidgoyal.net/kitty/)
 - [Neovim](https://neovim.io/)
 - [NPM](https://www.npmjs.com/) using [nvm](https://github.com/nvm-sh/nvm)
@@ -27,6 +27,7 @@ User configuration files for:
 - [Vis](https://github.com/martanne/vis)
 - [xxdiff](https://github.com/blais/xxdiff)
 - [X11](https://www.x.org/wiki/) ([urxvt](http://software.schmorp.de/pkg/rxvt-unicode.html) and [xterm](https://invisible-island.net/xterm/))
+- [Zellij](https://zellij.dev/)
 - [Zsh](https://www.zsh.org/)
 - ... and other utility scripts
 

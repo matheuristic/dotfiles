@@ -1,4 +1,4 @@
-# ~/.config/helix/config.toml - helix configuration
+# ~/.config/helix/config.toml - Helix configuration
 
 [editor]
 auto-pairs = false

@@ -507,7 +507,9 @@
   - [rlwrap](https://github.com/hanslub42/rlwrap):
     `readline` wrapper to enable completion and history for any
     command-line tool taking keyboard input
-  - [tmux](https://github.com/tmux/tmux):
+  - [screen](https://www.gnu.org/software/screen/) or
+    [tmux](https://github.com/tmux/tmux) or
+    [Zellij](https://zellij.dev/):
     Terminal multiplexer, useful for managing and persisting remote
     sessions over Mosh or SSH
   - [ttyplot](https://github.com/tenox7/ttyplot):
