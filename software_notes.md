@@ -240,6 +240,18 @@
 - Project (codebase) tools
   - [Cookiecutter](https://github.com/cookiecutter/cookiecutter)
     Project templates
+  - [DevSkim](https://github.com/microsoft/DevSkim) or
+    [Semgrep](https://github.com/returntocorp/semgrep):
+    Code security linter for multiple languages, with a command-line
+    interface; ones for specific languages or tools also exist
+    (e.g., [C++](https://github.com/david-a-wheeler/flawfinder),
+    [Go](https://github.com/securego/gosec),
+    [Kubernetes](https://github.com/controlplaneio/kubesec),
+    [Ruby on Rails](https://github.com/presidentbeef/brakeman/),
+    [Terraform](https://github.com/aquasecurity/tfsec)); there are
+    also [other](https://github.com/Microsoft/ApplicationInspector)
+    [tools](https://github.com/googleprojectzero/weggli) that help
+    analyze what code does instead of looking for specific code smells
   - [EditorConfig](https://editorconfig.org/)
     ([Github](https://github.com/editorconfig/)):
     Define formatting conventions for project code and text files,
@@ -378,8 +390,10 @@
     TUI text editor based on [vi](https://en.wikipedia.org/wiki/Vi);
     Vim can be found pre-installed on many systems; Neovim is a
     refactor of Vim; other more lightweight clones of vi exist, like
-    [OpenVI](https://github.com/johnsonjh/OpenVi) and
-    [nvi2](https://github.com/lichray/nvi2) (see
+    [OpenVI](https://github.com/johnsonjh/OpenVi),
+    [neatvi](https://github.com/aligrudi/neatvi),
+    [nextvi](https://github.com/kyx0r/nextvi), or
+    [nvi2](https://github.com/lichray/nvi2), (see
     [here](https://mattwidmann.net/notes/the-nvi-text-editor/),
     [here](https://mattwidmann.net/notes/configuring-the-defaults-of-nvi/)
     and [here](https://mattwidmann.net/notes/modern-nvi-mappings/) for
