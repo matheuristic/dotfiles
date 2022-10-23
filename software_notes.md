@@ -880,22 +880,41 @@ mamba deactivate
 
 Use Tectonic for LaTeX compilation.
 
-As of Jan 2022, there are no Pandoc binaries packaged for Darwin
-aarch64 (although Homebrew offers an option), so alternatives are
-listed below.
-
 ```sh
 mamba create -n latextools
 mamba activate latextools
 mamba install tectonic
 mamba deactivate
 cd $HOME/.local/bin
-ln -s $HOME/mambaforge/envs/latextools/bin/tectonic .
+ln -s $HOME/mambaforge/envs/latextools/bin/tectonic
 ```
 
-#### Ruby tools setup
+To support compiling PDF files from Markdown files, setup
+either Pandoc or the Kramdown-Asciidoc toolchain as described
+in the next sections.
 
-Setup useful Ruby tools.
+#### Pandoc setup
+
+Pandoc is a very useful tool for converting between different document
+formats (e.g., Markdown to HTML, or Markdown to LaTeX).
+
+There are no Pandoc binaries packaged for macOS arm64 from the
+official repository, but binaries are available from the Anaconda
+conda repository.
+
+```sh
+mamba create -n pandoc
+mamba activate pandoc
+conda config --env --add channels anaconda
+conda install pandoc
+mamba deactivate
+cd $HOME/.local/bin
+ln -s $HOME/mambaforge/envs/pandoc/bin/pandoc
+```
+
+#### Kramdown-Asciidoc toolchain setup
+
+Setup a useful Ruby toolchain for compiling Markdown files to LaTeX.
 
 - Asciidoctor for processing Asciidoc files, with extensions for
   conversion to PDF, PDF optimization and syntax highlighting
@@ -960,11 +979,12 @@ Environment-independent Python development tools.
 ```sh
 mamba create -n pydevtools python=3.9
 mamba activate pydevtools
-mamba install jedi-language-server black
+mamba install black
+mamba install python-lsp-server
 mamba deactivate
 cd $HOME/.local/bin
-ln -s $HOME/mambaforge/envs/pyenv/jedi-language-server
 ln -s $HOME/mambaforge/envs/pyenv/black
+ln -s $HOME/mambaforge/envs/pyenv/pylsp
 ```
 
 #### Installing GPU ML libraries for darwin-aarch64 machines
@@ -1031,7 +1051,7 @@ Adapted from:
 https://spack.readthedocs.io/en/latest/getting_started.html#installation
 
 Spack is one of few package managers that does not require root
-permissions by default.
+permissions by default. (Conda is another one).
 
 ```sh
 git clone -c feature.manyFiles=true https://github.com/spack/spack.git ~/spack
