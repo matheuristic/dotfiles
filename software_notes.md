@@ -486,9 +486,14 @@
     to use, tsv-utils is supposedly faster for large datasets.
   - [QXmlEdit](http://qxmledit.org/):
     XML editor
-  - [Visidata](https://www.visidata.org/):
-    Terminal tabular data multitool, supports sources loadable via
-    Pandas using the `-f` option
+  - [Tad](https://www.tadviewer.com/)
+    ([Github](https://github.com/antonycourtney/tad)):
+    GUI tabular data viewer for CSV, Parquet, SQLite, and DuckDB files
+  - [Visidata](https://www.visidata.org/) or
+    [CSView](https://github.com/wfxr/csview):
+    TUI tabular data viewer; Visidata is more of a multitool, in that
+    it allows for editing and supports any source loadable via Pandas
+    using the `-f` option
   - [yq](https://github.com/mikefarah/yq):
     Command-line YAML processor
 - User experience and interface (graphical)
