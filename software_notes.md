@@ -738,6 +738,97 @@ Not all apps follow XDG or Apple's guidelines on the two systems,
 often for convenience or legacy reasons. For example, Vim by default
 uses `~/.vimrc` for the user config file on both Linux and macOS.
 
+## Conda
+
+Other package managers can exist alongside the operating system's
+(APT for Debian, the App Store for macOS, and so on). Conda is one of
+these, and can be set up without the need to be a superuser.
+
+### Anaconda, Miniconda, Miniforge, Mambaforge
+
+[Conda](https://conda.io/) is a package and environment manager useful
+for developing and deploying applications leverage a repository of
+pre-built packages.
+
+[Anaconda](https://anaconda.org/) is a full-fat distribution with
+many default packages installed, and is created and maintained by
+[Anaconda, Inc](https://www.anaconda.com/).
+
+[Miniconda](https://docs.conda.io/en/latest/miniconda.html) is a
+minimal version of Anaconda that only contains the basic set of
+package and environment management commands.
+
+[Miniforge](https://github.com/conda-forge/miniforge) is a variant
+of Miniconda that uses the [conda-forge](https://conda-forge.org/)
+channel by default.
+
+[Mambaforge](https://github.com/conda-forge/miniforge#mambaforge)
+is a Miniforge variant that has installed by default
+[Mamba](https://github.com/mamba-org/mamba) which is a fast
+re-implementation of the conda package manager.
+
+It is usually best to install Miniconda, Miniforge or Mambaforge
+because of the smaller disk footprint since they don't come
+pre-installed with a wide array of packages.
+
+It is recommended that any code development, and even tools where
+multiple versions need to exist on the system, be installed into
+specific environments (whether using Conda or some other tool).
+
+### Workflow examples
+
+An example workflow is shown here, with some useful commands. See the
+[documentation](https://docs.conda.io/en/latest/) for more details on
+how to use the package manager.
+
+Using `conda` here but `mamba` supports the same parameters.
+
+```sh
+# Create a new environment using a specific channel-only
+conda create -n envname -c bioforge --override-channels
+# Active the environment
+conda activate envname
+# Add another channel (repository) for the environment
+conda config --env --add channels anaconda
+# Install a specific version of a package
+conda install python=3.8
+# Install a package from a specific repository
+conda install -c bioforge pandas
+# Update all packages
+conda update --all
+# Export environment with prefix path and build versions to YAML
+conda env export > envname.yml
+# Same as above without prefix paths and build versions
+conda env export --no-builds | grep -v -e '^prefix' > envname-basic.yml
+# Same as above but only showing explicitly requested packages
+conda env export --from-history | grep -v -e '^prefix' > envname-manual.yml
+# Deactivate environment
+conda deactivate
+# Recreate an environment from some environment file
+conda env create -n newenvname -f envname.yml
+```
+
+### Python pip interaction with Conda environments
+
+Python's [pip](https://pip.pypa.io/en/stable/) package installer will
+correctly install packages from [PyPI](https://pypi.org/) into the
+active Conda environment. Packages installed using a `pip` binary
+from the environment (check using `which pip`, should be installed
+automatically if `python` is installed in an environment as in the
+workflow example above) should also be tracked automatically by Conda.
+
+Similarly, installing Python packages in editable
+mode (same as setuptool's development mode, see
+[link](https://setuptools.readthedocs.io/en/latest/setuptools.html#dev
+elopment-mode)), i.e.,
+
+```sh
+pip install -e .
+```
+
+is run from the package repository directory with `setup.py`, should
+also links into the active environment's Python `site-packages` dir.
+
 ## Linux notes
 
 Some notes also apply to BSD systems.
@@ -829,8 +920,8 @@ mamba deactivate
 
 ### Basic CLI development environment using conda
 
-Conda can provide a basic CLI dev environment without XCode or its command-line
-tools installed. Some conda packages for this:
+Conda can provide a basic CLI dev environment without XCode or its
+command-line tools installed. Some conda packages for this:
 
 - `bat`
 - `clang`
