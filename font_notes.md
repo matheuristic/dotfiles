@@ -14,6 +14,11 @@ cp SOMEFONT.ttf ANOTHERFONT.ttc $HOME/.fonts/
 fc-cache -fv
 ```
 
+### Bitmap fonts
+
+Bitmap fonts, if distributed in TTF or OTF form, should be used
+without antialiasing and at their intended sizes (or multiples of it).
+
 ## Monospace fonts
 
 - [APL385](https://www.apl385.com/fonts/)
@@ -25,7 +30,9 @@ fc-cache -fv
 - [JuliaMono](https://github.com/cormullion/juliamono)
 - [Monocraft](https://github.com/IdreesInc/Monocraft) (bitmap, emulates Minecraft typeface)
 - [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_)
+- [ProFont](https://tobiasjung.name/profont/) (bitmap)
 - [Space Mono](https://github.com/googlefonts/spacemono)
+- [Spleen](https://github.com/fcambus/spleen) (bitmap)
 - [Terminus](http://terminus-font.sourceforge.net/) (bitmap,
   [TTF version](https://files.ax86.net/terminus-ttf/))
 - [Unifont](http://unifoundry.com/unifont/index.html) (bitmap)
