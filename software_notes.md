@@ -498,7 +498,8 @@
     Command-line YAML processor
 - User experience and interface (graphical)
   - [LinearMouse](https://github.com/linearmouse/linearmouse) or
-    [Mos](https://github.com/Caldis/Mos):
+    [Mos](https://github.com/Caldis/Mos) or
+    [Scroll Reverser](https://github.com/pilotmoon/Scroll-Reverser):
     Mouse enhancements like reverse scrolling, linear scrolling,
     acceleration, etc, for external mice on macOS
   - [skhd](https://github.com/koekeishiya/skhd):
