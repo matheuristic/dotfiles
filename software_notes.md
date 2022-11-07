@@ -630,6 +630,10 @@
     Benchmark shell commands
   - [Joplin](https://joplinapp.org/):
     Note-taking application with sync support; cross-platform
+  - [Mathics](https://mathics.org/)
+    ([Github](https://github.com/Mathics3)):
+    Open-source alternative to
+    [Mathematica](https://www.wolfram.com/mathematica/)
   - [OmegaT](https://omegat.org/):
     Translation memory tool
   - [pass](https://www.passwordstore.org/):
