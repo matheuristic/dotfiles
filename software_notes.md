@@ -154,8 +154,17 @@
     (Linux) are platform-specific but are better integrated with the
     OS and have better support for Microsoft Exchange and Office 365
 - File management
+  - [Cryptomator](https://cryptomator.org/)
+    ([Github](https://github.com/cryptomator)):
+    Provides client-side encryption of local or cloud data (relevant
+    sync software needs to be installed on the machine), surfacing it
+    as a virtual drive; cross-platform, including iOS and Android;
+    compatible with first-party cloud storage provider software and
+    its vaults are interoperable with Mountain Duck vaults; not
+    compatible with `rclone mount`
   - [Cyberduck](https://cyberduck.io/):
-    Remote FTP, SFTP, WebDAV, cloud storage; macOS and Windows
+    Cross-platform remote FTP, SFTP, WebDAV, cloud storage; has a CLI
+    tool [duck.sh](https://duck.sh/)
   - [Double Commander](https://doublecmd.sourceforge.io/):
     GUI Midnight Commander clone
   - [Magic Wormhole](https://github.com/magic-wormhole/magic-wormhole):
@@ -170,6 +179,10 @@
     [lf](https://github.com/gokcehan/lf) or
     [broot](https://github.com/Canop/broot):
     Terminal file manager
+  - [rclone](https://rclone.org/)
+    ([Github](https://github.com/rclone/rclone)):
+    Like `rsync` but for cloud storage; `rclone mount` can be used to
+    mount cloud storage to a filesystem mount point
   - [rdfind](https://github.com/pauldreik/rdfind) or
     [fdupes](https://github.com/adrianlopezroche/fdupes):
     Command-line tool to find duplicate files
@@ -218,8 +231,13 @@
     Linux
   - [MuPDF](https://mupdf.com/):
     PDF reader
-  - [QPDF](https://github.com/qpdf/qpdf):
-    PDF transformations
+  - [QPDF](https://github.com/qpdf/qpdf) or
+    [pdfcpu](https://pdfcpu.io/)
+    ([Github](https://github.com/pdfcpu/pdfcpu)) or
+    [MuTool](https://mupdf.com/docs/mutool.html)
+    (part of [MuPDF](https://mupdf.com/), may be packaged separately
+    like in Debian where it is in the `mupdf-tools` package):
+    PDF transformations and processing
   - [sioyek](https://github.com/ahrm/sioyek) or
     [Zathura](https://pwmt.org/projects/zathura/):
     PDF reader for research and technical PDFs
@@ -259,8 +277,8 @@
   - [gitg](https://gitlab.gnome.org/GNOME/gitg) or
     [Gitup](https://github.com/git-up/GitUp) or
     [TortoiseGit](https://tortoisegit.org/):
-    Git GUI client; gitg is Linux-only and installable via Flathub,
-    Gitup is macOS-only, TortoiseGit is Windows-only
+    [Git](https://git-scm.com/) GUI client; gitg is Linux-only (and is
+    on Flathub), Gitup is macOS-only, TortoiseGit is Windows-only
   - [gogs](https://gogs.io/) or
     [Soft Serve](https://github.com/charmbracelet/soft-serve):
     Self-hosted Git server
@@ -331,16 +349,18 @@
     System resource monitor, runs as a daemon that logs process
     activity to disk
   - [bandwhich](https://github.com/imsnif/bandwhich):
-    Network utilization by process, connection, remote IP, hostname, etc
+    Network utilization by process, connection, remote IP, hostname,
+    and so on
   - [dua](https://github.com/Byron/dua-cli) or
     [dust](https://github.com/bootandy/dust):
-    Alternative to `du` for checking disk usage. dua also makes deletion
-    of unwanted data easy
+    Alternative to `du` for checking disk usage. dua also makes
+    deletion of unwanted data easy
   - [duf](https://github.com/muesli/duf) or
     [lfs](https://github.com/Canop/lfs):
     Command-line alternative to `df` with nicer user interface
   - [fkill](https://github.com/sindresorhus/fkill-cli):
-    Command-line tool to interactively kill running user and system procs
+    Command-line tool to interactively kill running user and system
+    procs
   - [forkstat](https://github.com/ColinIanKing/forkstat):
     Command-line program to log process forks, execs and exits;
     useful for tracking runaway processes
@@ -348,8 +368,8 @@
     [zenith](https://github.com/bvaisvil/zenith) or
     [bottom](https://github.com/ClementTsang/bottom):
     System resource monitor, alternative to `top`; note that dumb
-    terminals or logging ncurses should not be used, in which case
-    do `top -b` to run `top` in batch mode (or `top -b -n NUMBER` to
+    terminals or logging ncurses should not be used, in which case do
+    `top -b` to run `top` in batch mode (or `top -b -n NUMBER` to
     limit the number of iterations to `NUMBER`)
   - [lnav](https://lnav.org/)
     ([Github](https://github.com/tstack/lnav)):
@@ -371,7 +391,8 @@
   - [Acme](https://en.wikipedia.org/wiki/Acme_(text_editor)):
     Mouse-driven GUI text editor from
     [Plan 9](https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs),
-    ported to Linux and macOS ([link](https://9fans.github.io/plan9port/),
+    ported to Linux and macOS
+    ([link](https://9fans.github.io/plan9port/),
     [Github](https://github.com/9fans/plan9port))
   - [Emacs](https://www.gnu.org/software/emacs/):
     Extensible TUI and GUI text editor, macOS builds available from
@@ -406,8 +427,8 @@
     while `C-x o` switches focused window)
   - [Vis](https://github.com/martanne/vis):
     TUI text editor combining vi modal editing with
-    [Sam](https://en.wikipedia.org/wiki/Sam_(text_editor))'s structural
-    regular expressions and command language
+    [Sam](https://en.wikipedia.org/wiki/Sam_(text_editor))'s
+    structural regular expressions and command language
   - [Visual Studio Code](https://code.visualstudio.com/) or
     [VSCodium](https://vscodium.com/):
     GUI IDE; VSCodium is a build of VSCode that is free of tracking and
@@ -448,9 +469,9 @@
   - [Meld](https://meldmerge.org/) or
     [kdiff3](https://apps.kde.org/kdiff3/) or
     [xxdiff](https://github.com/blais/xxdiff):
-    GUI `diff` alternative; Meld supports Windows and Linux, which has
-    also a [macOS port](https://github.com/yousseb/meld), kdiff3
-    is Linux-only, xxdiff is lightweight but does not support Unicode
+    GUI `diff` alternative; Meld supports Windows and Linux and has a
+    [macOS port](https://github.com/yousseb/meld), kdiff3 is
+    Linux-only, xxdiff is lightweight but does not support Unicode
   - [par](http://www.nicemice.net/par/):
     Paragraph reformatter, like a smarter version of `fmt` from GNU
     [coreutils](https://www.gnu.org/software/coreutils/)
@@ -531,7 +552,11 @@
     [tmux](https://github.com/tmux/tmux) or
     [Zellij](https://zellij.dev/):
     Terminal multiplexer, useful for managing and persisting remote
-    sessions over Mosh or SSH
+    sessions over Mosh or SSH; generally, tmux is recommended over
+    screen unless there is a need to access a serial console (using
+    `screen /dev/somedevice` where `somedevice` is the device point
+    surfaced after connecting the serial port; for more info, see
+    [link](https://old.reddit.com/r/archlinux/comments/d41c1w/screen_vs_tmux/f0dj9rn/)
   - [ttyplot](https://github.com/tenox7/ttyplot):
     Real-time plotting tool in the terminal using stdin as data input
 - Virtualization
@@ -608,10 +633,13 @@
     or with public key cryptography by encrypting a file using a
     recipient's public key and `gpg -r EMAIL -o FILE.gpg -e FILE`
     where the encrypted file can later be decrypted with the
-    recipient's private key and `gpg -d <file>.gpg`
+    recipient's private key and `gpg -d <file>.gpg`; usually better
+    to use something like Cryptomator if not encrypting to share
   - [Al Dente](https://github.com/davidwernhart/AlDente):
-    macOS tool to limit battery charging (e.g. keeping charge
-    percentage at or below 80% can help prolong battery life)
+    macOS tool to limit battery charging (i.e., the claim is keeping
+    charge percentage at or below 80% can help prolong battery life),
+    however this may not be necessary if "Optimized Battery Charging"
+    is sufficient for usage needs
   - [Anki](https://apps.ankiweb.net/):
     Flashcards software
   - [ClamAV](https://www.clamav.net/):
@@ -652,6 +680,7 @@
     Todo list management (Taskwarrior) and time-tracking (Timewarrior)
   - [entr](https://github.com/eradman/entr) or
     [fswatch](https://github.com/emcrisostomo/fswatch) or
+    [watchdog](https://github.com/gorakhargosh/watchdog) or
     [watchexec](https://github.com/watchexec/watchexec) or
     [watchfiles](https://github.com/samuelcolvin/watchfiles) or
     [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch) or
@@ -660,7 +689,9 @@
     somewhat easier to use; fswatch is more a file watcher but can be
     piped to xargs to run commands specific to the changed file(s);
     Watch is Acme editor-specific; and Watchman has a client-server
-    architecture and is designed as more of a per-user system service
+    architecture and is designed as more of a per-user system service;
+    watchdog is mainly a library but has an optional tool watchmedo
+    (install `watchdog[watchmedo]` via pip) similar to watchexec
   - [Zotero](https://www.zotero.org/):
     Reference management software to collect, organize, cite and
     share research material
@@ -675,6 +706,9 @@
 - File management
   - [DevonThink Pro](https://www.devontechnologies.com/apps/devonthink):
     Document management and search solution; macOS
+  - [Mountain Duck](https://mountainduck.io/):
+    Like `rclone mount` but with a nicer user interface and its vaults
+    are interoperable with Cryptomator vaults
 - Integrated development environments
   - [DataGrip](https://www.jetbrains.com/datagrip/):
     Database admin-oriented IDE
@@ -838,6 +872,21 @@ also links into the active environment's Python `site-packages` dir.
 
 Some notes also apply to BSD systems.
 
+### APT usage tips
+
+Usage tips for [APT](https://en.wikipedia.org/wiki/APT_(software))
+which is the default package manager for
+[Debian](https://www.debian.org/) and [Ubuntu](https://ubuntu.com/).
+
+To figure out why a package `some-package-name` is installed, run:
+
+```sh
+apt-cache rdepends \
+    --no-{suggests,conflicts,breaks,replaces,enhances} \
+    --installed --recurse \
+    some-package-name
+```
+
 ### Linux development environment in ChromeOS
 
 Linux containers and VMs for ChromeOS are made available via the
@@ -923,32 +972,71 @@ mamba deactivate
 
 ## Mac notes
 
+### Shell commands for configuring macOS
+
+Useful shell commands to configure some macOS options.
+
+```sh
+# Don't create .DS_Store files on network and USB drives
+defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+# Disable indexing and searching of disk volumes
+for v in /Volumes/*; do sudo touch "$v/.metadata_never_index"; done
+for v in /Volumes/*; do sudo mdutil -i off -d "$v"; done
+# Finder settings (show hidden files, show path, current dir as default search scope, show filename extensions)
+defaults write com.apple.finder AppleShowAllFiles YES
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+# Unhide ~/Library for GUI file management
+chflags nohidden ~/Library
+```
+
+For more, see [these](https://gist.github.com/uson1x/2275613)
+[links](https://gist.github.com/iamdanre/551a6a68ce0fc3c9cea0ad53e32d5690).
+
 ### Basic CLI development environment using conda
 
 Conda can provide a basic CLI dev environment without XCode or its
-command-line tools installed. Some conda packages for this:
+command-line tools installed.
+
+Some general tools:
 
 - `bat`
-- `clang`
 - `gawk`
 - `git`
-- `go`
 - `htop`
+- `mosh`
+- `pandoc`
+  (as of 2022-11-15, only the `anaconda` channel has a working Apple
+  silicon version so install from there, see _Pandoc setup_ below)
+- `ripgrep`
+- `sed` (the GNU [version](https://www.gnu.org/software/sed/))
+- `stow`
+- `tmux`
+- `tree`
+
+Some data tools:
+
 - `postgresql`
+- `visidata`
+
+And some programming languages:
+
+- `go`
 - `python` and many packages in [PyPI](https://pypi.org/)
 - `r-base` and some [CRAN](https://cran.r-project.org/) packages
-- `ripgrep`
-- `sed`
-- `vim`
-- `visidata`
+- `sbcl`
 
 Notes:
 
-- R packages begin with an `r-` prefix but only popular packages are available
-- Conda has an `emacs` package, but go with one of the standalone Emacs
-  applications ([Emacs for Mac OSX](https://emacsformacosx.com/) or the
-  [emacs-mac port](https://github.com/railwaycat/homebrew-emacsmacport)) as they
-  are better integrated with the system
+- R packages begin with an `r-` prefix but only popular packages are
+  available and these should not be mixed with the packages installed
+  using R's `package.install`
+- Conda has an `emacs` package, but go with one of the standalone
+  Emacs applications ([Emacs for Mac OSX](https://emacsformacosx.com/)
+  [emacs-mac](https://github.com/railwaycat/homebrew-emacsmacport)
+  port) as they are better integrated with the system
 
 #### Installation
 
@@ -965,13 +1053,11 @@ Mambaforge. Assumes `$HOME/.local/bin` is in `$PATH` and `$HOME/.zshrc` exists.
 # Create basic tools environment rather than polluting base environment
 mamba create -n devtools
 mamba activate devtools
-mamba install bat git htop ripgrep tmux
 cd $HOME/.local/bin
-ln -s $HOME/mambaforge/envs/devtools/bin/bat .
-ln -s $HOME/mambaforge/envs/devtools/bin/git .
-ln -s $HOME/mambaforge/envs/devtools/bin/htop .
-ln -s $HOME/mambaforge/envs/devtools/bin/rg .
-ln -s $HOME/mambaforge/envs/devtools/bin/tmux .
+for cmd in bat gawk git htop rg tmux tree; do
+    mamba install -y "$cmd"
+    ln -s "$HOME/mambaforge/envs/devtoos/bin/$cmd"
+done
 mamba deactivate
 # Create new environments as needed for each project, e.g.
 # > mamba create -n some-project python=3.9
@@ -1090,17 +1176,34 @@ ln -s $HOME/mambaforge/envs/pyenv/pylsp
 
 #### Installing GPU ML libraries for darwin-aarch64 machines
 
+**PyTorch**
+
+PyTorch v1.12 and later natively supports GPU-acceleration for Apple
+silicon GPUs, so just install as usual (via conda shown below, change
+Python version as appropriate).
+
+```sh
+mamba create -n pytorchenv python=3.9
+mamba activate pytorchenv
+conda config --env --add channels pytorch
+mamba install -c pytorch pytorch torchvision torchaudio
+```
+
+**Tensorflow**
+
+
 Metal-enabled [Tensorflow](https://www.tensorflow.org/)
 ([link](https://developer.apple.com/metal/tensorflow-plugin/)),
-currently supports Python `3.8` and `3.9`.
+currently supports Python `3.8`, `3.9` and `3.10`.
 
 Note that `tensorflow-deps` versions follow base Tensorflow versions,
 so if using Tensorflow `2.6.X`, install `tensorflow-deps==2.6.0`.
 
 ```sh
-mamba create -n tfenv python=3.8
+mamba create -n tfenv python=3.9
 mamba activate tfenv
 conda config --env --add channels apple
+mamba install tensorflow
 mamba install -c apple tensorflow-deps
 pip install tensorflow-metal
 pip install tensorflow-macos
@@ -1145,6 +1248,10 @@ for compile instructions and pre-compiled wheels, and see
 sudo rm -rf /Library/Developer/CommandLineTools
 sudo xcode-select --install
 ```
+
+Attempting to run commands like `/usr/bin/clang` or `/usr/bin/clang`
+will also prompt the user about whether the system should download and
+install the command-line developer tools.
 
 ### Installing and using Spack
 
