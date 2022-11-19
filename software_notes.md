@@ -466,12 +466,18 @@
     has the latest version), and is
     [augmentable](https://dev.languagetool.org/finding-errors-using-n-gram-data.html)
     with [n-gram](https://languagetool.org/download/ngram-data/) data
-  - [Meld](https://meldmerge.org/) or
+  - [FileMerge](https://developer.apple.com/xcode/features/) or
+    [Meld](https://meldmerge.org/) or
     [kdiff3](https://apps.kde.org/kdiff3/) or
+    [tkdiff](https://sourceforge.net/projects/tkdiff/) or
     [xxdiff](https://github.com/blais/xxdiff):
     GUI `diff` alternative; Meld supports Windows and Linux and has a
     [macOS port](https://github.com/yousseb/meld), kdiff3 is
-    Linux-only, xxdiff is lightweight but does not support Unicode
+    Linux-only, xxdiff is lightweight but does not support Unicode,
+    FileMerge comes with the macOS XCode IDE and can be called from
+    the command-line using `opendiff`, tkdiff is a somewhat easier to
+    set up and lightweight option on macOS (see _Mac Notes_ >
+    _Graphical diff and merge tool_)
   - [par](http://www.nicemice.net/par/):
     Paragraph reformatter, like a smarter version of `fmt` from GNU
     [coreutils](https://www.gnu.org/software/coreutils/)
@@ -649,6 +655,12 @@
     Command-line tool for transforming Markdown-style expressions into
     ASCII art, [webapp](https://github.com/ArthurSonzogni/Diagon) and
     [snap](https://snapcraft.io/diagon) available
+  - [diffoscope](https://diffoscope.org/)
+    ([Salsa](https://salsa.debian.org/reproducible-builds/diffoscope)):
+    Like `diff` but supports archives and directories in addition to
+    files, and can output to formats like HTML, JSON, Markdown and
+    reStructuredText in addition to text; as a pure Python package, it
+    is installable via `pip` from [PyPI](https://pypi.org/)
   - [grex](https://github.com/pemistahl/grex):
     Generate regex from test cases
   - [Hammerspoon](https://www.hammerspoon.org/):
@@ -670,6 +682,9 @@
   - [pastel](https://github.com/sharkdp/pastel) or
     [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
     Terminal color picker
+  - [Platypus](https://github.com/sveinbjornt/Platypus):
+    macOS tool for wrapping command-line programs into a
+    macOS application bundle
   - [sc-im](https://github.com/andmarti1424/sc-im)
     Terminal spreadsheet program
   - [Sweet Home 3D](https://www.sweethome3d.com/):
@@ -731,9 +746,30 @@
 - Text tools (general)
   - [Beyond Compare](https://www.scootersoftware.com/):
     Compare files and folders
+  - [Kaleidoscope](https://kaleidoscope.app/):
+    Diff text and images
 - Word processing
   - [Scrivener](https://www.literatureandlatte.com/scrivener/overview):
     Word processor for authoring books and screenplays
+
+## Directory structure
+
+An opinionated directory structure setup:
+
+- Locally installed software (usually C or C++ source compiled and
+  installed using `make` or `cmake`) use the `$HOME/.local` prefix.
+- Projects go into `src` and have their directory path provide any
+  relevant information about the project, e.g., this repository's
+  local path would be `$HOME/src/github.com/matheuristic/dotfiles`
+  while a non-version-controlled project could be at the
+  `$HOME/src/someprojectname` directory.
+- Vendored or third-party packages typically go into `vendor`, e.g.,
+  [qsv](https://github.com/jqnatividad/qsv) downloads can be put into
+  `$HOME/vendor/github.com/jqnatividad/qsv` and its binaries
+  for versions `X.Y.Z` can go into the
+  `$HOME/vendor/github.com/jqnatividad/qsv/X.Y.Z` directory.
+- Otherwise, use the directory structure appropriate for the operating
+  system or installed software configuration.
 
 ## Standard directories for application configuration, data, etc
 
@@ -972,49 +1008,175 @@ mamba deactivate
 
 ## Mac notes
 
-### Shell commands for configuring macOS
+### Configuring macOS settings
 
-Useful shell commands to configure some macOS options.
+Some recommended customizations:
 
-```sh
-# Don't create .DS_Store files on network and USB drives
-defaults write com.apple.desktopservices DSDontWriteNetworkStores true
-defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-# Disable indexing and searching of disk volumes
-for v in /Volumes/*; do sudo touch "$v/.metadata_never_index"; done
-for v in /Volumes/*; do sudo mdutil -i off -d "$v"; done
-# Finder settings (show hidden files, show path, current dir as default search scope, show filename extensions)
-defaults write com.apple.finder AppleShowAllFiles YES
-defaults write com.apple.finder ShowPathbar -bool true
-defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-# Unhide ~/Library for GUI file management
-chflags nohidden ~/Library
-```
+- Go to **Finder** > **Preferences** > **Advanced** >
+  Set **When performing a search:** to **Search the Current Folder**
+  (sets the default search location in Finder to the current folder)
+- Go to **Finder** > **Preferences** > **Advanced** >
+  Enable **Show all filename extensions**
+  (make file listings in Finder be more consistent in what is shown)
+- Go to **Finder** > **View** > **Customize toolbar** >
+  Drag the **Path** icon to the toolbar
+  (ease navigation to parent or ancestor folder)
+- Go to **Finder** > Do _Command-Shift-period_ in a Finder window
+  (toggles showing hidden files, persists across sessions)
+- Go to **System settings** > **General** > **About** >
+  Modify **Name** to the desired one for the machine
 
-For more, see [these](https://gist.github.com/uson1x/2275613)
+These and more configuration options can also be set using the
+command-line, see [these](https://gist.github.com/uson1x/2275613)
 [links](https://gist.github.com/iamdanre/551a6a68ce0fc3c9cea0ad53e32d5690).
 
-### Basic CLI development environment using conda
+### Recommended apps
 
-Conda can provide a basic CLI dev environment without XCode or its
-command-line tools installed.
+- [Google Chrome](https://www.google.com/chrome/)
+  (for compatibility with websites)
+- [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+  (for compatibility with more powerful extensions, see
+  [link](https://blog.mozilla.org/addons/2022/05/18/manifest-v3-in-firefox-recap-next-steps/))
 
-Some general tools:
+### Installing XCode command-line tools
 
-- `bat`
-- `gawk`
-- `git`
+```sh
+sudo rm -rf /Library/Developer/CommandLineTools
+sudo xcode-select --install
+```
+
+Attempting to run commands like `/usr/bin/clang` or `/usr/bin/clang`
+will also prompt the user about whether the system should download and
+install the command-line developer tools.
+
+### Installing MacPorts without root privileges
+
+Make sure the XCode command-line developer tools are installed.
+
+In a nutshell, download the latest MacPorts source release from
+[Github](https://github.com/macports/macports-base/releases), verify
+its checksum against the `MacPorts-<VERSION>.chk.txt` file, extract
+it, configure the installation directory and indicate root privileges
+should not be used, compile it, install it, configure the user shell
+`$PATH` and `$MANPATH`, and sync the ports tree.
+
+```sh
+mkdir -p ${HOME}/src/github.com/macports/macports-base # change dir as desired
+cd ${HOME}/src/github.com/macports/macports-base
+export MACPORTSVERSION=2.8.0   # change as needed
+export PREFIX=${HOME}/macports # change as desired
+curl -LO https://github.com/macports/macports-base/releases/download/v${MACPORTSVERSION}/MacPorts-${MACPORTSVERSION}.tar.bz2
+curl -LO https://github.com/macports/macports-base/releases/download/v${MACPORTSVERSION}/MacPorts-${MACPORTSVERSION}.chk.txt
+shasum -a256 MacPorts-${MACPORTSVERSION}.tar.bz2  # ... and verify against the entry in MacPorts-${MACPORTSVERSION}.chk.txt
+tar xjf MacPorts-${MACPORTSVERSION}.tar.bz2
+cd MacPorts-${MACPORTSVERSION}
+./configure --with-no-root-privileges --prefix=${PREFIX}
+make -s -j `sysctl -n machdep.cpu.core_count`
+make -s -j `sysctl -n machdep.cpu.core_count` install
+cat >> ${HOME}/.zshrc <<EOF
+export PATH=${PREFIX}/bin:${PREFIX}/sbin:\$PATH
+export MANPATH=${PREFIX}/share/man:\$MANPATH
+EOF
+source ${HOME}/.zshrc
+port selfupdate
+```
+
+Recommended tools to install (not listed are those that need to be
+compiled using the Go, Haskell or Rust toolchain like `bat` or
+`pandoc` or `ripgrep`; they can be compiled using MacPorts, using a
+separate environment, or their binaries installed directly using
+conda as detailed in the next section):
+
+- `gawk` (GNU
+  [AWK](https://www.gnu.org/software/gawk/manual/gawk.html))
+- `gnupg2`
+- `gsed` (GNU [sed](https://www.gnu.org/software/sed/))
 - `htop`
 - `mosh`
+- `stow`
+- `tree`
+
+```sh
+port -N install gawk gnupg2 gsed mosh stow tree
+```
+
+Useful `port` commands ("ports" are the tool's name for packages):
+
+```sh
+port selfupdate                 # update the ports tree
+port -y install somepkgname     # dry-run install of somepkgname
+port installed inactive         # list inactive ports
+port uninstall inactive         # uninstall inactive ports
+port echo leaves                # list leaves (auto-installed ports that are no longer dependencies)
+port uninstall leaves           # uninstall leaves
+port installed requested        # list manually installed port
+port unsetrequested somepkgname # mark manually installed port as auto-installed
+```
+
+To update the MacPorts version, just recompile and reinstall the new
+version.
+
+Note that on a major macOS version upgrade, it is probably best to
+wipe the whole MacPorts install, recompile and reinstall the
+previously installed requested ports. For more info, see this
+[link](https://trac.macports.org/wiki/Migration).
+
+### Graphical diff and merge tool
+
+There are a number of commercial graphical diff and merge tools
+easily installable in macOS, but open-source options all require
+a bit of work:
+
+- `opendiff`/`FileMerge`: requires XCode IDE (not command-line tools)
+  which requires a lot of disk space be installed.
+- `tkdiff`: typically installed via Homebrew (requires root privileges
+  to set up) or manually installed (MacPorts version is pretty old),
+  requires [Tk](https://www.tcl.tk/).
+- `xxdiff`: typically installed via Homebrew (requires root privileges
+  to set up) or MacPorts, and requires Qt which has many build
+  dependencies because of if not installing pre-built binaries.
+
+In terms of the recommended setup, if the XCode IDE is installed just
+use `opendiff`. Otherwise, if using the MacPorts package manager,
+install Quartz Tk and download the latest tkdiff source which is an
+executable Tcl script. The following shell commands installs Quartz Tk
+using MacPorts (the macOS system version is rather old), downloads the
+tkdiff v5.6 into `$HOME/src/sourceforge.net/tkdiff` and symlinks the
+`tkdiff` script into `$HOME/.local/bin` (assumed to be `$PATH`).
+
+  ```sh
+  port -N install tk +quartz # via MacPorts, skip if already installed
+  export TKDIFFVERSION=5.6   # change as appropriate
+  mkdir -p $HOME/src/sourceforge.net/tkdiff
+  cd $HOME/src/sourceforge.net/tkdiff
+  curl
+  curl -L https://sourceforge.net/projects/tkdiff/files/tkdiff/${TKDIFFVERSION}/tkdiff-${TKDIFFVERSION}.zip/download > tkdiff-${TKDIFFVERSION}.zip
+  unzip tkdiff-${TKDIFFVERSION}.zip
+  rm -f latest && ln -s tkdiff-${TKDIFFVERSION} latest
+  cd ~/.local/bin
+  ln -s $HOME/src/sourceforge.net/tkdiff/latest/tkdiff
+  ```
+
+Graphical diff and merge tools can also be used with diffing and
+merging in Git. This can be configured as follows (the example
+here uses `tkdiff` globally, modify as appropriate):
+
+```sh
+git config --global merge.tool tkdiff
+git config --global diff.tool tkdiff
+git config --global --add difftool.prompt false
+```
+
+### Basic CLI development tools using conda
+
+Some general tools (these ones have heavier build dependencies,
+so just use the conda binaries instead of compiling with MacPorts):
+
+- `bat`
 - `pandoc`
   (as of 2022-11-15, only the `anaconda` channel has a working Apple
   silicon version so install from there, see _Pandoc setup_ below)
 - `ripgrep`
-- `sed` (the GNU [version](https://www.gnu.org/software/sed/))
-- `stow`
-- `tmux`
-- `tree`
 
 Some data tools:
 
@@ -1032,11 +1194,14 @@ Notes:
 
 - R packages begin with an `r-` prefix but only popular packages are
   available and these should not be mixed with the packages installed
-  using R's `package.install`
+  using R's `package.install` mechanism.
 - Conda has an `emacs` package, but go with one of the standalone
   Emacs applications ([Emacs for Mac OSX](https://emacsformacosx.com/)
   [emacs-mac](https://github.com/railwaycat/homebrew-emacsmacport)
-  port) as they are better integrated with the system
+  port) as they are better integrated with the system.
+- Conda can provide a basic CLI dev environment without XCode or its
+  command-line tools installed. However, it is recommended to install at
+  least the command-line tools.
 
 #### Installation
 
@@ -1054,7 +1219,7 @@ Mambaforge. Assumes `$HOME/.local/bin` is in `$PATH` and `$HOME/.zshrc` exists.
 mamba create -n devtools
 mamba activate devtools
 cd $HOME/.local/bin
-for cmd in bat gawk git htop rg tmux tree; do
+for cmd in bat rg; do
     mamba install -y "$cmd"
     ln -s "$HOME/mambaforge/envs/devtoos/bin/$cmd"
 done
@@ -1080,7 +1245,7 @@ To support compiling PDF files from Markdown files, setup
 either Pandoc or the Kramdown-Asciidoc toolchain as described
 in the next sections.
 
-#### Pandoc setup
+#### Pandoc setup (recommended)
 
 Pandoc is a very useful tool for converting between different document
 formats (e.g., Markdown to HTML, or Markdown to LaTeX).
@@ -1099,7 +1264,7 @@ cd $HOME/.local/bin
 ln -s $HOME/mambaforge/envs/pandoc/bin/pandoc
 ```
 
-#### Kramdown-Asciidoc toolchain setup
+#### Kramdown-Asciidoc toolchain setup (alternative to Pandoc)
 
 Setup a useful Ruby toolchain for compiling Markdown files to LaTeX.
 
@@ -1242,24 +1407,14 @@ Metal-support, see
 for compile instructions and pre-compiled wheels, and see
 [here](https://github.com/tensorflow/text/pull/756) for more info.
 
-### Installing XCode command-line tools
-
-```sh
-sudo rm -rf /Library/Developer/CommandLineTools
-sudo xcode-select --install
-```
-
-Attempting to run commands like `/usr/bin/clang` or `/usr/bin/clang`
-will also prompt the user about whether the system should download and
-install the command-line developer tools.
-
-### Installing and using Spack
+### Installing and using Spack (alternative to MacPort)
 
 Adapted from:
 https://spack.readthedocs.io/en/latest/getting_started.html#installation
 
-Spack is one of few package managers that does not require root
-permissions by default. (Conda is another one).
+Spack is another package managers that does not require root
+permissions by default. (Conda and MacPorts, detailed above, can also
+set up without root privileges).
 
 ```sh
 git clone -c feature.manyFiles=true https://github.com/spack/spack.git ~/spack
@@ -1442,6 +1597,10 @@ listed
 the `dav2fs` package).
 
 ## GnuPG
+
+### Migrating keys
+
+TODO
 
 ### Exporting ASCII-armored keys as QR codes
 
