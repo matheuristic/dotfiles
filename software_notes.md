@@ -477,7 +477,7 @@
     FileMerge comes with the macOS XCode IDE and can be called from
     the command-line using `opendiff`, tkdiff is a somewhat easier to
     set up and lightweight option on macOS (see _Mac Notes_ >
-    _Graphical diff and merge tool_)
+    _Graphical diff and merge tool_); these also diff directories
   - [par](http://www.nicemice.net/par/):
     Paragraph reformatter, like a smarter version of `fmt` from GNU
     [coreutils](https://www.gnu.org/software/coreutils/)
@@ -1165,6 +1165,16 @@ here uses `tkdiff` globally, modify as appropriate):
 git config --global merge.tool tkdiff
 git config --global diff.tool tkdiff
 git config --global --add difftool.prompt false
+```
+
+Also, as an aside, Git automatically creates `*.orig` backup files
+created while resolving merges, which can leave a number of these
+files lying around after merges are completed. To configure Git so
+that they are removed automatically as files are successfully merged,
+do the following:
+
+```sh
+git config --global mergetool.keepBackup false
 ```
 
 ### Basic CLI development tools using conda
