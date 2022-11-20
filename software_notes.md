@@ -1158,13 +1158,15 @@ tkdiff v5.6 into `$HOME/src/sourceforge.net/tkdiff` and symlinks the
   ```
 
 Graphical diff and merge tools can also be used with diffing and
-merging in Git. This can be configured as follows (the example
-here uses `tkdiff` globally, modify as appropriate):
+merging in Git. This can be configured as follows (the example here
+uses `tkdiff` globally, modify as appropriate; the last config option
+is so that `git difftool --dir-diff` works properly with `tkdiff`):
 
 ```sh
 git config --global merge.tool tkdiff
 git config --global diff.tool tkdiff
 git config --global --add difftool.prompt false
+git config --global difftool.tkdiff.cmd 'tkdiff -R "$LOCAL" "$REMOTE"'
 ```
 
 Also, as an aside, Git automatically creates `*.orig` backup files
