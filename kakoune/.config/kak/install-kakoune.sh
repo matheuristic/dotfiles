@@ -7,7 +7,7 @@
 # - libncurses-dev
 
 # Kakoune release version
-VERSION=${1:-2021.11.08}
+VERSION=${1:-2022.10.31}
 
 PREFIX=${PREFIX:-$HOME/.local}
 

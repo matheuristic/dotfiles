@@ -4,7 +4,7 @@
 
 install_fzf() {
   # Setup fzf.kak https://github.com/andreyorst/fzf.kak
-  VERSION=1.0.3
+  VERSION=1.1.0
   URL="https://github.com/andreyorst/fzf.kak/archive/refs/tags/v${VERSION}.tar.gz"
   mkdir -p plugins
   cd plugins
@@ -14,6 +14,7 @@ install_fzf() {
   mv "fzf.kak-${VERSION}" fzf.kak
   rm -f fzf-kak.tar.gz
   cd ..
+  echo 'WARNING: fzf.kak is no longer maintained. Look into replacing with https://github.com/gustavo-hms/peneira'
   return 0
 }
 

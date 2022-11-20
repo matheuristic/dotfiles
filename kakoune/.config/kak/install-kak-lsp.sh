@@ -3,7 +3,7 @@
 # Setup kak-lsp https://github.com/kak-lsp/kak-lsp
 
 # kak-lsp release version
-VERSION=${1:-10.0.0}
+VERSION=${1:-14.1.0}
 
 PREFIX=${PREFIX:-$HOME/.local}
 BINDIR=${BINDIR:-$PREFIX/bin}
@@ -27,7 +27,12 @@ esac
 
 CFGDIR="${XDG_CONFIG_HOME}/kak-lsp"
 TMPDIR=kak-lsp-v${VERSION}
-TMPFILE=kak-lsp-v${VERSION}-x86_64-${ARCH}.tar.gz
+if [ "$(uname)" = "Linux" ]; then
+  TMPFILE=kak-lsp-v${VERSION}-x86_64-${ARCH}.tar.gz
+else
+  echo 'Only Linux x86_64 is supported' >&2
+  exit 1
+fi
 
 URL="https://github.com/kak-lsp/kak-lsp/releases/download/v${VERSION}/${TMPFILE}"
 echo "Create work directory: ${TMPDIR}"
