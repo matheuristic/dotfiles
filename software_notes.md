@@ -1612,7 +1612,15 @@ the `dav2fs` package).
 
 ### Migrating keys
 
-TODO
+A simple way to migrate GnuPG keys is to copy over the GnuPG data
+directory (this preserves all keys and the the trust database) at
+`C:/Documents and Settings/Username/Application Data/GnuPG` on Windows
+systems (replace `Username` as appropriate) or at `$HOME/.gnupg` on
+Linux/macOS systems.
+
+References:
+
+- [Moving/Copying your PGP Keys](https://www.phildev.net/pgp/gpg_moving_keys.html)
 
 ### Exporting ASCII-armored keys as QR codes
 
