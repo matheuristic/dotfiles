@@ -149,6 +149,7 @@ if has('autocmd')
     autocmd BufReadPre,FileReadPre      *.asc,*.gpg set noswapfile nobackup
     " Switch to binary mode to read the encrypted file
     autocmd BufReadPre,FileReadPre      *.asc,*.gpg set bin
+    autocmd BufReadPre,FileReadPre      *.asc,*.gpg set noshelltemp
     autocmd BufReadPre,FileReadPre      *.asc,*.gpg let ch_save = &ch|set ch=2
     autocmd BufReadPre,FileReadPre      *.asc,*.gpg let shsave = &sh
     autocmd BufReadPre,FileReadPre      *.asc,*.gpg let &sh = 'sh'
@@ -169,6 +170,7 @@ if has('autocmd')
     " Undo the encryption so we are back in the normal text, directly after the file has been written.
     autocmd BufWritePost,FileWritePost  *.asc,*.gpg silent u
     autocmd BufWritePost,FileWritePost  *.asc,*.gpg set nobin
+    autocmd BufWritePost,FileWritePost  *.asc,*.gpg set shelltemp&
   augroup END " }}}2
 endif
 
