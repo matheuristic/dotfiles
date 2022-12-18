@@ -1610,6 +1610,22 @@ the `dav2fs` package).
 
 ## GnuPG
 
+### Workarounds for TTY pinentry errors
+
+If using TTY pinentry (on macOS or Linux), GnuPG might throw an error
+like `Inappropriate ioctl for device`. As a workaround, set the
+`$GPG_TTY` environment variable to the value of `tty`. For example,
+add the following line to `$HOME/.zshrc` (if Zsh is the user shell) or
+`$HOME/.bashrc` (if Bash is the user shell):
+
+```sh
+export GPG_TTY=$(tty)
+```
+
+References:
+
+- ["inappropriate ioctl for device"](https://github.com/keybase/keybase-issues/issues/2798)
+
 ### Migrating keys
 
 A simple way to migrate GnuPG keys is to copy over the GnuPG data
