@@ -1724,9 +1724,23 @@ respectively.
    [here](https://grahamlopez.org/git/git_credentials.html) and
    [here](https://andrearichiardi.com/blog/posts/git-credential-netrc.html).
 
+1. **If using Git from the XCode command-line tools on macOS**, add
+   its bundled Perl modules to the Perl library path using the
+   `$PERL5LIB` or `$PERLLIB` environment variables, i.e., add the
+   following line to `$HOME/.bashrc` (if Bash is the user shell)
+   or `$HOME/.zshrc` (if Zsh is the user shell):
+
+   ```sh
+   export PERL5LIB=/Library/Developer/CommandLineTools/usr/share/git-core/perl:$PERL5LIB
+   ```
+
 **NOTES**:
 
-- Requires Perl with the Git module installed.
+- Requires the Perl modules that comes with Git be in the Perl library
+  path. On Linux, this is typically done automatically when Git is
+  installed using the system package manager. On macOS, if the XCode
+  command-line tools Git is used, then follow the end step in the
+  instructions above.
 - For Github users, this approach is good for storing tokens but using
   SSH keys is also fine if granular permissioning is not required.
 
