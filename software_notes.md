@@ -678,7 +678,15 @@
   - [OmegaT](https://omegat.org/):
     Translation memory tool
   - [pass](https://www.passwordstore.org/):
-    Command-line password manager
+    Command-line password manager; if using MacPorts on macOS but
+    using XCode command-line tools Git, it is enough to only install
+    its dependencies `tree`, `util-linux` and `qrencode` with MacPorts,
+    and install `pass` from source specifying the `PREFIX` environment
+    variable as appropriate (e.g., `PREFIX=$HOME/.local make install`),
+    then modifying the installed `lib/password-store/platform.sh` file
+    (e.g., `$HOME/.local/lib/password-store/platform.sh`) so that the
+    line `GETOPT=...` points directly to the MacPorts-installed
+    `getopt` (e.g., `GETOPT="/Users/$(whoami)/macports/bin/getopt"`)
   - [pastel](https://github.com/sharkdp/pastel) or
     [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
     Terminal color picker
@@ -1099,6 +1107,11 @@ conda as detailed in the next section):
 ```sh
 port -N install gawk gnupg2 gsed mosh stow tree
 ```
+
+If installing `gnupg2` above, it is recommended to change the
+`pinentry` symlink to `pinentry-tty` instead of the default
+`pinentry-ncurses`. For more info, see the _Using TTY pinentry_
+subsection of the _GnuPG_ section.
 
 Useful `port` commands ("ports" are the tool's name for packages):
 
@@ -1610,17 +1623,30 @@ the `dav2fs` package).
 
 ## GnuPG
 
-### Workarounds for TTY pinentry errors
+### Using TTY pinentry
 
-If using TTY pinentry (on macOS or Linux), GnuPG might throw an error
-like `Inappropriate ioctl for device`. As a workaround, set the
-`$GPG_TTY` environment variable to the value of `tty`. For example,
-add the following line to `$HOME/.zshrc` (if Zsh is the user shell) or
-`$HOME/.bashrc` (if Bash is the user shell):
+If using a console pinentry for entering the GnuPG password in the
+terminal, it can be better to use TTY pinentry rather than ncurses
+pinentry. Configure this as follows:
 
-```sh
-export GPG_TTY=$(tty)
-```
+- The default `pinentry` is usually symlinked to `pinentry-ncurses`
+  which has issues being run from other ncurses programs like Vim.
+  Change the symlink `pinentry` so it points to `pinentry-tty`. For example,
+  suppose if using `pinentry` from MacPorts installed to `$HOME/macports`:
+
+  ```sh
+  cd $HOME/macports/bin
+  rm pinentry && ln -s pinentry-tty pinentry
+  ```
+
+- Set the `$GPG_TTY` environment variable in the shell configuration to the
+  value of `tty`, else errors like `Inappropriate ioctl for device` might be
+  thrown by GnuPG. For example, add the following line to `$HOME/.zshrc` (if
+  Zsh is the user shell) or `$HOME/.bashrc` (if Bash is the user shell):
+
+  ```sh
+  export GPG_TTY=$(tty)
+  ```
 
 References:
 
