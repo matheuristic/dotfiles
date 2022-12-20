@@ -679,14 +679,15 @@
     Translation memory tool
   - [pass](https://www.passwordstore.org/):
     Command-line password manager; if using MacPorts on macOS but
-    using XCode command-line tools Git, it is enough to only install
-    its dependencies `tree`, `util-linux` and `qrencode` with MacPorts,
-    and install `pass` from source specifying the `PREFIX` environment
-    variable as appropriate (e.g., `PREFIX=$HOME/.local make install`),
-    then modifying the installed `lib/password-store/platform.sh` file
-    (e.g., `$HOME/.local/lib/password-store/platform.sh`) so that the
-    line `GETOPT=...` points directly to the MacPorts-installed
-    `getopt` (e.g., `GETOPT="/Users/$(whoami)/macports/bin/getopt"`)
+    using XCode command-line tools Git, install dependencies `tree`,
+    `util-linux` and `qrencode` with MacPorts, and install `pass` from
+    source specifying the `PREFIX` environment variable as appropriate
+    (e.g., `PREFIX=$HOME/.local make install`), then modifying the
+    installed `lib/password-store/platform.sh` file (e.g.,
+    `$HOME/.local/lib/password-store/platform.sh`) so that the line
+    `GETOPT=...` points directly to the MacPorts-installed `getopt`
+    (e.g., `GETOPT="/Users/$(whoami)/macports/bin/getopt"`); for more,
+    see [link](https://gist.github.com/abtrout/d64fb11ad6f9f49fa325)
   - [pastel](https://github.com/sharkdp/pastel) or
     [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
     Terminal color picker
