@@ -398,6 +398,11 @@
     Extensible TUI and GUI text editor, macOS builds available from
     [here](https://emacsformacosx.com/) or
     [here](https://github.com/railwaycat/homebrew-emacsmacport/releases)
+    or install via some package manager like
+    MacPorts (e.g., `port install emacs-mac-app +nativecomp` which
+    compiles a native GUI Emacs application, the native-comp variant,
+    at `/Applications/MacPorts/EmacsMac.app` or at
+    `/Users/Username/Applications/MacPorts/EmacsMac.app`)
   - [Helix](https://helix-editor.com/):
     TUI editor like Kakoune, but designed to have many editor features
     like [LSP](https://microsoft.github.io/language-server-protocol/)
