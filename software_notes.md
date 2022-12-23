@@ -137,6 +137,12 @@
   - [Tesseract](https://github.com/tesseract-ocr/tesseract)
 - Ebook readers and library managers
   - [Calibre](https://calibre-ebook.com/)
+  - [epr](https://github.com/wustho/epr) or
+    [epy](https://github.com/wustho/epy):
+    TUI ebook reader; epr supports only EPUB; epy is a fork of epy
+    with support for more formats like MOBI and AZW3, and adds
+    features like bookmarks, integration with external dictionaries,
+    and inline formatting
   - [epub2txt2](https://github.com/kevinboone/epub2txt2):
     Extract text from EPUB
   - [Foliate](https://johnfactotum.github.io/foliate/)
