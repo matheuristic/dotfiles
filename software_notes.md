@@ -417,6 +417,11 @@
     TUI editor like vi, but implements an object-verb command model
     rather than vi's verb-object command-model; designed to call out
     to the shell for most features beyond basic editing
+  - [Lite XL](https://lite-xl.com/)
+    ([Github](https://github.com/lite-xl/lite-xl)) or
+    [Textadapt](https://orbitalquark.github.io/textadept/)
+    ([Github](https://github.com/orbitalquark/textadept)):
+    Cross-platform lightweight GUI text editor extensible using Lua
   - [Vim](https://www.vim.org/) or
     [Neovim](https://neovim.io/):
     TUI text editor based on [vi](https://en.wikipedia.org/wiki/Vi);
