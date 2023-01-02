@@ -1179,7 +1179,6 @@ tkdiff v5.6 into `$HOME/src/sourceforge.net/tkdiff` and symlinks the
   export TKDIFFVERSION=5.6   # change as appropriate
   mkdir -p $HOME/src/sourceforge.net/tkdiff
   cd $HOME/src/sourceforge.net/tkdiff
-  curl
   curl -L https://sourceforge.net/projects/tkdiff/files/tkdiff/${TKDIFFVERSION}/tkdiff-${TKDIFFVERSION}.zip/download > tkdiff-${TKDIFFVERSION}.zip
   unzip tkdiff-${TKDIFFVERSION}.zip
   rm -f latest && ln -s tkdiff-${TKDIFFVERSION} latest
