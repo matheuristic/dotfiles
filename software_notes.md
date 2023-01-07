@@ -280,6 +280,8 @@
     ([Github](https://github.com/editorconfig/)):
     Define formatting conventions for project code and text files,
     with multiple implementations and editor plugins to apply them
+    (install base command with `apt install editorconfig` on Debian or
+    Ubuntu, `port install editorconfig-core-c` via MacPorts on macOS)
   - [gitg](https://gitlab.gnome.org/GNOME/gitg) or
     [Gitup](https://github.com/git-up/GitUp) or
     [TortoiseGit](https://tortoisegit.org/):
