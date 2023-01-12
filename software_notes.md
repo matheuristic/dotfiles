@@ -714,6 +714,9 @@
     macOS application bundle
   - [sc-im](https://github.com/andmarti1424/sc-im)
     Terminal spreadsheet program
+  - [Stellarium](https://stellarium.org/)
+    ([Github](https://github.com/Stellarium/stellarium)):
+    Open-source desktop planetarium
   - [Sweet Home 3D](https://www.sweethome3d.com/):
     Open-source interior design application, also available as a
     [webapp](https://www.sweethome3d.com/SweetHome3DOnlineManager.jsp)
@@ -1088,8 +1091,8 @@ should not be used, compile it, install it, configure the user shell
 `$PATH` and `$MANPATH`, and sync the ports tree.
 
 ```sh
-mkdir -p ${HOME}/src/github.com/macports/macports-base # change dir as desired
-cd ${HOME}/src/github.com/macports/macports-base
+mkdir -p ${HOME}/vendor/github.com/macports/macports-base # change dir as desired
+cd ${HOME}/vendor/github.com/macports/macports-base
 export MACPORTSVERSION=2.8.0   # change as needed
 export PREFIX=${HOME}/macports # change as desired
 curl -LO https://github.com/macports/macports-base/releases/download/v${MACPORTSVERSION}/MacPorts-${MACPORTSVERSION}.tar.bz2
@@ -1173,19 +1176,19 @@ use `opendiff`. Otherwise, if using the MacPorts package manager,
 install Quartz Tk and download the latest tkdiff source which is an
 executable Tcl script. The following shell commands installs Quartz Tk
 using MacPorts (the macOS system version is rather old), downloads the
-tkdiff v5.6 into `$HOME/src/sourceforge.net/tkdiff` and symlinks the
-`tkdiff` script into `$HOME/.local/bin` (assumed to be `$PATH`).
+tkdiff v5.6 into `$HOME/vendor/sourceforge.net/tkdiff` and symlinks
+the `tkdiff` script into `$HOME/.local/bin` (assumed to be `$PATH`).
 
   ```sh
   port -N install tk +quartz # via MacPorts, skip if already installed
   export TKDIFFVERSION=5.6   # change as appropriate
-  mkdir -p $HOME/src/sourceforge.net/tkdiff
-  cd $HOME/src/sourceforge.net/tkdiff
+  mkdir -p $HOME/vendor/sourceforge.net/tkdiff
+  cd $HOME/vendor/sourceforge.net/tkdiff
   curl -L https://sourceforge.net/projects/tkdiff/files/tkdiff/${TKDIFFVERSION}/tkdiff-${TKDIFFVERSION}.zip/download > tkdiff-${TKDIFFVERSION}.zip
   unzip tkdiff-${TKDIFFVERSION}.zip
   rm -f latest && ln -s tkdiff-${TKDIFFVERSION} latest
   cd ~/.local/bin
-  ln -s $HOME/src/sourceforge.net/tkdiff/latest/tkdiff
+  ln -s $HOME/vendor/sourceforge.net/tkdiff/latest/tkdiff
   ```
 
 Graphical diff and merge tools can also be used with diffing and
