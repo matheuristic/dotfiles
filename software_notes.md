@@ -685,6 +685,9 @@
     Use [Lua](https://www.lua.org/) for macOS scripts that can call
     system APIs, for example middle-click-move mouse to scroll
     ([link](https://superuser.com/questions/303424/can-i-enable-scrolling-with-middle-button-drag-in-os-x))
+  - [ivy](https://github.com/robpike/ivy):
+    APL-like calculator ([docs](https://pkg.go.dev/robpike.io/ivy)),
+    install with `go install robpike.io/ivy@latest` (requires Go)
   - [hyperfine](https://github.com/sharkdp/hyperfine):
     Benchmark shell commands
   - [Joplin](https://joplinapp.org/):
