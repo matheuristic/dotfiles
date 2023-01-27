@@ -28,13 +28,15 @@ without antialiasing and at their intended sizes (or multiples of it).
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
 - [JuliaMono](https://github.com/cormullion/juliamono)
-- [Monocraft](https://github.com/IdreesInc/Monocraft) (bitmap, emulates Minecraft typeface)
-- [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_)
+- [Monocraft](https://github.com/IdreesInc/Monocraft)
+  (bitmap, emulates Minecraft typeface)
+- [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/)
+  (_commercial_)
 - [ProFont](https://tobiasjung.name/profont/) (bitmap)
 - [Space Mono](https://github.com/googlefonts/spacemono)
 - [Spleen](https://github.com/fcambus/spleen) (bitmap)
-- [Terminus](http://terminus-font.sourceforge.net/) (bitmap,
-  [TTF version](https://files.ax86.net/terminus-ttf/))
+- [Terminus](http://terminus-font.sourceforge.net/)
+  (bitmap, [TTF version](https://files.ax86.net/terminus-ttf/))
 - [Unifont](http://unifoundry.com/unifont/index.html) (bitmap)
 
 ## Sans-serif proportional fonts
@@ -50,6 +52,8 @@ without antialiasing and at their intended sizes (or multiples of it).
   [Condensed](https://www.omnibus-type.com/fonts/asap-condensed/)
   ([Github](https://github.com/Omnibus-Type/AsapCondensed))
 - [Atkinson Hyperlegible](https://brailleinstitute.org/freefont)
+- [Clarity City](https://github.com/vmware/clarity-city)
+  (similar to Gotham but with stricter geometry)
 - [Cooper Hewitt](https://www.cooperhewitt.org/open-source-at-cooper-hewitt/cooper-hewitt-the-typeface-by-chester-jenkins/)
   ([Github](https://github.com/cooperhewitt/cooperhewitt-typeface))
 - [Decovar](https://github.com/googlefonts/decovar)
@@ -60,8 +64,12 @@ without antialiasing and at their intended sizes (or multiples of it).
   ([Github](https://github.com/bBoxType/FiraGO))
 - [Jost*](https://github.com/indestructible-type/Jost)
   (Futura alternative)
+- [Montserrat](https://github.com/JulietaUla/Montserrat)
+  (Gotham clone)
 - [Open Sans](https://github.com/googlefonts/opensans)
 - [Outfit](https://github.com/Outfitio/Outfit-Fonts)
+- [Poppins](https://www.indiantypefoundry.com/fonts/poppins)
+  ([Github](https://github.com/itfoundry/Poppins), geometric)
 - [Plein](https://www.fontshare.com/fonts/plein)
 - [Plus Jakarta Sans](https://github.com/tokotype/PlusJakartaSans)
 - [Public Sans](https://public-sans.digital.gov/)
@@ -113,6 +121,7 @@ without antialiasing and at their intended sizes (or multiples of it).
 
 ## Font families
 
+- [DM](https://github.com/googlefonts/dm-fonts) (sans like Poppins, serif like Source Serif Pro, has monospace [version](https://github.com/googlefonts/dm-mono) based on sans font)
 - [Go](https://go.dev/blog/go-fonts)
 - [IBM Plex](https://github.com/IBM/plex)
 - [Input](https://input.djr.com/) (_free for personal use_)
