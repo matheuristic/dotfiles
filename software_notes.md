@@ -679,6 +679,9 @@
     files, and can output to formats like HTML, JSON, Markdown and
     reStructuredText in addition to text; as a pure Python package, it
     is installable via `pip` from [PyPI](https://pypi.org/)
+  - [FontForge](https://fontforge.org/)
+    ([Github](https://github.com/fontforge/fontforge)):
+    Open-source cross-platform scriptable font editor
   - [grex](https://github.com/pemistahl/grex):
     Generate regex from test cases
   - [Hammerspoon](https://www.hammerspoon.org/):
@@ -2103,8 +2106,8 @@ for the different accounts instead of just one `gmi-send`.
 
 ### Installing and setting up aerc
 
-Make sure the [Go](https://go.dev/) compiler is installed (easiest is
-using downloading from the website).
+Make sure the [Go](https://go.dev/) compiler is installed (download
+from the Go website, or use a package manager like APT or MacPorts).
 
 Compile aerc and install it to a separate directory (best to do so
 because it needs to be run with specific library paths set):
