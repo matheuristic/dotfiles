@@ -29,7 +29,8 @@ without antialiasing and at their intended sizes (or multiples of it).
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
 - [JuliaMono](https://github.com/cormullion/juliamono)
 - [Monocraft](https://github.com/IdreesInc/Monocraft)
-  (bitmap, emulates Minecraft typeface)
+  (bitmap, emulates Minecraft typeface, proportional
+  [version](https://github.com/IdreesInc/Minecraft-Font))
 - [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/)
   (_commercial_)
 - [ProFont](https://tobiasjung.name/profont/) (bitmap)
