@@ -553,8 +553,19 @@
   - [skhd](https://github.com/koekeishiya/skhd):
     Hotkey daemon; macOS
   - [Rectangle](https://github.com/rxhanson/Rectangle):
-    Move and resize windows using keyboard shortcuts and snap areas;
-    macOS
+    Move and resize windows using keyboard shortcuts and snap areas
+    in macOS; as an alternative, three of the more useful keyboard
+    shortcuts in Rectangle can be replicated using _Preferences_ >
+    _Keyboard_ > _Keyboard Shortcuts_ > _App Shortcuts_ and clicking
+    on `+`, keeping `All Applications`, inserting as the Menu Title
+    action `Move Window to Left Side of Screen` and setting the
+    shortcut key as desired (`Ctrl-Option-Left` is recommended), and
+    repeating for other actions `Move Window to Right Side of Screen`
+    (recommend `Ctrl-Option-Right` here), as well as `Zoom` (recommend
+    using `Ctrl-Option-Return` here), **or** hover over the green `+`
+    button on the top-left corner of the window and press `Option`
+    which allows mouse selection of the actions which does not require
+    keyboard shortcut configuration
   - [ueli](https://ueli.app/):
     Launcher like [Alfred](https://www.alfredapp.com/) but open-source
     and available for Windows in addition to macOS
