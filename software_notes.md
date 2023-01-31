@@ -1029,16 +1029,16 @@ directory in `$PATH` (below assumes `$HOME/.local/bin` is in `$PATH`).
 
 ```sh
 # Create a named environment rather than polluting base
-mamba create -n devtools
-mamba activate devtools
+mamba create -n tools
+mamba activate tools
 mamba install bat black htop mdformat pandoc ripgrep
 cd $HOME/.local/bin
-ln -s $HOME/mambaforge/envs/devtools/bin/bat
-ln -s $HOME/mambaforge/envs/devtools/bin/black
-ln -s $HOME/mambaforge/envs/devtools/bin/htop
-ln -s $HOME/mambaforge/envs/devtools/bin/mdformat
-ln -s $HOME/mambaforge/envs/devtools/bin/pandoc
-ln -s $HOME/mambaforge/envs/devtools/bin/rg
+ln -s $HOME/mambaforge/envs/tools/bin/bat
+ln -s $HOME/mambaforge/envs/tools/bin/black
+ln -s $HOME/mambaforge/envs/tools/bin/htop
+ln -s $HOME/mambaforge/envs/tools/bin/mdformat
+ln -s $HOME/mambaforge/envs/tools/bin/pandoc
+ln -s $HOME/mambaforge/envs/tools/bin/rg
 mamba deactivate
 ```
 
@@ -1268,12 +1268,12 @@ Mambaforge. Assumes `$HOME/.local/bin` is in `$PATH` and `$HOME/.zshrc` exists.
 # $ conda config --set auto_activate_base false
 # $ mamba init
 # Create basic tools environment rather than polluting base environment
-mamba create -n devtools
-mamba activate devtools
+mamba create -n tools
+mamba activate tools
 cd $HOME/.local/bin
-for cmd in bat rg; do
+for cmd in bat ripgrep; do
     mamba install -y "$cmd"
-    ln -s "$HOME/mambaforge/envs/devtoos/bin/$cmd"
+    ln -s "$HOME/mambaforge/envs/tools/bin/$cmd"
 done
 mamba deactivate
 # Create new environments as needed for each project, e.g.
@@ -1297,13 +1297,32 @@ To support compiling PDF files from Markdown files, setup
 either Pandoc or the Kramdown-Asciidoc toolchain as described
 in the next sections.
 
+#### Groff setup
+
+GNU Troff (groff) is a typesetting system useful as a lightweight
+alternative to LaTeX.
+
+There are no groff binaries packaged for macOS arm64 in the
+conda-forge repository, but binaries are available from the Anaconda
+repository.
+
+```sh
+mamba create -n groff
+mamba activate groff
+conda config --env --add channels anaconda
+conda install groff
+mamba deactivate
+cd $HOME/.local/bin
+ln -s $HOME/mambaforge/envs/groff/bin/groff
+```
+
 #### Pandoc setup (recommended)
 
 Pandoc is a very useful tool for converting between different document
 formats (e.g., Markdown to HTML, or Markdown to LaTeX).
 
-There are no Pandoc binaries packaged for macOS arm64 from the
-official repository, but binaries are available from the Anaconda
+There are no Pandoc binaries packaged for macOS arm64 in the
+conda-forge repository, but binaries are available from the Anaconda
 conda repository.
 
 ```sh
@@ -1381,14 +1400,14 @@ chmod +x kramdoc
 Environment-independent Python development tools.
 
 ```sh
-mamba create -n pydevtools python=3.9
-mamba activate pydevtools
+mamba create -n pytools python=3.9
+mamba activate pytools
 mamba install black
 mamba install python-lsp-server
 mamba deactivate
 cd $HOME/.local/bin
-ln -s $HOME/mambaforge/envs/pyenv/black
-ln -s $HOME/mambaforge/envs/pyenv/pylsp
+ln -s $HOME/mambaforge/envs/pytools/black
+ln -s $HOME/mambaforge/envs/pytools/pylsp
 ```
 
 #### Installing GPU ML libraries for darwin-aarch64 machines
