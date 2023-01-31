@@ -110,6 +110,9 @@
     Asciidoc processor, has an
     [extension](https://asciidoctor.org/docs/asciidoctor-pdf/)
     for PDF generation
+  - [groff](https://www.gnu.org/software/groff/):
+    Typesetting system that can output PS, PDF, HTML or DVI;
+    a lightweight alternative to (La)TeX but less popular
   - [hred](https://github.com/danburzo/hred):
     Command-line HTML (and XML) to JSON converter
   - [Kramdown](https://kramdown.gettalong.org/):
@@ -1297,9 +1300,9 @@ To support compiling PDF files from Markdown files, setup
 either Pandoc or the Kramdown-Asciidoc toolchain as described
 in the next sections.
 
-#### Groff setup
+#### groff setup
 
-GNU Troff (groff) is a typesetting system useful as a lightweight
+GNU roff (groff) is a typesetting system useful as a lightweight
 alternative to LaTeX.
 
 There are no groff binaries packaged for macOS arm64 in the
