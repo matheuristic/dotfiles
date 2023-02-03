@@ -550,8 +550,9 @@
     [Scroll Reverser](https://github.com/pilotmoon/Scroll-Reverser):
     Mouse enhancements like reverse scrolling, linear scrolling,
     acceleration, etc, for external mice on macOS
-  - [skhd](https://github.com/koekeishiya/skhd):
-    Hotkey daemon; macOS
+  - [Maccy](https://maccy.app/)
+    ([Github](https://github.com/p0deje/Maccy)):
+    Clipboard manager; macOS
   - [Rectangle](https://github.com/rxhanson/Rectangle):
     Move and resize windows using keyboard shortcuts and snap areas
     in macOS; as an alternative, three of the more useful keyboard
@@ -566,6 +567,14 @@
     button on the top-left corner of the window and press `Option`
     which allows mouse selection of the actions which does not require
     keyboard shortcut configuration
+  - [shottr](https://shottr.cc/):
+    Screenshot app; macOS
+  - [skhd](https://github.com/koekeishiya/skhd):
+    Hotkey daemon; macOS
+  - [stats](https://github.com/exelban/stats):
+    Menu bar system monitor; macOS
+  - [Textinator](https://github.com/RhetTbull/textinator):
+    Detect text in screenshots and copy it to the clipboard; macOS
   - [ueli](https://ueli.app/):
     Launcher like [Alfred](https://www.alfredapp.com/) but open-source
     and available for Windows in addition to macOS
@@ -1080,10 +1089,12 @@ These and more configuration options can also be set using the
 command-line, see [these](https://gist.github.com/uson1x/2275613)
 [links](https://gist.github.com/iamdanre/551a6a68ce0fc3c9cea0ad53e32d5690).
 
-### Recommended apps
+### Alternative web browsers
+
+Besides built-in Safari, other browsers may be useful or preferred:
 
 - [Google Chrome](https://www.google.com/chrome/)
-  (for compatibility with websites)
+  (some websites are only fully compatible with this)
 - [Firefox](https://www.mozilla.org/en-US/firefox/new/)
   (for compatibility with more powerful extensions, see
   [link](https://blog.mozilla.org/addons/2022/05/18/manifest-v3-in-firefox-recap-next-steps/))
