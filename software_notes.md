@@ -2367,9 +2367,27 @@ To have an index per codebase or per group of codebases, `direnv` or
 entering or leaving specific directories. For example, assuming
 `direnv` is installed, a codebase-specific `$CSEARCHINDEX` can be
 configured to be automatically set and unset when entering and leaving
-that codebase's directory as follows.
+that codebase's directory.
+
+First, install `direnv` or `shadowenv` if needed. E.g., for `direnv`:
 
 ```sh
+# If needed, install direnv and hook it into the shell, see
+# https://direnv.net/docs/installation.html
+# Following installs with Go and assumes shell is Zsh
+go install github.com/direnv/direnv@latest
+cat >>$HOME/.zshrc <<EOF
+eval "$(direnv hook zsh)"
+EOF
+source $HOME/.zshrc
+```
+
+Codebase-specific setup of direnv to automatically switch the index
+when entering and leaving the code directory can be done as follows
+(also provided as the `utils/.local/csearch-setup` script):
+
+```sh
+# Go to code directory
 cd /path/to/repository/
 # Setup direnv config for this codebase
 cat >>.envrc <<EOF
@@ -2379,7 +2397,7 @@ direnv allow .
 # Index the codebase
 cindex $PWD
 # Run if a Git repository to avoid syncing index and direnv config
-cat >> .gitignore <EOF
+cat >>.gitignore <<EOF
 # direnv config
 /.envrc
 # Code search index

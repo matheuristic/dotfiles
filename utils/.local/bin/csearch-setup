@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+# Setup Code Search index local to current directory tree using direnv
+# This should be called from the root folder of a code repository
+
+# Check needed commands are installed
+if ! command -v direnv >/dev/null 2>&1; then
+  echo "direnv needs to be installed" 1>&2
+  exit 1
+fi
+if ! command -v cindex >/dev/null 2>&1; then
+  echo "Code Search (https://github.com/google/codesearch) needs to be installed" 1>&2
+  exit 1
+fi
+
+# Setup direnv config for this codebase
+cat >>.envrc <<EOF
+export CSEARCHINDEX=$PWD/.csearchindex
+EOF
+direnv allow .
+
+# Index the codebase
+cindex $PWD
+
+# Run if a Git repository to avoid syncing index and direnv config
+cat >>.gitignore <<EOF
+# direnv config
+/.envrc
+# Code search index
+/.csearchindex
+EOF
