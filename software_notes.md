@@ -2377,6 +2377,7 @@ First, install `direnv` or `shadowenv` if needed. E.g., for `direnv`:
 # Following installs with Go and assumes shell is Zsh
 go install github.com/direnv/direnv@latest
 cat >>$HOME/.zshrc <<EOF
+# direnv
 eval "$(direnv hook zsh)"
 EOF
 source $HOME/.zshrc
