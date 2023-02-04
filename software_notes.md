@@ -311,6 +311,12 @@
     Easier-to-use [Make](https://www.gnu.org/software/make/)
     alternative
 - Remote login and desktop
+  - [cpu](https://github.com/u-root/cpu):
+    Implementation of Plan 9 [cpu](https://man.cat-v.org/plan_9/1/cpu)
+    command in Go, modified to work over SSH; useful for logging into
+    remote systems while allowing use of files from the local system,
+    like running local binaries and using local files remotely on an
+    embedded system with limited disk capacity
   - [Mosh](https://mosh.org/):
     Robust SSH alternative
   - [Remmina](https://remmina.org/):
