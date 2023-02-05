@@ -315,8 +315,15 @@
     Implementation of Plan 9 [cpu](https://man.cat-v.org/plan_9/1/cpu)
     command in Go, modified to work over SSH; useful for logging into
     remote systems while allowing use of files from the local system,
-    like running local binaries and using local files remotely on an
-    embedded system with limited disk capacity
+    (e.g., 1. cpu into an embedded system with limited disk capacity
+    and running binaries from the local system, or 2. cpu into an
+    x86-64 Linux machine from an Apple Silicon macOS system to develop
+    for and run on the Linux system while keeping the code repository
+    and code output on the macOS system); currently requires the
+    `cpud` daemon to be run as root on remote Linux systems as `mount`
+    is a privileged operation in Linux, and if running on a system
+    using `systemd` the daemon should be started with `cpud -d -init`
+    (see [discussion](https://github.com/u-root/cpu/issues/59))
   - [Mosh](https://mosh.org/):
     Robust SSH alternative
   - [Remmina](https://remmina.org/):
