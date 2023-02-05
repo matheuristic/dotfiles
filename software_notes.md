@@ -579,11 +579,15 @@
     Hotkey daemon; macOS
   - [stats](https://github.com/exelban/stats):
     Menu bar system monitor; macOS
-  - [Textinator](https://github.com/RhetTbull/textinator):
+  - [Textinator](https://github.com/RhetTbull/textinator)
+    or [TRex](https://github.com/amebalabs/TRex):
     Detect text in screenshots and copy it to the clipboard; macOS
   - [ueli](https://ueli.app/):
     Launcher like [Alfred](https://www.alfredapp.com/) but open-source
     and available for Windows in addition to macOS
+  - [xbar](https://github.com/matryer/xbar) or
+    [SwiftBar](https://github.com/swiftbar/SwiftBar):
+    Pipe output to the menu bar; macOS
   - [Unshaky](https://github.com/aahung/Unshaky):
     Double keypress workaround for butterfly keyboards; macOS
 - User experience and interface (text)
@@ -613,9 +617,20 @@
   - [ttyplot](https://github.com/tenox7/ttyplot):
     Real-time plotting tool in the terminal using stdin as data input
 - Virtualization
+  - [colima](https://github.com/abiosoft/colima) or
+    [Rancher Desktop](https://rancherdesktop.io/)
+    ([Github](https://github.com/rancher-sandbox/rancher-desktop/)):
+    Minimal-setup container runtimes on macOS with support for Docker,
+    containerd, or Kubernetes; uses [lima](https://lima-vm.io/), which
+    is like WSL2 for macOS, under the hood; alternative to Docker
+    Desktop; for more info, see
+    [link](https://www.cncf.io/blog/2023/02/02/docker-on-macos-is-slow-and-how-to-fix-it/)
   - [UTM](https://github.com/utmapp/UTM):
     iOS and macOS tool for managing [QEMU](https://www.qemu.org/)
-    virtual machines
+    virtual machines; alternatives are [lima](https://lima-vm.io/)
+    ([Github](https://github.com/lima-vm/lima)) if there is no need to
+    run GUI apps, or Ubuntu-only [Multipass](https://multipass.run/)
+    ([Github](https://github.com/canonical/multipass))
   - [virt-manager](https://virt-manager.org/):
     Linux desktop tool for managing QEMU/KVM virtual machines
 - VPN
