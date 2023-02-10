@@ -12,6 +12,10 @@ umask 077
 # Use Emacs bindings
 bindkey -e
 
+# Autocomplete, also load user-local completions in ~/.zsh_completions
+[ -d $HOME/.zsh_completions ] && fpath=($HOME/.zsh_completions $fpath)
+autoload -Uz compinit && compinit
+
 # History settings
 setopt histignorealldups sharehistory
 HISTSIZE=10000

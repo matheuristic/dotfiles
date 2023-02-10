@@ -762,7 +762,12 @@
     `$HOME/.local/lib/password-store/platform.sh`) so that the line
     `GETOPT=...` points directly to the MacPorts-installed `getopt`
     (e.g., `GETOPT="/Users/$(whoami)/macports/bin/getopt"`); for more,
-    see [link](https://gist.github.com/abtrout/d64fb11ad6f9f49fa325)
+    see [link](https://gist.github.com/abtrout/d64fb11ad6f9f49fa325);
+    for completion support when installing from source, see `INSTALL`
+    in the pass source or directly copy the completion files to the
+    appropriate directories (e.g., for Zsh, copy the file
+    `src/completion/pass.zsh_completion` to a file with name prefixed
+    by `_` in an `$fpath` dir, say `$HOME/.zsh_completions/_pass`)
   - [pastel](https://github.com/sharkdp/pastel) or
     [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
     Terminal color picker
