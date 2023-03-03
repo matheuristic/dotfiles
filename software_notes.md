@@ -62,6 +62,9 @@
     Amazon Redshift, CockroachDB, MariaDB databases
   - [Jailer](https://github.com/Wisser/Jailer):
     Subset databases and browse relational data
+  - [Mathesar](https://mathesar.org/)
+    ([Github](https://github.com/centerofci/mathesar)):
+    PostgreSQL web client with a spreadsheet-like web interface
   - [OctoSQL](https://github.com/cube2222/octosql):
     Make queries that can span MySQL, PostgreSQL databases along with
     CSV and JSON
@@ -99,7 +102,8 @@
   - [LinkedIdeas](https://github.com/fespinoza/LinkedIdeas):
     Mind-mapping tool
   - [Pikchr](https://pikchr.org/) or
-    [PlantUML](https://plantuml.com/):
+    [PlantUML](https://plantuml.com/) or
+    [Mermaid(https://mermaid.js.org/):
     Markup language for diagramming, standalone or supported by
     Markdown processers like Pandoc via plugins
 - Digital design
@@ -188,6 +192,8 @@
     [lf](https://github.com/gokcehan/lf) or
     [broot](https://github.com/Canop/broot):
     Terminal file manager
+  - [PeaZip](https://peazip.github.io/):
+    File manager and file archiver
   - [rclone](https://rclone.org/)
     ([Github](https://github.com/rclone/rclone)):
     Like `rsync` but for cloud storage; `rclone mount` can be used to
