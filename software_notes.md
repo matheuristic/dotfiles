@@ -153,6 +153,13 @@
     [Asciidoc converter](https://github.com/asciidoctor/kramdown-asciidoc)
   - [Pandoc](https://pandoc.org/):
     Document converter, can also process Markdown
+  - [Quarto](https://quarto.org/)
+    ([Github](https://github.com/quarto-dev/quarto-cli)):
+    Publishing system built on Pandoc, successor to R Markdown,
+    supporting Markdown and Jupyter notebooks with dynamic content
+    using Python, R, Julia, and Observable JS; for a user-local
+    install, one option is to extract the tarball version somewhere
+    and symlink the `quarto` binary from a directory in `$PATH`
   - [shot-scraper](https://github.com/simonw/shot-scraper):
     Command-line utility for taking partial or full screenshots of
     websites
