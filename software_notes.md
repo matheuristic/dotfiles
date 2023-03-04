@@ -9,10 +9,20 @@
     [ReaPlugs](https://www.reaper.fm/reaplugs/) VST plugins; Ardour
     seems more suited to audio recording and engineering, while Zrythm
     seems more suited to MIDI electronic music production
+  - [Blender](https://www.blender.org/)
+    ([Github](https://github.com/blender/blender)):
+    3D creation suite covering the full 3D animation pipeline
+  - [Handbrake](https://handbrake.fr/):
+    Video encoder
   - [Kdenlive](https://kdenlive.org/en/):
-    Video editor
+    Video editor; alternative is [ShotCut](https://shotcut.org/)
   - [LMMS](https://lmms.io/):
     Music sequencer
+  - [LosslessCut](https://github.com/mifi/lossless-cut):
+    Tool for cutting/trimming audio/video files without re-encoding
+  - [MediaInfo](https://mediaarea.net/en/MediaInfo)
+    ([Github](https://github.com/MediaArea/MediaInfo)):
+    Tool for showing technical and tag data of audio and video files
   - [sfxr-qt](https://github.com/agateau/sfxr-qt):
     SFX creator for games; Qt port of
     [SFXR](http://www.drpetter.se/project_sfxr.html);
@@ -20,6 +30,25 @@
     [online](https://sfxr.me/); also built into LMMS
   - [Synfig](https://github.com/synfig/synfig/):
     2D vector animation
+  - [Ultimate Vocal Remover GUI](https://github.com/Anjok07/ultimatevocalremovergui):
+    Tool for using open-source deep learning models (e.g.,
+    [Demucs](https://github.com/facebookresearch/demucs) and
+    [MDX-NET](https://github.com/kuielab/mdx-net)) to isolate
+    vocals from audio tracks; a donation-supported web interface
+    [MVSEP](https://mvsep.com/) is also available
+- Audio and Video Playback and Streaming
+  - [NDI Tools](https://www.ndi.tv/tools/):
+    Software for low-latency broadcasting over LAN by taking any video
+    source, like a webcam, video capture card or desktop, and making
+    that an NDI source accessible by other computers on the network
+  - [OBS Studio](https://obsproject.com/):
+    Software for broadcasting video streams with
+    [very](https://obsproject.com/forum/resources/downstream-keyer.1254/)
+    [many](https://obsproject.com/forum/resources/closed-captioning-via-google-speech-recognition.833/)
+    [different](https://sammisolutions.itch.io/sammi)
+    [plugins](https://github.com/Xaymar/obs-StreamFX/wiki)
+  - [VLC](https://www.videolan.org/vlc/):
+    Media player
 - Backup
   - [BorgBackup](https://www.borgbackup.org/):
     File backup tool; frontends available like
@@ -33,7 +62,7 @@
   - [ctop](https://github.com/bcicen/ctop):
     `top` for containers
   - [Docker](https://docs.docker.com/)
-- Data analytics apps
+- Data analytics
   - [JASP](https://jasp-stats.org/):
     GUI statistical analysis tool
   - [Netron](https://github.com/lutzroeder/netron):
@@ -42,7 +71,7 @@
     Open-source SPSS alternative
   - [Veusz](https://veusz.github.io/):
     Scientific plotting and graphing
-- Data pipelines
+- Data pipeline
   - [Apache Airflow](https://airflow.apache.org/):
     Scheduling workflows
   - [Apache HOP](https://hop.apache.org/):
@@ -50,6 +79,13 @@
   - [Snakemake](https://snakemake.readthedocs.io/en/stable/) or
     [Nextflow](https://www.nextflow.io/)
     Run batch workflows
+- Database
+  - [ClickHouse](https://github.com/ClickHouse/ClickHouse):
+    Time-series DB
+  - [PostgreSQL](https://www.postgresql.org/):
+    Relational DB; use
+    [TimescaleDB](https://github.com/timescale/timescaledb)
+    plugin to better support time-series
 - Database clients
   - [Altair](https://altair.sirmuel.design/):
     GraphQL client
@@ -76,13 +112,6 @@
     Redis client
   - [Sequel Ace](https://github.com/Sequel-Ace/Sequel-Ace):
     MySQL, MariaDB client; macOS
-- Databases
-  - [ClickHouse](https://github.com/ClickHouse/ClickHouse):
-    Time-series DB
-  - [PostgreSQL](https://www.postgresql.org/):
-    Relational DB; use
-    [TimescaleDB](https://github.com/timescale/timescaledb)
-    plugin to better support time-series
 - Desktop publishing
   - [Scribus](https://www.scribus.net/)
 - Diagramming and image editing
@@ -142,7 +171,7 @@
     [Python](https://github.com/chrismattmann/tika-python) bindings
     available
   - [Tesseract](https://github.com/tesseract-ocr/tesseract)
-- Ebook readers and library managers
+- Ebook reader or library manager
   - [Calibre](https://calibre-ebook.com/)
   - [epr](https://github.com/wustho/epr) or
     [epy](https://github.com/wustho/epy):
@@ -215,12 +244,12 @@
     available
   - [tree](http://mama.indstate.edu/users/ice/tree/):
     Command-line tool to list files in subdir tree depth-indented
-- Newsreaders
+- Newsreader
   - [NetNewsWire](https://github.com/Ranchero-Software/NetNewsWire):
     RSS reader; iOS and macOS
   - [Pan](http://pan.rebelbase.com/):
     Usenet reader
-- Package/runtime managers
+- Package/runtime manager
   - [asdf](https://asdf-vm.com/):
     Language runtime manager
   - [Flatpak](https://flatpak.org/):
@@ -236,7 +265,7 @@
     [conda-forge](https://conda-forge.org/); the Mambaforge variant
     recommended as it comes with the Conda drop-in replacement
     [Mamba](https://github.com/mamba-org/mamba) that is much faster
-- PDF readers and tools
+- PDF reader or transformer
   - [diffpdf](https://tracker.debian.org/pkg/diffpdf)
     ([source](http://www.qtrac.eu/diffpdf-foss.html)):
     Diff two PDF files, Can be used with `git` by setting
@@ -262,7 +291,7 @@
     macOS is usually good enough
   - [Xournal++](https://github.com/xournalpp/xournalpp):
     Handwriting notebook with PDF annotation support
-- Presentations
+- Presentation
   - [Marp](https://marp.app/):
     Markdown-based presentations; use via the command-line tool
     [marp-cli](https://github.com/marp-team/marp-cli)
@@ -270,7 +299,7 @@
     Multi-monitor PDF presentations
   - [slides](https://github.com/maaslalani/slides):
     Terminal-based presentations using Markdown files
-- Project (codebase) tools
+- Project (codebase)
   - [Cookiecutter](https://github.com/cookiecutter/cookiecutter)
     Project templates
   - [DevSkim](https://github.com/microsoft/DevSkim) or
@@ -360,7 +389,7 @@
   - [ripgrep](https://github.com/BurntSushi/ripgrep):
     `grep` alternative, extend to more file formats with
     [ripgrep-all](https://github.com/phiresky/ripgrep-all)
-- Shell enhancements
+- Shell enhancement
   - [tldr](https://github.com/tldr-pages/tldr) or
     [navi](https://github.com/denisidoro/navi):
     Interactive command references on the command-line; tldr has
@@ -417,7 +446,96 @@
     Command-line benchmarking tool that supports multiple and warmup
     runs, export of results to various formats, etc; basically a
     featureful alternative to the standard `time` command
-- Text editors and integrated development environments
+- Text (general)
+  - [Aspell](http://aspell.net/) or
+    [Nuspell](https://nuspell.github.io/):
+    Spell checker
+  - [bat](https://github.com/sharkdp/bat):
+    Command-line `cat` clone with syntax highlighting and Git integration
+  - [cspell](https://github.com/streetsidesoftware/cspell):
+    Code-aware spell checker
+  - [daff](https://paulfitz.github.io/daff/):
+    Like `diff` but for tables
+  - [delta](https://github.com/dandavison/delta):
+    `diff` alternative
+  - [enchant](https://github.com/AbiWord/enchant):
+    Wrapper for abstracting different spell checking libraries into a
+    single interface, with support for personal word lists (one word per
+    line) at paths `$ENCHANT_CONFIG_DIR/<lang>.dic` (for example,
+    `$HOME/.config/enchant/en_US.dic` for the US English personal word
+    list on Unix or Linux systems)
+  - [FIGlet](http://www.figlet.org/)
+    ([Github](https://github.com/cmatsuoka/figlet)):
+    Convert text to large ASCII word art, additional fonts are
+    available [here](https://github.com/cmatsuoka/figlet-fonts)
+  - [hexyl](https://github.com/sharkdp/hexyl):
+    Command-line hex viewer
+  - [LanguageTool](https://languagetool.org/):
+    Style and grammar checker; standalone Java version downloadable
+    [here](https://languagetool.org/download/), snapshots available
+    [here](https://internal1.languagetool.org/snapshots/) (the link
+    [link](https://languagetool.org/download/LanguageTool-stable.zip)
+    has the latest version), and is
+    [augmentable](https://dev.languagetool.org/finding-errors-using-n-gram-data.html)
+    with [n-gram](https://languagetool.org/download/ngram-data/) data
+  - [FileMerge](https://developer.apple.com/xcode/features/) or
+    [Meld](https://meldmerge.org/) or
+    [kdiff3](https://apps.kde.org/kdiff3/) or
+    [tkdiff](https://sourceforge.net/projects/tkdiff/) or
+    [xxdiff](https://github.com/blais/xxdiff):
+    GUI `diff` alternative; Meld supports Windows and Linux and has a
+    [macOS port](https://github.com/yousseb/meld), kdiff3 is
+    Linux-only, xxdiff is lightweight but does not support Unicode,
+    FileMerge comes with the macOS XCode IDE and can be called from
+    the command-line using `opendiff`, tkdiff is a somewhat easier to
+    set up and lightweight option on macOS (see _Mac Notes_ >
+    _Graphical diff and merge tool_); these also diff directories
+  - [par](http://www.nicemice.net/par/):
+    Paragraph reformatter, like a smarter version of `fmt` from GNU
+    [coreutils](https://www.gnu.org/software/coreutils/)
+  - [sttr](https://github.com/abhimanyu003/sttr):
+    Command-line tool for string operations
+  - [uni](https://github.com/arp242/uni) or
+    [chars](https://github.com/antifuchs/chars):
+    Command-line tool for querying Unicode characters
+- Text (structured)
+  - [fq](https://github.com/wader/fq):
+    Like `jq` but for binary formats
+  - [ghostwriter](https://github.com/wereturtle/ghostwriter):
+    Graphical Markdown editor; Windows and Linux (also on Flathub)
+  - [gron](https://github.com/tomnomnom/gron):
+    Flattens JSON into discrete assignments that work better
+    with `grep` and `sed`
+  - [htmlq](https://github.com/mgdm/htmlq) or
+    [cascadia](https://github.com/suntong/cascadia):
+    Like grep for HTML but using CSS selectors
+  - [jq](https://stedolan.github.io/jq/):
+    Command-line JSON processor
+  - [jless](https://jless.io/):
+    Ncurses command-line JSON viewer
+  - [jo](https://github.com/jpmens/jo):
+    Command-line utility for creating JSON objects
+  - [Miller](https://github.com/johnkerl/miller) or
+    [qsv](https://github.com/jqnatividad/qsv)
+    (fork of [xsv](https://github.com/BurntSushi/xsv)) or
+    [tsv-utils](https://github.com/eBay/tsv-utils):
+    Command-line tool for working with CSV files;
+    tsv-utils also supports TSV files, and Miller also supports TSV
+    and tabular JSON files; Miller is more flexible, qsv is easier
+    to use, tsv-utils is supposedly faster for large datasets.
+  - [QXmlEdit](http://qxmledit.org/):
+    XML editor
+  - [Tad](https://www.tadviewer.com/)
+    ([Github](https://github.com/antonycourtney/tad)):
+    GUI tabular data viewer for CSV, Parquet, SQLite, and DuckDB files
+  - [Visidata](https://www.visidata.org/) or
+    [CSView](https://github.com/wfxr/csview):
+    TUI tabular data viewer; Visidata is more of a multitool, in that
+    it allows for editing and supports any source loadable via Pandas
+    using the `-f` option
+  - [yq](https://github.com/mikefarah/yq):
+    Command-line YAML processor
+- Text editor or integrated development environment
   - [Acme](https://en.wikipedia.org/wiki/Acme_(text_editor)):
     Mouse-driven GUI text editor from
     [Plan 9](https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs),
@@ -474,95 +592,6 @@
     GUI IDE; VSCodium is a build of VSCode that is free of tracking and
     Microsoft branding, but note that some Microsoft plugins like pylance
     (Python LSP server) does not support it
-- Text tools (general)
-  - [Aspell](http://aspell.net/) or
-    [Nuspell](https://nuspell.github.io/):
-    Spell checker
-  - [bat](https://github.com/sharkdp/bat):
-    Command-line `cat` clone with syntax highlighting and Git integration
-  - [cspell](https://github.com/streetsidesoftware/cspell):
-    Code-aware spell checker
-  - [daff](https://paulfitz.github.io/daff/):
-    Like `diff` but for tables
-  - [delta](https://github.com/dandavison/delta):
-    `diff` alternative
-  - [enchant](https://github.com/AbiWord/enchant):
-    Wrapper for abstracting different spell checking libraries into a
-    single interface, with support for personal word lists (one word per
-    line) at paths `$ENCHANT_CONFIG_DIR/<lang>.dic` (for example,
-    `$HOME/.config/enchant/en_US.dic` for the US English personal word
-    list on Unix or Linux systems)
-  - [FIGlet](http://www.figlet.org/)
-    ([Github](https://github.com/cmatsuoka/figlet)):
-    Convert text to large ASCII word art, additional fonts are
-    available [here](https://github.com/cmatsuoka/figlet-fonts)
-  - [hexyl](https://github.com/sharkdp/hexyl):
-    Command-line hex viewer
-  - [LanguageTool](https://languagetool.org/):
-    Style and grammar checker; standalone Java version downloadable
-    [here](https://languagetool.org/download/), snapshots available
-    [here](https://internal1.languagetool.org/snapshots/) (the link
-    [link](https://languagetool.org/download/LanguageTool-stable.zip)
-    has the latest version), and is
-    [augmentable](https://dev.languagetool.org/finding-errors-using-n-gram-data.html)
-    with [n-gram](https://languagetool.org/download/ngram-data/) data
-  - [FileMerge](https://developer.apple.com/xcode/features/) or
-    [Meld](https://meldmerge.org/) or
-    [kdiff3](https://apps.kde.org/kdiff3/) or
-    [tkdiff](https://sourceforge.net/projects/tkdiff/) or
-    [xxdiff](https://github.com/blais/xxdiff):
-    GUI `diff` alternative; Meld supports Windows and Linux and has a
-    [macOS port](https://github.com/yousseb/meld), kdiff3 is
-    Linux-only, xxdiff is lightweight but does not support Unicode,
-    FileMerge comes with the macOS XCode IDE and can be called from
-    the command-line using `opendiff`, tkdiff is a somewhat easier to
-    set up and lightweight option on macOS (see _Mac Notes_ >
-    _Graphical diff and merge tool_); these also diff directories
-  - [par](http://www.nicemice.net/par/):
-    Paragraph reformatter, like a smarter version of `fmt` from GNU
-    [coreutils](https://www.gnu.org/software/coreutils/)
-  - [sttr](https://github.com/abhimanyu003/sttr):
-    Command-line tool for string operations
-  - [uni](https://github.com/arp242/uni) or
-    [chars](https://github.com/antifuchs/chars):
-    Command-line tool for querying Unicode characters
-- Text tools (structured)
-  - [fq](https://github.com/wader/fq):
-    Like `jq` but for binary formats
-  - [ghostwriter](https://github.com/wereturtle/ghostwriter):
-    Graphical Markdown editor; Windows and Linux (also on Flathub)
-  - [gron](https://github.com/tomnomnom/gron):
-    Flattens JSON into discrete assignments that work better
-    with `grep` and `sed`
-  - [htmlq](https://github.com/mgdm/htmlq) or
-    [cascadia](https://github.com/suntong/cascadia):
-    Like grep for HTML but using CSS selectors
-  - [jq](https://stedolan.github.io/jq/):
-    Command-line JSON processor
-  - [jless](https://jless.io/):
-    Ncurses command-line JSON viewer
-  - [jo](https://github.com/jpmens/jo):
-    Command-line utility for creating JSON objects
-  - [Miller](https://github.com/johnkerl/miller) or
-    [qsv](https://github.com/jqnatividad/qsv)
-    (fork of [xsv](https://github.com/BurntSushi/xsv)) or
-    [tsv-utils](https://github.com/eBay/tsv-utils):
-    Command-line tool for working with CSV files;
-    tsv-utils also supports TSV files, and Miller also supports TSV
-    and tabular JSON files; Miller is more flexible, qsv is easier
-    to use, tsv-utils is supposedly faster for large datasets.
-  - [QXmlEdit](http://qxmledit.org/):
-    XML editor
-  - [Tad](https://www.tadviewer.com/)
-    ([Github](https://github.com/antonycourtney/tad)):
-    GUI tabular data viewer for CSV, Parquet, SQLite, and DuckDB files
-  - [Visidata](https://www.visidata.org/) or
-    [CSView](https://github.com/wfxr/csview):
-    TUI tabular data viewer; Visidata is more of a multitool, in that
-    it allows for editing and supports any source loadable via Pandas
-    using the `-f` option
-  - [yq](https://github.com/mikefarah/yq):
-    Command-line YAML processor
 - User experience and interface (graphical)
   - [LinearMouse](https://github.com/linearmouse/linearmouse) or
     [Mos](https://github.com/Caldis/Mos) or
@@ -679,6 +708,8 @@
   - [Monolith](https://github.com/Y2Z/monolith.git):
     Save complete webpages to a single HTML file with embedded CSS,
     images and Javascript
+  - [YT-DLP](https://github.com/yt-dlp/yt-dlp):
+    Fork of [youtube-dl](https://youtube-dl.org/)
 - Web development
   - [dog](https://github.com/ogham/dog):
     Alternative to `dig`
@@ -811,6 +842,13 @@
 
 ## Commercial software
 
+- Audio and video creation and editing
+  - [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve):
+    Non-linear video editor
+- Database client
+  - [DbVisualizer](https://www.dbvis.com/):
+    Cross-database SQL client with data visualization capabilities;
+    free version available with limited functionality
 - Diagramming
   - [iThoughts](https://www.toketaware.com/):
     Mind-mapping tool
@@ -822,16 +860,7 @@
   - [Mountain Duck](https://mountainduck.io/):
     Like `rclone mount` but with a nicer user interface and its vaults
     are interoperable with Cryptomator vaults
-- Integrated development environments
-  - [DataGrip](https://www.jetbrains.com/datagrip/):
-    Database admin-oriented IDE
-  - [DataSpell](https://www.jetbrains.com/dataspell/):
-    Data science-oriented IDE
-  - [PyCharm](https://www.jetbrains.com/pycharm/):
-    Python programming-oriented IDE; has open-source community edition
-  - [RStudio](https://rstudio.com/):
-    IDE for R; has open-source edition
-- Project (codebase) tools
+- Project (codebase)
   - [Sublime Merge](https://www.sublimemerge.com/):
     GUI Git client for macOS
 - Remote login and desktop
@@ -841,11 +870,22 @@
     installed; macOS and Windows
   - [Royal TSX](https://royalapps.com/ts/):
     Cross-platform RDP and VNC client; has free version
-- Text tools (general)
+- Text (general)
   - [Beyond Compare](https://www.scootersoftware.com/):
     Compare files and folders
   - [Kaleidoscope](https://kaleidoscope.app/):
     Diff text and images
+- Text editor or integrated development environment
+  - [DataGrip](https://www.jetbrains.com/datagrip/):
+    Database admin-oriented IDE
+  - [DataSpell](https://www.jetbrains.com/dataspell/):
+    Data science-oriented IDE
+  - [PyCharm](https://www.jetbrains.com/pycharm/):
+    Python programming-oriented IDE; has open-source community edition
+  - [RStudio](https://rstudio.com/):
+    IDE for R; has open-source edition
+  - [Sublime Text](https://www.sublimetext.com/):
+    Lightweight text editor
 - Word processing
   - [Scrivener](https://www.literatureandlatte.com/scrivener/overview):
     Word processor for authoring books and screenplays
