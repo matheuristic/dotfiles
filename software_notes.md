@@ -1391,6 +1391,12 @@ mamba deactivate
 # > mamba create -n some-project python=3.9
 ```
 
+The base environment conda package should be updated regularly.
+
+```sh
+conda update -n base -c conda-forge conda
+```
+
 #### LaTeX tools setup
 
 Use Tectonic for LaTeX compilation.
@@ -1421,7 +1427,7 @@ repository.
 mamba create -n groff
 mamba activate groff
 conda config --env --add channels anaconda
-conda install groff
+mamba install groff
 mamba deactivate
 cd $HOME/.local/bin
 ln -s $HOME/mambaforge/envs/groff/bin/groff
@@ -1432,15 +1438,10 @@ ln -s $HOME/mambaforge/envs/groff/bin/groff
 Pandoc is a very useful tool for converting between different document
 formats (e.g., Markdown to HTML, or Markdown to LaTeX).
 
-There are no Pandoc binaries packaged for macOS arm64 in the
-conda-forge repository, but binaries are available from the Anaconda
-conda repository.
-
 ```sh
 mamba create -n pandoc
 mamba activate pandoc
-conda config --env --add channels anaconda
-conda install pandoc
+mamba install pandoc
 mamba deactivate
 cd $HOME/.local/bin
 ln -s $HOME/mambaforge/envs/pandoc/bin/pandoc
@@ -1513,12 +1514,18 @@ Environment-independent Python development tools.
 ```sh
 mamba create -n pytools python=3.9
 mamba activate pytools
-mamba install black
-mamba install python-lsp-server
+pip install black
+pip install ruff-lsp
 mamba deactivate
 cd $HOME/.local/bin
 ln -s $HOME/mambaforge/envs/pytools/black
-ln -s $HOME/mambaforge/envs/pytools/pylsp
+cat >ruff-lsp <<EOF
+#!/bin/zsh
+. "$HOME/mambaforge/etc/profile.d/conda.sh"
+conda activate pytools
+ruff-lsp "$@"
+EOF
+chmod +x ruff-lsp
 ```
 
 #### Installing GPU ML libraries for darwin-aarch64 machines
