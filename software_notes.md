@@ -566,6 +566,9 @@
     TUI editor like vi, but implements an object-verb command model
     rather than vi's verb-object command-model; designed to call out
     to the shell for most features beyond basic editing
+  - [Lapce](https://lapce.dev/)
+    ([Github](https://github.com/lapce/lapce)):
+    Batteries-loaded fast cross-platform code editor
   - [Lite XL](https://lite-xl.com/)
     ([Github](https://github.com/lite-xl/lite-xl)) or
     [Textadapt](https://orbitalquark.github.io/textadept/)
@@ -1296,17 +1299,17 @@ using MacPorts (the macOS system version is rather old), downloads the
 tkdiff v5.6 into `$HOME/vendor/sourceforge.net/tkdiff` and symlinks
 the `tkdiff` script into `$HOME/.local/bin` (assumed to be `$PATH`).
 
-  ```sh
-  port -N install tk +quartz # via MacPorts, skip if already installed
-  export TKDIFFVERSION=5.6   # change as appropriate
-  mkdir -p $HOME/vendor/sourceforge.net/tkdiff
-  cd $HOME/vendor/sourceforge.net/tkdiff
-  curl -L https://sourceforge.net/projects/tkdiff/files/tkdiff/${TKDIFFVERSION}/tkdiff-${TKDIFFVERSION}.zip/download > tkdiff-${TKDIFFVERSION}.zip
-  unzip tkdiff-${TKDIFFVERSION}.zip
-  rm -f latest && ln -s tkdiff-${TKDIFFVERSION} latest
-  cd ~/.local/bin
-  ln -s $HOME/vendor/sourceforge.net/tkdiff/latest/tkdiff
-  ```
+```sh
+port -N install tk +quartz # via MacPorts, skip if already installed
+export TKDIFFVERSION=5.6   # change as appropriate
+mkdir -p $HOME/vendor/sourceforge.net/tkdiff
+cd $HOME/vendor/sourceforge.net/tkdiff
+curl -L https://sourceforge.net/projects/tkdiff/files/tkdiff/${TKDIFFVERSION}/tkdiff-${TKDIFFVERSION}.zip/download > tkdiff-${TKDIFFVERSION}.zip
+unzip tkdiff-${TKDIFFVERSION}.zip
+rm -f latest && ln -s tkdiff-${TKDIFFVERSION} latest
+cd ~/.local/bin
+ln -s $HOME/vendor/sourceforge.net/tkdiff/latest/tkdiff
+```
 
 Graphical diff and merge tools can also be used with diffing and
 merging in Git. This can be configured as follows (the example here
@@ -1391,10 +1394,10 @@ mamba deactivate
 # > mamba create -n some-project python=3.9
 ```
 
-The base environment conda package should be updated regularly.
+The base environment packages should be updated regularly.
 
 ```sh
-conda update -n base -c conda-forge conda
+conda update -n base -c conda-forge --all
 ```
 
 #### LaTeX tools setup
@@ -1437,6 +1440,8 @@ ln -s $HOME/mambaforge/envs/groff/bin/groff
 
 Pandoc is a very useful tool for converting between different document
 formats (e.g., Markdown to HTML, or Markdown to LaTeX).
+(Commands below create a new environment, but it may be preferable to
+install into the `tools` environment.)
 
 ```sh
 mamba create -n pandoc
@@ -1510,6 +1515,7 @@ chmod +x kramdoc
 #### Python development setup
 
 Environment-independent Python development tools.
+(Change Python version as appropriate.)
 
 ```sh
 mamba create -n pytools python=3.9
@@ -1545,10 +1551,9 @@ mamba install -c pytorch pytorch torchvision torchaudio
 
 **Tensorflow**
 
-
 Metal-enabled [Tensorflow](https://www.tensorflow.org/)
 ([link](https://developer.apple.com/metal/tensorflow-plugin/)),
-currently supports Python `3.8`, `3.9` and `3.10`.
+currently supports Python `3.8`, `3.9` and `3.10` (as of early 2023).
 
 Note that `tensorflow-deps` versions follow base Tensorflow versions,
 so if using Tensorflow `2.6.X`, install `tensorflow-deps==2.6.0`.
