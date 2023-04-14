@@ -1239,6 +1239,7 @@ conda as detailed in the next section):
 
 - `gawk` (GNU
   [AWK](https://www.gnu.org/software/gawk/manual/gawk.html))
+- `git`
 - `gnupg2`
 - `gsed` (GNU [sed](https://www.gnu.org/software/sed/))
 - `htop`
@@ -1247,13 +1248,23 @@ conda as detailed in the next section):
 - `tree`
 
 ```sh
-port -N install gawk gnupg2 gsed mosh stow tree
+port -N install gawk git gnupg2 gsed mosh stow tree
 ```
 
 If installing `gnupg2` above, it is recommended to change the
 `pinentry` symlink to `pinentry-tty` instead of the default
 `pinentry-ncurses`. For more info, see the _Using TTY pinentry_
 subsection of the _GnuPG_ section.
+
+It is also recommended to disable the system default Git credential
+helper which is set to `osxkeychain`. If using MacPorts `git`, run the
+following after installation. If using XCode command-line tools `git`,
+see the _Disabling the default macOS Git credential helper_ subsection
+of the _Git_ section.
+
+```sh
+git config --system --unset credential.helper
+```
 
 Useful `port` commands ("ports" are the tool's name for packages):
 
@@ -1881,6 +1892,28 @@ Adapted from [here](https://jherrlin.github.io/posts/emacs-gnupg-and-pass/).
 Run `help` while in the GPG shell for additional commands available.
 
 ## Git
+
+### Disabling the default macOS Git credential helper
+
+Both XCode command-line tools `git` and MacPorts `git` default to
+using `osxkeychain` as a credential helper which will automatically
+save Git passwords to the macOS keychain which is typically not the
+desired behavior. For more info, see
+[link](https://stackoverflow.com/questions/16052602/how-to-disable-osxkeychain-as-credential-helper-in-git-config).
+
+If installing `git` using MacPorts as above, it is recommended
+to unset its system default credential helper as follows.
+
+```sh
+git config --system --unset credential.helper
+```
+
+If using XCode command-line tools `git`, its system default credential
+helper can be unset by manually editing its configuration file.
+
+```sh
+sudo /Library/Developer/CommandLineTools/usr/share/git-core/gitconfig
+```
 
 ### Credentials using .netrc file
 
