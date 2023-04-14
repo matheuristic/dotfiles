@@ -1351,8 +1351,6 @@ so just use the conda binaries instead of compiling with MacPorts):
 
 - `bat`
 - `pandoc`
-  (as of 2022-11-15, only the `anaconda` channel has a working Apple
-  silicon version so install from there, see _Pandoc setup_ below)
 - `ripgrep`
 
 Some data tools:
