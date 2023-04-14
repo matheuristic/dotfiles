@@ -1237,6 +1237,10 @@ compiled using the Go, Haskell or Rust toolchain like `bat` or
 separate environment, or their binaries installed directly using
 conda as detailed in the next section):
 
+- `coreutils` (GNU
+  [coreutils](https://en.wikipedia.org/wiki/List_of_GNU_Core_Utilities_commands);
+  MacPorts-installed GNU coreutils commands are prefixed with `g`, for
+  example GNU `realpath` is installed as `grealpath`)
 - `gawk` (GNU
   [AWK](https://www.gnu.org/software/gawk/manual/gawk.html))
 - `git`
@@ -1248,7 +1252,7 @@ conda as detailed in the next section):
 - `tree`
 
 ```sh
-port -N install gawk git gnupg2 gsed mosh stow tree
+port -N install coreutils gawk git gnupg2 gsed mosh stow tree
 ```
 
 If installing `gnupg2` above, it is recommended to change the
