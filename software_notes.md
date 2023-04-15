@@ -1281,6 +1281,7 @@ port echo leaves                # list leaves (auto-installed ports that are no 
 port uninstall leaves           # uninstall leaves
 port installed requested        # list manually installed port
 port unsetrequested somepkgname # mark manually installed port as auto-installed
+port clean --all installed      # clean up temp build files
 ```
 
 To update the MacPorts version, just recompile and reinstall the new
