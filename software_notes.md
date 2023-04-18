@@ -288,6 +288,10 @@
     and `git config --global alias.diffpdf "difftool -t diffpdf"` and
     running e.g. `git diffpdf somecommit:somefile.pdf somefile.pdf`;
     Linux
+  - [DjVu.js](https://djvu.js.org/)
+    ([Github](https://github.com/RussCoder/djvujs)):
+    View DjVu documents in the browser; for local viewer usage
+    instructions, see [here](https://djvu.js.org/downloads)
   - [MuPDF](https://mupdf.com/):
     PDF reader
   - [QPDF](https://github.com/qpdf/qpdf) or
