@@ -23,6 +23,12 @@
   - [MediaInfo](https://mediaarea.net/en/MediaInfo)
     ([Github](https://github.com/MediaArea/MediaInfo)):
     Tool for showing technical and tag data of audio and video files
+  - [Natron](https://natrongithub.github.io/)
+    ([Github](https://github.com/NatronGitHub/Natron)):
+    Cross-platform video compositing software, like commercial
+    [Nuke](https://www.foundry.com/products/nuke-family/nuke) by The
+    Foundry and Adobe After Effects, or freeware DaVinci Resolve
+    [Fusion](https://www.blackmagicdesign.com/products/davinciresolve/fusion)
   - [sfxr-qt](https://github.com/agateau/sfxr-qt):
     SFX creator for games; Qt port of
     [SFXR](http://www.drpetter.se/project_sfxr.html);
@@ -30,6 +36,8 @@
     [online](https://sfxr.me/); also built into LMMS
   - [Synfig](https://github.com/synfig/synfig/):
     2D vector animation
+  - [Tooll 3](https://github.com/still-scene/t3):
+    Tool for creating real-time motion graphics for Windows
   - [Ultimate Vocal Remover GUI](https://github.com/Anjok07/ultimatevocalremovergui):
     Tool for using open-source deep learning models (e.g.,
     [Demucs](https://github.com/facebookresearch/demucs) and
@@ -856,7 +864,8 @@
 
 - Audio and video creation and editing
   - [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve):
-    Non-linear video editor
+    Freeware non-linear video editor, has paid
+    [version](https://www.blackmagicdesign.com/products/davinciresolve/studio)
 - Database client
   - [DbVisualizer](https://www.dbvis.com/):
     Cross-database SQL client with data visualization capabilities;
