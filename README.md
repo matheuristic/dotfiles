@@ -4,19 +4,13 @@ User configuration files for:
 
 - [Bash](https://www.gnu.org/software/bash/)
 - [Elixir](https://elixir-lang.org/)
-- [fish](https://fishshell.com/)
-- [Flake8](https://flake8.pycqa.org/en/latest/)
 - [Git](https://git-scm.com/)
-- [Helix](https://helix-editor.com/)
-- [kitty](https://sw.kovidgoyal.net/kitty/)
-- [Neovim](https://neovim.io/)
 - [NPM](https://www.npmjs.com/) using [nvm](https://github.com/nvm-sh/nvm)
 - [PostgreSQL](https://www.postgresql.org/)
-- [Proselint](https://github.com/amperser/proselint)
-- [Python](https://www.python.org/) using
-  [Pylint](https://www.pylint.org/) for linting
-- [R](https://www.r-project.org/) (for installations via `conda` on macOS)
-- [Ranger](https://github.com/ranger/ranger)
+- [Python](https://www.python.org/)
+  [Flake8](https://flake8.pycqa.org/en/latest/) (linter),
+  [Pylint](https://www.pylint.org/) (linter), and
+  [pdb](https://docs.python.org/3/library/pdb.html) (debugger)
 - [GNU Screen](https://www.gnu.org/software/screen/)
 - [tmux](https://github.com/tmux/tmux)
 - [Vi](https://en.wikipedia.org/wiki/Vi) (applicable to
@@ -27,11 +21,10 @@ User configuration files for:
 - [Vis](https://github.com/martanne/vis)
 - [xxdiff](https://github.com/blais/xxdiff)
 - [X11](https://www.x.org/wiki/) ([urxvt](http://software.schmorp.de/pkg/rxvt-unicode.html) and [xterm](https://invisible-island.net/xterm/))
-- [Zellij](https://zellij.dev/)
 - [Zsh](https://www.zsh.org/)
 - ... and other utility scripts
 
-For Acme configuration, see [here](https://github.com/plan9port-config).
+For Acme configuration, see [here](https://github.com/matheuristic/plan9port-config).
 
 For Emacs configuration, see [here](https://github.com/matheuristic/emacs-config).
 
