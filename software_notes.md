@@ -118,6 +118,13 @@
     Command-line tool for running SQL directly on CSV files
   - [RedisDesktopManager](https://github.com/uglide/RedisDesktopManager):
     Redis client
+  - [SchemaCrawler](https://www.schemacrawler.com/)
+    ([Github](https://github.com/schemacrawler/SchemaCrawler)):
+    Database schema discovery and comprehension tool; supports schema
+    [search](https://www.schemacrawler.com/schemacrawler-grep.html),
+    [diagramming](https://www.schemacrawler.com/diagramming.html) and
+    [scripting](https://www.schemacrawler.com/scripting.html) on any
+    database with a JDBC driver
   - [Sequel Ace](https://github.com/Sequel-Ace/Sequel-Ace):
     MySQL, MariaDB client; macOS
 - Desktop publishing
@@ -838,6 +845,12 @@
     Benchmark shell commands
   - [Joplin](https://joplinapp.org/):
     Note-taking application with sync support; cross-platform
+  - [kgt](https://github.com/katef/kgt/):
+    Convert between BNF syntaxes and visualize using railroad diagrams
+  - [libfsm](https://github.com/katef/libfsm):
+    NFA, DFA (finite automata), regex and lexical analysis tools;
+    [re](https://github.com/katef/libfsm/blob/main/doc/tutorial/re.md)
+    can compile regex to state machine and output as a `.dot` diagram
   - [Mathics](https://mathics.org/)
     ([Github](https://github.com/Mathics3)):
     Open-source alternative to
@@ -1221,7 +1234,12 @@ Besides built-in Safari, other browsers may be useful or preferred:
   (some websites are only fully compatible with this)
 - [Firefox](https://www.mozilla.org/en-US/firefox/new/)
   (for compatibility with more powerful extensions, see
-  [link](https://blog.mozilla.org/addons/2022/05/18/manifest-v3-in-firefox-recap-next-steps/))
+  [link](https://blog.mozilla.org/addons/2022/05/18/manifest-v3-in-firefox-recap-next-steps/));
+  [browsh](https://www.brow.sh/)
+  ([Github](https://github.com/browsh-org/browsh)) can be used to
+  offload webpage rendering to headless Firefox on a remote server and
+  accessing it in text via SSH or Mosh, which can be useful for
+  browsing the internet on a low-power low-bandwidth client device
 
 ### Installing XCode command-line tools
 
