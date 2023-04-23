@@ -224,6 +224,17 @@
     tool [duck.sh](https://duck.sh/)
   - [Double Commander](https://doublecmd.sourceforge.io/):
     GUI Midnight Commander clone
+  - [FUSE](https://en.wikipedia.org/wiki/Filesystem_in_Userspace):
+    Lets users mount filesystems without superuser privileges; usually
+    installed as a dependency by Linux package managers, for example,
+    `apt install rclone` on Debian will also pull in `fuse` or `fuse3`
+    as a suggested package; on macOS, install
+    [FUSE-T](https://www.fuse-t.org/)
+    ([Github](https://github.com/macos-fuse-t/fuse-t), kext-less) or
+    [macFUSE](https://osxfuse.github.io/)
+    ([Github](https://github.com/osxfuse/osxfuse), uses a kext), with
+    the latter being more mature but requiring third-party kernel
+    extensions be enabled
   - [Magic Wormhole](https://github.com/magic-wormhole/magic-wormhole):
     Command-line tool and library for sending files from one computer
     to another; note that this tool requires
@@ -241,7 +252,7 @@
   - [rclone](https://rclone.org/)
     ([Github](https://github.com/rclone/rclone)):
     Like `rsync` but for cloud storage; `rclone mount` can be used to
-    mount cloud storage to a filesystem mount point
+    mount cloud storage to a filesystem mount point (requires FUSE)
   - [rdfind](https://github.com/pauldreik/rdfind) or
     [fdupes](https://github.com/adrianlopezroche/fdupes):
     Command-line tool to find duplicate files
@@ -381,7 +392,8 @@
     using `systemd` the daemon should be started with `cpud -d -init`
     (see [discussion](https://github.com/u-root/cpu/issues/59))
   - [Mosh](https://mosh.org/):
-    Robust SSH alternative
+    Robust SSH alternative; `dumb` terminals don't work well with mosh
+    because it always outputs escape sequences to set the window title
   - [Remmina](https://remmina.org/):
     Remote desktop client for POSIX systems
 - Search
@@ -679,7 +691,12 @@
     screen unless there is a need to access a serial console (using
     `screen /dev/somedevice` where `somedevice` is the device point
     surfaced after connecting the serial port; for more info, see
-    [link](https://old.reddit.com/r/archlinux/comments/d41c1w/screen_vs_tmux/f0dj9rn/)
+    [link](https://old.reddit.com/r/archlinux/comments/d41c1w/screen_vs_tmux/f0dj9rn/);
+    for just the session management (detach and re-attach)
+    functionality of tmux and screen, there is
+    [dtach](https://github.com/crigler/dtach),
+    [abduco](https://github.com/martanne/abduco) or
+    [diss](https://github.com/yazgoo/diss/)
   - [ttyplot](https://github.com/tenox7/ttyplot):
     Real-time plotting tool in the terminal using stdin as data input
 - Virtualization
