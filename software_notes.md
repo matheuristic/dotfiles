@@ -337,6 +337,15 @@
   - [slides](https://github.com/maaslalani/slides):
     Terminal-based presentations using Markdown files
 - Project (codebase)
+  - [CodeQuery](https://ruben2020.github.io/codequery/)
+    ([Github](https://github.com/ruben2020/codequery)):
+    Code-browsing and -understanding tool, building on
+    [cscope](http://cscope.sourceforge.net/) and
+    [ctags](http://ctags.sourceforge.net/), providing a GUI interface
+    to these tools and visualization capabilities; supports C, C++,
+    Go, Java, Javascript, Python and Ruby; complementary tools include
+    [cflow](https://www.gnu.org/software/cflow/) to analyze C code or
+    [Doxygen](https://www.doxygen.nl/) to extract code structure
   - [Cookiecutter](https://github.com/cookiecutter/cookiecutter)
     Project templates
   - [DevSkim](https://github.com/microsoft/DevSkim) or
@@ -2481,6 +2490,9 @@ but does not scale well to large ones. There are instead indexers and
 index searching tools that should be used instead for those scenarios.
 These include Code Search, hound, zoekt, Xapian, and so on. Usage of
 Code Search, one of the simpler options, is illustrated here.
+
+In addition to code search tools, other code structure analysis tools
+like CodeQuery, GNU cflow and Doxygen can be help understand code.
 
 ### Installing and using Code Search
 
