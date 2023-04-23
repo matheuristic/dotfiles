@@ -242,7 +242,7 @@
     and a
     [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)
     server, which by default uses one hosted by the project
-  - [Midnight Commander](https://midnight-commander.org/) or:
+  - [Midnight Commander](https://midnight-commander.org/) or
     [nnn](https://github.com/jarun/nnn) or
     [lf](https://github.com/gokcehan/lf) or
     [broot](https://github.com/Canop/broot):
@@ -808,6 +808,20 @@
     files, and can output to formats like HTML, JSON, Markdown and
     reStructuredText in addition to text; as a pure Python package, it
     is installable via `pip` from [PyPI](https://pypi.org/)
+  - [entr](https://github.com/eradman/entr) or
+    [fswatch](https://github.com/emcrisostomo/fswatch) or
+    [watchdog](https://github.com/gorakhargosh/watchdog) or
+    [watchexec](https://github.com/watchexec/watchexec) or
+    [watchfiles](https://github.com/samuelcolvin/watchfiles) or
+    [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch) or
+    [Watchman](https://github.com/facebook/watchman):
+    Run command when files change; entr, watchexec and watchfiles are
+    somewhat easier to use; fswatch is more a file watcher but can be
+    piped to xargs to run commands specific to the changed file(s);
+    Watch is Acme editor-specific; and Watchman has a client-server
+    architecture and is designed as more of a per-user system service;
+    watchdog is mainly a library but has an optional tool watchmedo
+    (install `watchdog[watchmedo]` via pip) similar to watchexec
   - [FontForge](https://fontforge.org/)
     ([Github](https://github.com/fontforge/fontforge)):
     Open-source cross-platform scriptable font editor
@@ -863,20 +877,9 @@
   - [Taskwarrior](https://taskwarrior.org/) and
     [Timewarrior](https://timewarrior.net/):
     Todo list management (Taskwarrior) and time-tracking (Timewarrior)
-  - [entr](https://github.com/eradman/entr) or
-    [fswatch](https://github.com/emcrisostomo/fswatch) or
-    [watchdog](https://github.com/gorakhargosh/watchdog) or
-    [watchexec](https://github.com/watchexec/watchexec) or
-    [watchfiles](https://github.com/samuelcolvin/watchfiles) or
-    [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch) or
-    [Watchman](https://github.com/facebook/watchman):
-    Run command when files change; entr, watchexec and watchfiles are
-    somewhat easier to use; fswatch is more a file watcher but can be
-    piped to xargs to run commands specific to the changed file(s);
-    Watch is Acme editor-specific; and Watchman has a client-server
-    architecture and is designed as more of a per-user system service;
-    watchdog is mainly a library but has an optional tool watchmedo
-    (install `watchdog[watchmedo]` via pip) similar to watchexec
+  - [Vale](https://vale.sh/)
+    ([Github](https://github.com/errata-ai/vale)):
+    Linter for prose
   - [Zotero](https://www.zotero.org/):
     Reference management software to collect, organize, cite and
     share research material
