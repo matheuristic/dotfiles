@@ -383,6 +383,19 @@
     Pluggable system for building code tools, comes with indexer
     implementations for C++, Go and Java and other tools; see
     [link](https://european-lisp-symposium.org/static/2020/godbout-slides.pdf)
+  - [Moose](https://modularmoose.org/)
+    ([Github](https://github.com/moosetechnology/Moose)):
+    Platform for static analysis of software (better described
+    [here](http://agilevisualization.com/AgileVisualization/Moose/0306-Moose.html))
+    built on [Pharo](https://pharo.org/); for more info, see
+    [here](http://themoosebook.org/book/); source code parsers for
+    generating Moose models are available for
+    [Java](https://github.com/moosetechnology/VerveineJ),
+    [Fortran](https://github.com/NicolasAnquetil/VerveineF),
+    [C#](https://github.com/feenkcom/roslyn2famix) and
+    [C/C++](https://github.com/moosetechnology/VerveineC-Cpp), or
+    [create](https://github.com/moosetechnology/PetitParser)
+    [one](https://vimeo.com/139004257)
   - [onefetch](https://github.com/o2sh/onefetch):
     Git repository information and statistics
   - [ruplacer](https://github.com/your-tools/ruplacer):
@@ -600,6 +613,17 @@
     compiles a native GUI Emacs application, the native-comp variant,
     at `/Applications/MacPorts/EmacsMac.app` or at
     `/Users/Username/Applications/MacPorts/EmacsMac.app`)
+  - [Glamorous Toolkit](https://gtoolkit.com/)
+    ([Github](https://github.com/feenkcom/gtoolkit)): Workbench for
+    software and knowledge management built on the
+    [Pharo](https://pharo.org/) Smalltalk environment
+    ([link](https://lepiter.io/feenk/glamorous-toolkit-and-pharo-9q25tavxwfq6z1drwvegd5u9o/));
+    some examples of what it can do out of the box include analyzing
+    C++ code ([link](https://gtoolkit.com/docs/analyzing-cpp/)),
+    running and debugging Javascript and Python code
+    ([link](https://lepiter.io/feenk/introducing-lepiter--knowledge-management--e2p6apqsz5npq7m4xte0kkywn/)),
+    and so on; for more info, see [blog](https://lepiter.io/feenk/) or
+    [paper](https://scg.unibe.ch/archive/papers/Chis15c-PracticalDomainSpecificDebuggers.pdf)
   - [Helix](https://helix-editor.com/):
     TUI editor like Kakoune, but designed to have many editor features
     like [LSP](https://microsoft.github.io/language-server-protocol/)
