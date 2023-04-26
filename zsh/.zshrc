@@ -103,7 +103,8 @@ if [[ "$TERM" == "dumb" ]]; then
       unfunction preexec
   fi
   # Set prompt so middle-clicking line in Acme reruns line's command
-  PROMPT=": %m; "
+  # Show last exit code if non-zero
+  PROMPT=": %(?..{%?} )%m; "
   RPROMPT=""
 fi
 
