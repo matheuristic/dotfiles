@@ -242,6 +242,10 @@
     ([Github](https://github.com/osxfuse/osxfuse), uses a kext), with
     the latter being more mature but requiring third-party kernel
     extensions be enabled
+  - [Maestral](https://maestral.app/)
+    ([Github](https://github.com/samschott/maestral)):
+    Dropbox client, lighter but has less features than the
+    [official](https://www.dropbox.com/desktop) client
   - [Magic Wormhole](https://github.com/magic-wormhole/magic-wormhole):
     Command-line tool and library for sending files from one computer
     to another; note that this tool requires
