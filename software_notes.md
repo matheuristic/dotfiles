@@ -130,10 +130,29 @@
 - Desktop publishing
   - [Scribus](https://www.scribus.net/)
 - Diagramming and image editing
-  - [ASCIIFlow](https://github.com/lewish/asciiflow):
-    Web-based ASCII drawing application. Can be run locally
+  - [ASCIIFlow](https://asciiflow.com/)
+    ([Github](https://github.com/lewish/asciiflow)):
+    Web-based ASCII drawing application, which can be run locally with
+    [Bazel](https://bazel.build/) (install the Bazel launcher
+    [Bazelisk](https://github.com/bazelbuild/bazelisk) to pick the
+    right Bazel version; for live reloading, install and use
+    [ibazel](https://github.com/bazelbuild/bazel-watcher));
+    commercial Monodraw is more full-featured
   - [Caire](https://github.com/esimov/caire):
     Smart image resizing
+  - [Diagon](https://github.com/ArthurSonzogni/Diagon):
+    Command-line tool for transforming Markdown-style expressions into
+    ASCII art, [webapp](https://github.com/ArthurSonzogni/Diagon) and
+    [snap](https://snapcraft.io/diagon) available
+  - [Diagrams](https://diagrams.mingrammer.com/)
+    ([Github](https://github.com/mingrammer/diagrams)):
+    Create cloud system architecture diagrams using Python code
+  - [ditaa](https://github.com/stathissideris/ditaa) or
+    [goat](https://github.com/blampe/goat):
+    Command-line utility to convert ASCII diagrams to PNG or SVG;
+    an alternative is the webapp
+    [svgbob](http://ivanceras.github.io/svgbob-editor/)
+    ([Github](https://github.com/ivanceras/svgbob))
   - [drawio-desktop](https://github.com/jgraph/drawio-desktop) or
     [yEd](https://www.yworks.com/products/yed):
     Vector diagramming; drawio-desktop is the Electron build of
@@ -145,11 +164,26 @@
     Vector graphics editor
   - [LinkedIdeas](https://github.com/fespinoza/LinkedIdeas):
     Mind-mapping tool
+  - [Markmap](https://markmap.js.org/)
+    ([Github](https://github.com/markmap/markmap)):
+    Visualize Markdown as a mind-map; also available as a
+    [Webapp](https://markmap.js.org/repl) or VSCode
+    [plugin](https://marketplace.visualstudio.com/items?itemName=gera2ld.markmap-vscode)
+  - [Moebius](https://blocktronics.github.io/moebius/)
+    ([Github](https://github.com/blocktronics/moebius)) or
+    [Pablodraw](https://picoe.ca/products/pablodraw/)
+    ([Github](https://github.com/cwensley/pablodraw)):
+    Cross-platform ANSI and ASCII art editor
   - [Pikchr](https://pikchr.org/) or
     [PlantUML](https://plantuml.com/) or
     [Mermaid(https://mermaid.js.org/):
     Markup language for diagramming, standalone or supported by
     Markdown processers like Pandoc via plugins
+  - [UMLet](https://github.com/umlet/umlet)
+    ([Github](https://github.com/umlet/umlet),
+    [Webapp](https://www.umletino.com/), VSCode
+    [plugin](https://marketplace.visualstudio.com/items?itemName=TheUMLetTeam.umlet)):
+    Java GUI tool for drawing UML diagrams
 - Digital design
   - [Penpot](https://github.com/penpot/penpot):
     Open source design and prototyping platform like Sketch and Figma
@@ -842,10 +876,6 @@
   - [ClamAV](https://www.clamav.net/):
     Open-source antivirus engine, with frontends available like
     [ClamTk](https://gitlab.com/dave_m/clamtk)
-  - [Diagon](https://github.com/ArthurSonzogni/Diagon):
-    Command-line tool for transforming Markdown-style expressions into
-    ASCII art, [webapp](https://github.com/ArthurSonzogni/Diagon) and
-    [snap](https://snapcraft.io/diagon) available
   - [diffoscope](https://diffoscope.org/)
     ([Salsa](https://salsa.debian.org/reproducible-builds/diffoscope)):
     Like `diff` but supports archives and directories in addition to
@@ -948,7 +978,7 @@
   - [iThoughts](https://www.toketaware.com/):
     Mind-mapping tool
   - [Monodraw](https://monodraw.helftone.com/):
-    ASCII art editor; macOS
+    ASCII art editor; macOS (App Store and direct download)
 - File management
   - [DevonThink Pro](https://www.devontechnologies.com/apps/devonthink):
     Document management and search solution; macOS
