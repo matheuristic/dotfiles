@@ -563,7 +563,8 @@
     single interface, with support for personal word lists (one word per
     line) at paths `$ENCHANT_CONFIG_DIR/<lang>.dic` (for example,
     `$HOME/.config/enchant/en_US.dic` for the US English personal word
-    list on Unix or Linux systems)
+    list on Unix or Linux systems); install `enchant-2` with APT on
+    Debian and Ubuntu; install `enchant-2` with MacPorts on macOS
   - [FIGlet](http://www.figlet.org/)
     ([Github](https://github.com/cmatsuoka/figlet)):
     Convert text to large ASCII word art, additional fonts are
