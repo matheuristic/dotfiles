@@ -75,6 +75,9 @@
     GUI statistical analysis tool
   - [Netron](https://github.com/lutzroeder/netron):
     Neural network, deep learning and machine learning model viewer
+  - [Paraview](https://www.paraview.org/)
+    ([Github](https://github.com/Kitware/ParaView)):
+    Cross-platform tool for scientific visualization
   - [PSPP](https://www.gnu.org/software/pspp/):
     Open-source SPSS alternative
   - [Veusz](https://veusz.github.io/):
@@ -433,7 +436,9 @@
     [C#](https://github.com/feenkcom/roslyn2famix) and
     [C/C++](https://github.com/moosetechnology/VerveineC-Cpp), or
     [create](https://github.com/moosetechnology/PetitParser)
-    [one](https://vimeo.com/139004257)
+    [one](https://vimeo.com/139004257); alternative is
+    [Glamorous Toolkit](https://gtoolkit.com/)
+    ([Github](https://github.com/feenkcom/gtoolkit))
   - [onefetch](https://github.com/o2sh/onefetch):
     Git repository information and statistics
   - [ruplacer](https://github.com/your-tools/ruplacer):
@@ -1488,8 +1493,14 @@ And some programming languages:
 
 - `go`
 - `python` and many packages in [PyPI](https://pypi.org/)
+  - [Black](https://github.com/psf/black) for code formatting
+  - [ruff](https://github.com/charliermarsh/ruff) for linting
 - `r-base` and some [CRAN](https://cran.r-project.org/) packages
-- `sbcl`
+- `sbcl` (can also install with [Roswell](https://roswell.github.io/))
+  - [lime](https://github.com/eudoxia0/lime) is useful for connecting
+    to Swank server from a REPL outside of Emacs (or Vim or VSCode)
+  - [swank-crew](https://github.com/brown/swank-crew) for distributed
+    computing using Swank
 
 Notes:
 
