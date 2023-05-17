@@ -591,11 +591,12 @@
     [xxdiff](https://github.com/blais/xxdiff):
     GUI `diff` alternative; Meld supports Windows and Linux and has a
     [macOS port](https://github.com/yousseb/meld), kdiff3 is
-    Linux-only, xxdiff is lightweight but does not support Unicode,
-    FileMerge comes with the macOS XCode IDE and can be called from
-    the command-line using `opendiff`, tkdiff is a somewhat easier to
-    set up and lightweight option on macOS (see _Mac Notes_ >
-    _Graphical diff and merge tool_); these also diff directories
+    [cross-platform](https://binary-factory.kde.org/), xxdiff is
+    lightweight but does not support Unicode, FileMerge comes with the
+    macOS XCode IDE and callable from the command-line using
+    `opendiff`, tkdiff is lightweight and straightforward to set up on
+    macOS (see _Mac Notes_ > _Graphical diff and merge tool_); these
+    also diff directories
   - [par](http://www.nicemice.net/par/):
     Paragraph reformatter, like a smarter version of `fmt` from GNU
     [coreutils](https://www.gnu.org/software/coreutils/)
@@ -1497,10 +1498,11 @@ And some programming languages:
   - [ruff](https://github.com/charliermarsh/ruff) for linting
 - `r-base` and some [CRAN](https://cran.r-project.org/) packages
 - `sbcl` (can also install with [Roswell](https://roswell.github.io/))
-  - [lime](https://github.com/eudoxia0/lime) is useful for connecting
-    to Swank server from a REPL outside of Emacs (or Vim or VSCode)
-  - [swank-crew](https://github.com/brown/swank-crew) for distributed
-    computing using Swank
+  - [lime](https://github.com/eudoxia0/lime) or
+    [swank-client](https://github.com/brown/swank-client) (powers
+    [swank-crew](https://github.com/brown/swank-crew) for distributed
+    computing) are useful for connecting to Swank server and
+    interacting with it from a REPL outside of Emacs/Vim/VSCode
 
 Notes:
 
