@@ -140,7 +140,10 @@
     [Bazelisk](https://github.com/bazelbuild/bazelisk) to pick the
     right Bazel version; for live reloading, install and use
     [ibazel](https://github.com/bazelbuild/bazel-watcher));
-    commercial Monodraw is more full-featured
+    commercial Monodraw is more full-featured; alternatives are
+    [ascii-d](https://github.com/huytd/ascii-d) or
+    [MonoSketch](https://monosketch.io/)
+    ([Github](https://github.com/tuanchauict/MonoSketch))
   - [Caire](https://github.com/esimov/caire):
     Smart image resizing
   - [Diagon](https://github.com/ArthurSonzogni/Diagon):
@@ -159,7 +162,9 @@
   - [drawio-desktop](https://github.com/jgraph/drawio-desktop) or
     [yEd](https://www.yworks.com/products/yed):
     Vector diagramming; drawio-desktop is the Electron build of
-    [diagrams.net](https://www.diagrams.net/)
+    [diagrams.net](https://www.diagrams.net/); alternatives are
+    [Excalidraw](https://excalidraw.com/)
+    ([Github](https://github.com/excalidraw/excalidraw))
   - [GIMP](https://www.gimp.org/) or
     [Krita](https://krita.org/en/):
     Raster graphics editor
@@ -186,7 +191,9 @@
     ([Github](https://github.com/umlet/umlet),
     [Webapp](https://www.umletino.com/), VSCode
     [plugin](https://marketplace.visualstudio.com/items?itemName=TheUMLetTeam.umlet)):
-    Java GUI tool for drawing UML diagrams
+    Java GUI tool for drawing UML diagrams; alternative is
+    [Gaphor](https://gaphor.org/)
+    ([Github](https://github.com/gaphor/gaphor))
 - Digital design
   - [Penpot](https://github.com/penpot/penpot):
     Open source design and prototyping platform like Sketch and Figma
@@ -1498,11 +1505,13 @@ And some programming languages:
   - [ruff](https://github.com/charliermarsh/ruff) for linting
 - `r-base` and some [CRAN](https://cran.r-project.org/) packages
 - `sbcl` (can also install with [Roswell](https://roswell.github.io/))
-  - [lime](https://github.com/eudoxia0/lime) or
-    [swank-client](https://github.com/brown/swank-client) (powers
+  - [lime](https://github.com/eudoxia0/lime)
+    ([tutorial](https://40ants.com/lisp-project-of-the-day/2020/06/0092-lime.html))
+    or [swank-client](https://github.com/brown/swank-client) (powers
     [swank-crew](https://github.com/brown/swank-crew) for distributed
-    computing) are useful for connecting to Swank server and
-    interacting with it from a REPL outside of Emacs/Vim/VSCode
+    computing) are useful for interacting with a Swank server from a
+    REPL outside of Emacs/Vim/VSCode, or hot reloading
+    ([example](https://lispcookbook.github.io/cl-cookbook/web.html#hot-reload))
 
 Notes:
 
