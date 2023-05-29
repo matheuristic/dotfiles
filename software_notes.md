@@ -1947,6 +1947,20 @@ listed
 (note that for an M1 machine, install the `davfs2` package rather than
 the `dav2fs` package).
 
+### iPad and iPhone integration with macOS
+
+- [Continuity Camera](https://support.apple.com/en-us/HT213244):
+  Use iPhone as a webcam for Mac
+- [Continuity Camera](https://support.apple.com/en-us/HT209037):
+  Use iPhone or iPad to scan documents or take a picture on a Mac
+- [Continuity Markup and Sketch](https://support.apple.com/en-us/HT204975):
+  Use iPad or iPhone to sketch in or mark up Mac documents
+- [Sidecar](https://support.apple.com/en-us/HT210380):
+  Use iPad as a second display for a Mac
+- [Universal Control](https://support.apple.com/en-us/HT212757):
+  Use a single keyboard and mouse between Mac and iPad
+- [More info](https://www.apple.com/macos/continuity/)
+
 ## GnuPG
 
 ### Using TTY pinentry
