@@ -97,6 +97,13 @@
     Relational DB; use
     [TimescaleDB](https://github.com/timescale/timescaledb)
     plugin to better support time-series
+  - [TigerBeetle](https://tigerbeetle.com/)
+    ([Github](https://github.com/tigerbeetledb/tigerbeetle)):
+    Distributed high-throughput fault-tolerant database targeting
+    financial accounting use cases; long-term plans are to extract the
+    core into a library applicable to any state machine business logic
+    (see [here](https://news.ycombinator.com/item?id=32788795) and
+    [here](https://news.ycombinator.com/item?id=32787324))
 - Database clients
   - [Altair](https://altair.sirmuel.design/):
     GraphQL client
@@ -797,6 +804,8 @@
   - [ttyplot](https://github.com/tenox7/ttyplot):
     Real-time plotting tool in the terminal using stdin as data input
 - Virtualization
+  - [Blink](https://github.com/jart/blink):
+    Tiny x86-64-linux emulator that can run on any POSIX system
   - [colima](https://github.com/abiosoft/colima) or
     [Rancher Desktop](https://rancherdesktop.io/)
     ([Github](https://github.com/rancher-sandbox/rancher-desktop/)):
@@ -849,6 +858,9 @@
   - [YT-DLP](https://github.com/yt-dlp/yt-dlp):
     Fork of [youtube-dl](https://youtube-dl.org/)
 - Web development
+  - [ChiselStrike](https://github.com/chiselstrike/chiselstrike/):
+    Easily build a CRUD API backend for webapps using only Typescript
+    ([info](https://blog.turso.tech/my-other-database-is-a-compiler-10fd527a4d78))
   - [dog](https://github.com/ogham/dog):
     Alternative to `dig`
   - [Hurl](https://hurl.dev/):
@@ -901,6 +913,8 @@
     files, and can output to formats like HTML, JSON, Markdown and
     reStructuredText in addition to text; as a pure Python package, it
     is installable via `pip` from [PyPI](https://pypi.org/)
+  - [elfcat](https://github.com/ruslashev/elfcat):
+    ELF visualizer using HTML files generated from ELF binaries
   - [entr](https://github.com/eradman/entr) or
     [fswatch](https://github.com/emcrisostomo/fswatch) or
     [watchdog](https://github.com/gorakhargosh/watchdog) or
