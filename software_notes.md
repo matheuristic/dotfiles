@@ -93,6 +93,11 @@
 - Database
   - [ClickHouse](https://github.com/ClickHouse/ClickHouse):
     Time-series DB
+  - [Litestream](https://litestream.io/)
+    ([Github](https://github.com/benbjohnson/litestream))
+    Not a DB, but a tool for continuously replicating a SQLite DB to
+    cloud storage for backup or creating live read-only replicas
+    ([link](https://github.com/benbjohnson/litestream-read-replica-example)
   - [PostgreSQL](https://www.postgresql.org/):
     Relational DB; use
     [TimescaleDB](https://github.com/timescale/timescaledb)
