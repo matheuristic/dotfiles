@@ -2150,6 +2150,32 @@ respectively.
 - For Github users, this approach is good for storing tokens but using
   SSH keys is also fine if granular permissioning is not required.
 
+### Track remote branch as local branch
+
+When a remote repository is cloned, only the main (usually `main` or
+`master`) branch is tracked locally. To develop on an existing remote
+branch, it needs to be tracked locally, which can be done by using the
+`--track` option for `git checkout`.
+
+List remote branches:
+
+```sh
+git branch -r
+```
+
+Track remote branch locally (`REMOTENAME` must match one that was
+output by `git branch -r`):
+
+```sh
+git checkout --track <REMOTENAME>
+```
+
+List all branches (branches not tracked locally are in red):
+
+```sh
+git branch -avv
+```
+
 ### Syncing a fork with upstream
 
 To sync a fork with upstream:
