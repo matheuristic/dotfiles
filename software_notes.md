@@ -497,8 +497,10 @@
     for handling typos to bucket sort for ranking documents)
   - [fd](https://github.com/sharkdp/fd):
     Simpler command-line alternative to `find`
-  - [fzf](https://github.com/junegunn/fzf):
-    Command-line fuzzy finder
+  - [fzf](https://github.com/junegunn/fzf) or
+    [zf](https://github.com/natecraddock/zf):
+    Command-line fuzzy finder; zf has better filename matching
+    ([link](https://nathancraddock.com/blog/2023/a-different-approach-to-fuzzy-finding/))
   - [pdfgrep](https://pdfgrep.org/):
     Command-line tool for searching text in PDF files
   - [ripgrep](https://github.com/BurntSushi/ripgrep):
