@@ -317,6 +317,9 @@
     [GPRename](http://gprename.sourceforge.net/) or
     [Szyszka](https://github.com/qarmin/szyszka):
     Rename lots of files easily
+  - [Spacedrive](https://spacedrive.com/)
+    ([Github](https://github.com/spacedriveapp/spacedrive)):
+    Cross-platform cross-device/service file manager
   - [Stow](https://www.gnu.org/software/stow/):
     Symlink farm manager, useful for managing dotfiles
   - [Syncthing](https://syncthing.net/):
@@ -936,6 +939,10 @@
     ([Github](https://github.com/Mathics3)):
     Open-source alternative to
     [Mathematica](https://www.wolfram.com/mathematica/)
+  - [Nextcloud](https://nextcloud.com/)
+    ([Github](https://github.com/nextcloud)):
+    Self-host collaboration platform offering similar functionality to
+    Google Suite; Nextcloud Files can be used as a a WebDAV service
   - [OmegaT](https://omegat.org/):
     Translation memory tool
   - [pass](https://www.passwordstore.org/):
