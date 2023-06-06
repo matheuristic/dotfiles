@@ -94,14 +94,18 @@
   - [ClickHouse](https://github.com/ClickHouse/ClickHouse):
     Time-series DB
   - [Litestream](https://litestream.io/)
-    ([Github](https://github.com/benbjohnson/litestream))
-    Not a DB, but a tool for continuously replicating a SQLite DB to
-    cloud storage for backup or creating live read-only replicas
-    ([link](https://github.com/benbjohnson/litestream-read-replica-example)
+    ([Github](https://github.com/benbjohnson/litestream)) and
+    [LiteFS](https://github.com/superfly/litefs):
+    Not a DB, but SQLite tools for streaming backup of a SQLite DB to
+    cloud storage (Litestream) and replicating SQLite databases across
+    a cluster using a FUSE-based filesystem (LiteFS)
   - [PostgreSQL](https://www.postgresql.org/):
     Relational DB; use
     [TimescaleDB](https://github.com/timescale/timescaledb)
     plugin to better support time-series
+  - [rqlite](https://rqlite.io/)
+    ([Github](https://github.com/rqlite/rqlite)):
+    Distributed DB using SQLite as its storage engine
   - [TigerBeetle](https://tigerbeetle.com/)
     ([Github](https://github.com/tigerbeetledb/tigerbeetle)):
     Distributed high-throughput fault-tolerant database targeting
@@ -863,9 +867,6 @@
   - [YT-DLP](https://github.com/yt-dlp/yt-dlp):
     Fork of [youtube-dl](https://youtube-dl.org/)
 - Web development
-  - [ChiselStrike](https://github.com/chiselstrike/chiselstrike/):
-    Easily build a CRUD API backend for webapps using only Typescript
-    ([info](https://blog.turso.tech/my-other-database-is-a-compiler-10fd527a4d78))
   - [dog](https://github.com/ogham/dog):
     Alternative to `dig`
   - [Hurl](https://hurl.dev/):
