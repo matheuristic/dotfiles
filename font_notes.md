@@ -22,6 +22,9 @@ without antialiasing and at their intended sizes (or multiples of it).
 ## Monospace fonts
 
 - [APL385](https://www.apl385.com/fonts/)
+- [Berkeley Mono](https://berkeleygraphics.com/typefaces/berkeley-mono/)
+  (_commercial_)
+- [Comic Code](https://tosche.net/fonts/comic-code) (_commercial_)
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)
 - [Drafting* Mono](https://github.com/indestructible-type/Drafting)
 - [Fira Code](https://github.com/tonsky/FiraCode)
@@ -32,8 +35,7 @@ without antialiasing and at their intended sizes (or multiples of it).
 - [Monocraft](https://github.com/IdreesInc/Monocraft)
   (bitmap, emulates Minecraft typeface, proportional
   [version](https://github.com/IdreesInc/Minecraft-Font))
-- [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/)
-  (_commercial_)
+- [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_)
 - [ProFont](https://tobiasjung.name/profont/) (bitmap)
 - [Space Mono](https://github.com/googlefonts/spacemono)
 - [Spleen](https://github.com/fcambus/spleen) (bitmap)
@@ -54,6 +56,8 @@ without antialiasing and at their intended sizes (or multiples of it).
   [Condensed](https://www.omnibus-type.com/fonts/asap-condensed/)
   ([Github](https://github.com/Omnibus-Type/AsapCondensed))
 - [Atkinson Hyperlegible](https://brailleinstitute.org/freefont)
+  (there is also a third-party conversion to
+  [monospace](https://github.com/Hylian/atkinson-monolegible))
 - [Clarity City](https://github.com/vmware/clarity-city)
   (similar to Gotham but with stricter geometry)
 - [Clear Sans](https://github.com/intel/clear-sans)
@@ -147,6 +151,8 @@ without antialiasing and at their intended sizes (or multiples of it).
   [Mono](https://fonts.google.com/specimen/Roboto+Mono)
   ([Noto](https://fonts.google.com/noto/fonts) variants for CJK and
   other languages not supported by Roboto)
+- Spline [Sans](https://github.com/SorkinType/SplineSans),
+  [Sans Mono](https://github.com/SorkinType/SplineSansMono)
 - Source [Sans](https://github.com/adobe-fonts/source-sans),
   [Serif](https://github.com/adobe-fonts/source-serif),
   [Code Pro](https://github.com/adobe-fonts/source-code-pro) (CJK
