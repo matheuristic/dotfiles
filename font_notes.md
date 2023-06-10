@@ -27,10 +27,10 @@ without antialiasing and at their intended sizes (or multiples of it).
 - [Comic Code](https://tosche.net/fonts/comic-code) (_commercial_)
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)
 - [Drafting* Mono](https://github.com/indestructible-type/Drafting)
-- [Fira Code](https://github.com/tonsky/FiraCode)
 - [Intel One Mono](https://github.com/intel/intel-one-mono)
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
+- [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono)
 - [JuliaMono](https://github.com/cormullion/juliamono)
 - [Monocraft](https://github.com/IdreesInc/Monocraft)
   (bitmap, emulates Minecraft typeface, proportional
@@ -56,8 +56,6 @@ without antialiasing and at their intended sizes (or multiples of it).
   [Condensed](https://www.omnibus-type.com/fonts/asap-condensed/)
   ([Github](https://github.com/Omnibus-Type/AsapCondensed))
 - [Atkinson Hyperlegible](https://brailleinstitute.org/freefont)
-  (there is also a third-party conversion to
-  [monospace](https://github.com/Hylian/atkinson-monolegible))
 - [Clarity City](https://github.com/vmware/clarity-city)
   (similar to Gotham but with stricter geometry)
 - [Clear Sans](https://github.com/intel/clear-sans)
