@@ -30,8 +30,11 @@ without antialiasing and at their intended sizes (or multiples of it).
 - [Intel One Mono](https://github.com/intel/intel-one-mono)
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
+  (on macOS, install individual TTF files rather than the super TTC
+  file, see [here](https://github.com/be5invis/Iosevka/issues/1377))
 - [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono)
 - [JuliaMono](https://github.com/cormullion/juliamono)
+- [Martian Mono](https://github.com/evilmartians/mono)
 - [Monocraft](https://github.com/IdreesInc/Monocraft)
   (bitmap, emulates Minecraft typeface, proportional
   [version](https://github.com/IdreesInc/Minecraft-Font))
@@ -173,6 +176,7 @@ without antialiasing and at their intended sizes (or multiples of it).
 - [Typewolf](https://www.typewolf.com/)
 - [Typographica](https://typographica.org/)
   ([Library](https://library.typographica.org/))
+- [Typography: Google Fonts Combinations](https://www.behance.net/gallery/35768979/Typography-Google-Fonts-Combinations)
 - [Variable fonts](https://variablefonts.typenetwork.com/)
 - [Velvetyne Type Foundry](https://velvetyne.fr/)
   ([Gitlab](https://gitlab.com/velvetyne))
