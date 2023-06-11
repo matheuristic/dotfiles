@@ -2014,7 +2014,7 @@ pinentry. Configure this as follows:
   Zsh is the user shell) or `$HOME/.bashrc` (if Bash is the user shell):
 
   ```sh
-  export GPG_TTY=$(tty)
+  test -t 0 && export GPG_TTY=$(tty)
   ```
 
 References:
