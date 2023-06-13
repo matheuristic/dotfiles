@@ -953,6 +953,12 @@
     Note-taking application with sync support; cross-platform
   - [kgt](https://github.com/katef/kgt/):
     Convert between BNF syntaxes and visualize using railroad diagrams
+  - [LCDF Typetools](https://www.lcdf.org/type/)
+    ([Github](https://github.com/kohler/lcdf-typetools)):
+    Font manipulation utilities, `otfinfo` is useful for getting
+    available features and code points in TTF and OTF fonts; if using
+    MacPorts, `port install lcdf-typetools -texlive` installs the
+    utilities without pulling in TexLive as a dependency
   - [libfsm](https://github.com/katef/libfsm):
     NFA, DFA (finite automata), regex and lexical analysis tools;
     [re](https://github.com/katef/libfsm/blob/main/doc/tutorial/re.md)
