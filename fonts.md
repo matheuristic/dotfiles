@@ -27,6 +27,7 @@ without antialiasing and at their intended sizes (or multiples of it).
 - [Comic Code](https://tosche.net/fonts/comic-code) (_commercial_)
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)
 - [Drafting* Mono](https://github.com/indestructible-type/Drafting)
+- [Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans)
 - [Intel One Mono](https://github.com/intel/intel-one-mono)
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
@@ -44,6 +45,7 @@ without antialiasing and at their intended sizes (or multiples of it).
 - [Spleen](https://github.com/fcambus/spleen) (bitmap)
 - [Terminus](http://terminus-font.sourceforge.net/)
   (bitmap, [TTF version](https://files.ax86.net/terminus-ttf/))
+- [Twilio Sans Mono](https://github.com/twilio/twilio-sans-mono)
 - [Unifont](http://unifoundry.com/unifont/index.html) (bitmap)
 
 ## Sans-serif proportional fonts
@@ -119,13 +121,17 @@ without antialiasing and at their intended sizes (or multiples of it).
 - [Reforma](https://pampatype.com/reforma)
 
 ## Symbol fonts
+
 - [Asap Symbol](https://www.omnibus-type.com/fonts/asap-symbol/)
   ([Github](https://github.com/Omnibus-Type/Asap-Symbol))
 - [Catrinity](https://catrinity-font.de/) (sans-serif)
+- [DSEG](https://www.keshikan.net/fonts-e.html)
+  ([Github](https://github.com/keshikan/DSEG)) (LCD display-like)
 - [Quivira](http://www.quivira-font.com/) (serif)
 - [Symbola](https://dn-works.com/ufas/) (_free for personal use_)
 
 ## Script fonts
+
 - [Ballet](https://github.com/Omnibus-Type/Ballet)
 
 ## Font families
