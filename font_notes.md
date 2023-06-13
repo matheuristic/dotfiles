@@ -72,6 +72,7 @@ without antialiasing and at their intended sizes (or multiples of it).
   ([Github](https://github.com/bBoxType/FiraGO))
 - [Jost*](https://github.com/indestructible-type/Jost)
   (Futura alternative)
+- [Luciole](https://www.luciole-vision.com/luciole-en.html)
 - [Montserrat](https://github.com/JulietaUla/Montserrat)
   (Gotham clone)
 - [Open Sans](https://github.com/googlefonts/opensans)
