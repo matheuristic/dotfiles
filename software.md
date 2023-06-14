@@ -2096,8 +2096,10 @@ save Git passwords to the macOS keychain which is typically not the
 desired behavior. For more info, see
 [link](https://stackoverflow.com/questions/16052602/how-to-disable-osxkeychain-as-credential-helper-in-git-config).
 
-If installing `git` using MacPorts as above, it is recommended
-to unset its system default credential helper as follows.
+If installing `git` using MacPorts as above, it is recommended to
+unset its system default credential helper as follows each time `git`
+is installed or upgraded (as each upgrade replaces the current system
+Git config with the default version).
 
 ```sh
 git config --system --unset credential.helper
