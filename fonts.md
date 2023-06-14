@@ -72,6 +72,7 @@ without antialiasing and at their intended sizes (or multiples of it).
 - [Figtree](https://github.com/erikdkennedy/figtree)
 - [FiraGO](https://bboxtype.com/typefaces/FiraGO/)
   ([Github](https://github.com/bBoxType/FiraGO))
+- [Inconstant Regular](https://www.nothingcomicaboutdyslexia.com/inconstant-regular)
 - [Jost*](https://github.com/indestructible-type/Jost)
   (Futura alternative)
 - [Luciole](https://www.luciole-vision.com/luciole-en.html)
