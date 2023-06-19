@@ -19,6 +19,18 @@ fc-cache -fv
 Bitmap fonts, if distributed in TTF or OTF form, should be used
 without antialiasing and at their intended sizes (or multiples of it).
 
+### Freezing font features
+
+For software that don't support toggling of OpenType features, one way
+to use those features is to "freeze" those features into a new font,
+making them the default. Some tooling to help do that:
+
+- [pyftfeatfreeze](https://github.com/twardoch/fonttools-opentype-feature-freezer)
+  (also has a GUI app OTFeatureFreeze, but the Python command-line
+  tool basically works the same)
+- [FontFreeze](https://mutsuntsai.github.io/fontfreeze/)
+  ([Github](https://github.com/MuTsunTsai/fontfreeze)) webapp
+
 ## Monospace fonts
 
 - [APL385](https://www.apl385.com/fonts/)
@@ -26,7 +38,6 @@ without antialiasing and at their intended sizes (or multiples of it).
   (_commercial_)
 - [Comic Code](https://tosche.net/fonts/comic-code) (_commercial_)
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)
-- [Drafting* Mono](https://github.com/indestructible-type/Drafting)
 - [Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans)
 - [Intel One Mono](https://github.com/intel/intel-one-mono)
 - [Iosveka](https://github.com/be5invis/Iosevka)
@@ -34,50 +45,28 @@ without antialiasing and at their intended sizes (or multiples of it).
   (on macOS, install individual TTF files rather than the super TTC
   file, see [here](https://github.com/be5invis/Iosevka/issues/1377))
 - [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono)
-- [JuliaMono](https://github.com/cormullion/juliamono)
-- [Martian Mono](https://github.com/evilmartians/mono)
 - [Monocraft](https://github.com/IdreesInc/Monocraft)
   (bitmap, emulates Minecraft typeface, proportional
   [version](https://github.com/IdreesInc/Minecraft-Font))
 - [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_)
-- [ProFont](https://tobiasjung.name/profont/) (bitmap)
-- [Space Mono](https://github.com/googlefonts/spacemono)
-- [Spleen](https://github.com/fcambus/spleen) (bitmap)
-- [Terminus](http://terminus-font.sourceforge.net/)
-  (bitmap, [TTF version](https://files.ax86.net/terminus-ttf/))
 - [Twilio Sans Mono](https://github.com/twilio/twilio-sans-mono)
 - [Unifont](http://unifoundry.com/unifont/index.html) (bitmap)
 
 ## Sans-serif proportional fonts
 
-- Archivo [Regular](https://www.omnibus-type.com/fonts/archivo/)
-  ([Github](https://github.com/Omnibus-Type/Archivo)),
-  [Black](https://www.omnibus-type.com/fonts/archivo-black/)
-  ([Black](https://github.com/Omnibus-Type/ArchivoBlack)), and
-  [Narrow](https://www.omnibus-type.com/fonts/archivo-narrow/)
-  ([Github](https://github.com/Omnibus-Type/ArchivoNarrow))
-- Asap [Regular](https://www.omnibus-type.com/fonts/asap/)
-  ([Github](https://github.com/Omnibus-Type/Asap)), and
-  [Condensed](https://www.omnibus-type.com/fonts/asap-condensed/)
-  ([Github](https://github.com/Omnibus-Type/AsapCondensed))
 - [Atkinson Hyperlegible](https://brailleinstitute.org/freefont)
 - [Clarity City](https://github.com/vmware/clarity-city)
   (similar to Gotham but with stricter geometry)
 - [Clear Sans](https://github.com/intel/clear-sans)
 - [Cooper Hewitt](https://www.cooperhewitt.org/open-source-at-cooper-hewitt/cooper-hewitt-the-typeface-by-chester-jenkins/)
   ([Github](https://github.com/cooperhewitt/cooperhewitt-typeface))
-- [Decovar](https://github.com/googlefonts/decovar)
-  (parametric axes, see [link](https://web.dev/variable-fonts/))
-- [Encode Sans](https://github.com/thundernixon/Encode-Sans)
 - [Figtree](https://github.com/erikdkennedy/figtree)
 - [FiraGO](https://bboxtype.com/typefaces/FiraGO/)
   ([Github](https://github.com/bBoxType/FiraGO))
-- [Inconstant Regular](https://www.nothingcomicaboutdyslexia.com/inconstant-regular)
+- [Inter](https://github.com/rsms/inter)
+  (Helvetica alternative)
 - [Jost*](https://github.com/indestructible-type/Jost)
   (Futura alternative)
-- [Luciole](https://www.luciole-vision.com/luciole-en.html)
-- [Montserrat](https://github.com/JulietaUla/Montserrat)
-  (Gotham clone)
 - [Open Sans](https://github.com/googlefonts/opensans)
 - [Outfit](https://github.com/Outfitio/Outfit-Fonts)
 - [Poppins](https://www.indiantypefoundry.com/fonts/poppins)
@@ -88,8 +77,6 @@ without antialiasing and at their intended sizes (or multiples of it).
   ([Github](https://github.com/uswds/public-sans))
 - [Readex Pro](https://github.com/ThomasJockin/readexpro) (expanded
   [Lexend](https://github.com/googlefonts/lexend))
-- [Roboto Flex](https://github.com/googlefonts/roboto-flex)
-  (parametric axes, see [link](https://web.dev/variable-fonts/))
 - [Space Grotesk](https://github.com/floriankarsten/space-grotesk)
 - [Urbanist](https://github.com/coreyhu/Urbanist)
 - [Work Sans](http://weiweihuanghuang.github.io/Work-Sans/)
@@ -102,23 +89,16 @@ without antialiasing and at their intended sizes (or multiples of it).
   (parametric axes, see [link](https://web.dev/variable-fonts/))
 - [Bodoni](http://indestructible-type.github.io/Bodoni.html)
   ([Github](https://github.com/indestructible-type/Bodoni))
-- [Castoro](https://github.com/TiroTypeworks/Castoro)
 - [Courier Prime](https://quoteunquoteapps.com/courierprime/)
+  [Regular](https://github.com/quoteunquoteapps/CourierPrime),
+  [Sans](https://github.com/quoteunquoteapps/CourierPrimeSans),
+  and [Code](https://github.com/quoteunquoteapps/CourierPrimeCode)
 - [ETbb](https://tug.org/FontCatalogue/etbb/)
   ([CTAN](https://ctan.org/pkg/etbb?lang=en))
-- [Fraunces](https://github.com/undercasetype/Fraunces)
 - Grenze [Regular](https://www.omnibus-type.com/fonts/grenze/)
   ([Github](https://github.com/Omnibus-Type/Grenze)), and
   [Gotisch](https://www.omnibus-type.com/fonts/grenze-gotisch/)
   ([Github](https://github.com/Omnibus-Type/Grenze-Gotisch))
-- [Inter](https://github.com/rsms/inter)
-- [Lora](https://github.com/cyrealtype/Lora-Cyrillic)
-- [Literata](https://www.type-together.com/literata-font)
-  ([Github](https://github.com/googlefonts/literata))
-- [Montagu Slab](https://github.com/floriankarsten/montagu-slab)
-- [Newsreader](https://github.com/productiontype/Newsreader)
-- [Playfair](https://github.com/clauseggers/Playfair)
-- [Spectral](https://github.com/productiontype/spectral)
 - [Reforma](https://pampatype.com/reforma)
 
 ## Symbol fonts
@@ -157,9 +137,11 @@ without antialiasing and at their intended sizes (or multiples of it).
   [Condensed](https://fonts.google.com/specimen/Roboto+Condensed),
   [Serif](https://fonts.google.com/specimen/Roboto+Serif),
   [Slab](https://fonts.google.com/specimen/Roboto+Slab),
-  [Mono](https://fonts.google.com/specimen/Roboto+Mono)
-  ([Noto](https://fonts.google.com/noto/fonts) variants for CJK and
-  other languages not supported by Roboto)
+  [Mono](https://fonts.google.com/specimen/Roboto+Mono),
+  [Flex](https://github.com/googlefonts/roboto-flex)
+  (parametric axes, see [link](https://web.dev/variable-fonts/));
+  use [Noto](https://fonts.google.com/noto/fonts) variants for CJK and
+  other languages not supported by Roboto
 - Spline [Sans](https://github.com/SorkinType/SplineSans),
   [Sans Mono](https://github.com/SorkinType/SplineSansMono)
 - Source [Sans](https://github.com/adobe-fonts/source-sans),
@@ -185,6 +167,7 @@ without antialiasing and at their intended sizes (or multiples of it).
 - [Typographica](https://typographica.org/)
   ([Library](https://library.typographica.org/))
 - [Typography: Google Fonts Combinations](https://www.behance.net/gallery/35768979/Typography-Google-Fonts-Combinations)
-- [Variable fonts](https://variablefonts.typenetwork.com/)
+- [Variable fonts](https://variablefonts.typenetwork.com/) - Type Network
+- [Variable fonts](https://v-fonts.com/) - A simple resource for finding and trying variable fonts
 - [Velvetyne Type Foundry](https://velvetyne.fr/)
   ([Gitlab](https://gitlab.com/velvetyne))
