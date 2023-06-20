@@ -1356,6 +1356,8 @@ Besides built-in Safari, other browsers may be useful or preferred:
   offload webpage rendering to headless Firefox on a remote server and
   accessing it in text via SSH or Mosh, which can be useful for
   browsing the internet on a low-power low-bandwidth client device
+- [Mullvad Browser](https://github.com/mullvad/mullvadvpn-app)
+  (privacy-focused web browser, based on Firefox)
 
 ### Installing XCode command-line tools
 
