@@ -1,21 +1,33 @@
+# Linux settings for xxdiff
+
 [diff]
-	# tool = meld
 	tool = xxdiff
 [difftool]
 	prompt = false
 [merge]
-	# tool = meld
 	tool = xxdiff
 [mergetool]
 	prompt = false
 [alias]
 	diffdir = difftool --dir-diff
 
-# macOS settings for [Meld for OSX](https://yousseb.github.io/meld/)
+# macOS settings for [P4Merge](https://www.perforce.com/products/helix-core-apps/merge-diff-tool-p4merge)
+# from https://apple.stackexchange.com/a/419269
 
-# [difftool "meld"]
-# 	trustExitCode = true
-# 	cmd = open -W -a Meld --args \"$LOCAL\" \"$PWD/$REMOTE\"
-# [mergetool "meld"]
-# 	trustExitCode = true
-# 	cmd = open -W -a Meld --args --auto-merge \"$PWD/$LOCAL\" \"$PWD/$BASE\" \"$PWD/$REMOTE\" --output=\"$PWD/$MERGED\"
+#[diff]
+#	tool = p4mergetool
+#[difftool "p4mergetool"]
+#	cmd = open -W -a p4merge.app --args \"$LOCAL\" \"$REMOTE\"
+#	keepBackup = false
+#	keepTemporaries = false
+#	trustExitCode = false
+#	prompt = false
+#[merge]
+#	tool = p4mergetool
+#[mergetool "p4mergetool"]
+#	cmd = open -W -a p4merge.app --args \"BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+#	keepBackup = false
+#	trustExitCode = false
+#	prompt = false
+#[alias]
+#	diffdir = difftool --dir-diff
