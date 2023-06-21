@@ -34,3 +34,15 @@
 [mergetool "p4merge"]
 	path = /Applications/p4merge.app/Contents/Resources/launchp4merge
 	#trustExitCode = false
+
+# open-source alternative [tkdiff](https://sourceforge.net/projects/tkdiff/)
+
+#[diff]
+#	tool = tkdiff
+#[difftool]
+#	prompt = false
+#[merge]
+#	tool = tkdiff
+#[mergetool]
+#	prompt = false
+#	#keepBackup = false

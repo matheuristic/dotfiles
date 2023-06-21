@@ -91,6 +91,10 @@
     [Nextflow](https://www.nextflow.io/)
     Run batch workflows
 - Database
+  - [BaseX](https://basex.org/):
+    XML database and XQuery processor; useful for analyzing or
+    processing many or huge XML files
+    ([example](https://yobriefca.se/blog/2014/05/17/a-brief-overview-of-basex/))
   - [ClickHouse](https://github.com/ClickHouse/ClickHouse):
     Time-series DB
   - [Litestream](https://litestream.io/)
@@ -99,6 +103,9 @@
     Not a DB, but SQLite tools for streaming backup of a SQLite DB to
     cloud storage (Litestream) and replicating SQLite databases across
     a cluster using a FUSE-based filesystem (LiteFS)
+  - [MongoDB](https://www.mongodb.com/)
+    ([Github](https://github.com/mongodb/mongo)):
+    NoSQL database
   - [PostgreSQL](https://www.postgresql.org/):
     Relational DB; use
     [TimescaleDB](https://github.com/timescale/timescaledb)
