@@ -1,33 +1,36 @@
 # Linux settings for xxdiff
 
-[diff]
-	tool = xxdiff
-[difftool]
-	prompt = false
-[merge]
-	tool = xxdiff
-[mergetool]
-	prompt = false
-[alias]
-	diffdir = difftool --dir-diff
-
-# macOS settings for [P4Merge](https://www.perforce.com/products/helix-core-apps/merge-diff-tool-p4merge)
-# from https://apple.stackexchange.com/a/419269
-
 #[diff]
-#	tool = p4mergetool
-#[difftool "p4mergetool"]
-#	cmd = open -W -a p4merge.app --args \"$LOCAL\" \"$REMOTE\"
-#	keepBackup = false
-#	keepTemporaries = false
-#	trustExitCode = false
+#	tool = xxdiff
+#[difftool]
 #	prompt = false
 #[merge]
-#	tool = p4mergetool
-#[mergetool "p4mergetool"]
-#	cmd = open -W -a p4merge.app --args \"BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
-#	keepBackup = false
-#	trustExitCode = false
+#	tool = xxdiff
+#[mergetool]
 #	prompt = false
 #[alias]
 #	diffdir = difftool --dir-diff
+
+# macOS settings for [P4Merge](https://www.perforce.com/products/helix-core-apps/merge-diff-tool-p4merge)
+# from https://gist.github.com/tony4d/3454372?permalink_comment_id=3615987#gistcomment-3615987
+
+# `launchp4merge` is used instead of `open -W -a APPNAME --args SOME ARGS`
+# so going to the next file diff or merge only requires closing the window,
+# see https://stackoverflow.com/questions/33049253/is-it-possible-to-make-p4merge-quit-automatically-when-window-is-exited-on-mac-o
+# and https://portal.perforce.com/s/article/2848
+
+# modify the path to p4merge.app launchp4merge below as needed
+# note that P4Merge does not support diffing directories, see https://stackoverflow.com/a/20135857
+
+[diff]
+	tool = p4merge
+[difftool]
+	prompt = false
+[merge]
+	tool = p4merge
+[mergetool]
+	prompt = false
+	#keepBackup = false
+[mergetool "p4merge"]
+	path = /Applications/p4merge.app/Contents/Resources/launchp4merge
+	#trustExitCode = false
