@@ -612,6 +612,8 @@
     has the latest version), and is
     [augmentable](https://dev.languagetool.org/finding-errors-using-n-gram-data.html)
     with [n-gram](https://languagetool.org/download/ngram-data/) data
+    (note that the `ngrams-en-20150817.zip` file should be unzipped to
+    `~/languagetool/ngram-data/en/`, modify for other languages)
   - [FileMerge](https://developer.apple.com/xcode/features/) or
     [Meld](https://meldmerge.org/) or
     [kdiff3](https://apps.kde.org/kdiff3/) or
@@ -1226,14 +1228,27 @@ Usage tips for [APT](https://en.wikipedia.org/wiki/APT_(software))
 which is the default package manager for
 [Debian](https://www.debian.org/) and [Ubuntu](https://ubuntu.com/).
 
-To figure out why a package `some-package-name` is installed, run:
+- Reverse dependencies of `PACKAGE`:
 
-```sh
-apt-cache rdepends \
-    --no-{suggests,conflicts,breaks,replaces,enhances} \
-    --installed --recurse \
-    some-package-name
-```
+  ```sh
+  apt-cache rdepends \
+      --no-{suggests,conflicts,breaks,replaces,enhances} \
+      --installed --recurse \
+      PACKAGE
+  ```
+
+- Install `PACKAGE` without its recommended packages:
+
+  ```sh
+  apt-get install --no-install-recommends PACKAGE
+  ```
+
+- Simulate installing or removing `PACKAGE`:
+
+  ```sh
+  apt-get install --dry-run PACKAGE
+  apt-get remove --dry-run PACKAGE
+  ```
 
 ### Linux development environment in ChromeOS
 
@@ -2764,3 +2779,209 @@ cat >>.gitignore <<EOF
 /.csearchindex
 EOF
 ```
+
+## Setting up Box sync on Linux
+
+Windows and Linux has official support for mounting Box on the
+filesystem ([Box Drive](https://www.box.com/resources/downloads)),
+Linux does not. [rclone](https://rclone.org/) can be used instead.
+
+### Install rclone binary
+
+Install `rclone` either using a package manager or by
+[downloading](https://rclone.org/downloads/) a static binary into a
+directory in `$PATH`.
+
+Also make sure FUSE is installed.
+
+### Configure new rclone remote config for Box:
+
+1. Run "rclone config".
+1. Select "n" (new remote).
+1. Enter a name for the new remote, e.g. "Box".
+1. Enter the number associated with Box (number may change with rclone
+   versions, it is "6" as of v1.52).
+1. Leave blank for client id.
+1. Leave blank for client secret.
+1. Leave blank for box config file.
+1. For box subtype, enter the number associated to act on behalf of
+   "user" (or "enterprise" if it is an enterprise account).
+1. Enter "n" (No) when asked whether to edit advanced config.
+1. Enter "y" (Yes) when asked whether to use auto config.
+1. A Box app web page to give authorization to rclone to access the
+   Box account will open (may have to use the alternate URL with host
+   127.0.0.1 if the initial redirection does not work). Log in to
+   authorize rclone.
+1. Select "y" (Yes) to indicate the config is ok.
+
+### Usage
+
+- List directories in the top level
+
+  ```sh
+  rclone lsd Box:
+  ```
+
+- List all files
+
+  ```sh
+  rclone ls Box:
+  ```
+
+- Mount Box to a given directory:
+
+  Make sure mount directory exists. The example here uses `~/Box`.
+
+  ```sh
+  mkdir -p ~/Box
+  ```
+
+  Use `rclone mount` to create a FUSE mount. It is recommended to
+  mount Box with caching enabled. This increases compatibility with
+  most other apps since they typically assume the ability to do
+  simultaneously read/writes to a file, butcomes at the cost of higher
+  disk usage and files only syncing backremotely (to Box) when closed.
+
+  ```sh
+  rclone mount Box: ~/Box --vfs-cache-mode full
+  ```
+
+  See [here](https://rclone.org/commands/rclone_mount/) for more info.
+
+- Unmount mounted Box directory:
+
+  ```sh
+  fusermount -u ~/Box
+  ```
+
+### Automount on system startup using systemd
+
+- Systemd config file:
+
+  Save the following to `~/.config/systemd/user/rclone-box.service`
+  (change `USERNAME` and paths in `ExecStart` and/or `ExecStartPost`
+  as needed). An alternative configuration where the directory
+  structure, filenames and attributes are pre-cached and persisted is
+  also included but commented out (this option is only safe when there
+  are not multiple users uploading to the remote storage at the same
+  time).
+
+  ```desktop
+  # ~/.config/systemd/user/rclone-box.service
+  [Unit]
+  Description=Box (rclone)
+  After=
+
+  [Service]
+  Type=notify
+  # Make sure rclone and mount point exists
+  ExecStartPre=/usr/bin/test -x /home/USERNAME/.local/bin/rclone
+  ExecStartPre=/usr/bin/test -d /home/USERNAME/Box
+  ExecStartPre=/usr/bin/test -w /home/USERNAME/Box
+  # Mount on start
+  # The --rc flag starts rclone's remote control service.
+  # This is pretty useful for the ability to manually refresh
+  # the directory structure and file attributes before directory
+  # cache expiry using
+  # $ rclone rc vfs/refresh --fast-list recursive=true
+  # ---
+  ###
+  # Option 1 (standard mount)
+  ###
+  ExecStart=/home/USERNAME/.local/bin/rclone mount Box: /home/USERNAME/Box --rc --vfs-cache-mode full
+  ###
+  # Option 2 (persistent cache and pre-caching on startup)
+  # Increase --attr-timeout, --vfs-cache-max-age and --dir-cache-time
+  # for more persistent cache. After mounting, pre-caching of the
+  # directory structure, filenames and attributes is triggered using
+  # a vfs/refresh command to the remote control API.
+  # Note that this setup is only safe when there aren't multiple users
+  # uploading the same file at the same time
+  ###
+  # ExecStart=/home/USERNAME/.local/bin/rclone mount Box: /home/USERNAME/Box --rc --vfs-cache-mode full --vfs-cache-max-age 720h --dir-cache-time 720h --attr-timeout 1m --poll-interval 30s
+  # ExecStartPost=/home/USERNAME/.local/bin/rclone rc vfs/refresh recursive=true --rc-addr 127.0.0.1:5572 _async=true
+  # ---
+  # Unmount on stop
+  ExecStop=/bin/fusermount -u /home/USERNAME/Box
+  # Always restart if the process exists
+  Restart=always
+  RestartSec=10
+
+  [Install]
+  WantedBy=default.target
+  ```
+
+- Enabling autostart of service:
+
+  ```sh
+  systemctl --user enable rclone-box.service
+  ```
+
+- Disabling autostart of service:
+
+  ```sh
+  systemctl --user disable rclone-box.service
+  ```
+
+- Starting service manually:
+
+  ```sh
+  systemctl --user start rclone-box.service
+  ```
+
+- Stopping service manually:
+
+  ```sh
+  systemctl --user stop rclone-box.service
+  ```
+
+## Using dar and par2
+
+dar and par2 are useful for data archival on nix platforms.
+
+### dar
+
+dar (disk archive) is an archiving tool that supports encryption. Also
+supports recovery records if par2 is installed.
+
+- Create archive:
+
+  ```sh
+  dar -c backup_file_without_extension -g file1 -g file2 ... -g fileN
+  ```
+
+- Extract from archive:
+
+  ```sh
+  dar -x backup_file_without_extension
+  ```
+
+- Use the `-K` or `--key` to encrypt the archive (AES is recommended):
+
+  ```sh
+  dar -c backup_file_without_extension -g file1 -K aes:some_pw_str
+  ```
+
+Additional info [here](http://dar.linux.free.fr/doc/index.html).
+
+### par2
+
+Create recovery records for files with par2.
+
+- Create record:
+
+  ```sh
+  par2 create some_files.par2 file1 file2 file3
+  ```
+
+- Verify files:
+
+  ```sh
+  par2 verify some_files.par2
+  ```
+
+- Repair files:
+
+  ```sh
+  par2 repair some_files.par2
+  ```
