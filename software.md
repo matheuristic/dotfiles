@@ -618,15 +618,16 @@
     [Meld](https://meldmerge.org/) or
     [kdiff3](https://apps.kde.org/kdiff3/) or
     [tkdiff](https://sourceforge.net/projects/tkdiff/) or
-    [xxdiff](https://github.com/blais/xxdiff):
+    [xxdiff](https://github.com/blais/xxdiff) or
+    [P4Merge](https://www.perforce.com/products/helix-core-apps/merge-diff-tool-p4merge):
     GUI `diff` alternative; Meld supports Windows and Linux and has a
     [macOS port](https://github.com/yousseb/meld), kdiff3 is
     [cross-platform](https://binary-factory.kde.org/), xxdiff is
     lightweight but does not support Unicode, FileMerge comes with the
     macOS XCode IDE and callable from the command-line using
     `opendiff`, tkdiff is lightweight and straightforward to set up on
-    macOS (see _Mac Notes_ > _Graphical diff and merge tool_); these
-    also diff directories
+    macOS (see _Mac Notes_ > _Graphical diff and merge tool_), P4Merge
+    is free but not open-source; these also diff directories
   - [par](http://www.nicemice.net/par/):
     Paragraph reformatter, like a smarter version of `fmt` from GNU
     [coreutils](https://www.gnu.org/software/coreutils/)
@@ -1047,10 +1048,12 @@
   - [Royal TSX](https://royalapps.com/ts/):
     Cross-platform RDP and VNC client; has free version
 - Text (general)
-  - [Beyond Compare](https://www.scootersoftware.com/):
-    Compare files and folders
-  - [Kaleidoscope](https://kaleidoscope.app/):
-    Diff text and images
+  - [Araxis Merge](https://www.araxis.com/merge/) or
+    [Beyond Compare](https://www.scootersoftware.com/) or
+    [Deltawalker](https://www.deltawalker.com/) or
+    [Kaleidoscope](https://kaleidoscope.app/):
+    Compare files and folders; Deltawalker and Kaleidoscope
+    also support diffing images
 - Text editor or integrated development environment
   - [DataGrip](https://www.jetbrains.com/datagrip/):
     Database admin-oriented IDE
