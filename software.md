@@ -1437,9 +1437,14 @@ conda as detailed in the next section):
   [coreutils](https://en.wikipedia.org/wiki/List_of_GNU_Core_Utilities_commands);
   MacPorts-installed GNU coreutils commands are prefixed with `g`, for
   example GNU `realpath` is installed as `grealpath`)
+- `diffutils` (GNU
+  [Diffutils](https://www.gnu.org/software/diffutils/manual/html_node/index.html);
+  MacPorts installed GNU Diffutils commands are prefixed for `g`, for
+  example GNU `diff` is installed as `gdiff`)
 - `gawk` (GNU
   [AWK](https://www.gnu.org/software/gawk/manual/gawk.html))
-- `git`
+- `git` (it is recommended to disable the default macOS Git credential
+  helper that stores Git credentials in the macOS keychain, see below)
 - `gnupg2`
 - `gsed` (GNU [sed](https://www.gnu.org/software/sed/))
 - `htop`
