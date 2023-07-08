@@ -66,6 +66,21 @@
     [par2](https://github.com/Parchive/par2cmdline/)
   - [Timeshift](https://teejeetech.com/timeshift/):
     Like Windows System Restore but for Linux
+- Calendar and task management
+  - [Remind](https://dianne.skoll.ca/projects/remind/)
+    ([Git repository](https://salsa.debian.org/dskoll/remind)):
+    Scriptable calendar and alarm program, with
+    [CalDAV](https://github.com/jspricke/remind-caldav) (Google) and
+    [iCalendar](https://github.com/jspricke/python-remind) integration
+    along with CLI ([link1](https://sr.ht/~mlaparie/remint/),
+    [link2](https://gitlab.com/wyrd-calendar/wyrd)) and GUI
+    (`tkremind` that comes with Remind) front-ends
+  - [Taskwarrior](https://taskwarrior.org/) and
+    [Timewarrior](https://timewarrior.net/):
+    Todo list management (Taskwarrior) and time-tracking
+    (Timewarrior); [syncall](https://github.com/bergercookie/syncall)
+    can be used to sync Taskwarrior tasks with various services like
+    Asana, Google Calendar, Google Keep and so on
 - Containerization
   - [ctop](https://github.com/bcicen/ctop):
     `top` for containers
@@ -1013,9 +1028,6 @@
   - [Sweet Home 3D](https://www.sweethome3d.com/):
     Open-source interior design application, also available as a
     [webapp](https://www.sweethome3d.com/SweetHome3DOnlineManager.jsp)
-  - [Taskwarrior](https://taskwarrior.org/) and
-    [Timewarrior](https://timewarrior.net/):
-    Todo list management (Taskwarrior) and time-tracking (Timewarrior)
   - [Vale](https://vale.sh/)
     ([Github](https://github.com/errata-ai/vale)):
     Linter for prose
