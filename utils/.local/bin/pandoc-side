@@ -2,6 +2,11 @@
 
 # pandoc wrapper to generate HTML file from Markdown with footnotes rendered as sidenotes
 
+# NOTE: if Quarto is installed, it is recommended to just run
+# "quarto render -M reference-location:margin" instead, see
+# https://quarto-dev.github.io/quarto-gallery/page-layout/tufte.html
+# https://github.com/quarto-dev/quarto-gallery/tree/main/page-layout
+
 # Sourced files used for heredocs:
 # * pandoc-sidenote re-implemented in Lua
 #   https://gist.github.com/op8867555/882d4cd4c526091a57803ea81bf3a5a6
