@@ -264,11 +264,13 @@
     [TeXLive](https://www.tug.org/texlive/) or
     [TinyTeX](https://github.com/yihui/tinytex):
     Processor for (La)TeX, which is used widely in scientific writing
-  - [TeXmacs](https://texmacs.org/):
+  - [TeXmacs](https://texmacs.org/)
+    ([Github](https://github.com/texmacs/texmacs)):
     WYSIWYG scientific writing software, that is an alternative
     to LaTeX but can import/export LaTeX files; there is an a
     distribution of TeXmacs called [Mogan](https://mogan.app/)
-    that aims to be more user-friendly
+    ([Github](https://github.com/XmacsLabs/mogan)) that aims to be
+    more user-friendly
   - [WeasyPrint](https://github.com/Kozea/WeasyPrint) or
     [percollate](https://github.com/danburzo/percollate):
     Convert HTML to PDF files; percollate processes the page for
