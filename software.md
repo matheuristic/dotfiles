@@ -263,7 +263,12 @@
   - [Tectonic](https://tectonic-typesetting.github.io/) or
     [TeXLive](https://www.tug.org/texlive/) or
     [TinyTeX](https://github.com/yihui/tinytex):
-    (La)TeX processor
+    Processor for (La)TeX, which is used widely in scientific writing
+  - [TeXmacs](https://texmacs.org/):
+    WYSIWYG scientific writing software, that is an alternative
+    to LaTeX but can import/export LaTeX files; there is an a
+    distribution of TeXmacs called [Mogan](https://mogan.app/)
+    that aims to be more user-friendly
   - [WeasyPrint](https://github.com/Kozea/WeasyPrint) or
     [percollate](https://github.com/danburzo/percollate):
     Convert HTML to PDF files; percollate processes the page for
@@ -652,7 +657,10 @@
     is free but not open-source; these also diff directories
   - [par](http://www.nicemice.net/par/):
     Paragraph reformatter, like a smarter version of `fmt` from GNU
-    [coreutils](https://www.gnu.org/software/coreutils/)
+    [coreutils](https://www.gnu.org/software/coreutils/); note that
+    macOS built-in `fmt` does not support Unicode, while `par` and
+    GNU Coreutils `fmt` (installable as `gfmt` from the MacPorts
+    or Homebrew `coreutils` package on macOS) do support Unicode
   - [sttr](https://github.com/abhimanyu003/sttr):
     Command-line tool for string operations
   - [uni](https://github.com/arp242/uni) or
@@ -2039,6 +2047,35 @@ the `dav2fs` package).
 - [Universal Control](https://support.apple.com/en-us/HT212757):
   Use a single keyboard and mouse between Mac and iPad
 - [More info](https://www.apple.com/macos/continuity/)
+
+### Working around "[SOFTWARE NAME] can't be opened because Apple cannot check it for malicious software"
+
+Apps downloaded from the internet normally have a quarantine extended
+attribute attached to them so opening them needs to first pass through
+Gatekeeper's first run checks. For unverified and unnotarized
+applications, a message like "[SOFTWARE NAME] can't be opened because
+Apple cannot check it for malicious software" will pop up and the app
+will not be opened.
+
+Usually, it is sufficient to do one of the following:
+
+- In Finder, Control-click the application icon and choose Open from
+  the context menu.
+
+- Go to System Settings > Privacy & Security, locate a section about
+  trying to open the app and grant an exception for the app by
+  clicking the Open Anyway button.
+
+If the above approaches do not work, one can downloading the
+application (usually a DMG file containing the application bundle) by
+using `curl` or `wget` in Terminal to avoid the system automatically
+setting the xattr on the application. The downloaded file will not
+have its xattr set, so it (or its extracted application bundle) should
+run without the Gatekeeper first run check.
+
+Note that it is recommended to verify checksums or the GPG signature
+of any application downloaded, especially if this workaround is
+needed.
 
 ## GnuPG
 
