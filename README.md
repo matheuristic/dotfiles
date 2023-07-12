@@ -6,6 +6,7 @@ User configuration files for:
 - [Elixir](https://elixir-lang.org/)
 - [Git](https://git-scm.com/)
 - [NPM](https://www.npmjs.com/) using [nvm](https://github.com/nvm-sh/nvm)
+- [Pandoc](https://pandoc.org/) and [Quarto](https://quarto.org/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Python](https://www.python.org/)
   [Flake8](https://flake8.pycqa.org/en/latest/) (linter),
