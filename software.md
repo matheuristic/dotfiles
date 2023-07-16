@@ -249,7 +249,9 @@
     Markdown processor, has an
     [Asciidoc converter](https://github.com/asciidoctor/kramdown-asciidoc)
   - [Pandoc](https://pandoc.org/):
-    Document converter, can also process Markdown
+    Document converter, can also process Markdown extendable with
+    filters like [this one](https://github.com/pandoc-ext/diagram)
+    facilitating diagramming using code blocks
   - [Quarto](https://quarto.org/)
     ([Github](https://github.com/quarto-dev/quarto-cli)):
     Publishing system built on Pandoc, successor to R Markdown,
@@ -271,6 +273,9 @@
     distribution of TeXmacs called [Mogan](https://mogan.app/)
     ([Github](https://github.com/XmacsLabs/mogan)) that aims to be
     more user-friendly
+  - [Typst](https://typst.app/)
+    ([Github](https://github.com/typst/typst)):
+    Markup-based typesetting system, that is an alternative to LaTeX
   - [WeasyPrint](https://github.com/Kozea/WeasyPrint) or
     [percollate](https://github.com/danburzo/percollate):
     Convert HTML to PDF files; percollate processes the page for
@@ -1060,6 +1065,16 @@
     Mind-mapping tool
   - [Monodraw](https://monodraw.helftone.com/):
     ASCII art editor; macOS (App Store and direct download)
+- Document conversion and rendering:
+  - [AntennaHouse](https://www.antennahouse.com/) or
+    [Prince](https://www.princexml.com/):
+    Convert HTML to PDF files; Prince is free for non-commercial use
+    (note that the free version watermarks the resulting PDF file)
+  - [Vellum](https://vellum.pub/) or
+    [Atticus](https://www.atticus.io/):
+    Format eBooks and print books for publication; Vellum is
+    macOS-only and expensive but more polished, while Atticus is
+    less polished but cross-platform and cheaper
 - File management
   - [DevonThink Pro](https://www.devontechnologies.com/apps/devonthink):
     Document management and search solution; macOS
@@ -1097,6 +1112,11 @@
 - Word processing
   - [Scrivener](https://www.literatureandlatte.com/scrivener/overview):
     Word processor for authoring books and screenplays
+- Virtualization
+  - [Orbstack](https://orbstack.dev/):
+    macOS Docker runtime and Linux virtual machine management,
+    more performant and lightweight than Docker Desktop and Colima
+    as of July 2023; free for personal use
 
 ## Directory structure
 
