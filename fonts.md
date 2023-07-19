@@ -31,6 +31,13 @@ making them the default. Some tooling to help do that:
 - [FontFreeze](https://mutsuntsai.github.io/fontfreeze/)
   ([Github](https://github.com/MuTsunTsai/fontfreeze)) webapp
 
+## Font managers
+
+- [Font Book](https://support.apple.com/guide/font-book/welcome/mac)
+  (macOS)
+- [FontBase](https://fontba.se/)
+- [Typeface](https://typefaceapp.com/) (_commercial_)
+
 ## Monospace fonts
 
 - [APL385](https://www.apl385.com/fonts/)
@@ -61,8 +68,10 @@ making them the default. Some tooling to help do that:
 - [Cooper Hewitt](https://www.cooperhewitt.org/open-source-at-cooper-hewitt/cooper-hewitt-the-typeface-by-chester-jenkins/)
   ([Github](https://github.com/cooperhewitt/cooperhewitt-typeface))
 - [Figtree](https://github.com/erikdkennedy/figtree)
+- [Finlandica](https://github.com/HelsinkiTypeStudio/Finlandica)
 - [FiraGO](https://bboxtype.com/typefaces/FiraGO/)
   ([Github](https://github.com/bBoxType/FiraGO))
+- [Georama](https://github.com/productiontype/Georama)
 - [Inter](https://github.com/rsms/inter)
   (Helvetica alternative)
 - [Jost*](https://github.com/indestructible-type/Jost)
@@ -77,8 +86,12 @@ making them the default. Some tooling to help do that:
   ([Github](https://github.com/uswds/public-sans))
 - [Readex Pro](https://github.com/ThomasJockin/readexpro) (expanded
   [Lexend](https://github.com/googlefonts/lexend))
+- [Shantell Sans](https://github.com/arrowtype/shantell-sans)
+  (Comic Sans-inspired)
 - [Space Grotesk](https://github.com/floriankarsten/space-grotesk)
 - [Urbanist](https://github.com/coreyhu/Urbanist)
+- [Womprat](https://crown.fontdue.com/fonts/womprat) (Star Wars-y,
+  _commercial_)
 - [Work Sans](http://weiweihuanghuang.github.io/Work-Sans/)
   ([Github](https://github.com/weiweihuanghuang/Work-Sans))
 - [Ysabeau](https://github.com/CatharsisFonts/Ysabeau)
@@ -89,6 +102,7 @@ making them the default. Some tooling to help do that:
   (parametric axes, see [link](https://web.dev/variable-fonts/))
 - [Bodoni](http://indestructible-type.github.io/Bodoni.html)
   ([Github](https://github.com/indestructible-type/Bodoni))
+- [Cardo](https://github.com/googlefonts/CardoFont)
 - [Courier Prime](https://quoteunquoteapps.com/courierprime/)
   [Regular](https://github.com/quoteunquoteapps/CourierPrime),
   [Sans](https://github.com/quoteunquoteapps/CourierPrimeSans),
@@ -99,6 +113,8 @@ making them the default. Some tooling to help do that:
   ([Github](https://github.com/Omnibus-Type/Grenze)), and
   [Gotisch](https://www.omnibus-type.com/fonts/grenze-gotisch/)
   ([Github](https://github.com/Omnibus-Type/Grenze-Gotisch))
+- [Libre Bodoni](https://github.com/googlefonts/Libre-Bodoni)
+- [Playfair](https://github.com/googlefonts/Playfair)
 - [Reforma](https://pampatype.com/reforma)
 
 ## Symbol fonts
@@ -121,6 +137,8 @@ making them the default. Some tooling to help do that:
 - [Go](https://go.dev/blog/go-fonts)
 - [IBM Plex](https://github.com/IBM/plex)
 - [Input](https://input.djr.com/) (_free for personal use_)
+- Instrument [Sans](https://github.com/Instrument/instrument-sans) and
+  [Serif](https://github.com/Instrument/instrument-serif)
 - [Kurinto Font Folio](https://www.kurinto.com/)
 - Lucida ([B&H](https://lucidafonts.com/),
   [TUG](https://tug.org/store/lucida/index.html)) (_commercial_;
@@ -163,6 +181,7 @@ making them the default. Some tooling to help do that:
 - [The League of Movable Type](https://www.theleagueofmoveabletype.com/)
   ([Github](https://github.com/theleagueof))
 - [The Ultimate Oldschool PC Font Pack](https://int10h.org/oldschool-pc-fonts/)
+- [Tunera Type Foundry](https://www.tunera.xyz/)
 - [Typewolf](https://www.typewolf.com/)
 - [Typographica](https://typographica.org/)
   ([Library](https://library.typographica.org/))
