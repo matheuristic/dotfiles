@@ -82,9 +82,18 @@
     can be used to sync Taskwarrior tasks with various services like
     Asana, Google Calendar, Google Keep and so on
 - Containerization
+  - [colima](https://github.com/abiosoft/colima) or
+    [Rancher Desktop](https://rancherdesktop.io/)
+    ([Github](https://github.com/rancher-sandbox/rancher-desktop/)):
+    Minimal-setup container runtimes on macOS with support for Docker,
+    containerd, or Kubernetes; uses [lima](https://lima-vm.io/), which
+    is like WSL2 for macOS, under the hood; alternative to Docker
+    Desktop; for more info, see
+    [link](https://www.cncf.io/blog/2023/02/02/docker-on-macos-is-slow-and-how-to-fix-it/)
   - [ctop](https://github.com/bcicen/ctop):
     `top` for containers
   - [Docker](https://docs.docker.com/)
+    [Desktop](https://docs.docker.com/desktop/install/mac-install/)
 - Data analytics
   - [JASP](https://jasp-stats.org/):
     GUI statistical analysis tool
@@ -855,14 +864,6 @@
 - Virtualization
   - [Blink](https://github.com/jart/blink):
     Tiny x86-64-linux emulator that can run on any POSIX system
-  - [colima](https://github.com/abiosoft/colima) or
-    [Rancher Desktop](https://rancherdesktop.io/)
-    ([Github](https://github.com/rancher-sandbox/rancher-desktop/)):
-    Minimal-setup container runtimes on macOS with support for Docker,
-    containerd, or Kubernetes; uses [lima](https://lima-vm.io/), which
-    is like WSL2 for macOS, under the hood; alternative to Docker
-    Desktop; for more info, see
-    [link](https://www.cncf.io/blog/2023/02/02/docker-on-macos-is-slow-and-how-to-fix-it/)
   - [UTM](https://github.com/utmapp/UTM):
     iOS and macOS tool for managing [QEMU](https://www.qemu.org/)
     virtual machines; alternatives are [lima](https://lima-vm.io/)
@@ -1056,6 +1057,11 @@
   - [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve):
     Freeware non-linear video editor, has paid
     [version](https://www.blackmagicdesign.com/products/davinciresolve/studio)
+- Containerization
+  - [Orbstack](https://orbstack.dev/):
+    macOS Docker runtime and Linux virtual machine management,
+    more performant and lightweight than Docker Desktop and Colima
+    as of July 2023; free for personal use
 - Database client
   - [DbVisualizer](https://www.dbvis.com/):
     Cross-database SQL client with data visualization capabilities;
@@ -1113,10 +1119,7 @@
   - [Scrivener](https://www.literatureandlatte.com/scrivener/overview):
     Word processor for authoring books and screenplays
 - Virtualization
-  - [Orbstack](https://orbstack.dev/):
-    macOS Docker runtime and Linux virtual machine management,
-    more performant and lightweight than Docker Desktop and Colima
-    as of July 2023; free for personal use
+  - Orbstack (see Containerization)
 
 ## Directory structure
 

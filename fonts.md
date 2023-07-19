@@ -100,8 +100,11 @@ making them the default. Some tooling to help do that:
 
 - [Amstelvar](https://github.com/googlefonts/amstelvar)
   (parametric axes, see [link](https://web.dev/variable-fonts/))
-- [Bodoni](http://indestructible-type.github.io/Bodoni.html)
+- [Besley](https://indestructibletype.com/Besley.html)
+  ([Github](https://github.com/indestructible-type/Besley))
+- [Bodoni Moda](http://indestructible-type.github.io/Bodoni.html)
   ([Github](https://github.com/indestructible-type/Bodoni))
+- [Bona Nova](https://github.com/kosmynkab/Bona-Nova)
 - [Cardo](https://github.com/googlefonts/CardoFont)
 - [Courier Prime](https://quoteunquoteapps.com/courierprime/)
   [Regular](https://github.com/quoteunquoteapps/CourierPrime),
@@ -113,7 +116,6 @@ making them the default. Some tooling to help do that:
   ([Github](https://github.com/Omnibus-Type/Grenze)), and
   [Gotisch](https://www.omnibus-type.com/fonts/grenze-gotisch/)
   ([Github](https://github.com/Omnibus-Type/Grenze-Gotisch))
-- [Libre Bodoni](https://github.com/googlefonts/Libre-Bodoni)
 - [Playfair](https://github.com/googlefonts/Playfair)
 - [Reforma](https://pampatype.com/reforma)
 
