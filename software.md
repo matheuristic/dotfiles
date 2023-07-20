@@ -131,9 +131,11 @@
     ([Github](https://github.com/mongodb/mongo)):
     NoSQL database
   - [PostgreSQL](https://www.postgresql.org/):
-    Relational DB; use
+    Relational DB; use the
     [TimescaleDB](https://github.com/timescale/timescaledb)
-    plugin to better support time-series
+    plugin to better support time-series, or the
+    [Citus](https://github.com/citusdata/citus) plugin
+    for schema-based sharding
   - [rqlite](https://rqlite.io/)
     ([Github](https://github.com/rqlite/rqlite)):
     Distributed DB using SQLite as its storage engine
