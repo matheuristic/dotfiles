@@ -72,7 +72,6 @@ making them the default. Some tooling to help do that:
 - [Clarity City](https://github.com/vmware/clarity-city)
   (similar to Gotham but with stricter geometry)
 - [Clear Sans](https://github.com/intel/clear-sans)
-- [Comic Relief](https://github.com/loudifier/Comic-Relief)
 - [Cooper Hewitt](https://www.cooperhewitt.org/open-source-at-cooper-hewitt/cooper-hewitt-the-typeface-by-chester-jenkins/)
   ([Github](https://github.com/cooperhewitt/cooperhewitt-typeface))
 - [Figtree](https://github.com/erikdkennedy/figtree)
