@@ -129,6 +129,9 @@ making them the default. Some tooling to help do that:
 - [EB Garamond](https://github.com/georgd/EB-Garamond)
 - [ETbb](https://tug.org/FontCatalogue/etbb/)
   ([CTAN](https://ctan.org/pkg/etbb?lang=en))
+- The [Fell Types](https://iginomarini.com/fell/the-revival-fonts/)
+  ([background](https://www.linyangchen.com/Typography-Fell-Types-font),
+  [Google Fonts](https://fonts.google.com/?query=IM+Fell))
 - Grenze [Regular](https://www.omnibus-type.com/fonts/grenze/)
   ([Github](https://github.com/Omnibus-Type/Grenze)), and
   [Gotisch](https://www.omnibus-type.com/fonts/grenze-gotisch/)
