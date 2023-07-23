@@ -62,6 +62,8 @@ making them the default. Some tooling to help do that:
 ## Sans-serif proportional fonts
 
 - [Atkinson Hyperlegible](https://brailleinstitute.org/freefont)
+- [Avenir](https://en.wikipedia.org/wiki/Avenir_(typeface))
+  (included with macOS)
 - [Clarity City](https://github.com/vmware/clarity-city)
   (similar to Gotham but with stricter geometry)
 - [Clear Sans](https://github.com/intel/clear-sans)
@@ -84,12 +86,15 @@ making them the default. Some tooling to help do that:
 - [Plus Jakarta Sans](https://github.com/tokotype/PlusJakartaSans)
 - [Public Sans](https://public-sans.digital.gov/)
   ([Github](https://github.com/uswds/public-sans))
+- [Raleway](https://github.com/theleagueof/raleway)
 - [Readex Pro](https://github.com/ThomasJockin/readexpro) (expanded
   [Lexend](https://github.com/googlefonts/lexend))
+- [Schibsted Grotesk](https://github.com/schibsted/schibsted-grotesk)
 - [Shantell Sans](https://github.com/arrowtype/shantell-sans)
   (Comic Sans-inspired)
 - [Space Grotesk](https://github.com/floriankarsten/space-grotesk)
 - [Urbanist](https://github.com/coreyhu/Urbanist)
+- [Wix Madefor](https://github.com/wix-incubator/wixmadefor)
 - [Womprat](https://crown.fontdue.com/fonts/womprat) (Star Wars-y,
   _commercial_)
 - [Work Sans](http://weiweihuanghuang.github.io/Work-Sans/)
@@ -110,14 +115,18 @@ making them the default. Some tooling to help do that:
   [Regular](https://github.com/quoteunquoteapps/CourierPrime),
   [Sans](https://github.com/quoteunquoteapps/CourierPrimeSans),
   and [Code](https://github.com/quoteunquoteapps/CourierPrimeCode)
+- [EB Garamond](https://github.com/georgd/EB-Garamond)
 - [ETbb](https://tug.org/FontCatalogue/etbb/)
   ([CTAN](https://ctan.org/pkg/etbb?lang=en))
 - Grenze [Regular](https://www.omnibus-type.com/fonts/grenze/)
   ([Github](https://github.com/Omnibus-Type/Grenze)), and
   [Gotisch](https://www.omnibus-type.com/fonts/grenze-gotisch/)
   ([Github](https://github.com/Omnibus-Type/Grenze-Gotisch))
+- [Mate](https://github.com/etunni/mate)
 - [Playfair](https://github.com/googlefonts/Playfair)
 - [Reforma](https://pampatype.com/reforma)
+- [Spectral](https://github.com/productiontype/spectral)
+- [Sprat](https://github.com/EthanNakache/Sprat-type)
 
 ## Symbol fonts
 
@@ -127,6 +136,8 @@ making them the default. Some tooling to help do that:
 - [DSEG](https://www.keshikan.net/fonts-e.html)
   ([Github](https://github.com/keshikan/DSEG)) (LCD display-like)
 - [Quivira](http://www.quivira-font.com/) (serif)
+- [Redacted](https://github.com/christiannaths/redacted-font)
+  (for keeping wireframes and prototypes free of distracting text)
 - [Symbola](https://dn-works.com/ufas/) (_free for personal use_)
 
 ## Script fonts
@@ -135,12 +146,16 @@ making them the default. Some tooling to help do that:
 
 ## Font families
 
+- [Bagnard](https://github.com/sebsan/Bagnard) and
+  [Bagnard Sans](https://github.com/sebsan/Bagnard-Sans)
 - [DM](https://github.com/googlefonts/dm-fonts) (sans like Poppins, serif like Source Serif Pro, has monospace [version](https://github.com/googlefonts/dm-mono) based on sans font)
 - [Go](https://go.dev/blog/go-fonts)
 - [IBM Plex](https://github.com/IBM/plex)
 - [Input](https://input.djr.com/) (_free for personal use_)
 - Instrument [Sans](https://github.com/Instrument/instrument-sans) and
   [Serif](https://github.com/Instrument/instrument-serif)
+- Josefin [Sans](https://github.com/googlefonts/josefinsans) and
+  [Slab](https://github.com/davelab6/josefinslab)
 - [Kurinto Font Folio](https://www.kurinto.com/)
 - Lucida ([B&H](https://lucidafonts.com/),
   [TUG](https://tug.org/store/lucida/index.html)) (_commercial_;
@@ -174,10 +189,12 @@ making them the default. Some tooling to help do that:
 ## Links
 
 - [Beautiful Web Type](https://beautifulwebtype.com/)
+- [Collletttivo](https://www.collletttivo.it/)
 - [Google Font Updates](https://twitter.com/googlefonts?lang=us)
 - [Google Fonts Knowledge](https://fonts.google.com/knowledge)
 - [Omnibus-Type](https://www.omnibus-type.com/)
 - [On snot and fonts](http://luc.devroye.org/fonts.html)
+- [Open Foundry](https://open-foundry.com/)
 - [Programming Fonts](https://www.programmingfonts.org/)
   ([Tumblr](https://programmingfonts.tumblr.com/))
 - [The League of Movable Type](https://www.theleagueofmoveabletype.com/)
