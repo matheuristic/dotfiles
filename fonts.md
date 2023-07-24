@@ -44,6 +44,8 @@ making them the default. Some tooling to help do that:
 - [Berkeley Mono](https://berkeleygraphics.com/typefaces/berkeley-mono/)
   (_commercial_)
 - [Comic Code](https://tosche.net/fonts/comic-code) (_commercial_)
+- [Commit Mono](https://commitmono.com/)
+  ([Github](https://github.com/eigilnikolajsen/commit-mono))
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)
 - [Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans)
 - [Intel One Mono](https://github.com/intel/intel-one-mono)
