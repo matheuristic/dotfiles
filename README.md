@@ -28,6 +28,7 @@ User configuration files for:
 For Acme configuration, see [here](https://github.com/matheuristic/plan9port-config).
 
 For Emacs configuration, see [here](https://github.com/matheuristic/emacs-config).
+See [here](https://emacs.amodernist.com/) for a simpler alternative.
 
 For Org example documents, see [here](https://github.com/matheuristic/org-examples).
 

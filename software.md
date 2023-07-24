@@ -233,7 +233,7 @@
     Cross-platform ANSI and ASCII art editor
   - [Pikchr](https://pikchr.org/) or
     [PlantUML](https://plantuml.com/) or
-    [Mermaid(https://mermaid.js.org/):
+    [Mermaid](https://mermaid.js.org/):
     Markup language for diagramming, standalone or supported by
     Markdown processers like Pandoc via plugins
   - [UMLet](https://github.com/umlet/umlet)
