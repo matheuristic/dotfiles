@@ -81,6 +81,11 @@
     (Timewarrior); [syncall](https://github.com/bergercookie/syncall)
     can be used to sync Taskwarrior tasks with various services like
     Asana, Google Calendar, Google Keep and so on
+- Compilers and linkers
+  - [Mold](https://github.com/rui314/mold):
+    Drop-in replacement for Linux linkers on various architectures;
+    for macOS support, there is a commercial version
+    [sold](https://github.com/bluewhalesystems/sold)
 - Containerization
   - [colima](https://github.com/abiosoft/colima) or
     [Rancher Desktop](https://rancherdesktop.io/)
