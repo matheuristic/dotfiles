@@ -251,60 +251,14 @@
 - Digital design
   - [Penpot](https://github.com/penpot/penpot):
     Open source design and prototyping platform like Sketch and Figma
-- Document conversion and rendering
-  - [Asciidoctor](https://asciidoctor.org/):
-    Asciidoc processor, has an
-    [extension](https://asciidoctor.org/docs/asciidoctor-pdf/)
-    for PDF generation
-  - [groff](https://www.gnu.org/software/groff/):
-    Typesetting system that can output PS, PDF, HTML or DVI;
-    a lightweight alternative to (La)TeX but less popular
-  - [hred](https://github.com/danburzo/hred):
-    Command-line HTML (and XML) to JSON converter
-  - [Kramdown](https://kramdown.gettalong.org/):
-    Markdown processor, has an
-    [Asciidoc converter](https://github.com/asciidoctor/kramdown-asciidoc)
-  - [Pandoc](https://pandoc.org/):
-    Document converter, can also process Markdown extendable with
-    filters like [this one](https://github.com/pandoc-ext/diagram)
-    facilitating diagramming using code blocks
-  - [Quarto](https://quarto.org/)
-    ([Github](https://github.com/quarto-dev/quarto-cli)):
-    Publishing system built on Pandoc, successor to R Markdown,
-    supporting Markdown and Jupyter notebooks with dynamic content
-    using Python, R, Julia, and Observable JS; for a user-local
-    install, one option is to extract the tarball version somewhere
-    and symlink the `quarto` binary from a directory in `$PATH`
-  - [shot-scraper](https://github.com/simonw/shot-scraper):
-    Command-line utility for taking partial or full screenshots of
-    websites
-  - [Tectonic](https://tectonic-typesetting.github.io/) or
-    [TeXLive](https://www.tug.org/texlive/) or
-    [TinyTeX](https://github.com/yihui/tinytex):
-    Processor for (La)TeX, which is used widely in scientific writing
-  - [TeXmacs](https://texmacs.org/)
-    ([Github](https://github.com/texmacs/texmacs)):
-    WYSIWYG scientific writing software, that is an alternative
-    to LaTeX but can import/export LaTeX files; there is an a
-    distribution of TeXmacs called [Mogan](https://mogan.app/)
-    ([Github](https://github.com/XmacsLabs/mogan)) that aims to be
-    more user-friendly
-  - [Typst](https://typst.app/)
-    ([Github](https://github.com/typst/typst)):
-    Markup-based typesetting system, that is an alternative to LaTeX
-  - [WeasyPrint](https://github.com/Kozea/WeasyPrint) or
-    [percollate](https://github.com/danburzo/percollate):
-    Convert HTML to PDF files; percollate processes the page for
-    readability before conversion; the file can also be directly
-    opened in a browser and printed to PDF
-- Document text extraction
-  - [Apache Tika](http://tika.apache.org/):
-    [Go](https://github.com/google/go-tika)
-    [Python](https://github.com/chrismattmann/tika-python) bindings
-    available
-  - [Tesseract](https://github.com/tesseract-ocr/tesseract)
+- Ebook authoring
+  - [Sigil](https://sigil-ebook.com/)
+    ([Github](https://github.com/Sigil-Ebook/Sigil)):
+    Cross-platform ebook editor supporting EPUB
 - Ebook reader or library manager
   - [Calibre](https://calibre-ebook.com/)
+    ([Github](https://github.com/kovidgoyal/calibre)):
+    Ebook manager supporting an array of formats, with many plugins
   - [epr](https://github.com/wustho/epr) or
     [epy](https://github.com/wustho/epy):
     TUI ebook reader; epr supports only EPUB; epy is a fork of epy
@@ -313,7 +267,12 @@
     and inline formatting
   - [epub2txt2](https://github.com/kevinboone/epub2txt2):
     Extract text from EPUB
-  - [Foliate](https://johnfactotum.github.io/foliate/)
+  - [Foliate](https://johnfactotum.github.io/foliate/):
+    Linux ebook viewer
+  - [MuPDF](https://mupdf.com/) (see _PDF reader or transformer_)
+  - [Thorium](https://www.edrlab.org/software/thorium-reader/)
+    ([Github](https://github.com/edrlab/thorium-reader)):
+    Cross-platform Electron ebook reading app
 - Email
   - [aerc](https://git.sr.ht/~rjarry/aerc):
     TUI email client with [notmuch](https://notmuchmail.org/) support.
@@ -394,6 +353,55 @@
     available
   - [tree](http://mama.indstate.edu/users/ice/tree/):
     Command-line tool to list files in subdir tree depth-indented
+- Image text extraction
+  - [Apache Tika](http://tika.apache.org/):
+    [Go](https://github.com/google/go-tika)
+    [Python](https://github.com/chrismattmann/tika-python) bindings
+    available
+  - [Tesseract](https://github.com/tesseract-ocr/tesseract)
+- Markup language document conversion and rendering
+  - [Asciidoctor](https://asciidoctor.org/):
+    Asciidoc processor, has an
+    [extension](https://asciidoctor.org/docs/asciidoctor-pdf/)
+    for PDF generation
+  - [groff](https://www.gnu.org/software/groff/):
+    Typesetting system that can output PS, PDF, HTML or DVI;
+    a lightweight alternative to (La)TeX but less popular
+  - [hred](https://github.com/danburzo/hred):
+    Command-line HTML (and XML) to JSON converter
+  - [Kramdown](https://kramdown.gettalong.org/):
+    Markdown processor, has an
+    [Asciidoc converter](https://github.com/asciidoctor/kramdown-asciidoc)
+  - [Pandoc](https://pandoc.org/):
+    Document converter, can also process Markdown extendable with
+    filters like [this one](https://github.com/pandoc-ext/diagram)
+    facilitating diagramming using code blocks
+  - [Quarto](https://quarto.org/)
+    ([Github](https://github.com/quarto-dev/quarto-cli)):
+    Publishing system built on Pandoc, successor to R Markdown,
+    supporting Markdown and Jupyter notebooks with dynamic content
+    using Python, R, Julia, and Observable JS; for a user-local
+    install, one option is to extract the tarball version somewhere
+    and symlink the `quarto` binary from a directory in `$PATH`
+  - [Tectonic](https://tectonic-typesetting.github.io/) or
+    [TeXLive](https://www.tug.org/texlive/) or
+    [TinyTeX](https://github.com/yihui/tinytex):
+    Processor for (La)TeX, which is used widely in scientific writing
+  - [TeXmacs](https://texmacs.org/)
+    ([Github](https://github.com/texmacs/texmacs)):
+    WYSIWYG scientific writing software, that is an alternative
+    to LaTeX but can import/export LaTeX files; there is an a
+    distribution of TeXmacs called [Mogan](https://mogan.app/)
+    ([Github](https://github.com/XmacsLabs/mogan)) that aims to be
+    more user-friendly
+  - [Typst](https://typst.app/)
+    ([Github](https://github.com/typst/typst)):
+    Markup-based typesetting system, that is an alternative to LaTeX
+  - [WeasyPrint](https://github.com/Kozea/WeasyPrint) or
+    [percollate](https://github.com/danburzo/percollate):
+    Convert HTML to PDF files; percollate processes the page for
+    readability before conversion; the file can also be directly
+    opened in a browser and printed to PDF
 - Newsreader
   - [NetNewsWire](https://github.com/Ranchero-Software/NetNewsWire):
     RSS reader; iOS and macOS
@@ -428,7 +436,8 @@
     View DjVu documents in the browser; for local viewer usage
     instructions, see [here](https://djvu.js.org/downloads)
   - [MuPDF](https://mupdf.com/):
-    PDF reader
+    PDF, XPS and EPUB reader; AGPL version is available in many
+    package managers like APT (Linux), Homebrew or MacPorts (macOS)
   - [QPDF](https://github.com/qpdf/qpdf) or
     [pdfcpu](https://pdfcpu.io/)
     ([Github](https://github.com/pdfcpu/pdfcpu)) or
@@ -912,6 +921,9 @@
   - [Monolith](https://github.com/Y2Z/monolith.git):
     Save complete webpages to a single HTML file with embedded CSS,
     images and Javascript
+  - [shot-scraper](https://github.com/simonw/shot-scraper):
+    Command-line utility for taking partial or full screenshots of
+    websites
   - [YT-DLP](https://github.com/yt-dlp/yt-dlp):
     Fork of [youtube-dl](https://youtube-dl.org/)
 - Web development
@@ -1078,14 +1090,10 @@
     Mind-mapping tool
   - [Monodraw](https://monodraw.helftone.com/):
     ASCII art editor; macOS (App Store and direct download)
-- Document conversion and rendering:
-  - [AntennaHouse](https://www.antennahouse.com/) or
-    [Prince](https://www.princexml.com/):
-    Convert HTML to PDF files; Prince is free for non-commercial use
-    (note that the free version watermarks the resulting PDF file)
+- Ebook authoring:
   - [Vellum](https://vellum.pub/) or
     [Atticus](https://www.atticus.io/):
-    Format eBooks and print books for publication; Vellum is
+    Format ebooks and print books for publication; Vellum is
     macOS-only and expensive but more polished, while Atticus is
     less polished but cross-platform and cheaper
 - File management
@@ -1094,6 +1102,11 @@
   - [Mountain Duck](https://mountainduck.io/):
     Like `rclone mount` but with a nicer user interface and its vaults
     are interoperable with Cryptomator vaults
+- Markup language document conversion and rendering
+  - [AntennaHouse](https://www.antennahouse.com/) or
+    [Prince](https://www.princexml.com/):
+    Convert HTML to PDF files; Prince is free for non-commercial use
+    (note that the free version watermarks the resulting PDF file)
 - Project (codebase)
   - [Sublime Merge](https://www.sublimemerge.com/):
     GUI Git client for macOS
