@@ -418,11 +418,14 @@
     [Spack](https://spack.io/) or
     [Homebrew](https://brew.sh/):
     macOS package manager for open-source software
-  - [Miniforge](https://github.com/conda-forge/miniforge):
-    [Conda](https://conda.io/) pre-configured for
-    [conda-forge](https://conda-forge.org/); the Mambaforge variant
-    recommended as it comes with the Conda drop-in replacement
-    [Mamba](https://github.com/mamba-org/mamba) that is much faster
+  - [Mamba](https://mamba.readthedocs.io/)
+    ([Github](https://github.com/mamba-org)):
+    Drop-in replacement for [conda](https://conda.io/), with the
+    [micromamba](https://github.com/mamba-org/micromamba-releases)
+    the preferred variant; using [conda-forge](https://conda-forge.org/)
+    as the primary repository is recommended
+  - [Rhumba](https://github.com/mamba-org/rhumba):
+    R package manager installable via conda or mamba
 - PDF reader or transformer
   - [diffpdf](https://tracker.debian.org/pkg/diffpdf)
     ([source](http://www.qtrac.eu/diffpdf-foss.html)):
@@ -1213,7 +1216,7 @@ Other package managers can exist alongside the operating system's
 (APT for Debian, the App Store for macOS, and so on). Conda is one of
 these, and can be set up without the need to be a superuser.
 
-### Anaconda, Miniconda, Miniforge, Mambaforge
+### Anaconda, Miniconda, Miniforge, Mambaforge, Micromamba
 
 [Conda](https://conda.io/) is a package and environment manager useful
 for developing and deploying applications leverage a repository of
@@ -1236,9 +1239,13 @@ is a Miniforge variant that has installed by default
 [Mamba](https://github.com/mamba-org/mamba) which is a fast
 re-implementation of the conda package manager.
 
-It is usually best to install Miniconda, Miniforge or Mambaforge
-because of the smaller disk footprint since they don't come
-pre-installed with a wide array of packages.
+[Micromamba](https://github.com/mamba-org/micromamba-releases)
+is a statically-linked single executable conda package manager.
+It does not come pre-configured for any specific repo.
+
+It is usually best to install Miniconda, Miniforge, Mambaforge or
+Micromamba because of the smaller disk footprint since they don't
+come pre-installed with a wide array of packages.
 
 It is recommended that any code development, and even tools where
 multiple versions need to exist on the system, be installed into
@@ -1250,7 +1257,7 @@ An example workflow is shown here, with some useful commands. See the
 [documentation](https://docs.conda.io/en/latest/) for more details on
 how to use the package manager.
 
-Using `conda` here but `mamba` supports the same parameters.
+Using `conda` here but `mamba` and `micromamba` support the same params.
 
 ```sh
 # Create a new environment using a specific channel-only
@@ -1297,6 +1304,52 @@ pip install -e .
 
 is run from the package repository directory with `setup.py`, should
 also links into the active environment's Python `site-packages` dir.
+
+### Micromamba install example
+
+Manual install, assumes `$HOME/.local/bin` is in `$PATH`, ZSH is
+the user shell, and `$HOME/micromamba/` used for micromamba envs:
+
+```sh
+# Download binary and place into a directory on the path
+curl -Ls https://micro.mamba.pm/api/micromamba/osx-arm64/latest | tar -xvj $HOME/.local/bin/micromamba
+# Set up micromamba in shell config
+micromamba shell init -s zsh -p $HOME/micromamba
+# Use conda-forge repo and don't auto-activate base env
+micromamba config append channels conda-forge
+micromamba config append channels nodefaults
+micromamba config set channel_priority strict
+micromamba config set auto_activate_base false
+```
+
+(Or for a wizard-based install, run
+`"${SHELL}" <(curl -L micro.mamba.pm/install.sh)`
+in the console.)
+
+Set up a tools environment and install some simple tooling:
+
+```sh
+micromamba create tools
+micromamba activate tools
+micromamba install ripgrep pandoc
+```
+
+Notes:
+
+- R packages begin with an `r-` prefix but only popular packages
+  are available and these should not be mixed with the packages
+  installed using R's `package.install` mechanism. It is better
+  to use [rhumba](https://github.com/mamba-org/rhumba) to manage
+  packages from within R if running R from a conda installation.
+- Conda has an `emacs` package, but it is generally
+  better to compile, go with a native package-manager
+  distributed Eamcs, or on macOS one of the standalone Emacs
+  applications ([Emacs for Mac OSX](https://emacsformacosx.com/)
+  [emacs-mac](https://github.com/railwaycat/homebrew-emacsmacport)
+  port) as they are better integrated with the system.
+- On macOS, conda can provide a basic CLI dev environment without
+  XCode or its command-line tools installed. However, it is
+  recommended to install at least the command-line tools.
 
 ## Linux notes
 
@@ -1375,43 +1428,6 @@ More information can also be found on
   ```
 
   and restart the computer so the new setting takes effect.
-
-### Conda
-
-Mambaforge. Assumes `$HOME/.local/bin` is in `$PATH` and Bash is the
-user shell (and therefore also that `$HOME/.bashrc` exists).
-
-```sh
-# Install mambaforge for faster operations
-chmod +x Mambaforge-Linux-x86_64.sh
-./Mambaforge-Linux-x86_64.sh                      # interactive install
-eval "$(~/mambaforge/bin/conda shell.bash hook)"  # modify path as needed
-conda init
-conda config --set auto_activate_base false
-mamba init
-# Create new environments as needed for each project, e.g.
-# $ mamba create -n some-project python=3.9
-```
-
-Some tools (like `bat`, `htop`, etc) have newer versions in conda-forge
-than what is available in the system package manager. If desired,
-install these in a development environment and symlink them to a
-directory in `$PATH` (below assumes `$HOME/.local/bin` is in `$PATH`).
-
-```sh
-# Create a named environment rather than polluting base
-mamba create -n tools
-mamba activate tools
-mamba install bat black htop mdformat pandoc ripgrep
-cd $HOME/.local/bin
-ln -s $HOME/mambaforge/envs/tools/bin/bat
-ln -s $HOME/mambaforge/envs/tools/bin/black
-ln -s $HOME/mambaforge/envs/tools/bin/htop
-ln -s $HOME/mambaforge/envs/tools/bin/mdformat
-ln -s $HOME/mambaforge/envs/tools/bin/pandoc
-ln -s $HOME/mambaforge/envs/tools/bin/rg
-mamba deactivate
-```
 
 ## Mac notes
 
@@ -1620,215 +1636,9 @@ do the following:
 git config --global mergetool.keepBackup false
 ```
 
-### Basic CLI development tools using conda
+### Installing GPU ML libraries for darwin-aarch64 machines
 
-Some general tools (these ones have heavier build dependencies,
-so just use the conda binaries instead of compiling with MacPorts):
-
-- `bat`
-- `pandoc`
-- `ripgrep`
-
-Some data tools:
-
-- `postgresql`
-- `visidata`
-
-And some programming languages:
-
-- `go`
-- `python` and many packages in [PyPI](https://pypi.org/)
-  - [Black](https://github.com/psf/black) for code formatting
-  - [ruff](https://github.com/charliermarsh/ruff) for linting
-- `r-base` and some [CRAN](https://cran.r-project.org/) packages
-- `sbcl` (can also install with [Roswell](https://roswell.github.io/))
-  - [lime](https://github.com/eudoxia0/lime)
-    ([tutorial](https://40ants.com/lisp-project-of-the-day/2020/06/0092-lime.html))
-    or [swank-client](https://github.com/brown/swank-client) (powers
-    [swank-crew](https://github.com/brown/swank-crew) for distributed
-    computing) are useful for interacting with a Swank server from a
-    REPL outside of Emacs/Vim/VSCode, or hot reloading
-    ([example](https://lispcookbook.github.io/cl-cookbook/web.html#hot-reload))
-
-Notes:
-
-- R packages begin with an `r-` prefix but only popular packages are
-  available and these should not be mixed with the packages installed
-  using R's `package.install` mechanism.
-- Conda has an `emacs` package, but go with one of the standalone
-  Emacs applications ([Emacs for Mac OSX](https://emacsformacosx.com/)
-  [emacs-mac](https://github.com/railwaycat/homebrew-emacsmacport)
-  port) as they are better integrated with the system.
-- Conda can provide a basic CLI dev environment without XCode or its
-  command-line tools installed. However, it is recommended to install at
-  least the command-line tools.
-
-#### Installation
-
-Mambaforge. Assumes `$HOME/.local/bin` is in `$PATH` and `$HOME/.zshrc` exists.
-
-```sh
-# Install mambaforge for faster operations
-# $ chmod +x Mambaforge-MacOSX-arm64.sh
-# $ ./Mambaforge-MacOSX-arm64.sh                     # interactive install
-# $ eval "$(~/mambaforge/bin/conda shell.zsh hook)"  # modify path as needed
-# $ conda init
-# $ conda config --set auto_activate_base false
-# $ mamba init
-# Create basic tools environment rather than polluting base environment
-mamba create -n tools
-mamba activate tools
-cd $HOME/.local/bin
-for cmd in bat ripgrep; do
-    mamba install -y "$cmd"
-    ln -s "$HOME/mambaforge/envs/tools/bin/$cmd"
-done
-mamba deactivate
-# Create new environments as needed for each project, e.g.
-# > mamba create -n some-project python=3.9
-```
-
-The base environment packages should be updated regularly.
-
-```sh
-conda update -n base -c conda-forge --all
-```
-
-#### LaTeX tools setup
-
-Use Tectonic for LaTeX compilation.
-
-```sh
-mamba create -n latextools
-mamba activate latextools
-mamba install tectonic
-mamba deactivate
-cd $HOME/.local/bin
-ln -s $HOME/mambaforge/envs/latextools/bin/tectonic
-```
-
-To support compiling PDF files from Markdown files, setup
-either Pandoc or the Kramdown-Asciidoc toolchain as described
-in the next sections.
-
-#### groff setup
-
-GNU roff (groff) is a typesetting system useful as a lightweight
-alternative to LaTeX.
-
-There are no groff binaries packaged for macOS arm64 in the
-conda-forge repository, but binaries are available from the Anaconda
-repository.
-
-```sh
-mamba create -n groff
-mamba activate groff
-conda config --env --add channels anaconda
-mamba install groff
-mamba deactivate
-cd $HOME/.local/bin
-ln -s $HOME/mambaforge/envs/groff/bin/groff
-```
-
-#### Pandoc setup (recommended)
-
-Pandoc is a very useful tool for converting between different document
-formats (e.g., Markdown to HTML, or Markdown to LaTeX).
-(Commands below create a new environment, but it may be preferable to
-install into the `tools` environment.)
-
-```sh
-mamba create -n pandoc
-mamba activate pandoc
-mamba install pandoc
-mamba deactivate
-cd $HOME/.local/bin
-ln -s $HOME/mambaforge/envs/pandoc/bin/pandoc
-```
-
-#### Kramdown-Asciidoc toolchain setup (alternative to Pandoc)
-
-Setup a useful Ruby toolchain for compiling Markdown files to LaTeX.
-
-- Asciidoctor for processing Asciidoc files, with extensions for
-  conversion to PDF, PDF optimization and syntax highlighting
-- Kramdown for processing Markdown files (of the Kramdown flavor), as
-  well as a converter to Asciidoc
-
-```sh
-mamba create -n rbtools
-mamba activate rbtools
-mamba install ruby
-gem install asciidoctor
-gem install asciidoctor-pdf rghost rouge
-gem install kramdown kramdown-asciidoc
-mamba deactivate
-```
-
-Create the following files with the given contents.
-
-`$HOME/.local/bin/asciidoctor`:
-
-```sh
-#!/bin/zsh
-source $HOME/mambaforge/etc/profile.d/conda.sh
-source $HOME/mambaforge/etc/profile.d/mamba.sh
-mamba activate rbtools
-asciidoctor "$@"
-```
-
-`$HOME/.local/bin/kramdown`:
-
-```sh
-#!/bin/zsh
-source $HOME/mambaforge/etc/profile.d/conda.sh
-source $HOME/mambaforge/etc/profile.d/mamba.sh
-mamba activate rbtools
-kramdown "$@"
-```
-
-`$HOME/.local/bin/kramdoc`:
-
-```sh
-#!/bin/zsh
-source $HOME/mambaforge/etc/profile.d/conda.sh
-source $HOME/mambaforge/etc/profile.d/mamba.sh
-mamba activate rbtools
-kramdoc "$@"
-```
-
-Make the files executable so they are easy to run on the command-line.
-
-```sh
-cd $HOME/.local/bin
-chmod +x asciidoctor
-chmod +x kramdown
-chmod +x kramdoc
-```
-
-#### Python development setup
-
-Environment-independent Python development tools.
-(Change Python version as appropriate.)
-
-```sh
-mamba create -n pytools python=3.9
-mamba activate pytools
-pip install black
-pip install ruff-lsp
-mamba deactivate
-cd $HOME/.local/bin
-ln -s $HOME/mambaforge/envs/pytools/black
-cat >ruff-lsp <<EOF
-#!/bin/zsh
-. "$HOME/mambaforge/etc/profile.d/conda.sh"
-conda activate pytools
-ruff-lsp "$@"
-EOF
-chmod +x ruff-lsp
-```
-
-#### Installing GPU ML libraries for darwin-aarch64 machines
+Assumes mamba (not micromamba) is installed.
 
 **PyTorch**
 
@@ -1894,58 +1704,6 @@ Metal-support, see
 [here](https://github.com/sun1638650145/Libraries-and-Extensions-for-TensorFlow-for-Apple-Silicon)
 for compile instructions and pre-compiled wheels, and see
 [here](https://github.com/tensorflow/text/pull/756) for more info.
-
-### Installing and using Spack (alternative to MacPort)
-
-Adapted from:
-https://spack.readthedocs.io/en/latest/getting_started.html#installation
-
-Spack is another package managers that does not require root
-permissions by default. (Conda and MacPorts, detailed above, can also
-set up without root privileges).
-
-```sh
-git clone -c feature.manyFiles=true https://github.com/spack/spack.git ~/spack
-# Following is for Bash/ZSH, see install instructions for other shells
-. ~/spack/share/spack/setup-env.sh
-# if needed, use a Python install other than the system one, for example
-#   export SPACK_PYTHON=$HOME/mambaforge/envs/pyenv/bin/python
-# see https://github.com/spack/spack/pull/31792
-# and https://github.com/spack/spack/issues/31735
-```
-
-Modify the shell config file to set up the environment setup when the
-shell starts. For Bash (`$HOME/.bashrc`) or ZSH (`$HOME/.zshrc`):
-
-```sh
-if [ -d $HOME/spack ]; then
-  . $HOME/spack/share/spack/setup-env.sh
-  # Can use a Python install other than the system one, for example
-  #   export SPACK_PYTHON=$HOME/mambaforge/envs/pyenv/bin/python
-fi
-```
-
-It is best practice to install packages within an environment, e.g.:
-
-```sh
-spack env create default
-spack env activate default
-spack install libvterm libtool cmake
-spack env deactivate
-```
-
-To use some environment by default (like the `default` environment
-created above), load it in the shell config startup, e.g. the above
-block in Bash and ZSH config example could be changed to:
-
-```sh
-if [ -d $HOME/spack ]; then
-  . $HOME/spack/share/spack/setup-env.sh
-  # Can use a Python install other than the system one, for example
-  #   export SPACK_PYTHON=$HOME/mambaforge/envs/pyenv/bin/python
-  spack env activate default
-fi
-```
 
 ### Running virtual machines with UTM on M1 Macs
 

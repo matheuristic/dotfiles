@@ -20,21 +20,26 @@ autoload -Uz compinit && compinit
 setopt histignorealldups sharehistory
 HISTSIZE=10000
 SAVEHIST=10000
-# HISTFILE=~/.zsh_history
+#HISTFILE=~/.zsh_history
 
 # Aliases and functions
-alias ll='ls -lhF'      # same as above with permissions details
-lld () {                # directories only
-  ls -lhF "$@" | grep --color=never "^d"
-}
-llf () {                # files only
-  ls -lhF "$@" | grep --color=never "^-"
-}
-alias rm='rm -i'        # remove file with confirmation prompt
 command -v md5sum > /dev/null \
   || alias md5sum="md5" # alias `md5` to `md5sum` (macOS)
 alias map='xargs -n1'   # map fn, e.g. $ find . -name '*.dll' | map dirname
 alias dusorted='du -sh * | sort -rh' # sorted disk usage for current directory
+
+# Non-plan9port aliases and functions
+if [ -z "$winid" ]; then
+  alias ll='ls -lhF'
+  alias ls="ls -F"
+  alias rm="rm -i"
+  lld () {                # directories only
+    ls -lhF "$@" | grep --color=never "^d"
+  }
+  llf () {                # files only
+    ls -lhF "$@" | grep --color=never "^-"
+  }
+fi
 
 # Prevent Mac from sleeping for given time: $ keepawake <hrs>
 if [[ "x`uname`" == "xDarwin" ]]; then
@@ -48,13 +53,8 @@ if [[ "x`uname`" == "xDarwin" ]]; then
   }
 fi
 
-# Set paths as needed
-
-# go support
-if [ -d $HOME/go ]; then
-  export GOPATH=$HOME/go
-  export PATH=$GOPATH/bin:$PATH
-fi
+# Set GnuPG TTY if running in a TTY
+test -t 0 && export GPG_TTY=$(tty)
 
 # User-local binaries and manpages
 if [ -d $HOME/.local/bin ]; then
@@ -64,31 +64,30 @@ if [ -d $HOME/.local/share/man ]; then
   MANPATH=$HOME/.local/share/man:$MANPATH
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup=$("$HOME/mambaforge/bin/conda" 'shell.bash' 'hook' 2> /dev/null)
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "$HOME/mambaforge/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/mambaforge/bin:$PATH"
-    fi
+# Go
+if [ -d $HOME/go ]; then
+  export GOPATH=$HOME/go
+  export PATH=$GOPATH/bin:$PATH
 fi
-unset __conda_setup
 
-if [ -f "$HOME/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "$HOME/mambaforge/etc/profile.d/mamba.sh"
+# MacPorts
+if [ -d $HOME/macports ]; then
+  export PATH=$HOME/macports/bin:$HOME/macports/sbin:$PATH
+  export MANPATH=$HOME/macports/share/man:$MANPATH
 fi
-# <<< conda initialize <<<
+
+# plan9port
+if [ -d $HOME/.local/plan9 ]; then
+  export PLAN9=$HOME/.local/plan9
+  export PATH=$PATH:$PLAN9/bin
+fi
 
 # Update Acme window tag line with dir in which it's running
 if [ "$winid" ]; then
-    _acme_cd () {
-        builtin cd "$@" && awd
-    }
-    alias cd=_acme_cd
+  _acme_cd () {
+    builtin cd "$@" && awd
+  }
+  alias cd=_acme_cd
 fi
 
 # No fancy Zsh prompt when using dumb terminals
@@ -102,9 +101,8 @@ if [[ "$TERM" == "dumb" ]]; then
   if whence -w preexec >/dev/null; then
       unfunction preexec
   fi
-  # Set prompt so middle-clicking line in Acme reruns line's command
-  # Show last exit code if non-zero
-  PROMPT=": %(?..{%?} )%m; "
+  # Set simple prompt, show last exit code if non-zero
+  PROMPT="%(?..[%?] ); "
   RPROMPT=""
 fi
 
