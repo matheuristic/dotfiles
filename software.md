@@ -270,7 +270,7 @@
   - [Foliate](https://johnfactotum.github.io/foliate/):
     Linux ebook viewer
   - [MuPDF](https://mupdf.com/) (see _PDF reader or transformer_)
-  - [Thorium](https://www.edrlab.org/software/thorium-reader/)
+  - [Thorium Reader](https://www.edrlab.org/software/thorium-reader/)
     ([Github](https://github.com/edrlab/thorium-reader)):
     Cross-platform Electron ebook reading app
 - Email
@@ -803,9 +803,14 @@
     structural regular expressions and command language
   - [Visual Studio Code](https://code.visualstudio.com/) or
     [VSCodium](https://vscodium.com/):
-    GUI IDE; VSCodium is a build of VSCode that is free of tracking and
-    Microsoft branding, but note that some Microsoft plugins like pylance
-    (Python LSP server) does not support it
+    GUI IDE; VSCodium is a build of VSCode that is free
+    of tracking and Microsoft branding, but note that some
+    Microsoft plugins like pylance (Python LSP server) does
+    not support it; some useful plugins include LLM-based
+    assistant [Continue](https://continue.dev/docs/intro)
+    ([Github](https://github.com/continuedev/continue)) and the
+    different extensions for remote development include over SSH
+    ([link](https://code.visualstudio.com/docs/remote/remote-overview))
 - User experience and interface (graphical)
   - [LinearMouse](https://github.com/linearmouse/linearmouse) or
     [Mos](https://github.com/Caldis/Mos) or
