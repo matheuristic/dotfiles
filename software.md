@@ -44,7 +44,7 @@
     [MDX-NET](https://github.com/kuielab/mdx-net)) to isolate
     vocals from audio tracks; a donation-supported web interface
     [MVSEP](https://mvsep.com/) is also available
-- Audio and Video Playback and Streaming
+- Audio and video playback and streaming
   - [NDI Tools](https://www.ndi.tv/tools/):
     Software for low-latency broadcasting over LAN by taking any video
     source, like a webcam, video capture card or desktop, and making
@@ -64,7 +64,7 @@
   - [dar](http://dar.linux.free.fr/):
     File archiving, supports recovery records using
     [par2](https://github.com/Parchive/par2cmdline/)
-  - [Timeshift](https://teejeetech.com/timeshift/):
+  - [Timeshift](https://github.com/linuxmint/timeshift):
     Like Windows System Restore but for Linux
 - Calendar and task management
   - [Remind](https://dianne.skoll.ca/projects/remind/)
@@ -405,6 +405,9 @@
 - Newsreader
   - [NetNewsWire](https://github.com/Ranchero-Software/NetNewsWire):
     RSS reader; iOS and macOS
+  - [Newsboat](https://newsboat.org/)
+    ([Github](https://github.com/newsboat/newsboat)):
+    CLI RSS reader
   - [Pan](http://pan.rebelbase.com/):
     Usenet reader
 - Package/runtime manager
@@ -815,6 +818,11 @@
     different extensions for remote development include over SSH
     ([link](https://code.visualstudio.com/docs/remote/remote-overview))
 - User experience and interface (graphical)
+  - [Amethyst](https://ianyh.com/amethyst/)
+    ([Github](https://github.com/ianyh/Amethyst):
+    Tiling window manager for macOS
+  - [Barrier](https://github.com/debauchee/barrier):
+    Cross-platform software that mimics KVM switch functionality
   - [LinearMouse](https://github.com/linearmouse/linearmouse) or
     [Mos](https://github.com/Caldis/Mos) or
     [Scroll Reverser](https://github.com/pilotmoon/Scroll-Reverser):
@@ -838,7 +846,11 @@
     which allows mouse selection of the actions which does not require
     keyboard shortcut configuration
   - [shottr](https://shottr.cc/):
-    Screenshot app; macOS
+    Screenshot app for macOS, although note that macOS has built-in
+    screenshot taking via `Cmd-Shift-3` (capture full screen),
+    `Cmd-Shift-4` (select a region and capture it),
+    `Cmd-Shift-4-Space` (capture window), and via the
+    Screenshot app (`Cmd-Shift-5` or use Spotlight search)
   - [skhd](https://github.com/koekeishiya/skhd):
     Hotkey daemon; macOS
   - [stats](https://github.com/exelban/stats):
@@ -1006,6 +1018,9 @@
   - [FontForge](https://fontforge.org/)
     ([Github](https://github.com/fontforge/fontforge)):
     Open-source cross-platform scriptable font editor
+  - [Goxel](https://goxel.xyz/)
+    ([Github](https://github.com/guillaumechereau/goxel)):
+    3D voxel editor
   - [grex](https://github.com/pemistahl/grex):
     Generate regex from test cases
   - [Hammerspoon](https://www.hammerspoon.org/):
@@ -1143,6 +1158,14 @@
     IDE for R; has open-source edition
   - [Sublime Text](https://www.sublimetext.com/):
     Lightweight text editor
+- User experience and interface (graphical)
+  - [Synergy](https://symless.com/synergy)
+    ([Github](https://github.com/symless/synergy-core/)):
+    Cross-platform software mimicking KVM switch functionality to share
+    a keyboard and a mouse across systems; source code available for
+    [self-compile](https://symless.com/synergy/news/how-to-use-synergy-for-free),
+    but is also available compiled by a third-party as
+    [binaries](https://github.com/DEAKSoftware/Synergy-Binaries)
 - Word processing
   - [Scrivener](https://www.literatureandlatte.com/scrivener/overview):
     Word processor for authoring books and screenplays
