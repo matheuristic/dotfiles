@@ -56,6 +56,11 @@ fi
 # Set GnuPG TTY if running in a TTY
 test -t 0 && export GPG_TTY=$(tty)
 
+# XCode command-line tools Perl modules (needed for XCode CLI git)
+if [ -d /Library/Developer/CommandLineTools/usr/share/git-core/perl ]; then
+  export PERL5LIB=/Library/Developer/CommandLineTools/usr/share/git-core/perl:$PERL5LIB
+fi
+
 # User-local binaries and manpages
 if [ -d $HOME/.local/bin ]; then
   PATH=$HOME/.local/bin:$PATH
@@ -74,6 +79,9 @@ fi
 if [ -d $HOME/macports ]; then
   export PATH=$HOME/macports/bin:$HOME/macports/sbin:$PATH
   export MANPATH=$HOME/macports/share/man:$MANPATH
+fi
+if [ -d $HOME/macports/share/perl5 ]; then
+  export PERL5LIB=$HOME/macports/share/perl5:$PERL5LIB
 fi
 
 # plan9port
