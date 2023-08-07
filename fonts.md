@@ -87,6 +87,7 @@ making them the default. Some tooling to help do that:
   (Futura alternative)
 - [Lato](https://github.com/googlefonts/LatoGFVersion)
   ([source](https://github.com/latofonts/lato-source))
+- [Maple Mono](https://github.com/subframe7536/Maple-font)
 - [Open Sans](https://github.com/googlefonts/opensans)
 - [Outfit](https://github.com/Outfitio/Outfit-Fonts)
 - [Poppins](https://www.indiantypefoundry.com/fonts/poppins)
@@ -165,12 +166,15 @@ making them the default. Some tooling to help do that:
 
 - [Bagnard](https://github.com/sebsan/Bagnard) and
   [Bagnard Sans](https://github.com/sebsan/Bagnard-Sans)
-- [DM](https://github.com/googlefonts/dm-fonts) (sans like Poppins, serif like Source Serif Pro, has monospace [version](https://github.com/googlefonts/dm-mono) based on sans font)
+- [DM](https://github.com/googlefonts/dm-fonts) (sans
+  like Poppins, serif like Source Serif Pro, has monospace
+  [version](https://github.com/googlefonts/dm-mono) based on
+  the sans font)
 - [Go](https://go.dev/blog/go-fonts)
 - [IBM Plex](https://github.com/IBM/plex)
 - [Input](https://input.djr.com/) (_free for personal use_)
-- Instrument [Sans](https://github.com/Instrument/instrument-sans) and
-  [Serif](https://github.com/Instrument/instrument-serif)
+- Instrument [Sans](https://github.com/Instrument/instrument-sans)
+  and [Serif](https://github.com/Instrument/instrument-serif)
 - Josefin [Sans](https://github.com/googlefonts/josefinsans) and
   [Slab](https://github.com/davelab6/josefinslab)
 - [Kurinto Font Folio](https://www.kurinto.com/)
@@ -179,6 +183,9 @@ making them the default. Some tooling to help do that:
   some versions licensed and distributed with specific platforms,
   e.g., _Lucida Sans Unicode_ on Windows, _Lucida Grande_ on macOS)
   ([detail](https://bigelowandholmes.typepad.com/bigelow-holmes/how-and-why-lucida/))
+- [Luxi](https://en.wikipedia.org/wiki/Luxi_fonts) Sans,
+  Serif and Mono (distributed as `font-bh-ttf-<version>.tar.<gz|xz>`
+  [here](https://xorg.freedesktop.org/releases/individual/font/))
 - [M+](https://mplusfonts.github.io/)
   ([Github](https://github.com/coz-m/MPLUS_FONTS))
 - [New Computer Modern](https://tug.org/FontCatalogue/newcomputermodernroman/)
@@ -217,6 +224,8 @@ making them the default. Some tooling to help do that:
 - [Pangram Pangram](https://pangrampangram.com/) (_commercial_)
 - [Programming Fonts](https://www.programmingfonts.org/)
   ([Tumblr](https://programmingfonts.tumblr.com/))
+- [Programming Fonts](https://github.com/ProgrammingFonts/ProgrammingFonts)
+  (parallel project to the above)
 - [The League of Movable Type](https://www.theleagueofmoveabletype.com/)
   ([Github](https://github.com/theleagueof))
 - [The Ultimate Oldschool PC Font Pack](https://int10h.org/oldschool-pc-fonts/)
