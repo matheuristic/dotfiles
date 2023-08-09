@@ -183,9 +183,10 @@ making them the default. Some tooling to help do that:
   some versions licensed and distributed with specific platforms,
   e.g., _Lucida Sans Unicode_ on Windows, _Lucida Grande_ on macOS)
   ([detail](https://bigelowandholmes.typepad.com/bigelow-holmes/how-and-why-lucida/))
-- [Luxi](https://en.wikipedia.org/wiki/Luxi_fonts) Sans,
-  Serif and Mono (distributed as `font-bh-ttf-<version>.tar.<gz|xz>`
-  [here](https://xorg.freedesktop.org/releases/individual/font/))
+- [Luxi](https://en.wikipedia.org/wiki/Luxi_fonts) Sans, Serif
+  and Mono (distributed as `font-bh-ttf-<version>.tar.<gz|xz>`
+  [here](https://xorg.freedesktop.org/releases/individual/font/)),
+  Luxi Sans and Luxi Mono are similar to Lucida Sans and Go Mono
 - [M+](https://mplusfonts.github.io/)
   ([Github](https://github.com/coz-m/MPLUS_FONTS))
 - [New Computer Modern](https://tug.org/FontCatalogue/newcomputermodernroman/)
