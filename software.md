@@ -2644,8 +2644,9 @@ First, install `direnv` or `shadowenv` if needed. E.g., for `direnv`:
 # If needed, install direnv and hook it into the shell, see
 # https://direnv.net/docs/installation.html
 # Following installs with Go and assumes shell is Zsh
+# A quoted heredoc limit string autoescapes special characters
 go install github.com/direnv/direnv@latest
-cat >>$HOME/.zshrc <<EOF
+cat >>$HOME/.zshrc <<'EOF'
 # direnv
 eval "$(direnv hook zsh)"
 EOF
