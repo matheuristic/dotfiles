@@ -43,6 +43,7 @@ making them the default. Some tooling to help do that:
 - [APL385](https://www.apl385.com/fonts/)
 - [Berkeley Mono](https://berkeleygraphics.com/typefaces/berkeley-mono/)
   (_commercial_)
+- [cnxt](https://github.com/cbytensky/cnxt) (bitmap, license unspecified)
 - [Comic Code](https://tosche.net/fonts/comic-code) (_commercial_)
 - [Commit Mono](https://commitmono.com/)
   ([Github](https://github.com/eigilnikolajsen/commit-mono))
