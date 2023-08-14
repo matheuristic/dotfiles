@@ -63,6 +63,10 @@ making them the default. Some tooling to help do that:
   ([Github](https://github.com/googlefonts/spacemono))
 - [Twilio Sans Mono](https://github.com/twilio/twilio-sans-mono)
 - [Unifont](http://unifoundry.com/unifont/index.html) (bitmap)
+- [Unscii](http://viznut.fi/unscii/) (bitmap,
+  [Github](https://github.com/viznut/unscii),
+  [funscii](https://github.com/asiekierka/funscii) fork with JP
+  support and bugfixes)
 
 ## Sans-serif proportional fonts
 
