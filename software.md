@@ -553,7 +553,10 @@
     `cpud` daemon to be run as root on remote Linux systems as `mount`
     is a privileged operation in Linux, and if running on a system
     using `systemd` the daemon should be started with `cpud -d -init`
-    (see [discussion](https://github.com/u-root/cpu/issues/59))
+    (see [discussion](https://github.com/u-root/cpu/issues/59));
+    [u-root](https://github.com/u-root/u-root), which is a fully
+    Go userland, can be useful in conjunction with cpu to work with
+    remote machines with minimal disk space
   - [Mosh](https://mosh.org/):
     Robust SSH alternative; `dumb` terminals don't work well with mosh
     because it always outputs escape sequences to set the window title
