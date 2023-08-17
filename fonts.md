@@ -38,6 +38,14 @@ making them the default. Some tooling to help do that:
 - [FontBase](https://fontba.se/)
 - [Typeface](https://typefaceapp.com/) (_commercial_)
 
+## Font tools
+
+- [FontForge](https://fontforge.org/)
+  ([Github](https://github.com/fontforge/fontforge)):
+  Font editor
+- [monobit](https://github.com/robhagemans/monobit):
+  Modify and convert bitmap fonts
+
 ## Monospace fonts
 
 - [APL385](https://www.apl385.com/fonts/)
