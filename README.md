@@ -32,6 +32,10 @@ See [here](https://emacs.amodernist.com/) for a simpler alternative.
 
 For Org example documents, see [here](https://github.com/matheuristic/org-examples).
 
+For fonts, see [`fonts.md`](fonts.md).
+
+For a list of software and other configuration, see [`software.md`](software.md).
+
 ## Deploying config files using GNU Stow
 
 Install [GNU Stow](https://www.gnu.org/software/stow/) (on a
