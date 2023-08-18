@@ -65,6 +65,7 @@ making them the default. Some tooling to help do that:
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)
 - [Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans)
 - [Galmuri](https://github.com/quiple/galmuri) (bitmap, CJK)
+- [Gohufont](https://font.gohu.org/) (bitmap)
 - [Intel One Mono](https://github.com/intel/intel-one-mono)
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
@@ -84,7 +85,8 @@ making them the default. Some tooling to help do that:
   [funscii](https://github.com/asiekierka/funscii) fork with JP
   support and bugfixes)
 - [UW ttyp0](https://people.mpi-inf.mpg.de/~uwe/misc/uw-ttyp0/)
-  (bitmap, [vector port](https://github.com/flowchartsman/greybeard))
+  (bitmap, vector port
+  [Greybeard](https://github.com/flowchartsman/greybeard))
 - [Zpix](https://github.com/SolidZORO/zpix-pixel-font) (bitmap, CJK,
   _free for personal use_)
 
