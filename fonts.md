@@ -40,9 +40,16 @@ making them the default. Some tooling to help do that:
 
 ## Font tools
 
+- [bdf_view](https://github.com/emurenMRz/bdf_view):
+  Display BDF fonts
+  ([webapp](https://emurenmrz.github.io/bdf_view/))
+- [Bits'N'Picas](https://github.com/kreativekorp/bitsnpicas):
+  Create and convert bitmap and emoji font
+- [bdf2x](https://github.com/Francesco149/bdf2x):
+  Upscale BDF bitmap fonts
 - [FontForge](https://fontforge.org/)
   ([Github](https://github.com/fontforge/fontforge)):
-  Font editor
+  Font editor that can create, convert and display fonts
 - [monobit](https://github.com/robhagemans/monobit):
   Modify and convert bitmap fonts
 
@@ -57,6 +64,7 @@ making them the default. Some tooling to help do that:
   ([Github](https://github.com/eigilnikolajsen/commit-mono))
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)
 - [Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans)
+- [Galmuri](https://github.com/quiple/galmuri) (bitmap, CJK)
 - [Intel One Mono](https://github.com/intel/intel-one-mono)
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
@@ -75,6 +83,10 @@ making them the default. Some tooling to help do that:
   [Github](https://github.com/viznut/unscii),
   [funscii](https://github.com/asiekierka/funscii) fork with JP
   support and bugfixes)
+- [UW ttyp0](https://people.mpi-inf.mpg.de/~uwe/misc/uw-ttyp0/)
+  (bitmap, [vector port](https://github.com/flowchartsman/greybeard))
+- [Zpix](https://github.com/SolidZORO/zpix-pixel-font) (bitmap, CJK,
+  _free for personal use_)
 
 ## Sans-serif proportional fonts
 
