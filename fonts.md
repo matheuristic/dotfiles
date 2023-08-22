@@ -66,6 +66,7 @@ making them the default. Some tooling to help do that:
 - [Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans)
 - [Galmuri](https://github.com/quiple/galmuri) (bitmap, CJK)
 - [Gohufont](https://font.gohu.org/) (bitmap)
+- [GNU intlfonts](https://ftp.gnu.org/gnu/intlfonts/)
 - [Intel One Mono](https://github.com/intel/intel-one-mono)
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
@@ -76,6 +77,7 @@ making them the default. Some tooling to help do that:
   (bitmap, emulates Minecraft typeface, proportional
   [version](https://github.com/IdreesInc/Minecraft-Font))
 - [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_)
+- [Proggy](https://github.com/bluescan/proggyfonts) fonts
 - [Space Mono](https://www.colophon-foundry.org/custom-projects/space-mono)
   ([Github](https://github.com/googlefonts/spacemono))
 - [Twilio Sans Mono](https://github.com/twilio/twilio-sans-mono)
