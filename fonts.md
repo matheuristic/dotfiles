@@ -55,7 +55,13 @@ making them the default. Some tooling to help do that:
 
 ## Monospace fonts
 
-- [APL385](https://www.apl385.com/fonts/)
+- [APL385](https://www.apl385.com/fonts/), and its derivatives
+  [APL386](https://abrudz.github.io/APL386/)
+  ([Github](https://github.com/abrudz/APL386)) and
+  [BQN386](https://dzaima.github.io/BQN386/)
+  ([Github](https://github.com/dzaima/BQN386))
+  (good APL character coverage, BQN386 also covers BQN characters)
+  [BQN](https://mlochbaum.github.io/BQN/))
 - [Berkeley Mono](https://berkeleygraphics.com/typefaces/berkeley-mono/)
   (_commercial_)
 - [cnxt](https://github.com/cbytensky/cnxt) (bitmap, license unspecified)
@@ -80,6 +86,8 @@ making them the default. Some tooling to help do that:
 - [Proggy](https://github.com/bluescan/proggyfonts) fonts
 - [Space Mono](https://www.colophon-foundry.org/custom-projects/space-mono)
   ([Github](https://github.com/googlefonts/spacemono))
+- [Terminus](https://terminus-font.sourceforge.net/)
+  (bitmap, [TTF version](https://files.ax86.net/terminus-ttf/))
 - [Twilio Sans Mono](https://github.com/twilio/twilio-sans-mono)
 - [Unifont](http://unifoundry.com/unifont/index.html) (bitmap)
 - [Unscii](http://viznut.fi/unscii/) (bitmap,
