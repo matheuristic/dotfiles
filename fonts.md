@@ -40,9 +40,6 @@ making them the default. Some tooling to help do that:
 
 ## Font tools
 
-- [bdf_view](https://github.com/emurenMRz/bdf_view):
-  Display BDF fonts
-  ([webapp](https://emurenmrz.github.io/bdf_view/))
 - [Bits'N'Picas](https://github.com/kreativekorp/bitsnpicas):
   Create and convert bitmap and emoji font
 - [bdf2x](https://github.com/Francesco149/bdf2x):
@@ -226,11 +223,16 @@ making them the default. Some tooling to help do that:
 - [Luxi](https://en.wikipedia.org/wiki/Luxi_fonts) Sans, Serif
   and Mono (distributed as `font-bh-ttf-<version>.tar.<gz|xz>`
   [here](https://xorg.freedesktop.org/releases/individual/font/)),
-  Luxi Sans and Luxi Mono are similar to Lucida Sans and Go Mono
+  Luxi Sans and Luxi Mono are similar to Go and Go Mono
 - [M+](https://mplusfonts.github.io/)
   ([Github](https://github.com/coz-m/MPLUS_FONTS))
 - [New Computer Modern](https://tug.org/FontCatalogue/newcomputermodernroman/)
   ([CTAN](https://ctan.org/pkg/newcomputermodern?lang=en))
+- [Noto](https://notofonts.github.io/)
+  ([Docs](https://notofonts.github.io/noto-docs/),
+  [Github](https://github.com/notofonts))
+  fonts, primarily sans-serif proportional with some monospace,
+  that together aim to cover all scripts in the Unicode standard
 - [Recursive](https://github.com/arrowtype/recursive)
 - [Red Hat](https://github.com/RedHatOfficial/RedHatFont)
 - [Roboto](https://fonts.google.com/specimen/Roboto),
@@ -239,9 +241,7 @@ making them the default. Some tooling to help do that:
   [Slab](https://fonts.google.com/specimen/Roboto+Slab),
   [Mono](https://fonts.google.com/specimen/Roboto+Mono),
   [Flex](https://github.com/googlefonts/roboto-flex)
-  (parametric axes, see [link](https://web.dev/variable-fonts/));
-  use [Noto](https://fonts.google.com/noto/fonts) variants for CJK and
-  other languages not supported by Roboto
+  (parametric axes, see [link](https://web.dev/variable-fonts/))
 - Spline [Sans](https://github.com/SorkinType/SplineSans),
   [Sans Mono](https://github.com/SorkinType/SplineSansMono)
 - Source [Sans](https://github.com/adobe-fonts/source-sans),
@@ -268,6 +268,8 @@ making them the default. Some tooling to help do that:
   ([Tumblr](https://programmingfonts.tumblr.com/))
 - [Programming Fonts](https://github.com/ProgrammingFonts/ProgrammingFonts)
   (parallel project to the above)
+- [SIL Language Technology - Fonts](https://software.sil.org/fonts/)
+  ([Github](https://github.com/silnrsi))
 - [The League of Movable Type](https://www.theleagueofmoveabletype.com/)
   ([Github](https://github.com/theleagueof))
 - [The Ultimate Oldschool PC Font Pack](https://int10h.org/oldschool-pc-fonts/)
