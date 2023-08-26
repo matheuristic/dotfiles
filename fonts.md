@@ -52,12 +52,10 @@ making them the default. Some tooling to help do that:
 
 ## Monospace fonts
 
-- [APL385](https://www.apl385.com/fonts/), and its derivatives
-  [APL386](https://abrudz.github.io/APL386/)
-  ([Github](https://github.com/abrudz/APL386)) and
-  [BQN386](https://dzaima.github.io/BQN386/)
+- [BQN386](https://dzaima.github.io/BQN386/)
   ([Github](https://github.com/dzaima/BQN386))
-  (good APL character coverage, BQN386 also covers BQN characters)
+  (derived from [APL385](https://www.apl385.com/fonts/) and
+  [APL386](https://abrudz.github.io/APL386/))
 - [Berkeley Mono](https://berkeleygraphics.com/typefaces/berkeley-mono/)
   (_commercial_)
 - [cnxt](https://github.com/cbytensky/cnxt) (bitmap, license unspecified)
@@ -71,7 +69,6 @@ making them the default. Some tooling to help do that:
 - [Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans)
 - [Galmuri](https://github.com/quiple/galmuri) (bitmap, CJK)
 - [Gohufont](https://font.gohu.org/) (bitmap)
-- [GNU intlfonts](https://ftp.gnu.org/gnu/intlfonts/)
 - [Intel One Mono](https://github.com/intel/intel-one-mono)
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
@@ -82,13 +79,9 @@ making them the default. Some tooling to help do that:
   (bitmap, emulates Minecraft typeface, proportional
   [version](https://github.com/IdreesInc/Minecraft-Font))
 - [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_)
-- [ProFont](https://tobiasjung.name/profont/)
 - [Proggy](https://github.com/bluescan/proggyfonts) fonts
 - [Space Mono](https://www.colophon-foundry.org/custom-projects/space-mono)
   ([Github](https://github.com/googlefonts/spacemono))
-- [Sudo](https://www.kutilek.de/sudo-font/)
-  ([Github](https://github.com/jenskutilek/sudo-font), also has
-  proportional version Sudo UI and a variable font version)
 - [Terminus](https://terminus-font.sourceforge.net/)
   (bitmap, [TTF version](https://files.ax86.net/terminus-ttf/))
 - [Twilio Sans Mono](https://github.com/twilio/twilio-sans-mono)
