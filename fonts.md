@@ -52,6 +52,8 @@ making them the default. Some tooling to help do that:
 
 ## Monospace fonts
 
+- [Ark Pixel Font](https://github.com/TakWolf/ark-pixel-font)
+  (bitmap, CJK)
 - [BQN386](https://dzaima.github.io/BQN386/)
   ([Github](https://github.com/dzaima/BQN386))
   (derived from [APL385](https://www.apl385.com/fonts/) and
@@ -189,6 +191,7 @@ making them the default. Some tooling to help do that:
 - [Quivira](http://www.quivira-font.com/) (serif)
 - [Redacted](https://github.com/christiannaths/redacted-font)
   (for keeping wireframes and prototypes free of distracting text)
+- [Siji-ng](https://github.com/mxkrsv/siji-ng) (bitmap)
 - [Symbola](https://dn-works.com/ufas/) (_free for personal use_)
 
 ## Script fonts
@@ -275,6 +278,8 @@ making them the default. Some tooling to help do that:
 - [Typographica](https://typographica.org/)
   ([Library](https://library.typographica.org/))
 - [Typography: Google Fonts Combinations](https://www.behance.net/gallery/35768979/Typography-Google-Fonts-Combinations)
+- [U8g2 fonts](https://github.com/olikraus/u8g2/tree/master/tools/font/bdf)
+  ([preview](https://github.com/olikraus/u8g2/wiki/fntgrp))
 - [Variable fonts](https://variablefonts.typenetwork.com/) - Type Network
 - [Variable fonts](https://v-fonts.com/) - A simple resource for finding and trying variable fonts
 - [Velvetyne Type Foundry](https://velvetyne.fr/)
