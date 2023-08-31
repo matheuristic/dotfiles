@@ -80,10 +80,16 @@ making them the default. Some tooling to help do that:
 - [Monocraft](https://github.com/IdreesInc/Monocraft)
   (bitmap, emulates Minecraft typeface, proportional
   [version](https://github.com/IdreesInc/Minecraft-Font))
+- [OCR A](https://sourceforge.net/projects/ocr-a-font/)
+  (the TTF file does work correctly on macOS so for that system
+  install the PFA file instead, see next font for alternative)
+- [OCR B](https://tsukurimashou.osdn.jp/ocr.php.en)
+  (also has OCR A with a larger glyph set than the previous font)
 - [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_)
 - [Proggy](https://github.com/bluescan/proggyfonts) fonts
 - [Space Mono](https://www.colophon-foundry.org/custom-projects/space-mono)
   ([Github](https://github.com/googlefonts/spacemono))
+- [Spleen](https://github.com/fcambus/spleen) (bitmap)
 - [Terminus](https://terminus-font.sourceforge.net/)
   (bitmap, [TTF version](https://files.ax86.net/terminus-ttf/))
 - [Twilio Sans Mono](https://github.com/twilio/twilio-sans-mono)
