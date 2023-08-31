@@ -52,6 +52,7 @@ making them the default. Some tooling to help do that:
 
 ## Monospace fonts
 
+- [0xProto](https://github.com/0xType/0xProto)
 - [Ark Pixel Font](https://github.com/TakWolf/ark-pixel-font)
   (bitmap, CJK)
 - [BQN386](https://dzaima.github.io/BQN386/)
