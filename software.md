@@ -912,10 +912,13 @@
   - [virt-manager](https://virt-manager.org/):
     Linux desktop tool for managing QEMU/KVM virtual machines
 - VPN
-  - [innernet](https://github.com/tonarino/innernet) or
-    [nebula](https://github.com/slackhq/nebula):
+  - [headscale](https://github.com/juanfont/headscale) or
+    [innernet](https://github.com/tonarino/innernet) or
+    [nebula](https://github.com/slackhq/nebula) or
+    [netbird](https://github.com/netbirdio/netbird):
     Overlay networking tool for creating a private network, like
-    [Tailscale](https://tailscale.com/)
+    [Tailscale](https://tailscale.com/); especially, headscale is
+    an open-source self-hosted Tailscale control server alternative
   - [OpenVPN](https://openvpn.net/vpn-client/)
     or [TunnelBlick](https://tunnelblick.net/):
     OpenVPN client, note that Linux clients be should installed via
