@@ -63,8 +63,8 @@ making them the default. Some tooling to help do that:
   (_commercial_)
 - [cnxt](https://github.com/cbytensky/cnxt) (bitmap, license unspecified)
 - [Comic Code](https://tosche.net/fonts/comic-code) (_commercial_,
-  open-source alts [one](https://dtinth.github.io/comic-mono-font/)
-  and [two](https://github.com/shannpersand/comic-shanns))
+  open-source alts [one](https://github.com/jesusmgg/comic-shanns-mono)
+  and [two](https://dtinth.github.io/comic-mono-font/))
 - [Commit Mono](https://commitmono.com/)
   ([Github](https://github.com/eigilnikolajsen/commit-mono))
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)

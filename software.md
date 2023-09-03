@@ -351,8 +351,6 @@
     Continous file synchronization; macOS
     [frontend](https://github.com/syncthing/syncthing-macos)
     available
-  - [tree](http://mama.indstate.edu/users/ice/tree/):
-    Command-line tool to list files in subdir tree depth-indented
 - Image text extraction
   - [Apache Tika](http://tika.apache.org/):
     [Go](https://github.com/google/go-tika)
@@ -618,6 +616,10 @@
   - [duf](https://github.com/muesli/duf) or
     [lfs](https://github.com/Canop/lfs):
     Command-line alternative to `df` with nicer user interface
+  - [eBPF/bcc](https://github.com/iovisor/bcc) or
+    [strace](https://strace.io/):
+    Process debugging;
+    eBPF/bcc [tutorial](https://ish-ar.io/python-ebpf-tracing/)
   - [fkill](https://github.com/sindresorhus/fkill-cli):
     Command-line tool to interactively kill running user and system
     procs
@@ -631,22 +633,22 @@
     terminals or logging ncurses should not be used, in which case do
     `top -b` to run `top` in batch mode (or `top -b -n NUMBER` to
     limit the number of iterations to `NUMBER`)
-  - [lnav](https://lnav.org/)
-    ([Github](https://github.com/tstack/lnav)):
-    Log file viewer supporting multiple file formats and compression
-    types, and can consolidate multiple log files into a single view
-  - [Sloth](https://sveinbjorn.org/sloth):
-    macOS application to show open files, dirs, sockets and pipes
-  - [Stacer](https://github.com/oguzhaninan/Stacer):
-    Linux system optimizer and monitoring GUI tool
-  - [eBPF/bcc](https://github.com/iovisor/bcc) or
-    [strace](https://strace.io/):
-    Process debugging;
-    eBPF/bcc [tutorial](https://ish-ar.io/python-ebpf-tracing/)
   - [hyperfine](https://github.com/sharkdp/hyperfine):
     Command-line benchmarking tool that supports multiple and warmup
     runs, export of results to various formats, etc; basically a
     featureful alternative to the standard `time` command
+  - [lnav](https://lnav.org/)
+    ([Github](https://github.com/tstack/lnav)):
+    Log file viewer supporting multiple file formats and compression
+    types, and can consolidate multiple log files into a single view
+  - [pstree](https://github.com/FredHucht/pstree):
+    List processes as a tree
+  - [Sloth](https://sveinbjorn.org/sloth):
+    macOS application to show open files, dirs, sockets and pipes
+  - [Stacer](https://github.com/oguzhaninan/Stacer):
+    Linux system optimizer and monitoring GUI tool
+  - [tree](http://mama.indstate.edu/users/ice/tree/):
+    Command-line tool to list files in subdir tree depth-indented
 - Text (general)
   - [Aspell](http://aspell.net/) or
     [Nuspell](https://nuspell.github.io/):
