@@ -62,7 +62,9 @@ making them the default. Some tooling to help do that:
 - [Berkeley Mono](https://berkeleygraphics.com/typefaces/berkeley-mono/)
   (_commercial_)
 - [cnxt](https://github.com/cbytensky/cnxt) (bitmap, license unspecified)
-- [Comic Code](https://tosche.net/fonts/comic-code) (_commercial_)
+- [Comic Code](https://tosche.net/fonts/comic-code) (_commercial_,
+  open-source alts [one](https://dtinth.github.io/comic-mono-font/)
+  and [two](https://github.com/shannpersand/comic-shanns))
 - [Commit Mono](https://commitmono.com/)
   ([Github](https://github.com/eigilnikolajsen/commit-mono))
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)
@@ -76,7 +78,9 @@ making them the default. Some tooling to help do that:
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
   (on macOS, install individual TTF files rather than the super TTC
-  file, see [here](https://github.com/be5invis/Iosevka/issues/1377))
+  file, see [here](https://github.com/be5invis/Iosevka/issues/1377),
+  [derivative](https://github.com/shytikov/pragmasevka) to mimic
+  PragmataPro more closely than the SS08 variant)
 - [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono)
 - [Monocraft](https://github.com/IdreesInc/Monocraft)
   (bitmap, emulates Minecraft typeface, proportional
@@ -116,12 +120,16 @@ making them the default. Some tooling to help do that:
 - [Clarity City](https://github.com/vmware/clarity-city)
   (similar to Gotham but with stricter geometry)
 - [Clear Sans](https://github.com/intel/clear-sans)
+- [Comic Neue](https://comicneue.com/)
+  ([Github](https://github.com/crozynski/comicneue),
+  marker-style font mimicking Comic Sans, has angular variant)
 - [Cooper Hewitt](https://www.cooperhewitt.org/open-source-at-cooper-hewitt/cooper-hewitt-the-typeface-by-chester-jenkins/)
   ([Github](https://github.com/cooperhewitt/cooperhewitt-typeface))
 - [Figtree](https://github.com/erikdkennedy/figtree)
 - [Finlandica](https://github.com/HelsinkiTypeStudio/Finlandica)
 - [FiraGO](https://bboxtype.com/typefaces/FiraGO/)
   ([Github](https://github.com/bBoxType/FiraGO))
+- [Gabarito](https://github.com/naipefoundry/gabarito)
 - [Georama](https://github.com/productiontype/Georama)
 - [Inter](https://github.com/rsms/inter)
   (Helvetica alternative)
@@ -141,13 +149,18 @@ making them the default. Some tooling to help do that:
   (_commercial_)
 - [Public Sans](https://public-sans.digital.gov/)
   ([Github](https://github.com/uswds/public-sans))
+- [Radio-Canada](https://github.com/cbcrc/radiocanadafonts)
+  (parametric axes, see [link](https://web.dev/variable-fonts/))
 - [Raleway](https://github.com/theleagueof/raleway)
 - [Readex Pro](https://github.com/ThomasJockin/readexpro) (expanded
   [Lexend](https://github.com/googlefonts/lexend))
 - [Schibsted Grotesk](https://github.com/schibsted/schibsted-grotesk)
 - [Shantell Sans](https://github.com/arrowtype/shantell-sans)
-  (Comic Sans-inspired)
+  (marker-style font like Comic Sans and Inkwell Sans,
+  parametric axes, see [link](https://web.dev/variable-fonts/))
 - [Space Grotesk](https://github.com/floriankarsten/space-grotesk)
+- [TASA Typeface Collection](https://tasatype.localremote.co/)
+  ([Github](https://github.com/adrianzwz/TASA-Typeface-Collection))
 - [Urbanist](https://github.com/coreyhu/Urbanist)
 - [Wix Madefor](https://github.com/wix-incubator/wixmadefor)
 - [Womprat](https://crown.fontdue.com/fonts/womprat) (Star Wars-y,
