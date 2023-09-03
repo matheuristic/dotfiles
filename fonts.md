@@ -52,7 +52,6 @@ making them the default. Some tooling to help do that:
 
 ## Monospace fonts
 
-- [0xProto](https://github.com/0xType/0xProto)
 - [Ark Pixel Font](https://github.com/TakWolf/ark-pixel-font)
   (bitmap, CJK)
 - [BQN386](https://dzaima.github.io/BQN386/)
@@ -61,10 +60,9 @@ making them the default. Some tooling to help do that:
   [APL386](https://abrudz.github.io/APL386/))
 - [Berkeley Mono](https://berkeleygraphics.com/typefaces/berkeley-mono/)
   (_commercial_)
-- [cnxt](https://github.com/cbytensky/cnxt) (bitmap, license unspecified)
 - [Comic Code](https://tosche.net/fonts/comic-code) (_commercial_,
-  open-source alts [one](https://github.com/jesusmgg/comic-shanns-mono)
-  and [two](https://dtinth.github.io/comic-mono-font/))
+  open-source alts [one](https://dtinth.github.io/comic-mono-font/)
+  and [two](https://github.com/jesusmgg/comic-shanns-mono))
 - [Commit Mono](https://commitmono.com/)
   ([Github](https://github.com/eigilnikolajsen/commit-mono))
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)
@@ -73,8 +71,6 @@ making them the default. Some tooling to help do that:
   (vector) ([Github](https://github.com/kreativekorp/open-relay))
 - [Fantasque Sans Mono](https://github.com/belluzj/fantasque-sans)
 - [Galmuri](https://github.com/quiple/galmuri) (bitmap, CJK)
-- [Gohufont](https://font.gohu.org/) (bitmap)
-- [Intel One Mono](https://github.com/intel/intel-one-mono)
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
   (on macOS, install individual TTF files rather than the super TTC
@@ -82,6 +78,9 @@ making them the default. Some tooling to help do that:
   [derivative](https://github.com/shytikov/pragmasevka) to mimic
   PragmataPro more closely than the SS08 variant)
 - [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono)
+- [Julia Mono](https://juliamono.netlify.app/)
+  ([Github](https://github.com/cormullion/juliamono),
+  good Unicode coverage)
 - [Monocraft](https://github.com/IdreesInc/Monocraft)
   (bitmap, emulates Minecraft typeface, proportional
   [version](https://github.com/IdreesInc/Minecraft-Font))
@@ -90,15 +89,16 @@ making them the default. Some tooling to help do that:
   install the PFA file instead, see next font for alternative)
 - [OCR B](https://tsukurimashou.osdn.jp/ocr.php.en)
   (also has OCR A with a larger glyph set than the previous font)
-- [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_)
+- [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_,
+  good Unicode coverage)
 - [Proggy](https://github.com/bluescan/proggyfonts) fonts
 - [Space Mono](https://www.colophon-foundry.org/custom-projects/space-mono)
   ([Github](https://github.com/googlefonts/spacemono))
 - [Spleen](https://github.com/fcambus/spleen) (bitmap)
 - [Terminus](https://terminus-font.sourceforge.net/)
   (bitmap, [TTF version](https://files.ax86.net/terminus-ttf/))
-- [Twilio Sans Mono](https://github.com/twilio/twilio-sans-mono)
-- [Unifont](http://unifoundry.com/unifont/index.html) (bitmap)
+- [Unifont](http://unifoundry.com/unifont/index.html) (bitmap,
+  extremely good Unicode coverage)
 - [Unscii](http://viznut.fi/unscii/) (bitmap,
   [Github](https://github.com/viznut/unscii),
   [funscii](https://github.com/asiekierka/funscii) fork with JP
