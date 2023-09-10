@@ -256,6 +256,9 @@
     ([Github](https://github.com/Sigil-Ebook/Sigil)):
     Cross-platform ebook editor supporting EPUB
 - Ebook reader or library manager
+  - [Alexandria](https://github.com/btpf/Alexandria):
+    Cross-platform Tauri- and epub.js-based ebook reader
+    (Windows and Linux currently supported, macOS planned)
   - [Calibre](https://calibre-ebook.com/)
     ([Github](https://github.com/kovidgoyal/calibre)):
     Ebook manager supporting an array of formats, with many plugins
@@ -269,7 +272,8 @@
     Extract text from EPUB
   - [Foliate](https://johnfactotum.github.io/foliate/):
     Linux ebook viewer
-  - [MuPDF](https://mupdf.com/) (see _PDF reader or transformer_)
+  - [MuPDF](https://mupdf.com/):
+    See _PDF reader or transformer_
   - [Thorium Reader](https://www.edrlab.org/software/thorium-reader/)
     ([Github](https://github.com/edrlab/thorium-reader)):
     Cross-platform Electron ebook reading app
