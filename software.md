@@ -117,7 +117,7 @@
   - [Apache HOP](https://hop.apache.org/):
     Fork of [Kettle/PDI](https://github.com/pentaho/pentaho-kettle)
   - [Snakemake](https://snakemake.readthedocs.io/en/stable/) or
-    [Nextflow](https://www.nextflow.io/)
+    [Nextflow](https://www.nextflow.io/):
     Run batch workflows
 - Database
   - [BaseX](https://basex.org/):
@@ -1288,11 +1288,14 @@ An example workflow is shown here, with some useful commands. See the
 [documentation](https://docs.conda.io/en/latest/) for more details on
 how to use the package manager.
 
-Using `conda` here but `mamba` and `micromamba` support the same params.
+Using `conda` here but `mamba` and `micromamba` support the same
+params except where noted.
 
 ```sh
+# List environments
+conda env list
 # Create a new environment using a specific channel-only
-conda create -n envname -c bioforge --override-channels
+conda env create -n envname -c bioforge --override-channels
 # Active the environment
 conda activate envname
 # Add another channel (repository) for the environment
@@ -1566,11 +1569,12 @@ conda as detailed in the next section):
 - `gsed` (GNU [sed](https://www.gnu.org/software/sed/))
 - `htop`
 - `mosh`
+- `pstree`
 - `stow`
 - `tree`
 
 ```sh
-port -N install coreutils gawk git gnupg2 gsed mosh stow tree
+port -N install coreutils gawk git gnupg2 gsed mosh pstree stow tree
 ```
 
 If installing `gnupg2` above, it is recommended to change the
@@ -1617,13 +1621,14 @@ easily installable in macOS, but open-source options all require
 a bit of work:
 
 - `opendiff`/`FileMerge`: requires XCode IDE (not command-line tools)
-  which requires a lot of disk space be installed.
+  which requires a lot of disk space be installed. Non-open source.
+- `P4Merge`: Non-open source.
 - `tkdiff`: typically installed via Homebrew (requires root privileges
   to set up) or manually installed (MacPorts version is pretty old),
   requires [Tk](https://www.tcl.tk/).
 - `xxdiff`: typically installed via Homebrew (requires root privileges
   to set up) or MacPorts, and requires Qt which has many build
-  dependencies because of if not installing pre-built binaries.
+  dependencies if not installing pre-built binaries.
 
 In terms of the recommended setup, if the XCode IDE is installed just
 use `opendiff`. Otherwise, if using the MacPorts package manager,

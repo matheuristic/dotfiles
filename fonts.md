@@ -47,6 +47,9 @@ making them the default. Some tooling to help do that:
 - [FontForge](https://fontforge.org/)
   ([Github](https://github.com/fontforge/fontforge)):
   Font editor that can create, convert and display fonts
+- [LCDF Typetools](https://www.lcdf.org/type/)
+  ([Github](https://github.com/kohler/lcdf-typetools)):
+  Font manipulation utilities, see `software.md`
 - [monobit](https://github.com/robhagemans/monobit):
   Modify and convert bitmap fonts
 
@@ -217,6 +220,7 @@ making them the default. Some tooling to help do that:
 ## Script fonts
 
 - [Ballet](https://github.com/Omnibus-Type/Ballet)
+- [Borel](https://github.com/RosaWagner/Borel)
 
 ## Font families
 
