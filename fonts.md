@@ -92,6 +92,8 @@ making them the default. Some tooling to help do that:
   install the PFA file instead, see next font for alternative)
 - [OCR B](https://tsukurimashou.osdn.jp/ocr.php.en)
   (also has OCR A with a larger glyph set than the previous font)
+- [Pixel Code](https://qwerasd205.github.io/PixelCode/examples/specimen.html)
+  ([Github](https://github.com/qwerasd205/PixelCode))
 - [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_,
   good Unicode coverage)
 - [Proggy](https://github.com/bluescan/proggyfonts) fonts
@@ -128,6 +130,7 @@ making them the default. Some tooling to help do that:
   marker-style font mimicking Comic Sans, has angular variant)
 - [Cooper Hewitt](https://www.cooperhewitt.org/open-source-at-cooper-hewitt/cooper-hewitt-the-typeface-by-chester-jenkins/)
   ([Github](https://github.com/cooperhewitt/cooperhewitt-typeface))
+- [Dungeon Chunk](https://github.com/PriorityInterrupt/dungeon-chunk)
 - [Figtree](https://github.com/erikdkennedy/figtree)
 - [Finlandica](https://github.com/HelsinkiTypeStudio/Finlandica)
 - [FiraGO](https://bboxtype.com/typefaces/FiraGO/)
@@ -141,8 +144,11 @@ making them the default. Some tooling to help do that:
 - [Lato](https://github.com/googlefonts/LatoGFVersion)
   ([source](https://github.com/latofonts/lato-source))
 - [Maple Mono](https://github.com/subframe7536/Maple-font)
+- [Northrup](https://github.com/mirnovov/northrup)
 - [Open Sans](https://github.com/googlefonts/opensans)
 - [Outfit](https://github.com/Outfitio/Outfit-Fonts)
+- [Pixelify Sans](https://github.com/eifetx/Pixelify-Sans)
+- [Pixellari](https://github.com/zedseven/Pixellari)
 - [Poppins](https://www.indiantypefoundry.com/fonts/poppins)
   ([Github](https://github.com/itfoundry/Poppins), geometric)
 - [Plein](https://www.fontshare.com/fonts/plein)
@@ -182,6 +188,8 @@ making them the default. Some tooling to help do that:
   ([Github](https://github.com/indestructible-type/Bodoni))
 - [Bona Nova](https://github.com/kosmynkab/Bona-Nova)
 - [Cardo](https://github.com/googlefonts/CardoFont)
+- [CERN-www](https://github.com/djrrb/CERN-www-fonts)
+  ((WorldWideWeb)[https://worldwideweb.cern.ch/] browser font clone)
 - [Courier Prime](https://quoteunquoteapps.com/courierprime/)
   [Regular](https://github.com/quoteunquoteapps/CourierPrime),
   [Sans](https://github.com/quoteunquoteapps/CourierPrimeSans),
@@ -282,6 +290,7 @@ making them the default. Some tooling to help do that:
 - [Fonts In Use](https://fontsinuse.com/)
 - [Google Font Updates](https://twitter.com/googlefonts?lang=us)
 - [Google Fonts Knowledge](https://fonts.google.com/knowledge)
+- [hoard-of-bitfonts](https://github.com/robhagemans/hoard-of-bitfonts)
 - [KreativeKorp Relay Fonts](http://www.kreativekorp.com/software/fonts/index.shtml)
 - [monospace-font-list](https://github.com/dse/monospace-font-list)
 - [Omnibus-Type](https://www.omnibus-type.com/)
