@@ -116,6 +116,8 @@ making them the default. Some tooling to help do that:
 
 ## Sans-serif proportional fonts
 
+- [Andika](https://software.sil.org/andika/)
+  ([Github](https://github.com/silnrsi/font-andika))
 - [Atkinson Hyperlegible](https://brailleinstitute.org/freefont)
 - [Avenir](https://en.wikipedia.org/wiki/Avenir_(typeface))
   and its variants (included with macOS)
