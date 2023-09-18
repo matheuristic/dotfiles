@@ -102,8 +102,10 @@ making them the default. Some tooling to help do that:
 - [Spleen](https://github.com/fcambus/spleen) (bitmap)
 - [Terminus](https://terminus-font.sourceforge.net/)
   (bitmap, [TTF version](https://files.ax86.net/terminus-ttf/))
-- [Unifont](http://unifoundry.com/unifont/index.html) (bitmap,
-  extremely good Unicode coverage)
+- [Unifont](http://unifoundry.com/unifont/index.html)
+  (bitmap, extremely good Unicode coverage; there is a fork
+  [UnifontEX](https://github.com/stgiga/UnifontEX) that merges in
+  Unifont Upper that has glyphs above the basic multilingual plane)
 - [Unscii](http://viznut.fi/unscii/) (bitmap,
   [Github](https://github.com/viznut/unscii),
   [funscii](https://github.com/asiekierka/funscii) fork with JP
