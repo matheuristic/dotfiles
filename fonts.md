@@ -308,6 +308,7 @@ making them the default. Some tooling to help do that:
   (parallel project to the above)
 - [SIL Language Technology - Fonts](https://software.sil.org/fonts/)
   ([Github](https://github.com/silnrsi))
+- [The LaTeX Font Catalogue](https://tug.org/FontCatalogue/)
 - [The League of Movable Type](https://www.theleagueofmoveabletype.com/)
   ([Github](https://github.com/theleagueof))
 - [The Ultimate Oldschool PC Font Pack](https://int10h.org/oldschool-pc-fonts/)
