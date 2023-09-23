@@ -9,6 +9,8 @@
     [ReaPlugs](https://www.reaper.fm/reaplugs/) VST plugins; Ardour
     seems more suited to audio recording and engineering, while Zrythm
     seems more suited to MIDI electronic music production
+  - [Blackhole](https://existential.audio/blackhole/):
+    Route audio between apps (e.g., to record internal audio), macOS
   - [Blender](https://www.blender.org/)
     ([Github](https://github.com/blender/blender)):
     3D creation suite covering the full 3D animation pipeline
@@ -44,6 +46,8 @@
     [MDX-NET](https://github.com/kuielab/mdx-net)) to isolate
     vocals from audio tracks; a donation-supported web interface
     [MVSEP](https://mvsep.com/) is also available
+  - [xACT](http://xact.scottcbrown.org/):
+    Audio format converter, macOS
 - Audio and video playback and streaming
   - [NDI Tools](https://www.ndi.tv/tools/):
     Software for low-latency broadcasting over LAN by taking any video
@@ -315,6 +319,9 @@
     ([Github](https://github.com/osxfuse/osxfuse), uses a kext), with
     the latter being more mature but requiring third-party kernel
     extensions be enabled
+  - [Keka](https://www.keka.io/en/):
+    GUI file archiver, macOS; download from website is free, while
+    App Store version is paid (basically donationware)
   - [Maestral](https://maestral.app/)
     ([Github](https://github.com/samschott/maestral)):
     Dropbox client, lighter but has less features than the
@@ -412,6 +419,14 @@
     CLI RSS reader
   - [Pan](http://pan.rebelbase.com/):
     Usenet reader
+- Networking
+  - [LuLu](https://objective-see.org/products/lulu.html)
+    ([Github](https://github.com/objective-see/LuLu)):
+    Firewall for macOS; while the built-in firewall only filters
+    incoming connections, this can also filter outgoing connections
+  - [Netiquette](https://objective-see.org/products/netiquette.html)
+    ([Github](https://github.com/objective-see/Netiquette)):
+    Network monitor, macOS
 - Package/runtime manager
   - [asdf](https://asdf-vm.com/):
     Language runtime manager
@@ -630,6 +645,8 @@
   - [forkstat](https://github.com/ColinIanKing/forkstat):
     Command-line program to log process forks, execs and exits;
     useful for tracking runaway processes
+  - [GrandPerspective](https://grandperspectiv.sourceforge.net/):
+    Visualize disk usage using a tree map, macOS
   - [htop](https://github.com/htop-dev/htop) or
     [zenith](https://github.com/bvaisvil/zenith) or
     [bottom](https://github.com/ClementTsang/bottom):
@@ -832,6 +849,8 @@
     Tiling window manager for macOS
   - [Barrier](https://github.com/debauchee/barrier):
     Cross-platform software that mimics KVM switch functionality
+  - [Hyperkey](https://hyperkey.app/):
+    Use CapsLock as a "hyper" key, that is, C-Opt-Cmd-Shift, on macOS
   - [LinearMouse](https://github.com/linearmouse/linearmouse) or
     [Mos](https://github.com/Caldis/Mos) or
     [Scroll Reverser](https://github.com/pilotmoon/Scroll-Reverser):
@@ -943,8 +962,8 @@
     Go via `go install github.com/makeworld-the-better-one/amfora` or
     `go install tildegit.org/sloum/bombadillo@latest`; Bombadillo
     is also a Gopher client; use gcat in Acme or dumb terminals
-  - [Ka-Block!](http://kablock.com/)
-    Safari extension for blocking ads and trackers; iOS and macOS
+  - [Hush](https://oblador.github.io/hush/):
+    Safari extension to block nag popups and trackers; iOS and macOS
   - [Lagrange](https://gmi.skyjake.fi/lagrange/)
     ([Github](https://github.com/skyjake/lagrange)) or
     [Kristall](https://kristall.random-projects.net/)
@@ -1044,6 +1063,9 @@
     install with `go install robpike.io/ivy@latest` (requires Go)
   - [hyperfine](https://github.com/sharkdp/hyperfine):
     Benchmark shell commands
+  - [Jiggler](http://www.sticksoftware.com/software/Jiggler.html)
+    ([Github](https://github.com/bhaller/Jiggler)):
+    Keep the system awake, useful when running lengthy tasks, macOS
   - [Joplin](https://joplinapp.org/):
     Note-taking application with sync support; cross-platform
   - [kgt](https://github.com/katef/kgt/):
@@ -1101,6 +1123,8 @@
   - [Vale](https://vale.sh/)
     ([Github](https://github.com/errata-ai/vale)):
     Linter for prose
+  - [Velja](https://sindresorhus.com/velja):
+    Open different links in different browsers or apps, macOS
   - [Zotero](https://www.zotero.org/):
     Reference management software to collect, organize, cite and
     share research material
