@@ -163,6 +163,8 @@ making them the default. Some tooling to help do that:
 - Proxima [Nova](https://www.marksimonson.com/fonts/view/proxima-nova)
   and [Vara](https://www.marksimonson.com/fonts/view/proxima-vara)
   (_commercial_)
+- [Proza Libre](https://bureauroffa.com/about-proza-libre)
+  ([Github](https://github.com/jasperdewaard/Proza-Libre))
 - [Public Sans](https://public-sans.digital.gov/)
   ([Github](https://github.com/uswds/public-sans))
 - [Radio-Canada](https://github.com/cbcrc/radiocanadafonts)
