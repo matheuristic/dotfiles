@@ -1591,8 +1591,9 @@ conda as detailed in the next section):
   example GNU `diff` is installed as `gdiff`)
 - `gawk` (GNU
   [AWK](https://www.gnu.org/software/gawk/manual/gawk.html))
-- `git` (it is recommended to disable the default macOS Git credential
-  helper that stores Git credentials in the macOS keychain, see below)
+- `git` (it is recommended to override the default system-wide macOS
+  Git credential helper setting which is to store Git credentials
+  in the macOS keychain, see below)
 - `gnupg2`
 - `gsed` (GNU [sed](https://www.gnu.org/software/sed/))
 - `htop`
@@ -1610,15 +1611,13 @@ If installing `gnupg2` above, it is recommended to change the
 `pinentry-ncurses`. For more info, see the _Using TTY pinentry_
 subsection of the _GnuPG_ section.
 
-It is also recommended to disable the system default Git credential
-helper which is set to `osxkeychain`. If using MacPorts `git`, run the
-following after installation. If using XCode command-line tools `git`,
-see the _Disabling the default macOS Git credential helper_ subsection
-of the _Git_ section.
-
-```sh
-git config --system --unset credential.helper
-```
+It is also recommended to override the default system-wide
+Git credential helper setting. It is set to `osxkeychain` which
+stores credentials using the system keychain. That can be undesired
+behavior, especially when using another Git credential manager and
+to avoid Git credentials being cached in unexpected places. See
+_Overriding the default macOS Git credential helper_ in the _Git_
+section.
 
 Useful `port` commands ("ports" are the tool's name for packages):
 
@@ -2041,29 +2040,49 @@ Run `help` while in the GPG shell for additional commands available.
 
 ## Git
 
-### Disabling the default macOS Git credential helper
+### Overriding the default macOS Git credential helper
 
 Both XCode command-line tools `git` and MacPorts `git` default to
 using `osxkeychain` as a credential helper which will automatically
 save Git passwords to the macOS keychain which is typically not the
-desired behavior. For more info, see
-[link](https://stackoverflow.com/questions/16052602/how-to-disable-osxkeychain-as-credential-helper-in-git-config).
+desired behavior. (Run `git config --system --list` to see the
+`git` default system settings of the installation.)
 
-If installing `git` using MacPorts as above, it is recommended to
-unset its system default credential helper as follows each time `git`
-is installed or upgraded (as each upgrade replaces the current system
-Git config with the default version).
+It is recommended to reset the credential helper in the global
+config if managing Git credentials separately, or if storing Git
+credentials in the system keychain is to be avoided.
+
+For doing this, Git allows a higher priority config file to override
+(i.e., clear) lower priority config settings by using an empty string
+as a setting's value and adding new setting values after as desired.
+The priority order of the different config scopes is _worktree_ >
+_local_ > _global_ > _system_.  (For more info on config scopes,
+see [here](https://git-scm.com/docs/git-config#FILES).)
+
+**Example 1.** The following global settings override the system
+credential helper settings and adds `netrc` as a credential
+helper. (The helper needs to be set up first, see next section).
 
 ```sh
-git config --system --unset credential.helper
+git config --global credential.helper ''
+git config --global --add credential.helper 'netrc -f ~/.netrc.gpg -v'
 ```
 
-If using XCode command-line tools `git`, its system default credential
-helper can be unset by manually editing its configuration file.
+**Example 2.** The following local settings override the
+system and global credential helper settings and adds
+[1Password](https://1password.com/) as a Git credential
+[helper](https://github.com/develerik/git-credential-1password).
+(The helper needs to be set up first.)
 
 ```sh
-sudo /Library/Developer/CommandLineTools/usr/share/git-core/gitconfig
+git config --local credential.helper ''
+git config --local credential.helper '!git-credential-1password'
 ```
+
+For more info, see
+[here](https://stackoverflow.com/questions/13198143/how-do-i-disable-gits-credential-helper-for-a-single-repository)
+and
+[here](https://git-scm.com/docs/gitcredentials#Documentation/gitcredentials.txt-helper).
 
 ### Credentials using .netrc file
 
@@ -2108,7 +2127,7 @@ respectively.
    credentials globally.
 
    ```sh
-   git config --local credential.helper "netrc -f ~/.netrc.gpg -v"
+   git config --local --add credential.helper "netrc -f ~/.netrc.gpg -v"
    ```
 
    Adapted from
