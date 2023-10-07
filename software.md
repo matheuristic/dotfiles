@@ -177,8 +177,13 @@
     CSV and JSON
   - [pgcli](https://www.pgcli.com/):
     PostgreSQL command-line client
-  - [q](https://github.com/harelba/q):
-    Command-line tool for running SQL directly on CSV files
+  - [q](https://github.com/harelba/q) or
+    [columnq](https://github.com/roapi/roapi/tree/main/columnq-cli) or
+    [clickhouse-local](https://clickhouse.com/docs/en/operations/utilities/clickhouse-local) or
+    [glaredb](https://github.com/GlareDB/glaredb):
+    Command-line tool for running SQL directly on CSV and other
+    tabular files; or use sqlite3
+    ([link](https://til.simonwillison.net/sqlite/one-line-csv-operations))
   - [RedisDesktopManager](https://github.com/uglide/RedisDesktopManager):
     Redis client
   - [SchemaCrawler](https://www.schemacrawler.com/)
@@ -660,10 +665,14 @@
     Command-line benchmarking tool that supports multiple and warmup
     runs, export of results to various formats, etc; basically a
     featureful alternative to the standard `time` command
+  - [klogg](https://klogg.filimonov.dev/)
+    ([Github](https://github.com/variar/klogg)):
+    Cross-platform GUI log explorer
   - [lnav](https://lnav.org/)
     ([Github](https://github.com/tstack/lnav)):
-    Log file viewer supporting multiple file formats and compression
-    types, and can consolidate multiple log files into a single view
+    TUI log file viewer supporting multiple file formats and
+    compression types, with the ability to consolidate multiple
+    log files into a single view
   - [pstree](https://github.com/FredHucht/pstree):
     List processes as a tree
   - [Sloth](https://sveinbjorn.org/sloth):
@@ -733,6 +742,11 @@
     [chars](https://github.com/antifuchs/chars):
     Command-line tool for querying Unicode characters
 - Text (structured)
+  - [csvquote](https://github.com/dbro/csvquote):
+    Makes its easier to use CSV files with standard Unix tools like
+    awk, sed, cut and join by converting (and reverting) embedded
+    commas and newlines to non-printing characters, for example
+    `csvquote a.csv | cut -d',' -f3 | sort | uniq -c | csvquote -u`
   - [fq](https://github.com/wader/fq):
     Like `jq` but for binary formats
   - [ghostwriter](https://github.com/wereturtle/ghostwriter):
