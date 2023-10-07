@@ -129,7 +129,9 @@
     processing many or huge XML files
     ([example](https://yobriefca.se/blog/2014/05/17/a-brief-overview-of-basex/))
   - [ClickHouse](https://github.com/ClickHouse/ClickHouse):
-    Time-series DB
+    Time-series DB, can also run queries on local or
+    remote files without installing a database server using
+    [clickhouse-local](https://clickhouse.com/docs/en/operations/utilities/clickhouse-local)
   - [Litestream](https://litestream.io/)
     ([Github](https://github.com/benbjohnson/litestream)) and
     [LiteFS](https://github.com/superfly/litefs):
@@ -1183,6 +1185,9 @@
     [Kaleidoscope](https://kaleidoscope.app/):
     Compare files and folders; Deltawalker and Kaleidoscope
     also support diffing images
+- Text (structured)
+  - [Modern CSV](https://www.moderncsv.com/):
+    Cross-platform CSV editor/viewer
 - Text editor or integrated development environment
   - [DataGrip](https://www.jetbrains.com/datagrip/):
     Database admin-oriented IDE
