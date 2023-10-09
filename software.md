@@ -363,6 +363,12 @@
   - [Spacedrive](https://spacedrive.com/)
     ([Github](https://github.com/spacedriveapp/spacedrive)):
     Cross-platform cross-device/service file manager
+  - [SSHFS](https://github.com/libfuse/sshfs)
+    ([fork](https://github.com/deadbeefsociety/sshfs)):
+    Mount remote filesystem using SSH (requires FUSE),
+    alternative is `rclone mount` (see rclone) or
+    some more complex setup using NFSv4 and Wireguard
+    ([example](https://sigmdel.ca/michel/ha/wireguard/network_share_over_wireguard_en.html))
   - [Stow](https://www.gnu.org/software/stow/):
     Symlink farm manager, useful for managing dotfiles
   - [Syncthing](https://syncthing.net/):
