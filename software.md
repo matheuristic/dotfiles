@@ -742,6 +742,11 @@
     [chars](https://github.com/antifuchs/chars):
     Command-line tool for querying Unicode characters
 - Text (structured)
+  - [The One True Awk](https://github.com/onetrueawk/awk):
+    Version of AWK described in The Awk Programming Language
+    [book](https://awk.dev/); alternative implementations include
+    [Gawk](https://www.gnu.org/software/gawk/manual/) and
+    [others](https://www.gnu.org/software/gawk/manual/html_node/Other-Versions.html)
   - [csvquote](https://github.com/dbro/csvquote):
     Makes its easier to use CSV files with standard Unix tools like
     awk, sed, cut and join by converting (and reverting) embedded
