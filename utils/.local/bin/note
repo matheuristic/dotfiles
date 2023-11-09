@@ -91,6 +91,7 @@ if [ ! -f "$NOTEPATH" ]; then
 EOF
 	# Workaround for file errors when opening a newly created note too quickly
 	touch "$NOTEPATH"
+	sleep 0.01
 fi
 
 ${EDITOR:-vi} "$NOTEPATH"
