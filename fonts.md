@@ -69,6 +69,7 @@ making them the default. Some tooling to help do that:
 - [Commit Mono](https://commitmono.com/)
   ([Github](https://github.com/eigilnikolajsen/commit-mono))
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)
+- [Everson Mono](https://www.evertype.com/emono/) (_shareware_)
 - [Fairfax](http://www.kreativekorp.com/software/fonts/fairfax/) (bitmap)
   and [Fairfax HD](http://www.kreativekorp.com/software/fonts/fairfaxhd/)
   (vector) ([Github](https://github.com/kreativekorp/open-relay))
@@ -126,6 +127,8 @@ making them the default. Some tooling to help do that:
 - Brandon [Grotesque](https://www.hvdfonts.com/fonts/brandon-grotesque)
   and [Text](https://www.hvdfonts.com/fonts/brandon-text)
   (condensed versions also available, _commercial_)
+- [Canada1500](https://typodermicfonts.com/canada1500/)
+  ([Github copy with OFL license](https://github.com/inferno986return/Canada1500))
 - [Clarity City](https://github.com/vmware/clarity-city)
   (similar to Gotham but with stricter geometry)
 - [Clear Sans](https://github.com/intel/clear-sans)
@@ -251,6 +254,8 @@ making them the default. Some tooling to help do that:
   like Poppins, serif like Source Serif Pro, has monospace
   [version](https://github.com/googlefonts/dm-mono) based on
   the sans font)
+- [Geist](https://vercel.com/font) Sans and Mono
+  ([Github](https://github.com/vercel/geist-font))
 - [Go](https://go.dev/blog/go-fonts)
 - [IBM Plex](https://github.com/IBM/plex)
 - [Input](https://input.djr.com/) (_free for personal use_)
