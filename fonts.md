@@ -103,6 +103,9 @@ making them the default. Some tooling to help do that:
 - [Space Mono](https://www.colophon-foundry.org/custom-projects/space-mono)
   ([Github](https://github.com/googlefonts/spacemono))
 - [Spleen](https://github.com/fcambus/spleen) (bitmap)
+- [Tektite](https://www.chiark.greenend.org.uk/~sgtatham/fonts/)
+  (bitmap, also see
+  [here](https://unix.stackexchange.com/questions/226593/where-can-i-find-a-modern-version-of-the-rock-or-t-console-typeface))
 - [Terminus](https://terminus-font.sourceforge.net/)
   (bitmap, [TTF version](https://files.ax86.net/terminus-ttf/))
 - [Unifont](http://unifoundry.com/unifont/index.html)
