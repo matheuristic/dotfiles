@@ -310,6 +310,7 @@ making them the default. Some tooling to help do that:
 - [Beautiful Web Type](https://beautifulwebtype.com/)
 - [Collletttivo](https://www.collletttivo.it/)
 - [Colophon Foundry](https://www.colophon-foundry.org/) (_commercial_)
+- [DamienG's typefaces](https://damieng.com/typography/)
 - [Fonts In Use](https://fontsinuse.com/)
 - [Google Font Updates](https://twitter.com/googlefonts?lang=us)
 - [Google Fonts Knowledge](https://fonts.google.com/knowledge)
