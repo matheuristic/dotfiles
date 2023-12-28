@@ -59,8 +59,12 @@ making them the default. Some tooling to help do that:
   (bitmap, CJK)
 - [BQN386](https://dzaima.github.io/BQN386/)
   ([Github](https://github.com/dzaima/BQN386))
-  (derived from [APL385](https://www.apl385.com/fonts/) and
-  [APL386](https://abrudz.github.io/APL386/))
+  (designed for use with [BQN](https://mlochbaum.github.io/BQN/),
+  derived from [APL385](https://www.apl385.com/fonts/) and
+  [APL386](https://abrudz.github.io/APL386/), alternative is
+  [Uiua386](https://www.uiua.org/install) designed for use with
+  [Uiua](https://www.uiua.org/) downloadable
+  [here](https://github.com/uiua-lang/uiua/raw/main/site/Uiua386.ttf))
 - [Berkeley Mono](https://berkeleygraphics.com/typefaces/berkeley-mono/)
   (_commercial_)
 - [Comic Code](https://tosche.net/fonts/comic-code) (_commercial_,

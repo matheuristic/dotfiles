@@ -200,14 +200,13 @@
 - Diagramming and image editing
   - [ASCIIFlow](https://asciiflow.com/)
     ([Github](https://github.com/lewish/asciiflow)):
-    Web-based ASCII drawing application, which can be run locally with
-    [Bazel](https://bazel.build/) (install the Bazel launcher
-    [Bazelisk](https://github.com/bazelbuild/bazelisk) to pick the
-    right Bazel version; for live reloading, install and use
+    Web-based ASCII drawing application, which can be run locally
+    with [Bazel](https://bazel.build/) (install the Bazel launcher
+    [Bazelisk](https://github.com/bazelbuild/bazelisk) to pick
+    the right Bazel version; for live reloading, install and use
     [ibazel](https://github.com/bazelbuild/bazel-watcher));
-    commercial Monodraw is more full-featured; alternatives are
-    [ascii-d](https://github.com/huytd/ascii-d) or
-    [MonoSketch](https://monosketch.io/)
+    commercial Monodraw is more full-featured; an
+    alternative is [MonoSketch](https://monosketch.io/)
     ([Github](https://github.com/tuanchauict/MonoSketch))
   - [Caire](https://github.com/esimov/caire):
     Smart image resizing
