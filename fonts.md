@@ -249,7 +249,13 @@ making them the default. Some tooling to help do that:
 - [Redacted](https://github.com/christiannaths/redacted-font)
   (for keeping wireframes and prototypes free of distracting text)
 - [Siji-ng](https://github.com/mxkrsv/siji-ng) (bitmap)
-- [Symbola](https://dn-works.com/ufas/) (_free for personal use_)
+- [Symbola](https://dn-works.com/ufas/)
+  (_free for personal use_, may need to email author for font but
+  earlier versions are distributed as attachments in PDF files
+  [downloadable](https://aur.archlinux.org/packages/ttf-symbola#comment-883110)
+  from the author's site that can be extracted using
+  [pdfcpu](https://github.com/pdfcpu/pdfcpu) or `pdfdetach` from
+  [poppler](https://poppler.freedesktop.org/))
 
 ## Script fonts
 
