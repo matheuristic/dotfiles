@@ -139,6 +139,8 @@ making them the default. Some tooling to help do that:
   (condensed versions also available, _commercial_)
 - [Canada1500](https://typodermicfonts.com/canada1500/)
   ([Github copy with OFL license](https://github.com/inferno986return/Canada1500))
+- [CERN-www](https://github.com/djrrb/CERN-www-fonts)
+  ([WorldWideWeb](https://worldwideweb.cern.ch/) browser font clone)
 - [Clarity City](https://github.com/vmware/clarity-city)
   (similar to Gotham but with stricter geometry)
 - [Clear Sans](https://github.com/intel/clear-sans)
@@ -213,8 +215,6 @@ making them the default. Some tooling to help do that:
   ([Github](https://github.com/indestructible-type/Bodoni))
 - [Bona Nova](https://github.com/kosmynkab/Bona-Nova)
 - [Cardo](https://github.com/googlefonts/CardoFont)
-- [CERN-www](https://github.com/djrrb/CERN-www-fonts)
-  ((WorldWideWeb)[https://worldwideweb.cern.ch/] browser font clone)
 - [Courier Prime](https://quoteunquoteapps.com/courierprime/)
   [Regular](https://github.com/quoteunquoteapps/CourierPrime),
   [Sans](https://github.com/quoteunquoteapps/CourierPrimeSans),
