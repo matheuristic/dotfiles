@@ -91,6 +91,9 @@ making them the default. Some tooling to help do that:
 - [Julia Mono](https://juliamono.netlify.app/)
   ([Github](https://github.com/cormullion/juliamono),
   good Unicode coverage)
+- [Monaspace](https://monaspace.githubnext.com/)
+  ([Github](https://github.com/githubnext/monaspace))
+  (superfamily of five type categories, variable)
 - [Monocraft](https://github.com/IdreesInc/Monocraft)
   (bitmap, emulates Minecraft typeface, proportional
   [version](https://github.com/IdreesInc/Minecraft-Font))
