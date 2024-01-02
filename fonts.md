@@ -91,6 +91,7 @@ making them the default. Some tooling to help do that:
 - [Julia Mono](https://juliamono.netlify.app/)
   ([Github](https://github.com/cormullion/juliamono),
   good Unicode coverage)
+- [Maple Mono](https://github.com/subframe7536/Maple-font)
 - [Monaspace](https://monaspace.githubnext.com/)
   ([Github](https://github.com/githubnext/monaspace))
   (superfamily of five type categories, variable)
@@ -168,7 +169,6 @@ making them the default. Some tooling to help do that:
 - [Luohei Variable](https://atelier-anchor.com/luohei-variable)
   ([Github](https://github.com/atelier-anchor/luohei-variable))
   (CJK, variable)
-- [Maple Mono](https://github.com/subframe7536/Maple-font)
 - [Northrup](https://github.com/mirnovov/northrup)
 - [Open Sans](https://github.com/googlefonts/opensans)
 - [Outfit](https://github.com/Outfitio/Outfit-Fonts)
