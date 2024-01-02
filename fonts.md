@@ -19,6 +19,13 @@ fc-cache -fv
 Bitmap fonts, if distributed in TTF or OTF form, should be used
 without antialiasing and at their intended sizes (or multiples of it).
 
+### Variable fonts (VF)
+
+Variable fonts are font files that contain a range
+of variants (e.g., by weight, width, slant, etc) in a
+single file ([more](https://web.dev/variable-fonts/)
+[info](https://en.wikipedia.org/wiki/Variable_font)).
+
 ### Freezing font features
 
 For software that don't support toggling of OpenType features, one way
@@ -44,9 +51,13 @@ making them the default. Some tooling to help do that:
   Create and convert bitmap and emoji font
 - [bdf2x](https://github.com/Francesco149/bdf2x):
   Upscale BDF bitmap fonts
+- [FontDrop!](https://fontdrop.info/):
+  Online webapp for inspecting font files
 - [FontForge](https://fontforge.org/)
   ([Github](https://github.com/fontforge/fontforge)):
   Font editor that can create, convert and display fonts
+- [fontTools](https://github.com/fonttools/fonttools):
+  Font manipulation libraries and utilities
 - [LCDF Typetools](https://www.lcdf.org/type/)
   ([Github](https://github.com/kohler/lcdf-typetools)):
   Font manipulation utilities, see `software.md`
@@ -71,7 +82,8 @@ making them the default. Some tooling to help do that:
   open-source alts [one](https://dtinth.github.io/comic-mono-font/)
   and [two](https://github.com/jesusmgg/comic-shanns-mono))
 - [Commit Mono](https://commitmono.com/)
-  ([Github](https://github.com/eigilnikolajsen/commit-mono))
+  ([Github](https://github.com/eigilnikolajsen/commit-mono),
+  VF[_ital_,**wght**])
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)
 - [Everson Mono](https://www.evertype.com/emono/) (_shareware_)
 - [Fairfax](http://www.kreativekorp.com/software/fonts/fairfax/) (bitmap)
@@ -88,13 +100,15 @@ making them the default. Some tooling to help do that:
   [derivative](https://github.com/shytikov/pragmasevka) to mimic
   PragmataPro more closely than the SS08 variant)
 - [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono)
+  (VF[**wght**])
 - [Julia Mono](https://juliamono.netlify.app/)
   ([Github](https://github.com/cormullion/juliamono),
   good Unicode coverage)
 - [Maple Mono](https://github.com/subframe7536/Maple-font)
 - [Monaspace](https://monaspace.githubnext.com/)
   ([Github](https://github.com/githubnext/monaspace))
-  (superfamily of five type categories, variable)
+  (superfamily of five type categories,
+  VF[_slnt_,wdth,**weight**])
 - [Monocraft](https://github.com/IdreesInc/Monocraft)
   (bitmap, emulates Minecraft typeface, proportional
   [version](https://github.com/IdreesInc/Minecraft-Font))
@@ -136,6 +150,7 @@ making them the default. Some tooling to help do that:
 - [Andika](https://software.sil.org/andika/)
   ([Github](https://github.com/silnrsi/font-andika))
 - [Atkinson Hyperlegible](https://brailleinstitute.org/freefont)
+  ([extended version](https://github.com/jacobxperez/atkinson-hyperlegible-pro))
 - [Avenir](https://en.wikipedia.org/wiki/Avenir_(typeface))
   and its variants (included with macOS)
 - Brandon [Grotesque](https://www.hvdfonts.com/fonts/brandon-grotesque)
@@ -155,67 +170,85 @@ making them the default. Some tooling to help do that:
   ([Github](https://github.com/cooperhewitt/cooperhewitt-typeface))
 - [Dungeon Chunk](https://github.com/PriorityInterrupt/dungeon-chunk)
 - [Figtree](https://github.com/erikdkennedy/figtree)
+  (VF[**wght**])
 - [Finlandica](https://github.com/HelsinkiTypeStudio/Finlandica)
+  (VF[**wght**])
 - [FiraGO](https://bboxtype.com/typefaces/FiraGO/)
   ([Github](https://github.com/bBoxType/FiraGO))
 - [Gabarito](https://github.com/naipefoundry/gabarito)
+  (VF[**wght**])
 - [Georama](https://github.com/productiontype/Georama)
+  (VF[wdth,**wght**])
 - [Inter](https://github.com/rsms/inter)
-  (Helvetica alternative)
+  (Helvetica alternative, VF[_ital_,opsz,**wght**])
 - [Jost*](https://github.com/indestructible-type/Jost)
-  (Futura alternative)
+  (Futura alternative, VF[_ital_,**wght**])
 - [Lato](https://github.com/googlefonts/LatoGFVersion)
   ([source](https://github.com/latofonts/lato-source))
 - [Luohei Variable](https://atelier-anchor.com/luohei-variable)
   ([Github](https://github.com/atelier-anchor/luohei-variable))
-  (CJK, variable)
+  (CJK, VF[xwgt,ywgt])
 - [Northrup](https://github.com/mirnovov/northrup)
 - [Open Sans](https://github.com/googlefonts/opensans)
+  (VF[wdth,**wght**])
 - [Outfit](https://github.com/Outfitio/Outfit-Fonts)
+  (VF[**wght**])
 - [Pixelify Sans](https://github.com/eifetx/Pixelify-Sans)
 - [Pixellari](https://github.com/zedseven/Pixellari)
 - [Poppins](https://www.indiantypefoundry.com/fonts/poppins)
   ([Github](https://github.com/itfoundry/Poppins), geometric)
 - [Plein](https://www.fontshare.com/fonts/plein)
 - [Plus Jakarta Sans](https://github.com/tokotype/PlusJakartaSans)
+  (VF[**wght**])
 - Proxima [Nova](https://www.marksimonson.com/fonts/view/proxima-nova)
   and [Vara](https://www.marksimonson.com/fonts/view/proxima-vara)
   (_commercial_)
 - [Proza Libre](https://bureauroffa.com/about-proza-libre)
   ([Github](https://github.com/jasperdewaard/Proza-Libre))
 - [Public Sans](https://public-sans.digital.gov/)
-  ([Github](https://github.com/uswds/public-sans))
+  ([Github](https://github.com/uswds/public-sans), VF[**wght**])
 - [Radio-Canada](https://github.com/cbcrc/radiocanadafonts)
-  (parametric axes, see [link](https://web.dev/variable-fonts/))
+  (VF[wdth,**wght**])
 - [Raleway](https://github.com/theleagueof/raleway)
+  (VF[**wght**])
 - [Readex Pro](https://github.com/ThomasJockin/readexpro) (expanded
-  [Lexend](https://github.com/googlefonts/lexend))
+  [Lexend](https://github.com/googlefonts/lexend),
+  VF[HEXP,**wght**])
 - [Schibsted Grotesk](https://github.com/schibsted/schibsted-grotesk)
+  (VF[**wght**])
 - [Shantell Sans](https://github.com/arrowtype/shantell-sans)
   (marker-style font like Comic Sans and Inkwell Sans,
-  parametric axes, see [link](https://web.dev/variable-fonts/))
+  VF[BNCE,INFM,SPAC,_ital_,**wght**])
 - [Smiley Sans](https://atelier-anchor.com/typefaces/smiley-sans)
   ([Github](https://github.com/atelier-anchor/smiley-sans))
   (CJK)
 - [Space Grotesk](https://github.com/floriankarsten/space-grotesk)
+  (VF[**wght**])
 - [TASA Typeface Collection](https://tasatype.localremote.co/)
-  ([Github](https://github.com/adrianzwz/TASA-Typeface-Collection))
+  ([Github](https://github.com/adrianzwz/TASA-Typeface-Collection),
+  VF[**wght**])
 - [Urbanist](https://github.com/coreyhu/Urbanist)
+  (VF[_ital_,**wght**])
 - [Wix Madefor](https://github.com/wix-incubator/wixmadefor)
+  (VF[_ital_,**wght**])
 - [Womprat](https://crown.fontdue.com/fonts/womprat) (Star Wars-y,
   _commercial_)
 - [Work Sans](http://weiweihuanghuang.github.io/Work-Sans/)
-  ([Github](https://github.com/weiweihuanghuang/Work-Sans))
+  ([Github](https://github.com/weiweihuanghuang/Work-Sans),
+  VF[**wght**])
 - [Ysabeau](https://github.com/CatharsisFonts/Ysabeau)
+  (VF[**wght**])
 
 ## Serif proportional fonts
 
 - [Amstelvar](https://github.com/googlefonts/amstelvar)
-  (parametric axes, see [link](https://web.dev/variable-fonts/))
+  (VF[GRAD,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,wdth,**wght**])
 - [Besley](https://indestructibletype.com/Besley.html)
-  ([Github](https://github.com/indestructible-type/Besley))
+  ([Github](https://github.com/indestructible-type/Besley),
+  VF[wdth,**wght**])
 - [Bodoni Moda](http://indestructible-type.github.io/Bodoni.html)
-  ([Github](https://github.com/indestructible-type/Bodoni))
+  ([Github](https://github.com/indestructible-type/Bodoni),
+  VF[opsz,**wght**])
 - [Bona Nova](https://github.com/kosmynkab/Bona-Nova)
 - [Cardo](https://github.com/googlefonts/CardoFont)
 - [Courier Prime](https://quoteunquoteapps.com/courierprime/)
@@ -230,16 +263,20 @@ making them the default. Some tooling to help do that:
   ([Github](https://github.com/Omnibus-Type/Grenze)), and
   [Gotisch](https://www.omnibus-type.com/fonts/grenze-gotisch/)
   ([Github](https://github.com/Omnibus-Type/Grenze-Gotisch))
+  (VF[**wght**])
 - [IM Fell](https://iginomarini.com/fell/the-revival-fonts/) fonts
   ([Google Fonts](https://fonts.google.com/?query=IM+Fell),
   [more](https://iginomarini.com/fell/history/)
   [info](https://www.linyangchen.com/Typography-Fell-Types-font))
 - [Junicode](https://github.com/psb1558/Junicode-font)
+  (VF[ENLA,wdth,**wght**])
 - [Mate](https://github.com/etunni/mate)
 - [Playfair](https://github.com/googlefonts/Playfair)
+  (VF[opsz,wdth,**wght**])
 - [Reforma](https://pampatype.com/reforma)
 - [Spectral](https://github.com/productiontype/spectral)
 - [Sprat](https://github.com/EthanNakache/Sprat-type)
+  (VF[wdth,**wght**])
 
 ## Symbol fonts
 
@@ -250,7 +287,8 @@ making them the default. Some tooling to help do that:
   ([Github](https://github.com/keshikan/DSEG)) (LCD display-like)
 - [Quivira](http://www.quivira-font.com/) (serif)
 - [Redacted](https://github.com/christiannaths/redacted-font)
-  (for keeping wireframes and prototypes free of distracting text)
+  (for keeping wireframes and prototypes free of distracting text,
+  VF[**wght**])
 - [Siji-ng](https://github.com/mxkrsv/siji-ng) (bitmap)
 - [Symbola](https://dn-works.com/ufas/)
   (_free for personal use_, may need to email author for font but
@@ -263,6 +301,7 @@ making them the default. Some tooling to help do that:
 ## Script fonts
 
 - [Ballet](https://github.com/Omnibus-Type/Ballet)
+  (VF[opsz])
 - [Borel](https://github.com/RosaWagner/Borel)
 
 ## Font families
@@ -272,16 +311,19 @@ making them the default. Some tooling to help do that:
 - [DM](https://github.com/googlefonts/dm-fonts) (sans
   like Poppins, serif like Source Serif Pro, has monospace
   [version](https://github.com/googlefonts/dm-mono) based on
-  the sans font)
+  the sans font, VF[opsz,**wght**])
 - [Geist](https://vercel.com/font) Sans and Mono
-  ([Github](https://github.com/vercel/geist-font))
+  ([Github](https://github.com/vercel/geist-font), VF[**wght**])
 - [Go](https://go.dev/blog/go-fonts)
 - [IBM Plex](https://github.com/IBM/plex)
+  (VF[wdth,**wght**])
 - [Input](https://input.djr.com/) (_free for personal use_)
 - Instrument [Sans](https://github.com/Instrument/instrument-sans)
-  and [Serif](https://github.com/Instrument/instrument-serif)
+  (VF[wdth,**wght**]) and
+  [Serif](https://github.com/Instrument/instrument-serif)
 - Josefin [Sans](https://github.com/googlefonts/josefinsans) and
   [Slab](https://github.com/davelab6/josefinslab)
+  (both VF[**wght**])
 - [Kurinto Font Folio](https://www.kurinto.com/)
 - Lucida ([B&H](https://lucidafonts.com/),
   [TUG](https://tug.org/store/lucida/index.html)) (_commercial_;
@@ -301,20 +343,25 @@ making them the default. Some tooling to help do that:
   [Github](https://github.com/notofonts))
   fonts, primarily sans-serif proportional with some monospace,
   that together aim to cover all scripts in the Unicode standard
+  (some VF[**wght**], some VF[wdth,**wght**])
 - [Recursive](https://github.com/arrowtype/recursive)
+  (VF[CASL,CRSV,MONO,_slnt_,**wght**])
 - [Red Hat](https://github.com/RedHatOfficial/RedHatFont)
+  (VF[**wght**])
 - [Roboto](https://fonts.google.com/specimen/Roboto),
   [Condensed](https://fonts.google.com/specimen/Roboto+Condensed),
   [Serif](https://fonts.google.com/specimen/Roboto+Serif),
   [Slab](https://fonts.google.com/specimen/Roboto+Slab),
   [Mono](https://fonts.google.com/specimen/Roboto+Mono),
   [Flex](https://github.com/googlefonts/roboto-flex)
-  (parametric axes, see [link](https://web.dev/variable-fonts/))
+  (VF[GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,_slnt_,wdth,**wght**])
 - Spline [Sans](https://github.com/SorkinType/SplineSans),
   [Sans Mono](https://github.com/SorkinType/SplineSansMono)
+  (both VF[**wght**])
 - Source [Sans](https://github.com/adobe-fonts/source-sans),
   [Serif](https://github.com/adobe-fonts/source-serif),
-  [Code Pro](https://github.com/adobe-fonts/source-code-pro) (CJK
+  [Code Pro](https://github.com/adobe-fonts/source-code-pro)
+  (some VF[**wght**], some VF[opsz,**wght**]; CJK
   [Sans](https://github.com/adobe-fonts/source-han-sans),
   [Serif](https://github.com/adobe-fonts/source-han-serif),
   [Mono](https://github.com/adobe-fonts/source-han-mono) variants)
