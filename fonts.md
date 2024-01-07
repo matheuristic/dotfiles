@@ -79,8 +79,9 @@ making them the default. Some tooling to help do that:
 - [Berkeley Mono](https://berkeleygraphics.com/typefaces/berkeley-mono/)
   (_commercial_)
 - [Comic Code](https://tosche.net/fonts/comic-code) (_commercial_,
-  open-source alts [one](https://dtinth.github.io/comic-mono-font/)
-  and [two](https://github.com/jesusmgg/comic-shanns-mono))
+  open-source alts [one](https://dtinth.github.io/comic-mono-font/),
+  [two](https://github.com/jesusmgg/comic-shanns-mono) and
+  [three](https://github.com/kaBeech/serious-sans))
 - [Commit Mono](https://commitmono.com/)
   ([Github](https://github.com/eigilnikolajsen/commit-mono),
   VF[_ital_,**wght**])
