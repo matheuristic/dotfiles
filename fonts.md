@@ -16,7 +16,7 @@ fc-cache -fv
 
 ### Bitmap fonts
 
-Bitmap fonts, if distributed in TTF or OTF form, should be used
+Bitmap fonts, if distributed in TTF or OTF or OTB form, should be used
 without antialiasing and at their intended sizes (or multiples of it).
 
 ### Variable fonts (VF)

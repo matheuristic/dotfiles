@@ -785,7 +785,9 @@
     XML editor
   - [Tad](https://www.tadviewer.com/)
     ([Github](https://github.com/antonycourtney/tad)):
-    GUI tabular data viewer for CSV, Parquet, SQLite, and DuckDB files
+    GUI tabular data viewer for CSV, Parquet, SQLite and DuckDB files;
+    alternative is [CSView](https://kothar.net/csview) (different from
+    another one that is listed here)
   - [Visidata](https://www.visidata.org/) or
     [CSView](https://github.com/wfxr/csview):
     TUI tabular data viewer; Visidata is more of a multitool, in that
