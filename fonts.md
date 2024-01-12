@@ -228,6 +228,8 @@ making them the default. Some tooling to help do that:
 - [TASA Typeface Collection](https://tasatype.localremote.co/)
   ([Github](https://github.com/adrianzwz/TASA-Typeface-Collection),
   VF[**wght**])
+- [Teachers](https://github.com/chankfonts/Teachers-fonts)
+  (VF[**wght**])
 - [Urbanist](https://github.com/coreyhu/Urbanist)
   (VF[_ital_,**wght**])
 - [Wix Madefor](https://github.com/wix-incubator/wixmadefor)
@@ -278,6 +280,8 @@ making them the default. Some tooling to help do that:
 - [Spectral](https://github.com/productiontype/spectral)
 - [Sprat](https://github.com/EthanNakache/Sprat-type)
   (VF[wdth,**wght**])
+- [Wittgenstein](https://github.com/jrgdrs/Wittgenstein)
+  (VF[**wght**])
 
 ## Symbol fonts
 
