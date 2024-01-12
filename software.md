@@ -885,20 +885,28 @@
   - [Maccy](https://maccy.app/)
     ([Github](https://github.com/p0deje/Maccy)):
     Clipboard manager; macOS
-  - [Rectangle](https://github.com/rxhanson/Rectangle):
+  - [MiddleClick](https://github.com/artginzburg/MiddleClick-Sonoma):
+    Middle-click with three-finger tap; commercial alternatives
+    include [Middle](https://middleclick.app/),
+    [Multitouch](https://multitouch.app/) and
+    [BetterTouchTool](https://folivora.ai/)
+  - [Rectangle](https://rectangleapp.com/)
+    ([Github](https://github.com/rxhanson/Rectangle)):
     Move and resize windows using keyboard shortcuts and snap areas
     in macOS; as an alternative, three of the more useful keyboard
     shortcuts in Rectangle can be replicated using _Preferences_ >
     _Keyboard_ > _Keyboard Shortcuts_ > _App Shortcuts_ and clicking
     on `+`, keeping `All Applications`, inserting as the Menu Title
     action `Move Window to Left Side of Screen` and setting the
-    shortcut key as desired (`Ctrl-Option-Left` is recommended), and
-    repeating for other actions `Move Window to Right Side of Screen`
-    (recommend `Ctrl-Option-Right` here), as well as `Zoom` (recommend
-    using `Ctrl-Option-Return` here), **or** hover over the green `+`
-    button on the top-left corner of the window and press `Option`
-    which allows mouse selection of the actions which does not require
-    keyboard shortcut configuration
+    shortcut key as desired (`Ctrl-Option-Left` is recommended),
+    and repeating for other actions `Move Window to Right Side
+    of Screen` (recommend `Ctrl-Option-Right` here), as well as
+    `Zoom` (recommend using `Ctrl-Option-Return` here), **or**
+    hover over the green `+` button on the top-left corner of the
+    window and press `Option` which allows mouse selection of the
+    actions (does not require keyboard shortcut configuration);
+    there's also a commercial ([Pro](https://rectangleapp.com/pro)
+    version with more features
   - [shottr](https://shottr.cc/):
     Screenshot app for macOS, although note that macOS has built-in
     screenshot taking via `Cmd-Shift-3` (capture full screen),
