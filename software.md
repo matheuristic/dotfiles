@@ -871,6 +871,9 @@
     ([Github](https://github.com/continuedev/continue)) and the
     different extensions for remote development include over SSH
     ([link](https://code.visualstudio.com/docs/remote/remote-overview))
+  - [Zed](https://zed.dev/)
+    ([Github](https://github.com/zed-industries/zed)):
+    Multithreaded GPU-accelerated collaborative code editor
 - User experience and interface (graphical)
   - [Amethyst](https://ianyh.com/amethyst/)
     ([Github](https://github.com/ianyh/Amethyst):
