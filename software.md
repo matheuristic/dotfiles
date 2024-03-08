@@ -456,11 +456,6 @@
     [micromamba](https://github.com/mamba-org/micromamba-releases)
     the preferred variant; using [conda-forge](https://conda-forge.org/)
     as the primary repository is recommended
-  - [mise](https://mise.jdx.dev/)
-    ([Github](https://github.com/jdx/mise)):
-    Combines the functionality of asdf (language runtime management),
-    direnv (directory-local environment variables), and make
-    (build tool)
   - [Rhumba](https://github.com/mamba-org/rhumba):
     R package manager installable via conda or mamba
 - PDF reader or transformer
@@ -1471,7 +1466,7 @@ Conda (see above) can work as a virtual environment manager.
 
 However, for developing Python code it's probably
 better to use a dedicated Python version manager like
-[pyenv](https://github.com/pyenv/pyenv) to control Python
+[pyenv](https://github.com/pyenv/pyenv) or [asdf](https://github.com/asdf-vm/asdf) to control Python
 version, and Python-native virtual environment tooling like
 [venv](https://docs.python.org/3/library/venv.html) to create an
 isolated Python environment for the installing packages specific
@@ -1508,6 +1503,23 @@ Examples of commonly used pyenv commands:
 - `pyenv exec <command> [args...]` runs the given command with
   the given arguments with the local (or global if there isn't one
   configured) Python version activated
+
+An alternative is to use [asdf](https://github.com/asdf-vm/asdf):
+
+```sh
+# Installation (replace version as needed), restart shell after
+git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf" --branch v0.14.0
+asdf plugin-add python
+# Common commands
+asdf update                   # Update asdf to latest stable version
+asdf current                  # Display current lang runtime versions
+asdf list all python          # List available Python versions
+asdf list python              # List installed versions
+asdf install python 3.11.8    # Install Python version 3.11.8
+asdf shell python 3.11.8      # Use Python 3.11.8 in current shell
+asdf local python 3.11.8      # Use Python 3.11.8 in current dir
+asdf uninstall python 3.11.8  # Uninstall Python 3.11.8
+```
 
 ### Global Python virtual environments
 
@@ -1549,8 +1561,8 @@ as needed), at a `.venv` subdirectory in the project folder:
 
 ```sh
 cd /path/to/project/dir
-pyenv local 3.11.8
-pyenv exec python -m venv .venv
+pyenv local 3.11.8               # or `asdf local python 3.11.8`
+pyenv exec python -m venv .venv  # or `python -m venv .venv`
 ```
 
 Activate the virtual environment:
@@ -1565,6 +1577,10 @@ Deactivate an activated virtual environment:
 ```sh
 deactivate
 ```
+
+It is possible to automate activation and deactivation of the virtual
+environment using [direnv](https://github.com/direnv/direnv), see
+[here](https://github.com/direnv/direnv/wiki/Python).
 
 ## Linux notes
 
