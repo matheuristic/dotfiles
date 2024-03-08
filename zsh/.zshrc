@@ -27,6 +27,7 @@ command -v md5sum > /dev/null \
   || alias md5sum="md5" # alias `md5` to `md5sum` (macOS)
 alias map='xargs -n1'   # map fn, e.g. $ find . -name '*.dll' | map dirname
 alias dusorted='du -sh * | sort -rh' # sorted disk usage for current directory
+alias listeningtcpports="lsof -iTCP -sTCP:LISTEN -n -P | awk '{print \$1, substr(\$0, index(\$0,\$9))}'"
 
 # Non-plan9port aliases and functions
 if [ -z "$winid" ]; then
