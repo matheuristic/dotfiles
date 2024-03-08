@@ -456,6 +456,11 @@
     [micromamba](https://github.com/mamba-org/micromamba-releases)
     the preferred variant; using [conda-forge](https://conda-forge.org/)
     as the primary repository is recommended
+  - [mise](https://mise.jdx.dev/)
+    ([Github](https://github.com/jdx/mise)):
+    Combines the functionality of asdf (language runtime management),
+    direnv (directory-local environment variables), and make
+    (build tool)
   - [Rhumba](https://github.com/mamba-org/rhumba):
     R package manager installable via conda or mamba
 - PDF reader or transformer
@@ -1460,6 +1465,107 @@ Notes:
   XCode or its command-line tools installed. However, it is
   recommended to install at least the command-line tools.
 
+## Python virtual environments
+
+Conda (see above) can work as a virtual environment manager.
+
+However, for developing Python code it's probably
+better to use a dedicated Python version manager like
+[pyenv](https://github.com/pyenv/pyenv) to control Python
+version, and Python-native virtual environment tooling like
+[venv](https://docs.python.org/3/library/venv.html) to create an
+isolated Python environment for the installing packages specific
+to the code being developed.
+
+### Using specific Python versions
+
+Use [pyenv](https://github.com/pyenv/pyenv) to install and switch
+between different versions of Python.
+
+Install pyenv (replace `$HOME/.bashrc` with `$HOME/.zshrc` if
+using Zsh as in the case of the macOS default shell):
+
+```sh
+curl https://pyenv.run | bash
+cat >>$HOME/.bashrc <<EOF
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+EOF
+```
+
+Examples of commonly used pyenv commands:
+
+- `pyenv update` updates pyenv and its installed plugins
+- `pyenv versions` shows available versions
+- `pyenv install -l` shows installable versions
+- `pyenv install <version>` installs the specified Python version,
+  e.g., `pyenv install 3.11.8`
+- `pyenv shell <version>` uses the specified Python version for
+  the current shell session
+- `pyenv local <version>` uses the specific Python version while
+  in the current directory when running `pyenv exec`
+- `pyenv exec <command> [args...]` runs the given command with
+  the given arguments with the local (or global if there isn't one
+  configured) Python version activated
+
+### Global Python virtual environments
+
+Use [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
+to manage global virtual environments for Python (the following
+creates a virtual environment named `myenv` using Python version
+`3.11.8`, change as needed):
+
+```sh
+pyenv virtualenvs              # list virtualenvs
+pyenv virtualenv 3.11.8 myenv  # create virtualenv
+pyenv activate myenv           # activate virtualenv
+pyenv deactivate               # deactivate current virtualenv
+pyenv virtualenv-delete myenv  # delete virtualenv
+```
+
+These global virtual environments can be used to install Python
+tooling, and a wrapper script can be created in a directory
+on the `$PATH`. Example:
+
+```sh
+pyenv virtualenv 3.11.8 myenv
+pyenv activate myenv
+pip install black
+pyenv deactivate
+cat >$HOME/.local/bin/black <<EOF
+#!/bin/zsh
+pyenv activate myenv
+black $@
+EOF
+chmod +x $HOME/.local/bin/black
+```
+
+### Project-specific Python virtual environments
+
+Set up a virtual environment for a project using a specific Python
+version installed via pyenv (version `3.11.8` is used here, change
+as needed), at a `.venv` subdirectory in the project folder:
+
+```sh
+cd /path/to/project/dir
+pyenv local 3.11.8
+pyenv exec python -m venv .venv
+```
+
+Activate the virtual environment:
+
+```sh
+cd /path/to/project/dir
+source .venv/bin/activate
+```
+
+Deactivate an activated virtual environment:
+
+```sh
+deactivate
+```
+
 ## Linux notes
 
 Some notes also apply to BSD systems.
@@ -1567,7 +1673,11 @@ command-line, see [these](https://gist.github.com/uson1x/2275613)
 Besides built-in Safari, other browsers may be useful or preferred:
 
 - [Google Chrome](https://www.google.com/chrome/)
-  (some websites are only fully compatible with this)
+  (some websites are only fully compatible with this; note that if
+  `Google LLC` and `GoogleUpdater` are disabled from starting at
+  login and are not allowed Full Disk Access, the browser needs to
+  be updated manually by downloading the new version and installing
+  over the current version)
 - [Firefox](https://www.mozilla.org/en-US/firefox/new/)
   (for compatibility with more powerful extensions, see
   [link](https://blog.mozilla.org/addons/2022/05/18/manifest-v3-in-firefox-recap-next-steps/));
