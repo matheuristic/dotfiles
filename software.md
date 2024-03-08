@@ -441,7 +441,9 @@
     Network monitor, macOS
 - Package/runtime manager
   - [asdf](https://asdf-vm.com/):
-    Language runtime manager
+    Language runtime manager with plugins
+    [plugins](https://github.com/asdf-vm/asdf-plugins) for many
+    language runtimes and tools (like `bat`, `jq`, `ripgrep`, etc)
   - [Flatpak](https://flatpak.org/):
     Application manager; [Flathub](https://flathub.org/) is the de
     facto repository; for easier permissioning control install
@@ -1465,8 +1467,9 @@ Notes:
 Conda (see above) can work as a virtual environment manager.
 
 However, for developing Python code it's probably
-better to use a dedicated Python version manager like
-[pyenv](https://github.com/pyenv/pyenv) or [asdf](https://github.com/asdf-vm/asdf) to control Python
+better to use a dedicated Python version manager
+like [pyenv](https://github.com/pyenv/pyenv) or
+[asdf](https://github.com/asdf-vm/asdf) to control Python
 version, and Python-native virtual environment tooling like
 [venv](https://docs.python.org/3/library/venv.html) to create an
 isolated Python environment for the installing packages specific
@@ -1500,6 +1503,7 @@ Examples of commonly used pyenv commands:
   the current shell session
 - `pyenv local <version>` uses the specific Python version while
   in the current directory when running `pyenv exec`
+- `pyenv global <version>` sets the global default Python version
 - `pyenv exec <command> [args...]` runs the given command with
   the given arguments with the local (or global if there isn't one
   configured) Python version activated
@@ -1517,7 +1521,9 @@ asdf list all python          # List available Python versions
 asdf list python              # List installed versions
 asdf install python 3.11.8    # Install Python version 3.11.8
 asdf shell python 3.11.8      # Use Python 3.11.8 in current shell
+asdf shell python --unset     # Unset asdf-set Python version in shell
 asdf local python 3.11.8      # Use Python 3.11.8 in current dir
+asdf global python 3.11.8     # Use Python 3.11.8 by default
 asdf uninstall python 3.11.8  # Uninstall Python 3.11.8
 ```
 
