@@ -1466,19 +1466,36 @@ Notes:
 
 Conda (see above) can work as a virtual environment manager.
 
-However, for developing Python code it's probably
-better to use a dedicated Python version manager
-like [pyenv](https://github.com/pyenv/pyenv) or
+However, another option is to use a dedicated Python version
+manager like [pyenv](https://github.com/pyenv/pyenv) or
 [asdf](https://github.com/asdf-vm/asdf) to control Python
 version, and Python-native virtual environment tooling like
 [venv](https://docs.python.org/3/library/venv.html) to create an
 isolated Python environment for the installing packages specific
 to the code being developed.
 
+Conda can be more convenient it comes with pre-built packages
+both within and outside the Python ecosystem, but there may be
+dependency resolution issues, build versions may not match up across
+architectures, and mixing `pip install`-ed and `conda install`-ed
+packages can create subtle packaging issues that are hard to resolve.
+
+In contrast, pyenv and asdf (in conjunction with venv) are simpler
+(they only build a base version of Python), but don't come with the
+convenience of pre-built packages (especially those outside
+the Python ecosystem that may be involved to build).
+
 ### Using specific Python versions
 
-Use [pyenv](https://github.com/pyenv/pyenv) to install and switch
-between different versions of Python.
+Conda already provides a way to do this, just create a new
+environment with some specific python version (or no specific
+version for the latest). For example, `conda create -n myenv
+python=3.11.8` creates a new environment called `myenv` with Python
+3.11.8 installed, `conda activate myenv` activates that environment,
+and `conda deactivate` after that deactivates it.
+
+Otherwise, use [pyenv](https://github.com/pyenv/pyenv) to install
+and switch between different versions of Python.
 
 Install pyenv (replace `$HOME/.bashrc` with `$HOME/.zshrc` if
 using Zsh as in the case of the macOS default shell):
@@ -1529,7 +1546,10 @@ asdf uninstall python 3.11.8  # Uninstall Python 3.11.8
 
 ### Global Python virtual environments
 
-Use [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
+If using Conda, see the previous subsection.
+
+Otherwise, one can use pyenv via the plugin
+[pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
 to manage global virtual environments for Python (the following
 creates a virtual environment named `myenv` using Python version
 `3.11.8`, change as needed):
@@ -1562,8 +1582,8 @@ chmod +x $HOME/.local/bin/black
 ### Project-specific Python virtual environments
 
 Set up a virtual environment for a project using a specific Python
-version installed via pyenv (version `3.11.8` is used here, change
-as needed), at a `.venv` subdirectory in the project folder:
+version installed via pyenv (or asdf; version `3.11.8` is used here,
+change as needed), at a `.venv` subdirectory in the project folder:
 
 ```sh
 cd /path/to/project/dir
@@ -1587,6 +1607,9 @@ deactivate
 It is possible to automate activation and deactivation of the virtual
 environment using [direnv](https://github.com/direnv/direnv), see
 [here](https://github.com/direnv/direnv/wiki/Python).
+
+This can also be done using Conda, in a similar way as asdf (use
+`conda activate myenv` instead of `asdf local python 3.11.8`).
 
 ## Linux notes
 
