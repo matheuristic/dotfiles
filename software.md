@@ -91,7 +91,7 @@
     for macOS support, there is a commercial version
     [sold](https://github.com/bluewhalesystems/sold)
 - Containerization
-  - [colima](https://github.com/abiosoft/colima) or
+  - [Colima](https://github.com/abiosoft/colima) or
     [Rancher Desktop](https://rancherdesktop.io/)
     ([Github](https://github.com/rancher-sandbox/rancher-desktop/)):
     Minimal-setup container runtimes on macOS with support for Docker,
@@ -234,8 +234,6 @@
     Raster graphics editor
   - [Inkscape](https://inkscape.org/):
     Vector graphics editor
-  - [LinkedIdeas](https://github.com/fespinoza/LinkedIdeas):
-    Mind-mapping tool
   - [Markmap](https://markmap.js.org/)
     ([Github](https://github.com/markmap/markmap)):
     Visualize Markdown as a mind-map; also available as a
@@ -525,10 +523,13 @@
     analyze what code does instead of looking for specific code smells
   - [EditorConfig](https://editorconfig.org/)
     ([Github](https://github.com/editorconfig/)):
-    Define formatting conventions for project code and text files,
-    with multiple implementations and editor plugins to apply them
-    (install base command with `apt install editorconfig` on Debian or
-    Ubuntu, `port install editorconfig-core-c` via MacPorts on macOS);
+    Define formatting conventions for project code and
+    text files, with multiple implementations and editor
+    plugins to apply them (install base command with `apt
+    install editorconfig` on Debian or Ubuntu, `port install
+    editorconfig-core-c` via MacPorts on macOS, via a Python
+    [package](https://pypi.org/project/EditorConfig/), or download a
+    [binary](https://github.com/editorconfig/editorconfig-core-go));
     [editorconfig-checker](https://editorconfig-checker.github.io/)
     can be used to check that files conform to EditorConfig settings
   - [gitg](https://gitlab.gnome.org/GNOME/gitg) or
@@ -545,22 +546,8 @@
     ([Github](https://github.com/kythe/kythe)):
     Pluggable system for building code tools, comes with indexer
     implementations for C++, Go and Java and other tools; see
-    [link](https://european-lisp-symposium.org/static/2020/godbout-slides.pdf)
-  - [Moose](https://modularmoose.org/)
-    ([Github](https://github.com/moosetechnology/Moose)):
-    Platform for static analysis of software (better described
-    [here](http://agilevisualization.com/AgileVisualization/Moose/0306-Moose.html))
-    built on [Pharo](https://pharo.org/); for more info, see
-    [here](http://themoosebook.org/book/); source code parsers for
-    generating Moose models are available for
-    [Java](https://github.com/moosetechnology/VerveineJ),
-    [Fortran](https://github.com/NicolasAnquetil/VerveineF),
-    [C#](https://github.com/feenkcom/roslyn2famix) and
-    [C/C++](https://github.com/moosetechnology/VerveineC-Cpp), or
-    [create](https://github.com/moosetechnology/PetitParser)
-    [one](https://vimeo.com/139004257); alternative is
-    [Glamorous Toolkit](https://gtoolkit.com/)
-    ([Github](https://github.com/feenkcom/gtoolkit))
+    [overview](https://www.kythe.io/docs/kythe-overview.html) and
+    [presentation](https://european-lisp-symposium.org/static/2020/godbout-slides.pdf)
   - [onefetch](https://github.com/o2sh/onefetch):
     Git repository information and statistics
   - [ruplacer](https://github.com/your-tools/ruplacer):
@@ -680,6 +667,9 @@
     TUI log file viewer supporting multiple file formats and
     compression types, with the ability to consolidate multiple
     log files into a single view
+  - [osquery](https://github.com/osquery/osquery):
+    Expose operating system as a relational database
+    ([HN](https://news.ycombinator.com/item?id=39501281))
   - [pstree](https://github.com/FredHucht/pstree):
     List processes as a tree
   - [Sloth](https://sveinbjorn.org/sloth):
@@ -813,33 +803,6 @@
     compiles a native GUI Emacs application, the native-comp variant,
     at `/Applications/MacPorts/EmacsMac.app` or at
     `/Users/Username/Applications/MacPorts/EmacsMac.app`)
-  - [Glamorous Toolkit](https://gtoolkit.com/)
-    ([Github](https://github.com/feenkcom/gtoolkit)): Workbench for
-    software and knowledge management built on the
-    [Pharo](https://pharo.org/) Smalltalk environment
-    ([link](https://lepiter.io/feenk/glamorous-toolkit-and-pharo-9q25tavxwfq6z1drwvegd5u9o/));
-    some examples of what it can do out of the box include analyzing
-    C++ code ([link](https://gtoolkit.com/docs/analyzing-cpp/)),
-    running and debugging Javascript and Python code
-    ([link](https://lepiter.io/feenk/introducing-lepiter--knowledge-management--e2p6apqsz5npq7m4xte0kkywn/)),
-    and so on; for more info, see [blog](https://lepiter.io/feenk/) or
-    [paper](https://scg.unibe.ch/archive/papers/Chis15c-PracticalDomainSpecificDebuggers.pdf)
-  - [Helix](https://helix-editor.com/):
-    TUI editor like Kakoune, but designed to have many editor features
-    like [LSP](https://microsoft.github.io/language-server-protocol/)
-    support built into the editor
-  - [Kakoune](https://kakoune.org/):
-    TUI editor like vi, but implements an object-verb command model
-    rather than vi's verb-object command-model; designed to call out
-    to the shell for most features beyond basic editing
-  - [Lapce](https://lapce.dev/)
-    ([Github](https://github.com/lapce/lapce)):
-    Batteries-loaded fast cross-platform code editor
-  - [Lite XL](https://lite-xl.com/)
-    ([Github](https://github.com/lite-xl/lite-xl)) or
-    [Textadapt](https://orbitalquark.github.io/textadept/)
-    ([Github](https://github.com/orbitalquark/textadept)):
-    Cross-platform lightweight GUI text editor extensible using Lua
   - [Vim](https://www.vim.org/) or
     [Neovim](https://neovim.io/):
     TUI text editor based on [vi](https://en.wikipedia.org/wiki/Vi);
@@ -854,11 +817,6 @@
     and [here](https://mattwidmann.net/notes/modern-nvi-mappings/) for
     more info; easily compilable only on BSDs and macOS), but these
     lack a good number of features added in vim and Neovim
-  - [Vile](https://invisible-island.net/vile/):
-    Vi Like Emacs (vile) combines vi modal editing with multiple
-    buffer and multiple window features of Emacs; bindings are a mix
-    of the two (for example, `i` enters insert mode from command mode
-    while `C-x o` switches focused window)
   - [Vis](https://github.com/martanne/vis):
     TUI text editor combining vi modal editing with
     [Sam](https://en.wikipedia.org/wiki/Sam_(text_editor))'s
@@ -936,11 +894,13 @@
   - [Unshaky](https://github.com/aahung/Unshaky):
     Double keypress workaround for butterfly keyboards; macOS
 - User experience and interface (text)
-  - [direnv](https://github.com/direnv/direnv) or
-    [shadowenv](https://github.com/Shopify/shadowenv):
+  - [direnv](https://direnv.net/)
+    ([Github](https://github.com/direnv/direnv)):
     Load and unload env vars based on location; for `direnv`, config
     files go into `$XDG_CONFIG_HOME/direnv/` and allowed directory
-    environment files are recorded in `$XDG_DATA_HOME/allow/`
+    environment files are recorded in `$XDG_DATA_HOME/direnv/allow/`;
+    alternatives: [autoenv](https://github.com/hyperupcall/autoenv),
+    [shadowenv](https://github.com/Shopify/shadowenv)
   - [hollywood](https://github.com/dustinkirkland/hollywood):
     Hollywood technobabble in a Byobu session
   - [parallel](https://www.gnu.org/software/parallel/):
@@ -993,7 +953,9 @@
     TunnelBlick is macOS-only and built on the older but still
     maintained OpenVPN 2 libraries
   - [WireGuard](https://www.wireguard.com/):
-    Simple and high-performance VPN
+    Simple and high-performance VPN; can be involved to set up,
+    use tools like [wg-easy](https://github.com/wg-easy/wg-easy)
+    for easier installation and administration
 - Web browsing
   - [Amfora](https://github.com/makeworld-the-better-one/amfora) or
     [Bombadillo](https://bombadillo.colorfield.space/)
@@ -1066,7 +1028,10 @@
     however this may not be necessary if "Optimized Battery Charging"
     is sufficient for usage needs
   - [Anki](https://apps.ankiweb.net/):
-    Flashcards software
+    Flashcards software; cross-platform, and also available on
+    [iOS](https://apps.apple.com/us/app/ankimobile-flashcards/id373493387),
+    [Android](https://play.google.com/store/apps/details?id=com.ichi2.anki),
+    and as a [webapp](https://ankiweb.net/)
   - [ClamAV](https://www.clamav.net/):
     Open-source antivirus engine, with frontends available like
     [ClamTk](https://gitlab.com/dave_m/clamtk)
@@ -1136,23 +1101,41 @@
     Google Suite; Nextcloud Files can be used as a a WebDAV service
   - [OmegaT](https://omegat.org/):
     Translation memory tool
-  - [pass](https://www.passwordstore.org/):
-    Command-line password manager; if using MacPorts on macOS but
-    using XCode command-line tools Git, install dependencies `tree`,
-    `util-linux` and `qrencode` with MacPorts, and install `pass` from
-    source specifying the `PREFIX` environment variable as appropriate
-    (e.g., `PREFIX=$HOME/.local make install`), then modifying the
-    installed `lib/password-store/platform.sh` file (e.g.,
-    `$HOME/.local/lib/password-store/platform.sh`) so that the line
-    `GETOPT=...` points directly to the MacPorts-installed `getopt`
-    (e.g., `GETOPT="/Users/$(whoami)/macports/bin/getopt"`); for more,
-    see [link](https://gist.github.com/abtrout/d64fb11ad6f9f49fa325);
-    for completion support when installing from source, see `INSTALL`
-    in the pass source or directly copy the completion files to the
-    appropriate directories (e.g., for Zsh, copy the file
+  - [pass](https://www.passwordstore.org/) or
+    [gopass](https://www.gopass.pw/)
+    ([Github](https://github.com/gopasspw/gopass)):
+    Command-line password manager; **pass-specific instructions**:
+    on macOS pass is available in MacPorts or Homebrew, or install
+    directly from source where if using MacPorts along with
+    XCode command-line tools Git, install dependencies `tree`,
+    `util-linux` and `qrencode` with MacPorts, and install `pass`
+    from source specifying the `PREFIX` environment variable
+    as appropriate (e.g., `PREFIX=$HOME/.local make install`),
+    then modifying the installed `lib/password-store/platform.sh`
+    file (e.g., `$HOME/.local/lib/password-store/platform.sh`)
+    so that the line `GETOPT=...` points directly
+    to the MacPorts-installed `getopt` (e.g.,
+    `GETOPT="/Users/$(whoami)/macports/bin/getopt"`) (for more, see
+    [link](https://gist.github.com/abtrout/d64fb11ad6f9f49fa325), and
+    for completion support when installing from source see `INSTALL`
+    in the pass source or directly copy the completion files
+    to the appropriate directories (e.g., for Zsh, copy the file
     `src/completion/pass.zsh_completion` to a file with name prefixed
-    by `_` in an `$fpath` dir, say `$HOME/.zsh_completions/_pass`)
-  - [pastel](https://github.com/sharkdp/pastel) or
+    by `_` in an `$fpath` dir, say `$HOME/.zsh_completions/_pass`);
+    **gopass-specific instructions**: gopass is mostly
+    compatible with pass, its binaries can be downloaded
+    [here](https://github.com/gopasspw/gopass/releases),
+    and Zsh completion can be enabled by copying or symlinking
+    `zsh.completion` from the extracted gopass binary archive to a
+    `_`-prefixed file in an `$fpath` directory using a command like
+    `ln -s /path/to/gopass/zsh.completion ~/.zsh_completions/_gopass`
+    and rebuilding the cache via `rm ~/.zcompdump && compinit`,
+    and optionally add `alias pass=gopass` to `~/.zshrc` to use
+    gopass as a drop-in replacement for pass; **supporting apps**:
+    [Pass (iOS)](https://github.com/mssun/passforios)
+    ([Appstore](https://apps.apple.com/us/app/pass-password-store/id1205820573)),
+    [Password Store (Android)](https://github.com/android-password-store/android-password-store)
+ - [pastel](https://github.com/sharkdp/pastel) or
     [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
     Terminal color picker
   - [Platypus](https://github.com/sveinbjornt/Platypus):
@@ -1796,6 +1779,7 @@ conda as detailed in the next section):
 - `git` (it is recommended to override the default system-wide macOS
   Git credential helper setting which is to store Git credentials
   in the macOS keychain, see below)
+- `git-lfs`
 - `gnupg2`
 - `gsed` (GNU [sed](https://www.gnu.org/software/sed/))
 - `htop`
@@ -1805,7 +1789,7 @@ conda as detailed in the next section):
 - `tree`
 
 ```sh
-port -N install coreutils gawk git gnupg2 gsed mosh pstree stow tree
+port -N install coreutils gawk git git-lfs gnupg2 gsed mosh pstree stow tree
 ```
 
 If installing `gnupg2` above, it is recommended to change the
@@ -2125,6 +2109,8 @@ References:
 - [Moving/Copying your PGP Keys](https://www.phildev.net/pgp/gpg_moving_keys.html)
 
 ### Exporting ASCII-armored keys as QR codes
+
+(Requires `qrencode` be installed on the system.)
 
 First run `gpg --list-keys --with-subkey-fingerprint` to list the keys plus
 subkeys along with their fingerprints. Identify the encrypting subkey, if one
