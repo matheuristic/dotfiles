@@ -1135,7 +1135,8 @@
     [Pass (iOS)](https://github.com/mssun/passforios)
     ([Appstore](https://apps.apple.com/us/app/pass-password-store/id1205820573)),
     [Password Store (Android)](https://github.com/android-password-store/android-password-store)
- - [pastel](https://github.com/sharkdp/pastel) or
+    ([Play Store](https://play.google.com/store/apps/details?id=dev.msfjarvis.aps))
+  - [pastel](https://github.com/sharkdp/pastel) or
     [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
     Terminal color picker
   - [Platypus](https://github.com/sveinbjornt/Platypus):
@@ -2067,6 +2068,47 @@ needed.
 
 ## GnuPG
 
+### Creating a GPG key
+
+Create new key and signing key (a encrypt subkey is automatically
+generated). As of 2024-March-15, it is recommended to use the
+default key type `ECC (sign and encrypt)` with elliptic curve type
+`Curve 25519` (also the default).
+
+```console
+$ gpg --expert --full-gen-key
+Your selection? 9     # Kind of key: ECC (sign and encrypt) *default*
+Your selection? 1     # Which elliptic curve: Curve 25519 *default*
+Key is valid for? 0   # key does not expire *default*
+$ gpg --edit-key [NEW_KEY_FINGERPRINT]
+gpg> addkey
+Your selection? 10    # Kind of subkey: Signing only, ECC
+Your selection? 1     # Which elliptic curve: Default (Curve 25519) is ok
+Key is valid for? 0   # Does not expire, or set an expiration date if desired
+gpg> save
+```
+
+Make sure to backup the master key somewhere safe (see below section
+"Migrating keys", or just archive the GnuPG directory into a tarball
+(may want to avoid backing up the `openpgp-revocs.d` subdirectory):
+
+```console
+$ killall gpg-agent
+$ tar -cf name-of-backup-file.tar -C $HOME/.gnupg
+$ shasum -a256 name-of-backup-file.tar > name-of-backup-file.tar.sha256
+```
+
+(Optional) Run `gpg --edit-key [KEY_FINGERPRINT_WITHOUT_SPACES]` to
+change subkey expirations to 1 year. These would have to be extended
+and resynced each year. This is recommended if distributing subkeys
+to many machines.
+
+**Note**: It is recommended to keep the primary key on as few
+machines as possible, and distribute (see "Migrating keys" or
+"Exporting ASCII-armored keys as QR codes" below) only subkeys
+to other machines (either signing or encrypt subkey, or both,
+as appropriate).
+
 ### Using TTY pinentry
 
 If using a console pinentry for entering the GnuPG password in the
@@ -2098,14 +2140,44 @@ References:
 
 ### Migrating keys
 
-A simple way to migrate GnuPG keys is to copy over the GnuPG data
-directory (this preserves all keys and the the trust database) at
-`C:/Documents and Settings/Username/Application Data/GnuPG` on Windows
-systems (replace `Username` as appropriate) or at `$HOME/.gnupg` on
-Linux/macOS systems.
+Below, replace `[EMAIL...]` or `[KEY_FINGERPRINT_WITHOUT_SPACES]` as
+appropriate. Fingerprints (mainly needed if there are multiple keys
+for the same email) can be listed running `gpg -k` in the terminal.
+
+Export keys and ownertrust (from the old machine to migrate from):
+
+```console
+$ gpg --export --armor [EMAIL_OR_KEY_FINGERPRINT_WITHOUT_SPACES] > [EMAIL_OR_OTHER_ID].pub.asc
+$ gpg --export-secret-keys --armor [EMAIL_OR_KEY_FINGERPRINT_WITHOUT_SPACES] > [EMAIL_OR_OTHER_ID].priv.asc
+$ gpg --export-secret-subkeys --armor [EMAIL_OR_KEY_FINGERPRINT_WITHOUT_SPACES] > [EMAIL_OR_OTHER_ID].sub_priv.asc
+$ gpg --export-ownertrust > ownertrust.txt
+```
+
+Import keys and ownertrust (on new machine to migrate to):
+
+If you need to restore your keys and trust level (e.g., after reinstalling the system or on a new computer), use the following commands:
+
+```console
+$ gpg --import [EMAIL_OR_OTHER_ID].pub.asc
+$ gpg --import [EMAIL_OR_OTHER_ID].priv.asc
+$ gpg --import [EMAIL_OR_OTHER_ID].sub_priv.asc
+$ gpg --import-ownertrust ownertrust.txt
+$ gpg --edit-key [EMAIL_OR_KEY_FINGERPRINT_WITHOUT_SPACES]
+gpg> trust
+Your decision? 5
+```
+
+**Alternative**: Copy over the GnuPG data directory (this preserves
+all keys and the the trust database) which is `C:/Documents
+and Settings/Username/Application Data/GnuPG` on Windows systems
+(replace `Username` as appropriate) or `$HOME/.gnupg` on Linux/macOS
+systems (Linux/macOS instructions shown), but don't include the
+`openpgp-revocs.d` subdirectory and kill `gpg-agent` first to close
+any open socket files.
 
 References:
 
+- [How to backup GPG](https://serverfault.com/a/1040984)
 - [Moving/Copying your PGP Keys](https://www.phildev.net/pgp/gpg_moving_keys.html)
 
 ### Exporting ASCII-armored keys as QR codes
@@ -2124,11 +2196,11 @@ code images as below (modifying appropriately `<KEY_EMAIL>` and
 ```sh
 mkdir -p /tmp/keys-export && cd $_
 # export public key to pubkey-??.qr QR code image files
-gpg --export --armor <KEY_EMAIL> > pub.key
+gpg --export --armor <EMAIL_OR_SUBKEY_FINGERPRINT_WITHOUT_SPACES> > pub.key
 split -C 2500 pub.key pubkey-
 for file in pubkey-??; do <"$file" qrencode -s 3 -d 150 -o "$file".qr; done
 # export secret subkey to subkey-??.qr QR code image files
-gpg --export --armor <SUBKEY_FINGERPRINT_WITHOUT_SPACES> > sub.key
+gpg --export-secret-subkeys --armor <SUBKEY_FINGERPRINT_WITHOUT_SPACES> > sub.key
 split -C 2500 sub.key subkey-
 for file in subkey-??; do <"$file" qrencode -s 3 -d 150 -o "$file".qr; done
 ```
@@ -2156,6 +2228,155 @@ Adapted from [here](https://jherrlin.github.io/posts/emacs-gnupg-and-pass/).
 1. Publish/disseminate the updated keys as appropriate
 
 Run `help` while in the GPG shell for additional commands available.
+
+## [Gopass](https://www.gopass.pw/)
+
+This section covers setup and other
+non-routine tasks for gopass. Also see
+[here](https://github.com/gopasspw/gopass/blob/master/docs/features.md).
+
+### Setup
+
+After [installing]() gopass, iniitialize a password store and add
+completion to the shell (if `--path ...` is not provided, the store
+path defaults to `~/.local/share/gopass/stores/root`):
+
+```console
+$ gopass init --path ~/.password-store [GPG_KEY_EMAIL_OR_KEY_ID_OR_FINGERPRINT_WITHOUT_SPACES]
+$ echo "source <(gopass completion zsh)" >> ~/.zshrc
+```
+
+Configure git:
+
+```console
+$ gopass git remote add origin [repo-url]
+$ gopass git config set user.name [name of user]
+$ gopass git config set user.email [email of user]
+$ gopass git config commit.gpgsign true
+$ gopass git config user.signingKey <SIGN SUBKEY FINGERPRINT>\!
+```
+
+### Pass/gopass entry format
+
+Entries can be edited using `gopass edit [some-entry]`:
+
+- The first line of the encrypted file for each entry contains the password.
+- Other lines should be preceded by an identifier for what that line contains.
+- Use `Username: [username]` to indicate a user name.
+- Others can be ad hoc and descriptive, examples:
+  - `Secret question: [secret qn] [answer]`
+  - `Last renewed: [last renewal date]`
+
+### Extensions and mobile apps
+
+- [gopassbridge](https://github.com/gopasspw/gopassbridge):
+  Browser extension
+- [Pass - Password Store](https://github.com/mssun/passforios)
+  ([Appstore](https://apps.apple.com/us/app/pass-password-store/id1205820573)):
+  iOS app, only supports 1 repository
+- [Password Store](https://github.com/android-password-store/android-password-store)
+  ([Play Store](https://play.google.com/store/apps/details?id=dev.msfjarvis.aps)):
+  Android app, only supports 1 repository
+
+### Rotate GPG key for the password store
+
+Create a new GPG key:
+
+```console
+$ gpg --expert --full-gen-key
+$ gpg -k           # Note the new key's fingerprint
+$ gpg --edit-key [NEW_KEY_FINGERPRINT]
+gpg> addkey
+Your selection? 10    # Kind of subkey: Signing only, ECC
+Your selection? 1     # Which elliptic curve: Default (Curve 25519) is ok
+Key is valid for? 0   # Does not expire, or set an expiration date if desired
+gpg> save
+$ gpg -k --with-subkey-fingerprints
+/path/to/pubring.kbx
+-----------------------------
+pub   rsa4096/XXXXXXXXXXXXXXXX 2020-01-01 [SC]
+      Key fingerprint = YYYY YYYY YYYY YYYY YYYY  YYYY YYYY YYYY YYYY YYYY
+uid                 [ultimate] Some Name <user@domain.com>
+sub   rsa4096/UUUUUUUUUUUUUUUU 2020-01-01 [E]
+      Key fingerprint = VVVV VVVV VVVV VVVV VVVV  VVVV VVVV VVVV VVVV VVVV
+sub   rsa4096/PPPPPPPPPPPPPPPP 2020-01-01 [S]
+      Key fingerprint = QQQQ QQQQ QQQQ QQQQ QQQQ  QQQQ QQQQ QQQQ QQQQ QQQQ
+
+pub   ed25519/A000000000000000 2023-12-31 [SC]
+      Key fingerprint = AAAA AAAA AAAA AAAA AAAA  AAAA AAAA AAAA AAAA AAAA
+uid                 [ultimate] Some Name <user@domain.com>
+sub   cv25519/B111111111111111 2023-12-31 [E]
+      Key fingerprint = BBBB BBBB BBBB BBBB BBBB  BBBB BBBB BBBB BBBB BBBB
+sub   ed25519/C222222222222222 2023-12-31 [S]
+      Key fingerprint = CCCC CCCC CCCC CCCC CCCC  CCCC CCCC CCCC CCCC CCCC
+```
+
+Note *sub* key (the one with `[E]`) fingerprint for the old and new
+keys (`VVVV VVVV ...` and `BBBB BBBB ...` respectively in the example
+output above), and the subkey id for the new key's signing subkey
+(the one with `[S]`, `C222...` in the example output above).
+
+If the old key was the default one, update it by adding the following
+line to `$HOME/.gnupg/gpg.conf` or modifying the appropriate line
+if one already exists, using the new primary key's fingerprint
+without spaces (in the above example, this would be `AAAAAAAA...`):
+
+```conf
+default-key [NEW_KEY_FINGERPRINT_WITHOUT_SPACES]
+```
+
+Add new encrypt subkey and remove the old encrypt subkey to and
+from the configured gopass recipients:
+
+```console
+$ cd /path/to/gopass/password/store/
+$ gopass recipients add [NEW_SUBKEY_FINGERPRINT_WITHOUT_SPACES]
+$ gopass recipients remove [OLD_SUBKEY_FINGERPRINT_WITHOUT_SPACES]
+```
+
+Update the signing subkey (the one with `[S]` for the new key, e.g.,
+`C222...` in the above example):
+
+```console
+$ gopass git configure git config user.signingkey [NEW_SIGNING_SUBKEY_ID]\!
+```
+
+Export the signing subkey public key to the remote Git forge. E.g.,
+for Gitlab go to user preferences to add a new GPG key by
+copying over the text block output by run `gpg --armor --export
+[NEW_SIGNING_SUBKEY_ID]` (instructions may differ by forge).
+
+Immediately continuing from above, it is recommended to remove
+all Git history so passwords encrypted with the old key cannot be
+accessed by looking at an old commit (following assumes the
+main branch name is `master` and the remote repository settings
+allows force push to that branch):
+
+```console
+$ git checkout --orphan latest_branch
+$ git add -A
+$ git commit -am 'Initial commit after changing GPG key'
+$ git branch -m master
+$ git push -f origin master
+```
+
+**Note**: If there are files on the system (e.g., a
+`$HOME/.netrc.gpg` file) that are encrypted with the old GPG
+key, re-encrypt them (use `--recipient [NEW_KEY_ID]` instead of
+`--default-recipient-self` if the new key won't be the default one):
+
+```console
+$ gpg --output somefile --decrypt somefile.gpg
+$ rm -f somefile.gpg
+$ gpg --output somefile.gpg --encrypt --default-recipient-self [NEW_KEY_ID]
+```
+
+Adapted from
+[here](https://daryl.wakatara.com/migrate-to-ecc-encryption-keys/)
+and [here](https://stackoverflow.com/a/26000395).
+
+Other references:
+- [Git Tools - Signing Your Work](https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work)
 
 ## Git
 
