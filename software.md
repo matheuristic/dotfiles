@@ -1010,18 +1010,22 @@
     Tool for authoring interactive, non-linear stories
 - Other
   - [age](https://github.com/FiloSottile/age) or
+    [ccrypt](https://ccrypt.sourceforge.net/) or
     [eureka](https://github.com/mimoo/eureka):
-    Simple command-line encryption/decryption tool; eureka is more
-    limited (no key files; generates a token to be used by recipient);
-    or just use GnuPG, either without public key cryptography by
-    running `gpg -o FILE.gpg -c FILE` to encrypt a file with a
-    symmetric cipher using a passphrase where the encrypted file can
-    later be decrypted with `gpg -d FILE.gpg` and the same passphrase,
-    or with public key cryptography by encrypting a file using a
-    recipient's public key and `gpg -r EMAIL -o FILE.gpg -e FILE`
-    where the encrypted file can later be decrypted with the
-    recipient's private key and `gpg -d <file>.gpg`; usually better
-    to use something like Cryptomator if not encrypting to share
+    Simple command-line encryption/decryption tool; ccrypt
+    is the simplest (prompt for password when encrypting, use
+    same password to decrypt); eureka is limited (no key files;
+    generates a token to be used by recipient); age is similar but
+    additionally supports identity files; or just use GnuPG, either
+    without public key cryptography by running `gpg -o FILE.gpg
+    -c FILE` to encrypt a file with a symmetric cipher using a
+    passphrase where the encrypted file can later be decrypted with
+    `gpg -d FILE.gpg` and the same passphrase, or with public key
+    cryptography by encrypting a file using a recipient's public
+    key and `gpg -r EMAIL -o FILE.gpg -e FILE` where the encrypted
+    file can later be decrypted with the recipient's private key
+    and `gpg -d <file>.gpg`; usually better to use something like
+    Cryptomator if not encrypting to share
   - [Al Dente](https://github.com/davidwernhart/AlDente):
     macOS tool to limit battery charging (i.e., the claim is keeping
     charge percentage at or below 80% can help prolong battery life),
@@ -2088,14 +2092,18 @@ Key is valid for? 0   # Does not expire, or set an expiration date if desired
 gpg> save
 ```
 
-Make sure to backup the master key somewhere safe (see below section
-"Migrating keys", or just archive the GnuPG directory into a tarball
-(may want to avoid backing up the `openpgp-revocs.d` subdirectory):
+Make sure to backup the keys somewhere safe (see below section
+"Migrating keys", or just archive the GnuPG directory into a
+tarball although in that case one may want to avoid backing
+up the `openpgp-revocs.d` subdirectory), encrypting if needed
+([ccrypt](https://ccrypt.sourceforge.net/) is used below):
 
 ```console
 $ killall gpg-agent
-$ tar -cf name-of-backup-file.tar -C $HOME/.gnupg
-$ shasum -a256 name-of-backup-file.tar > name-of-backup-file.tar.sha256
+$ cd path/to/folder-with-exported-keys/..                   # or `cd ~`
+$ tar cf name-of-backup-file.tar folder-with-exported-keys  # or `tar cf name-of-backup-file.tar .gnupg`
+$ ccrypt -e name-of-backup-file.tar                         # encrypt file
+$ shasum -a256 name-of-backup-file.tar.cpt > name-of-backup-file.tar.cpt.sha256
 ```
 
 (Optional) Run `gpg --edit-key [KEY_FINGERPRINT_WITHOUT_SPACES]` to
