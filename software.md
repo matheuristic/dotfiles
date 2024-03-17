@@ -1875,6 +1875,8 @@ References:
 
 - [Spack Docs](https://spack.readthedocs.io/en/latest/)
 - [Tutorial: Spack 101](https://spack-tutorial.readthedocs.io/en/latest/)
+- [Spack Packages](https://packages.spack.io/)
+- [Spack Build Cache](https://cache.spack.io/)
 
 ### Installing MacPorts without root privileges
 
