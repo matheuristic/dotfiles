@@ -449,7 +449,9 @@
   - [MacPorts](https://www.macports.org/) or
     [Spack](https://spack.io/) or
     [Homebrew](https://brew.sh/):
-    macOS package manager for open-source software
+    macOS package manager for open-source software; recommendation is
+    to use Spack for a user-local install, MacPorts for a multi-user
+    machine, and Homebrew for a single-user machine
   - [Mamba](https://mamba.readthedocs.io/)
     ([Github](https://github.com/mamba-org)):
     Drop-in replacement for [conda](https://conda.io/), with the
@@ -1732,6 +1734,82 @@ sudo xcode-select --install
 Attempting to run commands like `/usr/bin/clang` or `/usr/bin/clang`
 will also prompt the user about whether the system should download and
 install the command-line developer tools.
+
+### Installing [Spack](https://spack.io/)
+
+Make sure the XCode command-line developer tools are installed.
+
+To install Spack, create a `default` environment, and install some
+software (`gnupg`, `libqrencode` for `qrencode`, `tree`, and `gawk`
+shown here) into it:
+
+```console
+$ git clone -c feature.manyFiles=true https://github.com/spack/spack.git
+$ . $HOME/spack/share/spack/setup-env.sh  # add this to ~/.zshrc or ~/.bashrc
+$ spack install gnupg libqrencode tree gawk
+$ spack activate  # same as "spack env create default" then "spack env activate default"
+$ spack add gnupg libqrencode tree gawk
+$ spack install
+```
+
+To load Spack and activate the `default` environment automatically on
+Zsh shell startup:
+
+```sh
+cat >>~/.zshrc <<EOF
+# Spack
+. ~/spack/share/spack/setup-env.sh
+spacktivate  # short command for spack env activate
+EOF
+```
+
+If desired, add a build
+[cache](https://spack.readthedocs.io/en/latest/binary_caches.html)
+(the [develop](https://cache.spack.io/tag/develop/) version of the
+[official](https://cache.spack.io/) build cache is used below; as of
+2024-March-16, for macOS it only supports Ventura and not Sonoma):
+
+```console
+$ spack mirror add develop https://binaries.spack.io/develop
+$ spack buildcache keys --install --trust
+```
+
+Useful Spack commands (for a more complete listing, see
+[here](https://spack.readthedocs.io/en/latest/basic_usage.html)):
+
+- `spack help` for usage help
+- `spack list [PACKAGE]` lists packages Spack can install,
+  optionally filtered by a PACKAGE name if specified
+- `spack info PACKAGE` shows info the package PACKAGE
+- `spack install PACKAGE...` installs the given packages
+  - Use the `-d` option for more verbose output
+  - Install a specific version by using `@`,
+    e.g., `spack install mpich@3.0.4`
+  - Use a specific compiler by using `%` (also allows adding compiler
+    flags), e.g., `spack install mpich %gcc@13.2.0 cflags="-O3 -g"`
+    installs `mpich` using GCC version 13.2.0 with `CFLAGS="-O3 -g"`
+- `spack uninstall PACKAGE...` uninstalls the given packages
+  - To also uninstall dependents, use the `--dependents` option
+- `spack find [PACKAGE]` shows installed packages, optionally filtered
+  by a PACKAGE name if specified
+- `spack gc` uninstalls unneeded packages
+- `spack mark -e PACKAGE` and `spack mark -i PACKAGE` marks a package
+  as explicitly installed and implicitly installed respectively
+- `spack load PACKAGE` and `spack unload PACKAGE` loads and unloads a
+  given installed PACKAGE onto `$PATH` for the current shell session
+- `spack extensions PACKAGE` finds extensions for a given PACKAGE,
+  e.g., `spack extensions python` finds extensions for `python`
+- `spack env create ENVIRONMENT` creates a given ENVIRONMENT
+- `spack env activate [ENVIRONMENT]` activates the given ENVIRONMENT
+  (`default` if no environment is specified)
+  - `spacktivate` is a short hand for `spack env activate`
+- `spack env deactivate` deactivates the current environment
+  - `despacktivate` is a short hand for `spack env deactivate`
+
+References:
+
+- [Spack Docs](https://spack.readthedocs.io/en/latest/)
+- [Tutorial: Spack 101](https://spack-tutorial.readthedocs.io/en/latest/)
 
 ### Installing MacPorts without root privileges
 
