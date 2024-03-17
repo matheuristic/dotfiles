@@ -1746,7 +1746,7 @@ shown here) into it:
 $ git clone -c feature.manyFiles=true https://github.com/spack/spack.git
 $ . $HOME/spack/share/spack/setup-env.sh  # add this to ~/.zshrc or ~/.bashrc
 $ spack install gnupg libqrencode tree gawk
-$ spack activate  # same as "spack env create default" then "spack env activate default"
+$ spacktivate  # same as "spack env create default" then "spack env activate default"
 $ spack add gnupg libqrencode tree gawk
 $ spack install
 ```
@@ -1762,7 +1762,7 @@ spacktivate  # short command for spack env activate
 EOF
 ```
 
-If desired, add a build
+If desired, before `spack install ...` above, add a build
 [cache](https://spack.readthedocs.io/en/latest/binary_caches.html)
 (the [develop](https://cache.spack.io/tag/develop/) version of the
 [official](https://cache.spack.io/) build cache is used below; as of
@@ -1801,11 +1801,75 @@ Useful Spack commands (for a more complete listing, see
 - `spack extensions PACKAGE` finds extensions for a given PACKAGE,
   e.g., `spack extensions python` finds extensions for `python`
 - `spack env create ENVIRONMENT` creates a given ENVIRONMENT
-- `spack env activate [ENVIRONMENT]` activates the given ENVIRONMENT
-  (`default` if no environment is specified)
-  - `spacktivate` is a short hand for `spack env activate`
-- `spack env deactivate` deactivates the current environment
-  - `despacktivate` is a short hand for `spack env deactivate`
+- `spack env activate [ENVIRONMENT]` or `spacktivate [ENVIRONMENT]`
+  activates the given ENVIRONMENT (`default` if none specified)
+- `spack env deactivate` of `despacktivate` deactivates the current
+  environment
+- `spack add PACKAGE` in an environment adds PACKAGE to the env specs
+- `spack remove PACKAGE` in an environment removes PACKAGE from the
+  env specs
+- `spack concretize --fresh --force` in an environment tells Spack to
+  use the latest version of every package in the env and forcibly
+  overwrites its previous concretization
+- `spack install` in an environment will build and install packages
+  for its concretized spec
+
+Common workflows (adapted from
+[here](https://spack.readthedocs.io/en/latest/replace_conda_homebrew.html)):
+
+- To set up an environment (some sampling of packages chosen below,
+  change as appropriate):
+
+  ```console
+  $ spack env create myenv
+  $ spack -e myenv add bash@5 python py-numpy py-scipy py-matplotlib
+  ```
+
+  To ensure only a single version of any package exists in the
+  environment, it is recommended to run `spack -e myenv config edit`
+  and add the following:
+
+  ```yaml
+  spack:
+    # ...
+    concretizer:
+      unify: true
+  ```
+
+  Concretize the environment (concretization picks the optimal
+  versions of each package within the specs constraints according to
+  policies set for the particular Spack installation), and build and
+  install the packages:
+
+  ```console
+  $ spack -e myenv concretize
+  $ spack -e myenv install
+  ```
+
+- To update packages in an environment:
+
+  ```console
+  $ spack env activate myenv
+  $ spack concretize --fresh --force
+  $ spack install
+  ```
+
+- To clean up old packages in an environment after an update:
+
+  ```console
+  $ spack env activate myenv
+  $ spack mark -i --all
+  $ spack concretize --fresh --force
+  $ spack install
+  $ spack gc
+  ```
+
+- To remove an environment:
+
+  ```console
+  $ spack env deactivate
+  $ spack env remove myenv
+  ```
 
 References:
 
