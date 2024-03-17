@@ -1783,6 +1783,8 @@ Useful Spack commands (for a more complete listing, see
 - `spack info PACKAGE` shows info the package PACKAGE
 - `spack install PACKAGE...` installs the given packages
   - Use the `-d` option for more verbose output
+  - Use the `--add` option to incrementally install the package and
+    concretize in the active environment
   - Install a specific version by using `@`,
     e.g., `spack install mpich@3.0.4`
   - Use a specific compiler by using `%` (also allows adding compiler
@@ -2201,7 +2203,7 @@ If using a console pinentry for entering the GnuPG password in the
 terminal, it can be better to use TTY pinentry rather than ncurses
 pinentry. Configure this as follows:
 
-- The default `pinentry` is usually symlinked to `pinentry-ncurses`
+- The default `pinentry` may be symlinked to `pinentry-ncurses`
   which has issues being run from other ncurses programs like Vim.
   Change the symlink `pinentry` so it points to `pinentry-tty`. For example,
   suppose if using `pinentry` from MacPorts installed to `$HOME/macports`:
@@ -2209,6 +2211,12 @@ pinentry. Configure this as follows:
   ```sh
   cd $HOME/macports/bin
   rm pinentry && ln -s pinentry-tty pinentry
+  ```
+
+  Or just set the pinentry program used in `$HOME/.gnupg/gpg-agent.conf`:
+
+  ```conf
+  pinentry-program /path/to/pinentry-tty
   ```
 
 - Set the `$GPG_TTY` environment variable in the shell configuration to the
