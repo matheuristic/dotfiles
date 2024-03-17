@@ -692,13 +692,12 @@
     Like `diff` but for tables
   - [delta](https://github.com/dandavison/delta):
     `diff` alternative
-  - [enchant](https://github.com/AbiWord/enchant):
-    Wrapper for abstracting different spell checking libraries into a
-    single interface, with support for personal word lists (one word per
-    line) at paths `$ENCHANT_CONFIG_DIR/<lang>.dic` (for example,
-    `$HOME/.config/enchant/en_US.dic` for the US English personal word
-    list on Unix or Linux systems); install `enchant-2` with APT on
-    Debian and Ubuntu; install `enchant-2` with MacPorts on macOS
+  - [Hunspell](https://hunspell.github.io/)
+    ([Github](https://github.com/hunspell/hunspell)) or
+    [Enchant](https://github.com/AbiWord/enchant):
+    Hunspell is a command-line spell checker and spell checking
+    library; Enchant is a wrapper for abstracting different spell
+    checking libraries, including Hunspell, into a single interface
   - [FIGlet](http://www.figlet.org/)
     ([Github](https://github.com/cmatsuoka/figlet)):
     Convert text to large ASCII word art, additional fonts are
