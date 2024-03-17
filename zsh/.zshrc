@@ -85,6 +85,12 @@ if [ -d $HOME/macports/share/perl5 ]; then
   export PERL5LIB=$HOME/macports/share/perl5:$PERL5LIB
 fi
 
+# Spack
+if [ -d $HOME/spack ]; then
+  . $HOME/spack/share/spack/setup-env.sh
+  spacktivate  # comment this line to not auto-activate default env
+fi
+
 # plan9port
 if [ -d $HOME/.local/plan9 ]; then
   export PLAN9=$HOME/.local/plan9
