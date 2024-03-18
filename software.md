@@ -1451,6 +1451,170 @@ Notes:
   XCode or its command-line tools installed. However, it is
   recommended to install at least the command-line tools.
 
+### Script for installing global tools using conda
+
+Save the following shell code to a file, e.g. `setup-conda-tools.sh`,
+and run `chmod +x setup-conda-tools.sh` to make it executable.
+
+```sh
+#!/bin/sh
+
+# Create a conda env and install packages from a conda environment YAML file, and
+# link a command for each installed package to $PREFIX/bin/ (one or more
+# commands separated by whitespace in a comment after each package, or if
+# none are indicated then a command of the same name as the package)
+
+# Requirements: conda or variant (default: micromamba) installed and configured
+
+# Example file that when "install"-ed with this script creates a conda-tools
+# env with black, pandoc, python==3.11.8, ripgrep and shellcheck packages
+# installed and creates wrappers for black, pandoc, pandoc-lua, pandoc-server,
+# rg, and shellcheck (python is not wrapped, its trailing comment is empty):
+#
+#     name: conda-tools
+#     channels:
+#       - conda-forge
+#     dependencies:
+#       - black
+#       - pandoc # pandoc pandoc-lua pandoc-server
+#       - python=3.11.8 #
+#       - ripgrep # rg
+#       - shellcheck
+#       # - tree
+
+set -e
+
+CONDA_CMD=${CONDA_CMD:-micromamba}
+PREFIX=${PREFIX:-$HOME/.local}
+
+validate_file () {
+	if [ -z "$1" ]; then
+		echo 'No filename specified' 1>&2
+		exit 2
+	fi
+	if [ ! -f "$1" ]; then
+		echo "File $1 not found" 1>&2
+		exit 2
+	fi
+}
+
+get_envname () {
+	# Assume no tab characters in file, and env name on the same line as 'name:'
+	ENVNAME=$(cat "$1" | grep -E '^name:' | sed 's/^name: *//' | sed 's/ *$//')
+	if [ -z "$ENVNAME" ]; then
+		echo 'No environment name found' 1>&2
+		exit 3
+	fi
+	echo "$ENVNAME"
+}
+
+get_dependencies_to_link () {
+	# Assume no tab characters in file, and skip Python
+	cat "$1" | sed -e '1,/^dependencies: *$/ d' | \
+		sed -e '/^[^ ]/,$ d' | \
+		grep -v '^ *#' | \
+		sed 's/.*# *//g' | \
+		sed 's/ *-  *//g' | \
+		sed 's/[=<>].*//g' | \
+		sed 's/ *$//g'
+}
+
+install_tools () {
+	FILENAME="$1"
+	validate_file "$FILENAME"
+	ENVNAME=$(get_envname "$FILENAME")
+
+	micromamba create -y -f "$FILENAME"
+
+	for PROGNAME in $(get_dependencies_to_link "$FILENAME"); do
+		if [ -z "$PROGNAME" ]; then
+			continue
+		fi
+		DEST=$PREFIX/bin/$PROGNAME
+	 	echo "Creating wrapper for $ENVNAME env $PROGNAME : $DEST"
+	 	cat >"$DEST" <<EOF
+#!/bin/zsh
+
+micromamba run -n $ENVNAME $PROGNAME \$@
+EOF
+		chmod +x "$DEST"
+	done
+
+	echo "Done"
+}
+
+uninstall_tools () {
+	FILENAME="$1"
+	validate_file "$FILENAME"
+	ENVNAME=$(get_envname "$FILENAME")
+
+	for PROGNAME in $(get_dependencies_to_link "$FILENAME"); do
+		if [ -z "$PROGNAME" ]; then
+			continue
+		fi
+		DEST=$PREFIX/bin/$PROGNAME
+		rm -f "$DEST"
+		echo "Removed $DEST"
+	done
+
+	micromamba env remove -y -n "$ENVNAME"
+
+	echo "Done"
+}
+
+case $1 in
+	install)
+		install_tools "$2"
+		;;
+	uninstall)
+		uninstall_tools "$2"
+		;;
+	*)
+		echo "Usage: $(basename $0) <install|uninstall> <filename>" 1>&2
+		exit 1
+		;;
+esac
+```
+
+Create a conda YAML file like the following, say `conda-tools.yml`:
+
+```yaml
+name: conda-tools
+channels:
+  - conda-forge
+dependencies:
+  - black
+  - editorconfig
+  - gawk
+  - mosh
+  - pandoc # pandoc pandoc-lua pandoc-server
+  - pstree
+  - python==3.11.8 #
+  - ripgrep # rg
+  - ruff
+  - shellcheck
+  - tree
+```
+
+Create a `conda-tools` conda environment with black, editorconfig,
+gawk, mosh, pandoc, pstree, python 3.11.8, ripgrep, ruff, shellcheck
+and tree, followed by creating executable wrappers for `black`,
+`editorconfig`, `gawk`, `mosh`, `pandoc`, `pandoc-lua`,
+`pandoc-server`, `pstree`, `rg`, `ruff`, `shellcheck` and `tree` from
+the environment in `$HOME/.local/bin/` (that is assumed to be on the
+`$PATH`):
+
+```console
+$ ./setup-conda-tools.sh conda-tools.yml
+```
+
+Note that in the YAML file, the commands to wrap are indicated in
+a trailing comment for its corresponding package, separated by
+whitespace. If there is no command in the trailing comment, no
+wrapper is created for that command. If there is no comment comment
+for a package, then the default behavior is to assume a command
+exists with the same name as the command and wrap that.
+
 ## Python virtual environments
 
 Conda (see above) can work as a virtual environment manager.
@@ -1739,15 +1903,15 @@ install the command-line developer tools.
 Make sure the XCode command-line developer tools are installed.
 
 To install Spack, create a `default` environment, and install some
-software (`gnupg`, `libqrencode` for `qrencode`, `tree`, and `gawk`
-shown here) into it:
+software (`gnupg`, `hunspell`, and `libqrencode` for `qrencode` shown
+here) into it:
 
 ```console
 $ git clone -c feature.manyFiles=true https://github.com/spack/spack.git
 $ . $HOME/spack/share/spack/setup-env.sh  # add this to ~/.zshrc or ~/.bashrc
-$ spack install gnupg libqrencode tree gawk
+$ spack install gnupg hunspell libqrencode
 $ spacktivate  # same as "spack env create default" then "spack env activate default"
-$ spack add gnupg libqrencode tree gawk
+$ spack add gnupg hunspell libqrencode
 $ spack install
 ```
 
