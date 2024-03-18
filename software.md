@@ -1459,10 +1459,16 @@ and run `chmod +x setup-conda-tools.sh` to make it executable.
 ```sh
 #!/bin/sh
 
-# Create a conda env and install packages from a conda environment YAML file, and
-# link a command for each installed package to $PREFIX/bin/ (one or more
+# setup-conda-tools.sh - create conda env from file and global command wrappers
+
+# Create a conda env and install packages from a conda environment YAML file,
+# and link a command for each installed package to $PREFIX/bin/ (one or more
 # commands separated by whitespace in a comment after each package, or if
 # none are indicated then a command of the same name as the package)
+
+# Set the CONDA_ENV env var to change the conda cmd used (default: micromamba)
+
+# Set the PREFIX env var to change prefix as mentioned above (default: ~/.local)
 
 # Requirements: conda or variant (default: micromamba) installed and configured
 
@@ -1524,7 +1530,7 @@ install_tools () {
 	validate_file "$FILENAME"
 	ENVNAME=$(get_envname "$FILENAME")
 
-	micromamba create -y -f "$FILENAME"
+	"$CONDA_CMD" env create -y -f "$FILENAME"
 
 	for PROGNAME in $(get_dependencies_to_link "$FILENAME"); do
 		if [ -z "$PROGNAME" ]; then
@@ -1535,7 +1541,7 @@ install_tools () {
 	 	cat >"$DEST" <<EOF
 #!/bin/zsh
 
-micromamba run -n $ENVNAME $PROGNAME \$@
+"$CONDA_CMD" run -n $ENVNAME $PROGNAME \$@
 EOF
 		chmod +x "$DEST"
 	done
@@ -1557,7 +1563,7 @@ uninstall_tools () {
 		echo "Removed $DEST"
 	done
 
-	micromamba env remove -y -n "$ENVNAME"
+	"$CONDA_CMD" env remove -y -n "$ENVNAME"
 
 	echo "Done"
 }
