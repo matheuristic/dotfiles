@@ -1586,6 +1586,7 @@ dependencies:
   - black
   - editorconfig
   - gawk
+  - libqrencode # qrencode
   - mosh
   - pandoc # pandoc pandoc-lua pandoc-server
   - pstree
@@ -1903,15 +1904,14 @@ install the command-line developer tools.
 Make sure the XCode command-line developer tools are installed.
 
 To install Spack, create a `default` environment, and install some
-software (`gnupg`, `hunspell`, and `libqrencode` for `qrencode` shown
-here) into it:
+software (`gnupg` and `hunspell` shown here) into it:
 
 ```console
 $ git clone -c feature.manyFiles=true https://github.com/spack/spack.git
 $ . $HOME/spack/share/spack/setup-env.sh  # add this to ~/.zshrc or ~/.bashrc
-$ spack install gnupg hunspell libqrencode
+$ spack install gnupg hunspell
 $ spacktivate  # same as "spack env create default" then "spack env activate default"
-$ spack add gnupg hunspell libqrencode
+$ spack add gnupg hunspell
 $ spack install
 ```
 
