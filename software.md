@@ -1585,7 +1585,6 @@ channels:
 dependencies:
   - black
   - editorconfig
-  - gawk
   - libqrencode # qrencode
   - mosh
   - pandoc # pandoc pandoc-lua pandoc-server
@@ -1600,10 +1599,9 @@ dependencies:
 Create a `conda-tools` conda environment with black, editorconfig,
 gawk, mosh, pandoc, pstree, python 3.11.8, ripgrep, ruff, shellcheck
 and tree, followed by creating executable wrappers for `black`,
-`editorconfig`, `gawk`, `mosh`, `pandoc`, `pandoc-lua`,
-`pandoc-server`, `pstree`, `rg`, `ruff`, `shellcheck` and `tree` from
-the environment in `$HOME/.local/bin/` (that is assumed to be on the
-`$PATH`):
+`editorconfig`, `mosh`, `pandoc`, `pandoc-lua`, `pandoc-server`,
+`pstree`, `rg`, `ruff`, `shellcheck` and `tree` from the environment
+in `$HOME/.local/bin/` (that is assumed to be on the `$PATH`):
 
 ```console
 $ ./setup-conda-tools.sh install conda-tools.yml
@@ -1909,10 +1907,11 @@ software (`gnupg` and `hunspell` shown here) into it:
 ```console
 $ git clone -c feature.manyFiles=true https://github.com/spack/spack.git
 $ . $HOME/spack/share/spack/setup-env.sh  # add this to ~/.zshrc or ~/.bashrc
-$ spack install gnupg hunspell
+$ spack install gawk gnupg hunspell
 $ spacktivate  # same as "spack env create default" then "spack env activate default"
-$ spack add gnupg hunspell
+$ spack add gawk gnupg hunspell
 $ spack install
+$ spack gc
 ```
 
 To load Spack and activate the `default` environment automatically on
