@@ -1905,8 +1905,9 @@ To install Spack, create a `default` environment, and install some
 software (`gnupg` and `hunspell` shown here) into it:
 
 ```console
+$ cd ~
 $ git clone -c feature.manyFiles=true https://github.com/spack/spack.git
-$ . $HOME/spack/share/spack/setup-env.sh  # add this to ~/.zshrc or ~/.bashrc
+$ . ~/spack/share/spack/setup-env.sh  # add this to ~/.zshrc or ~/.bashrc
 $ spack install gawk gnupg hunspell
 $ spacktivate  # same as "spack env create default" then "spack env activate default"
 $ spack add gawk gnupg hunspell
