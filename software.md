@@ -1606,15 +1606,15 @@ the environment in `$HOME/.local/bin/` (that is assumed to be on the
 `$PATH`):
 
 ```console
-$ ./setup-conda-tools.sh conda-tools.yml
+$ ./setup-conda-tools.sh install conda-tools.yml
 ```
 
-Note that in the YAML file, the commands to wrap are indicated in
-a trailing comment for its corresponding package, separated by
-whitespace. If there is no command in the trailing comment, no
-wrapper is created for that command. If there is no comment comment
-for a package, then the default behavior is to assume a command
-exists with the same name as the command and wrap that.
+Note that in the YAML file, the commands to wrap are indicated in a
+trailing comment for its corresponding package, separated by
+whitespace. If there is no command in the trailing comment, no wrapper
+is created for that command. If there is no comment for a package,
+then the default behavior is to assume a command exists with the same
+name as the command and to wrap that.
 
 ## Python virtual environments
 
