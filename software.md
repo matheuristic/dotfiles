@@ -1540,7 +1540,7 @@ install_tools () {
 		DEST=$PREFIX/bin/$PROGNAME
 	 	echo "Creating wrapper for $ENVNAME env $PROGNAME : $DEST"
 	 	cat >"$DEST" <<EOF
-#!/bin/zsh
+#!/bin/sh
 
 "$CONDA_CMD" run -n $ENVNAME $PROGNAME \$@
 EOF
@@ -1620,6 +1620,22 @@ whitespace. If there is no command in the trailing comment, no wrapper
 is created for that command. If there is no comment for a package,
 then the default behavior is to assume a command exists with the same
 name as the command and to wrap that.
+
+Also note that if using `conda` or `mamba` instead of `micromamba`,
+some wrapped commands may not have the expected terminal interaction
+(typically ncurses- or piping-related). For example, `bat somefile.sh`
+may not use ncurses or `cat test.md | prettier --parser=markdown` may
+not output anything to stdout. If using `conda` or `mamba`, modify
+`setup-conda-tools.sh` so the wrapper script part looks like:
+
+```sh
+#!/bin/sh
+
+CONDA_SH=\$(dirname "\$CONDA_EXE")/../etc/profile.d/conda.sh
+. "\$CONDA_SH"
+conda activate $ENVNAME
+"$PROGNAME" \$@
+```
 
 ## Python virtual environments
 
