@@ -1411,10 +1411,11 @@ Manual install, assumes `$HOME/.local/bin` is in `$PATH`, ZSH is
 the user shell, and `$HOME/micromamba/` used for micromamba envs:
 
 ```sh
+cd ~/.local
 # Download binary and place into a directory on the path
-curl -Ls https://micro.mamba.pm/api/micromamba/osx-arm64/latest | tar -xvj $HOME/.local/bin/micromamba
+curl -Ls https://micro.mamba.pm/api/micromamba/osx-arm64/latest | tar -xj bin/micromamba
 # Set up micromamba in shell config
-micromamba shell init -s zsh -p $HOME/micromamba
+micromamba shell init -s zsh -p "$HOME/micromamba"
 # Use conda-forge repo and don't auto-activate base env
 micromamba config append channels conda-forge
 micromamba config append channels nodefaults
