@@ -1494,6 +1494,13 @@ set -e
 CONDA_CMD=${CONDA_CMD:-micromamba}
 PREFIX=${PREFIX:-$HOME/.local}
 
+validate_conda_cmd () {
+	if ! [ "$CONDA_CMD" == "conda" -o "$CONDA_CMD" == "mamba" -o "$(basename $CONDA_CMD)" == "micromamba" ]; then
+		echo "Unsupported CONDA_CMD $CONDA_CMD" 1>&2
+		exit 2
+	fi
+}
+
 validate_file () {
 	if [ -z "$1" ]; then
 		echo 'No filename specified' 1>&2
@@ -1539,11 +1546,33 @@ install_tools () {
 		fi
 		DEST=$PREFIX/bin/$PROGNAME
 	 	echo "Creating wrapper for $ENVNAME env $PROGNAME : $DEST"
-	 	cat >"$DEST" <<EOF
+		if [ "$(basename $CONDA_CMD)" == "micromamba" ]; then
+			cat >"$DEST" <<EOF
 #!/bin/sh
 
 "$CONDA_CMD" run -n $ENVNAME $PROGNAME \$@
 EOF
+		elif [ "$CONDA_CMD" == "conda" -o "$CONDA_CMD" == "mamba" ]; then
+			# Need to explicitly activate env when using
+			# conda or mamba, else some wrapped commands
+			# may not behave in the terminal as expected
+			# (typically in cases where ncurses or piping
+			# is being used). E.g., `bat somefile.sh`
+			# acts like in a dumb term or
+			# `cat test.md | prettier --parser=markdown`
+			# may not output anything to stdout
+			CONDA_SH=$(dirname $CONDA_EXE)
+			cat >"$DEST" <<EOF
+#!/bin/sh
+
+. "$CONDA_SH/../etc/profile.d/conda.sh"
+conda activate $ENVNAME
+"$PROGNAME" \$@
+EOF
+		else
+			echo "Unsupported command $CONDA_CMD" 1>&2
+			exit 2
+		fi
 		chmod +x "$DEST"
 	done
 
@@ -1571,9 +1600,11 @@ uninstall_tools () {
 
 case $1 in
 	install)
+		validate_conda_cmd
 		install_tools "$2"
 		;;
 	uninstall)
+		validate_conda_cmd
 		uninstall_tools "$2"
 		;;
 	*)
@@ -1620,22 +1651,6 @@ whitespace. If there is no command in the trailing comment, no wrapper
 is created for that command. If there is no comment for a package,
 then the default behavior is to assume a command exists with the same
 name as the command and to wrap that.
-
-Also note that if using `conda` or `mamba` instead of `micromamba`,
-some wrapped commands may not have the expected terminal interaction
-(typically ncurses- or piping-related). For example, `bat somefile.sh`
-may not use ncurses or `cat test.md | prettier --parser=markdown` may
-not output anything to stdout. If using `conda` or `mamba`, modify
-`setup-conda-tools.sh` so the wrapper script part looks like:
-
-```sh
-#!/bin/sh
-
-CONDA_SH=\$(dirname "\$CONDA_EXE")/../etc/profile.d/conda.sh
-. "\$CONDA_SH"
-conda activate $ENVNAME
-"$PROGNAME" \$@
-```
 
 ## Python virtual environments
 
