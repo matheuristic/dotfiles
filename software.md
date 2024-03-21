@@ -1027,11 +1027,19 @@
     file can later be decrypted with the recipient's private key
     and `gpg -d <file>.gpg`; usually better to use something like
     Cryptomator if not encrypting to share
+  - [Aiko](https://sindresorhus.com/aiko)
+    ([App Store](https://apps.apple.com/app/id1672085276)):
+    iOS and macOS app for local audio transcription using OpenAI's
+    [Whisper](https://openai.com/research/whisper) model
   - [Al Dente](https://github.com/davidwernhart/AlDente):
     macOS tool to limit battery charging (i.e., the claim is keeping
     charge percentage at or below 80% can help prolong battery life),
     however this may not be necessary if "Optimized Battery Charging"
     is sufficient for usage needs
+  - [Amazing AI](https://sindresorhus.com/amazing-ai)
+    ([App Store](https://apps.apple.com/app/id1660147028)):
+    iOS and macOS (Apple Silicon M1/M2/... chip required) app for
+    local image generation from text using the Stable Diffusion model
   - [Anki](https://apps.ankiweb.net/):
     Flashcards software; cross-platform, and also available on
     [iOS](https://apps.apple.com/us/app/ankimobile-flashcards/id373493387),
@@ -1158,7 +1166,8 @@
   - [Vale](https://vale.sh/)
     ([Github](https://github.com/errata-ai/vale)):
     Linter for prose
-  - [Velja](https://sindresorhus.com/velja):
+  - [Velja](https://sindresorhus.com/velja)
+    ([App Store](https://apps.apple.com/app/id1607635845)):
     Open different links in different browsers or apps, macOS
   - [Zotero](https://www.zotero.org/):
     Reference management software to collect, organize, cite and
