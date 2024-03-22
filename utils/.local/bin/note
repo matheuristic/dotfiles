@@ -60,8 +60,6 @@ EOF
 			exit 1
 	esac
 done
-echo "basis date $BASISDATE"
-echo "adjustment $DATEADJUSTMENT"
 
 DATEFMT="+%Y-%m-%d-%a"
 DATEPARAMS=
