@@ -581,17 +581,29 @@
     Robust SSH alternative; `dumb` terminals don't work well with mosh
     because it always outputs escape sequences to set the window title
   - [Remmina](https://remmina.org/):
-    Remote desktop client for POSIX systems
+    Remote desktop client for POSIX systems; on systems that can
+    run [Chrome](https://www.google.com/chrome/), there is also
+    [Chrome Remote Desktop](https://remotedesktop.google.com/)
+    ([extension](https://chromewebstore.google.com/detail/chrome-remote-desktop/inomeogfingihgjfjlpeplalcfajhgai))
 - Search
   - [Code Search](https://github.com/google/codesearch) or
     [hound](https://github.com/hound-search/hound) or
     [zoekt](https://github.com/sourcegraph/zoekt):
-    Text search engine, good for source code; codesearch and hound are
-    based on [this paper](https://swtch.com/~rsc/regexp/regexp4.html);
-    codebase and zoekt have CLI interfaces, while hound and zoekt
+    Text search engine for source code; codesearch and hound are based
+    on [this paper](https://swtch.com/~rsc/regexp/regexp4.html); zoekt
+    is based on a simplified version of a technique described
+    [here](https://link.springer.com/article/10.1007/s11390-016-1618-6)
+    ([design](https://github.com/sourcegraph/zoekt/blob/main/doc/design.md),
+    [HN comment](https://news.ycombinator.com/item?id=38370711)).
+    Code Search and zoekt have CLI interfaces, while hound and zoekt
     (using zoekt-webserver) have web interfaces; hound and zoekt are
     more featureful, e.g., works with various Git hosts; see the
-    **Working with large codebases** section below for a good use case
+    **Working with large codebases** section below for a good use
+    case; Code Search is archived now (although it still compiles and
+    works), but there are maintained forks with added features
+    ([one](https://github.com/junkblocker/codesearch),
+    [two](https://github.com/hakonhall/codesearch),
+    [three](https://github.com/tylerwilliams/codesearch))
   - [Meilisearch](https://github.com/meilisearch/meilisearch) or
     [ElasticSearch](https://github.com/elastic/elasticsearch) or
     [Toshi](https://github.com/toshi-search/Toshi):
@@ -682,8 +694,13 @@
     Command-line tool to list files in subdir tree depth-indented
 - Text (general)
   - [Aspell](http://aspell.net/) or
-    [Nuspell](https://nuspell.github.io/):
-    Spell checker
+    [Nuspell](https://nuspell.github.io/) or
+    [Hunspell](https://hunspell.github.io/)
+    ([Github](https://github.com/hunspell/hunspell)) or
+    [Enchant](https://github.com/AbiWord/enchant):
+    Command-line spell checkers and libraries; Enchant is a wrapper
+    for abstracting different spell checking libraries, including
+    the others mentioned here, into a single interface
   - [bat](https://github.com/sharkdp/bat):
     Command-line `cat` clone with syntax highlighting and Git integration
   - [cspell](https://github.com/streetsidesoftware/cspell):
@@ -692,12 +709,6 @@
     Like `diff` but for tables
   - [delta](https://github.com/dandavison/delta):
     `diff` alternative
-  - [Hunspell](https://hunspell.github.io/)
-    ([Github](https://github.com/hunspell/hunspell)) or
-    [Enchant](https://github.com/AbiWord/enchant):
-    Hunspell is a command-line spell checker and spell checking
-    library; Enchant is a wrapper for abstracting different spell
-    checking libraries, including Hunspell, into a single interface
   - [FIGlet](http://www.figlet.org/)
     ([Github](https://github.com/cmatsuoka/figlet)):
     Convert text to large ASCII word art, additional fonts are
@@ -840,7 +851,9 @@
     ([Github](https://github.com/ianyh/Amethyst):
     Tiling window manager for macOS
   - [Barrier](https://github.com/debauchee/barrier):
-    Cross-platform software that mimics KVM switch functionality
+    Cross-platform software that mimics KVM switch functionality; if
+    using Macs and iPads with the same account, best to use instead
+    [Universal Control](https://support.apple.com/en-us/102459)
   - [Hyperkey](https://hyperkey.app/):
     Use CapsLock as a "hyper" key, that is, C-Opt-Cmd-Shift, on macOS
   - [LinearMouse](https://github.com/linearmouse/linearmouse) or
@@ -906,8 +919,11 @@
     Hollywood technobabble in a Byobu session
   - [parallel](https://www.gnu.org/software/parallel/):
     Command-line tool for executing jobs in parallel
-  - [pv](http://www.ivarch.com/programs/pv.shtml):
-    Like `cat` but prints progress to stderr
+  - [pv](http://www.ivarch.com/programs/pv.shtml)
+    ([Codeberg](https://codeberg.org/a-j-wood/pv)):
+    Like `cat` (reads from stdin or file and forwards it to stdout)
+    while printing progress to stderr; useful for monitoring progress
+    when piping large amounts of data from one program to another
   - [rlwrap](https://github.com/hanslub42/rlwrap):
     `readline` wrapper to enable completion and history for any
     command-line tool taking keyboard input
@@ -939,13 +955,6 @@
   - [virt-manager](https://virt-manager.org/):
     Linux desktop tool for managing QEMU/KVM virtual machines
 - VPN
-  - [headscale](https://github.com/juanfont/headscale) or
-    [innernet](https://github.com/tonarino/innernet) or
-    [nebula](https://github.com/slackhq/nebula) or
-    [netbird](https://github.com/netbirdio/netbird):
-    Overlay networking tool for creating a private network, like
-    [Tailscale](https://tailscale.com/); especially, headscale is
-    an open-source self-hosted Tailscale control server alternative
   - [OpenVPN](https://openvpn.net/vpn-client/)
     or [TunnelBlick](https://tunnelblick.net/):
     OpenVPN client, note that Linux clients be should installed via
@@ -954,9 +963,18 @@
     TunnelBlick is macOS-only and built on the older but still
     maintained OpenVPN 2 libraries
   - [WireGuard](https://www.wireguard.com/):
-    Simple and high-performance VPN; can be involved to set up,
-    use tools like [wg-easy](https://github.com/wg-easy/wg-easy)
-    for easier installation and administration
+    Simple and high-performance VPN; can be involved to set up, use
+    tools like [wg-easy](https://github.com/wg-easy/wg-easy) for
+    easier installation and administration; WireGuard orchestration
+    tools include [headscale](https://github.com/juanfont/headscale)
+    (open-source self-hosted [Tailscale](https://tailscale.com/)
+    control server alternative designed to be used with Tailscale
+    clients), [innernet](https://github.com/tonarino/innernet),
+    [nebula](https://github.com/slackhq/nebula), or
+    [netbird](https://github.com/netbirdio/netbird);
+    non-WireGuard-based alternatives include
+    [ZeroTier](https://www.zerotier.com/) (self-hosting
+    [supported](https://docs.zerotier.com/selfhost))
 - Web browsing
   - [Amfora](https://github.com/makeworld-the-better-one/amfora) or
     [Bombadillo](https://bombadillo.colorfield.space/)
@@ -1483,9 +1501,10 @@ and run `chmod +x setup-conda-tools.sh` to make it executable.
 # Requirements: conda or variant (default: micromamba) installed and configured
 
 # Example file that when "install"-ed with this script creates a conda-tools
-# env with black, pandoc, python==3.11.8, ripgrep and shellcheck packages
-# installed and creates wrappers for black, pandoc, pandoc-lua, pandoc-server,
-# rg, and shellcheck (python is not wrapped, its trailing comment is empty):
+# env with black, pandoc, python==3.11.8, and ripgrep packages installed and
+# creates wrappers for black, pandoc, pandoc-lua, pandoc-server, and rg
+# (python has an empty trailing comment so it is not wrapped; and tree is
+# commented out so it is not installed):
 #
 #     name: conda-tools
 #     channels:
@@ -1495,7 +1514,6 @@ and run `chmod +x setup-conda-tools.sh` to make it executable.
 #       - pandoc # pandoc pandoc-lua pandoc-server
 #       - python=3.11.8 #
 #       - ripgrep # rg
-#       - shellcheck
 #       # - tree
 
 set -e
@@ -1630,25 +1648,21 @@ name: conda-tools
 channels:
   - conda-forge
 dependencies:
-  - black
   - editorconfig
   - libqrencode # qrencode
   - mosh
   - pandoc # pandoc pandoc-lua pandoc-server
   - pstree
-  - python==3.11.8 #
   - ripgrep # rg
-  - ruff
-  - shellcheck
   - tree
 ```
 
-Create a `conda-tools` conda environment with black, editorconfig,
-gawk, mosh, pandoc, pstree, python 3.11.8, ripgrep, ruff, shellcheck
-and tree, followed by creating executable wrappers for `black`,
-`editorconfig`, `mosh`, `pandoc`, `pandoc-lua`, `pandoc-server`,
-`pstree`, `rg`, `ruff`, `shellcheck` and `tree` from the environment
-in `$HOME/.local/bin/` (that is assumed to be on the `$PATH`):
+Create a `conda-tools` conda environment with editorconfig,
+libqrencode, mosh, pandoc, pstree, ripgrep and tree, followed by
+creating executable wrappers for the `editorconfig`, `qrencode`,
+`mosh`, `pandoc`, `pandoc-lua`, `pandoc-server`, `pstree`, `rg` and
+`tree` commands from the environment in `$HOME/.local/bin/` (which is
+assumed to be in `$PATH`):
 
 ```console
 $ ./setup-conda-tools.sh install conda-tools.yml
