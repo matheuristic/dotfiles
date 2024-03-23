@@ -2971,12 +2971,13 @@ git mv a.txt b.txt
 
 However, supposed that was done using `mv` instead. The following
 steps show how to reconcile the Git repository with the new filenames
-(basically `git rm` the old filename and `git add` the new filename):
+(basically `git rm --cache` to remove the old filename from the index
+and `git add` the file with the new name):
 
 ```sh
-mv a.txt b.txt
-git rm a.txt
-git add b.txt
+mv a.txt b.txt         # oops, meant to "git mv" but did "mv" instead
+git rm --cached a.txt  # fix pt 1: remove old file from index
+git add b.txt          # fix pt 2: add new file
 ```
 
 ## Using Notmuch, Lieer and aerc for GMail usage
