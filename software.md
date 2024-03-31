@@ -557,6 +557,13 @@
   - [scc](https://github.com/boyter/scc) or
     [tokei](https://github.com/XAMPPRocky/tokei):
     Count lines of code by language
+  - [scorecard](https://scorecard.dev/)
+    ([Github](https://github.com/ossf/scorecard)):
+    Assess operational risk (code, build, dependencies, testing,
+    maintenance, etc) of open-source software; can be run on public
+    repositories owned by others; results for many open source
+    projects are also published weekly as a BigQuery dataset (see
+    [here](https://github.com/ossf/scorecard?tab=readme-ov-file#public-data))
   - [task](https://github.com/go-task/task):
     Easier-to-use [Make](https://www.gnu.org/software/make/)
     alternative
