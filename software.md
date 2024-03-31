@@ -511,6 +511,18 @@
     [Doxygen](https://www.doxygen.nl/) to extract code structure
   - [Cookiecutter](https://github.com/cookiecutter/cookiecutter)
     Project templates
+  - [Dependency Management Data](https://dmd.tanna.dev/)
+    ([Gitlab](https://gitlab.com/tanna.dev/dependency-management-data)):
+    Tooling for tracking dependencies across an organization and
+    making them queryable, supports importing data from several
+    sources ([link](https://dmd.tanna.dev/related/)) including AWS,
+    [Renovate](https://docs.renovatebot.com/), OpenSSF
+    [scorecard](https://securityscorecards.dev/)
+    ([link](https://dmd.tanna.dev/cookbooks/import-scorecards/)),
+    [Dependabot](https://docs.github.com/en/code-security/dependabot),
+    [OSS Review Toolkit](https://oss-review-toolkit.org/ort/)
+    ([link](https://dmd.tanna.dev/cookbooks/getting-started-ort/)),
+    etc
   - [DevSkim](https://github.com/microsoft/DevSkim) or
     [Semgrep](https://github.com/returntocorp/semgrep):
     Code security linter for multiple languages, with a command-line
@@ -552,6 +564,10 @@
     [presentation](https://european-lisp-symposium.org/static/2020/godbout-slides.pdf)
   - [onefetch](https://github.com/o2sh/onefetch):
     Git repository information and statistics
+  - [OSS Review Toolkit](https://oss-review-toolkit.org/ort/)
+    ([Github](https://github.com/oss-review-toolkit/ort)):
+    Suite of tools for analyzing project dependencies and checking
+    software license compliance
   - [ruplacer](https://github.com/your-tools/ruplacer):
     Find and replace recursively, like a combo of `find` and `sed -i`
   - [scc](https://github.com/boyter/scc) or
