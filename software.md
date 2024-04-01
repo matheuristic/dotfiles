@@ -3,22 +3,28 @@
 ## Open-source software
 
 - Audio and video creation and editing
-  - [Ardour](https://ardour.org/) or
-    [Zrythm](https://www.zrythm.org/):
+  - [Ardour](https://ardour.org/)
+    ([Github](https://github.com/Ardour/ardour)) or
+    [Zrythm](https://www.zrythm.org/)
+    ([Gitlab](https://gitlab.zrythm.org/zrythm/zrythm)):
     Digital audio workstation; Ardour works with
     [ReaPlugs](https://www.reaper.fm/reaplugs/) VST plugins; Ardour
     seems more suited to audio recording and engineering, while Zrythm
     seems more suited to MIDI electronic music production
-  - [Blackhole](https://existential.audio/blackhole/):
+  - [Blackhole](https://existential.audio/blackhole/)
+    ([Github](https://github.com/ExistentialAudio/BlackHole)):
     Route audio between apps (e.g., to record internal audio), macOS
   - [Blender](https://www.blender.org/)
     ([Github](https://github.com/blender/blender)):
     3D creation suite covering the full 3D animation pipeline
-  - [Handbrake](https://handbrake.fr/):
+  - [Handbrake](https://handbrake.fr/)
+    ([Github](https://github.com/HandBrake/HandBrake)):
     Video encoder
-  - [Kdenlive](https://kdenlive.org/en/):
+  - [Kdenlive](https://kdenlive.org/en/)
+    ([KDE Invent](https://invent.kde.org/multimedia/kdenlive)):
     Video editor; alternative is [ShotCut](https://shotcut.org/)
-  - [LMMS](https://lmms.io/):
+  - [LMMS](https://lmms.io/)
+    ([Github](https://github.com/LMMS/lmms)):
     Music sequencer
   - [LosslessCut](https://github.com/mifi/lossless-cut):
     Tool for cutting/trimming audio/video files without re-encoding
@@ -36,7 +42,12 @@
     [SFXR](http://www.drpetter.se/project_sfxr.html);
     [JavaScript](https://github.com/chr15m/jsfxr) port available
     [online](https://sfxr.me/); also built into LMMS
-  - [Synfig](https://github.com/synfig/synfig/):
+  - [SunVox](https://warmplace.ru/soft/sunvox/):
+    Cross-platform modular synth and music sequencer, also see this
+    [guide](https://sunvox-guide.readthedocs.io/en/latest/index.html)
+    ([Github](https://github.com/metrasynth/sunvox-guide))
+  - [Synfig](https://www.synfig.org/)
+    ([Github](https://github.com/synfig/synfig/)):
     2D vector animation
   - [Tooll 3](https://github.com/still-scene/t3):
     Tool for creating real-time motion graphics for Windows
@@ -53,19 +64,25 @@
     Software for low-latency broadcasting over LAN by taking any video
     source, like a webcam, video capture card or desktop, and making
     that an NDI source accessible by other computers on the network
-  - [OBS Studio](https://obsproject.com/):
+  - [OBS Studio](https://obsproject.com/)
+    ([Github](https://github.com/obsproject/obs-studio)):
     Software for broadcasting video streams with
     [very](https://obsproject.com/forum/resources/downstream-keyer.1254/)
     [many](https://obsproject.com/forum/resources/closed-captioning-via-google-speech-recognition.833/)
     [different](https://sammisolutions.itch.io/sammi)
     [plugins](https://github.com/Xaymar/obs-StreamFX/wiki)
-  - [VLC](https://www.videolan.org/vlc/):
+  - [VLC](https://www.videolan.org/vlc/)
+    ([Git](https://code.videolan.org/videolan/vlc)):
     Media player
 - Backup
-  - [BorgBackup](https://www.borgbackup.org/):
+  - [BorgBackup](https://www.borgbackup.org/)
+    ([Github](https://github.com/borgbackup/borg)):
     File backup tool; frontends available like
-    [Vorta](https://vorta.borgbase.com/)
-  - [dar](http://dar.linux.free.fr/):
+    [Vorta](https://vorta.borgbase.com/), along with other
+    [tooling](https://github.com/borgbackup/community)
+  - [dar](http://dar.linux.free.fr/)
+    ([Github](https://github.com/Edrusb/DAR),
+    [SourceForge](https://sourceforge.net/projects/dar/)):
     File archiving, supports recovery records using
     [par2](https://github.com/Parchive/par2cmdline/)
   - [Timeshift](https://github.com/linuxmint/timeshift):
@@ -79,8 +96,10 @@
     along with CLI ([link1](https://sr.ht/~mlaparie/remint/),
     [link2](https://gitlab.com/wyrd-calendar/wyrd)) and GUI
     (`tkremind` that comes with Remind) front-ends
-  - [Taskwarrior](https://taskwarrior.org/) and
-    [Timewarrior](https://timewarrior.net/):
+  - [Taskwarrior](https://taskwarrior.org/)
+    ([Github](https://github.com/GothenburgBitFactory/taskwarrior))
+    and [Timewarrior](https://timewarrior.net/)
+    ([Github](https://github.com/GothenburgBitFactory/timewarrior)):
     Todo list management (Taskwarrior) and time-tracking
     (Timewarrior); [syncall](https://github.com/bergercookie/syncall)
     can be used to sync Taskwarrior tasks with various services like
@@ -99,12 +118,16 @@
     is like WSL2 for macOS, under the hood; alternative to Docker
     Desktop; for more info, see
     [link](https://www.cncf.io/blog/2023/02/02/docker-on-macos-is-slow-and-how-to-fix-it/)
-  - [ctop](https://github.com/bcicen/ctop):
-    `top` for containers
+  - [dive](https://github.com/wagoodman/dive):
+    Tool for exploring Docker image layers
   - [Docker](https://docs.docker.com/)
     [Desktop](https://docs.docker.com/desktop/install/mac-install/)
+  - [lazydocker](https://github.com/jesseduffield/lazydocker) or
+    [oxker](https://github.com/mrjackwills/oxker):
+    Terminal UI to monitor and control Docker containers
 - Data analytics
-  - [JASP](https://jasp-stats.org/):
+  - [JASP](https://jasp-stats.org/)
+    ([Github](https://github.com/jasp-stats/jasp-desktop)):
     GUI statistical analysis tool
   - [Netron](https://github.com/lutzroeder/netron):
     Neural network, deep learning and machine learning model viewer
@@ -113,22 +136,28 @@
     Cross-platform tool for scientific visualization
   - [PSPP](https://www.gnu.org/software/pspp/):
     Open-source SPSS alternative
-  - [Veusz](https://veusz.github.io/):
+  - [Veusz](https://veusz.github.io/)
+    ([Github](https://github.com/veusz/veusz)):
     Scientific plotting and graphing
 - Data pipeline
-  - [Apache Airflow](https://airflow.apache.org/):
+  - [Apache Airflow](https://airflow.apache.org/)
+    ([Github](https://github.com/apache/airflow)):
     Scheduling workflows
-  - [Apache HOP](https://hop.apache.org/):
+  - [Apache HOP](https://hop.apache.org/)
+    ([Github](https://github.com/apache/hop)):
     Fork of [Kettle/PDI](https://github.com/pentaho/pentaho-kettle)
-  - [Snakemake](https://snakemake.readthedocs.io/en/stable/) or
-    [Nextflow](https://www.nextflow.io/):
+  - [Snakemake](https://snakemake.github.io/)
+    ([Github](https://github.com/snakemake/snakemake)) or
+    [Nextflow](https://www.nextflow.io/)
+    ([Github](https://github.com/nextflow-io/nextflow)):
     Run batch workflows
 - Database
   - [BaseX](https://basex.org/):
     XML database and XQuery processor; useful for analyzing or
     processing many or huge XML files
     ([example](https://yobriefca.se/blog/2014/05/17/a-brief-overview-of-basex/))
-  - [ClickHouse](https://github.com/ClickHouse/ClickHouse):
+  - [ClickHouse](https://clickhouse.com/)
+    ([Github](https://github.com/ClickHouse/ClickHouse)):
     Time-series DB, can also run queries on local or
     remote files without installing a database server using
     [clickhouse-local](https://clickhouse.com/docs/en/operations/utilities/clickhouse-local)
@@ -141,7 +170,8 @@
   - [MongoDB](https://www.mongodb.com/)
     ([Github](https://github.com/mongodb/mongo)):
     NoSQL database
-  - [PostgreSQL](https://www.postgresql.org/):
+  - [PostgreSQL](https://www.postgresql.org/)
+    ([Git](https://git.postgresql.org/gitweb/)):
     Relational DB; use the
     [TimescaleDB](https://github.com/timescale/timescaledb)
     plugin to better support time-series, or the
@@ -158,13 +188,17 @@
     (see [here](https://news.ycombinator.com/item?id=32788795) and
     [here](https://news.ycombinator.com/item?id=32787324))
 - Database clients
-  - [Altair](https://altair.sirmuel.design/):
+  - [Altair](https://altairgraphql.dev/)
+    ([Github](https://github.com/altair-graphql/altair)):
     GraphQL client
-  - [DBeaver](https://dbeaver.io/):
-    Client for any database that has a jDBC driver
+  - [DBeaver](https://dbeaver.io/)
+    ([Github](https://github.com/dbeaver/dbeaver)):
+    Client for any database that has a jDBC driver; there is a paid
+    Pro version available [here](https://dbeaver.com/)
   - [DataStation](https://github.com/multiprocessio/datastation):
     Data IDE
-  - [DbGate](https://dbgate.org/):
+  - [DbGate](https://dbgate.org/)
+    ([Github](https://github.com/dbgate/dbgate)):
     Client for MySQL, PostgreSQL, SQL Server, MongoDB, Redis, SQLite,
     Amazon Redshift, CockroachDB, MariaDB databases
   - [Jailer](https://github.com/Wisser/Jailer):
@@ -175,12 +209,22 @@
   - [OctoSQL](https://github.com/cube2222/octosql):
     Make queries that can span MySQL, PostgreSQL databases along with
     CSV and JSON
-  - [pgcli](https://www.pgcli.com/):
-    PostgreSQL command-line client
-  - [q](https://github.com/harelba/q) or
+  - [pgcli](https://www.pgcli.com/)
+    ([Github](https://github.com/dbcli/pgcli)):
+    PostgreSQL command-line client; the developer org has CLIs for
+    other databases ([link](https://www.dbcli.com/)) like
+    LiteCLI(https://litecli.com/)
+    ([Github](https://github.com/dbcli/litecli)) for SQLite or
+    MyCLI(https://www.mycli.net/)
+    ([Github](https://github.com/dbcli/mycli)) for MySQL or
+    IRedis(https://iredis.xbin.io/)
+    ([Github](https://github.com/laixintao/iredis)) for Redis
+  - [q](https://harelba.github.io/q/)
+    ([Github](https://github.com/harelba/q)) or
     [columnq](https://github.com/roapi/roapi/tree/main/columnq-cli) or
     [clickhouse-local](https://clickhouse.com/docs/en/operations/utilities/clickhouse-local) or
-    [glaredb](https://github.com/GlareDB/glaredb):
+    [glaredb](https://glaredb.com/)
+    ([Github](https://github.com/GlareDB/glaredb)):
     Command-line tool for running SQL directly on CSV and other
     tabular files; or use sqlite3
     ([link](https://til.simonwillison.net/sqlite/one-line-csv-operations))
@@ -197,6 +241,7 @@
     MySQL, MariaDB client; macOS
 - Desktop publishing
   - [Scribus](https://www.scribus.net/)
+    ([Github mirror](https://github.com/scribusproject/scribus))
 - Diagramming and image editing
   - [ASCIIFlow](https://asciiflow.com/)
     ([Github](https://github.com/lewish/asciiflow)):
@@ -226,13 +271,16 @@
   - [drawio-desktop](https://github.com/jgraph/drawio-desktop) or
     [yEd](https://www.yworks.com/products/yed):
     Vector diagramming; drawio-desktop is the Electron build of
-    [diagrams.net](https://www.diagrams.net/); alternatives are
+    [draw.io](https://www.drawio.com/); alternatives are
     [Excalidraw](https://excalidraw.com/)
     ([Github](https://github.com/excalidraw/excalidraw))
-  - [GIMP](https://www.gimp.org/) or
-    [Krita](https://krita.org/en/):
+  - [GIMP](https://www.gimp.org/)
+    ([GNOME Gitlab](https://gitlab.gnome.org/GNOME/gimp)) or
+    [Krita](https://krita.org/en/)
+    ([KDE Invent](https://invent.kde.org/graphics/krita)):
     Raster graphics editor
-  - [Inkscape](https://inkscape.org/):
+  - [Inkscape](https://inkscape.org/)
+    ([Gitlab](https://gitlab.com/inkscape/inkscape)):
     Vector graphics editor
   - [Markmap](https://markmap.js.org/)
     ([Github](https://github.com/markmap/markmap)):
@@ -244,12 +292,16 @@
     [Pablodraw](https://picoe.ca/products/pablodraw/)
     ([Github](https://github.com/cwensley/pablodraw)):
     Cross-platform ANSI and ASCII art editor
-  - [Pikchr](https://pikchr.org/) or
-    [PlantUML](https://plantuml.com/) or
-    [Mermaid](https://mermaid.js.org/):
+  - [Pikchr](https://pikchr.org/)
+    ([Fossil](https://pikchr.org/home/dir?ci=trunk)) or
+    [PlantUML](https://plantuml.com/)
+    ([Github](https://github.com/plantuml/plantuml)) or
+    [Mermaid](https://mermaid.js.org/)
+    ([Github](https://github.com/mermaid-js/mermaid),
+    [CLI](https://github.com/mermaid-js/mermaid-cli)):
     Markup language for diagramming, standalone or supported by
     Markdown processers like Pandoc via plugins
-  - [UMLet](https://github.com/umlet/umlet)
+  - [UMLet](https://www.umlet.com/)
     ([Github](https://github.com/umlet/umlet),
     [Webapp](https://www.umletino.com/), VSCode
     [plugin](https://marketplace.visualstudio.com/items?itemName=TheUMLetTeam.umlet)):
@@ -257,16 +309,20 @@
     [Gaphor](https://gaphor.org/)
     ([Github](https://github.com/gaphor/gaphor))
 - Digital design
-  - [Penpot](https://github.com/penpot/penpot):
-    Open source design and prototyping platform like Sketch and Figma
-- Ebook authoring
-  - [Sigil](https://sigil-ebook.com/)
-    ([Github](https://github.com/Sigil-Ebook/Sigil)):
-    Cross-platform ebook editor supporting EPUB
-- Ebook reader or library manager
-  - [Alexandria](https://github.com/btpf/Alexandria):
-    Cross-platform Tauri- and epub.js-based ebook reader
-    (Windows and Linux currently supported, macOS planned)
+  - [Penpot](https://penpot.app/)
+    ([Github](https://github.com/penpot/penpot)):
+    Open source design and prototyping platform like
+    [Sketch](https://www.sketch.com/) and
+    [Figma](https://www.figma.com/)
+- Ebook
+  - [Alexandria](https://github.com/btpf/Alexandria) or
+    [Foliate](https://johnfactotum.github.io/foliate/)
+    ([Github](https://github.com/johnfactotum/foliate)) or
+    [Thorium Reader](https://www.edrlab.org/software/thorium-reader/)
+    ([Github](https://github.com/edrlab/thorium-reader)):
+    EPUB3-compliant GUI ebook reader; Alexandria (cross-platform) and
+    Foliate (Linux-only) are more performant; Thorium (cross-platform)
+    is the reference reader for the format and so the most compliant
   - [Calibre](https://calibre-ebook.com/)
     ([Github](https://github.com/kovidgoyal/calibre)):
     Ebook manager supporting an array of formats, with many plugins
@@ -278,13 +334,11 @@
     and inline formatting
   - [epub2txt2](https://github.com/kevinboone/epub2txt2):
     Extract text from EPUB
-  - [Foliate](https://johnfactotum.github.io/foliate/):
-    Linux ebook viewer
   - [MuPDF](https://mupdf.com/):
     See _PDF reader or transformer_
-  - [Thorium Reader](https://www.edrlab.org/software/thorium-reader/)
-    ([Github](https://github.com/edrlab/thorium-reader)):
-    Cross-platform Electron ebook reading app
+  - [Sigil](https://sigil-ebook.com/)
+    ([Github](https://github.com/Sigil-Ebook/Sigil)):
+    Cross-platform ebook editor supporting EPUB
 - Email
   - [aerc](https://git.sr.ht/~rjarry/aerc):
     TUI email client with [notmuch](https://notmuchmail.org/) support.
@@ -307,10 +361,12 @@
     compatible with first-party cloud storage provider software and
     its vaults are interoperable with Mountain Duck vaults; not
     compatible with `rclone mount`
-  - [Cyberduck](https://cyberduck.io/):
+  - [Cyberduck](https://cyberduck.io/)
+    ([Github](https://github.com/iterate-ch/cyberduck)):
     Cross-platform remote FTP, SFTP, WebDAV, cloud storage; has a CLI
     tool [duck.sh](https://duck.sh/)
-  - [Double Commander](https://doublecmd.sourceforge.io/):
+  - [Double Commander](https://doublecmd.sourceforge.io/)
+    ([Github](https://github.com/doublecmd/doublecmd)):
     GUI Midnight Commander clone
   - [FUSE](https://en.wikipedia.org/wiki/Filesystem_in_Userspace):
     Lets users mount filesystems without superuser privileges; usually
@@ -323,13 +379,16 @@
     ([Github](https://github.com/osxfuse/osxfuse), uses a kext), with
     the latter being more mature but requiring third-party kernel
     extensions be enabled
-  - [Keka](https://www.keka.io/en/):
-    GUI file archiver, macOS; download from website is free, while
-    App Store version is paid (basically donationware)
+  - [Keka](https://www.keka.io/en/)
+    ([Github](https://github.com/aonez/Keka)) or
+    [PeaZip](https://peazip.github.io/)
+    ([Github](https://github.com/peazip/PeaZip/)):
+    GUI file archiver; macOS-only Keka is basically donationware
+    (there is a paid App Store version); PeaZip is cross-platform
   - [Maestral](https://maestral.app/)
     ([Github](https://github.com/samschott/maestral)):
-    Dropbox client, lighter but has less features than the
-    [official](https://www.dropbox.com/desktop) client
+    Dropbox clientfor Linux and macOS, lighter but has less features
+    than the [official](https://www.dropbox.com/desktop) client
   - [Magic Wormhole](https://github.com/magic-wormhole/magic-wormhole):
     Command-line tool and library for sending files from one computer
     to another; note that this tool requires
@@ -337,13 +396,12 @@
     and a
     [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)
     server, which by default uses one hosted by the project
-  - [Midnight Commander](https://midnight-commander.org/) or
+  - [Midnight Commander](https://midnight-commander.org/)
+    ([Github](https://github.com/MidnightCommander/mc)) or
     [nnn](https://github.com/jarun/nnn) or
     [lf](https://github.com/gokcehan/lf) or
     [broot](https://github.com/Canop/broot):
     Terminal file manager
-  - [PeaZip](https://peazip.github.io/):
-    File manager and file archiver
   - [rclone](https://rclone.org/)
     ([Github](https://github.com/rclone/rclone)):
     Like `rsync` but for cloud storage; `rclone mount` can be used to
@@ -360,38 +418,44 @@
   - [Spacedrive](https://spacedrive.com/)
     ([Github](https://github.com/spacedriveapp/spacedrive)):
     Cross-platform cross-device/service file manager
-  - [SSHFS](https://github.com/libfuse/sshfs)
-    ([fork](https://github.com/deadbeefsociety/sshfs)):
+  - [SSHFS](https://github.com/libfuse/sshfs):
     Mount remote filesystem using SSH (requires FUSE),
     alternative is `rclone mount` (see rclone) or
     some more complex setup using NFSv4 and Wireguard
     ([example](https://sigmdel.ca/michel/ha/wireguard/network_share_over_wireguard_en.html))
   - [Stow](https://www.gnu.org/software/stow/):
     Symlink farm manager, useful for managing dotfiles
-  - [Syncthing](https://syncthing.net/):
+  - [Syncthing](https://syncthing.net/)
+    ([Github](https://github.com/syncthing/syncthing)):
     Continous file synchronization; macOS
     [frontend](https://github.com/syncthing/syncthing-macos)
     available
 - Image text extraction
-  - [Apache Tika](http://tika.apache.org/):
-    [Go](https://github.com/google/go-tika)
+  - [Apache Tika](http://tika.apache.org/)
+    ([Github](https://github.com/apache/tika/)):
+    [Go](https://github.com/google/go-tika) and
     [Python](https://github.com/chrismattmann/tika-python) bindings
     available
-  - [Tesseract](https://github.com/tesseract-ocr/tesseract)
+  - [Tesseract](https://tesseract-ocr.github.io/)
+    ([Github](https://github.com/tesseract-ocr/tesseract))
 - Markup language document conversion and rendering
-  - [Asciidoctor](https://asciidoctor.org/):
+  - [Asciidoctor](https://asciidoctor.org/)
+    ([Github](https://github.com/asciidoctor/asciidoctor)):
     Asciidoc processor, has an
-    [extension](https://asciidoctor.org/docs/asciidoctor-pdf/)
-    for PDF generation
+    [extension](https://asciidoctor.org/docs/asciidoctor-pdf/) for PDF
+    generation; Javascript
+    [port](https://github.com/asciidoctor/asciidoctor.js) and
+    [CLI](https://github.com/asciidoctor/asciidoctor-cli.js) available
+  - [Docutils](https://www.docutils.org/)
+    ([Github](https://github.com/docutils/docutils)):
+    Convert ReStructuredText to other formats
   - [groff](https://www.gnu.org/software/groff/):
     Typesetting system that can output PS, PDF, HTML or DVI;
     a lightweight alternative to (La)TeX but less popular
   - [hred](https://github.com/danburzo/hred):
     Command-line HTML (and XML) to JSON converter
-  - [Kramdown](https://kramdown.gettalong.org/):
-    Markdown processor, has an
-    [Asciidoc converter](https://github.com/asciidoctor/kramdown-asciidoc)
-  - [Pandoc](https://pandoc.org/):
+  - [Pandoc](https://pandoc.org/)
+    ([Github](https://github.com/jgm/pandoc)):
     Document converter, can also process Markdown extendable with
     filters like [this one](https://github.com/pandoc-ext/diagram)
     facilitating diagramming using code blocks
@@ -402,7 +466,13 @@
     using Python, R, Julia, and Observable JS; for a user-local
     install, one option is to extract the tarball version somewhere
     and symlink the `quarto` binary from a directory in `$PATH`
-  - [Tectonic](https://tectonic-typesetting.github.io/) or
+  - [Sphinx](https://www.sphinx-doc.org/)
+    ([Github](https://github.com/sphinx-doc/sphinx)):
+    Generate project docs from source code and ReStructuredText (or
+    [Markdown](https://myst-parser.readthedocs.io/en/latest/)),
+    supports multiple programming langs (domains), built on Docutils
+  - [Tectonic](https://tectonic-typesetting.github.io/)
+    ([Github](https://github.com/tectonic-typesetting/tectonic)) or
     [TeXLive](https://www.tug.org/texlive/) or
     [TinyTeX](https://github.com/yihui/tinytex):
     Processor for (La)TeX, which is used widely in scientific writing
@@ -422,12 +492,14 @@
     readability before conversion; the file can also be directly
     opened in a browser and printed to PDF
 - Newsreader
-  - [NetNewsWire](https://github.com/Ranchero-Software/NetNewsWire):
+  - [NetNewsWire](https://netnewswire.com/)
+    ([Github](https://github.com/Ranchero-Software/NetNewsWire)):
     RSS reader; iOS and macOS
   - [Newsboat](https://newsboat.org/)
     ([Github](https://github.com/newsboat/newsboat)):
     CLI RSS reader
-  - [Pan](http://pan.rebelbase.com/):
+  - [Pan](http://pan.rebelbase.com/)
+    ([GNOME Gitlab](https://gitlab.gnome.org/GNOME/pan/)):
     Usenet reader
 - Networking
   - [LuLu](https://objective-see.org/products/lulu.html)
@@ -438,23 +510,27 @@
     ([Github](https://github.com/objective-see/Netiquette)):
     Network monitor, macOS
 - Package/runtime manager
-  - [asdf](https://asdf-vm.com/):
+  - [asdf](https://asdf-vm.com/)
+    ([Github](https://github.com/asdf-vm/asdf)):
     Language runtime manager with plugins
     [plugins](https://github.com/asdf-vm/asdf-plugins) for many
     language runtimes and tools (like `bat`, `jq`, `ripgrep`, etc)
   - [Flatpak](https://flatpak.org/):
-    Application manager; [Flathub](https://flathub.org/) is the de
-    facto repository; for easier permissioning control install
+    Linux application manager; [Flathub](https://flathub.org/) is the
+    de facto repository; for easier permissioning control install
     [Flathub](https://flathub.org/apps/details/com.github.tchx84.Flatseal)
-  - [MacPorts](https://www.macports.org/) or
-    [Spack](https://spack.io/) or
-    [Homebrew](https://brew.sh/):
+  - [MacPorts](https://www.macports.org/)
+    ([Github org](https://github.com/macports)) or
+    [Spack](https://spack.io/)
+    ([Github](https://github.com/spack/spack)) or
+    [Homebrew](https://brew.sh/)
+    ([Github](https://github.com/Homebrew/brew)):
     macOS package manager for open-source software; recommendation is
     to use Spack for a user-local install, MacPorts for a multi-user
     machine, and Homebrew for a single-user machine
   - [Mamba](https://mamba.readthedocs.io/)
     ([Github](https://github.com/mamba-org)):
-    Drop-in replacement for [conda](https://conda.io/), with the
+    Drop-in replacement for [conda](https://conda.io/), with
     [micromamba](https://github.com/mamba-org/micromamba-releases)
     the preferred variant; using [conda-forge](https://conda-forge.org/)
     as the primary repository is recommended
@@ -526,15 +602,17 @@
   - [DevSkim](https://github.com/microsoft/DevSkim) or
     [Semgrep](https://github.com/returntocorp/semgrep):
     Code security linter for multiple languages, with a command-line
-    interface; ones for specific languages or tools also exist
-    (e.g., [C++](https://github.com/david-a-wheeler/flawfinder),
+    interface; ones for specific languages or tools also exist (e.g.,
+    [C++](https://github.com/david-a-wheeler/flawfinder),
     [Go](https://github.com/securego/gosec),
-    [Kubernetes](https://github.com/controlplaneio/kubesec),
-    [Ruby on Rails](https://github.com/presidentbeef/brakeman/),
+    [Kubernetes](https://github.com/controlplaneio/kubesec), [Ruby on
+    Rails](https://github.com/presidentbeef/brakeman/),
     [Terraform](https://github.com/aquasecurity/tfsec)); there are
     also [other](https://github.com/Microsoft/ApplicationInspector)
-    [tools](https://github.com/googleprojectzero/weggli) that help
-    analyze what code does instead of looking for specific code smells
+    [tools](https://github.com/googleprojectzero/weggli) that analyze
+    what code does instead of looking for specific code smells; also
+    see [these](https://jreyesr.github.io/posts/semgrep-blog-rules/)
+    [articles](https://parsiya.net/blog/2022-04-07-code-review-hot-spots-with-semgrep/)
   - [EditorConfig](https://editorconfig.org/)
     ([Github](https://github.com/editorconfig/)):
     Define formatting conventions for project code and
@@ -683,7 +761,8 @@
   - [forkstat](https://github.com/ColinIanKing/forkstat):
     Command-line program to log process forks, execs and exits;
     useful for tracking runaway processes
-  - [GrandPerspective](https://grandperspectiv.sourceforge.net/):
+  - [GrandPerspective](https://grandperspectiv.sourceforge.net/)
+    ([SourceForge](https://sourceforge.net/projects/grandperspectiv/)):
     Visualize disk usage using a tree map, macOS
   - [htop](https://github.com/htop-dev/htop) or
     [zenith](https://github.com/bvaisvil/zenith) or
@@ -709,11 +788,14 @@
     ([HN](https://news.ycombinator.com/item?id=39501281))
   - [pstree](https://github.com/FredHucht/pstree):
     List processes as a tree
-  - [Sloth](https://sveinbjorn.org/sloth):
+  - [Sloth](https://sveinbjorn.org/sloth)
+    ([Github](https://github.com/sveinbjornt/Sloth)):
     macOS application to show open files, dirs, sockets and pipes
   - [Stacer](https://github.com/oguzhaninan/Stacer):
     Linux system optimizer and monitoring GUI tool
-  - [tree](http://mama.indstate.edu/users/ice/tree/):
+  - [tree](https://oldmanprogrammer.net/source.php?dir=projects/tree)
+    ([Github](https://github.com/Old-Man-Programmer/tree),
+    [Gitlab](https://gitlab.com/OldManProgrammer/unix-tree)):
     Command-line tool to list files in subdir tree depth-indented
 - Text (general)
   - [Aspell](http://aspell.net/) or
@@ -738,16 +820,18 @@
     available [here](https://github.com/cmatsuoka/figlet-fonts)
   - [hexyl](https://github.com/sharkdp/hexyl):
     Command-line hex viewer
-  - [LanguageTool](https://languagetool.org/):
+  - [LanguageTool](https://languagetool.org/)
+    ([Github](https://github.com/languagetool-org/languagetool)):
     Style and grammar checker; standalone Java version downloadable
     [here](https://languagetool.org/download/), snapshots available
     [here](https://internal1.languagetool.org/snapshots/) (the link
     [link](https://languagetool.org/download/LanguageTool-stable.zip)
-    has the latest version), and is
-    [augmentable](https://dev.languagetool.org/finding-errors-using-n-gram-data.html)
-    with [n-gram](https://languagetool.org/download/ngram-data/) data
-    (note that the `ngrams-en-20150817.zip` file should be unzipped to
-    `~/languagetool/ngram-data/en/`, modify for other languages)
+    has the latest stable version), and is augmentable
+    ([instructions](https://github.com/nschang/languagetool-101)) with
+    [n-gram](https://dev.languagetool.org/finding-errors-using-n-gram-data.html)
+    [data](https://languagetool.org/download/ngram-data/) for better error finding,
+    [fasttext](https://fasttext.cc/) for better language detection and
+    [word2vec](https://languagetool.org/download/word2vec/) for confusion pair disambiguation
   - [FileMerge](https://developer.apple.com/xcode/features/) or
     [Meld](https://meldmerge.org/) or
     [kdiff3](https://apps.kde.org/kdiff3/) or
@@ -784,30 +868,30 @@
     awk, sed, cut and join by converting (and reverting) embedded
     commas and newlines to non-printing characters, for example
     `csvquote a.csv | cut -d',' -f3 | sort | uniq -c | csvquote -u`
+  - [fastgron](https://github.com/adamritter/fastgron):
+    Flattens JSON into discrete assignments that work better with
+    `grep` and `sed`; [gron.awk](https://github.com/xonixx/gron.awk)
+    is similar but implemented in pure Awk
   - [fq](https://github.com/wader/fq):
     Like `jq` but for binary formats
   - [ghostwriter](https://github.com/wereturtle/ghostwriter):
     Graphical Markdown editor; Windows and Linux (also on Flathub)
-  - [gron](https://github.com/tomnomnom/gron):
-    Flattens JSON into discrete assignments that work better
-    with `grep` and `sed`
   - [htmlq](https://github.com/mgdm/htmlq) or
     [cascadia](https://github.com/suntong/cascadia):
     Like grep for HTML but using CSS selectors
-  - [jq](https://stedolan.github.io/jq/):
+  - [jq](https://jqlang.github.io/jq/)
+    ([Github](https://github.com/jqlang/jq)):
     Command-line JSON processor
-  - [jless](https://jless.io/):
+  - [jless](https://jless.io/)
+    ([Github](https://github.com/PaulJuliusMartinez/jless)):
     Ncurses command-line JSON viewer
   - [jo](https://github.com/jpmens/jo):
     Command-line utility for creating JSON objects
   - [Miller](https://github.com/johnkerl/miller) or
     [qsv](https://github.com/jqnatividad/qsv)
-    (fork of [xsv](https://github.com/BurntSushi/xsv)) or
-    [tsv-utils](https://github.com/eBay/tsv-utils):
-    Command-line tool for working with CSV files;
-    tsv-utils also supports TSV files, and Miller also supports TSV
-    and tabular JSON files; Miller is more flexible, qsv is easier
-    to use, tsv-utils is supposedly faster for large datasets.
+    (fork of [xsv](https://github.com/BurntSushi/xsv)):
+    Command-line tool for working with CSV files; Miller also supports
+    TSV and tabular JSON; Miller is more flexible, qsv easier to use
   - [QXmlEdit](http://qxmledit.org/):
     XML editor
   - [Tad](https://www.tadviewer.com/)
@@ -815,7 +899,8 @@
     GUI tabular data viewer for CSV, Parquet, SQLite and DuckDB files;
     alternative is [CSView](https://kothar.net/csview) (different from
     another one that is listed here)
-  - [Visidata](https://www.visidata.org/) or
+  - [Visidata](https://www.visidata.org/)
+    ([Github](https://github.com/saulpw/visidata)) or
     [CSView](https://github.com/wfxr/csview):
     TUI tabular data viewer; Visidata is more of a multitool, in that
     it allows for editing and supports any source loadable via Pandas
@@ -871,14 +956,14 @@
     Multithreaded GPU-accelerated collaborative code editor
 - User experience and interface (graphical)
   - [Amethyst](https://ianyh.com/amethyst/)
-    ([Github](https://github.com/ianyh/Amethyst):
+    ([Github](https://github.com/ianyh/Amethyst)):
     Tiling window manager for macOS
-  - [Barrier](https://github.com/debauchee/barrier):
-    Cross-platform software that mimics KVM switch functionality; if
-    using Macs and iPads with the same account, best to use instead
-    [Universal Control](https://support.apple.com/en-us/102459)
   - [Hyperkey](https://hyperkey.app/):
     Use CapsLock as a "hyper" key, that is, C-Opt-Cmd-Shift, on macOS
+  - [Input Leap](https://github.com/input-leap/input-leap):
+    Cross-platform software that mimics KVM switch functionality; Macs
+    and iPads with the same account can just use the built-in
+    [Universal Control](https://support.apple.com/en-us/102459)
   - [LinearMouse](https://github.com/linearmouse/linearmouse) or
     [Mos](https://github.com/Caldis/Mos) or
     [Scroll Reverser](https://github.com/pilotmoon/Scroll-Reverser):
@@ -907,14 +992,8 @@
     hover over the green `+` button on the top-left corner of the
     window and press `Option` which allows mouse selection of the
     actions (does not require keyboard shortcut configuration);
-    there's also a commercial ([Pro](https://rectangleapp.com/pro)
+    there's also a commercial [Pro](https://rectangleapp.com/pro)
     version with more features
-  - [shottr](https://shottr.cc/):
-    Screenshot app for macOS, although note that macOS has built-in
-    screenshot taking via `Cmd-Shift-3` (capture full screen),
-    `Cmd-Shift-4` (select a region and capture it),
-    `Cmd-Shift-4-Space` (capture window), and via the
-    Screenshot app (`Cmd-Shift-5` or use Spotlight search)
   - [skhd](https://github.com/koekeishiya/skhd):
     Hotkey daemon; macOS
   - [stats](https://github.com/exelban/stats):
@@ -922,9 +1001,10 @@
   - [Textinator](https://github.com/RhetTbull/textinator)
     or [TRex](https://github.com/amebalabs/TRex):
     Detect text in screenshots and copy it to the clipboard; macOS
-  - [ueli](https://ueli.app/):
+  - [ueli](https://ueli.app/)
+    ([Github](https://github.com/oliverschwendener/ueli)):
     Launcher like [Alfred](https://www.alfredapp.com/) but open-source
-    and available for Windows in addition to macOS
+    and cross-platform
   - [xbar](https://github.com/matryer/xbar) or
     [SwiftBar](https://github.com/swiftbar/SwiftBar):
     Pipe output to the menu bar; macOS
@@ -952,7 +1032,8 @@
     command-line tool taking keyboard input
   - [screen](https://www.gnu.org/software/screen/) or
     [tmux](https://github.com/tmux/tmux) or
-    [Zellij](https://zellij.dev/):
+    [Zellij](https://zellij.dev/)
+    ([Github](https://github.com/zellij-org/zellij)):
     Terminal multiplexer, useful for managing and persisting remote
     sessions over Mosh or SSH; generally, tmux is recommended over
     screen unless there is a need to access a serial console (using
@@ -978,11 +1059,13 @@
   - [virt-manager](https://virt-manager.org/):
     Linux desktop tool for managing QEMU/KVM virtual machines
 - VPN
-  - [OpenVPN](https://openvpn.net/vpn-client/)
-    or [TunnelBlick](https://tunnelblick.net/):
+  - [OpenVPN](https://openvpn.net/vpn-client/) or
+    [TunnelBlick](https://tunnelblick.net/)
+    ([Github](https://github.com/Tunnelblick/Tunnelblick)):
     OpenVPN client, note that Linux clients be should installed via
     the system package manager (see
-    [here](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux));
+    [here](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux)
+    and [here](https://gitlab.com/openvpn/openvpn3-linux));
     TunnelBlick is macOS-only and built on the older but still
     maintained OpenVPN 2 libraries
   - [WireGuard](https://www.wireguard.com/):
@@ -1007,17 +1090,20 @@
     Go via `go install github.com/makeworld-the-better-one/amfora` or
     `go install tildegit.org/sloum/bombadillo@latest`; Bombadillo
     is also a Gopher client; use gcat in Acme or dumb terminals
-  - [Hush](https://oblador.github.io/hush/):
+  - [Hush](https://oblador.github.io/hush/)
+    ([Github](https://github.com/oblador/hush)):
     Safari extension to block nag popups and trackers; iOS and macOS
   - [Lagrange](https://gmi.skyjake.fi/lagrange/)
     ([Github](https://github.com/skyjake/lagrange)) or
     [Kristall](https://kristall.random-projects.net/)
     ([Github](https://github.com/MasterQ32/kristall)):
     Gemini GUI client; Kristall also supports Gopher
-  - [Monolith](https://github.com/Y2Z/monolith.git):
+  - [Monolith](https://crates.io/crates/monolith)
+    ([Github](https://github.com/Y2Z/monolith.git)):
     Save complete webpages to a single HTML file with embedded CSS,
     images and Javascript
-  - [shot-scraper](https://github.com/simonw/shot-scraper):
+  - [shot-scraper](https://shot-scraper.datasette.io/)
+    ([Github](https://github.com/simonw/shot-scraper)):
     Command-line utility for taking partial or full screenshots of
     websites
   - [YT-DLP](https://github.com/yt-dlp/yt-dlp):
@@ -1028,46 +1114,50 @@
     and audio) or `yt-dlp -f 123+456` to download formats `123` and
     `456` followed by merging them (usually one video and one audio)
 - Web development
-  - [dog](https://github.com/ogham/dog):
-    Alternative to `dig`
-  - [Hurl](https://hurl.dev/):
+  - [doge](https://github.com/Dj-Codeman/doge):
+    Alternative to `dig`, fork of [dog](https://github.com/ogham/dog)
+    which is no longer maintained
+  - [Hurl](https://hurl.dev/)
+    ([Github](https://github.com/Orange-OpenSource/hurl)):
     Command-line tool for running HTTP requests defined in a text file
   - [frp](https://github.com/fatedier/frp):
     Reverse proxy, like [ngrok](https://ngrok.com/)
-  - [httpie](https://httpie.io/) or
+  - [httpie](https://httpie.io/)
+    ([Github](https://github.com/httpie/cli)) or
     [xh](https://github.com/ducaale/xh):
     Command-line API client; much lighter weight than
     [Postman](https://www.postman.com/)
   - [Mockoon](https://github.com/mockoon/mockoon):
     HTTP mock server
-  - [mitmproxy](https://mitmproxy.org/):
+  - [mitmproxy](https://mitmproxy.org/)
+    ([Github](https://github.com/mitmproxy/mitmproxy)):
     Interactive HTTPS proxy
-  - [Prism](https://github.com/stoplightio/prism):
+  - [Prism](https://stoplight.io/open-source/prism)
+    ([Github](https://github.com/stoplightio/prism)):
     HTTP mock server with behavior that can be specified from OpenAPI
     v2 (Swagger), OpenAPI v3 or Postman Collection files
 - Word processing
-  - [Manuskript](https://www.theologeek.ch/manuskript/):
+  - [Manuskript](https://www.theologeek.ch/manuskript/)
+    ([Github](https://github.com/olivierkes/manuskript)):
     Word processor for writers like Scrivener
-  - [TwineJS](https://github.com/klembot/twinejs):
+  - [Twine](https://twinery.org/)
+    ([Github](https://github.com/klembot/twinejs)):
     Tool for authoring interactive, non-linear stories
 - Other
   - [age](https://github.com/FiloSottile/age) or
-    [ccrypt](https://ccrypt.sourceforge.net/) or
-    [eureka](https://github.com/mimoo/eureka):
-    Simple command-line encryption/decryption tool; ccrypt
-    is the simplest (prompt for password when encrypting, use
-    same password to decrypt); eureka is limited (no key files;
-    generates a token to be used by recipient); age is similar but
-    additionally supports identity files; or just use GnuPG, either
-    without public key cryptography by running `gpg -o FILE.gpg
-    -c FILE` to encrypt a file with a symmetric cipher using a
-    passphrase where the encrypted file can later be decrypted with
-    `gpg -d FILE.gpg` and the same passphrase, or with public key
-    cryptography by encrypting a file using a recipient's public
-    key and `gpg -r EMAIL -o FILE.gpg -e FILE` where the encrypted
-    file can later be decrypted with the recipient's private key
-    and `gpg -d <file>.gpg`; usually better to use something like
-    Cryptomator if not encrypting to share
+    [ccrypt](https://ccrypt.sourceforge.net/):
+    Command-line encryption/decryption tool; ccrypt is simpler (prompt
+    for password when encrypting, use same password to decrypt); age
+    supports using either identity files or generates a token to be
+    used by a recipient; or just use GnuPG, either without public key
+    cryptography by running `gpg -o FILE.gpg -c FILE` to encrypt a
+    file with a symmetric cipher using a passphrase where the
+    encrypted file can later be decrypted with `gpg -d FILE.gpg` and
+    the same passphrase, or with public key cryptography by encrypting
+    a file using a recipient's public key and `gpg -r EMAIL -o
+    FILE.gpg -e FILE` where the encrypted file can later be decrypted
+    with the recipient's private key and `gpg -d <file>.gpg`; better
+    to use something like Cryptomator if not encrypting to share
   - [Aiko](https://sindresorhus.com/aiko)
     ([App Store](https://apps.apple.com/app/id1672085276)):
     iOS and macOS app for local audio transcription using OpenAI's
@@ -1076,17 +1166,20 @@
     macOS tool to limit battery charging (i.e., the claim is keeping
     charge percentage at or below 80% can help prolong battery life),
     however this may not be necessary if "Optimized Battery Charging"
-    is sufficient for usage needs
+    is sufficient for usage needs; there is also a paid Pro version
+    with more features available [here](https://apphousekitchen.com/)
   - [Amazing AI](https://sindresorhus.com/amazing-ai)
     ([App Store](https://apps.apple.com/app/id1660147028)):
     iOS and macOS (Apple Silicon M1/M2/... chip required) app for
     local image generation from text using the Stable Diffusion model
-  - [Anki](https://apps.ankiweb.net/):
+  - [Anki](https://apps.ankiweb.net/)
+    ([Github](https://github.com/ankitects/anki)):
     Flashcards software; cross-platform, and also available on
     [iOS](https://apps.apple.com/us/app/ankimobile-flashcards/id373493387),
     [Android](https://play.google.com/store/apps/details?id=com.ichi2.anki),
     and as a [webapp](https://ankiweb.net/)
-  - [ClamAV](https://www.clamav.net/):
+  - [ClamAV](https://www.clamav.net/)
+    ([Github](https://github.com/Cisco-Talos/clamav)):
     Open-source antivirus engine, with frontends available like
     [ClamTk](https://gitlab.com/dave_m/clamtk)
   - [diffoscope](https://diffoscope.org/)
@@ -1098,18 +1191,15 @@
   - [elfcat](https://github.com/ruslashev/elfcat):
     ELF visualizer using HTML files generated from ELF binaries
   - [entr](https://github.com/eradman/entr) or
-    [fswatch](https://github.com/emcrisostomo/fswatch) or
     [watchdog](https://github.com/gorakhargosh/watchdog) or
     [watchexec](https://github.com/watchexec/watchexec) or
     [watchfiles](https://github.com/samuelcolvin/watchfiles) or
     [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch) or
     [Watchman](https://github.com/facebook/watchman):
     Run command when files change; entr, watchexec and watchfiles are
-    somewhat easier to use; fswatch is more a file watcher but can be
-    piped to xargs to run commands specific to the changed file(s);
-    Watch is Acme editor-specific; and Watchman has a client-server
-    architecture and is designed as more of a per-user system service;
-    watchdog is mainly a library but has an optional tool watchmedo
+    somewhat easier to use; Watch is Acme editor-specific; Watchman
+    has a client-server architecture and is more of a per-user system
+    service; watchdog is a library but has an optional tool watchmedo
     (install `watchdog[watchmedo]` via pip) similar to watchexec
   - [FontForge](https://fontforge.org/)
     ([Github](https://github.com/fontforge/fontforge)):
@@ -1119,7 +1209,8 @@
     3D voxel editor
   - [grex](https://github.com/pemistahl/grex):
     Generate regex from test cases
-  - [Hammerspoon](https://www.hammerspoon.org/):
+  - [Hammerspoon](https://www.hammerspoon.org/)
+    ([Github](https://github.com/Hammerspoon/hammerspoon)):
     Use [Lua](https://www.lua.org/) for macOS scripts that can call
     system APIs, for example middle-click-move mouse to scroll
     ([link](https://superuser.com/questions/303424/can-i-enable-scrolling-with-middle-button-drag-in-os-x))
@@ -1131,7 +1222,8 @@
   - [Jiggler](http://www.sticksoftware.com/software/Jiggler.html)
     ([Github](https://github.com/bhaller/Jiggler)):
     Keep the system awake, useful when running lengthy tasks, macOS
-  - [Joplin](https://joplinapp.org/):
+  - [Joplin](https://joplinapp.org/)
+    ([Github](https://github.com/laurent22/joplin/)):
     Note-taking application with sync support; cross-platform
   - [kgt](https://github.com/katef/kgt/):
     Convert between BNF syntaxes and visualize using railroad diagrams
@@ -1146,16 +1238,18 @@
     [re](https://github.com/katef/libfsm/blob/main/doc/tutorial/re.md)
     can compile regex to state machine and output as a `.dot` diagram
   - [Mathics](https://mathics.org/)
-    ([Github](https://github.com/Mathics3)):
+    ([Github org](https://github.com/Mathics3)):
     Open-source alternative to
     [Mathematica](https://www.wolfram.com/mathematica/)
   - [Nextcloud](https://nextcloud.com/)
-    ([Github](https://github.com/nextcloud)):
+    ([Github org](https://github.com/nextcloud)):
     Self-host collaboration platform offering similar functionality to
     Google Suite; Nextcloud Files can be used as a a WebDAV service
-  - [OmegaT](https://omegat.org/):
+  - [OmegaT](https://omegat.org/)
+    ([Github](https://github.com/omegat-org/omegat)):
     Translation memory tool
-  - [pass](https://www.passwordstore.org/) or
+  - [pass](https://www.passwordstore.org/)
+    ([Git](https://git.zx2c4.com/password-store/)) or
     [gopass](https://www.gopass.pw/)
     ([Github](https://github.com/gopasspw/gopass)):
     Command-line password manager; **pass-specific instructions**:
@@ -1193,7 +1287,8 @@
   - [pastel](https://github.com/sharkdp/pastel) or
     [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
     Terminal color picker
-  - [Platypus](https://github.com/sveinbjornt/Platypus):
+  - [Platypus](https://sveinbjorn.org/platypus)
+    ([Github](https://github.com/sveinbjornt/Platypus)):
     macOS tool for wrapping command-line programs into a
     macOS application bundle
   - [sc-im](https://github.com/andmarti1424/sc-im)
@@ -1201,7 +1296,8 @@
   - [Stellarium](https://stellarium.org/)
     ([Github](https://github.com/Stellarium/stellarium)):
     Open-source desktop planetarium
-  - [Sweet Home 3D](https://www.sweethome3d.com/):
+  - [Sweet Home 3D](https://www.sweethome3d.com/)
+    ([SourceForge](https://sourceforge.net/projects/sweethome3d/)):
     Open-source interior design application, also available as a
     [webapp](https://www.sweethome3d.com/SweetHome3DOnlineManager.jsp)
   - [Vale](https://vale.sh/)
@@ -1210,7 +1306,8 @@
   - [Velja](https://sindresorhus.com/velja)
     ([App Store](https://apps.apple.com/app/id1607635845)):
     Open different links in different browsers or apps, macOS
-  - [Zotero](https://www.zotero.org/):
+  - [Zotero](https://www.zotero.org/)
+    ([Github](https://github.com/zotero/zotero)):
     Reference management software to collect, organize, cite and
     share research material
 
@@ -1234,7 +1331,7 @@
     Mind-mapping tool
   - [Monodraw](https://monodraw.helftone.com/):
     ASCII art editor; macOS (App Store and direct download)
-- Ebook authoring:
+- Ebook
   - [Vellum](https://vellum.pub/) or
     [Atticus](https://www.atticus.io/):
     Format ebooks and print books for publication; Vellum is
@@ -1283,6 +1380,12 @@
   - [Sublime Text](https://www.sublimetext.com/):
     Lightweight text editor
 - User experience and interface (graphical)
+  - [shottr](https://shottr.cc/):
+    Screenshot app for macOS, free for non-commercial use; note that
+    macOS has built-in screenshot taking via `Cmd-Shift-3` (capture
+    full screen), `Cmd-Shift-4` (select a region and capture it),
+    `Cmd-Shift-4-Space` (capture window), and via the Screenshot app
+    (`Cmd-Shift-5` or use Spotlight search)
   - [Synergy](https://symless.com/synergy)
     ([Github](https://github.com/symless/synergy-core/)):
     Cross-platform software mimicking KVM switch functionality to share
