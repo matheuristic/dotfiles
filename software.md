@@ -116,7 +116,10 @@
     Minimal-setup container runtimes on macOS with support for Docker,
     containerd, or Kubernetes; uses [lima](https://lima-vm.io/), which
     is like WSL2 for macOS, under the hood; alternative to Docker
-    Desktop; for more info, see
+    Desktop; note that the Docker CLI client is needed (see
+    [here](https://docs.docker.com/engine/install/binaries/) for
+    binaries which can be extracted to some directory in `$PATH` like
+    `~/.local/bin`) to use Colima's Docker runtime; for more info, see
     [link](https://www.cncf.io/blog/2023/02/02/docker-on-macos-is-slow-and-how-to-fix-it/)
   - [dive](https://github.com/wagoodman/dive):
     Tool for exploring Docker image layers
