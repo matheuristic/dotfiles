@@ -285,6 +285,13 @@
   - [Inkscape](https://inkscape.org/)
     ([Gitlab](https://gitlab.com/inkscape/inkscape)):
     Vector graphics editor
+  - [libvips](https://www.libvips.org/)
+    ([Github](https://github.com/libvips/libvips)):
+    Image processing library with a command-line tool,
+    like [ImageMagick](https://imagemagick.org/); has
+    a speadsheet-like GUI front-end
+    [nip2](https://github.com/libvips/nip2));
+    [article](https://tonisagrista.com/blog/2023/libvips/)
   - [Markmap](https://markmap.js.org/)
     ([Github](https://github.com/markmap/markmap)):
     Visualize Markdown as a mind-map; also available as a
@@ -1139,6 +1146,10 @@
     ([Github](https://github.com/stoplightio/prism)):
     HTTP mock server with behavior that can be specified from OpenAPI
     v2 (Swagger), OpenAPI v3 or Postman Collection files
+  - [Skyvern](https://www.skyvern.com/)
+    ([Github](https://github.com/Skyvern-AI/Skyvern/)):
+    Automated browser workflows using computer vision and LLMs;
+    [article](https://blog.skyvern.com/we-open-sourced-and-ended-up-1-on-hackernews/)
 - Word processing
   - [Manuskript](https://www.theologeek.ch/manuskript/)
     ([Github](https://github.com/olivierkes/manuskript)):

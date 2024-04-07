@@ -32,9 +32,11 @@ For software that don't support toggling of OpenType features, one way
 to use those features is to "freeze" those features into a new font,
 making them the default. Some tooling to help do that:
 
-- [pyftfeatfreeze](https://github.com/twardoch/fonttools-opentype-feature-freezer)
-  (also has a GUI app OTFeatureFreeze, but the Python command-line
-  tool basically works the same)
+- [pyftfeatfreeze](https://twardoch.github.io/fonttools-opentype-feature-freezer/)
+  ([Github](https://github.com/twardoch/fonttools-opentype-feature-freezer))
+  (there's a GUI app OTFeatureFreezer, but the Python command-line
+  tool basically works the same; also see
+  [here](https://fsd.it/2024/02/16/now-you-can-customize-your-pragmata-pro-font/))
 - [FontFreeze](https://mutsuntsai.github.io/fontfreeze/)
   ([Github](https://github.com/MuTsunTsai/fontfreeze)) webapp
 
@@ -51,21 +53,55 @@ making them the default. Some tooling to help do that:
   Create and convert bitmap and emoji font
 - [bdf2x](https://github.com/Francesco149/bdf2x):
   Upscale BDF bitmap fonts
+- [Calligraphr](https://www.calligraphr.com/en/):
+  Turn handwriting into fonts (_commercial_)
 - [FontDrop!](https://fontdrop.info/):
   Online webapp for inspecting font files
 - [FontForge](https://fontforge.org/)
   ([Github](https://github.com/fontforge/fontforge)):
   Font editor that can create, convert and display fonts
+- [fontjoy](https://fontjoy.com/)
+  ([Github](https://github.com/Jack000/fontjoy)):
+  Font pairings using deep learning
 - [fontTools](https://github.com/fonttools/fonttools):
   Font manipulation libraries and utilities
+- [FontoGen](https://github.com/SerCeMan/fontogen):
+  Generative AI-created fonts
+  ([article](https://serce.me/posts/02-10-2023-hey-computer-make-me-a-font))
+- [Fontra](https://fontra.xyz/)
+  ([Github](https://github.com/googlefonts/fontra)):
+  Web-based font editor, also available for the
+  [desktop](https://github.com/googlefonts/fontra-pak)
+- [Glyphr Studio](https://www.glyphrstudio.com/)
+  ([Github](https://github.com/glyphr-studio)):
+  Web-based font editor like FontForge, also available for the
+  [desktop](https://github.com/glyphr-studio/Glyphr-Studio-Desktop)
+- [Glyphs](https://glyphsapp.com/):
+  Font editor (_commercial_)
+- [Google Font Classifier](https://github.com/Storia-AI/font-classify):
+  Finds the Google Font that most closely matches text in an image
+- [hexagone](https://github.com/nolenroyalty/hexagone):
+  Modify font so it converts hex codes to RGB
+  ([article](https://eieio.games/nonsense/hexagone-converting-hex-to-rgb-with-a-font/))
 - [LCDF Typetools](https://www.lcdf.org/type/)
   ([Github](https://github.com/kohler/lcdf-typetools)):
   Font manipulation utilities, see `software.md`
+- [metaflop](https://www.metaflop.com/)
+  ([Github](https://github.com/metaflop)):
+  Modulate/customize fonts within given parameters to generate range
+  of font families
 - [monobit](https://github.com/robhagemans/monobit):
   Modify and convert bitmap fonts
+- [numderline](https://thume.ca/numderline/)
+  ([Github](https://github.com/trishume/numderline)):
+  Modify fonts so alternating groups of three digits are underlined,
+  making it easier to distinguish thousand/thousand-th parts
+  ([article](https://blog.janestreet.com/commas-in-big-numbers-everywhere/))
 
 ## Monospace fonts
 
+- [Agave](https://b.agaric.net/page/agave)
+  ([Github](https://github.com/blobject/agave))
 - [Ark Pixel Font](https://github.com/TakWolf/ark-pixel-font)
   (bitmap, CJK)
 - [BQN386](https://dzaima.github.io/BQN386/)
@@ -86,6 +122,7 @@ making them the default. Some tooling to help do that:
   ([Github](https://github.com/eigilnikolajsen/commit-mono),
   VF[_ital_,**wght**])
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)
+- [Ellograph](https://connary.com/ellograph.html) (_commercial_)
 - [Everson Mono](https://www.evertype.com/emono/) (_shareware_)
 - [Fairfax](http://www.kreativekorp.com/software/fonts/fairfax/) (bitmap)
   and [Fairfax HD](http://www.kreativekorp.com/software/fonts/fairfaxhd/)
@@ -112,7 +149,8 @@ making them the default. Some tooling to help do that:
   VF[_slnt_,wdth,**weight**])
 - [Monocraft](https://github.com/IdreesInc/Monocraft)
   (bitmap, emulates Minecraft typeface, proportional
-  [version](https://github.com/IdreesInc/Minecraft-Font))
+  [version](https://github.com/IdreesInc/Minecraft-Font),
+  vector-y [version](https://github.com/IdreesInc/Miracode))
 - [OCR A](https://sourceforge.net/projects/ocr-a-font/)
   (the TTF file does work correctly on macOS so for that system
   install the PFA file instead, see next font for alternative)
@@ -164,6 +202,9 @@ making them the default. Some tooling to help do that:
 - [Clarity City](https://github.com/vmware/clarity-city)
   (similar to Gotham but with stricter geometry)
 - [Clear Sans](https://github.com/intel/clear-sans)
+- [Climate Crisis](https://design.google/library/climate-crisis)
+  ([Github](https://github.com/dancoull/ClimateCrisis))
+  (VF[YEAR])
 - [Comic Neue](https://comicneue.com/)
   ([Github](https://github.com/crozynski/comicneue),
   marker-style font mimicking Comic Sans, has angular variant)
@@ -189,6 +230,11 @@ making them the default. Some tooling to help do that:
 - [Luohei Variable](https://atelier-anchor.com/luohei-variable)
   ([Github](https://github.com/atelier-anchor/luohei-variable))
   (CJK, VF[xwgt,ywgt])
+- [National Park](https://nationalparktypeface.com/)
+  ([Github](https://github.com/benhoepner/National-Park))
+  (VF[**wght**])
+- [Neutraface](https://housefonts.com/hi/neutraface)
+  (_commercial_)
 - [Northrup](https://github.com/mirnovov/northrup)
 - [Open Sans](https://github.com/googlefonts/opensans)
   (VF[wdth,**wght**])
@@ -215,6 +261,9 @@ making them the default. Some tooling to help do that:
 - [Readex Pro](https://github.com/ThomasJockin/readexpro) (expanded
   [Lexend](https://github.com/googlefonts/lexend),
   VF[HEXP,**wght**])
+- [Rocher Color](https://www.harbortype.com/fonts/rocher-color/)
+  ([article](https://www.harbortype.com/rocher-color-making-a-variable-color-font/),
+  VF[BVEL,SHDW])
 - [Schibsted Grotesk](https://github.com/schibsted/schibsted-grotesk)
   (VF[**wght**])
 - [Shantell Sans](https://github.com/arrowtype/shantell-sans)
@@ -223,12 +272,18 @@ making them the default. Some tooling to help do that:
 - [Smiley Sans](https://atelier-anchor.com/typefaces/smiley-sans)
   ([Github](https://github.com/atelier-anchor/smiley-sans))
   (CJK)
+- [SN Pro](https://supernotes.app/open-source/sn-pro/)
+  ([Github](https://github.com/supernotes/sn-pro))
+  (VF[_slnt_,**wght**])
 - [Space Grotesk](https://github.com/floriankarsten/space-grotesk)
   (VF[**wght**])
 - [TASA Typeface Collection](https://tasatype.localremote.co/)
   ([Github](https://github.com/adrianzwz/TASA-Typeface-Collection),
   VF[**wght**])
 - [Teachers](https://github.com/chankfonts/Teachers-fonts)
+  (VF[**wght**])
+- [Unbounded](https://unbounded.polkadot.network/)
+  ([Github](https://github.com/w3f/unbounded))
   (VF[**wght**])
 - [Urbanist](https://github.com/coreyhu/Urbanist)
   (VF[_ital_,**wght**])
@@ -260,6 +315,9 @@ making them the default. Some tooling to help do that:
   and [Code](https://github.com/quoteunquoteapps/CourierPrimeCode)
 - [Domaine](https://klim.co.nz/collections/domaine/) (_commercial_)
 - [EB Garamond](https://github.com/georgd/EB-Garamond)
+- [Elstob](https://psb1558.github.io/Elstob-font/)
+  ([Github](https://github.com/psb1558/Elstob-font))
+  (VF[GRAD,SPAC,_slnt_,opsz,**wght**])
 - [ETbb](https://tug.org/FontCatalogue/etbb/)
   ([CTAN](https://ctan.org/pkg/etbb?lang=en))
 - Grenze [Regular](https://www.omnibus-type.com/fonts/grenze/)
@@ -277,6 +335,10 @@ making them the default. Some tooling to help do that:
 - [Playfair](https://github.com/googlefonts/Playfair)
   (VF[opsz,wdth,**wght**])
 - [Reforma](https://pampatype.com/reforma)
+- [Shakespeare Serif](https://github.com/edent/Shakespeare-Serif-Font)
+  (font based on scans of the
+  [First Folio](https://en.wikipedia.org/wiki/First_Folio),
+  [article](https://shkspr.mobi/blog/2023/07/shakespeare-serif-a-new-font-based-on-the-first-folio/))
 - [Spectral](https://github.com/productiontype/spectral)
 - [Sprat](https://github.com/EthanNakache/Sprat-type)
   (VF[wdth,**wght**])
@@ -288,12 +350,18 @@ making them the default. Some tooling to help do that:
 - [Asap Symbol](https://www.omnibus-type.com/fonts/asap-symbol/)
   ([Github](https://github.com/Omnibus-Type/Asap-Symbol))
 - [Catrinity](https://catrinity-font.de/) (sans-serif)
+- [Chartwell](https://www.vectrotype.com/chartwell) (_commercial_,
+  font to render charts using OpenType)
 - [DSEG](https://www.keshikan.net/fonts-e.html)
   ([Github](https://github.com/keshikan/DSEG)) (LCD display-like)
+- [Eva Icons](https://akveo.github.io/eva-icons/)
+  ([Github](https://github.com/akveo/eva-icons))
+  (Webfont)
 - [Quivira](http://www.quivira-font.com/) (serif)
 - [Redacted](https://github.com/christiannaths/redacted-font)
   (for keeping wireframes and prototypes free of distracting text,
   VF[**wght**])
+- [Signals](https://significa.co/blog/signals-by-significa)
 - [Siji-ng](https://github.com/mxkrsv/siji-ng) (bitmap)
 - [Symbola](https://dn-works.com/ufas/)
   (_free for personal use_, may need to email author for font but
@@ -311,6 +379,10 @@ making them the default. Some tooling to help do that:
 
 ## Font families
 
+- [Avería](http://iotic.com/averia/)
+  ([Google Fonts](https://fonts.google.com/?query=averia))
+  (font created by averaging other fonts
+  [VF](https://github.com/eliheuer/averia-libre-vf)[**wght**])
 - [Bagnard](https://github.com/sebsan/Bagnard) and
   [Bagnard Sans](https://github.com/sebsan/Bagnard-Sans)
 - [DM](https://github.com/googlefonts/dm-fonts) (sans
@@ -349,6 +421,7 @@ making them the default. Some tooling to help do that:
   fonts, primarily sans-serif proportional with some monospace,
   that together aim to cover all scripts in the Unicode standard
   (some VF[**wght**], some VF[wdth,**wght**])
+- [Open Sauce](https://github.com/marcologous/Open-Sauce-Fonts)
 - [Recursive](https://github.com/arrowtype/recursive)
   (VF[CASL,CRSV,MONO,_slnt_,**wght**])
 - [Red Hat](https://github.com/RedHatOfficial/RedHatFont)
@@ -398,6 +471,7 @@ making them the default. Some tooling to help do that:
   ([Github](https://github.com/theleagueof))
 - [The Ultimate Oldschool PC Font Pack](https://int10h.org/oldschool-pc-fonts/)
 - [Tunera Type Foundry](https://www.tunera.xyz/)
+- [Typeface Trivia](https://github.com/subidit/typophilia) - list of fonts and font trivia
 - [Typewolf](https://www.typewolf.com/)
 - [Typographica](https://typographica.org/)
   ([Library](https://library.typographica.org/))
