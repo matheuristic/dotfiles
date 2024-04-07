@@ -155,7 +155,8 @@ making them the default. Some tooling to help do that:
   (the TTF file does work correctly on macOS so for that system
   install the PFA file instead, see next font for alternative)
 - [OCR B](https://tsukurimashou.osdn.jp/ocr.php.en)
-  (also has OCR A with a larger glyph set than the previous font)
+  (also has OCR A with larger glyph set than previous font, alternate
+  [download site](https://aur.archlinux.org/packages/ocr-fonts))
 - [Pixel Code](https://qwerasd205.github.io/PixelCode/examples/specimen.html)
   ([Github](https://github.com/qwerasd205/PixelCode))
 - [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_,
