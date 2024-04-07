@@ -154,9 +154,14 @@ making them the default. Some tooling to help do that:
 - [OCR A](https://sourceforge.net/projects/ocr-a-font/)
   (the TTF file does work correctly on macOS so for that system
   install the PFA file instead, see next font for alternative)
-- [OCR B](https://tsukurimashou.osdn.jp/ocr.php.en)
+- [OCR B](https://tsukurimashou.org/ocr.php.en)
   (also has OCR A with larger glyph set than previous font, alternate
-  [download site](https://aur.archlinux.org/packages/ocr-fonts))
+  [download site](https://aur.archlinux.org/packages/ocr-fonts); other
+  implementations are [CTAN](https://ctan.org/pkg/ocr-b-outline) and a
+  constant stroke width
+  [variant](https://web.archive.org/web/20190328165040/https://wehtt.am/ocr-b/);
+  there is also a variant standard covering Japanese Katakana,
+  [OCR-BK](https://force4u.cocolog-nifty.com/skywalker/2010/07/ocrocr-bkw-9d5e.html))
 - [Pixel Code](https://qwerasd205.github.io/PixelCode/examples/specimen.html)
   ([Github](https://github.com/qwerasd205/PixelCode))
 - [PragmataPro](https://fsd.it/shop/fonts/pragmatapro/) (_commercial_,
