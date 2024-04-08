@@ -785,7 +785,16 @@
     Command-line benchmarking tool that supports multiple and warmup
     runs, export of results to various formats, etc; basically a
     featureful alternative to the standard `time` command
-  - [klogg](https://klogg.filimonov.dev/)
+  - [inxi](https://smxi.org/)
+    ([Codeberg](https://codeberg.org/smxi/inxi)) or
+    [hardinfo2](https://www.hardinfo2.org/)
+    ([Github](https://www.hardinfo2.org/)):
+    Tool to show system information; inxi is a CLI tool, hardinfo is a
+    GUI tool, both are Linux-only; for macOS, use the built-in
+    `system_profiler` (CLI) or "System Information.app" (GUI); a
+    nice-looking CLI alternative but with less functionality is
+    [fastfetch](https://github.com/fastfetch-cli/fastfetch)
+ - [klogg](https://klogg.filimonov.dev/)
     ([Github](https://github.com/variar/klogg)):
     Cross-platform GUI log explorer
   - [lnav](https://lnav.org/)
@@ -966,7 +975,8 @@
     Multithreaded GPU-accelerated collaborative code editor
 - User experience and interface (graphical)
   - [Amethyst](https://ianyh.com/amethyst/)
-    ([Github](https://github.com/ianyh/Amethyst)):
+    ([Github](https://github.com/ianyh/Amethyst)) or
+    [yabai](https://github.com/koekeishiya/yabai):
     Tiling window manager for macOS
   - [Hyperkey](https://hyperkey.app/):
     Use CapsLock as a "hyper" key, that is, C-Opt-Cmd-Shift, on macOS
@@ -1015,6 +1025,12 @@
     ([Github](https://github.com/oliverschwendener/ueli)):
     Launcher like [Alfred](https://www.alfredapp.com/) but open-source
     and cross-platform
+  - [Velja](https://sindresorhus.com/velja)
+    ([App Store](https://apps.apple.com/app/id1607635845)) or
+    [finicky](https://github.com/johnste/finicky) or
+    [Browserosaurus](https://browserosaurus.com/)
+    ([Github](https://github.com/will-stone/browserosaurus)):
+    Open different links in different browsers or apps, macOS
   - [xbar](https://github.com/matryer/xbar) or
     [SwiftBar](https://github.com/swiftbar/SwiftBar):
     Pipe output to the menu bar; macOS
@@ -1317,9 +1333,6 @@
   - [Vale](https://vale.sh/)
     ([Github](https://github.com/errata-ai/vale)):
     Linter for prose
-  - [Velja](https://sindresorhus.com/velja)
-    ([App Store](https://apps.apple.com/app/id1607635845)):
-    Open different links in different browsers or apps, macOS
   - [Zotero](https://www.zotero.org/)
     ([Github](https://github.com/zotero/zotero)):
     Reference management software to collect, organize, cite and
@@ -1394,6 +1407,10 @@
   - [Sublime Text](https://www.sublimetext.com/):
     Lightweight text editor
 - User experience and interface (graphical)
+  - [Choosy](https://choosy.app/) or
+    [OpenIn](https://loshadki.app/openin4/):
+    Open different links in different browsers or apps, macOS; free
+    alternatives include Velja, finicky and Browserosaurus
   - [shottr](https://shottr.cc/):
     Screenshot app for macOS, free for non-commercial use; note that
     macOS has built-in screenshot taking via `Cmd-Shift-3` (capture
