@@ -43,19 +43,20 @@ Debian-derived distribution use `sudo apt install stow`; on macOS use
 `sudo port install stow` if MacPorts is installed).
 
 Git clone the repository, and symlink each package's config files to
-the user home directory using `stow`. A package name simply
-corresponds to a directory within the repository, and `stow` with the
-`--no-folding` option will create the directory structure within the
-package at the target destination if it does not exist and
-symbolically link each file in the package to the corresponding
-location in the target destination, creating any required directories
-as needed. Two examples (tmux and fish) are shown as follows.
+the user home directory using `stow`. Each repository subdirectory in
+`stow/` (e.g.`stow/package`) corresponds to a package of the same
+name, and `stow` with the `--no-folding` and `--dotfiles` options will
+create the directory structure within the package at the target
+destination if it does not exist and symbolically link each file in
+the package to the corresponding location in the target destination,
+creating any required directories as needed and changing `dot-XYZ`
+names to `.XYZ`. Two examples (tmux and fish) are shown as follows.
 
 ```Shell
 $ git clone https://github.com/matheuristic/dotfiles.git
 $ cd dotfiles
-$ stow -t $HOME --no-folding tmux
-$ stow -t $HOME --no-folding fish
+$ stow -t $HOME --dotfiles --no-folding stow/tmux
+$ stow -t $HOME --dotfiles --no-folding stow/fish
 ...
 ```
 
