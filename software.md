@@ -2133,6 +2133,13 @@ $ spack install
 $ spack gc
 ```
 
+(Note: to use specific releases of Spack rather than the default
+rolling `develop` branch, check out the appropriate branch or tag.
+For example, to use the latest version in the `v0.21.*` series run
+`git checkout releases/v0.21` after cloning the repository, or to use
+`v0.21.2` run `git checkout tag/v0.21.2` after cloning the
+repository.)
+
 To load Spack and activate the `default` environment automatically on
 Zsh shell startup:
 
@@ -2251,6 +2258,33 @@ Common workflows (adapted from
   ```console
   $ spack env deactivate
   $ spack env remove myenv
+  ```
+
+- To upgrade Spack (below assumes it's cloned to `~/spack`):
+
+  Upgrade current branch, which assumes the current branch is
+  `develop` (rolling) or `releases/<some_version>` (release series):
+
+  ```console
+  $ cd ~/spack
+  $ git pull  # same as `git fetch && git merge origin/<branch-name>`
+  ```
+
+  Upgrade to a new release series (e.g., `releases/v0.21`):
+
+  ```console
+  $ cd ~/spack
+  $ git fetch origin
+  $ git branch --track releases/v0.21 origin/releases/v0.21  # optional
+  $ git switch releases/v0.21
+  ```
+
+  Upgrade to a new tag (e.g., `v0.21.2`):
+
+  ```console
+  $ cd ~/spack
+  $ git fetch
+  $ git checkout -b v0.21.2 tag/v0.21.2  # creates a new branch v0.21.2
   ```
 
 References:
@@ -3052,6 +3086,8 @@ output by `git branch -r`):
 ```sh
 git checkout --track <REMOTENAME>
 ```
+
+(`git switch` can also be used, run `man git-switch` for its manpage.)
 
 List all branches (branches not tracked locally are in red):
 
