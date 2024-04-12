@@ -131,6 +131,8 @@ making them the default. Some tooling to help do that:
 - [Galmuri](https://github.com/quiple/galmuri) (bitmap, CJK)
 - [IBM3161](https://github.com/wyatt8740/IBM3161-font)
   ([GitLab](https://gitlab.com/wyatt8740/IBM3161-font), bitmap)
+- [IBM fonts](https://github.com/farsil/ibmfonts)
+  (bitmap)
 - [Iosveka](https://github.com/be5invis/Iosevka)
   ([CJK variant](https://github.com/be5invis/Sarasa-Gothic))
   (on macOS, install individual TTF files rather than the super TTC
