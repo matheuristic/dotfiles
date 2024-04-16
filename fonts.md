@@ -196,6 +196,9 @@ making them the default. Some tooling to help do that:
 
 - [Andika](https://software.sil.org/andika/)
   ([Github](https://github.com/silnrsi/font-andika))
+- [Archivo](https://github.com/Omnibus-Type/Archivo) and
+  Archivo [Narrow](https://github.com/Omnibus-Type/ArchivoNarrow)
+  (VF[wdth,**wght**])
 - [Atkinson Hyperlegible](https://brailleinstitute.org/freefont)
   ([extended version](https://github.com/jacobxperez/atkinson-hyperlegible-pro))
 - [Avenir](https://en.wikipedia.org/wiki/Avenir_(typeface))
@@ -230,7 +233,9 @@ making them the default. Some tooling to help do that:
 - [Georama](https://github.com/productiontype/Georama)
   (VF[wdth,**wght**])
 - [Inter](https://github.com/rsms/inter)
-  (Helvetica alternative, VF[_ital_,opsz,**wght**])
+  (Helvetica alternative, there's a fork
+  [Pretendard](https://github.com/orioncactus/pretendard)
+  that adds CJK support, VF[_ital_,opsz,**wght**])
 - [Jost*](https://github.com/indestructible-type/Jost)
   (Futura alternative, VF[_ital_,**wght**])
 - [Lato](https://github.com/googlefonts/LatoGFVersion)
@@ -272,6 +277,8 @@ making them the default. Some tooling to help do that:
 - [Rocher Color](https://www.harbortype.com/fonts/rocher-color/)
   ([article](https://www.harbortype.com/rocher-color-making-a-variable-color-font/),
   VF[BVEL,SHDW])
+- [Saira](https://github.com/Omnibus-Type/Saira)
+  (has a stencil version, VF[wdth,**wght**])
 - [Schibsted Grotesk](https://github.com/schibsted/schibsted-grotesk)
   (VF[**wght**])
 - [Shantell Sans](https://github.com/arrowtype/shantell-sans)
@@ -458,6 +465,7 @@ making them the default. Some tooling to help do that:
 - [Collletttivo](https://www.collletttivo.it/)
 - [Colophon Foundry](https://www.colophon-foundry.org/) (_commercial_)
 - [DamienG's typefaces](https://damieng.com/typography/)
+- [Dot Colon](https://dotcolon.net/)
 - [Fonts In Use](https://fontsinuse.com/)
 - [Google Font Updates](https://twitter.com/googlefonts?lang=us)
 - [Google Fonts Knowledge](https://fonts.google.com/knowledge)
