@@ -332,6 +332,9 @@ making them the default. Some tooling to help do that:
   ([Github](https://github.com/indestructible-type/Bodoni),
   VF[opsz,**wght**])
 - [Bona Nova](https://github.com/kosmynkab/Bona-Nova)
+- [Canela](https://commercialtype.com/catalog/canela)
+  (has variants Canela Deck and Canela Text, comes with macOS but
+  needs to be downloaded in the Font Book app, _commercial_)
 - [Cardo](https://github.com/googlefonts/CardoFont)
 - [Courier Prime](https://quoteunquoteapps.com/courierprime/)
   [Regular](https://github.com/quoteunquoteapps/CourierPrime),
@@ -368,6 +371,9 @@ making them the default. Some tooling to help do that:
   (VF[wdth,**wght**])
 - [Wittgenstein](https://github.com/jrgdrs/Wittgenstein)
   (VF[**wght**])
+- [Yrsa](https://github.com/rosettatype/yrsa-rasa)
+  (has superset Rasa that adds Gujarati script support,
+  VF[**wght**])
 
 ## Symbol fonts
 
