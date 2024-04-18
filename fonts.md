@@ -210,6 +210,13 @@ making them the default. Some tooling to help do that:
   ([Github copy with OFL license](https://github.com/inferno986return/Canada1500))
 - [CERN-www](https://github.com/djrrb/CERN-www-fonts)
   ([WorldWideWeb](https://worldwideweb.cern.ch/) browser font clone)
+- [Chiq](https://ingofonts.de/ingofonts/en/iF_Chiq/iF_Chiq.html)
+  (based on Chicago font from the Apple computer; alternatively, use
+  the built-in Krungthep font on macOS, or revival font ChicagoFLF by
+  [Casady&Green](http://luc.devroye.org/fonts-27509.html) from
+  [here](https://fontsarena.com/chicago-flf-by-robin-casady/) or
+  [here](https://fontlibrary.org/en/font/chicagoflf) or a modified
+  [version](https://christtrekker.users.sourceforge.net/fnt/chicago.shtml))
 - [Clarity City](https://github.com/vmware/clarity-city)
   (similar to Gotham but with stricter geometry)
 - [Clear Sans](https://github.com/intel/clear-sans)
@@ -302,6 +309,8 @@ making them the default. Some tooling to help do that:
   (VF[**wght**])
 - [Urbanist](https://github.com/coreyhu/Urbanist)
   (VF[_ital_,**wght**])
+- [Virtue](http://www.scootergraphics.com/virtue/)
+  (improved clone of Charcoal font from MacOS 8)
 - [Wix Madefor](https://github.com/wix-incubator/wixmadefor)
   (VF[_ital_,**wght**])
 - [Womprat](https://crown.fontdue.com/fonts/womprat) (Star Wars-y,
@@ -464,6 +473,7 @@ making them the default. Some tooling to help do that:
 - [Beautiful Web Type](https://beautifulwebtype.com/)
 - [Collletttivo](https://www.collletttivo.it/)
 - [Colophon Foundry](https://www.colophon-foundry.org/) (_commercial_)
+- [Classic Macintosh Bitmap Typography](https://github.com/bzotto/ClassicMacTypography/)
 - [DamienG's typefaces](https://damieng.com/typography/)
 - [Dot Colon](https://dotcolon.net/)
 - [Fonts In Use](https://fontsinuse.com/)
