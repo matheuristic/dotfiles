@@ -79,7 +79,9 @@
     ([Github](https://github.com/borgbackup/borg)):
     File backup tool; frontends available like
     [Vorta](https://vorta.borgbase.com/), along with other
-    [tooling](https://github.com/borgbackup/community)
+    [tooling](https://github.com/borgbackup/community);
+    an alternative is [bup](https://bup.github.io/)
+    ([Github](https://github.com/bup/bup))
   - [dar](http://dar.linux.free.fr/)
     ([Github](https://github.com/Edrusb/DAR),
     [SourceForge](https://sourceforge.net/projects/dar/)):
@@ -244,7 +246,8 @@
     MySQL, MariaDB client; macOS
 - Desktop publishing
   - [Scribus](https://www.scribus.net/)
-    ([Github mirror](https://github.com/scribusproject/scribus))
+    ([Github mirror](https://github.com/scribusproject/scribus)):
+    Alternative to commercial Adobe InDesign; good for book layouts
 - Diagramming and image editing
   - [ASCIIFlow](https://asciiflow.com/)
     ([Github](https://github.com/lewish/asciiflow)):
