@@ -1835,6 +1835,13 @@ is created for that command. If there is no comment for a package,
 then the default behavior is to assume a command exists with the same
 name as the command and to wrap that.
 
+Also note that some packages install multiple commands, so it may be
+useful to refer to a package listing to figure out what commands are
+installed. For example, the file listing for a Debian package
+`graphviz` for Debian release `bullseye` can be found at
+[`https://packages.debian.org/bullseye/all/graphviz/filelist`](https://packages.debian.org/bullseye/all/graphviz/filelist)
+and the installed commands would be file with a `/usr/bin/` prefix.
+
 ## Python virtual environments
 
 Conda (see above) can work as a virtual environment manager.
