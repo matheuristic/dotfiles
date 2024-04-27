@@ -341,7 +341,8 @@ making them the default. Some tooling to help do that:
   [Sans](https://github.com/quoteunquoteapps/CourierPrimeSans),
   and [Code](https://github.com/quoteunquoteapps/CourierPrimeCode)
 - [Domaine](https://klim.co.nz/collections/domaine/) (_commercial_)
-- [EB Garamond](https://github.com/georgd/EB-Garamond)
+- [EB Garamond](http://www.georgduffner.at/ebgaramond/)
+  ([Github](https://github.com/georgd/EB-Garamond))
 - [Elstob](https://psb1558.github.io/Elstob-font/)
   ([Github](https://github.com/psb1558/Elstob-font))
   (VF[GRAD,SPAC,_slnt_,opsz,**wght**])
@@ -503,6 +504,7 @@ making them the default. Some tooling to help do that:
   ([Github](https://github.com/theleagueof))
 - [The Ultimate Oldschool PC Font Pack](https://int10h.org/oldschool-pc-fonts/)
 - [Tunera Type Foundry](https://www.tunera.xyz/)
+- [Type Classification](http://www.designishistory.com/1450/type-classification/)
 - [Typeface Trivia](https://github.com/subidit/typophilia) - list of fonts and font trivia
 - [Typewolf](https://www.typewolf.com/)
 - [Typographica](https://typographica.org/)

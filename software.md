@@ -1734,6 +1734,9 @@ install_tools () {
 		DEST=$PREFIX/bin/$PROGNAME
 	 	echo "Creating wrapper for $ENVNAME env $PROGNAME : $DEST"
 		if [ "$(basename $CONDA_CMD)" == "micromamba" ]; then
+			if [ ! -x "$MAMBA_ROOT_PREFIX/envs/$ENVNAME/bin/$PROGNAME" ]; then
+				echo "WARNING: Skipping wrapper creation: environment $ENVNAME has no command $PROGNAME" 1>&2
+			fi
 			cat >"$DEST" <<EOF
 #!/bin/sh
 
@@ -1749,6 +1752,9 @@ EOF
 			# `cat test.md | prettier --parser=markdown`
 			# may not output anything to stdout
 			CONDA_SH=$(dirname $CONDA_EXE)
+			if [ ! -x "$CONDA_SH/../envs/$ENVNAME/bin/$PROGNAME" ]; then
+				echo "WARNING: Skipping wrapper creation: environment $ENVNAME has no command $PROGNAME" 1>&2
+			fi
 			cat >"$DEST" <<EOF
 #!/bin/sh
 
