@@ -1681,10 +1681,10 @@ commands from that environment in the `$HOME/.local/bin/` dir.
 
 - In the YAML file, the commands to wrap are indicated in a trailing
   comment for its corresponding package, separated by whitespace. If
-  there is no command in the trailing comment, no wrapper is created
-  for that command. If there is no comment for a package, then the
-  default behavior is to assume a command exists with the same name as
-  the command and to wrap that.
+  there is a trailing comment but no commands listed, no wrappers are
+  created for that package. If there is no trailing comment for a
+  package, then the default behavior is to assume a command exists
+  with the same name as the command and to wrap that.
 
 - Some packages install multiple commands, so it may be useful to
   refer to a package listing to figure out what commands are
