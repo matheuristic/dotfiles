@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# Cross-platform paste from system clipboard script
+
 for cmd in `echo "pbcopy wl-copy xclip xsel" | sed -e 's/ +/\n/g'`; do
     if command -v $cmd >/dev/null 2>&1; then clipboardtool=$cmd; break; fi
 done
