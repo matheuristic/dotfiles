@@ -1,45 +1,54 @@
 # dotfiles
 
-User configuration files for:
+- [Font notes](fonts.md)
+- [Software notes](software.md)
+- [User config files and tool scripts](stow), `stow`-deployable
+  - [`bash`](stow/bash):
+    [Bash](https://www.gnu.org/software/bash/) config
+  - [`elixir`](stow/elixir):
+    [Elixir](https://elixir-lang.org/) interactive shell config
+  - [`git`](stow/git):
+    [Git](https://git-scm.com/)
+  - [`nvm`](stow/nvm):
+    [nvm](https://github.com/nvm-sh/nvm) scripts
+  - [`pandoc`](stow/pandoc):
+    [Pandoc](https://pandoc.org/) scripts
+  - [`psql`](stow/psql):
+    [PostgreSQL](https://www.postgresql.org/) `psql` config
+  - [`python`](stow/python):
+    [Python](https://www.python.org/)
+    [Flake8](https://flake8.pycqa.org/en/latest/) (linter),
+    [Pylint](https://www.pylint.org/) (linter), and
+    [pdb](https://docs.python.org/3/library/pdb.html) configs
+  - [`screen`](stow/screen):
+    [GNU Screen](https://www.gnu.org/software/screen/) config
+  - [`tmux`](stow/tmux):
+    [tmux](https://github.com/tmux/tmux) config
+  - [`utils`](stow/utils):
+    Other utility scripts
+  - [`vi`](stow/vi):
+    [Vi](https://en.wikipedia.org/wiki/Vi) config for
+    [nvi](https://repo.or.cz/nvi.git),
+    [nvi2](https://github.com/lichray/nvi2) and
+    [openvi](https://github.com/johnsonjh/OpenVi)
+  - [`vim`](stow/vim):
+    [Vim](https://www.vim.org/) config
+  - [`vis`](stow/vis):
+    [Vis](https://github.com/martanne/vis) config
+  - [`xxdiff`](stow/xxdiff):
+    [xxdiff](https://github.com/blais/xxdiff) config
+  - [`zsh`](stow/zsh):
+    [Zsh](https://www.zsh.org/) config
+- Other configuration and notes
+  - [Acme](https://github.com/matheuristic/plan9port-config)
+  - [Emacs](https://github.com/matheuristic/emacs-config)
+    (or a simpler [alternative](https://emacs.amodernist.com/))
+    - [Org example docs](https://github.com/matheuristic/org-examples)
 
-- [Bash](https://www.gnu.org/software/bash/)
-- [Elixir](https://elixir-lang.org/)
-- [Git](https://git-scm.com/)
-- [NPM](https://www.npmjs.com/) using [nvm](https://github.com/nvm-sh/nvm)
-- [Pandoc](https://pandoc.org/) and [Quarto](https://quarto.org/)
-- [PostgreSQL](https://www.postgresql.org/)
-- [Python](https://www.python.org/)
-  [Flake8](https://flake8.pycqa.org/en/latest/) (linter),
-  [Pylint](https://www.pylint.org/) (linter), and
-  [pdb](https://docs.python.org/3/library/pdb.html) (debugger)
-- [GNU Screen](https://www.gnu.org/software/screen/)
-- [tmux](https://github.com/tmux/tmux)
-- [Vi](https://en.wikipedia.org/wiki/Vi) (applicable to
-  [nvi](https://repo.or.cz/nvi.git),
-  [nvi2](https://github.com/lichray/nvi2) and
-  [openvi](https://github.com/johnsonjh/OpenVi))
-- [Vim](https://www.vim.org/)
-- [Vis](https://github.com/martanne/vis)
-- [xxdiff](https://github.com/blais/xxdiff)
-- [X11](https://www.x.org/wiki/) ([urxvt](http://software.schmorp.de/pkg/rxvt-unicode.html) and [xterm](https://invisible-island.net/xterm/))
-- [Zsh](https://www.zsh.org/)
-- ... and other utility scripts
-
-For Acme configuration, see [here](https://github.com/matheuristic/plan9port-config).
-
-For Emacs configuration, see [here](https://github.com/matheuristic/emacs-config).
-See [here](https://emacs.amodernist.com/) for a simpler alternative.
-
-For Org example documents, see [here](https://github.com/matheuristic/org-examples).
-
-For fonts, see [`fonts.md`](fonts.md).
-
-For a list of software and other configuration, see [`software.md`](software.md).
-
-## Deploying config files using GNU Stow
+## Deploying user config files and tool scripts using GNU Stow
 
 Install [GNU Stow](https://www.gnu.org/software/stow/) (on a
-Debian-derived distribution use `sudo apt install stow`; on macOS use
+Debian-derived distribution use `sudo apt install stow` ; on macOS use
 `sudo port install stow` if MacPorts is installed).
 
 Git clone the repository, and symlink each package's config files to
