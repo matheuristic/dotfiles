@@ -1,12 +1,14 @@
 # dotfiles
 
-- [Font notes](fonts.md)
-- [Software notes](software.md)
-- [User config files and tool scripts](stow), `stow`-deployable
+## Contents
+
+- [`fonts.md`](fonts.md): Font notes
+- [`software.md`](software.md): Software notes
+- [`stow`](stow): `stow`-deployable user config files and scripts
   - [`bash`](stow/bash):
     [Bash](https://www.gnu.org/software/bash/) config
   - [`elixir`](stow/elixir):
-    [Elixir](https://elixir-lang.org/) interactive shell config
+    [Elixir](https://elixir-lang.org/) REPL config
   - [`git`](stow/git):
     [Git](https://git-scm.com/)
   - [`nvm`](stow/nvm):
@@ -39,11 +41,13 @@
     [xxdiff](https://github.com/blais/xxdiff) config
   - [`zsh`](stow/zsh):
     [Zsh](https://www.zsh.org/) config
-- Other configuration and notes
-  - [Acme](https://github.com/matheuristic/plan9port-config)
-  - [Emacs](https://github.com/matheuristic/emacs-config)
-    (or a simpler [alternative](https://emacs.amodernist.com/))
-    - [Org example docs](https://github.com/matheuristic/org-examples)
+
+## Other configuration and notes
+
+- [Acme](https://github.com/matheuristic/plan9port-config)
+- [Emacs](https://github.com/matheuristic/emacs-config)
+  (or a simpler [alternative](https://emacs.amodernist.com/))
+  - [Org example docs](https://github.com/matheuristic/org-examples)
 
 ## Deploying user config files and tool scripts using GNU Stow
 
