@@ -121,6 +121,10 @@ making them the default. Some tooling to help do that:
 - [Commit Mono](https://commitmono.com/)
   ([Github](https://github.com/eigilnikolajsen/commit-mono),
   VF[_ital_,**wght**])
+- [Courier Prime](https://quoteunquoteapps.com/courierprime/)
+  [Regular](https://github.com/quoteunquoteapps/CourierPrime),
+  [Sans](https://github.com/quoteunquoteapps/CourierPrimeSans),
+  and [Code](https://github.com/quoteunquoteapps/CourierPrimeCode)
 - [Cozette](https://github.com/slavfox/Cozette) (bitmap)
 - [Ellograph](https://connary.com/ellograph.html) (_commercial_)
 - [Everson Mono](https://www.evertype.com/emono/) (_shareware_)
@@ -153,6 +157,8 @@ making them the default. Some tooling to help do that:
   (bitmap, emulates Minecraft typeface, proportional
   [version](https://github.com/IdreesInc/Minecraft-Font),
   vector-y [version](https://github.com/IdreesInc/Miracode))
+- [Pixel Panel](https://github.com/oliverlalan/PixelPanel)
+  (VF[rond,**wght**])
 - [OCR A](https://sourceforge.net/projects/ocr-a-font/)
   (the TTF file does work correctly on macOS so for that system
   install the PFA file instead, see next font for alternative)
@@ -336,10 +342,6 @@ making them the default. Some tooling to help do that:
   (has variants Canela Deck and Canela Text, comes with macOS but
   needs to be downloaded in the Font Book app, _commercial_)
 - [Cardo](https://github.com/googlefonts/CardoFont)
-- [Courier Prime](https://quoteunquoteapps.com/courierprime/)
-  [Regular](https://github.com/quoteunquoteapps/CourierPrime),
-  [Sans](https://github.com/quoteunquoteapps/CourierPrimeSans),
-  and [Code](https://github.com/quoteunquoteapps/CourierPrimeCode)
 - [Domaine](https://klim.co.nz/collections/domaine/) (_commercial_)
 - [EB Garamond](http://www.georgduffner.at/ebgaramond/)
   ([Github](https://github.com/georgd/EB-Garamond))
