@@ -178,7 +178,6 @@ making them the default. Some tooling to help do that:
 - [Space Mono](https://www.colophon-foundry.org/custom-projects/space-mono)
   ([Github](https://github.com/googlefonts/spacemono))
 - [Spleen](https://github.com/fcambus/spleen) (bitmap)
-- [Tamsyn](http://www.fial.com/~scott/tamsyn-font/) (bitmap)
 - [Tektite](https://www.chiark.greenend.org.uk/~sgtatham/fonts/)
   (bitmap, also see
   [here](https://unix.stackexchange.com/questions/226593/where-can-i-find-a-modern-version-of-the-rock-or-t-console-typeface))
@@ -207,8 +206,6 @@ making them the default. Some tooling to help do that:
   (VF[wdth,**wght**])
 - [Atkinson Hyperlegible](https://brailleinstitute.org/freefont)
   ([extended version](https://github.com/jacobxperez/atkinson-hyperlegible-pro))
-- [Avenir](https://en.wikipedia.org/wiki/Avenir_(typeface))
-  and its variants (included with macOS)
 - Brandon [Grotesque](https://www.hvdfonts.com/fonts/brandon-grotesque)
   and [Text](https://www.hvdfonts.com/fonts/brandon-text)
   (condensed versions also available, _commercial_)
