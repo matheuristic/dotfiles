@@ -2,118 +2,124 @@
 
 ## Open-source software
 
+(Note: ᴸ → Linux, ᴹ → Mac, ᵂ → Windows, ᴬ → Android, ᴵ → iOS)
+
 - Audio and video creation and editing
-  - [Ardour](https://ardour.org/)
+  - [Ardour](https://ardour.org/)ᴸᴹᵂ
     ([Github](https://github.com/Ardour/ardour)) or
-    [Zrythm](https://www.zrythm.org/)
+    [Zrythm](https://www.zrythm.org/)ᴸᴹᵂ
     ([Gitlab](https://gitlab.zrythm.org/zrythm/zrythm)):
     Digital audio workstation; Ardour works with
     [ReaPlugs](https://www.reaper.fm/reaplugs/) VST plugins; Ardour
     seems more suited to audio recording and engineering, while Zrythm
     seems more suited to MIDI electronic music production
-  - [Blackhole](https://existential.audio/blackhole/)
+  - [Blackhole](https://existential.audio/blackhole/)ᴹ
     ([Github](https://github.com/ExistentialAudio/BlackHole)):
-    Route audio between apps (e.g., to record internal audio), macOS
-  - [Blender](https://www.blender.org/)
+    Route audio between apps (e.g., to record internal audio)
+  - [Blender](https://www.blender.org/)ᴸᴹᵂ
     ([Github](https://github.com/blender/blender)):
     3D creation suite covering the full 3D animation pipeline
-  - [Handbrake](https://handbrake.fr/)
+  - [Handbrake](https://handbrake.fr/)ᴸᴹᵂ
     ([Github](https://github.com/HandBrake/HandBrake)):
     Video encoder
-  - [Kdenlive](https://kdenlive.org/en/)
+  - [Kdenlive](https://kdenlive.org/en/)ᴸᴹᵂ
     ([KDE Invent](https://invent.kde.org/multimedia/kdenlive)):
-    Video editor; alternative is [ShotCut](https://shotcut.org/)
-  - [LMMS](https://lmms.io/)
+    Video editor; alternative is [ShotCut](https://shotcut.org/)ᴸᴹᵂ
+    ([Github](https://github.com/mltframework/shotcut))
+  - [LMMS](https://lmms.io/)ᴸᴹᵂ
     ([Github](https://github.com/LMMS/lmms)):
     Music sequencer
-  - [LosslessCut](https://github.com/mifi/lossless-cut):
+  - [LosslessCut](https://github.com/mifi/lossless-cut)ᴸᴹᵂ:
     Tool for cutting/trimming audio/video files without re-encoding
-  - [MediaInfo](https://mediaarea.net/en/MediaInfo)
+  - [MediaInfo](https://mediaarea.net/en/MediaInfo)ᴸᴹᵂᴬᴵ
     ([Github](https://github.com/MediaArea/MediaInfo)):
     Tool for showing technical and tag data of audio and video files
-  - [Natron](https://natrongithub.github.io/)
+  - [Natron](https://natrongithub.github.io/)ᴸᴹᵂ
     ([Github](https://github.com/NatronGitHub/Natron)):
     Cross-platform video compositing software, like commercial
     [Nuke](https://www.foundry.com/products/nuke-family/nuke) by The
     Foundry and Adobe After Effects, or freeware DaVinci Resolve
     [Fusion](https://www.blackmagicdesign.com/products/davinciresolve/fusion)
-  - [sfxr-qt](https://github.com/agateau/sfxr-qt):
+  - [sfxr-qt](https://github.com/agateau/sfxr-qt)ᴸ:
     SFX creator for games; Qt port of
-    [SFXR](http://www.drpetter.se/project_sfxr.html);
+    [SFXR](http://www.drpetter.se/project_sfxr.html)ᴸᵂ;
     [JavaScript](https://github.com/chr15m/jsfxr) port available
     [online](https://sfxr.me/); also built into LMMS
-  - [SunVox](https://warmplace.ru/soft/sunvox/):
+  - [SunVox](https://warmplace.ru/soft/sunvox/)ᴸᴹᵂᴬᴵ:
     Cross-platform modular synth and music sequencer, also see this
     [guide](https://sunvox-guide.readthedocs.io/en/latest/index.html)
     ([Github](https://github.com/metrasynth/sunvox-guide))
-  - [Synfig](https://www.synfig.org/)
+  - [Synfig](https://www.synfig.org/)ᴸᴹᵂ
     ([Github](https://github.com/synfig/synfig/)):
     2D vector animation
-  - [Tooll 3](https://github.com/still-scene/t3):
-    Tool for creating real-time motion graphics for Windows
-  - [Ultimate Vocal Remover GUI](https://github.com/Anjok07/ultimatevocalremovergui):
+  - [Tooll 3](https://tooll.io/)ᵂ
+    ([Github](https://github.com/tooll3/t3)):
+    Tool for creating real-time motion graphics
+  - [Ultimate Vocal Remover GUI](https://github.com/Anjok07/ultimatevocalremovergui)ᴸᴹᵂ:
     Tool for using open-source deep learning models (e.g.,
     [Demucs](https://github.com/facebookresearch/demucs) and
     [MDX-NET](https://github.com/kuielab/mdx-net)) to isolate
     vocals from audio tracks; a donation-supported web interface
     [MVSEP](https://mvsep.com/) is also available
-  - [xACT](http://xact.scottcbrown.org/):
-    Audio format converter, macOS
+  - [xACT](http://xact.scottcbrown.org/)ᴹ:
+    Audio format converter
 - Audio and video playback and streaming
-  - [NDI Tools](https://www.ndi.tv/tools/):
+  - [NDI Tools](https://www.ndi.tv/tools/)ᴹᵂ:
     Software for low-latency broadcasting over LAN by taking any video
     source, like a webcam, video capture card or desktop, and making
     that an NDI source accessible by other computers on the network
-  - [OBS Studio](https://obsproject.com/)
+  - [OBS Studio](https://obsproject.com/)ᴸᴹᵂ
     ([Github](https://github.com/obsproject/obs-studio)):
     Software for broadcasting video streams with
     [very](https://obsproject.com/forum/resources/downstream-keyer.1254/)
     [many](https://obsproject.com/forum/resources/closed-captioning-via-google-speech-recognition.833/)
     [different](https://sammisolutions.itch.io/sammi)
     [plugins](https://github.com/Xaymar/obs-StreamFX/wiki)
-  - [VLC](https://www.videolan.org/vlc/)
+  - [VLC](https://www.videolan.org/vlc/)ᴸᴹᵂᴬᴵ
     ([Git](https://code.videolan.org/videolan/vlc)):
     Media player
 - Backup
-  - [BorgBackup](https://www.borgbackup.org/)
+  - [BorgBackup](https://www.borgbackup.org/)ᴸᴹ
     ([Github](https://github.com/borgbackup/borg)):
     File backup tool; frontends available like
-    [Vorta](https://vorta.borgbase.com/), along with other
+    [Vorta](https://vorta.borgbase.com/)ᴸᴹ, along with other
     [tooling](https://github.com/borgbackup/community);
-    an alternative is [bup](https://bup.github.io/)
+    an alternative is [bup](https://bup.github.io/)ᴸᴹᵂ
     ([Github](https://github.com/bup/bup))
-  - [dar](http://dar.linux.free.fr/)
+  - [dar](http://dar.linux.free.fr/)ᴸᴹᵂ
     ([Github](https://github.com/Edrusb/DAR),
     [SourceForge](https://sourceforge.net/projects/dar/)):
     File archiving, supports recovery records using
-    [par2](https://github.com/Parchive/par2cmdline/)
-  - [Timeshift](https://github.com/linuxmint/timeshift):
+    [par2](https://github.com/Parchive/par2cmdline/)ᴸᴹᵂ
+  - [Timeshift](https://github.com/linuxmint/timeshift)ᴸ:
     Like Windows System Restore but for Linux
 - Calendar and task management
-  - [Remind](https://dianne.skoll.ca/projects/remind/)
-    ([Git repository](https://salsa.debian.org/dskoll/remind)):
+  - [Remind](https://dianne.skoll.ca/projects/remind/)ᴸ
+    ([Salsa](https://salsa.debian.org/dskoll/remind),
+    [Git](https://git.skoll.ca/Skollsoft-Public/Remind)):
     Scriptable calendar and alarm program, with
     [CalDAV](https://github.com/jspricke/remind-caldav) (Google) and
     [iCalendar](https://github.com/jspricke/python-remind) integration
     along with CLI ([link1](https://sr.ht/~mlaparie/remint/),
     [link2](https://gitlab.com/wyrd-calendar/wyrd)) and GUI
     (`tkremind` that comes with Remind) front-ends
-  - [Taskwarrior](https://taskwarrior.org/)
+  - [Taskwarrior](https://taskwarrior.org/)ᴸᴹᵂ
     ([Github](https://github.com/GothenburgBitFactory/taskwarrior))
-    and [Timewarrior](https://timewarrior.net/)
+    and [Timewarrior](https://timewarrior.net/)ᴸᴹᵂ
     ([Github](https://github.com/GothenburgBitFactory/timewarrior)):
     Todo list management (Taskwarrior) and time-tracking
     (Timewarrior); [syncall](https://github.com/bergercookie/syncall)
     can be used to sync Taskwarrior tasks with various services like
     Asana, Google Calendar, Google Keep and so on
 - Compilers and linkers
-  - [Mold](https://github.com/rui314/mold):
+  - [Mold](https://github.com/rui314/mold)ᴸ:
     Drop-in replacement for Linux linkers on various architectures;
-    for macOS support, there is a commercial version
-    [sold](https://github.com/bluewhalesystems/sold)
+    for macOS support, there's the previously--commercial now--open
+    [sold](https://github.com/bluewhalesystems/sold)ᴸᴹ but which
+    looks less actively maintained
 - Containerization
-  - [Colima](https://github.com/abiosoft/colima) or
-    [Rancher Desktop](https://rancherdesktop.io/)
+  - [Colima](https://github.com/abiosoft/colima)ᴸᴹ or
+    [Rancher Desktop](https://rancherdesktop.io/)ᴸᴹᵂ
     ([Github](https://github.com/rancher-sandbox/rancher-desktop/)):
     Minimal-setup container runtimes on macOS with support for Docker,
     containerd, or Kubernetes; uses [lima](https://lima-vm.io/), which
@@ -123,25 +129,26 @@
     binaries which can be extracted to some directory in `$PATH` like
     `~/.local/bin`) to use Colima's Docker runtime; for more info, see
     [link](https://www.cncf.io/blog/2023/02/02/docker-on-macos-is-slow-and-how-to-fix-it/)
-  - [dive](https://github.com/wagoodman/dive):
+  - [dive](https://github.com/wagoodman/dive)ᴸᴹᵂ:
     Tool for exploring Docker image layers
   - [Docker](https://docs.docker.com/)
-    [Desktop](https://docs.docker.com/desktop/install/mac-install/)
-  - [lazydocker](https://github.com/jesseduffield/lazydocker) or
-    [oxker](https://github.com/mrjackwills/oxker):
+    [Desktop](https://docs.docker.com/desktop/install/mac-install/)ᴸᴹᵂ
+  - [lazydocker](https://github.com/jesseduffield/lazydocker)ᴸᴹᵂ or
+    [oxker](https://github.com/mrjackwills/oxker)ᴸᵂ:
     Terminal UI to monitor and control Docker containers
 - Data analytics
-  - [JASP](https://jasp-stats.org/)
+  - [JASP](https://jasp-stats.org/)ᴸᴹᵂ
     ([Github](https://github.com/jasp-stats/jasp-desktop)):
     GUI statistical analysis tool
-  - [Netron](https://github.com/lutzroeder/netron):
+  - [Netron](https://netron.app/)ᴸᴹ
+    ([Github](https://github.com/lutzroeder/netron)):
     Neural network, deep learning and machine learning model viewer
-  - [Paraview](https://www.paraview.org/)
+  - [Paraview](https://www.paraview.org/)ᴸᴹᵂ
     ([Github](https://github.com/Kitware/ParaView)):
     Cross-platform tool for scientific visualization
-  - [PSPP](https://www.gnu.org/software/pspp/):
+  - [PSPP](https://www.gnu.org/software/pspp/)ᴸᴹᵂ:
     Open-source SPSS alternative
-  - [Veusz](https://veusz.github.io/)
+  - [Veusz](https://veusz.github.io/)ᴸᴹᵂ
     ([Github](https://github.com/veusz/veusz)):
     Scientific plotting and graphing
 - Data pipeline
