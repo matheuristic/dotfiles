@@ -2,7 +2,9 @@
 
 ## Open-source software
 
-(Note: ᴸ → Linux, ᴹ → Mac, ᵂ → Windows, ᴬ → Android, ᴵ → iOS)
+(Note: ᴸ → Linux, ᴹ → Mac, ᵂ → Windows, ᴬ → Android, ᴵ → iOS;
+some Windows-installable tools require
+[WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux))
 
 - Audio and video creation and editing
   - [Ardour](https://ardour.org/)ᴸᴹᵂ
@@ -79,12 +81,12 @@
     ([Git](https://code.videolan.org/videolan/vlc)):
     Media player
 - Backup
-  - [BorgBackup](https://www.borgbackup.org/)ᴸᴹ
+  - [BorgBackup](https://www.borgbackup.org/)ᴸᴹᵂ
     ([Github](https://github.com/borgbackup/borg)):
     File backup tool; frontends available like
-    [Vorta](https://vorta.borgbase.com/)ᴸᴹ, along with other
+    [Vorta](https://vorta.borgbase.com/)ᴸᴹᵂ, along with other
     [tooling](https://github.com/borgbackup/community);
-    an alternative is [bup](https://bup.github.io/)ᴸᴹᵂ
+    an alternative is [bup](https://bup.github.io/)ᴸᴹ
     ([Github](https://github.com/bup/bup))
   - [dar](http://dar.linux.free.fr/)ᴸᴹᵂ
     ([Github](https://github.com/Edrusb/DAR),
@@ -103,9 +105,9 @@
     along with CLI ([link1](https://sr.ht/~mlaparie/remint/),
     [link2](https://gitlab.com/wyrd-calendar/wyrd)) and GUI
     (`tkremind` that comes with Remind) front-ends
-  - [Taskwarrior](https://taskwarrior.org/)ᴸᴹᵂ
+  - [Taskwarrior](https://taskwarrior.org/)ᴸᴹ
     ([Github](https://github.com/GothenburgBitFactory/taskwarrior))
-    and [Timewarrior](https://timewarrior.net/)ᴸᴹᵂ
+    and [Timewarrior](https://timewarrior.net/)ᴸᴹ
     ([Github](https://github.com/GothenburgBitFactory/timewarrior)):
     Todo list management (Taskwarrior) and time-tracking
     (Timewarrior); [syncall](https://github.com/bergercookie/syncall)
@@ -116,7 +118,8 @@
     Drop-in replacement for Linux linkers on various architectures;
     for macOS support, there's the previously--commercial now--open
     [sold](https://github.com/bluewhalesystems/sold)ᴸᴹ but which
-    looks less actively maintained
+    probably won't be actively maintained going forward (Github
+    [issue](https://github.com/bluewhalesystems/sold/issues/43))
 - Containerization
   - [Colima](https://github.com/abiosoft/colima)ᴸᴹ or
     [Rancher Desktop](https://rancherdesktop.io/)ᴸᴹᵂ
@@ -152,34 +155,34 @@
     ([Github](https://github.com/veusz/veusz)):
     Scientific plotting and graphing
 - Data pipeline
-  - [Apache Airflow](https://airflow.apache.org/)
+  - [Apache Airflow](https://airflow.apache.org/)ᴸᴹᵂ
     ([Github](https://github.com/apache/airflow)):
     Scheduling workflows
-  - [Apache HOP](https://hop.apache.org/)
+  - [Apache HOP](https://hop.apache.org/)ᴸᴹᵂ
     ([Github](https://github.com/apache/hop)):
     Fork of [Kettle/PDI](https://github.com/pentaho/pentaho-kettle)
-  - [Snakemake](https://snakemake.github.io/)
+  - [Snakemake](https://snakemake.github.io/)ᴸᴹᵂ
     ([Github](https://github.com/snakemake/snakemake)) or
-    [Nextflow](https://www.nextflow.io/)
+    [Nextflow](https://www.nextflow.io/)ᴸᴹ
     ([Github](https://github.com/nextflow-io/nextflow)):
     Run batch workflows
 - Database
-  - [BaseX](https://basex.org/):
+  - [BaseX](https://basex.org/):ᴸᴹ
     XML database and XQuery processor; useful for analyzing or
     processing many or huge XML files
     ([example](https://yobriefca.se/blog/2014/05/17/a-brief-overview-of-basex/))
-  - [ClickHouse](https://clickhouse.com/)
+  - [ClickHouse](https://clickhouse.com/)ᴸᴹᵂ
     ([Github](https://github.com/ClickHouse/ClickHouse)):
     Time-series DB, can also run queries on local or
     remote files without installing a database server using
     [clickhouse-local](https://clickhouse.com/docs/en/operations/utilities/clickhouse-local)
-  - [Litestream](https://litestream.io/)
+  - [Litestream](https://litestream.io/)ᴸᴹ
     ([Github](https://github.com/benbjohnson/litestream)) and
-    [LiteFS](https://github.com/superfly/litefs):
+    [LiteFS](https://github.com/superfly/litefs)ᴸ:
     Not a DB, but SQLite tools for streaming backup of a SQLite DB to
     cloud storage (Litestream) and replicating SQLite databases across
     a cluster using a FUSE-based filesystem (LiteFS)
-  - [MongoDB](https://www.mongodb.com/)
+  - [MongoDB](https://www.mongodb.com/)ᴸᴹ
     ([Github](https://github.com/mongodb/mongo)):
     NoSQL database
   - [PostgreSQL](https://www.postgresql.org/)
@@ -644,11 +647,11 @@
     [binary](https://github.com/editorconfig/editorconfig-core-go));
     [editorconfig-checker](https://editorconfig-checker.github.io/)
     can be used to check that files conform to EditorConfig settings
-  - [gitg](https://gitlab.gnome.org/GNOME/gitg) or
-    [Gitup](https://github.com/git-up/GitUp) or
-    [TortoiseGit](https://tortoisegit.org/):
-    [Git](https://git-scm.com/) GUI client; gitg is Linux-only (and is
-    on Flathub), Gitup is macOS-only, TortoiseGit is Windows-only
+  - [Gittyup](https://murmele.github.io/Gittyup/)ᴸᴹᵂ
+    ([Github](https://github.com/Murmele/Gittyup)) or
+    [Gitup](https://github.com/git-up/GitUp)ᴹ or
+    [TortoiseGit](https://tortoisegit.org/)ᵂ:
+    [Git](https://git-scm.com/) GUI client
   - [gogs](https://gogs.io/) or
     [Soft Serve](https://github.com/charmbracelet/soft-serve):
     Self-hosted Git server
