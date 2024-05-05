@@ -46,3 +46,8 @@
 #[mergetool]
 #	prompt = false
 #	#keepBackup = false
+
+# other alternatives include
+# [qgit](https://github.com/tibirna/qgit) or
+# [gitk](https://git-scm.com/docs/gitk/) or
+# [Emacs](https://github.com/paulotome/emacstool)

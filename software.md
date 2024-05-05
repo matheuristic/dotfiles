@@ -2,9 +2,11 @@
 
 ## Open-source software
 
-(Note: ᴸ → Linux, ᴹ → Mac, ᵂ → Windows, ᴬ → Android, ᴵ → iOS;
-some Windows-installable tools require
-[WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux))
+(Note: ᴸ → Linux, ᴹ → Mac, ᵂ → Windows, ᴬ → Android, ᴵ → iOS,
+ˣ → Language runtime-based (e.g., Python, Java, Javascript) with no
+platform restrictions; Many Linux tools are usable in Windows via
+[WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) or in
+Mac since it is POSIX-compliant.)
 
 - Audio and video creation and editing
   - [Ardour](https://ardour.org/)ᴸᴹᵂ
@@ -81,10 +83,10 @@ some Windows-installable tools require
     ([Git](https://code.videolan.org/videolan/vlc)):
     Media player
 - Backup
-  - [BorgBackup](https://www.borgbackup.org/)ᴸᴹᵂ
+  - [BorgBackup](https://www.borgbackup.org/)ᴸᴹ
     ([Github](https://github.com/borgbackup/borg)):
     File backup tool; frontends available like
-    [Vorta](https://vorta.borgbase.com/)ᴸᴹᵂ, along with other
+    [Vorta](https://vorta.borgbase.com/)ᴸᴹ, along with other
     [tooling](https://github.com/borgbackup/community);
     an alternative is [bup](https://bup.github.io/)ᴸᴹ
     ([Github](https://github.com/bup/bup))
@@ -105,14 +107,14 @@ some Windows-installable tools require
     along with CLI ([link1](https://sr.ht/~mlaparie/remint/),
     [link2](https://gitlab.com/wyrd-calendar/wyrd)) and GUI
     (`tkremind` that comes with Remind) front-ends
-  - [Taskwarrior](https://taskwarrior.org/)ᴸᴹ
+  - [Taskwarrior](https://taskwarrior.org/)ᴸ
     ([Github](https://github.com/GothenburgBitFactory/taskwarrior))
-    and [Timewarrior](https://timewarrior.net/)ᴸᴹ
+    and [Timewarrior](https://timewarrior.net/)ᴸ
     ([Github](https://github.com/GothenburgBitFactory/timewarrior)):
-    Todo list management (Taskwarrior) and time-tracking
-    (Timewarrior); [syncall](https://github.com/bergercookie/syncall)
-    can be used to sync Taskwarrior tasks with various services like
-    Asana, Google Calendar, Google Keep and so on
+    Todo list manager (Taskwarrior) and time-tracker (Timewarrior);
+    [syncall](https://github.com/bergercookie/syncall) can be used to
+    sync Taskwarrior tasks with various services like Asana, Google
+    Calendar, Google Keep and so on
 - Compilers and linkers
   - [Mold](https://github.com/rui314/mold)ᴸ:
     Drop-in replacement for Linux linkers on various architectures;
@@ -134,16 +136,15 @@ some Windows-installable tools require
     [link](https://www.cncf.io/blog/2023/02/02/docker-on-macos-is-slow-and-how-to-fix-it/)
   - [dive](https://github.com/wagoodman/dive)ᴸᴹᵂ:
     Tool for exploring Docker image layers
-  - [Docker](https://docs.docker.com/)
-    [Desktop](https://docs.docker.com/desktop/install/mac-install/)ᴸᴹᵂ
   - [lazydocker](https://github.com/jesseduffield/lazydocker)ᴸᴹᵂ or
     [oxker](https://github.com/mrjackwills/oxker)ᴸᵂ:
-    Terminal UI to monitor and control Docker containers
+    Terminal UI to monitor and control
+    [Docker](https://docs.docker.com/) containers
 - Data analytics
   - [JASP](https://jasp-stats.org/)ᴸᴹᵂ
     ([Github](https://github.com/jasp-stats/jasp-desktop)):
     GUI statistical analysis tool
-  - [Netron](https://netron.app/)ᴸᴹ
+  - [Netron](https://netron.app/)ᴸᴹᵂ
     ([Github](https://github.com/lutzroeder/netron)):
     Neural network, deep learning and machine learning model viewer
   - [Paraview](https://www.paraview.org/)ᴸᴹᵂ
@@ -155,47 +156,57 @@ some Windows-installable tools require
     ([Github](https://github.com/veusz/veusz)):
     Scientific plotting and graphing
 - Data pipeline
-  - [Apache Airflow](https://airflow.apache.org/)ᴸᴹᵂ
+  - [Apache Airflow](https://airflow.apache.org/)ˣ
     ([Github](https://github.com/apache/airflow)):
     Scheduling workflows
-  - [Apache HOP](https://hop.apache.org/)ᴸᴹᵂ
+  - [Apache HOP](https://hop.apache.org/)ˣ
     ([Github](https://github.com/apache/hop)):
     Fork of [Kettle/PDI](https://github.com/pentaho/pentaho-kettle)
-  - [Snakemake](https://snakemake.github.io/)ᴸᴹᵂ
+  - [Snakemake](https://snakemake.github.io/)ˣ
     ([Github](https://github.com/snakemake/snakemake)) or
-    [Nextflow](https://www.nextflow.io/)ᴸᴹ
+    [Nextflow](https://www.nextflow.io/)ˣ
     ([Github](https://github.com/nextflow-io/nextflow)):
     Run batch workflows
 - Database
-  - [BaseX](https://basex.org/):ᴸᴹ
+  - [BaseX](https://basex.org/):ˣ
     XML database and XQuery processor; useful for analyzing or
     processing many or huge XML files
     ([example](https://yobriefca.se/blog/2014/05/17/a-brief-overview-of-basex/))
-  - [ClickHouse](https://clickhouse.com/)ᴸᴹᵂ
+  - [ClickHouse](https://clickhouse.com/)ᴸᴹ
     ([Github](https://github.com/ClickHouse/ClickHouse)):
     Time-series DB, can also run queries on local or
     remote files without installing a database server using
     [clickhouse-local](https://clickhouse.com/docs/en/operations/utilities/clickhouse-local)
+  - [GlareDB](https://glaredb.com/)ᴸᴹᵂ
+    ([Github](https://github.com/glaredb/glaredb)):
+    Embeddable analytical database that can query multiple sources
+    (local files, S3, Snowflake, PostgreSQL, etc), like
+    [DuckDB](https://duckdb.org/)ᴸᴹᵂ
+    ([Github](https://github.com/duckdb/duckdb)) or
+    [chDB](https://doc.chdb.io/)ᴸᴹᵂ
+    ([Github](https://github.com/chdb-io/chdb)); also can
+    be run on the command-line like OctoSQL; a non-embeddable
+    alternative is [ROAPI](https://github.com/roapi/roapi)
   - [Litestream](https://litestream.io/)ᴸᴹ
     ([Github](https://github.com/benbjohnson/litestream)) and
     [LiteFS](https://github.com/superfly/litefs)ᴸ:
     Not a DB, but SQLite tools for streaming backup of a SQLite DB to
     cloud storage (Litestream) and replicating SQLite databases across
     a cluster using a FUSE-based filesystem (LiteFS)
-  - [MongoDB](https://www.mongodb.com/)ᴸᴹ
+  - [MongoDB](https://www.mongodb.com/)ᴸᴹᵂ
     ([Github](https://github.com/mongodb/mongo)):
     NoSQL database
-  - [PostgreSQL](https://www.postgresql.org/)
+  - [PostgreSQL](https://www.postgresql.org/)ᴸᴹᵂ
     ([Git](https://git.postgresql.org/gitweb/)):
     Relational DB; use the
-    [TimescaleDB](https://github.com/timescale/timescaledb)
+    [TimescaleDB](https://github.com/timescale/timescaledb)ᴸᴹᵂ
     plugin to better support time-series, or the
-    [Citus](https://github.com/citusdata/citus) plugin
+    [Citus](https://github.com/citusdata/citus)ᴸ plugin
     for schema-based sharding
-  - [rqlite](https://rqlite.io/)
+  - [rqlite](https://rqlite.io/)ᴸ
     ([Github](https://github.com/rqlite/rqlite)):
     Distributed DB using SQLite as its storage engine
-  - [TigerBeetle](https://tigerbeetle.com/)
+  - [TigerBeetle](https://tigerbeetle.com/)ᴸᴹᵂ
     ([Github](https://github.com/tigerbeetledb/tigerbeetle)):
     Distributed high-throughput fault-tolerant database targeting
     financial accounting use cases; long-term plans are to extract the
@@ -203,180 +214,192 @@ some Windows-installable tools require
     (see [here](https://news.ycombinator.com/item?id=32788795) and
     [here](https://news.ycombinator.com/item?id=32787324))
 - Database clients
-  - [Altair](https://altairgraphql.dev/)
+  - [Altair](https://altairgraphql.dev/)ᴸᴹᵂ
     ([Github](https://github.com/altair-graphql/altair)):
     GraphQL client
-  - [DBeaver](https://dbeaver.io/)
+  - [Another Redis Desktop Manager](https://github.com/qishibo/AnotherRedisDesktopManager)ᴸᴹᵂ:
+    Redis GUI client
+  - [DBeaver](https://dbeaver.io/)ᴸᴹᵂ
     ([Github](https://github.com/dbeaver/dbeaver)):
     Client for any database that has a jDBC driver; there is a paid
     Pro version available [here](https://dbeaver.com/)
-  - [DataStation](https://github.com/multiprocessio/datastation):
-    Data IDE
-  - [DbGate](https://dbgate.org/)
+  - [DbGate](https://dbgate.org/)ᴸᴹᵂ
     ([Github](https://github.com/dbgate/dbgate)):
     Client for MySQL, PostgreSQL, SQL Server, MongoDB, Redis, SQLite,
     Amazon Redshift, CockroachDB, MariaDB databases
-  - [Jailer](https://github.com/Wisser/Jailer):
+  - [Jailer](https://github.com/Wisser/Jailer)ᴸᵂˣ:
     Subset databases and browse relational data
-  - [Mathesar](https://mathesar.org/)
+  - [Mathesar](https://mathesar.org/)ˣ
     ([Github](https://github.com/centerofci/mathesar)):
     PostgreSQL web client with a spreadsheet-like web interface
-  - [OctoSQL](https://github.com/cube2222/octosql):
-    Make queries that can span MySQL, PostgreSQL databases along with
-    CSV and JSON
-  - [pgcli](https://www.pgcli.com/)
+  - [OctoSQL](https://github.com/cube2222/octosql)ᴸᴹᵂ:
+    Make queries from the command-line spanning MySQL, PostgreSQL
+    databases along with CSV and JSON; if only local files need be
+    supported, there are
+    [clickhouse-local](https://clickhouse.com/docs/en/operations/utilities/clickhouse-local)ᴸᴹᵂ
+    or [q](https://harelba.github.io/q/)ᴸᴹᵂˣ
+    ([Github](https://github.com/harelba/q)) or
+    [columnq](https://github.com/roapi/roapi/tree/main/columnq-cli)ᴸᴹᵂ,
+    or use [sqlite](https://www.sqlite.org/)ᴸᴹᵂ
+    ([howto](https://til.simonwillison.net/sqlite/one-line-csv-operations))
+  - [pgcli](https://www.pgcli.com/)ˣ
     ([Github](https://github.com/dbcli/pgcli)):
     PostgreSQL command-line client; the developer org has CLIs for
     other databases ([link](https://www.dbcli.com/)) like
-    LiteCLI(https://litecli.com/)
+    LiteCLI(https://litecli.com/)ˣ
     ([Github](https://github.com/dbcli/litecli)) for SQLite or
-    MyCLI(https://www.mycli.net/)
+    MyCLI(https://www.mycli.net/)ˣ
     ([Github](https://github.com/dbcli/mycli)) for MySQL or
-    IRedis(https://iredis.xbin.io/)
+    IRedis(https://iredis.xbin.io/)ˣ
     ([Github](https://github.com/laixintao/iredis)) for Redis
-  - [q](https://harelba.github.io/q/)
-    ([Github](https://github.com/harelba/q)) or
-    [columnq](https://github.com/roapi/roapi/tree/main/columnq-cli) or
-    [clickhouse-local](https://clickhouse.com/docs/en/operations/utilities/clickhouse-local) or
-    [glaredb](https://glaredb.com/)
-    ([Github](https://github.com/GlareDB/glaredb)):
-    Command-line tool for running SQL directly on CSV and other
-    tabular files; or use sqlite3
-    ([link](https://til.simonwillison.net/sqlite/one-line-csv-operations))
-  - [RedisDesktopManager](https://github.com/uglide/RedisDesktopManager):
-    Redis client
-  - [SchemaCrawler](https://www.schemacrawler.com/)
+  - [SchemaCrawler](https://www.schemacrawler.com/)ˣ
     ([Github](https://github.com/schemacrawler/SchemaCrawler)):
     Database schema discovery and comprehension tool; supports schema
     [search](https://www.schemacrawler.com/schemacrawler-grep.html),
     [diagramming](https://www.schemacrawler.com/diagramming.html) and
     [scripting](https://www.schemacrawler.com/scripting.html) on any
     database with a JDBC driver
-  - [Sequel Ace](https://github.com/Sequel-Ace/Sequel-Ace):
+  - [Sequel Ace](https://github.com/Sequel-Ace/Sequel-Ace)ᴹ:
     MySQL, MariaDB client; macOS
 - Desktop publishing
-  - [Scribus](https://www.scribus.net/)
+  - [Scribus](https://www.scribus.net/)ᴸᴹᵂ
     ([Github mirror](https://github.com/scribusproject/scribus)):
     Alternative to commercial Adobe InDesign; good for book layouts
 - Diagramming and image editing
-  - [ASCIIFlow](https://asciiflow.com/)
+  - [ASCIIFlow](https://asciiflow.com/)ˣ
     ([Github](https://github.com/lewish/asciiflow)):
-    Web-based ASCII drawing application, which can be run locally
-    with [Bazel](https://bazel.build/) (install the Bazel launcher
-    [Bazelisk](https://github.com/bazelbuild/bazelisk) to pick
-    the right Bazel version; for live reloading, install and use
+    ASCII drawing application, web-based but can be run locally with
+    [Bazel](https://bazel.build/) (install the Bazel launcher
+    [Bazelisk](https://github.com/bazelbuild/bazelisk) to pick the
+    right Bazel version; for live reloading, install and use
     [ibazel](https://github.com/bazelbuild/bazel-watcher));
-    commercial Monodraw is more full-featured; an
-    alternative is [MonoSketch](https://monosketch.io/)
-    ([Github](https://github.com/tuanchauict/MonoSketch))
-  - [Caire](https://github.com/esimov/caire):
+    commercial Monodraw is more full-featured; alternatives are
+    [MonoSketch](https://monosketch.io/)ˣ
+    ([Github](https://github.com/tuanchauict/MonoSketch)) or
+    [Asciio](https://nkh.github.io/P5-App-Asciio/)
+    ([Github](https://github.com/nkh/P5-App-Asciio))
+  - [ascii_tree](https://github.com/yzhong52/ascii_tree)ᴸ:
+    Renders Markdown headings as ASCII trees
+  - [Caire](https://github.com/esimov/caire)ᴸᴹᵂ:
     Smart image resizing
-  - [Diagon](https://github.com/ArthurSonzogni/Diagon):
+  - [Diagon](https://github.com/ArthurSonzogni/Diagon)ᴸᴹ:
     Command-line tool for transforming Markdown-style expressions into
-    ASCII art, [webapp](https://github.com/ArthurSonzogni/Diagon) and
+    ASCII art, [webapp](https://arthursonzogni.com/Diagon/) and
     [snap](https://snapcraft.io/diagon) available
-  - [Diagrams](https://diagrams.mingrammer.com/)
+  - [Diagrams](https://diagrams.mingrammer.com/)ˣ
     ([Github](https://github.com/mingrammer/diagrams)):
     Create cloud system architecture diagrams using Python code
-  - [ditaa](https://github.com/stathissideris/ditaa) or
-    [goat](https://github.com/blampe/goat):
+  - [goat](https://github.com/blampe/goat)ˣ:
     Command-line utility to convert ASCII diagrams to PNG or SVG;
     an alternative is the webapp
-    [svgbob](http://ivanceras.github.io/svgbob-editor/)
+    [svgbob](http://ivanceras.github.io/svgbob-editor/)ˣ
     ([Github](https://github.com/ivanceras/svgbob))
-  - [drawio-desktop](https://github.com/jgraph/drawio-desktop) or
-    [yEd](https://www.yworks.com/products/yed):
+  - [drawio-desktop](https://github.com/jgraph/drawio-desktop)ᴸᴹᵂ or
+    [yEd](https://www.yworks.com/products/yed)ᴸᴹᵂ:
     Vector diagramming; drawio-desktop is the Electron build of
-    [draw.io](https://www.drawio.com/); alternatives are
-    [Excalidraw](https://excalidraw.com/)
+    [draw.io](https://www.drawio.com/); yEd is free but not
+    open-source; an alternative is
+    [Excalidraw](https://excalidraw.com/)ˣ
     ([Github](https://github.com/excalidraw/excalidraw))
-  - [GIMP](https://www.gimp.org/)
+  - [GIMP](https://www.gimp.org/)ᴸᴹᵂ
     ([GNOME Gitlab](https://gitlab.gnome.org/GNOME/gimp)) or
-    [Krita](https://krita.org/en/)
+    [Krita](https://krita.org/en/)ᴸᴹᵂ
     ([KDE Invent](https://invent.kde.org/graphics/krita)):
     Raster graphics editor
-  - [Inkscape](https://inkscape.org/)
+  - [Inkscape](https://inkscape.org/)ᴸᴹᵂ
     ([Gitlab](https://gitlab.com/inkscape/inkscape)):
     Vector graphics editor
-  - [libvips](https://www.libvips.org/)
+  - [libvips](https://www.libvips.org/)ᴸᴹᵂ
     ([Github](https://github.com/libvips/libvips)):
     Image processing library with a command-line tool,
-    like [ImageMagick](https://imagemagick.org/); has
-    a speadsheet-like GUI front-end
-    [nip2](https://github.com/libvips/nip2));
+    like [ImageMagick](https://imagemagick.org/)ᴸᴹᵂ;
+    has a speadsheet-like GUI front-end
+    [nip2](https://github.com/libvips/nip2))ᴸᴹᵂ;
     [article](https://tonisagrista.com/blog/2023/libvips/)
   - [Markmap](https://markmap.js.org/)
     ([Github](https://github.com/markmap/markmap)):
-    Visualize Markdown as a mind-map; also available as a
+    Visualize Markdown as a mind-map, available on the
+    [CLI](https://markmap.js.org/docs/packages--markmap-cli)ˣ,
     [Webapp](https://markmap.js.org/repl) or VSCode
     [plugin](https://marketplace.visualstudio.com/items?itemName=gera2ld.markmap-vscode)
-  - [Moebius](https://blocktronics.github.io/moebius/)
+  - [Mermaid](https://mermaid.js.org/)
+    ([Github](https://github.com/mermaid-js/mermaid),
+    [CLI](https://github.com/mermaid-js/mermaid-cli)ˣ) or
+    [Pikchr](https://pikchr.org/)ᴸᴹᵂ
+    ([Fossil](https://pikchr.org/home/dir?ci=trunk)) or
+    [PlantUML](https://plantuml.com/)ˣ
+    ([Github](https://github.com/plantuml/plantuml)) or
+    [D2](https://d2lang.com/)ᴸᴹᵂ
+    ([Github](https://github.com/terrastruct/d2),
+    [Webapp](https://play.d2lang.com/)):
+    Markup language for diagramming, standalone or supported by
+    Markdown processers like Pandoc via plugins, also see
+    [here](https://xosh.org/text-to-diagram/)
+  - [Moebius](https://blocktronics.github.io/moebius/)ᴸᴹᵂˣ
     ([Github](https://github.com/blocktronics/moebius)) or
-    [Pablodraw](https://picoe.ca/products/pablodraw/)
+    [Pablodraw](https://picoe.ca/products/pablodraw/)ᴸᴹᵂ
     ([Github](https://github.com/cwensley/pablodraw)):
     Cross-platform ANSI and ASCII art editor
-  - [Pikchr](https://pikchr.org/)
-    ([Fossil](https://pikchr.org/home/dir?ci=trunk)) or
-    [PlantUML](https://plantuml.com/)
-    ([Github](https://github.com/plantuml/plantuml)) or
-    [Mermaid](https://mermaid.js.org/)
-    ([Github](https://github.com/mermaid-js/mermaid),
-    [CLI](https://github.com/mermaid-js/mermaid-cli)):
-    Markup language for diagramming, standalone or supported by
-    Markdown processers like Pandoc via plugins
-  - [UMLet](https://www.umlet.com/)
+  - [Gaphor](https://gaphor.org/)ᴸᴹᵂˣ
+    ([Github](https://github.com/gaphor/gaphor)) or
+    [UMLet](https://www.umlet.com/)ˣ
     ([Github](https://github.com/umlet/umlet),
     [Webapp](https://www.umletino.com/), VSCode
     [plugin](https://marketplace.visualstudio.com/items?itemName=TheUMLetTeam.umlet)):
-    Java GUI tool for drawing UML diagrams; alternative is
-    [Gaphor](https://gaphor.org/)
-    ([Github](https://github.com/gaphor/gaphor))
+    GUI tool for drawing UML diagrams
 - Digital design
-  - [Penpot](https://penpot.app/)
+  - [Penpot](https://penpot.app/)ᴸ
     ([Github](https://github.com/penpot/penpot)):
     Open source design and prototyping platform like
-    [Sketch](https://www.sketch.com/) and
+    [Sketch](https://www.sketch.com/)ᴹ and
     [Figma](https://www.figma.com/)
 - Ebook
-  - [Alexandria](https://github.com/btpf/Alexandria) or
-    [Foliate](https://johnfactotum.github.io/foliate/)
+  - [Alexandria](https://github.com/btpf/Alexandria)ᴸᴹᵂ or
+    [Foliate](https://johnfactotum.github.io/foliate/)ᴸ
     ([Github](https://github.com/johnfactotum/foliate)) or
-    [Thorium Reader](https://www.edrlab.org/software/thorium-reader/)
+    [Thorium Reader](https://thorium.edrlab.org/)ᴸᴹᵂ
     ([Github](https://github.com/edrlab/thorium-reader)):
     EPUB3-compliant GUI ebook reader; Alexandria (cross-platform) and
     Foliate (Linux-only) are more performant; Thorium (cross-platform)
     is the reference reader for the format and so the most compliant
-  - [Calibre](https://calibre-ebook.com/)
+  - [Calibre](https://calibre-ebook.com/)ᴸᴹᵂ
     ([Github](https://github.com/kovidgoyal/calibre)):
     Ebook manager supporting an array of formats, with many plugins
-  - [epr](https://github.com/wustho/epr) or
-    [epy](https://github.com/wustho/epy):
+  - [epr](https://github.com/wustho/epr)ˣ or
+    [epy](https://github.com/wustho/epy)ˣ:
     TUI ebook reader; epr supports only EPUB; epy is a fork of epy
     with support for more formats like MOBI and AZW3, and adds
     features like bookmarks, integration with external dictionaries,
     and inline formatting
-  - [epub2txt2](https://github.com/kevinboone/epub2txt2):
+  - [epub2txt2](https://github.com/kevinboone/epub2txt2)ᴸ:
     Extract text from EPUB
-  - [MuPDF](https://mupdf.com/):
+  - [MuPDF](https://mupdf.com/)ᴸᴹᵂ
+    ([Git](https://git.ghostscript.com/?p=mupdf.git;a=summary),
+    [Github](https://github.com/ArtifexSoftware/mupdf),
+    [Documentation](https://mupdf.readthedocs.io/en/latest/)):
     See _PDF reader or transformer_
-  - [Sigil](https://sigil-ebook.com/)
+  - [Sigil](https://sigil-ebook.com/)ᴸᴹᵂ
     ([Github](https://github.com/Sigil-Ebook/Sigil)):
     Cross-platform ebook editor supporting EPUB
 - Email
-  - [aerc](https://git.sr.ht/~rjarry/aerc):
-    TUI email client with [notmuch](https://notmuchmail.org/) support.
+  - [aerc](https://git.sr.ht/~rjarry/aerc)ᴸ:
+    TUI email client with [notmuch](https://notmuchmail.org/)ᴸ support.
     See the appropriate section below for how to set up Notmuch,
-    [Lieer](https://github.com/gauteh/lieer) and aerc for Gmail usage.
-  - [Apple Mail](https://support.apple.com/mail) or
-    [Evolution](https://wiki.gnome.org/Apps/Evolution) or
-    [Thunderbird](https://www.thunderbird.net/):
+    [Lieer](https://github.com/gauteh/lieer)ˣ and aerc for Gmail usage.
+  - [Apple Mail](https://support.apple.com/mail)ᴹ or
+    [Evolution](https://gitlab.gnome.org/GNOME/evolution/-/wikis/home)ᴸ or
+    [Thunderbird](https://www.thunderbird.net/)ᴸᴹᵂ:
     Thunderbird is a cross-platform graphical email client and has a
-    soft fork [Betterbird](https://www.betterbird.eu/) that applies
-    patches atop the ESR version; Apple Mail (macOS) and Evolution
-    (Linux) are platform-specific but are better integrated with the
-    OS and have better support for Microsoft Exchange and Office 365
+    soft fork [Betterbird](https://www.betterbird.eu/)ᴸᴹᵂ
+    ([Github](https://github.com/Betterbird/)) that applies patches
+    atop the ESR version; Microsoft Exchange and Office 365 is
+    supported in Apple Mail (macOS), in Evolution (Linux) via the EWS
+    [module](https://gitlab.gnome.org/GNOME/evolution/-/wikis/Building#3rd-party-modules)
+    (`evolution-ews` Debian pkg), and in Thunderbird with paid plugins
+    ([OWA](https://addons.thunderbird.net/en-US/thunderbird/addon/owl-for-exchange/),
+    [EWS](https://addons.thunderbird.net/en-US/thunderbird/addon/exquilla-exchange-web-services/)
 - File management
-  - [Cryptomator](https://cryptomator.org/)
+  - [Cryptomator](https://cryptomator.org/)ᴸᴹᵂ
     ([Github](https://github.com/cryptomator)):
     Provides client-side encryption of local or cloud data (relevant
     sync software needs to be installed on the machine), surfacing it
@@ -384,53 +407,56 @@ some Windows-installable tools require
     compatible with first-party cloud storage provider software and
     its vaults are interoperable with Mountain Duck vaults; not
     compatible with `rclone mount`
-  - [Cyberduck](https://cyberduck.io/)
+  - [Cyberduck](https://cyberduck.io/)ᴹᵂ
     ([Github](https://github.com/iterate-ch/cyberduck)):
-    Cross-platform remote FTP, SFTP, WebDAV, cloud storage; has a CLI
-    tool [duck.sh](https://duck.sh/)
-  - [Double Commander](https://doublecmd.sourceforge.io/)
+    Cross-platform remote FTP, SFTP, WebDAV, cloud storage GUI tool;
+    has a CLI version [`duck`](https://duck.sh/)ᴸᴹᵂ
+  - [Double Commander](https://doublecmd.sourceforge.io/)ᴸᴹᵂ
     ([Github](https://github.com/doublecmd/doublecmd)):
     GUI Midnight Commander clone
-  - [FUSE](https://en.wikipedia.org/wiki/Filesystem_in_Userspace):
+  - [FUSE](https://en.wikipedia.org/wiki/Filesystem_in_Userspace)ᴸ:
     Lets users mount filesystems without superuser privileges; usually
     installed as a dependency by Linux package managers, for example,
     `apt install rclone` on Debian will also pull in `fuse` or `fuse3`
     as a suggested package; on macOS, install
-    [FUSE-T](https://www.fuse-t.org/)
+    [FUSE-T](https://www.fuse-t.org/)ᴹ
     ([Github](https://github.com/macos-fuse-t/fuse-t), kext-less) or
-    [macFUSE](https://osxfuse.github.io/)
+    [macFUSE](https://osxfuse.github.io/)ᴹ
     ([Github](https://github.com/osxfuse/osxfuse), uses a kext), with
     the latter being more mature but requiring third-party kernel
     extensions be enabled
-  - [Keka](https://www.keka.io/en/)
+  - [Keka](https://www.keka.io/en/)ᴹᴵ
     ([Github](https://github.com/aonez/Keka)) or
-    [PeaZip](https://peazip.github.io/)
+    [PeaZip](https://peazip.github.io/)ᴸᴹᵂ
     ([Github](https://github.com/peazip/PeaZip/)):
-    GUI file archiver; macOS-only Keka is basically donationware
-    (there is a paid App Store version); PeaZip is cross-platform
-  - [Maestral](https://maestral.app/)
+    GUI file archiver; Keka is donationware (paid App Store version)
+  - [lftp](https://lftp.yar.ru/)ᴸ
+    ([Github](https://github.com/lavv17/lftp)):
+    Command-line file transfer program supporting multiple protocols;
+    if only FTP is needed, there is [ncftp](https://www.ncftp.com/)ᴸᴹᵂ
+  - [Maestral](https://maestral.app/)ᴸᴹ
     ([Github](https://github.com/samschott/maestral)):
     Dropbox clientfor Linux and macOS, lighter but has less features
     than the [official](https://www.dropbox.com/desktop) client
-  - [Magic Wormhole](https://github.com/magic-wormhole/magic-wormhole):
+  - [Magic Wormhole](https://github.com/magic-wormhole/magic-wormhole)ˣ:
     Command-line tool and library for sending files from one computer
     to another; note that this tool requires
-    [mailbox](https://github.com/magic-wormhole/magic-wormhole-mailbox-server)
+    [mailbox](https://github.com/magic-wormhole/magic-wormhole-mailbox-server)ˣ
     and a
-    [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)
+    [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)ˣ
     server, which by default uses one hosted by the project
-  - [Midnight Commander](https://midnight-commander.org/)
+  - [Midnight Commander](https://midnight-commander.org/)ᴸᴹ
     ([Github](https://github.com/MidnightCommander/mc)) or
-    [nnn](https://github.com/jarun/nnn) or
-    [lf](https://github.com/gokcehan/lf) or
-    [broot](https://github.com/Canop/broot):
+    [nnn](https://github.com/jarun/nnn)ᴸᴹ or
+    [lf](https://github.com/gokcehan/lf)ᴸᴹᵂ or
+    [broot](https://github.com/Canop/broot)ᴸᴹᵂ:
     Terminal file manager
-  - [rclone](https://rclone.org/)
+  - [rclone](https://rclone.org/)ᴸᴹᵂ
     ([Github](https://github.com/rclone/rclone)):
     Like `rsync` but for cloud storage; `rclone mount` can be used to
     mount cloud storage to a filesystem mount point (requires FUSE)
-  - [rdfind](https://github.com/pauldreik/rdfind) or
-    [fdupes](https://github.com/adrianlopezroche/fdupes):
+  - [rdfind](https://github.com/pauldreik/rdfind)ᴸᴹ or
+    [fdupes](https://github.com/adrianlopezroche/fdupes)ᴸᴹ:
     Command-line tool to find duplicate files
   - [renameutils](https://www.nongnu.org/renameutils/) or
     [f2](https://github.com/ayoisaiah/f2) or
@@ -571,7 +597,10 @@ some Windows-installable tools require
     ([Github](https://github.com/RussCoder/djvujs)):
     View DjVu documents in the browser; for local viewer usage
     instructions, see [here](https://djvu.js.org/downloads)
-  - [MuPDF](https://mupdf.com/):
+  - [MuPDF](https://mupdf.com/)ᴸᴹᵂ
+    ([Git](https://git.ghostscript.com/?p=mupdf.git;a=summary),
+    [Github](https://github.com/ArtifexSoftware/mupdf),
+    [Documentation](https://mupdf.readthedocs.io/en/latest/)):
     PDF, XPS and EPUB reader; AGPL version is available in many
     package managers like APT (Linux), Homebrew or MacPorts (macOS)
   - [QPDF](https://github.com/qpdf/qpdf) or
@@ -657,12 +686,6 @@ some Windows-installable tools require
     Self-hosted Git server
   - [kondo](https://github.com/tbillington/kondo):
     Clean unneeded files like build artifacts from project directories
-  - [Kythe](https://kythe.io/)
-    ([Github](https://github.com/kythe/kythe)):
-    Pluggable system for building code tools, comes with indexer
-    implementations for C++, Go and Java and other tools; see
-    [overview](https://www.kythe.io/docs/kythe-overview.html) and
-    [presentation](https://european-lisp-symposium.org/static/2020/godbout-slides.pdf)
   - [onefetch](https://github.com/o2sh/onefetch):
     Git repository information and statistics
   - [OSS Review Toolkit](https://oss-review-toolkit.org/ort/)
