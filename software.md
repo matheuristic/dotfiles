@@ -454,146 +454,155 @@ Mac since it is POSIX-compliant.)
   - [rclone](https://rclone.org/)ᴸᴹᵂ
     ([Github](https://github.com/rclone/rclone)):
     Like `rsync` but for cloud storage; `rclone mount` can be used to
-    mount cloud storage to a filesystem mount point (requires FUSE)
+    mount cloud storage to a filesystem mount point (requires FUSE);
+    an SSH-only mount alternative which also requires FUSE is
+    [SSHFS](https://github.com/libfuse/sshfs)ᴸ; another more complex
+    setup for romote filesystem mounting is using NFSv4 and Wireguard
+    ([example](https://sigmdel.ca/michel/ha/wireguard/network_share_over_wireguard_en.html))
   - [rdfind](https://github.com/pauldreik/rdfind)ᴸᴹ or
     [fdupes](https://github.com/adrianlopezroche/fdupes)ᴸᴹ:
     Command-line tool to find duplicate files
-  - [renameutils](https://www.nongnu.org/renameutils/) or
-    [f2](https://github.com/ayoisaiah/f2) or
-    [KRename](https://userbase.kde.org/KRename) or
-    [GPRename](http://gprename.sourceforge.net/) or
-    [Szyszka](https://github.com/qarmin/szyszka):
+  - [renameutils](https://www.nongnu.org/renameutils/)ᴸ or
+    [f2](https://github.com/ayoisaiah/f2)ᴸᴹᵂᴬ or
+    [KRename](https://userbase.kde.org/KRename)ᴸ or
+    [GPRename](http://gprename.sourceforge.net/)ᴸ or
+    [Szyszka](https://github.com/qarmin/szyszka)ᴸᴹᵂ:
     Rename lots of files easily
-  - [Spacedrive](https://spacedrive.com/)
+  - [Spacedrive](https://spacedrive.com/)ᴸᴹᵂ
     ([Github](https://github.com/spacedriveapp/spacedrive)):
     Cross-platform cross-device/service file manager
-  - [SSHFS](https://github.com/libfuse/sshfs):
-    Mount remote filesystem using SSH (requires FUSE),
-    alternative is `rclone mount` (see rclone) or
-    some more complex setup using NFSv4 and Wireguard
-    ([example](https://sigmdel.ca/michel/ha/wireguard/network_share_over_wireguard_en.html))
-  - [Stow](https://www.gnu.org/software/stow/):
+  - [Stow](https://www.gnu.org/software/stow/)ᴸ:
     Symlink farm manager, useful for managing dotfiles
-  - [Syncthing](https://syncthing.net/)
+  - [Syncthing](https://syncthing.net/)ᴸᴹᵂ
     ([Github](https://github.com/syncthing/syncthing)):
-    Continous file synchronization; macOS
-    [frontend](https://github.com/syncthing/syncthing-macos)
-    available
+    Continous file synchronization; has a macOS
+    [front-end](https://github.com/syncthing/syncthing-macos)ᴹ,
+    and there is an implementation (by the developers) for
+    [Android](https://github.com/syncthing/syncthing-android)ᴬ
+    ([Google Play](https://play.google.com/store/apps/details?id=com.nutomic.syncthingandroid))
+    and another for iOS (paid, not by the developers) called
+    [Möbius](https://apps.apple.com/us/app/m%C3%B6bius-sync-pro/id1671184333)ᴵ
 - Image text extraction
-  - [Apache Tika](http://tika.apache.org/)
+  - [Apache Tika](http://tika.apache.org/)ˣ
     ([Github](https://github.com/apache/tika/)):
     [Go](https://github.com/google/go-tika) and
     [Python](https://github.com/chrismattmann/tika-python) bindings
-    available
-  - [Tesseract](https://tesseract-ocr.github.io/)
+    available; also extracts text from many other file types
+  - [Tesseract](https://tesseract-ocr.github.io/)ᴸᴹᵂ
     ([Github](https://github.com/tesseract-ocr/tesseract))
 - Markup language document conversion and rendering
-  - [Asciidoctor](https://asciidoctor.org/)
+  - [Asciidoctor](https://asciidoctor.org/)ˣ
     ([Github](https://github.com/asciidoctor/asciidoctor)):
     Asciidoc processor, has an
-    [extension](https://asciidoctor.org/docs/asciidoctor-pdf/) for PDF
-    generation; Javascript
+    [extension](https://asciidoctor.org/docs/asciidoctor-pdf/)ˣ
+    for PDF generation; Javascript
     [port](https://github.com/asciidoctor/asciidoctor.js) and
     [CLI](https://github.com/asciidoctor/asciidoctor-cli.js) available
-  - [Docutils](https://www.docutils.org/)
+  - [Docutils](https://www.docutils.org/)ˣ
     ([Github](https://github.com/docutils/docutils)):
     Convert ReStructuredText to other formats
-  - [groff](https://www.gnu.org/software/groff/):
-    Typesetting system that can output PS, PDF, HTML or DVI;
-    a lightweight alternative to (La)TeX but less popular
-  - [hred](https://github.com/danburzo/hred):
+  - [groff](https://www.gnu.org/software/groff/)ᴸ:
+    Typesetting system that can output PS, PDF, HTML or DVI, developed
+    to replace Unix `troff` and `nroff`; compared to (La)Tex, it is
+    lighter-weight but less popular; alternatives are
+    [Heirloom Doctools](https://n-t-roff.github.io/heirloom/doctools.html)ᴸ
+    ([Github](https://github.com/n-t-roff/heirloom-doctools), and
+    manpage-only formatter [mandoc](https://mandoc.bsd.lv/)ᴸ
+  - [hred](https://github.com/danburzo/hred)ˣ:
     Command-line HTML (and XML) to JSON converter
-  - [Pandoc](https://pandoc.org/)
+  - [Pandoc](https://pandoc.org/)ᴸᴹᵂ
     ([Github](https://github.com/jgm/pandoc)):
     Document converter, can also process Markdown extendable with
     filters like [this one](https://github.com/pandoc-ext/diagram)
     facilitating diagramming using code blocks
-  - [Quarto](https://quarto.org/)
+  - [Quarto](https://quarto.org/)ᴸᴹᵂ
     ([Github](https://github.com/quarto-dev/quarto-cli)):
     Publishing system built on Pandoc, successor to R Markdown,
     supporting Markdown and Jupyter notebooks with dynamic content
     using Python, R, Julia, and Observable JS; for a user-local
     install, one option is to extract the tarball version somewhere
     and symlink the `quarto` binary from a directory in `$PATH`
-  - [Sphinx](https://www.sphinx-doc.org/)
+  - [Sphinx](https://www.sphinx-doc.org/)ˣ
     ([Github](https://github.com/sphinx-doc/sphinx)):
     Generate project docs from source code and ReStructuredText (or
     [Markdown](https://myst-parser.readthedocs.io/en/latest/)),
     supports multiple programming langs (domains), built on Docutils
-  - [Tectonic](https://tectonic-typesetting.github.io/)
+  - [Tectonic](https://tectonic-typesetting.github.io/)ᴸᴹᵂ
     ([Github](https://github.com/tectonic-typesetting/tectonic)) or
-    [TeXLive](https://www.tug.org/texlive/) or
-    [TinyTeX](https://github.com/yihui/tinytex):
+    [TeXLive](https://www.tug.org/texlive/)ᴸᴹᵂ or
+    [TinyTeX](https://github.com/rstudio/tinytex)
+    ([binaries](https://github.com/rstudio/tinytex-releases)ᴸᴹᵂ):
     Processor for (La)TeX, which is used widely in scientific writing
-  - [TeXmacs](https://texmacs.org/)
+  - [TeXmacs](https://texmacs.org/)ᴸᴹᵂ
     ([Github](https://github.com/texmacs/texmacs)):
     WYSIWYG scientific writing software, that is an alternative
     to LaTeX but can import/export LaTeX files; there is an a
     distribution of TeXmacs called [Mogan](https://mogan.app/)
     ([Github](https://github.com/XmacsLabs/mogan)) that aims to be
     more user-friendly
-  - [Typst](https://typst.app/)
+  - [Typst](https://typst.app/)ᴸᴹᵂ
     ([Github](https://github.com/typst/typst)):
     Markup-based typesetting system, that is an alternative to LaTeX
-  - [WeasyPrint](https://github.com/Kozea/WeasyPrint) or
-    [percollate](https://github.com/danburzo/percollate):
+  - [WeasyPrint](https://github.com/Kozea/WeasyPrint)ˣ or
+    [percollate](https://github.com/danburzo/percollate)ˣ:
     Convert HTML to PDF files; percollate processes the page for
     readability before conversion; the file can also be directly
     opened in a browser and printed to PDF
 - Newsreader
-  - [NetNewsWire](https://netnewswire.com/)
+  - [NetNewsWire](https://netnewswire.com/)ᴹ
     ([Github](https://github.com/Ranchero-Software/NetNewsWire)):
     RSS reader; iOS and macOS
-  - [Newsboat](https://newsboat.org/)
+  - [Newsboat](https://newsboat.org/)ᴸ
     ([Github](https://github.com/newsboat/newsboat)):
     CLI RSS reader
-  - [Pan](http://pan.rebelbase.com/)
+  - [Pan](http://pan.rebelbase.com/)ᴸᵂ
     ([GNOME Gitlab](https://gitlab.gnome.org/GNOME/pan/)):
     Usenet reader
 - Networking
-  - [LuLu](https://objective-see.org/products/lulu.html)
+  - [LuLu](https://objective-see.org/products/lulu.html)ᴹ
     ([Github](https://github.com/objective-see/LuLu)):
-    Firewall for macOS; while the built-in firewall only filters
+    Firewall; while the built-in firewall for macOS only filters
     incoming connections, this can also filter outgoing connections
-  - [Netiquette](https://objective-see.org/products/netiquette.html)
+  - [Netiquette](https://objective-see.org/products/netiquette.html)ᴹ
     ([Github](https://github.com/objective-see/Netiquette)):
-    Network monitor, macOS
+    Network monitor
 - Package/runtime manager
-  - [asdf](https://asdf-vm.com/)
+  - [asdf](https://asdf-vm.com/)ˣ
     ([Github](https://github.com/asdf-vm/asdf)):
     Language runtime manager with plugins
     [plugins](https://github.com/asdf-vm/asdf-plugins) for many
     language runtimes and tools (like `bat`, `jq`, `ripgrep`, etc)
-  - [Flatpak](https://flatpak.org/):
+  - [Flatpak](https://flatpak.org/)ᴸ:
     Linux application manager; [Flathub](https://flathub.org/) is the
     de facto repository; for easier permissioning control install
-    [Flathub](https://flathub.org/apps/details/com.github.tchx84.Flatseal)
-  - [MacPorts](https://www.macports.org/)
+    [Flathub](https://flathub.org/apps/details/com.github.tchx84.Flatseal)ᴸ
+  - [MacPorts](https://www.macports.org/)ᴹ
     ([Github org](https://github.com/macports)) or
-    [Spack](https://spack.io/)
+    [Spack](https://spack.io/)ᴸᴹ
     ([Github](https://github.com/spack/spack)) or
-    [Homebrew](https://brew.sh/)
+    [Homebrew](https://brew.sh/)ᴸᴹ
     ([Github](https://github.com/Homebrew/brew)):
     macOS package manager for open-source software; recommendation is
     to use Spack for a user-local install, MacPorts for a multi-user
     machine, and Homebrew for a single-user machine
-  - [Mamba](https://mamba.readthedocs.io/)
-    ([Github](https://github.com/mamba-org)):
+  - [Mamba](https://mamba.readthedocs.io/)ᴸᴹᵂ
+    ([Github](https://github.com/mamba-org),
+    [Binaries](https://github.com/conda-forge/miniforge)):
     Drop-in replacement for [conda](https://conda.io/), with
-    [micromamba](https://github.com/mamba-org/micromamba-releases)
+    [micromamba](https://github.com/mamba-org/micromamba-releases)ᴸᴹᵂ
     the preferred variant; using [conda-forge](https://conda-forge.org/)
     as the primary repository is recommended
   - [Rhumba](https://github.com/mamba-org/rhumba):
     R package manager installable via conda or mamba
 - PDF reader or transformer
-  - [diffpdf](https://tracker.debian.org/pkg/diffpdf)
+  - [diffpdf](https://tracker.debian.org/pkg/diffpdf)ᴸ
     ([source](http://www.qtrac.eu/diffpdf-foss.html)):
     Diff two PDF files, Can be used with `git` by setting
     `git config --global difftool.diffpdf.cmd 'diffpdf "$LOCAL" "$REMOTE"'`
     and `git config --global alias.diffpdf "difftool -t diffpdf"` and
     running e.g. `git diffpdf somecommit:somefile.pdf somefile.pdf`;
     Linux
-  - [DjVu.js](https://djvu.js.org/)
+  - [DjVu.js](https://djvu.js.org/)ˣ
     ([Github](https://github.com/RussCoder/djvujs)):
     View DjVu documents in the browser; for local viewer usage
     instructions, see [here](https://djvu.js.org/downloads)
@@ -603,30 +612,43 @@ Mac since it is POSIX-compliant.)
     [Documentation](https://mupdf.readthedocs.io/en/latest/)):
     PDF, XPS and EPUB reader; AGPL version is available in many
     package managers like APT (Linux), Homebrew or MacPorts (macOS)
-  - [QPDF](https://github.com/qpdf/qpdf) or
-    [pdfcpu](https://pdfcpu.io/)
+  - [QPDF](https://qpdf.sourceforge.io/)ᴸᵂ
+    ([Github](https://github.com/qpdf/qpdf)) or
+    [pdfcpu](https://pdfcpu.io/)ᴸᴹᵂ
     ([Github](https://github.com/pdfcpu/pdfcpu)) or
-    [MuTool](https://mupdf.com/docs/mutool.html)
+    [MuTool](https://mupdf.com/docs/mutool.html)ᴸᴹᵂ
     (part of [MuPDF](https://mupdf.com/), may be packaged separately
     like in Debian where it is in the `mupdf-tools` package):
     PDF transformations and processing
-  - [sioyek](https://github.com/ahrm/sioyek) or
-    [Zathura](https://pwmt.org/projects/zathura/):
+  - [sioyek](https://sioyek.info/)ᴸᴹᵂ
+    ([Github](https://github.com/ahrm/sioyek)) or
+    [Zathura](https://pwmt.org/projects/zathura/)ᴸ
+    ([Github](https://github.com/pwmt/zathura)):
     PDF reader for research and technical PDFs
-  - [Skim](https://skim-app.sourceforge.io/):
-    PDF reader and annotator; macOS; the built-in Apple
-    [Preview](https://support.apple.com/guide/preview/welcome/mac) on
-    macOS is usually good enough
-  - [Xournal++](https://github.com/xournalpp/xournalpp):
+  - [Skim](https://skim-app.sourceforge.io/)ᴹ:
+    PDF reader and annotator; the built-in Apple macOS
+    [Preview](https://support.apple.com/guide/preview/welcome/mac) is
+    usually good enough
+  - [Xournal++](https://xournalpp.github.io/)ᴸᴹᵂ
+    ([Github](https://github.com/xournalpp/xournalpp)):
     Handwriting notebook with PDF annotation support
 - Presentation
-  - [Marp](https://marp.app/):
-    Markdown-based presentations; use via the command-line tool
-    [marp-cli](https://github.com/marp-team/marp-cli)
-  - [pdfpc](https://github.com/pdfpc/pdfpc):
+  - [Marp](https://marp.app/)
+    ([Github](https://github.com/marp-team/marp),
+    [CLI app](https://github.com/marp-team/marp-cli)ˣ) or
+    [Slidev](https://sli.dev/)ˣ
+    ([Github](https://github.com/slidevjs/slidev)):
+    Markdown-based presentations on the browser;
+    for presentations on the terminal, there are also
+    [slides](https://maaslalani.com/slides/)
+    ([Github](https://github.com/maaslalani/slides)) and
+    [presenterm](https://mfontanini.github.io/presenterm/)
+    ([Github](https://github.com/mfontanini/presenterm));
+    there is also a simpler text-but-not-Markdown-based presenter
+    [sent](https://tools.suckless.org/sent/)ᴸ
+  - [pdfpc](https://pdfpc.github.io/)ᴸ
+    ([Github](https://github.com/pdfpc/pdfpc)):
     Multi-monitor PDF presentations
-  - [slides](https://github.com/maaslalani/slides):
-    Terminal-based presentations using Markdown files
 - Project (codebase)
   - [CodeQuery](https://ruben2020.github.io/codequery/)
     ([Github](https://github.com/ruben2020/codequery)):
@@ -1366,6 +1388,12 @@ Mac since it is POSIX-compliant.)
     ([SourceForge](https://sourceforge.net/projects/sweethome3d/)):
     Open-source interior design application, also available as a
     [webapp](https://www.sweethome3d.com/SweetHome3DOnlineManager.jsp)
+  - [uutils](https://uutils.github.io/)
+    ([Github org](https://github.com/uutils)):
+    Re-implementation of standard command-line tools in Rust
+    ([coreutils](https://github.com/uutils/coreutils)ᴸᴹᵂ,
+    [findutils](https://github.com/uutils/findutils)ᴸᴹᵂ,
+    [diffutils](https://github.com/uutils/diffutils)ᴸᴹᵂ)
   - [Vale](https://vale.sh/)
     ([Github](https://github.com/errata-ai/vale)):
     Linter for prose
