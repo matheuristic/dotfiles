@@ -3,7 +3,7 @@
 ## Open-source software
 
 (Note: ᴸ → Linux, ᴹ → Mac, ᵂ → Windows, ᴬ → Android, ᴵ → iOS,
-ˣ → Language runtime-based (e.g., Python, Java, Javascript) with no
+ᴿ → Language runtime-based (e.g., Python, Java, Javascript) with no
 platform restrictions; Many Linux tools are usable in Windows via
 [WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) or in
 Mac since it is POSIX-compliant.)
@@ -156,19 +156,19 @@ Mac since it is POSIX-compliant.)
     ([Github](https://github.com/veusz/veusz)):
     Scientific plotting and graphing
 - Data pipeline
-  - [Apache Airflow](https://airflow.apache.org/)ˣ
+  - [Apache Airflow](https://airflow.apache.org/)ᴿ
     ([Github](https://github.com/apache/airflow)):
     Scheduling workflows
-  - [Apache HOP](https://hop.apache.org/)ˣ
+  - [Apache HOP](https://hop.apache.org/)ᴿ
     ([Github](https://github.com/apache/hop)):
     Fork of [Kettle/PDI](https://github.com/pentaho/pentaho-kettle)
-  - [Snakemake](https://snakemake.github.io/)ˣ
+  - [Snakemake](https://snakemake.github.io/)ᴿ
     ([Github](https://github.com/snakemake/snakemake)) or
-    [Nextflow](https://www.nextflow.io/)ˣ
+    [Nextflow](https://www.nextflow.io/)ᴿ
     ([Github](https://github.com/nextflow-io/nextflow)):
     Run batch workflows
 - Database
-  - [BaseX](https://basex.org/):ˣ
+  - [BaseX](https://basex.org/)ᴿ:
     XML database and XQuery processor; useful for analyzing or
     processing many or huge XML files
     ([example](https://yobriefca.se/blog/2014/05/17/a-brief-overview-of-basex/))
@@ -227,9 +227,9 @@ Mac since it is POSIX-compliant.)
     ([Github](https://github.com/dbgate/dbgate)):
     Client for MySQL, PostgreSQL, SQL Server, MongoDB, Redis, SQLite,
     Amazon Redshift, CockroachDB, MariaDB databases
-  - [Jailer](https://github.com/Wisser/Jailer)ᴸᵂˣ:
+  - [Jailer](https://github.com/Wisser/Jailer)ᴸᵂᴿ:
     Subset databases and browse relational data
-  - [Mathesar](https://mathesar.org/)ˣ
+  - [Mathesar](https://mathesar.org/)ᴿ
     ([Github](https://github.com/centerofci/mathesar)):
     PostgreSQL web client with a spreadsheet-like web interface
   - [OctoSQL](https://github.com/cube2222/octosql)ᴸᴹᵂ:
@@ -237,22 +237,22 @@ Mac since it is POSIX-compliant.)
     databases along with CSV and JSON; if only local files need be
     supported, there are
     [clickhouse-local](https://clickhouse.com/docs/en/operations/utilities/clickhouse-local)ᴸᴹᵂ
-    or [q](https://harelba.github.io/q/)ᴸᴹᵂˣ
+    or [q](https://harelba.github.io/q/)ᴸᴹᵂᴿ
     ([Github](https://github.com/harelba/q)) or
     [columnq](https://github.com/roapi/roapi/tree/main/columnq-cli)ᴸᴹᵂ,
     or use [sqlite](https://www.sqlite.org/)ᴸᴹᵂ
     ([howto](https://til.simonwillison.net/sqlite/one-line-csv-operations))
-  - [pgcli](https://www.pgcli.com/)ˣ
+  - [pgcli](https://www.pgcli.com/)ᴿ
     ([Github](https://github.com/dbcli/pgcli)):
     PostgreSQL command-line client; the developer org has CLIs for
     other databases ([link](https://www.dbcli.com/)) like
-    LiteCLI(https://litecli.com/)ˣ
+    LiteCLI(https://litecli.com/)ᴿ
     ([Github](https://github.com/dbcli/litecli)) for SQLite or
-    MyCLI(https://www.mycli.net/)ˣ
+    MyCLI(https://www.mycli.net/)ᴿ
     ([Github](https://github.com/dbcli/mycli)) for MySQL or
-    IRedis(https://iredis.xbin.io/)ˣ
+    IRedis(https://iredis.xbin.io/)ᴿ
     ([Github](https://github.com/laixintao/iredis)) for Redis
-  - [SchemaCrawler](https://www.schemacrawler.com/)ˣ
+  - [SchemaCrawler](https://www.schemacrawler.com/)ᴿ
     ([Github](https://github.com/schemacrawler/SchemaCrawler)):
     Database schema discovery and comprehension tool; supports schema
     [search](https://www.schemacrawler.com/schemacrawler-grep.html),
@@ -266,7 +266,7 @@ Mac since it is POSIX-compliant.)
     ([Github mirror](https://github.com/scribusproject/scribus)):
     Alternative to commercial Adobe InDesign; good for book layouts
 - Diagramming and image editing
-  - [ASCIIFlow](https://asciiflow.com/)ˣ
+  - [ASCIIFlow](https://asciiflow.com/)ᴿ
     ([Github](https://github.com/lewish/asciiflow)):
     ASCII drawing application, web-based but can be run locally with
     [Bazel](https://bazel.build/) (install the Bazel launcher
@@ -274,7 +274,7 @@ Mac since it is POSIX-compliant.)
     right Bazel version; for live reloading, install and use
     [ibazel](https://github.com/bazelbuild/bazel-watcher));
     commercial Monodraw is more full-featured; alternatives are
-    [MonoSketch](https://monosketch.io/)ˣ
+    [MonoSketch](https://monosketch.io/)ᴿ
     ([Github](https://github.com/tuanchauict/MonoSketch)) or
     [Asciio](https://nkh.github.io/P5-App-Asciio/)
     ([Github](https://github.com/nkh/P5-App-Asciio))
@@ -286,20 +286,20 @@ Mac since it is POSIX-compliant.)
     Command-line tool for transforming Markdown-style expressions into
     ASCII art, [webapp](https://arthursonzogni.com/Diagon/) and
     [snap](https://snapcraft.io/diagon) available
-  - [Diagrams](https://diagrams.mingrammer.com/)ˣ
+  - [Diagrams](https://diagrams.mingrammer.com/)ᴿ
     ([Github](https://github.com/mingrammer/diagrams)):
     Create cloud system architecture diagrams using Python code
-  - [goat](https://github.com/blampe/goat)ˣ:
+  - [goat](https://github.com/blampe/goat)ᴿ:
     Command-line utility to convert ASCII diagrams to PNG or SVG;
     an alternative is the webapp
-    [svgbob](http://ivanceras.github.io/svgbob-editor/)ˣ
+    [svgbob](http://ivanceras.github.io/svgbob-editor/)ᴿ
     ([Github](https://github.com/ivanceras/svgbob))
   - [drawio-desktop](https://github.com/jgraph/drawio-desktop)ᴸᴹᵂ or
     [yEd](https://www.yworks.com/products/yed)ᴸᴹᵂ:
     Vector diagramming; drawio-desktop is the Electron build of
     [draw.io](https://www.drawio.com/); yEd is free but not
     open-source; an alternative is
-    [Excalidraw](https://excalidraw.com/)ˣ
+    [Excalidraw](https://excalidraw.com/)ᴿ
     ([Github](https://github.com/excalidraw/excalidraw))
   - [GIMP](https://www.gimp.org/)ᴸᴹᵂ
     ([GNOME Gitlab](https://gitlab.gnome.org/GNOME/gimp)) or
@@ -319,15 +319,15 @@ Mac since it is POSIX-compliant.)
   - [Markmap](https://markmap.js.org/)
     ([Github](https://github.com/markmap/markmap)):
     Visualize Markdown as a mind-map, available on the
-    [CLI](https://markmap.js.org/docs/packages--markmap-cli)ˣ,
+    [CLI](https://markmap.js.org/docs/packages--markmap-cli)ᴿ,
     [Webapp](https://markmap.js.org/repl) or VSCode
     [plugin](https://marketplace.visualstudio.com/items?itemName=gera2ld.markmap-vscode)
   - [Mermaid](https://mermaid.js.org/)
     ([Github](https://github.com/mermaid-js/mermaid),
-    [CLI](https://github.com/mermaid-js/mermaid-cli)ˣ) or
+    [CLI](https://github.com/mermaid-js/mermaid-cli)ᴿ) or
     [Pikchr](https://pikchr.org/)ᴸᴹᵂ
     ([Fossil](https://pikchr.org/home/dir?ci=trunk)) or
-    [PlantUML](https://plantuml.com/)ˣ
+    [PlantUML](https://plantuml.com/)ᴿ
     ([Github](https://github.com/plantuml/plantuml)) or
     [D2](https://d2lang.com/)ᴸᴹᵂ
     ([Github](https://github.com/terrastruct/d2),
@@ -335,14 +335,14 @@ Mac since it is POSIX-compliant.)
     Markup language for diagramming, standalone or supported by
     Markdown processers like Pandoc via plugins, also see
     [here](https://xosh.org/text-to-diagram/)
-  - [Moebius](https://blocktronics.github.io/moebius/)ᴸᴹᵂˣ
+  - [Moebius](https://blocktronics.github.io/moebius/)ᴸᴹᵂᴿ
     ([Github](https://github.com/blocktronics/moebius)) or
     [Pablodraw](https://picoe.ca/products/pablodraw/)ᴸᴹᵂ
     ([Github](https://github.com/cwensley/pablodraw)):
     Cross-platform ANSI and ASCII art editor
-  - [Gaphor](https://gaphor.org/)ᴸᴹᵂˣ
+  - [Gaphor](https://gaphor.org/)ᴸᴹᵂᴿ
     ([Github](https://github.com/gaphor/gaphor)) or
-    [UMLet](https://www.umlet.com/)ˣ
+    [UMLet](https://www.umlet.com/)ᴿ
     ([Github](https://github.com/umlet/umlet),
     [Webapp](https://www.umletino.com/), VSCode
     [plugin](https://marketplace.visualstudio.com/items?itemName=TheUMLetTeam.umlet)):
@@ -365,8 +365,8 @@ Mac since it is POSIX-compliant.)
   - [Calibre](https://calibre-ebook.com/)ᴸᴹᵂ
     ([Github](https://github.com/kovidgoyal/calibre)):
     Ebook manager supporting an array of formats, with many plugins
-  - [epr](https://github.com/wustho/epr)ˣ or
-    [epy](https://github.com/wustho/epy)ˣ:
+  - [epr](https://github.com/wustho/epr)ᴿ or
+    [epy](https://github.com/wustho/epy)ᴿ:
     TUI ebook reader; epr supports only EPUB; epy is a fork of epy
     with support for more formats like MOBI and AZW3, and adds
     features like bookmarks, integration with external dictionaries,
@@ -385,7 +385,7 @@ Mac since it is POSIX-compliant.)
   - [aerc](https://git.sr.ht/~rjarry/aerc)ᴸ:
     TUI email client with [notmuch](https://notmuchmail.org/)ᴸ support.
     See the appropriate section below for how to set up Notmuch,
-    [Lieer](https://github.com/gauteh/lieer)ˣ and aerc for Gmail usage.
+    [Lieer](https://github.com/gauteh/lieer)ᴿ and aerc for Gmail usage.
   - [Apple Mail](https://support.apple.com/mail)ᴹ or
     [Evolution](https://gitlab.gnome.org/GNOME/evolution/-/wikis/home)ᴸ or
     [Thunderbird](https://www.thunderbird.net/)ᴸᴹᵂ:
@@ -438,12 +438,12 @@ Mac since it is POSIX-compliant.)
     ([Github](https://github.com/samschott/maestral)):
     Dropbox clientfor Linux and macOS, lighter but has less features
     than the [official](https://www.dropbox.com/desktop) client
-  - [Magic Wormhole](https://github.com/magic-wormhole/magic-wormhole)ˣ:
+  - [Magic Wormhole](https://github.com/magic-wormhole/magic-wormhole)ᴿ:
     Command-line tool and library for sending files from one computer
     to another; note that this tool requires
-    [mailbox](https://github.com/magic-wormhole/magic-wormhole-mailbox-server)ˣ
+    [mailbox](https://github.com/magic-wormhole/magic-wormhole-mailbox-server)ᴿ
     and a
-    [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)ˣ
+    [transit relay](https://github.com/magic-wormhole/magic-wormhole-transit-relay)ᴿ
     server, which by default uses one hosted by the project
   - [Midnight Commander](https://midnight-commander.org/)ᴸᴹ
     ([Github](https://github.com/MidnightCommander/mc)) or
@@ -483,7 +483,7 @@ Mac since it is POSIX-compliant.)
     and another for iOS (paid, not by the developers) called
     [Möbius](https://apps.apple.com/us/app/m%C3%B6bius-sync-pro/id1671184333)ᴵ
 - Image text extraction
-  - [Apache Tika](http://tika.apache.org/)ˣ
+  - [Apache Tika](http://tika.apache.org/)ᴿ
     ([Github](https://github.com/apache/tika/)):
     [Go](https://github.com/google/go-tika) and
     [Python](https://github.com/chrismattmann/tika-python) bindings
@@ -491,14 +491,14 @@ Mac since it is POSIX-compliant.)
   - [Tesseract](https://tesseract-ocr.github.io/)ᴸᴹᵂ
     ([Github](https://github.com/tesseract-ocr/tesseract))
 - Markup language document conversion and rendering
-  - [Asciidoctor](https://asciidoctor.org/)ˣ
+  - [Asciidoctor](https://asciidoctor.org/)ᴿ
     ([Github](https://github.com/asciidoctor/asciidoctor)):
     Asciidoc processor, has an
-    [extension](https://asciidoctor.org/docs/asciidoctor-pdf/)ˣ
+    [extension](https://asciidoctor.org/docs/asciidoctor-pdf/)ᴿ
     for PDF generation; Javascript
     [port](https://github.com/asciidoctor/asciidoctor.js) and
     [CLI](https://github.com/asciidoctor/asciidoctor-cli.js) available
-  - [Docutils](https://www.docutils.org/)ˣ
+  - [Docutils](https://www.docutils.org/)ᴿ
     ([Github](https://github.com/docutils/docutils)):
     Convert ReStructuredText to other formats
   - [groff](https://www.gnu.org/software/groff/)ᴸ:
@@ -508,7 +508,7 @@ Mac since it is POSIX-compliant.)
     [Heirloom Doctools](https://n-t-roff.github.io/heirloom/doctools.html)ᴸ
     ([Github](https://github.com/n-t-roff/heirloom-doctools), and
     manpage-only formatter [mandoc](https://mandoc.bsd.lv/)ᴸ
-  - [hred](https://github.com/danburzo/hred)ˣ:
+  - [hred](https://github.com/danburzo/hred)ᴿ:
     Command-line HTML (and XML) to JSON converter
   - [Pandoc](https://pandoc.org/)ᴸᴹᵂ
     ([Github](https://github.com/jgm/pandoc)):
@@ -522,7 +522,7 @@ Mac since it is POSIX-compliant.)
     using Python, R, Julia, and Observable JS; for a user-local
     install, one option is to extract the tarball version somewhere
     and symlink the `quarto` binary from a directory in `$PATH`
-  - [Sphinx](https://www.sphinx-doc.org/)ˣ
+  - [Sphinx](https://www.sphinx-doc.org/)ᴿ
     ([Github](https://github.com/sphinx-doc/sphinx)):
     Generate project docs from source code and ReStructuredText (or
     [Markdown](https://myst-parser.readthedocs.io/en/latest/)),
@@ -543,8 +543,8 @@ Mac since it is POSIX-compliant.)
   - [Typst](https://typst.app/)ᴸᴹᵂ
     ([Github](https://github.com/typst/typst)):
     Markup-based typesetting system, that is an alternative to LaTeX
-  - [WeasyPrint](https://github.com/Kozea/WeasyPrint)ˣ or
-    [percollate](https://github.com/danburzo/percollate)ˣ:
+  - [WeasyPrint](https://github.com/Kozea/WeasyPrint)ᴿ or
+    [percollate](https://github.com/danburzo/percollate)ᴿ:
     Convert HTML to PDF files; percollate processes the page for
     readability before conversion; the file can also be directly
     opened in a browser and printed to PDF
@@ -567,7 +567,7 @@ Mac since it is POSIX-compliant.)
     ([Github](https://github.com/objective-see/Netiquette)):
     Network monitor
 - Package/runtime manager
-  - [asdf](https://asdf-vm.com/)ˣ
+  - [asdf](https://asdf-vm.com/)ᴿ
     ([Github](https://github.com/asdf-vm/asdf)):
     Language runtime manager with plugins
     [plugins](https://github.com/asdf-vm/asdf-plugins) for many
@@ -602,7 +602,7 @@ Mac since it is POSIX-compliant.)
     and `git config --global alias.diffpdf "difftool -t diffpdf"` and
     running e.g. `git diffpdf somecommit:somefile.pdf somefile.pdf`;
     Linux
-  - [DjVu.js](https://djvu.js.org/)ˣ
+  - [DjVu.js](https://djvu.js.org/)ᴿ
     ([Github](https://github.com/RussCoder/djvujs)):
     View DjVu documents in the browser; for local viewer usage
     instructions, see [here](https://djvu.js.org/downloads)
@@ -635,8 +635,8 @@ Mac since it is POSIX-compliant.)
 - Presentation
   - [Marp](https://marp.app/)
     ([Github](https://github.com/marp-team/marp),
-    [CLI app](https://github.com/marp-team/marp-cli)ˣ) or
-    [Slidev](https://sli.dev/)ˣ
+    [CLI app](https://github.com/marp-team/marp-cli)ᴿ) or
+    [Slidev](https://sli.dev/)ᴿ
     ([Github](https://github.com/slidevjs/slidev)):
     Markdown-based presentations on the browser;
     for presentations on the terminal, there are also
