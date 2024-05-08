@@ -3,10 +3,10 @@
 ## Open-source software
 
 (Note: ᴸ → Linux, ᴹ → Mac, ᵂ → Windows, ᴬ → Android, ᴵ → iOS,
-ᴿ → Language runtime-based (e.g., Python, Java, Javascript) with no
-platform restrictions; Many Linux tools are usable in Windows via
-[WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) or in
-Mac since it is POSIX-compliant.)
+ᴿ → Language runtime-based (e.g., Shell, Python, Java, Javascript)
+with no platform restrictions; Many Linux tools are usable in Windows
+via [WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux)
+or in Mac since it is POSIX-compliant.)
 
 - Audio and video creation and editing
   - [Ardour](https://ardour.org/)ᴸᴹᵂ
@@ -799,84 +799,88 @@ Mac since it is POSIX-compliant.)
     [ripgrep-all](https://github.com/phiresky/ripgrep-all)
 - Shell enhancement
   - [tldr](https://github.com/tldr-pages/tldr) or
-    [navi](https://github.com/denisidoro/navi):
+    [navi](https://github.com/denisidoro/navi)ᴸᴹᵂ:
     Interactive command references on the command-line; tldr has
     alternative client implementations
-    [tealdeer](https://github.com/dbrgn/tealdeer) or
-    [outfieldr](https://gitlab.com/ve-nt/outfieldr) that run much
+    [tealdeer](https://github.com/dbrgn/tealdeer)ᴸᴹᵂ or
+    [outfieldr](https://gitlab.com/ve-nt/outfieldr)ᴸᴹᵂ that run much
     faster than the usual Node.js and Python clients
-  - [z](https://github.com/rupa/z) or
-    [zoxide](https://github.com/ajeetdsouza/zoxide):
+  - [z](https://github.com/rupa/z)ᴿ or
+    [zoxide](https://github.com/ajeetdsouza/zoxide)ᴸᴹᵂ:
     Frecent directories; `z` is a plugin for Bash and Zsh, whereas
     `zoxide` is more of a replacement for the `cd` command
 - System administration
-  - [angle-grinder](https://github.com/rcoh/angle-grinder)
+  - [angle-grinder](https://github.com/rcoh/angle-grinder)ᴸᴹ
     (log analyzer)
-  - [atop](https://github.com/Atoptool/atop):
+  - [atop](https://github.com/Atoptool/atop)ᴸ:
     System resource monitor, runs as a daemon that logs process
     activity to disk
-  - [bandwhich](https://github.com/imsnif/bandwhich):
+  - [bandwhich](https://github.com/imsnif/bandwhich)ᴸᴹᵂᴬ:
     Network utilization by process, connection, remote IP, hostname,
     and so on
-  - [dua](https://github.com/Byron/dua-cli) or
-    [dust](https://github.com/bootandy/dust):
+  - [BleachBit](https://www.bleachbit.org/)ᴸᵂ
+    ([Github](https://github.com/bleachbit/bleachbit)) or
+    [czkawka](https://github.com/qarmin/czkawka)ᴸᴹᵂ:
+    Clean up unnecessary and temporary files from the system
+  - [dua](https://github.com/Byron/dua-cli)ᴸᴹᵂ or
+    [dust](https://github.com/bootandy/dust)ᴸᴹᵂ:
     Alternative to `du` for checking disk usage. dua also makes
     deletion of unwanted data easy
-  - [duf](https://github.com/muesli/duf) or
-    [lfs](https://github.com/Canop/lfs):
+  - [duf](https://github.com/muesli/duf)ᴸᴹᵂ or
+    [dysk](https://github.com/Canop/dysk)ᴸ:
     Command-line alternative to `df` with nicer user interface
-  - [eBPF/bcc](https://github.com/iovisor/bcc) or
-    [strace](https://strace.io/):
+  - [eBPF/bcc](https://github.com/iovisor/bcc)ᴸ or
+    [strace](https://strace.io/)ᴸ
+    ([Github](https://github.com/strace/strace),
+    [Gitlab](https://gitlab.com/strace/strace)):
     Process debugging;
     eBPF/bcc [tutorial](https://ish-ar.io/python-ebpf-tracing/)
-  - [fkill](https://github.com/sindresorhus/fkill-cli):
+  - [fkill](https://github.com/sindresorhus/fkill-cli)ᴿ:
     Command-line tool to interactively kill running user and system
     procs
-  - [forkstat](https://github.com/ColinIanKing/forkstat):
+  - [forkstat](https://github.com/ColinIanKing/forkstat)ᴸ:
     Command-line program to log process forks, execs and exits;
     useful for tracking runaway processes
-  - [GrandPerspective](https://grandperspectiv.sourceforge.net/)
+  - [GrandPerspective](https://grandperspectiv.sourceforge.net/)ᴹ
     ([SourceForge](https://sourceforge.net/projects/grandperspectiv/)):
     Visualize disk usage using a tree map, macOS
-  - [htop](https://github.com/htop-dev/htop) or
-    [zenith](https://github.com/bvaisvil/zenith) or
-    [bottom](https://github.com/ClementTsang/bottom):
+  - [htop](https://github.com/htop-dev/htop)ᴸᴹ or
+    [zenith](https://github.com/bvaisvil/zenith)ᴸᴹ or
+    [bottom](https://github.com/ClementTsang/bottom)ᴸᴹᵂ:
     System resource monitor, alternative to `top`; note that dumb
     terminals or logging ncurses should not be used, in which case do
     `top -b` to run `top` in batch mode (or `top -b -n NUMBER` to
     limit the number of iterations to `NUMBER`)
-  - [hyperfine](https://github.com/sharkdp/hyperfine):
+  - [hyperfine](https://github.com/sharkdp/hyperfine)ᴸᴹᵂ:
     Command-line benchmarking tool that supports multiple and warmup
     runs, export of results to various formats, etc; basically a
     featureful alternative to the standard `time` command
-  - [inxi](https://smxi.org/)
+  - [inxi](https://smxi.org/)ᴸ
     ([Codeberg](https://codeberg.org/smxi/inxi)) or
-    [hardinfo2](https://www.hardinfo2.org/)
-    ([Github](https://www.hardinfo2.org/)):
+    [hardinfo2](https://www.hardinfo2.org/)ᴸ
+    ([Github](https://github.com/hardinfo2/hardinfo2)):
     Tool to show system information; inxi is a CLI tool, hardinfo is a
     GUI tool, both are Linux-only; for macOS, use the built-in
     `system_profiler` (CLI) or "System Information.app" (GUI); a
     nice-looking CLI alternative but with less functionality is
-    [fastfetch](https://github.com/fastfetch-cli/fastfetch)
- - [klogg](https://klogg.filimonov.dev/)
+    [fastfetch](https://github.com/fastfetch-cli/fastfetch)ᴸᴹᵂ
+  - [klogg](https://klogg.filimonov.dev/)ᴸᴹᵂ
     ([Github](https://github.com/variar/klogg)):
     Cross-platform GUI log explorer
-  - [lnav](https://lnav.org/)
+  - [lnav](https://lnav.org/)ᴸᴹ
     ([Github](https://github.com/tstack/lnav)):
     TUI log file viewer supporting multiple file formats and
     compression types, with the ability to consolidate multiple
     log files into a single view
-  - [osquery](https://github.com/osquery/osquery):
+  - [osquery](https://github.com/osquery/osquery)ᴸᴹᵂ:
     Expose operating system as a relational database
     ([HN](https://news.ycombinator.com/item?id=39501281))
-  - [pstree](https://github.com/FredHucht/pstree):
+  - [pstree](https://github.com/FredHucht/pstree)ᴸᴹ:
     List processes as a tree
-  - [Sloth](https://sveinbjorn.org/sloth)
+  - [Sloth](https://sveinbjorn.org/sloth)ᴹ
     ([Github](https://github.com/sveinbjornt/Sloth)):
     macOS application to show open files, dirs, sockets and pipes
-  - [Stacer](https://github.com/oguzhaninan/Stacer):
-    Linux system optimizer and monitoring GUI tool
-  - [tree](https://oldmanprogrammer.net/source.php?dir=projects/tree)
+  - [tree](https://oldmanprogrammer.net/source.php?dir=projects/tree)ᴸᴹ
     ([Github](https://github.com/Old-Man-Programmer/tree),
     [Gitlab](https://gitlab.com/OldManProgrammer/unix-tree)):
     Command-line tool to list files in subdir tree depth-indented
@@ -1335,16 +1339,18 @@ Mac since it is POSIX-compliant.)
     ([Github org](https://github.com/Mathics3)):
     Open-source alternative to
     [Mathematica](https://www.wolfram.com/mathematica/)
-  - [Nextcloud](https://nextcloud.com/)
+  - [Nextcloud](https://nextcloud.com/)ᴸ
     ([Github org](https://github.com/nextcloud)):
     Self-host collaboration platform offering similar functionality to
-    Google Suite; Nextcloud Files can be used as a a WebDAV service
-  - [OmegaT](https://omegat.org/)
+    Google Suite; Nextcloud Files can be used as a a WebDAV service;
+    has desktopᴸᴹᵂ and mobileᴬᴵ clients
+    ([link](https://nextcloud.com/install/))
+  - [OmegaT](https://omegat.org/)ᴸᴹᵂᴿ
     ([Github](https://github.com/omegat-org/omegat)):
     Translation memory tool
-  - [pass](https://www.passwordstore.org/)
+  - [pass](https://www.passwordstore.org/)ᴿ
     ([Git](https://git.zx2c4.com/password-store/)) or
-    [gopass](https://www.gopass.pw/)
+    [gopass](https://www.gopass.pw/)ᴸᴹᵂ
     ([Github](https://github.com/gopasspw/gopass)):
     Command-line password manager; **pass-specific instructions**:
     on macOS pass is available in MacPorts or Homebrew, or install
@@ -1374,23 +1380,23 @@ Mac since it is POSIX-compliant.)
     and rebuilding the cache via `rm ~/.zcompdump && compinit`,
     and optionally add `alias pass=gopass` to `~/.zshrc` to use
     gopass as a drop-in replacement for pass; **supporting apps**:
-    [Pass (iOS)](https://github.com/mssun/passforios)
+    [Pass (iOS)](https://github.com/mssun/passforios)ᴵ
     ([Appstore](https://apps.apple.com/us/app/pass-password-store/id1205820573)),
-    [Password Store (Android)](https://github.com/android-password-store/android-password-store)
+    [Password Store (Android)](https://github.com/android-password-store/android-password-store)ᴬ
     ([Play Store](https://play.google.com/store/apps/details?id=dev.msfjarvis.aps))
-  - [pastel](https://github.com/sharkdp/pastel) or
-    [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui):
+  - [pastel](https://github.com/sharkdp/pastel)ᴸᴹᵂ or
+    [rgb-tui](https://github.com/ArthurSonzogni/rgb-tui)ᴸᴹᵂ:
     Terminal color picker
-  - [Platypus](https://sveinbjorn.org/platypus)
+  - [Platypus](https://sveinbjorn.org/platypus)ᴹ
     ([Github](https://github.com/sveinbjornt/Platypus)):
     macOS tool for wrapping command-line programs into a
     macOS application bundle
-  - [sc-im](https://github.com/andmarti1424/sc-im)
+  - [sc-im](https://github.com/andmarti1424/sc-im)ᴸ
     Terminal spreadsheet program
-  - [Stellarium](https://stellarium.org/)
+  - [Stellarium](https://stellarium.org/)ᴸᴹᵂ
     ([Github](https://github.com/Stellarium/stellarium)):
     Open-source desktop planetarium
-  - [Sweet Home 3D](https://www.sweethome3d.com/)
+  - [Sweet Home 3D](https://www.sweethome3d.com/)ᴸᴹᵂᴬᴵ
     ([SourceForge](https://sourceforge.net/projects/sweethome3d/)):
     Open-source interior design application, also available as a
     [webapp](https://www.sweethome3d.com/SweetHome3DOnlineManager.jsp)
@@ -1400,10 +1406,10 @@ Mac since it is POSIX-compliant.)
     ([coreutils](https://github.com/uutils/coreutils)ᴸᴹᵂ,
     [findutils](https://github.com/uutils/findutils)ᴸᴹᵂ,
     [diffutils](https://github.com/uutils/diffutils)ᴸᴹᵂ)
-  - [Vale](https://vale.sh/)
+  - [Vale](https://vale.sh/)ᴸᴹᵂ
     ([Github](https://github.com/errata-ai/vale)):
     Linter for prose
-  - [Zotero](https://www.zotero.org/)
+  - [Zotero](https://www.zotero.org/)ᴸᴹᵂᴵ
     ([Github](https://github.com/zotero/zotero)):
     Reference management software to collect, organize, cite and
     share research material
