@@ -186,7 +186,7 @@ Mac since it is POSIX-compliant.)
     [chDB](https://doc.chdb.io/)ᴸᴹᵂ
     ([Github](https://github.com/chdb-io/chdb)); also can
     be run on the command-line like OctoSQL; a non-embeddable
-    alternative is [ROAPI](https://github.com/roapi/roapi)
+    alternative is [ROAPI](https://github.com/roapi/roapi)ᴸᴹᵂ
   - [Litestream](https://litestream.io/)ᴸᴹ
     ([Github](https://github.com/benbjohnson/litestream)) and
     [LiteFS](https://github.com/superfly/litefs)ᴸ:
@@ -650,18 +650,18 @@ Mac since it is POSIX-compliant.)
     ([Github](https://github.com/pdfpc/pdfpc)):
     Multi-monitor PDF presentations
 - Project (codebase)
-  - [CodeQuery](https://ruben2020.github.io/codequery/)
+  - [CodeQuery](https://ruben2020.github.io/codequery/)ᴸᵂ
     ([Github](https://github.com/ruben2020/codequery)):
     Code-browsing and -understanding tool, building on
-    [cscope](http://cscope.sourceforge.net/) and
-    [ctags](http://ctags.sourceforge.net/), providing a GUI interface
+    [cscope](http://cscope.sourceforge.net/)ᴸ and
+    [ctags](http://ctags.sourceforge.net/)ᴸ, providing a GUI interface
     to these tools and visualization capabilities; supports C, C++,
     Go, Java, Javascript, Python and Ruby; complementary tools include
-    [cflow](https://www.gnu.org/software/cflow/) to analyze C code or
-    [Doxygen](https://www.doxygen.nl/) to extract code structure
-  - [Cookiecutter](https://github.com/cookiecutter/cookiecutter)
+    [cflow](https://www.gnu.org/software/cflow/)ᴸ to analyze C code or
+    [Doxygen](https://www.doxygen.nl/)ᴸᴹᵂ to extract code structure
+  - [Cookiecutter](https://github.com/cookiecutter/cookiecutter)ᴿ
     Project templates
-  - [Dependency Management Data](https://dmd.tanna.dev/)
+  - [Dependency Management Data](https://dmd.tanna.dev/)ᴸᴹᵂ
     ([Gitlab](https://gitlab.com/tanna.dev/dependency-management-data)):
     Tooling for tracking dependencies across an organization and
     making them queryable, supports importing data from several
@@ -673,17 +673,17 @@ Mac since it is POSIX-compliant.)
     [OSS Review Toolkit](https://oss-review-toolkit.org/ort/)
     ([link](https://dmd.tanna.dev/cookbooks/getting-started-ort/)),
     etc
-  - [DevSkim](https://github.com/microsoft/DevSkim) or
-    [Semgrep](https://github.com/returntocorp/semgrep):
+  - [DevSkim](https://github.com/microsoft/DevSkim)ᴸᴹᵂ or
+    [Semgrep](https://github.com/returntocorp/semgrep)ᴿ:
     Code security linter for multiple languages, with a command-line
     interface; ones for specific languages or tools also exist (e.g.,
-    [C++](https://github.com/david-a-wheeler/flawfinder),
-    [Go](https://github.com/securego/gosec),
-    [Kubernetes](https://github.com/controlplaneio/kubesec), [Ruby on
-    Rails](https://github.com/presidentbeef/brakeman/),
-    [Terraform](https://github.com/aquasecurity/tfsec)); there are
-    also [other](https://github.com/Microsoft/ApplicationInspector)
-    [tools](https://github.com/googleprojectzero/weggli) that analyze
+    [C++](https://github.com/david-a-wheeler/flawfinder)ᴿ,
+    [Go](https://github.com/securego/gosec)ᴸᴹᵂ,
+    [Kubernetes](https://github.com/controlplaneio/kubesec)ᴸᴹᵂ,
+    [Ruby on Rails](https://github.com/presidentbeef/brakeman/)ᴿ,
+    [Terraform](https://github.com/aquasecurity/tfsec)ᴸᴹᵂ); there are
+    also [other](https://github.com/Microsoft/ApplicationInspector)ᴸᴹᵂ
+    [tools](https://github.com/googleprojectzero/weggli)ᴸᴹᵂ that analyze
     what code does instead of looking for specific code smells; also
     see [these](https://jreyesr.github.io/posts/semgrep-blog-rules/)
     [articles](https://parsiya.net/blog/2022-04-07-code-review-hot-spots-with-semgrep/)
@@ -694,43 +694,46 @@ Mac since it is POSIX-compliant.)
     plugins to apply them (install base command with `apt
     install editorconfig` on Debian or Ubuntu, `port install
     editorconfig-core-c` via MacPorts on macOS, via a Python
-    [package](https://pypi.org/project/EditorConfig/), or download a
-    [binary](https://github.com/editorconfig/editorconfig-core-go));
-    [editorconfig-checker](https://editorconfig-checker.github.io/)
+    [package](https://github.com/editorconfig/editorconfig-core-py)ᴿ,
+    or download a
+    [binary](https://github.com/editorconfig/editorconfig-core-go)ᴸᴹᵂ);
+    [editorconfig-checker](https://editorconfig-checker.github.io/)ᴸᴹᵂ
+    ([Github](https://github.com/editorconfig-checker/editorconfig-checker))
     can be used to check that files conform to EditorConfig settings
   - [Gittyup](https://murmele.github.io/Gittyup/)ᴸᴹᵂ
     ([Github](https://github.com/Murmele/Gittyup)) or
     [Gitup](https://github.com/git-up/GitUp)ᴹ or
     [TortoiseGit](https://tortoisegit.org/)ᵂ:
     [Git](https://git-scm.com/) GUI client
-  - [gogs](https://gogs.io/) or
-    [Soft Serve](https://github.com/charmbracelet/soft-serve):
+  - [gogs](https://gogs.io/)ᴸᴹᵂ or
+    [Soft Serve](https://github.com/charmbracelet/soft-serve)ᴸᴹᵂ:
     Self-hosted Git server
-  - [kondo](https://github.com/tbillington/kondo):
+  - [kondo](https://github.com/tbillington/kondo)ᴸᴹᵂ:
     Clean unneeded files like build artifacts from project directories
-  - [onefetch](https://github.com/o2sh/onefetch):
+  - [onefetch](https://github.com/o2sh/onefetch)ᴸᴹᵂ:
     Git repository information and statistics
-  - [OSS Review Toolkit](https://oss-review-toolkit.org/ort/)
+  - [OSS Review Toolkit](https://oss-review-toolkit.org/ort/)ᴿ
     ([Github](https://github.com/oss-review-toolkit/ort)):
     Suite of tools for analyzing project dependencies and checking
     software license compliance
-  - [ruplacer](https://github.com/your-tools/ruplacer):
+  - [ruplacer](https://github.com/your-tools/ruplacer)ᴸᴹᵂ:
     Find and replace recursively, like a combo of `find` and `sed -i`
-  - [scc](https://github.com/boyter/scc) or
-    [tokei](https://github.com/XAMPPRocky/tokei):
+  - [scc](https://github.com/boyter/scc)ᴸᴹᵂ or
+    [tokei](https://github.com/XAMPPRocky/tokei)ᴸᴹᵂ:
     Count lines of code by language
-  - [scorecard](https://scorecard.dev/)
+  - [scorecard](https://scorecard.dev/)ᴸᴹᵂ
     ([Github](https://github.com/ossf/scorecard)):
     Assess operational risk (code, build, dependencies, testing,
     maintenance, etc) of open-source software; can be run on public
     repositories owned by others; results for many open source
     projects are also published weekly as a BigQuery dataset (see
     [here](https://github.com/ossf/scorecard?tab=readme-ov-file#public-data))
-  - [task](https://github.com/go-task/task):
+  - [task](https://taskfile.dev/)ᴸᴹᵂ
+    ([Github](https://github.com/go-task/task)):
     Easier-to-use [Make](https://www.gnu.org/software/make/)
     alternative
 - Remote login and desktop
-  - [cpu](https://github.com/u-root/cpu):
+  - [cpu](https://github.com/u-root/cpu)ᴸ:
     Implementation of Plan 9 [cpu](https://man.cat-v.org/plan_9/1/cpu)
     command in Go, modified to work over SSH; useful for logging into
     remote systems while allowing use of files from the local system,
@@ -746,18 +749,20 @@ Mac since it is POSIX-compliant.)
     [u-root](https://github.com/u-root/u-root), which is a fully
     Go userland, can be useful in conjunction with cpu to work with
     remote machines with minimal disk space
-  - [Mosh](https://mosh.org/):
+  - [Mosh](https://mosh.org/)ᴸᴹ
+    ([Github](https://github.com/mobile-shell/mosh)):
     Robust SSH alternative; `dumb` terminals don't work well with mosh
     because it always outputs escape sequences to set the window title
-  - [Remmina](https://remmina.org/):
+  - [Remmina](https://remmina.org/)ᴸ
+    ([Gitlab](https://gitlab.com/Remmina/Remmina)):
     Remote desktop client for POSIX systems; on systems that can
     run [Chrome](https://www.google.com/chrome/), there is also
     [Chrome Remote Desktop](https://remotedesktop.google.com/)
     ([extension](https://chromewebstore.google.com/detail/chrome-remote-desktop/inomeogfingihgjfjlpeplalcfajhgai))
 - Search
-  - [Code Search](https://github.com/google/codesearch) or
-    [hound](https://github.com/hound-search/hound) or
-    [zoekt](https://github.com/sourcegraph/zoekt):
+  - [Code Search](https://github.com/google/codesearch)ᴸᴹᵂ or
+    [hound](https://github.com/hound-search/hound)ᴸᴹᵂ or
+    [zoekt](https://github.com/sourcegraph/zoekt)ᴸᴹᵂ:
     Text search engine for source code; codesearch and hound are based
     on [this paper](https://swtch.com/~rsc/regexp/regexp4.html); zoekt
     is based on a simplified version of a technique described
@@ -773,22 +778,23 @@ Mac since it is POSIX-compliant.)
     ([one](https://github.com/junkblocker/codesearch),
     [two](https://github.com/hakonhall/codesearch),
     [three](https://github.com/tylerwilliams/codesearch))
-  - [Meilisearch](https://github.com/meilisearch/meilisearch) or
-    [ElasticSearch](https://github.com/elastic/elasticsearch) or
-    [Toshi](https://github.com/toshi-search/Toshi):
+  - [Meilisearch](https://github.com/meilisearch/meilisearch)ᴸᴹᵂ or
+    [ElasticSearch](https://github.com/elastic/elasticsearch)ᴸᴹᵂ or
+    [Toshi](https://github.com/toshi-search/Toshi)ᴸᴹᵂ:
     Search engine server; ElasticSearch and Toshi are designed for
     general-purpose search, while Meilisearch focuses on simpler
     searches (algorithm is inverse-index to Levenshtein automaton
     for handling typos to bucket sort for ranking documents)
-  - [fd](https://github.com/sharkdp/fd):
+  - [fd](https://github.com/sharkdp/fd)ᴸᴹᵂ:
     Simpler command-line alternative to `find`
-  - [fzf](https://github.com/junegunn/fzf) or
-    [zf](https://github.com/natecraddock/zf):
+  - [fzf](https://github.com/junegunn/fzf)ᴸᴹᵂ or
+    [zf](https://github.com/natecraddock/zf)ᴸᴹᵂ:
     Command-line fuzzy finder; zf has better filename matching
     ([link](https://nathancraddock.com/blog/2023/a-different-approach-to-fuzzy-finding/))
-  - [pdfgrep](https://pdfgrep.org/):
+  - [pdfgrep](https://pdfgrep.org/)ᴸ
+    ([Gitlab](https://gitlab.com/pdfgrep/pdfgrep)):
     Command-line tool for searching text in PDF files
-  - [ripgrep](https://github.com/BurntSushi/ripgrep):
+  - [ripgrep](https://github.com/BurntSushi/ripgrep)ᴸᴹᵂ:
     `grep` alternative, extend to more file formats with
     [ripgrep-all](https://github.com/phiresky/ripgrep-all)
 - Shell enhancement
@@ -1405,91 +1411,89 @@ Mac since it is POSIX-compliant.)
 ## Commercial software
 
 - Audio and video creation and editing
-  - [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve):
+  - [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve)ᴸᴹᵂ:
     Freeware non-linear video editor, has paid
-    [version](https://www.blackmagicdesign.com/products/davinciresolve/studio)
+    [version](https://www.blackmagicdesign.com/products/davinciresolve/studio)ᴸᴹᵂ
 - Containerization
-  - [Orbstack](https://orbstack.dev/):
+  - [Orbstack](https://orbstack.dev/)ᴹ:
     macOS Docker runtime and Linux virtual machine management,
     more performant and lightweight than Docker Desktop and Colima
     as of July 2023; free for personal use
 - Database client
-  - [DbVisualizer](https://www.dbvis.com/):
+  - [DbVisualizer](https://www.dbvis.com/)ᴸᴹᵂ:
     Cross-database SQL client with data visualization capabilities;
     free version available with limited functionality
 - Diagramming
-  - [iThoughts](https://www.toketaware.com/):
-    Mind-mapping tool
-  - [Monodraw](https://monodraw.helftone.com/):
+  - [Monodraw](https://monodraw.helftone.com/)ᴹ:
     ASCII art editor; macOS (App Store and direct download)
 - Ebook
-  - [Vellum](https://vellum.pub/) or
+  - [Vellum](https://vellum.pub/)ᴹ or
     [Atticus](https://www.atticus.io/):
     Format ebooks and print books for publication; Vellum is
     macOS-only and expensive but more polished, while Atticus is
     less polished but cross-platform and cheaper
 - File management
-  - [DevonThink Pro](https://www.devontechnologies.com/apps/devonthink):
+  - [DevonThink Pro](https://www.devontechnologies.com/apps/devonthink)ᴹ:
     Document management and search solution; macOS
-  - [Mountain Duck](https://mountainduck.io/):
+  - [Mountain Duck](https://mountainduck.io/)ᴹᵂ:
     Like `rclone mount` but with a nicer user interface and its vaults
     are interoperable with Cryptomator vaults
 - Markup language document conversion and rendering
-  - [AntennaHouse](https://www.antennahouse.com/) or
-    [Prince](https://www.princexml.com/):
+  - [AntennaHouse](https://www.antennahouse.com/)ᴸᴹᵂ or
+    [Prince](https://www.princexml.com/)ᴸᴹᵂ:
     Convert HTML to PDF files; Prince is free for non-commercial use
     (note that the free version watermarks the resulting PDF file)
 - Project (codebase)
-  - [Sublime Merge](https://www.sublimemerge.com/):
-    GUI Git client for macOS
+  - [Sublime Merge](https://www.sublimemerge.com/)ᴸᴹᵂ:
+    GUI Git client
 - Remote login and desktop
-  - [Jump Desktop](https://jumpdesktop.com/):
+  - [Jump Desktop](https://jumpdesktop.com/)ᴹᵂ:
     Remote desktop software, connect to host systems that have
     [Jump Desktop Connect](https://jumpdesktop.com/connect/)
-    installed; macOS and Windows
-  - [Royal TSX](https://royalapps.com/ts/):
+    installed
+  - [Royal TSX](https://royalapps.com/ts/)ᴹᵂ:
     Cross-platform RDP and VNC client; has free version
 - Text (general)
-  - [Araxis Merge](https://www.araxis.com/merge/) or
-    [Beyond Compare](https://www.scootersoftware.com/) or
-    [Deltawalker](https://www.deltawalker.com/) or
-    [Kaleidoscope](https://kaleidoscope.app/):
+  - [Araxis Merge](https://www.araxis.com/merge/)ᴹᵂ or
+    [Beyond Compare](https://www.scootersoftware.com/)ᴸᴹᵂ or
+    [Deltawalker](https://www.deltawalker.com/)ᴸᴹᵂ or
+    [Kaleidoscope](https://kaleidoscope.app/)ᴹ:
     Compare files and folders; Deltawalker and Kaleidoscope
     also support diffing images
 - Text (structured)
-  - [Modern CSV](https://www.moderncsv.com/):
+  - [Modern CSV](https://www.moderncsv.com/)ᴸᴹᵂ:
     Cross-platform CSV editor/viewer
 - Text editor or integrated development environment
-  - [DataGrip](https://www.jetbrains.com/datagrip/):
+  - [DataGrip](https://www.jetbrains.com/datagrip/)ᴸᴹᵂ:
     Database admin-oriented IDE
-  - [DataSpell](https://www.jetbrains.com/dataspell/):
+  - [DataSpell](https://www.jetbrains.com/dataspell/)ᴸᴹᵂ:
     Data science-oriented IDE
-  - [PyCharm](https://www.jetbrains.com/pycharm/):
+  - [PyCharm](https://www.jetbrains.com/pycharm/)ᴸᴹᵂ:
     Python programming-oriented IDE; has open-source community edition
-  - [RStudio](https://rstudio.com/):
+  - [RStudio](https://rstudio.com/)ᴸᴹᵂ:
     IDE for R; has open-source edition
-  - [Sublime Text](https://www.sublimetext.com/):
+  - [Sublime Text](https://www.sublimetext.com/)ᴸᴹᵂ:
     Lightweight text editor
 - User experience and interface (graphical)
-  - [Choosy](https://choosy.app/) or
-    [OpenIn](https://loshadki.app/openin4/):
-    Open different links in different browsers or apps, macOS; free
-    alternatives include Velja, finicky and Browserosaurus
-  - [shottr](https://shottr.cc/):
+  - [Choosy](https://choosy.app/)ᴹ or
+    [OpenIn](https://loshadki.app/openin4/)ᴹ:
+    Open different links in different browsers or apps in macOS; free
+    alternatives include Velja, finicky and Browserosaurus (see above)
+  - [shottr](https://shottr.cc/)ᴹ:
     Screenshot app for macOS, free for non-commercial use; note that
     macOS has built-in screenshot taking via `Cmd-Shift-3` (capture
     full screen), `Cmd-Shift-4` (select a region and capture it),
     `Cmd-Shift-4-Space` (capture window), and via the Screenshot app
     (`Cmd-Shift-5` or use Spotlight search)
-  - [Synergy](https://symless.com/synergy)
+  - [Synergy](https://symless.com/synergy)ᴸᴹᵂ
     ([Github](https://github.com/symless/synergy-core/)):
     Cross-platform software mimicking KVM switch functionality to share
     a keyboard and a mouse across systems; source code available for
     [self-compile](https://symless.com/synergy/news/how-to-use-synergy-for-free),
     but is also available compiled by a third-party as
-    [binaries](https://github.com/DEAKSoftware/Synergy-Binaries)
+    [binaries](https://github.com/DEAKSoftware/Synergy-Binaries)ᴸᴹᵂ
 - Word processing
-  - [Scrivener](https://www.literatureandlatte.com/scrivener/overview):
+  - [Scrivener](https://www.literatureandlatte.com/scrivener/overview)ᴹᵂᴵ:
     Word processor for authoring books and screenplays
 - Virtualization
   - Orbstack (see Containerization)
