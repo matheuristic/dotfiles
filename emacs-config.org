@@ -5623,7 +5623,6 @@ Dired major mode transient.
       ("Q" "Query-replace" dired-do-find-regexp-and-replace)
       ("{" "Find by name" find-name-dired)
       ("}" "Find by query" find-grep-dired)
-      ("/" "Filter" transient/dired-mode/filter)
       ]
      ["View"
       ("(" "Toggle details" dired-hide-details-mode :transient t)

@@ -2,7 +2,7 @@
 
 ;; Author: matheuristic
 ;; URL: https://github.com/matheuristic/emacs-config
-;; Generated: Sat May 11 22:03:28 2024
+;; Generated: Sun May 12 08:43:48 2024
 
 ;;; Commentary:
 
@@ -1350,7 +1350,9 @@ Formatting a selected region only works on top-level objects."
   :config
   (add-hook 'magit-process-find-password-functions
             #'magit-process-password-auth-source)
-  (setq epg-pinentry-mode 'loopback)) ; use Emacs minibuffer for entering GPG passphrase
+  ;; use Emacs minibuffer for GnuPG passphrases
+  ;; see https://vxlabs.com/2021/03/21/gnupg-pinentry-via-the-emacs-minibuffer/
+  (setq epg-pinentry-mode 'loopback))
 
 ;; Uncomment to check VC info on file auto-revert (increases I/O load)
 ;; https://magit.vc/manual/magit/The-mode_002dline-information-isn_0027t-always-up_002dto_002ddate.html
@@ -2939,7 +2941,6 @@ not support restricting to a region."
       ("Q" "Query-replace" dired-do-find-regexp-and-replace)
       ("{" "Find by name" find-name-dired)
       ("}" "Find by query" find-grep-dired)
-      ("/" "Filter" transient/dired-mode/filter)
       ]
      ["View"
       ("(" "Toggle details" dired-hide-details-mode :transient t)
