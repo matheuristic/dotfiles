@@ -1148,12 +1148,8 @@ buffer instead of usual one."
 (defun acme-mode--warp-mouse-to-point ()
   "Warp mouse pointer to point in the current window."
   (let* ((coords (posn-col-row (posn-at-point)))
-         (window-coords (window-inside-edges))
-         (x (+ (car coords) (car window-coords) -1)) ; the fringe is 0
-         (y (+ (cdr coords) (cadr window-coords)
-               (if (acme-mode--header-line-active-p)
-                   -1
-                 0))))
+         (x (+ (car coords) (window-left-column)))
+         (y (+ (cdr coords) (window-top-line))))
     (set-mouse-position (selected-frame) x y)))
 
 (defun acme-mode--highlight-search (text)
@@ -1800,7 +1796,7 @@ will insert the 3rd most recent entry in the kill ring."
 ;; PLUMBING FUNCTIONS
 
 (defun acme-mode--plumb-file-system-open (filename)
-  "Function to generically open given FILENAME using system 'xdg-open' or 'open'."
+  "Function to generically open given FILENAME using system `xdg-open' or `open'."
   (let ((system-open-command (or (executable-find "xdg-open")
                                  (executable-find "open"))))
     (if system-open-command
