@@ -2,7 +2,7 @@
 
 ;; Author: matheuristic
 ;; URL: https://github.com/matheuristic/emacs-config
-;; Generated: Sat May 11 20:48:26 2024
+;; Generated: Sat May 11 21:18:20 2024
 
 ;;; Commentary:
 
@@ -885,6 +885,11 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   (unless terminal-frame
     (define-key paredit-mode-map (kbd "M-[") #'paredit-wrap-square)
     (define-key paredit-mode-map (kbd "M-{") #'paredit-wrap-curly))
+  ;; restore old behavior of RET evaluating input in ielm and other interactive modes
+  ;; see https://paredit.org/cgit/paredit/plain/NEWS
+  ;; and https://old.reddit.com/r/emacs/comments/17k6pu4/m_aka_mx_evalexpression_does_nothing_upon_hitting/
+  (define-key paredit-mode-map (kbd "RET") nil)
+  (define-key paredit-mode-map (kbd "C-j") 'paredit-newline)
   ;; make delete-selection-mode work within paredit-mode
   (with-eval-after-load 'delsel
     (put 'paredit-forward-delete 'delete-selection 'supersede)
@@ -1638,7 +1643,8 @@ for more information."
                  ("2" . 2) ("C-2" . 2) ("M-2" . 2)
                  ("3" . 3) ("C-3" . 3) ("M-3" . 3)))))
   ;; enable `acme-mode'
-  (acme-mode 1))
+  ;(acme-mode 1)
+  )
 
 ;; OS-specific / macOS
 
@@ -1973,37 +1979,37 @@ name for the cloned indirect buffer ending with \"-INDIRECT\"."
 (global-set-key (kbd "C-c d e") #'transient/ediff)
 
 ;; add transient popup for various editing commands
-(require 'acme)
-(transient-define-prefix transient/edit ()
-  "Editing commands."
-  ["Edit"
-   ["Completion"
-    ("/" "Dyn. abbrev" dabbrev-expand :transient t) ; built-in
-    ;; ("TAB" "Company" company-complete) ; autoloaded from company-mode.el
-    ]
-   ["Line"
-    ("O" "New line above" my-open-line-above :transient t)
-    ("o" "New line below" my-open-line-below :transient t)
-    ("J" "Join lines" my-join-next-line :transient t)
-    ]
-   ["Multi-cursor"     ; functions autoloaded from multiple-cursors.el
-    ("C" "Edit lines" mc/edit-lines)
-    ("V" "Rect select" set-rectangular-region-anchor)
-    ("<" "Previous" mc/mark-previous-like-this :transient t)
-    (">" "Next" mc/mark-next-like-this :transient t)
-    ]
-   ["Other"
-    ("A" (lambda ()
-           (transient--make-description
-            "Acme mouse"
-            acme-mode))
-     acme-mode :transient t)            ; emulate Acme mouse user interface
-    (";" "Iedit" iedit-mode)            ; autoloaded from iedit.el
-    ("=" "Expand region" er/expand-region) ; autoloaded from expand-region.el
-    ]
-   ]
-  )
-(global-set-key (kbd "C-c e") #'transient/edit)
+(with-eval-after-load 'acme
+  (transient-define-prefix transient/edit ()
+    "Editing commands."
+    ["Edit"
+     ["Completion"
+      ("/" "Dyn. abbrev" dabbrev-expand :transient t) ; built-in
+      ;; ("TAB" "Company" company-complete) ; autoloaded from company-mode.el
+      ]
+     ["Line"
+      ("O" "New line above" my-open-line-above :transient t)
+      ("o" "New line below" my-open-line-below :transient t)
+      ("J" "Join lines" my-join-next-line :transient t)
+      ]
+     ["Multi-cursor"     ; functions autoloaded from multiple-cursors.el
+      ("C" "Edit lines" mc/edit-lines)
+      ("V" "Rect select" set-rectangular-region-anchor)
+      ("<" "Previous" mc/mark-previous-like-this :transient t)
+      (">" "Next" mc/mark-next-like-this :transient t)
+      ]
+     ["Other"
+      ("A" (lambda ()
+             (transient--make-description
+              "Acme mouse"
+              acme-mode))
+       acme-mode :transient t)            ; emulate Acme mouse user interface
+      (";" "Iedit" iedit-mode)            ; autoloaded from iedit.el
+      ("=" "Expand region" er/expand-region) ; autoloaded from expand-region.el
+      ]
+     ]
+    )
+  (global-set-key (kbd "C-c e") #'transient/edit))
 
 (defun transient/frame--previous-frame ()
   "Select previous frame."

@@ -2111,6 +2111,11 @@ Also configure it so its commands integrate appropriately with
   (unless terminal-frame
     (define-key paredit-mode-map (kbd "M-[") #'paredit-wrap-square)
     (define-key paredit-mode-map (kbd "M-{") #'paredit-wrap-curly))
+  ;; restore old behavior of RET evaluating input in ielm and other interactive modes
+  ;; see https://paredit.org/cgit/paredit/plain/NEWS
+  ;; and https://old.reddit.com/r/emacs/comments/17k6pu4/m_aka_mx_evalexpression_does_nothing_upon_hitting/
+  (define-key paredit-mode-map (kbd "RET") nil)
+  (define-key paredit-mode-map (kbd "C-j") 'paredit-newline)
   ;; make delete-selection-mode work within paredit-mode
   (with-eval-after-load 'delsel
     (put 'paredit-forward-delete 'delete-selection 'supersede)
