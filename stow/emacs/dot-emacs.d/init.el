@@ -2,7 +2,7 @@
 
 ;; Author: matheuristic
 ;; URL: https://github.com/matheuristic/emacs-config
-;; Generated: Sat May 11 21:33:08 2024
+;; Generated: Sat May 11 21:38:02 2024
 
 ;;; Commentary:
 
@@ -262,6 +262,10 @@ features are reloaded."
 (let ((maybe-dir (expand-file-name "~/.config/enchant/")))
   (when (file-directory-p maybe-dir)
     (setenv "DICPATH" maybe-dir)))
+;; on macOS, set path to Perl libraries installed by XCode command-line tools
+(let ((maybe-dir "/Library/Developer/CommandLineTools/usr/share/git-core/perl"))
+  (when (file-directory-p maybe-dir)
+    (setenv "PERL5LIB" (concat maybe-dir ":" (getenv "PERL5LIB")))))
 
 ;; Backend and frontend frameworks for building user interfaces
 
