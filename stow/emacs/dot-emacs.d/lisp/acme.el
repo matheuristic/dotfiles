@@ -583,13 +583,13 @@ See `acme-mode-plumbing-rules'.")
   "State of Acme mode.
 
 Possible states:
-* 'noselect (neutral state with no mouse buttons pressed)
-* 'textselect (1 pressed but no further buttons)
-* 'textselect-cut (1-2 chord last run but some buttons still pressed)
-* 'textselect-paste (1-3 chord last run but some buttons still pressed)
-* 'textselect2 (2 pressed but no further buttons)
-* 'textselect3 (3 pressed but no further buttons)
-* 'donothing (2-3 chord or 3-2 chord pressed, to cancel execute or look)")
+* \\='noselect (neutral state with no mouse buttons pressed)
+* \\='textselect (1 pressed but no further buttons)
+* \\='textselect-cut (1-2 chord last run but some buttons still pressed)
+* \\='textselect-paste (1-3 chord last run but some buttons still pressed)
+* \\='textselect2 (2 pressed but no further buttons)
+* \\='textselect3 (3 pressed but no further buttons)
+* \\='donothing (2-3 chord or 3-2 chord pressed, to cancel execute or look)")
 
 (defvar acme-mode--buttons acme-mode--nobuttons
   "Current buttons pressed stored as bits of an integer.
@@ -634,7 +634,7 @@ Used mainly for chained Del text executions from the tag buffer.")
 (defvar acme-mode--textselect-cut-or-paste-first nil
   "Whether cut or paste action was done first during current textselect.
 
-Possible values: 'cut or 'paste or nil")
+Possible values: \\='cut or \\='paste or nil")
 
 ;; CUSTOMIZATION VARIABLES
 
@@ -694,16 +694,16 @@ group by be shadowed by user-defined ones as desired.
 Example:
 
   (setq acme-mode-user-command-keywords
-        '((\"Commentcol\" . (lambda (arg)
+        \\='((\"Commentcol\" . (lambda (arg)
                               (comment-set-column (string-to-number arg))))
           (\"Fillcol\" . (lambda (&optional arg)
                             (if arg
                                 (setq fill-column (string-to-number arg))
                               (setq fill-column 70))))
           (\"Fontlock\" . (lambda ()
-                            (call-interactively 'font-lock-mode)))
+                            (call-interactively \\='font-lock-mode)))
           (\"Lnumbers\" . (lambda ()
-                            (call-interactively 'display-line-numbers-mode)))))"
+                            (call-interactively \\='display-line-numbers-mode)))))"
   :type '(alist :key-type (string :tag "Key") :value-type (function :tag "Value")))
 
 (defcustom acme-mode-keyboard-chord-keylist nil
@@ -716,7 +716,7 @@ Can be helpful when using a laptop trackpad.
 
 Example:
 
-  (setq acme-mode-keyboard-chord-keylist '((\"z\" . 1) (\"x\" . 2) (\"c\" . 3)))"
+  (setq acme-mode-keyboard-chord-keylist \\='((\"z\" . 1) (\"x\" . 2) (\"c\" . 3)))"
   :type '(alist :key-type (string :tag "Key") :value-type (integer :tag "Mouse button")))
 
 (defcustom acme-mode-no-warp-mouse nil
@@ -873,7 +873,7 @@ is set back to the window and buffer at the time of calling."
                 (- acme-mode--allbuttons button))))
 
 (defun acme-mode--maybe-reset-state ()
-  "Set `acme-mode--state' to 'noselect if no buttons are pressed."
+  "Set `acme-mode--state' to \\='noselect if no buttons are pressed."
   (when (acme-mode--down-p acme-mode--nobuttons)
     (setq acme-mode--state 'noselect)))
 
@@ -916,7 +916,7 @@ is set back to the window and buffer at the time of calling."
 
 For example,
 
-  (acme-mode--make-mouse-event 'double-down-mouse-1)
+  (acme-mode--make-mouse-event \\='double-down-mouse-1)
 
 creates an event similar to that generated when the left mouse
 is pressed twice and using last tracked mouse event position."
@@ -991,8 +991,9 @@ and if SIZE is nil then the window split is done evenly. See
 `split-window' for more about this parameter.
 
 SIDE controls on which side the new window is opened if in the
-same frame, and can be 'above , 'below , 'left , 'right or nil.
-See `split-window' for more about this parameter.
+same frame, and can be \\='above , \\='below , \\='left ,
+\\='right or nil. See `split-window' for more about this
+parameter.
 
 If WINDOW is non-nil, split it instead of the current window if
 creating a new window."
@@ -1565,7 +1566,7 @@ mode is enabled."
     (call-interactively 'completion-at-point)))
 
 (defun acme-mode--update-last-non-tag-buffer-window ()
-  "Update `acme-mode--last-non-tag-buffer-window' if current buffer is not a tag buffer."
+  "Update `acme-mode--last-non-tag-buffer-window' if not in a tag buffer."
   (let ((win (selected-window)))
     (unless (or (not (window-live-p win))
                 (acme-mode--tag-buffer-window-p win)
