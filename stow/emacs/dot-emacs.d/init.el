@@ -2,7 +2,7 @@
 
 ;; Author: matheuristic
 ;; URL: https://github.com/matheuristic/emacs-config
-;; Generated: Sat May 11 21:38:02 2024
+;; Generated: Sat May 11 22:03:28 2024
 
 ;;; Commentary:
 
@@ -1347,8 +1347,10 @@ Formatting a selected region only works on top-level objects."
 (use-package magit
   :commands magit-status
   :bind ("C-x g" . magit-status)
-  :config (add-hook 'magit-process-find-password-functions
-                    #'magit-process-password-auth-source))
+  :config
+  (add-hook 'magit-process-find-password-functions
+            #'magit-process-password-auth-source)
+  (setq epg-pinentry-mode 'loopback)) ; use Emacs minibuffer for entering GPG passphrase
 
 ;; Uncomment to check VC info on file auto-revert (increases I/O load)
 ;; https://magit.vc/manual/magit/The-mode_002dline-information-isn_0027t-always-up_002dto_002ddate.html

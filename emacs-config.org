@@ -3049,14 +3049,32 @@ form.
 machine <hostname> login <login_name> password <password> [port <port_number_or_name>]
 #+end_example
 
+Additionally, add to ~$HOME/.gnupg/gpg.conf~ the line:
+
+#+begin_src
+pinentry-mode loopback
+#+end_src
+
+And add to ~$HOME/.gnu/gpg-agent.conf~ the line:
+
+#+begin_src
+allow-loopback-pinentry
+#+end_src
+
+See [[https://bugs.launchpad.net/ubuntu/+source/pinentry/+bug/1986895][here]] for more info.
+
 #+name: magit
 #+begin_src emacs-lisp
 ;; binding for calling Magit
 (use-package magit
   :commands magit-status
   :bind ("C-x g" . magit-status)
-  :config (add-hook 'magit-process-find-password-functions
-                    #'magit-process-password-auth-source))
+  :config
+  (add-hook 'magit-process-find-password-functions
+            #'magit-process-password-auth-source)
+  ;; use Emacs minibuffer for GnuPG passphrases
+  ;; see https://vxlabs.com/2021/03/21/gnupg-pinentry-via-the-emacs-minibuffer/
+  (setq epg-pinentry-mode 'loopback))
 
 ;; Uncomment to check VC info on file auto-revert (increases I/O load)
 ;; https://magit.vc/manual/magit/The-mode_002dline-information-isn_0027t-always-up_002dto_002ddate.html
