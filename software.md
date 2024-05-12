@@ -1037,7 +1037,8 @@ or in Mac since it is POSIX-compliant.)
     and [here](https://mattwidmann.net/notes/modern-nvi-mappings/) for
     more info; easily compilable only on BSDs and macOS), but these
     lack a good number of features added in vim and Neovim
-  - [Vis](https://github.com/martanne/vis)ᴸ:
+  - [Vis](https://github.com/martanne/vis)ᴸ
+    ([Sourcehut](https://git.sr.ht/~martanne/vis)):
     TUI text editor combining vi modal editing with
     [Sam](https://en.wikipedia.org/wiki/Sam_(text_editor))'s
     structural regular expressions and command language
@@ -1055,30 +1056,30 @@ or in Mac since it is POSIX-compliant.)
     ([Github](https://github.com/zed-industries/zed)):
     Multithreaded GPU-accelerated collaborative code editor
 - User experience and interface (graphical)
-  - [Amethyst](https://ianyh.com/amethyst/)
+  - [Amethyst](https://ianyh.com/amethyst/)ᴹ
     ([Github](https://github.com/ianyh/Amethyst)) or
-    [yabai](https://github.com/koekeishiya/yabai):
+    [yabai](https://github.com/koekeishiya/yabai)ᴹ:
     Tiling window manager for macOS
-  - [Hyperkey](https://hyperkey.app/):
+  - [Hyperkey](https://hyperkey.app/)ᴹ:
     Use CapsLock as a "hyper" key, that is, C-Opt-Cmd-Shift, on macOS
-  - [Input Leap](https://github.com/input-leap/input-leap):
+  - [Input Leap](https://github.com/input-leap/input-leap)ᴸᴹᵂ:
     Cross-platform software that mimics KVM switch functionality; Macs
     and iPads with the same account can just use the built-in
     [Universal Control](https://support.apple.com/en-us/102459)
-  - [LinearMouse](https://github.com/linearmouse/linearmouse) or
-    [Mos](https://github.com/Caldis/Mos) or
-    [Scroll Reverser](https://github.com/pilotmoon/Scroll-Reverser):
+  - [LinearMouse](https://github.com/linearmouse/linearmouse)ᴹ or
+    [Mos](https://github.com/Caldis/Mos)ᴹ or
+    [Scroll Reverser](https://github.com/pilotmoon/Scroll-Reverser)ᴹ:
     Mouse enhancements like reverse scrolling, linear scrolling,
     acceleration, etc, for external mice on macOS
-  - [Maccy](https://maccy.app/)
+  - [Maccy](https://maccy.app/)ᴹ
     ([Github](https://github.com/p0deje/Maccy)):
-    Clipboard manager; macOS
-  - [MiddleClick](https://github.com/artginzburg/MiddleClick-Sonoma):
+    Clipboard manager for macOS
+  - [MiddleClick](https://github.com/artginzburg/MiddleClick-Sonoma)ᴹ:
     Middle-click with three-finger tap; commercial alternatives
-    include [Middle](https://middleclick.app/),
-    [Multitouch](https://multitouch.app/) and
-    [BetterTouchTool](https://folivora.ai/)
-  - [Rectangle](https://rectangleapp.com/)
+    include [Middle](https://middleclick.app/)ᴹ,
+    [Multitouch](https://multitouch.app/)ᴹ and
+    [BetterTouchTool](https://folivora.ai/)ᴹ
+  - [Rectangle](https://rectangleapp.com/)ᴹ
     ([Github](https://github.com/rxhanson/Rectangle)):
     Move and resize windows using keyboard shortcuts and snap areas
     in macOS; as an alternative, three of the more useful keyboard
@@ -1087,59 +1088,62 @@ or in Mac since it is POSIX-compliant.)
     on `+`, keeping `All Applications`, inserting as the Menu Title
     action `Move Window to Left Side of Screen` and setting the
     shortcut key as desired (`Ctrl-Option-Left` is recommended),
-    and repeating for other actions `Move Window to Right Side
-    of Screen` (recommend `Ctrl-Option-Right` here), as well as
-    `Zoom` (recommend using `Ctrl-Option-Return` here), **or**
-    hover over the green `+` button on the top-left corner of the
-    window and press `Option` which allows mouse selection of the
-    actions (does not require keyboard shortcut configuration);
-    there's also a commercial [Pro](https://rectangleapp.com/pro)
-    version with more features
-  - [skhd](https://github.com/koekeishiya/skhd):
-    Hotkey daemon; macOS
-  - [stats](https://github.com/exelban/stats):
-    Menu bar system monitor; macOS
-  - [Textinator](https://github.com/RhetTbull/textinator)
-    or [TRex](https://github.com/amebalabs/TRex):
-    Detect text in screenshots and copy it to the clipboard; macOS
-  - [ueli](https://ueli.app/)
+    and repeating for `Move Window to Right Side of Screen`
+    (recommend `Ctrl-Option-Right` here), as well as `Zoom`
+    (recommend using `Ctrl-Option-Return` here), **or** hover over the
+    green `+` button on the top-left corner of the window and press
+    `Option` which allows mouse selection of the actions (does not
+    require keyboard shortcut configuration); there's also a
+    commercial [Pro](https://rectangleapp.com/pro) version
+  - [skhd](https://github.com/koekeishiya/skhd)ᴹ or
+    [sxhkd](https://github.com/baskerville/sxhkd)ᴸ (X11) or
+    [swhkd](https://github.com/waycrate/swhkd)ᴸ (Wayland):
+    Hotkey daemon
+  - [stats](https://github.com/exelban/stats)ᴹ:
+    Menu bar system monitor for macOS
+  - [Textinator](https://github.com/RhetTbull/textinator)ᴹ
+    or [TRex](https://github.com/amebalabs/TRex)ᴹ:
+    Detect text in screenshots and copy it to the clipboard in macOS
+  - [ueli](https://ueli.app/)ᴸᴹᵂ
     ([Github](https://github.com/oliverschwendener/ueli)):
     Launcher like [Alfred](https://www.alfredapp.com/) but open-source
     and cross-platform
-  - [Velja](https://sindresorhus.com/velja)
+  - [Velja](https://sindresorhus.com/velja)ᴹ
     ([App Store](https://apps.apple.com/app/id1607635845)) or
-    [finicky](https://github.com/johnste/finicky) or
-    [Browserosaurus](https://browserosaurus.com/)
+    [finicky](https://github.com/johnste/finicky)ᴹ or
+    [Browserosaurus](https://browserosaurus.com/)ᴹ
     ([Github](https://github.com/will-stone/browserosaurus)):
-    Open different links in different browsers or apps, macOS
-  - [xbar](https://github.com/matryer/xbar) or
-    [SwiftBar](https://github.com/swiftbar/SwiftBar):
-    Pipe output to the menu bar; macOS
-  - [Unshaky](https://github.com/aahung/Unshaky):
-    Double keypress workaround for butterfly keyboards; macOS
+    Open different links in different browsers or apps in macOS
+  - [xbar](https://github.com/matryer/xbar)ᴹ or
+    [SwiftBar](https://github.com/swiftbar/SwiftBar)ᴹ:
+    Pipe output to the menu bar in macOS
+  - [Unshaky](https://github.com/aahung/Unshaky)ᴹ:
+    Double keypress workaround for Apple Mac butterfly keyboards
 - User experience and interface (text)
-  - [direnv](https://direnv.net/)
+  - [direnv](https://direnv.net/)ᴸᴹᵂ
     ([Github](https://github.com/direnv/direnv)):
     Load and unload env vars based on location; for `direnv`, config
     files go into `$XDG_CONFIG_HOME/direnv/` and allowed directory
     environment files are recorded in `$XDG_DATA_HOME/direnv/allow/`;
-    alternatives: [autoenv](https://github.com/hyperupcall/autoenv),
-    [shadowenv](https://github.com/Shopify/shadowenv)
-  - [hollywood](https://github.com/dustinkirkland/hollywood):
-    Hollywood technobabble in a Byobu session
-  - [parallel](https://www.gnu.org/software/parallel/):
+    alternatives: [autoenv](https://github.com/hyperupcall/autoenv)ᴿ,
+    [shadowenv](https://github.com/Shopify/shadowenv)ᴸᴹ
+  - [hollywood](https://github.com/dustinkirkland/hollywood)ᴸ:
+    Hollywood technobabble in a Byobu session; repository also has a
+    Wall Street version called wallstreet
+    ([announcement](https://blog.dustinkirkland.com/2014/12/hollywood-technodrama.html))
+  - [parallel](https://www.gnu.org/software/parallel/)ᴸ:
     Command-line tool for executing jobs in parallel
-  - [pv](http://www.ivarch.com/programs/pv.shtml)
+  - [pv](http://www.ivarch.com/programs/pv.shtml)ᴸ
     ([Codeberg](https://codeberg.org/a-j-wood/pv)):
     Like `cat` (reads from stdin or file and forwards it to stdout)
     while printing progress to stderr; useful for monitoring progress
     when piping large amounts of data from one program to another
-  - [rlwrap](https://github.com/hanslub42/rlwrap):
+  - [rlwrap](https://github.com/hanslub42/rlwrap)ᴸ:
     `readline` wrapper to enable completion and history for any
     command-line tool taking keyboard input
-  - [screen](https://www.gnu.org/software/screen/) or
-    [tmux](https://github.com/tmux/tmux) or
-    [Zellij](https://zellij.dev/)
+  - [screen](https://www.gnu.org/software/screen/)ᴸ or
+    [tmux](https://github.com/tmux/tmux)ᴸ or
+    [Zellij](https://zellij.dev/)ᴸᴹ
     ([Github](https://github.com/zellij-org/zellij)):
     Terminal multiplexer, useful for managing and persisting remote
     sessions over Mosh or SSH; generally, tmux is recommended over
@@ -1149,25 +1153,25 @@ or in Mac since it is POSIX-compliant.)
     [link](https://old.reddit.com/r/archlinux/comments/d41c1w/screen_vs_tmux/f0dj9rn/);
     for just the session management (detach and re-attach)
     functionality of tmux and screen, there is
-    [dtach](https://github.com/crigler/dtach),
-    [abduco](https://github.com/martanne/abduco) or
-    [diss](https://github.com/yazgoo/diss/)
-  - [ttyplot](https://github.com/tenox7/ttyplot):
+    [dtach](https://github.com/crigler/dtach)ᴸ,
+    [abduco](https://github.com/martanne/abduco)ᴸ or
+    [diss](https://github.com/yazgoo/diss/)ᴸ
+  - [ttyplot](https://github.com/tenox7/ttyplot)ᴸ:
     Real-time plotting tool in the terminal using stdin as data input
 - Virtualization
-  - [Blink](https://github.com/jart/blink):
+  - [Blink](https://github.com/jart/blink)ᴸᴹ:
     Tiny x86-64-linux emulator that can run on any POSIX system
-  - [UTM](https://github.com/utmapp/UTM):
-    iOS and macOS tool for managing [QEMU](https://www.qemu.org/)
-    virtual machines; alternatives are [lima](https://lima-vm.io/)
+  - [UTM](https://github.com/utmapp/UTM)ᴹᴵ:
+    iOS and macOS tool for managing [QEMU](https://www.qemu.org/)ᴸ
+    virtual machines; alternatives are [lima](https://lima-vm.io/)ᴸᴹ
     ([Github](https://github.com/lima-vm/lima)) if there is no need to
-    run GUI apps, or Ubuntu-only [Multipass](https://multipass.run/)
+    run GUI apps, or Ubuntu-only [Multipass](https://multipass.run/)ᴸ
     ([Github](https://github.com/canonical/multipass))
-  - [virt-manager](https://virt-manager.org/):
+  - [virt-manager](https://virt-manager.org/)ᴸ:
     Linux desktop tool for managing QEMU/KVM virtual machines
 - VPN
-  - [OpenVPN](https://openvpn.net/vpn-client/) or
-    [TunnelBlick](https://tunnelblick.net/)
+  - [OpenVPN](https://openvpn.net/client/)ᴸᴹᵂᴬᴵ or
+    [TunnelBlick](https://tunnelblick.net/)ᴹ
     ([Github](https://github.com/Tunnelblick/Tunnelblick)):
     OpenVPN client, note that Linux clients be should installed via
     the system package manager (see
@@ -1175,20 +1179,20 @@ or in Mac since it is POSIX-compliant.)
     and [here](https://gitlab.com/openvpn/openvpn3-linux));
     TunnelBlick is macOS-only and built on the older but still
     maintained OpenVPN 2 libraries
-  - [WireGuard](https://www.wireguard.com/):
+  - [WireGuard](https://www.wireguard.com/)ᴸᴹᵂᴬᴵ:
     Simple and high-performance VPN; can be involved to set up, use
     tools like [wg-easy](https://github.com/wg-easy/wg-easy) for
     easier installation and administration; WireGuard orchestration
-    tools include [headscale](https://github.com/juanfont/headscale)
-    (open-source self-hosted [Tailscale](https://tailscale.com/)
+    tools include [headscale](https://github.com/juanfont/headscale)ᴸᴹ
+    (open-source self-hosted [Tailscale](https://tailscale.com/)ᴸᴹᵂᴬᴵ
     control server alternative designed to be used with Tailscale
-    clients), [innernet](https://github.com/tonarino/innernet),
-    [nebula](https://github.com/slackhq/nebula), or
-    [netbird](https://github.com/netbirdio/netbird);
+    clients), [innernet](https://github.com/tonarino/innernet)ᴸᴹ,
+    [nebula](https://github.com/slackhq/nebula)ᴸᴹᵂ, or
+    [netbird](https://github.com/netbirdio/netbird)ᴸᴹᵂ;
     non-WireGuard-based alternatives include
-    [ZeroTier](https://www.zerotier.com/) (self-hosting
+    [ZeroTier](https://www.zerotier.com/)ᴸᴹᵂᴬᴵ (self-hosting
     [supported](https://docs.zerotier.com/selfhost))
-- Web browsing
+- Web browsing (besides Chrome and Firefox)
   - [Amfora](https://github.com/makeworld-the-better-one/amfora) or
     [Bombadillo](https://bombadillo.colorfield.space/)
     ([tildegit](https://tildegit.org/sloum/bombadillo)) or
