@@ -2,7 +2,7 @@
 
 ;; Author: matheuristic
 ;; URL: https://github.com/matheuristic/emacs-config
-;; Generated: Sun May 12 13:30:38 2024
+;; Generated: Sun May 12 15:58:38 2024
 
 ;;; Commentary:
 
@@ -1593,7 +1593,7 @@ for more information."
 (require 'acme)
 ;; emulate Acme interface
 (with-eval-after-load 'acme
-  (setq acme-mode-no-warp-mouse t)
+  (setq acme-mode-no-warp-mouse nil)
   (setq acme-mode-user-command-keywords
         '(("Commentcol" . (lambda (arg) (comment-set-column (string-to-number arg))))
           ("Expand" . (lambda () (call-interactively 'er/expand-region))) ; requires expand-region
