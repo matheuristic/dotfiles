@@ -900,19 +900,22 @@ or in Mac since it is POSIX-compliant.)
     for Hunspell can be found [here](http://wordlist.aspell.net/dicts/)
   - [bat](https://github.com/sharkdp/bat):
     Command-line `cat` clone with syntax highlighting and Git integration
-  - [cspell](https://github.com/streetsidesoftware/cspell):
+  - [cspell](https://cspell.org/)ᴿ
+    ([Github](https://github.com/streetsidesoftware/cspell)):
     Code-aware spell checker
-  - [daff](https://paulfitz.github.io/daff/):
+  - [daff](https://paulfitz.github.io/daff/)ᴿ
+    ([Github](https://github.com/paulfitz/daff)):
     Like `diff` but for tables
-  - [delta](https://github.com/dandavison/delta):
+  - [delta](https://dandavison.github.io/delta/)ᴸᴹᵂ
+    ([Github](https://github.com/dandavison/delta)):
     `diff` alternative
-  - [FIGlet](http://www.figlet.org/)
+  - [FIGlet](http://www.figlet.org/)ᴸᴹᵂ
     ([Github](https://github.com/cmatsuoka/figlet)):
     Convert text to large ASCII word art, additional fonts are
     available [here](https://github.com/cmatsuoka/figlet-fonts)
-  - [hexyl](https://github.com/sharkdp/hexyl):
+  - [hexyl](https://github.com/sharkdp/hexyl)ᴸᴹᵂ:
     Command-line hex viewer
-  - [LanguageTool](https://languagetool.org/)
+  - [LanguageTool](https://languagetool.org/)ᴿ
     ([Github](https://github.com/languagetool-org/languagetool)):
     Style and grammar checker; standalone Java version downloadable
     [here](https://languagetool.org/download/), snapshots available
@@ -924,80 +927,85 @@ or in Mac since it is POSIX-compliant.)
     [data](https://languagetool.org/download/ngram-data/) for better error finding,
     [fasttext](https://fasttext.cc/) for better language detection and
     [word2vec](https://languagetool.org/download/word2vec/) for confusion pair disambiguation
-  - [FileMerge](https://developer.apple.com/xcode/features/) or
-    [Meld](https://meldmerge.org/) or
-    [kdiff3](https://apps.kde.org/kdiff3/) or
-    [tkdiff](https://sourceforge.net/projects/tkdiff/) or
-    [xxdiff](https://github.com/blais/xxdiff) or
-    [P4Merge](https://www.perforce.com/products/helix-core-apps/merge-diff-tool-p4merge):
+  - [FileMerge](https://developer.apple.com/xcode/features/)ᴹ or
+    [Meld](https://meldmerge.org/)ᴸ or
+    [kdiff3](https://invent.kde.org/sdk/kdiff3)ᴸᴹᵂ or
+    [tkdiff](https://sourceforge.net/projects/tkdiff/)ᴸ or
+    [xxdiff](https://github.com/blais/xxdiff)ᴸ or
+    [P4Merge](https://www.perforce.com/products/helix-core-apps/merge-diff-tool-p4merge)ᴸᴹᵂ:
     GUI `diff` alternative; Meld supports Windows and Linux and has a
-    [macOS port](https://github.com/yousseb/meld), kdiff3 is
-    [cross-platform](https://binary-factory.kde.org/), xxdiff is
-    lightweight but does not support Unicode, FileMerge comes with the
-    macOS XCode IDE and callable from the command-line using
+    [macOS port](https://github.com/yousseb/meld)ᴹ, kdiff3 is
+    [cross-platform](https://download.kde.org/stable/kdiff3), xxdiff
+    is lightweight but does not support Unicode, FileMerge comes with
+    the macOS XCode IDE and callable from the command-line using
     `opendiff`, tkdiff is lightweight and straightforward to set up on
     macOS (see _Mac Notes_ > _Graphical diff and merge tool_), P4Merge
     is free but not open-source; these also diff directories
-  - [par](http://www.nicemice.net/par/):
+  - [par](http://www.nicemice.net/par/)ᴸ
+    ([BitBucket](https://bitbucket.org/amc-nicemice/par/)):
     Paragraph reformatter, like a smarter version of `fmt` from GNU
     [coreutils](https://www.gnu.org/software/coreutils/); note that
     macOS built-in `fmt` does not support Unicode, while `par` and
     GNU Coreutils `fmt` (installable as `gfmt` from the MacPorts
     or Homebrew `coreutils` package on macOS) do support Unicode
-  - [sttr](https://github.com/abhimanyu003/sttr):
+  - [sttr](https://github.com/abhimanyu003/sttr)ᴸᴹᵂ:
     Command-line tool for string operations
-  - [uni](https://github.com/arp242/uni) or
-    [chars](https://github.com/antifuchs/chars):
+  - [uni](https://github.com/arp242/uni)ᴸᴹᵂ or
+    [unicode](https://github.com/robpike/unicode)ᴸᴹᵂ or
+    [chars](https://github.com/antifuchs/chars)ᴸᴹᵂ:
     Command-line tool for querying Unicode characters
 - Text (structured)
-  - [The One True Awk](https://github.com/onetrueawk/awk):
+  - [The One True Awk](https://github.com/onetrueawk/awk)ᴸ:
     Version of AWK described in The Awk Programming Language
     [book](https://awk.dev/); alternative implementations include
     [Gawk](https://www.gnu.org/software/gawk/manual/) and
     [others](https://www.gnu.org/software/gawk/manual/html_node/Other-Versions.html)
-  - [csvquote](https://github.com/dbro/csvquote):
+  - [csvquote](https://github.com/dbro/csvquote)ᴸ:
     Makes its easier to use CSV files with standard Unix tools like
     awk, sed, cut and join by converting (and reverting) embedded
     commas and newlines to non-printing characters, for example
     `csvquote a.csv | cut -d',' -f3 | sort | uniq -c | csvquote -u`
-  - [fastgron](https://github.com/adamritter/fastgron):
+  - [fastgron](https://github.com/adamritter/fastgron)ᴸᴹᵂ:
     Flattens JSON into discrete assignments that work better with
     `grep` and `sed`; [gron.awk](https://github.com/xonixx/gron.awk)
     is similar but implemented in pure Awk
-  - [fq](https://github.com/wader/fq):
+  - [fq](https://github.com/wader/fq)ᴸᴹᵂ:
     Like `jq` but for binary formats
-  - [ghostwriter](https://github.com/wereturtle/ghostwriter):
+  - [ghostwriter](https://ghostwriter.kde.org/)ᴸᵂ
+    ([Github](https://github.com/KDE/ghostwriter),
+    [Invent](https://invent.kde.org/office/ghostwriter)):
     Graphical Markdown editor; Windows and Linux (also on Flathub)
-  - [htmlq](https://github.com/mgdm/htmlq) or
-    [cascadia](https://github.com/suntong/cascadia):
+  - [htmlq](https://github.com/mgdm/htmlq)ᴸᴹᵂ or
+    [cascadia](https://github.com/suntong/cascadia)ᴸᴹᵂ:
     Like grep for HTML but using CSS selectors
-  - [jq](https://jqlang.github.io/jq/)
+  - [jq](https://jqlang.github.io/jq/)ᴸᴹᵂ
     ([Github](https://github.com/jqlang/jq)):
     Command-line JSON processor
-  - [jless](https://jless.io/)
+  - [jless](https://jless.io/)ᴸᴹ
     ([Github](https://github.com/PaulJuliusMartinez/jless)):
     Ncurses command-line JSON viewer
-  - [jo](https://github.com/jpmens/jo):
+  - [jo](https://github.com/jpmens/jo)ᴸᵂ:
     Command-line utility for creating JSON objects
-  - [Miller](https://github.com/johnkerl/miller) or
-    [qsv](https://github.com/jqnatividad/qsv)
-    (fork of [xsv](https://github.com/BurntSushi/xsv)):
+  - [Miller](https://github.com/johnkerl/miller)ᴸᴹᵂ or
+    [qsv](https://github.com/jqnatividad/qsv)ᴸᴹᵂ
+    (fork of [xsv](https://github.com/BurntSushi/xsv)ᴸᴹᵂ):
     Command-line tool for working with CSV files; Miller also supports
     TSV and tabular JSON; Miller is more flexible, qsv easier to use
-  - [QXmlEdit](http://qxmledit.org/):
+  - [QXmlEdit](http://qxmledit.org/)ᴸᴹᵂ
+    ([Github](https://github.com/lbellonda/qxmledit)):
     XML editor
-  - [Tad](https://www.tadviewer.com/)
+  - [Tad](https://www.tadviewer.com/)ᴸᴹᵂ
     ([Github](https://github.com/antonycourtney/tad)):
     GUI tabular data viewer for CSV, Parquet, SQLite and DuckDB files;
     alternative is [CSView](https://kothar.net/csview) (different from
     another one that is listed here)
-  - [Visidata](https://www.visidata.org/)
+  - [Visidata](https://www.visidata.org/)ᴿ
     ([Github](https://github.com/saulpw/visidata)) or
-    [CSView](https://github.com/wfxr/csview):
+    [CSView](https://github.com/wfxr/csview)ᴸᴹᵂ:
     TUI tabular data viewer; Visidata is more of a multitool, in that
     it allows for editing and supports any source loadable via Pandas
     using the `-f` option
-  - [yq](https://github.com/mikefarah/yq):
+  - [yq](https://github.com/mikefarah/yq)ᴸᴹᵂ:
     Command-line YAML processor
 - Text editor or integrated development environment
   - [Acme](https://en.wikipedia.org/wiki/Acme_(text_editor)):
@@ -1005,36 +1013,36 @@ or in Mac since it is POSIX-compliant.)
     [Plan 9](https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs),
     ported to Linux and macOS
     ([link](https://9fans.github.io/plan9port/),
-    [Github](https://github.com/9fans/plan9port))
-  - [Emacs](https://www.gnu.org/software/emacs/):
+    [Github](https://github.com/9fans/plan9port)ᴸᴹ)
+  - [Emacs](https://www.gnu.org/software/emacs/)ᴸᵂ:
     Extensible TUI and GUI text editor, macOS builds available from
-    [here](https://emacsformacosx.com/) or
-    [here](https://github.com/railwaycat/homebrew-emacsmacport/releases)
+    [here](https://emacsformacosx.com/)ᴹ or
+    [here](https://github.com/railwaycat/homebrew-emacsmacport/releases)ᴹ
     or install via some package manager like
     MacPorts (e.g., `port install emacs-mac-app +nativecomp` which
     compiles a native GUI Emacs application, the native-comp variant,
     at `/Applications/MacPorts/EmacsMac.app` or at
     `/Users/Username/Applications/MacPorts/EmacsMac.app`)
-  - [Vim](https://www.vim.org/) or
-    [Neovim](https://neovim.io/):
+  - [Vim](https://www.vim.org/)ᴸᴹᵂ or
+    [Neovim](https://neovim.io/)ᴸᴹᵂ:
     TUI text editor based on [vi](https://en.wikipedia.org/wiki/Vi);
     Vim can be found pre-installed on many systems; Neovim is a
     refactor of Vim; other more lightweight clones of vi exist, like
-    [OpenVI](https://github.com/johnsonjh/OpenVi),
-    [neatvi](https://github.com/aligrudi/neatvi),
-    [nextvi](https://github.com/kyx0r/nextvi), or
-    [nvi2](https://github.com/lichray/nvi2), (see
+    [OpenVI](https://github.com/johnsonjh/OpenVi)ᴸ,
+    [neatvi](https://github.com/aligrudi/neatvi)ᴸ,
+    [nextvi](https://github.com/kyx0r/nextvi)ᴸ, or
+    [nvi2](https://github.com/lichray/nvi2)ᴸ, (see
     [here](https://mattwidmann.net/notes/the-nvi-text-editor/),
     [here](https://mattwidmann.net/notes/configuring-the-defaults-of-nvi/)
     and [here](https://mattwidmann.net/notes/modern-nvi-mappings/) for
     more info; easily compilable only on BSDs and macOS), but these
     lack a good number of features added in vim and Neovim
-  - [Vis](https://github.com/martanne/vis):
+  - [Vis](https://github.com/martanne/vis)ᴸ:
     TUI text editor combining vi modal editing with
     [Sam](https://en.wikipedia.org/wiki/Sam_(text_editor))'s
     structural regular expressions and command language
-  - [Visual Studio Code](https://code.visualstudio.com/) or
-    [VSCodium](https://vscodium.com/):
+  - [Visual Studio Code](https://code.visualstudio.com/)ᴸᴹᵂ or
+    [VSCodium](https://vscodium.com/)ᴸᴹᵂ:
     GUI IDE; VSCodium is a build of VSCode that is free
     of tracking and Microsoft branding, but note that some
     Microsoft plugins like pylance (Python LSP server) does
@@ -1043,7 +1051,7 @@ or in Mac since it is POSIX-compliant.)
     ([Github](https://github.com/continuedev/continue)) and the
     different extensions for remote development include over SSH
     ([link](https://code.visualstudio.com/docs/remote/remote-overview))
-  - [Zed](https://zed.dev/)
+  - [Zed](https://zed.dev/)ᴸᴹ
     ([Github](https://github.com/zed-industries/zed)):
     Multithreaded GPU-accelerated collaborative code editor
 - User experience and interface (graphical)
