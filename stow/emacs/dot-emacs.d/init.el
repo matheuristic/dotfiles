@@ -2,7 +2,7 @@
 
 ;; Author: matheuristic
 ;; URL: https://github.com/matheuristic/emacs-config
-;; Generated: Sat May 11 21:18:20 2024
+;; Generated: Sat May 11 21:33:08 2024
 
 ;;; Commentary:
 
@@ -255,7 +255,8 @@ features are reloaded."
 		      "~/macports/bin/"
 		      "~/spack/var/spack/environments/default/.spack-env/view/bin/")))
   (when (file-directory-p maybe-dir)
-    (add-to-list 'exec-path maybe-dir)))
+    (add-to-list 'exec-path maybe-dir)
+    (setenv "PATH" (concat maybe-dir ":" (getenv "PATH")))))
 (when (executable-find "emacsclient")
   (setenv "EDITOR" "emacsclient"))
 (let ((maybe-dir (expand-file-name "~/.config/enchant/")))

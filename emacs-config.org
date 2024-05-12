@@ -1028,7 +1028,8 @@ Set ~exec-path~ and the environment variables.
 		      "~/macports/bin/"
 		      "~/spack/var/spack/environments/default/.spack-env/view/bin/")))
   (when (file-directory-p maybe-dir)
-    (add-to-list 'exec-path maybe-dir)))
+    (add-to-list 'exec-path maybe-dir)
+    (setenv "PATH" (concat maybe-dir ":" (getenv "PATH")))))
 (when (executable-find "emacsclient")
   (setenv "EDITOR" "emacsclient"))
 (let ((maybe-dir (expand-file-name "~/.config/enchant/")))
