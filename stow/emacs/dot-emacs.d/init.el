@@ -2,7 +2,7 @@
 
 ;; Author: matheuristic
 ;; URL: https://github.com/matheuristic/emacs-config
-;; Generated: Sun May 12 08:43:48 2024
+;; Generated: Sun May 12 13:30:38 2024
 
 ;;; Commentary:
 
@@ -834,6 +834,8 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
   ;; hide mode line lighter
   (add-to-list 'my-mode-lighter-abbrev-alist '(which-key-mode . ""))
   (which-key-mode 1))
+;; force-load which-key package
+(require 'which-key)
 
 ;; expand selected region by semantic units
 (use-package expand-region
@@ -955,6 +957,9 @@ With arg N, insert N newlines."
 ;; note that comment insertion command ("M-;") is already DWIM-ified
 (global-set-key (kbd "M-u") #'upcase-dwim)
 (global-set-key (kbd "M-l") #'downcase-dwim)
+
+(use-package editorconfig
+  :config (editorconfig-mode 1))
 
 ;; Emacs as an edit server
 

@@ -2,6 +2,7 @@
 #+author: matheuristic
 #+options: h:4 num:t toc:t
 #+property: header-args:emacs-lisp :exports code
+#+startup: overview
 
 * Notes
 
@@ -2009,6 +2010,8 @@ in the middle of a key sequence.
   ;; hide mode line lighter
   (add-to-list 'my-mode-lighter-abbrev-alist '(which-key-mode . ""))
   (which-key-mode 1))
+;; force-load which-key package
+(require 'which-key)
 #+end_src
 
 ** Expanding selected regions by semantic units                        :gnu:
@@ -2241,6 +2244,17 @@ With arg N, insert N newlines."
 ;; note that comment insertion command ("M-;") is already DWIM-ified
 (global-set-key (kbd "M-u") #'upcase-dwim)
 (global-set-key (kbd "M-l") #'downcase-dwim)
+#+end_src
+
+** EditorConfig
+
+[[https://editorconfig.org/][EditorConfig]] is a tool to maintain consistent style across editors, using
+~.editorconfig~ files, including for [[https://github.com/editorconfig/editorconfig-emacs][Emacs]].
+
+#+name: editorconfig
+#+begin_src emacs-lisp
+(use-package editorconfig
+  :config (editorconfig-mode 1))
 #+end_src
 
 * Emacs as an edit server
@@ -3997,8 +4011,6 @@ a little unwieldy.
   ;(acme-mode 1)
   )
 #+end_src
-
-
 
 * OS-specific
 
@@ -6458,6 +6470,8 @@ The main configuration file.
 <<my-open-line-below-and-above>>
 
 <<bind-dwim-editing-commands>>
+
+<<editorconfig>>
 
 ;; Emacs as an edit server
 
