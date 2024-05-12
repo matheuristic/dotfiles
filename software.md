@@ -885,14 +885,19 @@ or in Mac since it is POSIX-compliant.)
     [Gitlab](https://gitlab.com/OldManProgrammer/unix-tree)):
     Command-line tool to list files in subdir tree depth-indented
 - Text (general)
-  - [Aspell](http://aspell.net/) or
-    [Nuspell](https://nuspell.github.io/) or
-    [Hunspell](https://hunspell.github.io/)
+  - [Aspell](http://aspell.net/)ᴸᴹ
+    ([Savannah](https://savannah.gnu.org/projects/aspell/),
+    [Github](https://github.com/GNUAspell/aspell)) or
+    [Nuspell](https://nuspell.github.io/)ᴸᴹᵂ
+    ([Github](https://github.com/nuspell/nuspell)) or
+    [Hunspell](https://hunspell.github.io/)ᴸᴹ
     ([Github](https://github.com/hunspell/hunspell)) or
-    [Enchant](https://github.com/AbiWord/enchant):
+    [Enchant](https://abiword.github.io/enchant/)ᴸᴹ
+    ([Github](https://github.com/AbiWord/enchant)):
     Command-line spell checkers and libraries; Enchant is a wrapper
     for abstracting different spell checking libraries, including
-    the others mentioned here, into a single interface
+    the others mentioned here, into a single interface; dictionaries
+    for Hunspell can be found [here](http://wordlist.aspell.net/dicts/)
   - [bat](https://github.com/sharkdp/bat):
     Command-line `cat` clone with syntax highlighting and Git integration
   - [cspell](https://github.com/streetsidesoftware/cspell):

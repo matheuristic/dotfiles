@@ -9,6 +9,8 @@
     [Bash](https://www.gnu.org/software/bash/) config
   - [`elixir`](stow/elixir):
     [Elixir](https://elixir-lang.org/) REPL config
+  - [`emacs`](stow/emacs):
+    [Emacs](https://www.gnu.org/software/emacs/) config
   - [`git`](stow/git):
     [Git](https://git-scm.com/)
   - [`nvm`](stow/nvm):
@@ -45,8 +47,8 @@
 ## Other configuration and notes
 
 - [Acme](https://github.com/matheuristic/plan9port-config)
-- [Emacs](https://github.com/matheuristic/emacs-config)
-  (or a simpler [alternative](https://emacs.amodernist.com/))
+- [Emacs (old config)](https://github.com/matheuristic/emacs-config)
+  or a simpler [alternative](https://emacs.amodernist.com/)
   - [Org example docs](https://github.com/matheuristic/org-examples)
 
 ## Deploying user config files and tool scripts using GNU Stow
