@@ -1801,7 +1801,11 @@ will insert the 3rd most recent entry in the kill ring."
   (let ((system-open-command (or (executable-find "xdg-open")
                                  (executable-find "open"))))
     (if system-open-command
-        (start-process "default-app" nil system-open-command filename)
+        (let ((expanded-filename
+               (if (file-name-absolute-p filename)
+                   filename
+                 (concat (file-name-directory buffer-file-name) "/" filename))))
+          (start-process "default-app" nil system-open-command expanded-filename))
       (message "No xdg-open or open on the system to generically open file."))))
 
 (defun acme-mode--plumb-python-error (error-line)
