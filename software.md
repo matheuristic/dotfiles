@@ -1192,32 +1192,35 @@ or in Mac since it is POSIX-compliant.)
     non-WireGuard-based alternatives include
     [ZeroTier](https://www.zerotier.com/)ᴸᴹᵂᴬᴵ (self-hosting
     [supported](https://docs.zerotier.com/selfhost))
-- Web browsing (besides Chrome and Firefox)
-  - [Amfora](https://github.com/makeworld-the-better-one/amfora) or
-    [Bombadillo](https://bombadillo.colorfield.space/)
+- Web browsing
+  (besides the standard [Chrome](https://www.google.com/chrome/),
+  [Firefox](https://www.mozilla.org/en-US/firefox/), and
+  [Safari](https://www.apple.com/safari/) browsers)
+  - [Amfora](https://github.com/makew0rld/amfora)ᴸᴹᵂ or
+    [Bombadillo](https://bombadillo.colorfield.space/)ᴸᴹᵂ
     ([tildegit](https://tildegit.org/sloum/bombadillo)) or
-    [gcat](https://github.com/aaronjanse/gcat):
+    [gcat](https://github.com/aaronjanse/gcat)ᴿ:
     Gemini TUI clients, available on Debian or compile using
     Go via `go install github.com/makeworld-the-better-one/amfora` or
     `go install tildegit.org/sloum/bombadillo@latest`; Bombadillo
     is also a Gopher client; use gcat in Acme or dumb terminals
-  - [Hush](https://oblador.github.io/hush/)
+  - [Hush](https://oblador.github.io/hush/)ᴹᴵ
     ([Github](https://github.com/oblador/hush)):
     Safari extension to block nag popups and trackers; iOS and macOS
-  - [Lagrange](https://gmi.skyjake.fi/lagrange/)
+  - [Lagrange](https://gmi.skyjake.fi/lagrange/)ᴸᴹᵂ
     ([Github](https://github.com/skyjake/lagrange)) or
-    [Kristall](https://kristall.random-projects.net/)
+    [Kristall](https://kristall.random-projects.net/)ᴸᴹᵂ
     ([Github](https://github.com/MasterQ32/kristall)):
     Gemini GUI client; Kristall also supports Gopher
-  - [Monolith](https://crates.io/crates/monolith)
+  - [Monolith](https://crates.io/crates/monolith)ᴸᴹᵂ
     ([Github](https://github.com/Y2Z/monolith.git)):
     Save complete webpages to a single HTML file with embedded CSS,
-    images and Javascript
-  - [shot-scraper](https://shot-scraper.datasette.io/)
+    images and Javascript; macOS version needs to be self-compiled
+  - [shot-scraper](https://shot-scraper.datasette.io/)ᴿ
     ([Github](https://github.com/simonw/shot-scraper)):
     Command-line utility for taking partial or full screenshots of
     websites
-  - [YT-DLP](https://github.com/yt-dlp/yt-dlp):
+  - [YT-DLP](https://github.com/yt-dlp/yt-dlp)ᴸᴹᵂ:
     Fork of [youtube-dl](https://youtube-dl.org/), example usage
     is `yt-dlp --list-formats URL` (change `URL` to video's URL)
     to list formats and `yt-dlp 123 URL` to download just format
@@ -1225,42 +1228,42 @@ or in Mac since it is POSIX-compliant.)
     and audio) or `yt-dlp -f 123+456` to download formats `123` and
     `456` followed by merging them (usually one video and one audio)
 - Web development
-  - [doge](https://github.com/Dj-Codeman/doge):
+  - [doge](https://github.com/Dj-Codeman/doge)ᴸᴹᵂ:
     Alternative to `dig`, fork of [dog](https://github.com/ogham/dog)
     which is no longer maintained
-  - [Hurl](https://hurl.dev/)
+  - [Hurl](https://hurl.dev/)ᴸᴹᵂ
     ([Github](https://github.com/Orange-OpenSource/hurl)):
     Command-line tool for running HTTP requests defined in a text file
-  - [frp](https://github.com/fatedier/frp):
+  - [frp](https://github.com/fatedier/frp)ᴸᴹᵂ:
     Reverse proxy, like [ngrok](https://ngrok.com/)
-  - [httpie](https://httpie.io/)
+  - [httpie](https://httpie.io/)ᴿ
     ([Github](https://github.com/httpie/cli)) or
-    [xh](https://github.com/ducaale/xh):
+    [xh](https://github.com/ducaale/xh)ᴸᴹᵂ:
     Command-line API client; much lighter weight than
     [Postman](https://www.postman.com/)
-  - [Mockoon](https://github.com/mockoon/mockoon):
+  - [Mockoon](https://github.com/mockoon/mockoon)ᴸᴹᵂ:
     HTTP mock server
-  - [mitmproxy](https://mitmproxy.org/)
+  - [mitmproxy](https://mitmproxy.org/))ᴸᴹᵂ
     ([Github](https://github.com/mitmproxy/mitmproxy)):
     Interactive HTTPS proxy
-  - [Prism](https://stoplight.io/open-source/prism)
+  - [Prism](https://stoplight.io/open-source/prism)ᴿ
     ([Github](https://github.com/stoplightio/prism)):
     HTTP mock server with behavior that can be specified from OpenAPI
     v2 (Swagger), OpenAPI v3 or Postman Collection files
-  - [Skyvern](https://www.skyvern.com/)
+  - [Skyvern](https://www.skyvern.com/)ᴸᴹᵂ
     ([Github](https://github.com/Skyvern-AI/Skyvern/)):
     Automated browser workflows using computer vision and LLMs;
     [article](https://blog.skyvern.com/we-open-sourced-and-ended-up-1-on-hackernews/)
 - Word processing
-  - [Manuskript](https://www.theologeek.ch/manuskript/)
+  - [Manuskript](https://www.theologeek.ch/manuskript/)ᴸᴹᵂ
     ([Github](https://github.com/olivierkes/manuskript)):
     Word processor for writers like Scrivener
-  - [Twine](https://twinery.org/)
+  - [Twine](https://twinery.org/)ᴸᴹᵂᴿ
     ([Github](https://github.com/klembot/twinejs)):
     Tool for authoring interactive, non-linear stories
 - Other
-  - [age](https://github.com/FiloSottile/age) or
-    [ccrypt](https://ccrypt.sourceforge.net/):
+  - [age](https://github.com/FiloSottile/age)ᴸᴹᵂ or
+    [ccrypt](https://ccrypt.sourceforge.net/)ᴸ:
     Command-line encryption/decryption tool; ccrypt is simpler (prompt
     for password when encrypting, use same password to decrypt); age
     supports using either identity files or generates a token to be
@@ -1273,86 +1276,86 @@ or in Mac since it is POSIX-compliant.)
     FILE.gpg -e FILE` where the encrypted file can later be decrypted
     with the recipient's private key and `gpg -d <file>.gpg`; better
     to use something like Cryptomator if not encrypting to share
-  - [Aiko](https://sindresorhus.com/aiko)
+  - [Aiko](https://sindresorhus.com/aiko)ᴹᴵ
     ([App Store](https://apps.apple.com/app/id1672085276)):
     iOS and macOS app for local audio transcription using OpenAI's
     [Whisper](https://openai.com/research/whisper) model
-  - [Al Dente](https://github.com/davidwernhart/AlDente):
+  - [Al Dente](https://github.com/davidwernhart/AlDente)ᴹ:
     macOS tool to limit battery charging (i.e., the claim is keeping
     charge percentage at or below 80% can help prolong battery life),
     however this may not be necessary if "Optimized Battery Charging"
     is sufficient for usage needs; there is also a paid Pro version
     with more features available [here](https://apphousekitchen.com/)
-  - [Amazing AI](https://sindresorhus.com/amazing-ai)
+  - [Amazing AI](https://sindresorhus.com/amazing-ai)ᴹᴵ
     ([App Store](https://apps.apple.com/app/id1660147028)):
     iOS and macOS (Apple Silicon M1/M2/... chip required) app for
     local image generation from text using the Stable Diffusion model
-  - [Anki](https://apps.ankiweb.net/)
+  - [Anki](https://apps.ankiweb.net/)ᴸᴹᵂᴬᴵ
     ([Github](https://github.com/ankitects/anki)):
     Flashcards software; cross-platform, and also available on
     [iOS](https://apps.apple.com/us/app/ankimobile-flashcards/id373493387),
     [Android](https://play.google.com/store/apps/details?id=com.ichi2.anki),
     and as a [webapp](https://ankiweb.net/)
-  - [ClamAV](https://www.clamav.net/)
+  - [ClamAV](https://www.clamav.net/)ᴸᴹᵂ
     ([Github](https://github.com/Cisco-Talos/clamav)):
     Open-source antivirus engine, with frontends available like
-    [ClamTk](https://gitlab.com/dave_m/clamtk)
-  - [diffoscope](https://diffoscope.org/)
+    [ClamTk](https://gitlab.com/dave_m/clamtk)ᴸ
+  - [diffoscope](https://diffoscope.org/)ᴸᴿ
     ([Salsa](https://salsa.debian.org/reproducible-builds/diffoscope)):
     Like `diff` but supports archives and directories in addition to
     files, and can output to formats like HTML, JSON, Markdown and
     reStructuredText in addition to text; as a pure Python package, it
     is installable via `pip` from [PyPI](https://pypi.org/)
-  - [elfcat](https://github.com/ruslashev/elfcat):
+  - [elfcat](https://github.com/ruslashev/elfcat)ᴸ:
     ELF visualizer using HTML files generated from ELF binaries
-  - [entr](https://github.com/eradman/entr) or
-    [watchdog](https://github.com/gorakhargosh/watchdog) or
-    [watchexec](https://github.com/watchexec/watchexec) or
+  - [entr](https://github.com/eradman/entr)ᴸᴹ or
+    [watchdog](https://github.com/gorakhargosh/watchdog)ᴿ or
+    [watchexec](https://github.com/watchexec/watchexec)ᴸᴹᵂ or
     [watchfiles](https://github.com/samuelcolvin/watchfiles) or
-    [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch) or
-    [Watchman](https://github.com/facebook/watchman):
+    [Watch](https://pkg.go.dev/9fans.net/go/acme/Watch)ᴿ or
+    [Watchman](https://github.com/facebook/watchman)ᴸᴹᵂ:
     Run command when files change; entr, watchexec and watchfiles are
     somewhat easier to use; Watch is Acme editor-specific; Watchman
     has a client-server architecture and is more of a per-user system
     service; watchdog is a library but has an optional tool watchmedo
     (install `watchdog[watchmedo]` via pip) similar to watchexec
-  - [FontForge](https://fontforge.org/)
+  - [FontForge](https://fontforge.org/)ᴸᴹᵂ
     ([Github](https://github.com/fontforge/fontforge)):
     Open-source cross-platform scriptable font editor
-  - [Goxel](https://goxel.xyz/)
+  - [Goxel](https://goxel.xyz/)ᴸᴹᵂ
     ([Github](https://github.com/guillaumechereau/goxel)):
     3D voxel editor
-  - [grex](https://github.com/pemistahl/grex):
+  - [grex](https://github.com/pemistahl/grex)ᴸᴹᵂ:
     Generate regex from test cases
-  - [Hammerspoon](https://www.hammerspoon.org/)
+  - [Hammerspoon](https://www.hammerspoon.org/)ᴹ
     ([Github](https://github.com/Hammerspoon/hammerspoon)):
     Use [Lua](https://www.lua.org/) for macOS scripts that can call
     system APIs, for example middle-click-move mouse to scroll
     ([link](https://superuser.com/questions/303424/can-i-enable-scrolling-with-middle-button-drag-in-os-x))
-  - [ivy](https://github.com/robpike/ivy):
+  - [ivy](https://github.com/robpike/ivy)ᴸᴹᵂ:
     APL-like calculator ([docs](https://pkg.go.dev/robpike.io/ivy)),
     install with `go install robpike.io/ivy@latest` (requires Go)
-  - [hyperfine](https://github.com/sharkdp/hyperfine):
+  - [hyperfine](https://github.com/sharkdp/hyperfine)ᴸᴹᵂ:
     Benchmark shell commands
-  - [Jiggler](http://www.sticksoftware.com/software/Jiggler.html)
+  - [Jiggler](http://www.sticksoftware.com/software/Jiggler.html)ᴹ
     ([Github](https://github.com/bhaller/Jiggler)):
     Keep the system awake, useful when running lengthy tasks, macOS
-  - [Joplin](https://joplinapp.org/)
+  - [Joplin](https://joplinapp.org/)ᴸᴹᵂᴬᴵ
     ([Github](https://github.com/laurent22/joplin/)):
     Note-taking application with sync support; cross-platform
-  - [kgt](https://github.com/katef/kgt/):
+  - [kgt](https://github.com/katef/kgt/)ᴸᴹ:
     Convert between BNF syntaxes and visualize using railroad diagrams
-  - [LCDF Typetools](https://www.lcdf.org/type/)
+  - [LCDF Typetools](https://www.lcdf.org/type/)ᴸ
     ([Github](https://github.com/kohler/lcdf-typetools)):
     Font manipulation utilities, `otfinfo` is useful for getting
     available features and code points in TTF and OTF fonts; if using
     MacPorts, `port install lcdf-typetools -texlive` installs the
     utilities without pulling in TexLive as a dependency
-  - [libfsm](https://github.com/katef/libfsm):
+  - [libfsm](https://github.com/katef/libfsm)ᴸᴹ:
     NFA, DFA (finite automata), regex and lexical analysis tools;
     [re](https://github.com/katef/libfsm/blob/main/doc/tutorial/re.md)
     can compile regex to state machine and output as a `.dot` diagram
-  - [Mathics](https://mathics.org/)
+  - [Mathics](https://mathics.org/)ᴿ
     ([Github org](https://github.com/Mathics3)):
     Open-source alternative to
     [Mathematica](https://www.wolfram.com/mathematica/)
