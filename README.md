@@ -65,13 +65,15 @@ create the directory structure within the package at the target
 destination if it does not exist and symbolically link each file in
 the package to the corresponding location in the target destination,
 creating any required directories as needed and changing `dot-XYZ`
-names to `.XYZ`. Two examples (tmux and fish) are shown as follows.
+names to `.XYZ`. Note that `stow` does not support slashes in the
+package names, so it should be run from within the `stow/` directory.
+Two examples (tmux and fish) are shown as follows.
 
 ```Shell
 $ git clone https://github.com/matheuristic/dotfiles.git
-$ cd dotfiles
-$ stow -t $HOME --dotfiles --no-folding stow/tmux
-$ stow -t $HOME --dotfiles --no-folding stow/fish
+$ cd dotfiles/stow
+$ stow -t $HOME --dotfiles --no-folding tmux
+$ stow -t $HOME --dotfiles --no-folding fish
 ...
 ```
 
