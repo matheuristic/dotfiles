@@ -2,7 +2,7 @@
 
 ;; Author: matheuristic
 ;; URL: https://github.com/matheuristic/emacs-config
-;; Generated: Sun May 12 22:53:24 2024
+;; Generated: Mon May 13 13:18:37 2024
 
 ;;; Commentary:
 
@@ -906,15 +906,18 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
     (put 'paredit-doublequote 'delete-selection t)
     (put 'paredit-newline 'delete-selection t)))
 
-;; traverse undo history as a tree, default binding is "C-x u"
-(use-package undo-tree
-  :init (setq undo-tree-visualizer-relative-timestamps nil
-              undo-tree-auto-save-history nil) ; don't autosave history
-  :config
-  ;; hide mode line lighter
-  (add-to-list 'my-mode-lighter-abbrev-alist '(undo-tree-mode . ""))
-  ;; enable globally
-  (global-undo-tree-mode))
+;; remap C-/ to `undo-only' (keep C-_ for `undo')
+;; note that C-? is by default mapped to `undo-redo'
+(global-set-key (kbd "C-/") #'undo-only)
+
+;; visualize and traverse the undo tree
+(when (version<= "28" emacs-version) ;; vundo requires Emacs 28+
+  (use-package vundo
+    :commands (vundo)
+    :bind ("C-x u" . vundo)
+    :init (setq vundo-compact-display t
+                vundo-glyph-alist vundo-unicode-symbols
+                vundo-window-max-height 5)))
 
 ;; bind over `zap-to-char' (defaults to "M-x") with `zap-up-to-char'
 (global-set-key [remap zap-to-char] #'zap-up-to-char)

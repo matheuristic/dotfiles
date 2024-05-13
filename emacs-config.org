@@ -2134,27 +2134,49 @@ Also configure it so its commands integrate appropriately with
     (put 'paredit-newline 'delete-selection t)))
 #+end_src
 
-** Traverse undo history as a tree                                     :gnu:
+** Linear undo
 
-The [[http://www.dr-qubit.org/undo-tree.html][undo-tree]] package allows the traversal of the undo history as a
-tree, which makes utilizing Emacs rather flexible undo/redo
-capabilities much easier.
+The default ~undo~ behavior of Emacs moves backwards in time and not
+edits, so if you undo and want to redo, you need to undo the undo.
 
-Default bindings are ~C-/~ to undo, ~C-S-/~ to redo, and ~C-x u~ to
-open a new window whose buffer where the undo history is presented as
-a tree and can be navigated using the regular movement keys.
+We can use ~undo-only~ and ~undo-redo~ to get behavior that is more
+consistent with the usual undo semantics for most applications.
+That is, ~undo-only~ moves backwards in edits and ~undo-redo~ moves
+forwards in edits.
 
-#+name: undo-tree
+The following overwrites the usual ~undo~ keybinding ~C-/~ to use
+~undo-only~ (note that by default, ~undo-redo~ is bound to ~C-?~
+so we need not bind it).
+
+#+name: linear-undo
 #+begin_src emacs-lisp
-;; traverse undo history as a tree, default binding is "C-x u"
-(use-package undo-tree
-  :init (setq undo-tree-visualizer-relative-timestamps nil
-              undo-tree-auto-save-history nil) ; don't autosave history
-  :config
-  ;; hide mode line lighter
-  (add-to-list 'my-mode-lighter-abbrev-alist '(undo-tree-mode . ""))
-  ;; enable globally
-  (global-undo-tree-mode))
+;; remap C-/ to `undo-only' (keep C-_ for `undo')
+;; note that C-? is by default mapped to `undo-redo'
+(global-set-key (kbd "C-/") #'undo-only)
+#+end_src
+
+** Visualize and traverse the undo tree                                 :gnu:
+
+Undo history can be visualized as tree using [[https://github.com/casouri/vundo][vundo]] which also lets
+users move in the tree to previous states. This can be useful to get
+to some branch state in the past, especially when the default undo
+behavior has been changed to a linear form (see above).
+
+The following code loads the package, and rebinds ~C-x u~ to show the
+undo tree using vundo.
+
+Requires Emacs 28+.
+
+#+name: vundo
+#+begin_src emacs-lisp
+;; visualize and traverse the undo tree
+(when (version<= "28" emacs-version) ;; vundo requires Emacs 28+
+  (use-package vundo
+    :commands (vundo)
+    :bind ("C-x u" . vundo)
+    :init (setq vundo-compact-display t
+                vundo-glyph-alist vundo-unicode-symbols
+                vundo-window-max-height 5)))
 #+end_src
 
 ** Zap up to character
@@ -6459,7 +6481,9 @@ The main configuration file.
 
 <<paredit>>
 
-<<undo-tree>>
+<<linear-undo>>
+
+<<vundo>>
 
 <<zap-up-to-char>>
 
