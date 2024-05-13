@@ -2,7 +2,7 @@
 
 ;; Author: matheuristic
 ;; URL: https://github.com/matheuristic/emacs-config
-;; Generated: Sun May 12 15:58:38 2024
+;; Generated: Sun May 12 22:53:24 2024
 
 ;;; Commentary:
 
@@ -93,7 +93,7 @@
 ;;;   in units of 1/10 point but other faces can use a float specifying
 ;;;   height relative to its underlying face if desired
 (set-face-attribute 'default nil :family "Comic Code"
-                    :height (if (eq system-type 'darwin) 130 110)
+                    :height (if (eq system-type 'darwin) 130 100)
                     :weight 'normal :width 'normal)
 (set-face-attribute 'fixed-pitch nil :family "Comic Code"
                     :height 1.0
