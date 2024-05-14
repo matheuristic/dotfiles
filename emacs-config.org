@@ -395,6 +395,24 @@ Here are some bindings while in the completions window.
 
 For more information, see the Emacs [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Completion-Commands.html][documentation]].
 
+** Emacs package archive signature check errors
+
+When the GNU ELPA package archive signature keys are too old, there
+may be errors like ~Failed to verify signature archive-contents.sig~
+or similar.
+
+In that case, the keys needs to be refreshed.
+One method is to install the ~gnu-elpa-keyring-update~ package.
+
+1. Set the variable ~package-check-signature~ to ~nil~ by doing
+   ~M-: (setq package-check-signature nil) RET~.
+2. Do ~M-x package-list-packages~ and the package listing should
+   refresh now.
+3. Install the ~gnu-elpa-keyring-update~ package.
+4. Reset the ~package-check-signature~ variable to its default by
+   doing ~M-: (setq package-check-signature 'allow-unsigned) RET~ or
+   by restarting Emacs.
+
 * Tags
 
 - ~early~: Configuration code (not boilerplate comments) that should
