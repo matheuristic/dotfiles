@@ -387,6 +387,11 @@ making them the default. Some tooling to help do that:
 - [Eva Icons](https://akveo.github.io/eva-icons/)
   ([Github](https://github.com/akveo/eva-icons))
   (Webfont)
+- Noto [Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji)
+  ([Github](https://github.com/google/fonts/tree/main/ofl/notoemoji))
+  (VF[**wght**]) and
+  [Sans Symbols 2](https://fonts.google.com/noto/specimen/Noto+Sans+Symbols+2)
+  ([Github](https://github.com/notofonts/symbols))
 - [Quivira](http://www.quivira-font.com/) (serif)
 - [Redacted](https://github.com/christiannaths/redacted-font)
   (for keeping wireframes and prototypes free of distracting text,
