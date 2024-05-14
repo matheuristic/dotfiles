@@ -57,6 +57,15 @@ Install [GNU Stow](https://www.gnu.org/software/stow/) (on a
 Debian-derived distribution use `sudo apt install stow` ; on macOS use
 `sudo port install stow` if MacPorts is installed).
 
+Make sure that the installed version of GNU Stow is at least `2.4.0`
+(earlier versions have buggy `--dotfiles` option behavior). If
+necessary, compile from source. On macOS, this means installing XCode
+CLI tools, setting the environment variable
+`PERL5LIB=/Library/Developer/CommandLineTools/usr/share/git-core/perl`
+and making sure to configure the right prefix in the configuration
+stage, e.g., `./configure --prefix=$HOME/.local` if `$HOME/.local` is
+a `$PATH` directory.
+
 Git clone the repository, and symlink each package's config files to
 the user home directory using `stow`. Each repository subdirectory in
 `stow/` (e.g.`stow/package`) corresponds to a package of the same
