@@ -2213,7 +2213,7 @@ is like ~d t <char>~ in Vim.
 
 #+name: zap-up-to-char
 #+begin_src emacs-lisp
-;; bind over `zap-to-char' (defaults to "M-x") with `zap-up-to-char'
+;; bind over `zap-to-char' (defaults to "M-z") with `zap-up-to-char'
 (global-set-key [remap zap-to-char] #'zap-up-to-char)
 #+end_src
 

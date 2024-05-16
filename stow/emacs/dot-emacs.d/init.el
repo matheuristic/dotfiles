@@ -2,7 +2,7 @@
 
 ;; Author: matheuristic
 ;; URL: https://github.com/matheuristic/emacs-config
-;; Generated: Mon May 13 13:18:37 2024
+;; Generated: Wed May 15 21:17:25 2024
 
 ;;; Commentary:
 
@@ -919,7 +919,7 @@ Uses `completing-read' for selection, which is set by Ido, Ivy, etc."
                 vundo-glyph-alist vundo-unicode-symbols
                 vundo-window-max-height 5)))
 
-;; bind over `zap-to-char' (defaults to "M-x") with `zap-up-to-char'
+;; bind over `zap-to-char' (defaults to "M-z") with `zap-up-to-char'
 (global-set-key [remap zap-to-char] #'zap-up-to-char)
 
 (global-set-key [remap just-one-space] #'cycle-spacing)
