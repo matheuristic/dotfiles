@@ -2572,12 +2572,15 @@ Usually, it is sufficient to do one of the following:
   trying to open the app and grant an exception for the app by
   clicking the Open Anyway button.
 
-If the above approaches do not work, one can downloading the
-application (usually a DMG file containing the application bundle) by
-using `curl` or `wget` in Terminal to avoid the system automatically
-setting the xattr on the application. The downloaded file will not
-have its xattr set, so it (or its extracted application bundle) should
-run without the Gatekeeper first run check.
+If the above approaches do not work, one can:
+
+- Delete the quarantine attribute on the app bundle or DMG file, via
+  `xattr -d com.apple.quarantine /path/to/file` in the terminal; or
+- Download the application, usually a DMG file with the app bundle, by
+  using `curl` or `wget` in Terminal to avoid the system automatically
+  setting extended attributes on the app (that is, the downloaded file
+  will not have its xattr set), so it or its extracted application
+  bundle should run with no Gatekeeper first run check
 
 Note that it is recommended to verify checksums or the GPG signature
 of any application downloaded, especially if this workaround is
