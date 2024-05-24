@@ -131,8 +131,8 @@ or in Mac since it is POSIX-compliant.)
     is like WSL2 for macOS, under the hood; alternative to Docker
     Desktop; note that the Docker CLI client is needed (see
     [here](https://docs.docker.com/engine/install/binaries/) for
-    binaries which can be extracted to some directory in `$PATH` like
-    `~/.local/bin`) to use Colima's Docker runtime; for more info, see
+    binaries which can be extracted a `$PATH` dir like `~/.local/bin`)
+    to use Colima's and Rancher's Docker runtime; also see
     [link](https://www.cncf.io/blog/2023/02/02/docker-on-macos-is-slow-and-how-to-fix-it/)
   - [dive](https://github.com/wagoodman/dive)ᴸᴹᵂ:
     Tool for exploring Docker image layers
@@ -351,7 +351,6 @@ or in Mac since it is POSIX-compliant.)
   - [Penpot](https://penpot.app/)ᴸ
     ([Github](https://github.com/penpot/penpot)):
     Open source design and prototyping platform like
-    [Sketch](https://www.sketch.com/)ᴹ and
     [Figma](https://www.figma.com/)
 - Ebook
   - [Alexandria](https://github.com/btpf/Alexandria)ᴸᴹᵂ or
@@ -1434,7 +1433,7 @@ or in Mac since it is POSIX-compliant.)
     Reference management software to collect, organize, cite and
     share research material
 
-## Commercial software
+## Closed-source and Commercial software
 
 - Audio and video creation and editing
   - [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve)ᴸᴹᵂ:
@@ -1452,6 +1451,11 @@ or in Mac since it is POSIX-compliant.)
 - Diagramming
   - [Monodraw](https://monodraw.helftone.com/)ᴹ:
     ASCII art editor; macOS (App Store and direct download)
+- Digital Design
+  - [Lunacy](https://icons8.com/lunacy)
+    ([App Store](https://apps.apple.com/us/app/lunacy-graphic-design-editor/id1582493835)):
+    Freeware design and prototyping app like
+    [Sketch](https://www.sketch.com/)ᴹ
 - Ebook
   - [Vellum](https://vellum.pub/)ᴹ or
     [Atticus](https://www.atticus.io/):
