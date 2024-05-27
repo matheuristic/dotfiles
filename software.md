@@ -1452,8 +1452,10 @@ or in Mac since it is POSIX-compliant.)
   - [Monodraw](https://monodraw.helftone.com/)ᴹ:
     ASCII art editor; macOS (App Store and direct download)
 - Digital Design
-  - [Lunacy](https://icons8.com/lunacy)
-    ([App Store](https://apps.apple.com/us/app/lunacy-graphic-design-editor/id1582493835)):
+  - [Lunacy](https://icons8.com/lunacy)ᴸᴹᵂ
+    ([Snap Store](https://snapcraft.io/lunacy),
+    [App Store](https://apps.apple.com/us/app/lunacy-graphic-design-editor/id1582493835),
+    [Microsoft Store](https://apps.microsoft.com/detail/9pnlmkkpcljj)):
     Freeware design and prototyping app like
     [Sketch](https://www.sketch.com/)ᴹ
 - Ebook
