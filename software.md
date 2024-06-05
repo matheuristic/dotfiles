@@ -1448,6 +1448,10 @@ or in Mac since it is POSIX-compliant.)
   - [DbVisualizer](https://www.dbvis.com/)ᴸᴹᵂ:
     Cross-database SQL client with data visualization capabilities;
     free version available with limited functionality
+  - [qStudio](https://www.timestored.com/qstudio/)ᴸᴹᵂᴿ:
+    Java-based cross-database SQL client, notable for supporting kdb+;
+    register on product website for a free license for use with all
+    databases except kdb+, which requires a commercial license
 - Diagramming
   - [Monodraw](https://monodraw.helftone.com/)ᴹ:
     ASCII art editor; macOS (App Store and direct download)
