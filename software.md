@@ -1222,7 +1222,7 @@ or in Mac since it is POSIX-compliant.)
   - [YT-DLP](https://github.com/yt-dlp/yt-dlp)ᴸᴹᵂ:
     Fork of [youtube-dl](https://youtube-dl.org/), example usage
     is `yt-dlp --list-formats URL` (change `URL` to video's URL)
-    to list formats and `yt-dlp 123 URL` to download just format
+    to list formats and `yt-dlp -f 123 URL` to download just format
     `123` from the listed formats (usually one with combined video
     and audio) or `yt-dlp -f 123+456` to download formats `123` and
     `456` followed by merging them (usually one video and one audio)
