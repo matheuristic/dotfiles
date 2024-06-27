@@ -990,6 +990,9 @@ or in Mac since it is POSIX-compliant.)
     (fork of [xsv](https://github.com/BurntSushi/xsv)ᴸᴹᵂ):
     Command-line tool for working with CSV files; Miller also supports
     TSV and tabular JSON; Miller is more flexible, qsv easier to use
+  - [qq](https://github.com/JFryy/qq)ᴸᴹ:
+    Config format transcoder with jq-like query syntax, supporting
+    JSON, YAML, TOML, XML, INI, HCL, TF, etc
   - [QXmlEdit](http://qxmledit.org/)ᴸᴹᵂ
     ([Github](https://github.com/lbellonda/qxmledit)):
     XML editor
