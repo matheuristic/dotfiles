@@ -914,6 +914,9 @@ or in Mac since it is POSIX-compliant.)
     available [here](https://github.com/cmatsuoka/figlet-fonts)
   - [hexyl](https://github.com/sharkdp/hexyl)ᴸᴹᵂ:
     Command-line hex viewer
+  - [ImHex](https://imhex.werwolv.net/)ᴸᴹᵂ
+    ([Github](https://github.com/WerWolv/ImHex)):
+    GUI hex editor
   - [LanguageTool](https://languagetool.org/)ᴿ
     ([Github](https://github.com/languagetool-org/languagetool)):
     Style and grammar checker; standalone Java version downloadable
