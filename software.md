@@ -301,6 +301,9 @@ or in Mac since it is POSIX-compliant.)
     open-source; an alternative is
     [Excalidraw](https://excalidraw.com/)ᴿ
     ([Github](https://github.com/excalidraw/excalidraw))
+  - [Freeplane](https://docs.freeplane.org/)ᴸᴹᵂᴿ
+    ([Github](https://github.com/freeplane/freeplane)):
+    Java GUI mind mapping application
   - [GIMP](https://www.gimp.org/)ᴸᴹᵂ
     ([GNOME Gitlab](https://gitlab.gnome.org/GNOME/gimp)) or
     [Krita](https://krita.org/en/)ᴸᴹᵂ
@@ -347,6 +350,9 @@ or in Mac since it is POSIX-compliant.)
     [Webapp](https://www.umletino.com/), VSCode
     [plugin](https://marketplace.visualstudio.com/items?itemName=TheUMLetTeam.umlet)):
     GUI tool for drawing UML diagrams
+  - [Treesheets](https://strlen.com/treesheets/)ᴸᴹᵂ
+    ([Github](https://github.com/aardappel/treesheets)):
+    "Hierarchical spreadsheet" that can be used for mind-maps
 - Digital design
   - [Penpot](https://penpot.app/)ᴸ
     ([Github](https://github.com/penpot/penpot)):
