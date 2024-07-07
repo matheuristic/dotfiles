@@ -923,10 +923,15 @@ or in Mac since it is POSIX-compliant.)
   - [ImHex](https://imhex.werwolv.net/)ᴸᴹᵂ
     ([Github](https://github.com/WerWolv/ImHex)) or
     [HexFiend](https://hexfiend.com/)ᴹ
-    ([Github](https://github.com/HexFiend/HexFiend)):
-    GUI hex editor; alternatively, use `xxd` to transform binary to
-    hex and `xxd -r` to do the reverse (in Vim, `:%!xxd` to go from
-    binary to hex and `:%!xxd -r` to go back from hex to binary)
+    ([Github](https://github.com/HexFiend/HexFiend)) or
+    [bvi](https://bvi.sourceforge.net/)ᴸ
+    ([Github](https://github.com/buergmann/bvi)) or
+    [hyx](https://yx7.cc/code/):
+    Hex editor; alternatively, use `:%!xxd` and `:%!xxd -r` in Vim to
+    go from binary to hex and back again
+    ([link](https://vim.fandom.com/wiki/Improved_hex_editing)), or
+    `M-x hexl-find-file` or `M-x hexl-mode` in Emacs
+    ([link](https://www.gnu.org/software/emacs/manual/html_node/emacs/Editing-Binary-Files.html))
   - [LanguageTool](https://languagetool.org/)ᴿ
     ([Github](https://github.com/languagetool-org/languagetool)):
     Style and grammar checker; standalone Java version downloadable
