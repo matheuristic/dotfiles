@@ -921,8 +921,12 @@ or in Mac since it is POSIX-compliant.)
   - [hexyl](https://github.com/sharkdp/hexyl)ᴸᴹᵂ:
     Command-line hex viewer
   - [ImHex](https://imhex.werwolv.net/)ᴸᴹᵂ
-    ([Github](https://github.com/WerWolv/ImHex)):
-    GUI hex editor
+    ([Github](https://github.com/WerWolv/ImHex)) or
+    [HexFiend](https://hexfiend.com/)ᴹ
+    ([Github](https://github.com/HexFiend/HexFiend)):
+    GUI hex editor; alternatively, use `xxd` to transform binary to
+    hex and `xxd -r` to do the reverse (in Vim, `:%!xxd` to go from
+    binary to hex and `:%!xxd -r` to go back from hex to binary)
   - [LanguageTool](https://languagetool.org/)ᴿ
     ([Github](https://github.com/languagetool-org/languagetool)):
     Style and grammar checker; standalone Java version downloadable
