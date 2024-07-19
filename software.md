@@ -1245,8 +1245,8 @@ or in Mac since it is POSIX-compliant.)
     is `yt-dlp --list-formats URL` (change `URL` to video's URL)
     to list formats and `yt-dlp -f 123 URL` to download just format
     `123` from the listed formats (usually one with combined video
-    and audio) or `yt-dlp -f 123+456` to download formats `123` and
-    `456` followed by merging them (usually one video and one audio)
+    and audio) or `yt-dlp -f 123+456 URL` to download formats `123`
+    and `456` then merge them (usually one video and one audio)
 - Web development
   - [doge](https://github.com/Dj-Codeman/doge)ᴸᴹᵂ:
     Alternative to `dig`, fork of [dog](https://github.com/ogham/dog)
@@ -2218,7 +2218,8 @@ Common workflows (adapted from
   $ spack -e myenv install
   ```
 
-- To update packages in an environment:
+- To update packages in an environment, typically after a `git pull`
+  (or fetch and merge) of the Spack repository:
 
   ```console
   $ spack env activate myenv
