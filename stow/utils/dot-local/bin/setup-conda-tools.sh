@@ -93,7 +93,7 @@ install_tools () {
 			cat >"$DEST" <<EOF
 #!/bin/sh
 
-"$CONDA_CMD" run -n $ENVNAME $PROGNAME \$@
+"$CONDA_CMD" run -n $ENVNAME $PROGNAME "\$@"
 EOF
 		elif [ "$CONDA_CMD" == "conda" -o "$CONDA_CMD" == "mamba" ]; then
 			# Need to explicitly activate env when using
@@ -113,7 +113,7 @@ EOF
 
 . "$CONDA_SH/../etc/profile.d/conda.sh"
 conda activate $ENVNAME
-"$PROGNAME" \$@
+"$PROGNAME" "\$@"
 EOF
 		else
 			echo "Unsupported command $CONDA_CMD" 1>&2

@@ -2618,6 +2618,32 @@ Note that it is recommended to verify checksums or the GPG signature
 of any application downloaded, especially if this workaround is
 needed.
 
+### Extracting contents of macOS package (`.pkg`) installer files
+
+Sometimes, it can be useful to pull out files from a `.pkg` macOS
+installer. One use case is to extract out an application bundle from
+an installer directly because the installer requires admin privileges
+but the user does not have or does not want to give such privileges.
+Another use case is to modify specific files in the installer as
+desired, like the install path or some other configuration setting.
+
+Extract `.pkg` installer files to a new (non-existing) target dir:
+
+```console
+$ pkgutil --expand-full /path/to/file.pkg /path/to/new/dir
+```
+
+Compress a folder with appropriate structure (e.g., a `.pkg` expanded
+followed by modifying some files) into a `.pkg` file:
+
+```console
+$ pkgutil --flatten /path/to/folder /path/to/new/file.pkg
+```
+
+References:
+- [Github gist](https://gist.github.com/ugultopu/1adf8e08acb87be649d69419cf7aca3c)
+- [Stack Overflow](https://stackoverflow.com/questions/41166805/how-to-extract-contents-from-payload-file-in-a-apple-macos-update-package)
+
 ## GnuPG
 
 ### Creating a GPG key
