@@ -17,6 +17,8 @@ or in Mac since it is POSIX-compliant.)
     [ReaPlugs](https://www.reaper.fm/reaplugs/) VST plugins; Ardour
     seems more suited to audio recording and engineering, while Zrythm
     seems more suited to MIDI electronic music production
+  - [AtomicParsley](https://github.com/wez/atomicparsley)ᴸᴹᵂ:
+    MPEG-4 (e.g., `.mp4`, `.m4a`) metadata editor
   - [Blackhole](https://existential.audio/blackhole/)ᴹ
     ([Github](https://github.com/ExistentialAudio/BlackHole)):
     Route audio between apps (e.g., to record internal audio)
@@ -27,7 +29,7 @@ or in Mac since it is POSIX-compliant.)
     ([Github](https://github.com/nicfit/eyeD3)) or
     [puddletag](https://docs.puddletag.net/)ᴿ
     ([Github](https://github.com/puddletag/puddletag)):
-    Command-line (eyeD3) or GUI (puddletag) audio tag editor
+    Command-line (eyeD3; mp3-only) or GUI (puddletag) audio tag editor
   - [Handbrake](https://handbrake.fr/)ᴸᴹᵂ
     ([Github](https://github.com/HandBrake/HandBrake)):
     Video encoder
