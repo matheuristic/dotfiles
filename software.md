@@ -23,6 +23,11 @@ or in Mac since it is POSIX-compliant.)
   - [Blender](https://www.blender.org/)ᴸᴹᵂ
     ([Github](https://github.com/blender/blender)):
     3D creation suite covering the full 3D animation pipeline
+  - [eyeD3](https://eyed3.readthedocs.io/en/latest/)
+    ([Github](https://github.com/nicfit/eyeD3)) or
+    [puddletag](https://docs.puddletag.net/)
+    ([Github](https://github.com/puddletag/puddletag)):
+    Command-line (eyeD3) or GUI (puddletag) audio tag editor
   - [Handbrake](https://handbrake.fr/)ᴸᴹᵂ
     ([Github](https://github.com/HandBrake/HandBrake)):
     Video encoder
