@@ -79,6 +79,9 @@ or in Mac since it is POSIX-compliant.)
     [many](https://obsproject.com/forum/resources/closed-captioning-via-google-speech-recognition.833/)
     [different](https://sammisolutions.itch.io/sammi)
     [plugins](https://github.com/Xaymar/obs-StreamFX/wiki)
+  - [Quod Libet](https://quodlibet.readthedocs.io/)ᴸᴹᵂ
+    ([Github](https://github.com/quodlibet/quodlibet)):
+    Audio player and library manager
   - [VLC](https://www.videolan.org/vlc/)ᴸᴹᵂᴬᴵ
     ([Git](https://code.videolan.org/videolan/vlc)):
     Media player
@@ -1460,6 +1463,9 @@ or in Mac since it is POSIX-compliant.)
   - [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve)ᴸᴹᵂ:
     Freeware non-linear video editor, has paid
     [version](https://www.blackmagicdesign.com/products/davinciresolve/studio)ᴸᴹᵂ
+- Audio and video playback and streaming
+  - [foobar2000](https://www.foobar2000.org/)ᴹᵂᴬᴵ:
+    Freeware audio player
 - Containerization
   - [Orbstack](https://orbstack.dev/)ᴹ:
     macOS Docker runtime and Linux virtual machine management,
