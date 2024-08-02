@@ -414,6 +414,9 @@ or in Mac since it is POSIX-compliant.)
     ([OWA](https://addons.thunderbird.net/en-US/thunderbird/addon/owl-for-exchange/),
     [EWS](https://addons.thunderbird.net/en-US/thunderbird/addon/exquilla-exchange-web-services/)
 - File management
+  - [7-Zip](https://www.7-zip.org/)ᴸᴹᵂ
+    ([SourceForge](https://sourceforge.net/projects/sevenzip/)):
+    Command-line file archiver that supports many formats
   - [Cryptomator](https://cryptomator.org/)ᴸᴹᵂ
     ([Github](https://github.com/cryptomator)):
     Provides client-side encryption of local or cloud data (relevant
