@@ -1398,6 +1398,10 @@ or in Mac since it is POSIX-compliant.)
     Google Suite; Nextcloud Files can be used as a a WebDAV service;
     has desktopᴸᴹᵂ and mobileᴬᴵ clients
     ([link](https://nextcloud.com/install/))
+  - [Ollama](https://ollama.com/)ᴸᴹᵂ
+    ([Github](https://github.com/ollama/ollama)):
+    Serve LLMs locally; on the Mac, the app bundle requires admin
+    privileges but the standalone binary does not
   - [OmegaT](https://omegat.org/)ᴸᴹᵂᴿ
     ([Github](https://github.com/omegat-org/omegat)):
     Translation memory tool
