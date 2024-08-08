@@ -27,9 +27,15 @@ or in Mac since it is POSIX-compliant.)
     3D creation suite covering the full 3D animation pipeline
   - [eyeD3](https://eyed3.readthedocs.io/en/latest/)ᴿ
     ([Github](https://github.com/nicfit/eyeD3)) or
+    [kid3](https://kid3.kde.org/)
+    ([KDE Projects](https://invent.kde.org/multimedia/kid3/)) or
+    [One Tagger](https://onetagger.github.io/)
+    ([Github](https://github.com/Marekkon5/onetagger)) or
+    [opustags](https://github.com/fmang/opustags) or
     [puddletag](https://docs.puddletag.net/)ᴿ
     ([Github](https://github.com/puddletag/puddletag)):
-    Command-line (eyeD3; mp3-only) or GUI (puddletag) audio tag editor
+    Command-line (eyeD3 is mp3-only, opustags is Ogg Opus only) or GUI
+    (kid3, One Tagger, puddletag) audio tag editor
   - [Handbrake](https://handbrake.fr/)ᴸᴹᵂ
     ([Github](https://github.com/HandBrake/HandBrake)):
     Video encoder
@@ -75,6 +81,22 @@ or in Mac since it is POSIX-compliant.)
   - [xACT](http://xact.scottcbrown.org/)ᴹ:
     Audio format converter
 - Audio and video playback and streaming
+  - [Ampache](https://ampache.org/)
+    ([Github](https://github.com/ampache/ampache)) or
+    [beets](https://beets.io/)
+    ([Github](https://github.com/beetbox/beets)) or
+    [LMS](https://github.com/epoupon/lms) or
+    [Navidrone](https://www.navidrome.org/)
+    ([Github](https://github.com/navidrome/navidrome/)):
+    Streaming music server; all support the
+    [Subsonic](https://www.subsonic.org/) API (beets via
+    [Beetstream](https://github.com/BinaryBrain/Beetstream), built-in
+    for others); Nextcloud (see Other) also has an optional Music app
+    that supports the Ampache and Subsonic API; also see
+    [here](https://github.com/basings/selfhosted-music-overview);
+    [many](https://github.com/ampache/ampache/wiki/client-api)
+    [clients](https://github.com/owncloud/music/wiki/Subsonic)
+    [available](https://name.subsonic.org/pages/apps.jsp)
   - [NDI Tools](https://www.ndi.tv/tools/)ᴹᵂ:
     Software for low-latency broadcasting over LAN by taking any video
     source, like a webcam, video capture card or desktop, and making
@@ -1397,7 +1419,12 @@ or in Mac since it is POSIX-compliant.)
     Self-host collaboration platform offering similar functionality to
     Google Suite; Nextcloud Files can be used as a a WebDAV service;
     has desktopᴸᴹᵂ and mobileᴬᴵ clients
-    ([link](https://nextcloud.com/install/))
+    ([link](https://nextcloud.com/install/)); supports apps like
+    [Music](https://apps.nextcloud.com/apps/music)
+    ([Github](https://github.com/owncloud/music)) which adds a music
+    player and Ampache/Subsonic music server (iOS clients include
+    [Amperfy](https://github.com/BLeeEZ/amperfy) and
+    [play:Sub](https://michaelsapps.dk/playsubapp/))
   - [Ollama](https://ollama.com/)ᴸᴹᵂ
     ([Github](https://github.com/ollama/ollama)):
     Serve LLMs locally; on the Mac, the app bundle requires admin
@@ -1477,6 +1504,10 @@ or in Mac since it is POSIX-compliant.)
   - [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve)ᴸᴹᵂ:
     Freeware non-linear video editor, has paid
     [version](https://www.blackmagicdesign.com/products/davinciresolve/studio)ᴸᴹᵂ
+  - [Mp3tag](https://www.mp3tag.de/)ᵂ and
+    [Mp3tag for Mac](https://mp3tag.app/)ᴹ:
+    Edit metadata for many different audio file formats;
+    Mp3tag for Windows is freeware and Mp3tag for Mac is paid
 - Audio and video playback and streaming
   - [foobar2000](https://www.foobar2000.org/)ᴹᵂᴬᴵ:
     Freeware audio player
