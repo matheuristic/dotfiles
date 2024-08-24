@@ -78,13 +78,19 @@ or in Mac since it is POSIX-compliant.)
     [MDX-NET](https://github.com/kuielab/mdx-net)) to isolate
     vocals from audio tracks; a donation-supported web interface
     [MVSEP](https://mvsep.com/) is also available
-  - [xACT](http://xact.scottcbrown.org/)ᴹ:
-    Audio format converter
+  - [unflac](https://sr.ht/~ft/unflac/) or
+    [Flacon](https://flacon.github.io/)
+  - [xACT](http://xact.scottcbrown.org/)ᴹ or
+    [XLD](https://tmkk.undo.jp/xld/index_e.html)ᴹ
+    ([Sourceforge](https://sourceforge.net/projects/xld/)) or
+    [fre:ac](https://www.freac.org/)ᴸᴹᵂ:
+    Audio format converter; xACT and XLD are GUI, fre:ac is CLI-only
 - Audio and video playback and streaming
   - [Ampache](https://ampache.org/)
     ([Github](https://github.com/ampache/ampache)) or
     [beets](https://beets.io/)
     ([Github](https://github.com/beetbox/beets)) or
+    [Gonic](https://github.com/sentriz/gonic) or
     [LMS](https://github.com/epoupon/lms) or
     [Navidrone](https://www.navidrome.org/)
     ([Github](https://github.com/navidrome/navidrome/)):
@@ -92,11 +98,26 @@ or in Mac since it is POSIX-compliant.)
     [Subsonic](https://www.subsonic.org/) API (beets via
     [Beetstream](https://github.com/BinaryBrain/Beetstream), built-in
     for others); Nextcloud (see Other) also has an optional Music app
-    that supports the Ampache and Subsonic API; also see
-    [here](https://github.com/basings/selfhosted-music-overview);
+    that supports the Ampache and Subsonic API;
     [many](https://github.com/ampache/ampache/wiki/client-api)
     [clients](https://github.com/owncloud/music/wiki/Subsonic)
-    [available](https://name.subsonic.org/pages/apps.jsp)
+    [available](https://name.subsonic.org/pages/apps.jsp), like
+    [substreamer](https://substreamerapp.com/) (Android, iOS),
+    [Amperfy](https://github.com/BLeeEZ/amperfy) (iOS),
+    [play:Sub](https://michaelsapps.dk/playsubapp/) (iOS, paid),
+    [Ultrasonic](https://gitlab.com/ultrasonic/ultrasonic) (Android),
+    [tempo](https://github.com/CappielloAntonio/tempo) (Android),
+    [Symfonium](https://symfonium.app/) (Android, paid),
+    [Submariner](https://github.com/SubmarinerApp/Submariner) (macOS),
+    [Supersonic](https://github.com/dweymouth/supersonic) (desktops),
+    etc; for other self-hosted music servers and clients, see
+    [here](https://github.com/basings/selfhosted-music-overview)
+  - [Jellyfin](https://jellyfin.org/)ᴸᴹᵂ
+    ([Github](https://github.com/jellyfin/jellyfin)):
+    Media server alternative to [Plex](https://www.plex.tv/) and
+    [Emby](https://emby.media/), with clients that span across
+    [many](https://jellyfin.org/downloads)
+    [platforms](https://github.com/awesome-jellyfin/awesome-jellyfin/)
   - [NDI Tools](https://www.ndi.tv/tools/)ᴹᵂ:
     Software for low-latency broadcasting over LAN by taking any video
     source, like a webcam, video capture card or desktop, and making
@@ -364,6 +385,8 @@ or in Mac since it is POSIX-compliant.)
     ([Fossil](https://pikchr.org/home/dir?ci=trunk)) or
     [PlantUML](https://plantuml.com/)ᴿ
     ([Github](https://github.com/plantuml/plantuml)) or
+    [LikeC4](https://likec4.dev/)
+    ([Github](https://github.com/likec4/likec4)) or
     [D2](https://d2lang.com/)ᴸᴹᵂ
     ([Github](https://github.com/terrastruct/d2),
     [Webapp](https://play.d2lang.com/)):
@@ -1504,6 +1527,11 @@ or in Mac since it is POSIX-compliant.)
   - [DaVinci Resolve](https://www.blackmagicdesign.com/products/davinciresolve)ᴸᴹᵂ:
     Freeware non-linear video editor, has paid
     [version](https://www.blackmagicdesign.com/products/davinciresolve/studio)ᴸᴹᵂ
+  - [EZ CD Audio Converter](https://www.poikosoft.com/music-converter)ᵂ:
+    Freeware audio format converter; alternatively, foobar2000
+    (specifically the Windows version) comes with a
+    [converter](https://wiki.hydrogenaud.io/index.php?title=Foobar2000:Converter)
+    ([supported formats](https://www.foobar2000.org/encoderpack))
   - [Mp3tag](https://www.mp3tag.de/)ᵂ and
     [Mp3tag for Mac](https://mp3tag.app/)ᴹ:
     Edit metadata for many different audio file formats;
