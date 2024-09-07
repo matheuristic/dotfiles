@@ -1233,7 +1233,8 @@ or in Mac since it is POSIX-compliant.)
     functionality of tmux and screen, there is
     [dtach](https://github.com/crigler/dtach)ᴸ,
     [abduco](https://github.com/martanne/abduco)ᴸ or
-    [diss](https://github.com/yazgoo/diss/)ᴸ
+    [diss](https://github.com/yazgoo/diss/)ᴸ or
+    [shpool](https://github.com/shell-pool/shpool)ᴸ
   - [ttyplot](https://github.com/tenox7/ttyplot)ᴸ:
     Real-time plotting tool in the terminal using stdin as data input
 - Virtualization
