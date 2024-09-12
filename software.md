@@ -1508,6 +1508,12 @@ or in Mac since it is POSIX-compliant.)
     ([SourceForge](https://sourceforge.net/projects/sweethome3d/)):
     Open-source interior design application, also available as a
     [webapp](https://www.sweethome3d.com/SweetHome3DOnlineManager.jsp)
+  - [Task Spooler](https://viric.name/soft/ts/)ᴸ or
+    [nq](https://github.com/leahneukirchen/nq)ᴸ or
+    [Pueue](https://github.com/Nukesor/pueue)ᴸᴹᵂ:
+    Lightweight command-line utility for queueing jobs; Task Spooler
+    and nq only support running jobs sequentially, while Pueue can
+    also run jobs in parallel
   - [uutils](https://uutils.github.io/)
     ([Github org](https://github.com/uutils)):
     Re-implementation of standard command-line tools in Rust
