@@ -488,6 +488,11 @@ or in Mac since it is POSIX-compliant.)
     ([Github](https://github.com/osxfuse/osxfuse), uses a kext), with
     the latter being more mature but requiring third-party kernel
     extensions be enabled
+  - [Immich](https://immich.app/)ᴸ:
+    Self-hosted photo library (like Google Photos), server can be run
+    [dockerized](https://immich.app/docs/install/docker-compose), with
+    web (access at `http://<machine-ip-address>:2283`) and
+    [mobile](https://immich.app/docs/features/mobile-app/)ᴬᴵ clients
   - [Keka](https://www.keka.io/en/)ᴹᴵ
     ([Github](https://github.com/aonez/Keka)) or
     [PeaZip](https://peazip.github.io/)ᴸᴹᵂ
