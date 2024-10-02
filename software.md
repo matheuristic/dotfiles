@@ -1583,6 +1583,9 @@ or in Mac since it is POSIX-compliant.)
 - File management
   - [DevonThink Pro](https://www.devontechnologies.com/apps/devonthink)ᴹ:
     Document management and search solution; macOS
+  - [iMazing](https://imazing.com/)ᴹᵂ:
+    Transfer files and apps between iOS and Mac/Windows devices,
+    useful for backing up apps that are no longer in the App Store
   - [Mountain Duck](https://mountainduck.io/)ᴹᵂ:
     Like `rclone mount` but with a nicer user interface and its vaults
     are interoperable with Cryptomator vaults
