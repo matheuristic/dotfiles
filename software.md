@@ -808,6 +808,11 @@ or in Mac since it is POSIX-compliant.)
     Easier-to-use [Make](https://www.gnu.org/software/make/)
     alternative
 - Remote login and desktop
+  - [autossh](https://www.harding.motd.ca/autossh/)ᴸ
+    ([Github](https://github.com/Autossh/autossh)):
+    Auto-restart SSH sessions and tunnels
+  - [boring](https://github.com/alebeck/boring)ᴸᴹ:
+    SSH tunnel manager (also supports auto-reconnect and keep-alive)
   - [cpu](https://github.com/u-root/cpu)ᴸ:
     Implementation of Plan 9 [cpu](https://man.cat-v.org/plan_9/1/cpu)
     command in Go, modified to work over SSH; useful for logging into
@@ -1146,6 +1151,10 @@ or in Mac since it is POSIX-compliant.)
     ([Github](https://github.com/zed-industries/zed)):
     Multithreaded GPU-accelerated collaborative code editor
 - User experience and interface (graphical)
+  - [AltTab](https://alt-tab-macos.netlify.app/)ᴹ
+    ([Github](https://github.com/lwouis/alt-tab-macos)):
+    Alt-Tab to cycle through all windows like on Windows,
+    compared to Cmd-Tab that cycles through applications
   - [Amethyst](https://ianyh.com/amethyst/)ᴹ
     ([Github](https://github.com/ianyh/Amethyst)) or
     [yabai](https://github.com/koekeishiya/yabai)ᴹ:
@@ -1326,7 +1335,8 @@ or in Mac since it is POSIX-compliant.)
     ([Github](https://github.com/Orange-OpenSource/hurl)):
     Command-line tool for running HTTP requests defined in a text file
   - [frp](https://github.com/fatedier/frp)ᴸᴹᵂ:
-    Reverse proxy, like [ngrok](https://ngrok.com/)
+    Reverse proxy, like [ngrok](https://ngrok.com/); for more options,
+    see [here](https://github.com/anderspitman/awesome-tunneling)
   - [httpie](https://httpie.io/)ᴿ
     ([Github](https://github.com/httpie/cli)) or
     [xh](https://github.com/ducaale/xh)ᴸᴹᵂ:
@@ -1450,6 +1460,11 @@ or in Mac since it is POSIX-compliant.)
     ([Github org](https://github.com/Mathics3)):
     Open-source alternative to
     [Mathematica](https://www.wolfram.com/mathematica/)
+  - [MonitorControl](https://monitorcontrol.app/)ᴹ
+    ([Github](https://github.com/MonitorControl/MonitorControl)):
+    Monitor controller, supports syncing brightness; paid alternatives
+    (with fancier UI or more features) include Lunar (see below) and
+    [BetterDisplay](https://github.com/waydabber/BetterDisplay)
   - [Nextcloud](https://nextcloud.com/)ᴸ
     ([Github org](https://github.com/nextcloud)):
     Self-host collaboration platform offering similar functionality to
@@ -1551,6 +1566,9 @@ or in Mac since it is POSIX-compliant.)
     (specifically the Windows version) comes with a
     [converter](https://wiki.hydrogenaud.io/index.php?title=Foobar2000:Converter)
     ([supported formats](https://www.foobar2000.org/encoderpack))
+  - [Gifski](https://sindresorhus.com/gifski)ᴹ
+    ([App Store](https://apps.apple.com/us/app/gifski/id1351639930)):
+    Convert videos to GIFs
   - [Mp3tag](https://www.mp3tag.de/)ᵂ and
     [Mp3tag for Mac](https://mp3tag.app/)ᴹ:
     Edit metadata for many different audio file formats;
@@ -1637,6 +1655,9 @@ or in Mac since it is POSIX-compliant.)
     [OpenIn](https://loshadki.app/openin4/)ᴹ:
     Open different links in different browsers or apps in macOS; free
     alternatives include Velja, finicky and Browserosaurus (see above)
+  - [Hyperduck](https://sindresorhus.com/hyperduck)ᴹᴵ
+    ([App Store](https://apps.apple.com/us/app/hyperduck/id6444667067)):
+    Send links from iOS to macOS devices and open them; free
   - [shottr](https://shottr.cc/)ᴹ:
     Screenshot app for macOS, free for non-commercial use; note that
     macOS has built-in screenshot taking via `Cmd-Shift-3` (capture
@@ -1655,6 +1676,12 @@ or in Mac since it is POSIX-compliant.)
     Word processor for authoring books and screenplays
 - Virtualization
   - Orbstack (see Containerization)
+- Other
+  - [Lunar](https://lunar.fyi)ᴹ
+    ([Github](https://github.com/alin23/Lunar)):
+    Monitor controller, with support for sync-ing brightness; free
+    version has limited functionality; alternative is
+    MonitorControl (see above)
 
 ## Directory structure
 
