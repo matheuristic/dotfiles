@@ -325,6 +325,15 @@ or in Mac since it is POSIX-compliant.)
   - [Scribus](https://www.scribus.net/)ᴸᴹᵂ
     ([Github mirror](https://github.com/scribusproject/scribus)):
     Alternative to commercial Adobe InDesign; good for book layouts
+- Device management
+  - [CameraController](https://github.com/Itaybre/CameraController)ᴹ:
+    Configure and control USB cameras, good alternative for avoiding
+    installation of device manufacturer's software
+  - [MonitorControl](https://monitorcontrol.app/)ᴹ
+    ([Github](https://github.com/MonitorControl/MonitorControl)):
+    Monitor controller, supports syncing brightness; paid alternatives
+    (with fancier UI or more features) include Lunar (see below) and
+    [BetterDisplay](https://github.com/waydabber/BetterDisplay)
 - Diagramming and image editing
   - [ASCIIFlow](https://asciiflow.com/)ᴿ
     ([Github](https://github.com/lewish/asciiflow)):
@@ -1460,11 +1469,6 @@ or in Mac since it is POSIX-compliant.)
     ([Github org](https://github.com/Mathics3)):
     Open-source alternative to
     [Mathematica](https://www.wolfram.com/mathematica/)
-  - [MonitorControl](https://monitorcontrol.app/)ᴹ
-    ([Github](https://github.com/MonitorControl/MonitorControl)):
-    Monitor controller, supports syncing brightness; paid alternatives
-    (with fancier UI or more features) include Lunar (see below) and
-    [BetterDisplay](https://github.com/waydabber/BetterDisplay)
   - [Nextcloud](https://nextcloud.com/)ᴸ
     ([Github org](https://github.com/nextcloud)):
     Self-host collaboration platform offering similar functionality to
@@ -1589,6 +1593,12 @@ or in Mac since it is POSIX-compliant.)
     Java-based cross-database SQL client, notable for supporting kdb+;
     register on product website for a free license for use with all
     databases except kdb+, which requires a commercial license
+- Device management
+  - [Lunar](https://lunar.fyi)ᴹ
+    ([Github](https://github.com/alin23/Lunar)):
+    Monitor controller, with support for sync-ing brightness; free
+    version has limited functionality; alternative is
+    MonitorControl (see above)
 - Diagramming
   - [Monodraw](https://monodraw.helftone.com/)ᴹ:
     ASCII art editor; macOS (App Store and direct download)
@@ -1676,12 +1686,6 @@ or in Mac since it is POSIX-compliant.)
     Word processor for authoring books and screenplays
 - Virtualization
   - Orbstack (see Containerization)
-- Other
-  - [Lunar](https://lunar.fyi)ᴹ
-    ([Github](https://github.com/alin23/Lunar)):
-    Monitor controller, with support for sync-ing brightness; free
-    version has limited functionality; alternative is
-    MonitorControl (see above)
 
 ## Directory structure
 
