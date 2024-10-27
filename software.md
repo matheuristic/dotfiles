@@ -72,6 +72,11 @@ or in Mac since it is POSIX-compliant.)
   - [Tooll 3](https://tooll.io/)ᵂ
     ([Github](https://github.com/tooll3/t3)):
     Tool for creating real-time motion graphics
+  - [Subtitle Edit](https://www.nikse.dk/subtitleedit)
+    ([Github](https://github.com/SubtitleEdit/subtitleedit))ᵂ or
+    [Tero Subtitler](https://www.uruworks.net/index.html)ᴸᴹᵂ
+    ([Github](https://github.com/URUWorks/TeroSubtitler)):
+    Create and edit subtitles
   - [Ultimate Vocal Remover GUI](https://github.com/Anjok07/ultimatevocalremovergui)ᴸᴹᵂ:
     Tool for using open-source deep learning models (e.g.,
     [Demucs](https://github.com/facebookresearch/demucs) and
@@ -133,7 +138,9 @@ or in Mac since it is POSIX-compliant.)
     ([Github](https://github.com/quodlibet/quodlibet)):
     Audio player and library manager
   - [VLC](https://www.videolan.org/vlc/)ᴸᴹᵂᴬᴵ
-    ([Git](https://code.videolan.org/videolan/vlc)):
+    ([Git](https://code.videolan.org/videolan/vlc)) or
+    [IINA](https://iina.io/)ᴹ
+    ([Github](https://github.com/iina/iina)):
     Media player
 - Backup
   - [BorgBackup](https://www.borgbackup.org/)ᴸᴹ
