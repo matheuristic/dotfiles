@@ -3242,6 +3242,14 @@ Use custom ~ereader~ theme in ~lisp/ereader-theme.el~.
 
 *Note*: Emacs 27+ added a new face attribute ~:extend~ to control extension of the face from the EOL until the edge of the window. By default it is only turned on for the ~hl-line~ and ~region~ faces. When modifying the custom theme, make sure to set this attribute to ~t~ for the faces that need to be extended.
 
+** Disable global font-locking (syntax highlight) by default          :early:
+
+#+name: no-default-font-lock
+#+begin_src emacs-lisp
+;; disable font-locking by default
+(global-font-lock-mode -1)
+#+end_src
+
 * Display face fonts                                                  :early:
 
 Set the fonts used for display faces.
@@ -6231,6 +6239,7 @@ Flymake minor mode transient.
 ;; add transient for Flymake
 (with-eval-after-load 'flymake
   (with-eval-after-load 'flymake-quickdef
+    (require 'flymake-proc)
     (defun transient/flymake-mode--flymake-devskim-toggle ()
       "Wrapper for calling `flymake-devskim-toggle' if defined."
       (interactive)
@@ -6322,6 +6331,8 @@ Static UI customizations should go here to optimize startup time.
 <<load-custom-theme>>
 
 <<display-face-fonts>>
+
+<<no-default-font-lock>>
 
 <<early-init-local>>
 

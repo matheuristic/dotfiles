@@ -2,7 +2,7 @@
 
 ;; Author: matheuristic
 ;; URL: https://github.com/matheuristic/emacs-config
-;; Generated: Wed May 15 21:17:25 2024
+;; Generated: Sat Nov  2 14:47:04 2024
 
 ;;; Commentary:
 
@@ -3416,6 +3416,7 @@ not support restricting to a region."
 ;; add transient for Flymake
 (with-eval-after-load 'flymake
   (with-eval-after-load 'flymake-quickdef
+    (require 'flymake-proc)
     (defun transient/flymake-mode--flymake-devskim-toggle ()
       "Wrapper for calling `flymake-devskim-toggle' if defined."
       (interactive)

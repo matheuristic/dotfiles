@@ -3,7 +3,7 @@
 ;; Copyright (c) 2022 Thiam Lee
 
 ;; Author: Thiam Lee
-;; Version: 0.1
+;; Version: 0.1.1
 ;; Package-Requires: ((emacs "27.1"))
 ;; Keywords: acme, mouse
 ;; URL: https://github.com/matheuristic/emacs-config
@@ -95,8 +95,7 @@
 ;;   or if no arg provided then yank the first kill-ring entry)
 ;; * Put (save buffer)
 ;; * Putall (save all modified buffers)
-;; * Redo (requires undo-tree-mode, takes an optional numeric argument
-;;   that indicates the number of times to repeat redo)
+;; * Redo (takes an optional numeric arg for num times to repeat redo)
 ;; * Rename (needs to be called with an arg, renames buffer file to
 ;;   the argument) [+]
 ;; * Snarf (copy region into kill ring)
@@ -317,8 +316,6 @@
 ;;
 ;; Limitations:
 ;;
-;; * Redo is only supported when undo-tree-mode is enabled, see
-;;   https://elpa.gnu.org/packages/undo-tree.html
 ;; * Currently, there does not appear to be a way to keep the point
 ;;   in the same location within the buffer (not the viewport) when
 ;;   scrolling, see https://stackoverflow.com/a/72302778
@@ -474,12 +471,13 @@
                (save-buffer)))
     ("Putall" . (lambda () (save-some-buffers))) ; save all buffers
     ("Redo" . (lambda (&optional arg)
-                (if (and (boundp 'undo-tree-mode) undo-tree-mode)
+                (if (version<= "28" emacs-version)
                     (progn
                       (deactivate-mark)
-                      (and (fboundp 'undo-tree-redo)
-                           (undo-tree-redo (when arg (string-to-number arg)))))
-                  (message "Redo is supported only when undo-tree-mode is enabled."))))
+                      (call-interactively 'undo-redo
+                                          t
+                                          (when arg (vector (string-to-number arg)))))
+                  (message "Redo is supported only for Emacs version>=28.1."))))
     ("Rename" . (lambda (&optional file-name)
                   (if (and file-name (> (length file-name) 0))
                       (acme-mode--rename-buffer-file file-name)
@@ -515,12 +513,13 @@
                      (message "Tab width set to `%s'" arg))
                  (message "Tab command requires a integer argument."))))
     ("Undo" . (lambda (&optional arg)
-                (if (and (boundp 'undo-tree-mode) undo-tree-mode)
+                (if (version<= "28" emacs-version)
                     (progn
                       (deactivate-mark)
-                      (and (fboundp 'undo-tree-undo)
-                           (undo-tree-undo (when arg (string-to-number arg)))))
-                  (undo-only (string-to-number arg)))))
+                      (call-interactively 'undo-only
+                                          t
+                                          (when arg (vector (string-to-number arg)))))
+                  (message "Redo is supported only for emacs version>=28.1."))))
     ("Zerox" . (lambda ()
                  (let (new-win)
                    (if acme-mode-use-frames
@@ -731,7 +730,7 @@ Example:
                                            Info-mode
                                            minibuffer-inactive-mode
                                            minibuffer-mode
-                                           special-mode ; help-mode and occur-mode are derived from special-mode
+                                           special-mode ; help-mode, occur-mode, vundo-mode are derived from special-mode
                                            undo-tree-visualizer-mode)
   "List of major modes for which to not use Acme mode mouse interace.
 
@@ -991,9 +990,8 @@ and if SIZE is nil then the window split is done evenly. See
 `split-window' for more about this parameter.
 
 SIDE controls on which side the new window is opened if in the
-same frame, and can be \\='above , \\='below , \\='left ,
-\\='right or nil. See `split-window' for more about this
-parameter.
+same frame, and can be \\='above , \\='below , \\='left , \\='right or nil.
+See `split-window' for more about this parameter.
 
 If WINDOW is non-nil, split it instead of the current window if
 creating a new window."
@@ -1149,8 +1147,12 @@ buffer instead of usual one."
 (defun acme-mode--warp-mouse-to-point ()
   "Warp mouse pointer to point in the current window."
   (let* ((coords (posn-col-row (posn-at-point)))
-         (x (+ (car coords) (window-left-column)))
-         (y (+ (cdr coords) (window-top-line))))
+         (window-coords (window-inside-edges))
+         (x (+ (car coords) (car window-coords) -1)) ;the fringe is 0
+         (y (+ (cdr coords) (cadr window-coords)
+               (if (acme-mode--header-line-active-p)
+                   -1
+                 0))))
     (set-mouse-position (selected-frame) x y)))
 
 (defun acme-mode--highlight-search (text)
@@ -1227,8 +1229,8 @@ the file window."
 (defun acme-mode--find-file-or-search (file-or-text)
   "Open FILE-OR-TEXT if a file path, else search forward for next occurrence.
 
-When searching forward and `acme-mode-no-warp-mouse' is nil, the
-mouse is warped to the search result if one exists."
+When searching forward, the mouse is warped to the search result
+if one exists."
   (or (acme-mode--find-file file-or-text acme-mode-no-warp-mouse)
       (acme-mode--search file-or-text acme-mode-no-warp-mouse)))
 
@@ -1566,7 +1568,7 @@ mode is enabled."
     (call-interactively 'completion-at-point)))
 
 (defun acme-mode--update-last-non-tag-buffer-window ()
-  "Update `acme-mode--last-non-tag-buffer-window' if not in a tag buffer."
+  "Update `acme-mode--last-non-tag-buffer-window' if current buf is not a tag one."
   (let ((win (selected-window)))
     (unless (or (not (window-live-p win))
                 (acme-mode--tag-buffer-window-p win)
@@ -1711,12 +1713,12 @@ the last text operation."
                 (kill-region (mark) (point)))
                ((eq acme-mode--state 'textselect-paste)
                 (setq acme-mode--state 'textselect-cut)
-                (if (and (boundp 'undo-tree-mode) undo-tree-mode)
+                (if (version<= "28" emacs-version)
                     (progn
                       (cond ((eq acme-mode--textselect-cut-or-paste-first 'cut)
-                             (and (fboundp 'undo-tree-redo) (undo-tree-redo)))
+                             (call-interactively 'undo-redo))
                             ((eq acme-mode--textselect-cut-or-paste-first 'paste)
-                             (and (fboundp 'undo-tree-undo) (undo-tree-undo)))))
+                             (call-interactively 'undo-only))))
                   (call-interactively 'undo)))
                ((eq acme-mode--state 'textselect3)
                 (acme-mode--clear-secondary-selection)
@@ -1767,11 +1769,11 @@ will insert the 3rd most recent entry in the kill ring."
                 (activate-mark))
                ((eq acme-mode--state 'textselect-cut)
                 (setq acme-mode--state 'textselect-paste)
-                (if (and (boundp 'undo-tree-mode) undo-tree-mode)
+                (if (version<= "28" emacs-version)
                     (cond ((eq acme-mode--textselect-cut-or-paste-first 'cut)
-                           (and (fboundp 'undo-tree-undo) (undo-tree-undo)))
+                           (call-interactively 'undo-only))
                           ((eq acme-mode--textselect-cut-or-paste-first 'paste)
-                           (and (fboundp 'undo-tree-redo) (undo-tree-redo))))
+                           (call-interactively 'undo-redo)))
                   (call-interactively 'undo))
                 (set-mark acme-mode--region-start)
                 (goto-char acme-mode--region-end))
@@ -1797,15 +1799,11 @@ will insert the 3rd most recent entry in the kill ring."
 ;; PLUMBING FUNCTIONS
 
 (defun acme-mode--plumb-file-system-open (filename)
-  "Function to generically open given FILENAME using system `xdg-open' or `open'."
+  "Function to generically open given FILENAME using system \\='xdg-open\\=' or \\='open\\='."
   (let ((system-open-command (or (executable-find "xdg-open")
                                  (executable-find "open"))))
     (if system-open-command
-        (let ((expanded-filename
-               (if (file-name-absolute-p filename)
-                   filename
-                 (concat (file-name-directory buffer-file-name) "/" filename))))
-          (start-process "default-app" nil system-open-command expanded-filename))
+        (start-process "default-app" nil system-open-command filename)
       (message "No xdg-open or open on the system to generically open file."))))
 
 (defun acme-mode--plumb-python-error (error-line)

@@ -2,7 +2,7 @@
 
 ;; Author: matheuristic
 ;; URL: https://github.com/matheuristic/emacs-config
-;; Generated: Wed May 15 21:17:25 2024
+;; Generated: Sat Nov  2 14:47:04 2024
 
 ;;; Commentary:
 
@@ -113,6 +113,9 @@
 (setq underline-minimum-offset 5)
 ;;; uncomment below if using a large font to not compact it during GC
 (setq inhibit-compacting-font-caches t)
+
+;; disable font-locking by default
+(global-font-lock-mode -1)
 
 ;; load local early init configuration
 (require 'early-init-local nil t)       ; don't raise errors
