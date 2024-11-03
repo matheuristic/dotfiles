@@ -6254,8 +6254,7 @@ Flymake minor mode transient.
        ["Error"
         ("n" "Next" flymake-goto-next-error)
         ("p" "Previous" flymake-goto-prev-error)
-        ("l" "List" my-toggle-flymake-diagnostics)
-        ("." "Describe" display-local-help)
+        ("l" "List" my-toggle-flymake-diagnostics :transient nil)
         ]
        ["Check"
         ("c" "Start" flymake-start)

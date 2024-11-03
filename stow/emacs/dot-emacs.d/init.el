@@ -2,7 +2,7 @@
 
 ;; Author: matheuristic
 ;; URL: https://github.com/matheuristic/emacs-config
-;; Generated: Sat Nov  2 14:47:04 2024
+;; Generated: Sat Nov  2 20:59:36 2024
 
 ;;; Commentary:
 
@@ -3431,8 +3431,7 @@ not support restricting to a region."
        ["Error"
         ("n" "Next" flymake-goto-next-error)
         ("p" "Previous" flymake-goto-prev-error)
-        ("l" "List" my-toggle-flymake-diagnostics)
-        ("." "Describe" display-local-help)
+        ("l" "List" my-toggle-flymake-diagnostics :transient nil)
         ]
        ["Check"
         ("c" "Start" flymake-start)
