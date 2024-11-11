@@ -57,6 +57,10 @@ or in Mac since it is POSIX-compliant.)
     [Nuke](https://www.foundry.com/products/nuke-family/nuke) by The
     Foundry and Adobe After Effects, or freeware DaVinci Resolve
     [Fusion](https://www.blackmagicdesign.com/products/davinciresolve/fusion)
+  - [OBS Studio](https://obsproject.com/)ᴸᴹᵂ:
+    Record video and livestream; has a
+    [projector](https://obsproject.com/kb/power-of-projectors) mode
+    that can be used with video conference software like Zoom
   - [sfxr-qt](https://github.com/agateau/sfxr-qt)ᴸ:
     SFX creator for games; Qt port of
     [SFXR](http://www.drpetter.se/project_sfxr.html)ᴸᵂ;
@@ -332,8 +336,7 @@ or in Mac since it is POSIX-compliant.)
   - [MonitorControl](https://monitorcontrol.app/)ᴹ
     ([Github](https://github.com/MonitorControl/MonitorControl)):
     Monitor controller, supports syncing brightness; paid alternatives
-    (with fancier UI or more features) include Lunar (see below) and
-    [BetterDisplay](https://github.com/waydabber/BetterDisplay)
+    (with fancier UI or more features) include Lunar and BetterDisplay
 - Diagramming and image editing
   - [ASCIIFlow](https://asciiflow.com/)ᴿ
     ([Github](https://github.com/lewish/asciiflow)):
@@ -378,6 +381,11 @@ or in Mac since it is POSIX-compliant.)
     [Krita](https://krita.org/en/)ᴸᴹᵂ
     ([KDE Invent](https://invent.kde.org/graphics/krita)):
     Raster graphics editor
+  - [Graphite](https://graphite.rs/)
+    ([Github](https://github.com/GraphiteEditor/Graphite)):
+    Raster and vector graphics editor that is an all-in-one
+    GIMP/Illustrator/Inkscape alternative; available as a progressive
+    webapp (PWA) but desktop versions planned
   - [Inkscape](https://inkscape.org/)ᴸᴹᵂ
     ([Gitlab](https://gitlab.com/inkscape/inkscape)):
     Vector graphics editor
@@ -1168,6 +1176,15 @@ or in Mac since it is POSIX-compliant.)
     ([Github](https://github.com/ianyh/Amethyst)) or
     [yabai](https://github.com/koekeishiya/yabai)ᴹ:
     Tiling window manager for macOS
+  - [DeskPad](https://github.com/Stengo/DeskPad)ᴹ or
+    [RegionToShare](https://github.com/tom-englert/RegionToShare)ᵂ:
+    Create a smaller virtual display (Desktop) or mirror a portion of
+    the screen to a hidden window (RegionToShare) for sharing only a
+    part of screen when using a very large monitor; alternatives are
+    OBS projectors (see OBS Studio in "Audio and video creation and
+    editing"), BetterDisplay (macOS) or Wayland/Xephyr in Linux
+    (see [here](https://news.ycombinator.com/item?id=41800602));
+    in Zoom, one can just select "Share a portion of screen"
   - [Hyperkey](https://hyperkey.app/)ᴹ:
     Use CapsLock as a "hyper" key, that is, C-Opt-Cmd-Shift, on macOS
   - [Input Leap](https://github.com/input-leap/input-leap)ᴸᴹᵂ:
@@ -1661,6 +1678,13 @@ or in Mac since it is POSIX-compliant.)
   - [Sublime Text](https://www.sublimetext.com/)ᴸᴹᵂ:
     Lightweight text editor
 - User experience and interface (graphical)
+  - [BetterDisplay](https://github.com/waydabber/BetterDisplay)ᴹ:
+    Create virtual displays; this can be useful to reduce latency when
+    using Airplay Display with a MacBook for an additional display, by
+    creating a virtual desktop with aspect and resolution matching
+    exactly that of the MacBook and mirroring that virtual desktop
+    (it is also a good idea to use a direct Thunderbolt wire to
+    connect the MacBook and to turn wifi on the MacBook off)
   - [Choosy](https://choosy.app/)ᴹ or
     [OpenIn](https://loshadki.app/openin4/)ᴹ:
     Open different links in different browsers or apps in macOS; free
