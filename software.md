@@ -1182,9 +1182,14 @@ or in Mac since it is POSIX-compliant.)
     the screen to a hidden window (RegionToShare) for sharing only a
     part of screen when using a very large monitor; alternatives are
     OBS projectors (see OBS Studio in "Audio and video creation and
-    editing"), BetterDisplay (macOS) or Wayland/Xephyr in Linux
-    (see [here](https://news.ycombinator.com/item?id=41800602));
-    in Zoom, one can just select "Share a portion of screen"
+    editing"), BetterDisplay (macOS, see below) or Wayland/Xephyr in
+    Linux (see [here](https://news.ycombinator.com/item?id=41800602));
+    in Zoom, one can just select "Share a portion of screen"; DeskPad
+    is also useful to reduce latency when using Airplay Display with a
+    MacBook for an extra display, by creating a virtual desktop with
+    aspect and resolution matching exactly that of the MacBook and
+    mirroring that virtual desktop (also a good idea to use a direct
+    Thunderbolt wire to connect the MacBook and turn Macbook wifi off)
   - [Hyperkey](https://hyperkey.app/)ᴹ:
     Use CapsLock as a "hyper" key, that is, C-Opt-Cmd-Shift, on macOS
   - [Input Leap](https://github.com/input-leap/input-leap)ᴸᴹᵂ:
@@ -1489,7 +1494,7 @@ or in Mac since it is POSIX-compliant.)
   - [Nextcloud](https://nextcloud.com/)ᴸ
     ([Github org](https://github.com/nextcloud)):
     Self-host collaboration platform offering similar functionality to
-    Google Suite; Nextcloud Files can be used as a a WebDAV service;
+    Google Suite; Nextcloud Files can be used as a WebDAV service;
     has desktopᴸᴹᵂ and mobileᴬᴵ clients
     ([link](https://nextcloud.com/install/)); supports apps like
     [Music](https://apps.nextcloud.com/apps/music)
@@ -1504,6 +1509,18 @@ or in Mac since it is POSIX-compliant.)
   - [OmegaT](https://omegat.org/)ᴸᴹᵂᴿ
     ([Github](https://github.com/omegat-org/omegat)):
     Translation memory tool
+  - [ownCloud Infinite Scale](https://doc.owncloud.com/ocis/next/)ᴸᴹ
+    ([Github](https://doc.owncloud.com/ocis/next/)) or
+    [Seafile](https://www.seafile.com/)ᴸ
+    ([Github](https://github.com/haiwen/seafile)):
+    Blob-based file sync and share platform that can be used a WebDAV
+    service; backing up is more complicated (typically involves
+    backing up both the full set of blobs along with the metadata
+    database); NextCloud is slower, but NextCloud stores files as is
+    to disk (easier backup), and also has a whole ecosystem of
+    applications built on it like Contact and Calendar syncing, music
+    serving, etc; SFTPGo is also slower but stores files as is, and is
+    simple and lightweight if just file management is needed
   - [pass](https://www.passwordstore.org/)ᴿ
     ([Git](https://git.zx2c4.com/password-store/)) or
     [gopass](https://www.gopass.pw/)ᴸᴹᵂ
@@ -1547,8 +1564,22 @@ or in Mac since it is POSIX-compliant.)
     ([Github](https://github.com/sveinbjornt/Platypus)):
     macOS tool for wrapping command-line programs into a
     macOS application bundle
+  - [Radicale](https://radicale.org/)ᴿ
+    ([Github](https://github.com/Kozea/Radicale)) or
+    [Baikal](https://sabre.io/baikal/)
+    ([Github](https://github.com/sabre-io/Baikal)):
+    CalDAV (calendar) and CardDAV (contacts) sync server; alternative
+    is NextCloud that has those features built-in
   - [sc-im](https://github.com/andmarti1424/sc-im)ᴸ
     Terminal spreadsheet program
+  - [SFTPGo](https://sftpgo.com/)ᴸᴹᵂ
+    ([Github](https://github.com/drakkan/sftpgo)):
+    File sharing and management SFTP, HTTP/S, FTP/S and WebDAV server;
+    easy to set up and manage; better than NextCloud for WebDAV if
+    there is a need for files to be stored as is (e.g., other apps
+    like Navidrome use those files as a music library) but no need for
+    NextCloud's other features/plugins; ownCloud Infinite Scale or
+    Seafile is better if there is no need for files to be stored as is
   - [Stellarium](https://stellarium.org/)ᴸᴹᵂ
     ([Github](https://github.com/Stellarium/stellarium)):
     Open-source desktop planetarium
@@ -1684,7 +1715,8 @@ or in Mac since it is POSIX-compliant.)
     creating a virtual desktop with aspect and resolution matching
     exactly that of the MacBook and mirroring that virtual desktop
     (it is also a good idea to use a direct Thunderbolt wire to
-    connect the MacBook and to turn wifi on the MacBook off)
+    connect the MacBook and to turn wifi on the MacBook off);
+    alternative is DeskPad (see above)
   - [Choosy](https://choosy.app/)ᴹ or
     [OpenIn](https://loshadki.app/openin4/)ᴹ:
     Open different links in different browsers or apps in macOS; free
