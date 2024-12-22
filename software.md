@@ -179,6 +179,59 @@ or in Mac since it is POSIX-compliant.)
     [syncall](https://github.com/bergercookie/syncall) can be used to
     sync Taskwarrior tasks with various services like Asana, Google
     Calendar, Google Keep and so on
+- Cloud services (self-hosted)
+  - [Immich](https://immich.app/)ᴸ
+    ([Github](https://github.com/immich-app/immich)) or
+    [Ente](https://ente.io/)
+    ([Github](https://github.com/ente-io/ente))
+     for self-hosting info):
+    Self-hosted photo library (like Google Photos); dockerizable
+    ([Immich](https://immich.app/docs/install/docker-compose),
+    [Ente] (https://github.com/ente-io/ente)), and has web and mobile
+    ([Immich](https://immich.app/docs/features/mobile-app/)ᴬᴵ,
+    [Ente] (https://ente.io/download)ᴬᴵ) clients
+  - [Nextcloud](https://nextcloud.com/)ᴸ
+    ([Github org](https://github.com/nextcloud)):
+    Self-host collaboration platform offering similar functionality to
+    Google Suite; Nextcloud Files can be used as a WebDAV service;
+    has desktopᴸᴹᵂ and mobileᴬᴵ clients
+    ([link](https://nextcloud.com/install/)); supports apps like
+    [Music](https://apps.nextcloud.com/apps/music)
+    ([Github](https://github.com/owncloud/music)) which adds a music
+    player and Ampache/Subsonic music server (iOS clients include
+    [Amperfy](https://github.com/BLeeEZ/amperfy) and
+    [play:Sub](https://michaelsapps.dk/playsubapp/))
+  - [Radicale](https://radicale.org/)ᴿ
+    ([Github](https://github.com/Kozea/Radicale)) or
+    [Baikal](https://sabre.io/baikal/)
+    ([Github](https://github.com/sabre-io/Baikal)):
+    CalDAV (calendar) and CardDAV (contacts) sync server; alternative
+    is NextCloud (see above) that has those features built-in
+  - [SFTPGo](https://sftpgo.com/)ᴸᴹᵂ
+    ([Github](https://github.com/drakkan/sftpgo)):
+    File sharing and management server that can use multiple storage
+    backends (local disk, S3, Google Cloud, Azure Blob, etc) and
+    accessible via a web UI, WebDAV, SFTP and FTP;
+    note that the local storage option stores files as is in a
+    standard directory structure (useful for other server apps like
+    Navidrome); alternatives are
+    NextCloud
+    (web UI and WebDAV-only, but has office and collaboration features
+    and lots of plugins, see above),
+    [ownCloud Infinite Scale](https://doc.owncloud.com/ocis/next/)ᴸᴹ
+    ([Github](https://doc.owncloud.com/ocis/next/)) or
+    [Seafile](https://www.seafile.com/)ᴸ
+    ([Github](https://github.com/haiwen/seafile))
+    (better performance, but files are stored in blobs),
+    [dufs](https://github.com/sigoden/dufs)
+    (fewer features, simple setup),
+    [File Browser](https://filebrowser.org/)ᴸᴹᵂ
+    (web UI only, local disk-only),
+    [Filestash](https://www.filestash.app/)ᴸ
+    ([Github](https://github.com/mickael-kerjean/filestash)) or
+    [FileGator](https://filegator.io/)ᴿ
+    ([Github](https://github.com/filegator/filegator))
+    (multiple storage backends, web UI access-only)
 - Compilers and linkers
   - [Mold](https://github.com/rui314/mold)ᴸ:
     Drop-in replacement for Linux linkers on various architectures;
@@ -512,11 +565,6 @@ or in Mac since it is POSIX-compliant.)
     ([Github](https://github.com/osxfuse/osxfuse), uses a kext), with
     the latter being more mature but requiring third-party kernel
     extensions be enabled
-  - [Immich](https://immich.app/)ᴸ:
-    Self-hosted photo library (like Google Photos), server can be run
-    [dockerized](https://immich.app/docs/install/docker-compose), with
-    web (access at `http://<machine-ip-address>:2283`) and
-    [mobile](https://immich.app/docs/features/mobile-app/)ᴬᴵ clients
   - [Keka](https://www.keka.io/en/)ᴹᴵ
     ([Github](https://github.com/aonez/Keka)) or
     [PeaZip](https://peazip.github.io/)ᴸᴹᵂ
@@ -528,7 +576,7 @@ or in Mac since it is POSIX-compliant.)
     if only FTP is needed, there is [ncftp](https://www.ncftp.com/)ᴸᴹᵂ
   - [Maestral](https://maestral.app/)ᴸᴹ
     ([Github](https://github.com/samschott/maestral)):
-    Dropbox clientfor Linux and macOS, lighter but has less features
+    Dropbox client for Linux and macOS, lighter but has less features
     than the [official](https://www.dropbox.com/desktop) client
   - [Magic Wormhole](https://github.com/magic-wormhole/magic-wormhole)ᴿ:
     Command-line tool and library for sending files from one computer
@@ -1491,17 +1539,6 @@ or in Mac since it is POSIX-compliant.)
     ([Github org](https://github.com/Mathics3)):
     Open-source alternative to
     [Mathematica](https://www.wolfram.com/mathematica/)
-  - [Nextcloud](https://nextcloud.com/)ᴸ
-    ([Github org](https://github.com/nextcloud)):
-    Self-host collaboration platform offering similar functionality to
-    Google Suite; Nextcloud Files can be used as a WebDAV service;
-    has desktopᴸᴹᵂ and mobileᴬᴵ clients
-    ([link](https://nextcloud.com/install/)); supports apps like
-    [Music](https://apps.nextcloud.com/apps/music)
-    ([Github](https://github.com/owncloud/music)) which adds a music
-    player and Ampache/Subsonic music server (iOS clients include
-    [Amperfy](https://github.com/BLeeEZ/amperfy) and
-    [play:Sub](https://michaelsapps.dk/playsubapp/))
   - [Ollama](https://ollama.com/)ᴸᴹᵂ
     ([Github](https://github.com/ollama/ollama)):
     Serve LLMs locally; on the Mac, the app bundle requires admin
@@ -1509,18 +1546,6 @@ or in Mac since it is POSIX-compliant.)
   - [OmegaT](https://omegat.org/)ᴸᴹᵂᴿ
     ([Github](https://github.com/omegat-org/omegat)):
     Translation memory tool
-  - [ownCloud Infinite Scale](https://doc.owncloud.com/ocis/next/)ᴸᴹ
-    ([Github](https://doc.owncloud.com/ocis/next/)) or
-    [Seafile](https://www.seafile.com/)ᴸ
-    ([Github](https://github.com/haiwen/seafile)):
-    Blob-based file sync and share platform that can be used a WebDAV
-    service; backing up is more complicated (typically involves
-    backing up both the full set of blobs along with the metadata
-    database); NextCloud is slower, but NextCloud stores files as is
-    to disk (easier backup), and also has a whole ecosystem of
-    applications built on it like Contact and Calendar syncing, music
-    serving, etc; SFTPGo is also slower but stores files as is, and is
-    simple and lightweight if just file management is needed
   - [pass](https://www.passwordstore.org/)ᴿ
     ([Git](https://git.zx2c4.com/password-store/)) or
     [gopass](https://www.gopass.pw/)ᴸᴹᵂ
@@ -1564,22 +1589,8 @@ or in Mac since it is POSIX-compliant.)
     ([Github](https://github.com/sveinbjornt/Platypus)):
     macOS tool for wrapping command-line programs into a
     macOS application bundle
-  - [Radicale](https://radicale.org/)ᴿ
-    ([Github](https://github.com/Kozea/Radicale)) or
-    [Baikal](https://sabre.io/baikal/)
-    ([Github](https://github.com/sabre-io/Baikal)):
-    CalDAV (calendar) and CardDAV (contacts) sync server; alternative
-    is NextCloud that has those features built-in
   - [sc-im](https://github.com/andmarti1424/sc-im)ᴸ
     Terminal spreadsheet program
-  - [SFTPGo](https://sftpgo.com/)ᴸᴹᵂ
-    ([Github](https://github.com/drakkan/sftpgo)):
-    File sharing and management SFTP, HTTP/S, FTP/S and WebDAV server;
-    easy to set up and manage; better than NextCloud for WebDAV if
-    there is a need for files to be stored as is (e.g., other apps
-    like Navidrome use those files as a music library) but no need for
-    NextCloud's other features/plugins; ownCloud Infinite Scale or
-    Seafile is better if there is no need for files to be stored as is
   - [Stellarium](https://stellarium.org/)ᴸᴹᵂ
     ([Github](https://github.com/Stellarium/stellarium)):
     Open-source desktop planetarium
@@ -1742,6 +1753,9 @@ or in Mac since it is POSIX-compliant.)
     Word processor for authoring books and screenplays
 - Virtualization
   - Orbstack (see Containerization)
+- VPN
+  - [Tailscale](https://tailscale.com/):
+    Wireguard-based VPN solution, free for personal use
 
 ## Directory structure
 
