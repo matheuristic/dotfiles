@@ -119,6 +119,8 @@ or in Mac since it is POSIX-compliant.)
     [Symfonium](https://symfonium.app/) (Android, paid),
     [Submariner](https://github.com/SubmarinerApp/Submariner) (macOS),
     [Supersonic](https://github.com/dweymouth/supersonic) (desktops),
+    [Arpeggi](https://old.reddit.com/r/arpeggiApp/) (iOS, beta, paid),
+    [SubSwift](https://apps.apple.com/us/app/subswift/id6504658929) (tvOS, paid),
     etc; for other self-hosted music servers and clients, see
     [here](https://github.com/basings/selfhosted-music-overview)
   - [Jellyfin](https://jellyfin.org/)ᴸᴹᵂ
@@ -171,6 +173,8 @@ or in Mac since it is POSIX-compliant.)
     along with CLI ([link1](https://sr.ht/~mlaparie/remint/),
     [link2](https://gitlab.com/wyrd-calendar/wyrd)) and GUI
     (`tkremind` that comes with Remind) front-ends
+  - [Someday](https://github.com/rbbydotdev/someday)ᴿ :
+    Calendly/cal.com alternative for Gmail users
   - [Taskwarrior](https://taskwarrior.org/)ᴸ
     ([Github](https://github.com/GothenburgBitFactory/taskwarrior))
     and [Timewarrior](https://timewarrior.net/)ᴸ
@@ -689,6 +693,11 @@ or in Mac since it is POSIX-compliant.)
     readability before conversion; the file can also be directly
     opened in a browser and printed to PDF
 - Newsreader
+  - [Miniflux](https://miniflux.app/)ᴸᴹᵂ
+    ([Github](https://github.com/miniflux)):
+    Self-hosted RSS reader, supports integrations via the
+    [Google Reader API](https://miniflux.app/docs/google_reader.html)
+    or directly with services like Instapaper, Pinboard or Pocket
   - [NetNewsWire](https://netnewswire.com/)ᴹ
     ([Github](https://github.com/Ranchero-Software/NetNewsWire)):
     RSS reader; iOS and macOS
@@ -1391,10 +1400,18 @@ or in Mac since it is POSIX-compliant.)
     [Kristall](https://kristall.random-projects.net/)ᴸᴹᵂ
     ([Github](https://github.com/MasterQ32/kristall)):
     Gemini GUI client; Kristall also supports Gopher
+  - [Linkding](https://linkding.link/)ᴿ
+    ([Github](https://github.com/sissbruecker/linkding)):
+    Self-hosted bookmark manager
   - [Monolith](https://crates.io/crates/monolith)ᴸᴹᵂ
     ([Github](https://github.com/Y2Z/monolith.git)):
     Save complete webpages to a single HTML file with embedded CSS,
     images and Javascript; macOS version needs to be self-compiled
+  - [Readeck](https://readeck.org/)ᴸᴹᵂ
+    ([Codeberg](https://codeberg.org/readeck/readeck)):
+    Self-hostable read-it-later webapp for saving web pages, like
+    [Pocket](https://getpocket.com/) or
+    [Instapaper](https://www.instapaper.com/)
   - [shot-scraper](https://shot-scraper.datasette.io/)ᴿ
     ([Github](https://github.com/simonw/shot-scraper)):
     Command-line utility for taking partial or full screenshots of
